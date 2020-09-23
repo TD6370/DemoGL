@@ -1,0 +1,70 @@
+#pragma once
+
+//#include "BindHeader.h"
+//--------------
+#include "ConfigBuffers.h"
+#include "Shaders.h"
+#include "ConfigUniformArg.h"
+#include "LoaderModelObj.h"
+#include "LoadBmp.h"
+
+#include <string>
+#include <iostream>
+
+#define GLEW_STATIC
+#include <GL/glew.h>
+
+//OpenGL Mathematics
+#include <glm/glm.hpp>
+
+class Plane;
+
+class ModelData {
+
+public:
+	const GLchar* PathShaderVertex = "basic.vert";
+	const GLchar* PathShaderFrag = "basic.frag";
+	const char* PathTexture = "./Textures/testTexture.bmp";
+	const char* PathModel3D = "./Models3D/monkey.obj";
+
+	ConfigUniform ConfUniform;
+
+	GLint TrianglesCount = 0;
+	GLint IndicesSize = 0;
+	GLuint VAO = 0;
+	GLuint VBO = 0;
+	GLuint ShaderProgram = 0;
+	bool IsIndex = false;
+
+	//-------------------
+	std::vector< glm::vec2 > UV;
+	std::vector< glm::vec3 > Normals;
+	std::vector< glm::vec3 > Vertices;
+	std::vector<unsigned int> Indices;
+	//std::vector<Plane>* Planes;
+
+	unsigned int WidthImage;
+	unsigned int HeightImage;
+
+	unsigned char* DataImage;
+	//------------------------
+	GLuint Texture_ID;
+	GLuint BufferUV_ID;
+	GLuint BufferNormal_ID;
+
+	float RadiusCollider = 5;
+
+	ModelData();
+
+	void Init();
+
+	void SetVAO();
+
+	void SetModelInBuffer(bool isUpdate = true);
+
+	//void FillPlanes();
+
+	//Plane* GetPlaneFromVertIndex(int indexVertPlane);
+
+	//Plane* GetPlanePrt(int indexPlane);
+};
