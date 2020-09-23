@@ -75,7 +75,8 @@ void MouseEvents(
 	GLFWwindow* window,
 	int m_widthWindow, int m_heightWindow,
 	float m_deltaTime,
-	Operator* p_operator)
+	Operator* p_operator,
+	ControllerInput* p_inputs)
 	{
 
 	// горизонтальный угол : по -Z
@@ -100,7 +101,14 @@ void MouseEvents(
 	{
 		isCeneter = true;
 		p_operator->m_start = false;
+		p_inputs->MBT = GLFW_MOUSE_BUTTON_2;
 	}
+	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+	if (state == GLFW_PRESS)
+	{
+		p_inputs->MBT = GLFW_MOUSE_BUTTON_1;
+	}
+
 	//----------------------------
 	if (xpos >= m_widthWindow - 2) {
 		p_operator->MouseOffset_x += m_widthWindow / 2;
@@ -162,7 +170,8 @@ void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 	Operator*  p_Operator,
 	GLfloat* paramCase,
 	float m_speed,
-	float m_deltaTime)
+	float m_deltaTime,
+	ControllerInput* p_inputs)
 {
 	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 
 	// и приложение после этого закроется
@@ -207,5 +216,7 @@ void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 		//if (!isPerspective)
 		//	camX = 0.0f;
 	}
+
+	p_inputs->Key = key;
 }
 

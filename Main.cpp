@@ -58,20 +58,23 @@ Operator m_OperatorG;
 
 Lighting m_Lighting;
 
-CreatorModelData Storage;
+CreatorModelData* Storage;
+
+ControllerInput Inputs;
 
 void LoadDataModel()
 {
 	//bool isGen = true;
 	bool isGen = false;
-	Storage = CreatorModelData();
+	//Storage = CreatorModelData();
+	Storage = new CreatorModelData();
 	if (isGen)
 	{
-		Storage.LoadModels();
-		Storage.GenerateObjects();
+		Storage->LoadModels();
+		Storage->GenerateObjects();
 	}
 	else {
-		Storage.Load();
+		Storage->Load();
 	}
 }
 
@@ -85,13 +88,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	KeyInput(window, key, scancode, action, mode,
 		&m_OperatorG,
 		&m_cameraG.paramCase,
-		m_speed, m_deltaTime);
+		m_speed, m_deltaTime, 
+		&Inputs);
 }
 
 
 void SetMouseEvents(GLFWwindow* window)
 {
-	MouseEvents(window,	m_widthWindow, m_heightWindow, m_deltaTime, &m_OperatorG);
+	MouseEvents(window,	m_widthWindow, m_heightWindow, m_deltaTime, &m_OperatorG, &Inputs);
 }
 
 
@@ -154,6 +158,12 @@ void DrawGraph(GLuint shaderProgram, std::shared_ptr<ModelData> model)
 	glDisableClientState(GL_NORMAL_ARRAY);*/
 
 	glBindVertexArray(0);
+}
+
+vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght) {
+	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+	vec3 posCursorObject = vec3(vecPos.x, vecPos.y, vecPos.z) + m_OperatorG.m_direction * lenght;
+	return posCursorObject;
 }
 
 int main()
@@ -243,7 +253,7 @@ int main()
 	bool test_isFerst = true;
 	vec3 SavePos;
 
-	int countObjects = Storage.SceneObjectsLastIndex;
+	int countObjects = Storage->SceneObjectsLastIndex;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -254,7 +264,7 @@ int main()
 		
 		for (int i = 0; i < countObjects + 1; i++)
 		{
-			object = Storage.GetObjectPrt(i);
+			object = Storage->GetObjectPrt(i);
 			model = object->ModelPtr;
 
 			//----- Start
@@ -275,8 +285,8 @@ int main()
 				last_VAO = model->VAO;
 			}
 
-			Storage.Camera = &m_cameraG;
-			Storage.MVP = &ConfigMVP;
+			Storage->Camera = &m_cameraG;
+			Storage->MVP = &ConfigMVP;
 			object->Action();
 
 			if (isUpdate)
@@ -308,7 +318,7 @@ int main()
 
 				model->ConfUniform.SetParamCase(55);
 
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				vector<string> checkedZona;
 				//vector<int> indexesVert = Storage.Clusters->GetVertexPolygonFromObject(objectObserver->Index, checkedZona);
 				//int indP = 0;
@@ -381,34 +391,48 @@ int main()
 			//		object->Postranslate = objectObserver->TempVectors[0]; //nearestSphereIntersectionPoint - green
 			//}
 			if (object->Name == "M_V_1") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				if (objectObserver->TempVectors.size() > 0)
 					object->Postranslate = objectObserver->TempVectors[0];
 			}
 			if (object->Name == "M_V_2") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				if (objectObserver->TempVectors.size() > 1)
 					object->Postranslate = objectObserver->TempVectors[1];
 			}
 			if (object->Name == "M_V_3") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				if (objectObserver->TempVectors.size() > 2)
 					object->Postranslate = objectObserver->TempVectors[2];
 			}
 			if (object->Name == "M_C_2") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				object->Postranslate = objectObserver->PlaneDownPosition; 
 			}
 
 			
 			if (object->Name == "M_C_1") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				object->Postranslate = objectObserver->Postranslate; //nearestPolygonIntersectionPoint - blue
 			}
-			
+
+			//Create object bullet
+			if (Inputs.MBT == GLFW_MOUSE_BUTTON_1) {
+				Inputs.MBT = -1;
+				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Bullet");
+				//if (objectObserver->ActionObjectCurrent != Moving)
+				//{
+					vec3 posCursorObject = GetVectorForward(&ConfigMVP, 5.f);
+					vec3 posTarget = GetVectorForward(&ConfigMVP, 100.f);
+					objectObserver->Speed = 1;
+					objectObserver->Postranslate = posCursorObject;
+					objectObserver->Target = posTarget;
+					objectObserver->ActionObjectCurrent = Moving;
+				//}
+			}
 
 			//----- Light position
-			std::shared_ptr <ObjectData> objectLight = Storage.GetObjectPrt("Mon"); //Box2
+			std::shared_ptr <ObjectData> objectLight = Storage->GetObjectPrt("Mon"); //Box2
 			m_Lighting.positionLight = vec3(objectLight->Postranslate.x, objectLight->Postranslate.y + 50.f, objectLight->Postranslate.z);
 			model->ConfUniform.SetPositionLight(m_Lighting.positionLight);
 			

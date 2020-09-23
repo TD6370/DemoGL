@@ -233,11 +233,12 @@ void CreatorModelData::LoadModels() {
 
 void CreatorModelData::LoadObjects() {
 
-    for (int i = 0; i < 300; i++)
+	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
+
+    for (int i = 0; i < 200; i++)
 	{
 		//std::shared_ptr<ModelData> model3 = GetModelPrt(0);
-		std::shared_ptr<ModelData> model3 = GetModelPrt("mon");
-		AddObject(this, "Mon", model3, NPC);
+		AddObject(this, "Mon", modelMon, NPC);
 	}
 
 	vec3 color_red = vec3(1, 0, 0);
@@ -251,14 +252,17 @@ void CreatorModelData::LoadObjects() {
 	AddObject(modelK, Polygon, vec3(0, -55, 0));*/
 
 
-	std::shared_ptr<ModelData> model1 = GetModelPrt("box");
-	AddObject(this, "Box", model1, Block, vec3(-50, -55, 70));
-	AddObject(this, "Box2", model1, Block, vec3(-50, -55, 70));
-	//AddObject(this, "Marker", model1, Block, vec3(0, -55, 0));
+	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
+	AddObject(this, "Box", modelBox, Block, vec3(-50, -55, 70));
+	AddObject(this, "Box2", modelBox, Block, vec3(-50, -55, 70));
+	//AddObject(this, "Marker", modelBox, Block, vec3(0, -55, 0));
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
 	AddObject(this, "M_P_1", modelM_P, Block, vec3(-50, 0, 0));
 	AddObject(this, "M_P_2", modelM_P, Block, vec3(-50, 0, 0));
+	//AddObject(this, "Bullet", modelM_P, Bullet, vec3(0, 0, 0));
+	AddObject(this, "Bullet", modelBox, Bullet, vec3(0, 0, 0));
+
 
 	std::shared_ptr<ModelData> modelM_C = GetModelPrt("marker_Cross");
 	AddObject(this, "M_C_1", modelM_C, Block, vec3(0, 0, -50));
@@ -285,9 +289,9 @@ void CreatorModelData::LoadObjects() {
 	}*/
 
 
-	model1 = GetModelPrt("plane");
+	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
 	//AddObject("Plane", model1, Polygon, vec3(radiusPlane/2, -55, radiusPlane / 2));
-	AddObject(this, "Plane", model1, Polygon, vec3(-20.f, -55, radiusPlane));
+	AddObject(this, "Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
 	CurrentPolygonObject = GetObjectPrt("Plane");
 
 }

@@ -45,7 +45,11 @@ ObjectData::ObjectData(int p_index,
 	case NPC:
 		ActionObjectCurrent = Starting;
 		break;
+	case Bullet:
+		ActionObjectCurrent = Stay;
+		break;
 	default:
+		ActionObjectCurrent = Lock;
 		break;
 	}
 
@@ -61,7 +65,15 @@ void ObjectData::ChekNextWay()
 	//GLuint dist = glm::distance(Target, Postranslate);
 	GLuint dist = glm::distance(vec2(Target.x, Target.z), vec2(Postranslate.x, Postranslate.z));
 	if (dist <= 2 + 0.1) {
-		ActionObjectCurrent = Search;
+		switch (TypeObj)
+		{
+			case Bullet:
+				ActionObjectCurrent = Stay;
+				break;
+			default:
+				ActionObjectCurrent = Search;
+				break;
+		}
 	}
 }
 
@@ -94,6 +106,44 @@ void ObjectData::ActionMoving()
 	Color = vec3(0);
 	Storage->Clusters->SaveClusterObject(Index);
 	Postranslate = NewPostranslate;
+}
+
+bool ObjectData::CheckIsLock() {
+
+	if (TypeObj == Bullet) //CHILD CLASS
+		return false;
+
+	bool isPolygon = CheckIsPolygon();
+
+	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
+	if (!isNotValidMove)
+		isNotValidMove = Storage->Clusters->IsCollisionObject(Index, true);
+	if (isNotValidMove)
+	{
+		Color = vec3(1, 0, 0);
+
+		if (ActionObjectCurrent == Moving) {
+			//------------------
+			GLfloat newTranslateAngle = 0.5f;
+
+			GLfloat y = Target.y;
+			vec3 vecR = Target - Postranslate;
+			Target.x = vecR.x * cos(newTranslateAngle) - vecR.z * sin(newTranslateAngle);
+			Target.z = vecR.x * sin(newTranslateAngle) + vecR.z * cos(newTranslateAngle);
+			Target = Target + Postranslate;
+			Target.y = y;
+
+			vec3 ray = normalize(Target - Postranslate);
+			TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
+
+			ActionObjectCurrent = Look;
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
+	return true;
 }
 
 void ObjectData::ActionLook() {
@@ -237,41 +287,6 @@ bool ObjectData::CheckIsPolygon() {
 	}
 
 	return CollisionPolygonState == COLLISE_UP || CollisionPolygonState == COLLISE_NORMAL;
-}
-
-bool ObjectData::CheckIsLock() {
-
-	bool isPolygon = CheckIsPolygon();
-
-	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
-	if(!isNotValidMove)
-		isNotValidMove = Storage->Clusters->IsCollisionObject(Index, true);
-	if (isNotValidMove)
-	{
-		Color = vec3(1, 0, 0);
-
-		if (ActionObjectCurrent == Moving) {
-			//------------------
-			GLfloat newTranslateAngle = 0.5f;
-
-			GLfloat y = Target.y;
-			vec3 vecR = Target - Postranslate;
-			Target.x = vecR.x * cos(newTranslateAngle) - vecR.z * sin(newTranslateAngle);
-			Target.z = vecR.x * sin(newTranslateAngle) + vecR.z * cos(newTranslateAngle);
-			Target = Target + Postranslate;
-			Target.y = y;
-
-			vec3 ray = normalize(Target - Postranslate);
-			TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
-
-			ActionObjectCurrent = Look;
-		}
-		return true;
-	}
-	else {
-		return false;
-	}
-	return true;
 }
 
 void ObjectData::RunTransform()

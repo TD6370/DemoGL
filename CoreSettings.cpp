@@ -42,6 +42,12 @@ struct Operator {
 	glm::vec3 m_positionCursorModel;
 };
 
+struct ControllerInput {
+
+	int Key = -1;
+	int MBT = -1;
+};
+
 struct Lighting {
 	glm::vec3 positionLight;
 };
@@ -56,7 +62,7 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting };
 
-enum TypeObject { Polygon, Block, Tree, Terra, NPC };
+enum TypeObject { Polygon, Block, Tree, Terra, NPC, Bullet };
 
 //enum TramsformType { RotateX, RotateY, RotateZ };
 
