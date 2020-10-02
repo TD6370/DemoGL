@@ -610,7 +610,6 @@ bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPositi
 		return true;
 	else
 		return false;
-	return false;
 }
 
 

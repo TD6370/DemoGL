@@ -60,9 +60,9 @@ struct CoreMVP {
 	glm::mat4 MVP;
 };
 
-enum ActionObject { Moving, Stay, Look, Search, Lock, Starting };
+enum ActionObject { Moving, Stay, Look, Search, Lock, Starting }; // , EventControl };
 
-enum TypeObject { Polygon, Block, Tree, Terra, NPC, Bullet };
+enum TypeObject { Polygon, Block, Tree, Terra, NPC, Bullet, Hero };
 
 //enum TramsformType { RotateX, RotateY, RotateZ };
 

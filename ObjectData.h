@@ -122,6 +122,12 @@ public:
 
 	//Plane* GetPlanePrt(int indexPlane);
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
+
+	void SetNewPosition();
+
+	bool CalculateTatget(vec3& resultTarget);
+
+	void Pathfinding();
 };
 
 #endif

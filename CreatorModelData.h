@@ -41,6 +41,7 @@ public:
 
 	Camera* Camera;
 	CoreMVP* MVP;
+	Operator* Operator;
 
 	CreatorModelData();
 

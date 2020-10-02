@@ -235,7 +235,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 200; i++)
+    for (int i = 0; i < 300; i++)
 	{
 		//std::shared_ptr<ModelData> model3 = GetModelPrt(0);
 		AddObject(this, "Mon", modelMon, NPC);

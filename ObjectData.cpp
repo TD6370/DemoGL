@@ -48,6 +48,9 @@ ObjectData::ObjectData(int p_index,
 	case Bullet:
 		ActionObjectCurrent = Stay;
 		break;
+	case Hero:
+		ActionObjectCurrent = Search;
+		break;
 	default:
 		ActionObjectCurrent = Lock;
 		break;
@@ -94,15 +97,14 @@ void ObjectData::ActionMoving()
 
 	Move = normalize(Target - Postranslate) * Speed;
 	NewPostranslate = Postranslate + Move;
-	if (CheckIsLock()) {
-		// --- test
-		//ActionObjectCurrent = Search;
+	if (CheckIsLock()) 
 		return;
-	}
+	else
+		SetNewPosition();
+}
 
-	//------------------- TEST -------------------
-	//return;
-
+void ObjectData::SetNewPosition()
+{
 	Color = vec3(0);
 	Storage->Clusters->SaveClusterObject(Index);
 	Postranslate = NewPostranslate;
@@ -121,29 +123,41 @@ bool ObjectData::CheckIsLock() {
 	if (isNotValidMove)
 	{
 		Color = vec3(1, 0, 0);
-
-		if (ActionObjectCurrent == Moving) {
-			//------------------
-			GLfloat newTranslateAngle = 0.5f;
-
-			GLfloat y = Target.y;
-			vec3 vecR = Target - Postranslate;
-			Target.x = vecR.x * cos(newTranslateAngle) - vecR.z * sin(newTranslateAngle);
-			Target.z = vecR.x * sin(newTranslateAngle) + vecR.z * cos(newTranslateAngle);
-			Target = Target + Postranslate;
-			Target.y = y;
-
-			vec3 ray = normalize(Target - Postranslate);
-			TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
-
-			ActionObjectCurrent = Look;
-		}
+		if (ActionObjectCurrent == Moving) 
+			Pathfinding();
 		return true;
 	}
 	else {
 		return false;
 	}
 	return true;
+}
+
+void ObjectData::Pathfinding() {
+
+	if (TypeObj == Hero)
+	{
+		 Storage->Operator->m_position = Postranslate;
+		 Target = Postranslate;
+		 return;
+	}
+	if (TypeObj == NPC)
+	{
+		GLfloat newTranslateAngle = 0.5f;
+
+		GLfloat y = Target.y;
+		vec3 vecR = Target - Postranslate;
+		Target.x = vecR.x * cos(newTranslateAngle) - vecR.z * sin(newTranslateAngle);
+		Target.z = vecR.x * sin(newTranslateAngle) + vecR.z * cos(newTranslateAngle);
+		Target = Target + Postranslate;
+		Target.y = y;
+
+		vec3 ray = normalize(Target - Postranslate);
+		TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
+
+		ActionObjectCurrent = Look;
+		return;
+	}
 }
 
 void ObjectData::ActionLook() {
@@ -162,22 +176,40 @@ void ObjectData::ActionLook() {
 		TranslateAngle -= m_speedRotate;
 }
 
+bool ObjectData::CalculateTatget(vec3& resultTarget) {
+
+	if (TypeObj == Hero)
+	{
+		if (Move == Storage->Operator->m_position)
+			return false;
+		Move = Storage->Operator->m_position;
+		resultTarget = vec3(Move.x, 0, Move.z);
+	}
+	if (TypeObj == NPC)
+	{
+		World WorldSetting;
+		GLfloat x = linearRand(minDist, DistanceTarget);
+		GLfloat z = linearRand(minDist, DistanceTarget);
+		int invers = linearRand(0, 1);
+		if (invers == 1)
+			x *= -1;
+		invers = linearRand(0, 1);
+		if (invers == 1)
+			z *= -1;
+		Move = vec3(x, 0, z);
+		resultTarget = Postranslate + Move;
+	}
+
+	return true;
+}
+
 void ObjectData::ActionSearch() {
 	World WorldSetting;
-	GLfloat x = linearRand(minDist, DistanceTarget);
-	GLfloat z = linearRand(minDist, DistanceTarget);
-	if (x > WorldSetting.Radius || x < -WorldSetting.Radius || z > WorldSetting.Radius || z < -WorldSetting.Radius)
+
+	vec3 newTarget;
+	if (!CalculateTatget(newTarget))
 		return;
 
-	int invers = linearRand(0, 1);
-	if (invers == 1)
-		x *= -1;
-	invers = linearRand(0, 1);
-	if (invers == 1)
-		z *= -1;
-
-	Move = vec3(x, 0, z);
-	vec3 newTarget = Postranslate + Move;
 	bool isLock = IsContactWorldBorder(newTarget);
 	if (isLock)
 		return;
@@ -199,7 +231,7 @@ void ObjectData::RunAction() {
 	{
 		switch (ActionObjectCurrent)
 		{
-		case Starting:
+			case Starting:
 				GenStartPosition();
 				break;
 			case Moving:
@@ -364,8 +396,6 @@ shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
 
 	return Planes[indexPlane];
 }
-
-
 
 
 

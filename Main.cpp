@@ -287,6 +287,7 @@ int main()
 
 			Storage->Camera = &m_cameraG;
 			Storage->MVP = &ConfigMVP;
+			Storage->Operator = &m_OperatorG;
 			object->Action();
 
 			if (isUpdate)
