@@ -185,8 +185,8 @@ int main()
 	//Выключение возможности изменения размера окна
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	//bool isFullscreen = true;
-	bool isFullscreen = false;
+	bool isFullscreen = true;
+	//bool isFullscreen = false;
 	GLFWmonitor* monitor = isFullscreen ? glfwGetPrimaryMonitor() : nullptr;
 	GLFWwindow* window = glfwCreateWindow(m_widthWindow, m_heightWindow, "LearnOpenGL", monitor, nullptr);
 	

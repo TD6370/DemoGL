@@ -123,11 +123,15 @@ public:
 	//Plane* GetPlanePrt(int indexPlane);
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
 
-	void SetNewPosition();
+	void SaveNewPosition();
 
 	bool CalculateTatget(vec3& resultTarget);
 
+	void CalculateNextPosition();
+
 	void Pathfinding();
+
+	void SaveHeroOperator(bool onlyVertical = false);
 };
 
 #endif

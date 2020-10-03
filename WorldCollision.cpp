@@ -274,9 +274,11 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 			object->PlaneDownPosition = vec3(pos.x, y, pos.z);
 
 			int vers = 3;
+			if (object->TypeObj == Hero)
+				vers = 1;
 			//--- version 1
 			if (vers == 1) {
-				object->Postranslate.y = object->PlaneDownPosition.y + radius;
+				//object->Postranslate.y = object->PlaneDownPosition.y + radius;
 				object->NewPostranslate.y = object->PlaneDownPosition.y + radius;
 			}
 			//--- version 2

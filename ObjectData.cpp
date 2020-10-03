@@ -73,6 +73,10 @@ void ObjectData::ChekNextWay()
 			case Bullet:
 				ActionObjectCurrent = Stay;
 				break;
+			case Hero:
+				//ActionObjectCurrent = Search; //Type 1.
+				//ActionObjectCurrent = Moving; //Type 1.
+				break;
 			default:
 				ActionObjectCurrent = Search;
 				break;
@@ -89,25 +93,46 @@ bool ObjectData::IsContactWorldBorder(vec3 pos) {
 	return result;
 }
 
+void ObjectData::CalculateNextPosition() {
+	if (TypeObj == Hero)
+	{
+		NewPostranslate = Target; //Vers 2.
+		ActionObjectCurrent = Search; //Type 2.
+	}
+	if (TypeObj == NPC)
+	{
+		Move = normalize(Target - Postranslate) * Speed;
+		NewPostranslate = Postranslate + Move;
+	}
+}
+
 void ObjectData::ActionMoving()
 {
 	ChekNextWay();
 	if (ActionObjectCurrent != Moving)
 		return;
 
-	Move = normalize(Target - Postranslate) * Speed;
-	NewPostranslate = Postranslate + Move;
+	CalculateNextPosition();
+
 	if (CheckIsLock()) 
 		return;
 	else
-		SetNewPosition();
+		SaveNewPosition();
 }
 
-void ObjectData::SetNewPosition()
+void ObjectData::SaveNewPosition()
 {
 	Color = vec3(0);
 	Storage->Clusters->SaveClusterObject(Index);
 	Postranslate = NewPostranslate;
+}
+
+void ObjectData::SaveHeroOperator(bool onlyVertical) {
+	float heroHeight = 1.5;
+	if(onlyVertical)
+		Storage->Operator->m_position.y = NewPostranslate.y + heroHeight;
+	else
+		Storage->Operator->m_position = vec3(NewPostranslate.x, NewPostranslate.y + heroHeight, NewPostranslate.z);
 }
 
 bool ObjectData::CheckIsLock() {
@@ -116,6 +141,11 @@ bool ObjectData::CheckIsLock() {
 		return false;
 
 	bool isPolygon = CheckIsPolygon();
+	if (TypeObj == Hero)
+	{
+		if (isPolygon)
+			SaveHeroOperator(true);
+	}
 
 	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
 	if (!isNotValidMove)
@@ -123,13 +153,11 @@ bool ObjectData::CheckIsLock() {
 	if (isNotValidMove)
 	{
 		Color = vec3(1, 0, 0);
-		if (ActionObjectCurrent == Moving) 
-			Pathfinding();
+		Pathfinding();
 		return true;
 	}
-	else {
+	else 
 		return false;
-	}
 	return true;
 }
 
@@ -137,7 +165,7 @@ void ObjectData::Pathfinding() {
 
 	if (TypeObj == Hero)
 	{
-		 Storage->Operator->m_position = Postranslate;
+		 SaveHeroOperator();
 		 Target = Postranslate;
 		 return;
 	}
@@ -180,10 +208,10 @@ bool ObjectData::CalculateTatget(vec3& resultTarget) {
 
 	if (TypeObj == Hero)
 	{
-		if (Move == Storage->Operator->m_position)
+		if (Move == Storage->Operator->m_position) //Move to hero
 			return false;
 		Move = Storage->Operator->m_position;
-		resultTarget = vec3(Move.x, 0, Move.z);
+		resultTarget = vec3(Move.x, Postranslate.y, Move.z);
 	}
 	if (TypeObj == NPC)
 	{
@@ -204,7 +232,6 @@ bool ObjectData::CalculateTatget(vec3& resultTarget) {
 }
 
 void ObjectData::ActionSearch() {
-	World WorldSetting;
 
 	vec3 newTarget;
 	if (!CalculateTatget(newTarget))
@@ -215,14 +242,21 @@ void ObjectData::ActionSearch() {
 		return;
 	NewPostranslate = newTarget;
 	isLock = Storage->Clusters->IsCollisionObject(Index, true);
-	if (isLock)
+	if (isLock) {
+		NewPostranslate = Postranslate;
+		if (TypeObj == Hero)
+			SaveHeroOperator();
 		return;
+	}
 	Target = newTarget;
 
 	vec3 ray = normalize(Target - Postranslate);
 	TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
 
-	ActionObjectCurrent = Look;
+	if (TypeObj == Hero)
+		ActionObjectCurrent = Moving; //Type 2.
+	if (TypeObj == NPC)
+		ActionObjectCurrent = Look;
 }
 
 void ObjectData::RunAction() {

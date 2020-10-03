@@ -229,13 +229,26 @@ void CreatorModelData::LoadModels() {
 	nextModel6.RadiusCollider = 0.1;
 	nextModel6.Init();
 	AddModel(&nextModel6, "marker_Point");
+
+	ModelData nextModelHomo = ModelData();
+	nextModelHomo.PathShaderVertex = "basic.vert";
+	nextModelHomo.PathShaderFrag = "basic.frag";
+	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
+	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelHomo.PathTexture = "./Textures/future.bmp";
+	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
+	nextModelHomo.RadiusCollider = 1;
+	nextModelHomo.Init();
+	AddModel(&nextModelHomo, "homo");
+
+
 }
 
 void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 300; i++)
+    for (int i = 0; i < 100; i++)
 	{
 		//std::shared_ptr<ModelData> model3 = GetModelPrt(0);
 		AddObject(this, "Mon", modelMon, NPC);
@@ -272,6 +285,10 @@ void CreatorModelData::LoadObjects() {
 	AddObject(this, "M_V_1", modelM_V, Block, vec3(0, 0, 50), color_green);
 	AddObject(this, "M_V_2", modelM_V, Block, vec3(0, 0, 50), color_blue);
 	AddObject(this, "M_V_3", modelM_V, Block, vec3(0, 0, 50), color_yelow);
+
+	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
+	AddObject(this, "Hero", modeHero, Hero, vec3(0, 0, 0));
+	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
 
 	float offsetCentrePlane = 500;
