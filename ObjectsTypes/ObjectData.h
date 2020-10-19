@@ -89,8 +89,10 @@ public:
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = NPC,
 		vec3 p_pos = vec3(0));
-	
+
 	~ObjectData();
+
+	void virtual InitData();
 
 	void GenStartPosition();
 
@@ -108,17 +110,9 @@ public:
 
 	string GetKeySectorPolygon(bool isNewPosition = true);
 
-	vec3 GetOperatorPosition();
-
-	//-------------
-
-	void FillPlanes();
-
 	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
 
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
-
-	void SaveHeroOperator(bool onlyVertical = false);
 };
 
 #endif

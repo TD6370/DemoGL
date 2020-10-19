@@ -5,6 +5,9 @@
 #include "ObjectsTypes\ObjectData.h"
 #include "ObjectsTypes\ObjectPhysic.h"
 #include "ObjectsTypes\ObjectDynamic.h"
+#include "ObjectsTypes\ObjectPolygon.h"
+#include "ObjectsTypes\ObjectHero.h"
+#include "ObjectsTypes\ObjectNPC.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -126,17 +129,56 @@ ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, s
 	ObjectData objectModel;
 	switch (p_typeObj)
 	{
-		case Polygon:
+		case Polygon:{
+			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
+			objectModel = obj;
+			break;
+		}
 		case Block:
-		case Terra:
+		case Terra: {
+			ObjectPhysic obj = ObjectPhysic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
+			objectModel = obj;
+			break;
+		}
 		case NPC:
+		{
+			ObjectNPC obj = ObjectNPC(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectNPC>(obj));
+			objectModel = obj;
+			break;
+		}
 		case Bullet:
-		case Hero: {
+		{
 			ObjectDynamic obj = ObjectDynamic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
 			obj.Storage = storage;
 			obj.Color = p_color;
 			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
+			objectModel = obj;
+			break;
+		}
+		case Hero: {
+			ObjectHero obj = ObjectHero(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectHero>(obj));
 			objectModel = obj;
 			break;
 		}
@@ -145,7 +187,6 @@ ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, s
 	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));
-
 	return objectModel;
 }
 
@@ -262,6 +303,14 @@ void CreatorModelData::LoadModels() {
 
 void CreatorModelData::LoadObjects() {
 
+	float offsetCentrePlane = 500;
+	float radiusPlane = 70;
+
+	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
+	AddObject(this, "Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
+	CurrentPolygonObject = GetObjectPrt("Plane");
+
+
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
     for (int i = 0; i < 100; i++)
@@ -307,10 +356,7 @@ void CreatorModelData::LoadObjects() {
 	AddObject(this, "Hero", modeHero, Hero, vec3(0, 0, 0));
 	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
-
-	float offsetCentrePlane = 500;
-	float radiusPlane = 70;
-
+	
 	/* for (int x = 0; x < 20; x++)
 	{
 		for (int z = 0; z < 20; z++)
@@ -321,13 +367,6 @@ void CreatorModelData::LoadObjects() {
 			AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
 		}
 	}*/
-
-
-	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
-	//AddObject("Plane", model1, Polygon, vec3(radiusPlane/2, -55, radiusPlane / 2));
-	AddObject(this, "Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
-	CurrentPolygonObject = GetObjectPrt("Plane");
-
 }
 
 void CreatorModelData::Load() {

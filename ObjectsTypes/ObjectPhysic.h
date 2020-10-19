@@ -18,8 +18,6 @@ class ObjectPhysic :
 
 public:
 
-	//CreatorModelData* Storage;
-
 	ObjectPhysic(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
@@ -39,6 +37,8 @@ public:
 	void CheckStartPosition();
 
 	void virtual LockResult();
+
+	void virtual LockPolygonResult();
 
 	bool CheckIsPolygon();
 

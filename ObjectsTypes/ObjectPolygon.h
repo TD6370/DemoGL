@@ -13,12 +13,12 @@ using glm::vec3;
 using glm::vec2;
 
 
-class ObjectDynamic :
+class ObjectPolygon :
 	public ObjectPhysic
 {
 public:
 
-	ObjectDynamic(
+	ObjectPolygon(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = NPC,
@@ -28,25 +28,8 @@ public:
 			p_typeObj,
 			p_pos) {};
 
-	void RunAction();
 
-	void ActionMoving();
+	void FillPlanes();
 
-	void ActionLook();
-
-	void ActionSearch();
-
-	bool virtual CalculateTatget(vec3& resultTarget);
-
-	void virtual CalculateNextPosition();
-
-	void virtual Pathfinding();
-
-	void ChekNextWay();
-
-	void LockResult();
-
-	void SaveNewPosition();
-
-	void virtual LockObjectResult();
+	void InitData();
 };

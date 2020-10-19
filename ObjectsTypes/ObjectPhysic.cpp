@@ -80,11 +80,8 @@ bool ObjectPhysic::CheckIsLock() {
 		return false;
 
 	bool isPolygon = CheckIsPolygon();
-	if (TypeObj == Hero)
-	{
-		if (isPolygon)
-			SaveHeroOperator(true);
-	}
+	if (isPolygon)
+		LockPolygonResult();
 
 	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
 	if (!isNotValidMove)
@@ -93,7 +90,6 @@ bool ObjectPhysic::CheckIsLock() {
 	{
 		Color = vec3(1, 0, 0);
 		LockResult();
-		//Pathfinding();
 		return true;
 	}
 	else
@@ -102,6 +98,10 @@ bool ObjectPhysic::CheckIsLock() {
 }
 
 void ObjectPhysic::LockResult() {
+
+}
+
+void ObjectPhysic::LockPolygonResult() {
 
 }
 

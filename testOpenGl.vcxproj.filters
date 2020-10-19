@@ -78,6 +78,15 @@
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectHero.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectNPC.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -141,6 +150,15 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectPolygon.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectHero.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectNPC.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

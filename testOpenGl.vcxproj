@@ -162,7 +162,10 @@
     <ClCompile Include="ModelData.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectData.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectHero.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectNPC.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
     <ClCompile Include="OperationString.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="TransformModel.cpp" />
@@ -184,7 +187,10 @@
     <ClInclude Include="ModelData.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />
     <ClInclude Include="ObjectsTypes\ObjectData.h" />
+    <ClInclude Include="ObjectsTypes\ObjectHero.h" />
+    <ClInclude Include="ObjectsTypes\ObjectNPC.h" />
     <ClInclude Include="ObjectsTypes\ObjectPhysic.h" />
+    <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shaders.h" />
