@@ -2,7 +2,9 @@
 #include "CreatorModelData.h"
 #include "WorldCollision.h"
 #include "ModelData.h"
-#include "ObjectData.h"
+#include "ObjectsTypes\ObjectData.h"
+#include "ObjectsTypes\ObjectPhysic.h"
+#include "ObjectsTypes\ObjectDynamic.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -121,12 +123,26 @@ ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, s
 		name += fileModel + "_" + std::to_string(SceneObjectsLastIndex);
 	}
 
-	ObjectData objectModel = ObjectData(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-	objectModel.Storage = storage;
-	objectModel.Color = p_color;
-	objectModel.Name = name;
-
-	SceneObjects.push_back(std::make_unique<ObjectData>(objectModel));
+	ObjectData objectModel;
+	switch (p_typeObj)
+	{
+		case Polygon:
+		case Block:
+		case Terra:
+		case NPC:
+		case Bullet:
+		case Hero: {
+			ObjectDynamic obj = ObjectDynamic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
+			objectModel = obj;
+			break;
+		}
+		default:
+		break;	
+	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));
 
@@ -273,8 +289,9 @@ void CreatorModelData::LoadObjects() {
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
 	AddObject(this, "M_P_1", modelM_P, Block, vec3(-50, 0, 0));
 	AddObject(this, "M_P_2", modelM_P, Block, vec3(-50, 0, 0));
-	//AddObject(this, "Bullet", modelM_P, Bullet, vec3(0, 0, 0));
-	AddObject(this, "Bullet", modelBox, Bullet, vec3(0, 0, 0));
+
+	AddObject(this, "Bullet", modelM_P, Bullet, vec3(0, 0, 0));
+	//AddObject(this, "Bullet", modelBox, Bullet, vec3(0, 0, 0));
 
 
 	std::shared_ptr<ModelData> modelM_C = GetModelPrt("marker_Cross");

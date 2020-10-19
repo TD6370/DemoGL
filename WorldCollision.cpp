@@ -1,7 +1,7 @@
 //@@@
 #include "WorldCollision.h"
 #include "ModelData.h"
-#include "ObjectData.h"
+#include "ObjectsTypes/ObjectData.h"
 #include "GeometryLib.h"
 //----------------------
 

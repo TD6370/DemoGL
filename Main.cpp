@@ -2,7 +2,7 @@
 #include "Main.h"
 
 #include "ModelData.h"
-#include "ObjectData.h"
+#include "ObjectsTypes/ObjectData.h"
 #include "Shaders.h"
 #include "CreatorModelData.h"
 
@@ -185,8 +185,8 @@ int main()
 	//Выключение возможности изменения размера окна
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	bool isFullscreen = true;
-	//bool isFullscreen = false;
+	//bool isFullscreen = true;
+	bool isFullscreen = false;
 	GLFWmonitor* monitor = isFullscreen ? glfwGetPrimaryMonitor() : nullptr;
 	GLFWwindow* window = glfwCreateWindow(m_widthWindow, m_heightWindow, "LearnOpenGL", monitor, nullptr);
 	
@@ -429,12 +429,13 @@ int main()
 					objectObserver->Postranslate = posCursorObject;
 					objectObserver->Target = posTarget;
 					objectObserver->ActionObjectCurrent = Moving;
+					//objectObserver->ActionObjectCurrent = Stay;
 				//}
 			}
 
 			//----- Light position
 			std::shared_ptr <ObjectData> objectLight = Storage->GetObjectPrt("Mon"); //Box2
-			m_Lighting.positionLight = vec3(objectLight->Postranslate.x, objectLight->Postranslate.y + 50.f, objectLight->Postranslate.z);
+			m_Lighting.positionLight = vec3(objectLight->Postranslate.x, objectLight->Postranslate.y + 15.f, objectLight->Postranslate.z);
 			model->ConfUniform.SetPositionLight(m_Lighting.positionLight);
 			
 			//------ Set Mouse position

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{f3f2bc06-85b4-4c94-a119-1e7f2da248ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -51,12 +54,6 @@
     <ClCompile Include="CoreSettings.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectData.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelData.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="OperationString.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -68,6 +65,18 @@
     </ClCompile>
     <ClCompile Include="GeometryLib.cpp">
       <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelData.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectData.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp">
+      <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,12 +116,6 @@
     <ClInclude Include="CoreSettings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="OperationString.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -127,6 +130,18 @@
     </ClInclude>
     <ClInclude Include="GeometryLib.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectPhysic.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectData.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelData.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectDynamic.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

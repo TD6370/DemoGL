@@ -3,13 +3,16 @@
 #ifndef ObjectData_H
 #define ObjectData_H
 
-#include "CoreSettings.h"
-#include "ConfigUniformArg.h"
-#include "TransformModel.h"
+#include "..\CoreSettings.h"
+#include "..\ConfigUniformArg.h"
+#include "..\TransformModel.h"
+
+//#include "ObjectPhysic.h"
 
 class ModelData;
 //class ObjectData;
 class CreatorModelData;
+//#include "../CreatorModelData.h" //---<<<
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -17,6 +20,8 @@ class CreatorModelData;
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/random.hpp>
+
+#include <fstream>
 
 using glm::vec4;
 using glm::vec3;
@@ -27,9 +32,12 @@ using std::shared_ptr;
 
 class Plane;
 
+//using  ObjectPhysic::CheckIsLock;
+//class  ObjectPhysic;
+
 class ObjectData
 {
-private:
+protected:
 	
 	GLfloat m_speedRotate = 0.1f;
 	GLfloat m_nextWayTime = 0;
@@ -75,6 +83,8 @@ public:
 	std::vector<shared_ptr<Plane>> Planes;
 	//shared_ptr<ObjectData>
 
+	ObjectData();
+
 	ObjectData(int p_index,
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = NPC,
@@ -84,52 +94,29 @@ public:
 
 	void GenStartPosition();
 
-	void ChekNextWay();
+	void virtual CheckStartPosition();
 
-	bool IsContactWorldBorder(vec3 pos);
-
-	void ActionMoving();
-	
-	void ActionLook();
-
-	void ActionSearch();
-
-	void RunAction();
-
-	bool CheckIsLock();
-
-	bool CheckIsPolygon();
+	void virtual RunAction();
 
 	void RunTransform();
 
-	//void Action(Camera* camera, CoreMVP* p_mvp);
 	void Action();
 	
 	vec3 GetVertexPosition(int indVertex);
 
 	vec3 ToWorldPosition(vec3 pos);
-	//bool IsCheckLock();
 
 	string GetKeySectorPolygon(bool isNewPosition = true);
 
+	vec3 GetOperatorPosition();
 
 	//-------------
 
 	void FillPlanes();
 
-	//Plane* GetPlaneFromVertIndex(int indexVertPlane);
 	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
 
-	//Plane* GetPlanePrt(int indexPlane);
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
-
-	void SaveNewPosition();
-
-	bool CalculateTatget(vec3& resultTarget);
-
-	void CalculateNextPosition();
-
-	void Pathfinding();
 
 	void SaveHeroOperator(bool onlyVertical = false);
 };
