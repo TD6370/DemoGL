@@ -8,6 +8,7 @@
 #include "ObjectsTypes\ObjectPolygon.h"
 #include "ObjectsTypes\ObjectHero.h"
 #include "ObjectsTypes\ObjectNPC.h"
+#include "ObjectsTypes\ObjectBullet.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -172,6 +173,17 @@ ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, s
 			objectModel = obj;
 			break;
 		}
+		case BulletHero:
+		{
+			ObjectBullet obj = ObjectBullet(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			obj.InitData();
+			obj.Storage = storage;
+			obj.Color = p_color;
+			obj.Name = name;
+			SceneObjects.push_back(std::make_unique<ObjectBullet>(obj));
+			objectModel = obj;
+			break;
+		}
 		case Hero: {
 			ObjectHero obj = ObjectHero(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			obj.InitData();
@@ -297,8 +309,6 @@ void CreatorModelData::LoadModels() {
 	nextModelHomo.RadiusCollider = 1;
 	nextModelHomo.Init();
 	AddModel(&nextModelHomo, "homo");
-
-
 }
 
 void CreatorModelData::LoadObjects() {
@@ -313,9 +323,8 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 0; i++)
+    for (int i = 0; i < 20; i++)
 	{
-		//std::shared_ptr<ModelData> model3 = GetModelPrt(0);
 		AddObject(this, "Mon", modelMon, NPC);
 	}
 
@@ -324,11 +333,6 @@ void CreatorModelData::LoadObjects() {
 	vec3 color_green = vec3(0, 1, 0);
 	vec3 color_violet = vec3(1, 0, 1);
 	vec3 color_yelow = vec3(0, 1, 1);
-
-	/*std::shared_ptr<ModelData> modelK = GetModelPrt(2);
-	AddObject(modelK, Polygon, vec3(0, -55, 0));
-	AddObject(modelK, Polygon, vec3(0, -55, 0));*/
-
 
 	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
 	AddObject(this, "Box", modelBox, Block, vec3(-50, -55, 70));
@@ -340,6 +344,7 @@ void CreatorModelData::LoadObjects() {
 	AddObject(this, "M_P_2", modelM_P, Block, vec3(-50, 0, 0));
 
 	AddObject(this, "Bullet", modelM_P, Bullet, vec3(0, 0, 0));
+	AddObject(this, "BulletHero", modelM_P, BulletHero, vec3(0, 0, 0));
 	//AddObject(this, "Bullet", modelBox, Bullet, vec3(0, 0, 0));
 
 

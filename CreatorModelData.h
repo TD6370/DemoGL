@@ -23,6 +23,7 @@ using std::string;
 class ModelData;
 class ObjectData;
 class WorldCluster;
+class ControllerInput;
 
 class CreatorModelData {
 protected:
@@ -42,6 +43,7 @@ public:
 	Camera* Camera;
 	CoreMVP* MVP;
 	Operator* Operator;
+	ControllerInput* Inputs;
 
 	CreatorModelData();
 

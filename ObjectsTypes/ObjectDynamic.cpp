@@ -3,6 +3,24 @@
 //-------------------
 #include "ObjectDynamic.h"
 
+void ObjectDynamic::InitData()
+{
+	switch (TypeObj)
+	{
+		case Block:
+		case Tree:
+		case Terra:
+		case Bullet:
+			ActionObjectCurrent = Stay;
+			break;
+		default:
+			ActionObjectCurrent = Lock;
+			break;
+	}
+
+	IsGravity = true;
+}
+
 void ObjectDynamic::RunAction() {
 
 	if (ActionObjectCurrent != Lock)

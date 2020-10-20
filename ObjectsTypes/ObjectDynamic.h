@@ -28,6 +28,8 @@ public:
 			p_typeObj,
 			p_pos) {};
 
+	void InitData();
+
 	void RunAction();
 
 	void ActionMoving();

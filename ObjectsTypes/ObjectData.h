@@ -9,11 +9,6 @@
 
 //#include "ObjectPhysic.h"
 
-class ModelData;
-//class ObjectData;
-class CreatorModelData;
-//#include "../CreatorModelData.h" //---<<<
-
 #define GLEW_STATIC
 #include <GL/glew.h>
 
@@ -31,9 +26,8 @@ using std::string;
 using std::shared_ptr;
 
 class Plane;
-
-//using  ObjectPhysic::CheckIsLock;
-//class  ObjectPhysic;
+class ModelData;
+class CreatorModelData;
 
 class ObjectData
 {
@@ -46,6 +40,7 @@ protected:
 	std::string m_keyPosSectorStr;
 public:
 	GLfloat Speed = 0.5f;
+	bool IsGravity = false;
 
 	CreatorModelData* Storage;
 
@@ -57,7 +52,7 @@ public:
 	//int RadiusCollider = 5;
 
 	std::shared_ptr<ModelData> ModelPtr;
-
+	
 	vec3 Color = vec3(0);
 
 	GLfloat TranslateAngle = 0;
@@ -72,16 +67,13 @@ public:
 
 	int minDist = 5;
 	int DistanceTarget = 20;
-	//int DistanceTarget = 10;
 
 	string ZonaPolygon;
 	GLfloat PolygonPointY = 0;
 	int PlaneDownIndex = -1;
 	vec3 PlaneDownPosition = vec3(0);
 	std::vector<vec3> TempVectors;
-	//std::vector<Plane>* Planes;
 	std::vector<shared_ptr<Plane>> Planes;
-	//shared_ptr<ObjectData>
 
 	ObjectData();
 

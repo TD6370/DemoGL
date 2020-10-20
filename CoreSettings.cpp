@@ -65,7 +65,7 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting }; // , EventControl };
 
-enum TypeObject { Polygon, Block, Tree, Terra, NPC, Bullet, Hero };
+enum TypeObject { Polygon, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero };
 
 //enum TramsformType { RotateX, RotateY, RotateZ };
 

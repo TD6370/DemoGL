@@ -205,7 +205,8 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 	vec3 posCalc = vec3(pos.x, 0, pos.z);
 	int step = 1 / object->Speed;
 	//----
-	stateResult = COLLISE_NORMAL;
+	if (object->IsGravity)
+		stateResult = COLLISE_NORMAL;
 
 	for (const int indPlane : indexesPlane)
 	{
@@ -274,11 +275,15 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 			object->PlaneDownPosition = vec3(pos.x, y, pos.z);
 
 			int vers = 3;
+
+			if (!object->IsGravity)
+				vers = 2;
+			
 			if (object->TypeObj == Hero)
 				vers = 1;
+
 			//--- version 1
 			if (vers == 1) {
-				//object->Postranslate.y = object->PlaneDownPosition.y + radius;
 				object->NewPostranslate.y = object->PlaneDownPosition.y + radius;
 			}
 			//--- version 2
@@ -286,8 +291,6 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 				if (pos.y < object->PlaneDownPosition.y)
 					stateResult = COLLISE_UP;
 				else if (pos.y > object->PlaneDownPosition.y + 0.5) {
-					//object->Postranslate.y = object->PlaneDownPosition.y + radius;
-					//object->NewPostranslate.y = object->PlaneDownPosition.y + radius;
 					stateResult = COLLISE_DOWN;
 				}
 			}
@@ -297,12 +300,9 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 				object->NewPostranslate.y -= speed;
 			}
 			//---------------------------
-
 			break;
 		}
-		//---------------------
 	}
-
 	return stateResult;
 }
 

@@ -33,6 +33,10 @@ void GenMVP(
 	Camera* p_camera,
 	CoreMVP* ConfigMVP);
 
+glm::vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG);
+
+glm::vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG);
+
 //enum TramsformType { RotateX, RotateY, RotateZ };
 //enum TramsformType;
 

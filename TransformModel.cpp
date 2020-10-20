@@ -19,6 +19,7 @@
 #include <glm/gtc/random.hpp>
 
 using glm::vec3;
+using glm::vec4;
 using glm::mat4;
 
 //glm::mat4 Transform(GLuint shaderProgram, unsigned int index, int paramCase, ConfigUniform confUniform, bool IsNoTranf, 
@@ -211,4 +212,26 @@ void GenMVP(
 	glm::vec3 positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator->m_MouseX, p_operator->m_MouseY, m_widthWindow, m_heightWindow);
 	p_operator->m_positionCursorModel = positionCursorModel;
 	
+}
+
+
+vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
+	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+	//float offset = 0.2f;
+	float offset = 1 / lenght;
+	vec3 directionFace = glm::vec3(
+		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
+		sin(operatorG->VerticalAngle - offset),
+		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
+	);
+	vec3 direction = directionFace * lenght;
+	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+	return posFace;
+}
+
+vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
+	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+	vec3 direction = operatorG->m_direction * lenght;
+	vec3 posForward = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+	return posForward;
 }

@@ -87,6 +87,9 @@
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectBullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -159,6 +162,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectNPC.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectBullet.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

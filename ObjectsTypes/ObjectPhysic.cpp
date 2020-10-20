@@ -52,24 +52,25 @@ bool ObjectPhysic::CheckIsPolygon() {
 
 	CollisionPolygonState = Storage->Clusters->IsCollisionPolygon(Index, plane, vertex);
 
-	switch (CollisionPolygonState)
-	{
-	case COLLISE_UP:
-	{
-		//Postranslate.y = NewPostranslate.y = (NewPostranslate.y + step);
-		NewPostranslate.y = (NewPostranslate.y + step);
-		break;
+	if (IsGravity) {
+		switch (CollisionPolygonState)
+		{
+		case COLLISE_UP:
+		{
+			//Postranslate.y = NewPostranslate.y = (NewPostranslate.y + step);
+			NewPostranslate.y = (NewPostranslate.y + step);
+			break;
+		}
+		case COLLISE_DOWN:
+			//Postranslate.y = NewPostranslate.y = (NewPostranslate.y - step);
+			NewPostranslate.y = (NewPostranslate.y - step);
+			break;
+		case COLLISE_NORMAL:
+			break;
+		default:
+			break;
+		}
 	}
-	case COLLISE_DOWN:
-		//Postranslate.y = NewPostranslate.y = (NewPostranslate.y - step);
-		NewPostranslate.y = (NewPostranslate.y - step);
-		break;
-	case COLLISE_NORMAL:
-		break;
-	default:
-		break;
-	}
-
 	return CollisionPolygonState == COLLISE_UP || CollisionPolygonState == COLLISE_NORMAL;
 }
 

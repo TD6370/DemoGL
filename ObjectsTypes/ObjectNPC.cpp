@@ -4,6 +4,7 @@
 void ObjectNPC::InitData()
 {
 	ActionObjectCurrent = Starting;
+	IsGravity = true;
 }
 
 void ObjectNPC::Pathfinding() {

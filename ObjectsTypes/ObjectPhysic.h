@@ -30,7 +30,7 @@ public:
 
 	bool IsContactWorldBorder(vec3 pos);
 
-	bool CheckIsLock();
+	bool virtual CheckIsLock();
 
 	void RunAction();
 

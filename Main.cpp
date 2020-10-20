@@ -160,27 +160,6 @@ void DrawGraph(GLuint shaderProgram, std::shared_ptr<ModelData> model)
 	glBindVertexArray(0);
 }
 
-vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght) {
-	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-	//float offset = 0.2f;
-	float offset = 1 / lenght;
-	vec3 directionFace = glm::vec3(
-		cos(m_OperatorG.VerticalAngle - offset) * sin(m_OperatorG.HorizontalAngle + offset),
-		sin(m_OperatorG.VerticalAngle - offset),
-		cos(m_OperatorG.VerticalAngle - offset) * cos(m_OperatorG.HorizontalAngle + offset)
-	);
-	vec3 direction = directionFace * lenght;
-	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
-	return posFace;
-}
-
-vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght) {
-	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-	vec3 direction = m_OperatorG.m_direction * lenght;
-	vec3 posForward = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
-	return posForward;
-}
-
 int main()
 {
 	m_cameraG = Camera();
@@ -303,6 +282,7 @@ int main()
 			Storage->Camera = &m_cameraG;
 			Storage->MVP = &ConfigMVP;
 			Storage->Operator = &m_OperatorG;
+			Storage->Inputs = &Inputs;
 			object->Action();
 
 			if (isUpdate)
@@ -430,22 +410,6 @@ int main()
 			if (object->Name == "M_C_1") {
 				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
 				object->Postranslate = objectObserver->Postranslate; //nearestPolygonIntersectionPoint - blue
-			}
-
-			//Create object bullet
-			if (Inputs.MBT == GLFW_MOUSE_BUTTON_1) {
-				Inputs.MBT = -1;
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Bullet");
-				//if (objectObserver->ActionObjectCurrent != Moving)
-				//{
-					vec3 posCursorObject = GetVectorForwardFace(&ConfigMVP, 5.f);
-					vec3 posTarget = GetVectorForward(&ConfigMVP, 100.f);
-					objectObserver->Speed = 1;
-					objectObserver->Postranslate = posCursorObject;
-					objectObserver->Target = posTarget;
-					objectObserver->ActionObjectCurrent = Moving;
-					//objectObserver->ActionObjectCurrent = Stay;
-				//}
 			}
 
 			//----- Light position

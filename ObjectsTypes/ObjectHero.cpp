@@ -5,6 +5,7 @@
 void ObjectHero::InitData()
 {
 	ActionObjectCurrent = Search;
+	IsGravity = true;
 }
 
 void ObjectHero::SaveHeroOperator(bool onlyVertical) {
