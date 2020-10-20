@@ -77,7 +77,7 @@ void MouseEvents(
 	float m_deltaTime,
 	Operator* p_operator,
 	ControllerInput* p_inputs)
-	{
+{
 
 	// горизонтальный угол : по -Z
 	float horizontalAngle = 3.14f;
@@ -146,12 +146,21 @@ void MouseEvents(
 	horizontalAngle += mouseSpeed * m_deltaTime * float(m_widthWindow / 2 - xpos - p_operator->MouseOffset_x);
 	verticalAngle += mouseSpeed * m_deltaTime * float(m_heightWindow / 2 - ypos - p_operator->MouseOffset_y);
 
+	p_operator->VerticalAngle = verticalAngle;
+	p_operator->HorizontalAngle = horizontalAngle;
+
 	// направление : Преобразовываем сферические координаты в декартовы
 	p_operator->m_direction = glm::vec3(
 		cos(verticalAngle) * sin(horizontalAngle),
 		sin(verticalAngle),
 		cos(verticalAngle) * cos(horizontalAngle)
 	);
+
+	/*p_operator->m_directionCursor = glm::vec3(
+		cos(verticalAngle - 0.2) * sin(horizontalAngle + 0.2),
+		sin(verticalAngle - 0.2),
+		cos(verticalAngle - 0.2) * cos(horizontalAngle + 0.2)
+	);*/
 
 	// Вектор «вправо»
 	p_operator->m_right = glm::vec3(

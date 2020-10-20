@@ -160,10 +160,25 @@ void DrawGraph(GLuint shaderProgram, std::shared_ptr<ModelData> model)
 	glBindVertexArray(0);
 }
 
+vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght) {
+	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+	//float offset = 0.2f;
+	float offset = 1 / lenght;
+	vec3 directionFace = glm::vec3(
+		cos(m_OperatorG.VerticalAngle - offset) * sin(m_OperatorG.HorizontalAngle + offset),
+		sin(m_OperatorG.VerticalAngle - offset),
+		cos(m_OperatorG.VerticalAngle - offset) * cos(m_OperatorG.HorizontalAngle + offset)
+	);
+	vec3 direction = directionFace * lenght;
+	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+	return posFace;
+}
+
 vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght) {
 	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-	vec3 posCursorObject = vec3(vecPos.x, vecPos.y, vecPos.z) + m_OperatorG.m_direction * lenght;
-	return posCursorObject;
+	vec3 direction = m_OperatorG.m_direction * lenght;
+	vec3 posForward = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+	return posForward;
 }
 
 int main()
@@ -423,7 +438,7 @@ int main()
 				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Bullet");
 				//if (objectObserver->ActionObjectCurrent != Moving)
 				//{
-					vec3 posCursorObject = GetVectorForward(&ConfigMVP, 5.f);
+					vec3 posCursorObject = GetVectorForwardFace(&ConfigMVP, 5.f);
 					vec3 posTarget = GetVectorForward(&ConfigMVP, 100.f);
 					objectObserver->Speed = 1;
 					objectObserver->Postranslate = posCursorObject;

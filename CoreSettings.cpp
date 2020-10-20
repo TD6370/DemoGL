@@ -30,6 +30,9 @@ struct Operator {
 
 	GLfloat Far = 1000.f;// 1000.f;;
 	glm::vec3 m_direction;
+	float VerticalAngle = 0;
+	float HorizontalAngle = 0;
+	//glm::vec3 m_directionCursor;
 	glm::vec3 m_right;
 	glm::vec3 m_up;
 	glm::vec3 m_position = glm::vec3(0, 0, 5);
