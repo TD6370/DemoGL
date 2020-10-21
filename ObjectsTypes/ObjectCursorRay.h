@@ -13,12 +13,15 @@ using glm::vec3;
 using glm::vec2;
 
 
-class ObjectHero :
+class ObjectCursorRay :
 	public ObjectDynamic
 {
 public:
+	GLfloat StartLenght = 5.f;
+	GLfloat EndLenght = 100.f;
+	int KeyPush = GLFW_MOUSE_BUTTON_1;
 
-	ObjectHero(
+	ObjectCursorRay(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = NPC,
@@ -30,19 +33,11 @@ public:
 
 	void InitData();
 
-	vec3 GetOperatorPosition();
+	void RunAction();
 
-	void SaveHeroOperator(bool onlyVertical = false);
-
-	void LockObjectResult();
-
-	void LockPolygonResult();
-
-	void Pathfinding();
-
-	bool CalculateTatget(vec3& resultTarget);
-
-	void CalculateNextPosition();
+	bool CheckIsLock();
 
 	void TargetCompleted();
+
+	void Push();
 };

@@ -46,6 +46,8 @@ public:
 
 	void ChekNextWay();
 
+	void virtual TargetCompleted();
+
 	void LockResult();
 
 	void SaveNewPosition();

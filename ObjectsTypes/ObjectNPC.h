@@ -30,13 +30,9 @@ public:
 
 	void InitData();
 
-	//void LockObjectResult();
-
-	//void LockPolygonResult();
-
 	void Pathfinding();
 
 	bool CalculateTatget(vec3& resultTarget);
 
-	//void CalculateNextPosition();
+	void TargetCompleted();
 };

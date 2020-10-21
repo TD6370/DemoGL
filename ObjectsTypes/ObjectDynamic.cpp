@@ -114,19 +114,12 @@ void ObjectDynamic::ChekNextWay()
 {
 	//GLuint dist = glm::distance(Target, Postranslate);
 	GLuint dist = glm::distance(vec2(Target.x, Target.z), vec2(Postranslate.x, Postranslate.z));
-	if (dist <= 2 + 0.1) {
-		switch (TypeObj)
-		{
-		case Bullet:
-			ActionObjectCurrent = Stay;
-			break;
-		case Hero:
-			break;
-		default:
-			ActionObjectCurrent = Search;
-			break;
-		}
-	}
+	if (dist <= 2 + 0.1) 
+		TargetCompleted();
+}
+
+void ObjectDynamic::TargetCompleted()
+{
 }
 
 void ObjectDynamic::CalculateNextPosition() {

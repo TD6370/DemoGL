@@ -74,3 +74,6 @@ void ObjectHero::CalculateNextPosition() {
 	ActionObjectCurrent = Search;
 }
 
+void ObjectHero::TargetCompleted()
+{
+}

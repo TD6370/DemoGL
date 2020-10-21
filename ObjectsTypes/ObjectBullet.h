@@ -37,5 +37,7 @@ public:
 
 	bool CheckIsLock();
 
+	void TargetCompleted();
+
 	void Push();
 };

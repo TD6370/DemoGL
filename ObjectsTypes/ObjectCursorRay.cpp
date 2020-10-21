@@ -1,16 +1,15 @@
-#include "ObjectBullet.h"
+#include "ObjectCursorRay.h"
+
 #include "..\CreatorModelData.h"
 #include "..\TransformModel.h"
-//#include "..\CoreSettings.h"
 
-
-void ObjectBullet::InitData()
+void ObjectCursorRay::InitData()
 {
 	ActionObjectCurrent = Stay;
 	Speed = 0.4f;
 }
 
-void ObjectBullet::RunAction() {
+void ObjectCursorRay::RunAction() {
 
 	if (ActionObjectCurrent != Lock)
 	{
@@ -33,16 +32,16 @@ void ObjectBullet::RunAction() {
 	Push();
 }
 
-bool ObjectBullet::CheckIsLock() {
+bool ObjectCursorRay::CheckIsLock() {
 	return false;
 }
 
-void ObjectBullet::TargetCompleted()
+void ObjectCursorRay::TargetCompleted()
 {
 	ActionObjectCurrent = Stay;
 }
 
-void ObjectBullet::Push() {
+void ObjectCursorRay::Push() {
 
 	if (Storage->Inputs->MBT == KeyPush) {
 		Storage->Inputs->MBT = -1;
@@ -53,6 +52,3 @@ void ObjectBullet::Push() {
 		ActionObjectCurrent = Moving;
 	}
 }
-
-
-

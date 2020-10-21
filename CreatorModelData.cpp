@@ -9,6 +9,7 @@
 #include "ObjectsTypes\ObjectHero.h"
 #include "ObjectsTypes\ObjectNPC.h"
 #include "ObjectsTypes\ObjectBullet.h"
+#include "ObjectsTypes\ObjectCursorRay.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -107,7 +108,7 @@ std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(string key)
 	return prt_model;
 }
 
-ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
+std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
 
 	SceneObjectsLastIndex = SceneObjects.size();
 
@@ -127,75 +128,65 @@ ObjectData CreatorModelData::AddObject(CreatorModelData* storage, string name, s
 		name += fileModel + "_" + std::to_string(SceneObjectsLastIndex);
 	}
 
-	ObjectData objectModel;
+	std::shared_ptr<ObjectData> objectModel;
 	switch (p_typeObj)
 	{
-		case Polygon:{
+		case Polygon: {
 			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Block:
 		case Terra: {
 			ObjectPhysic obj = ObjectPhysic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		case NPC:
 		{
 			ObjectNPC obj = ObjectNPC(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectNPC>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Bullet:
 		{
 			ObjectDynamic obj = ObjectDynamic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
+			break;
+		}
+		case CursorRay:
+		{
+			ObjectCursorRay obj = ObjectCursorRay(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectCursorRay>(obj));
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		case BulletHero:
 		{
 			ObjectBullet obj = ObjectBullet(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectBullet>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Hero: {
 			ObjectHero obj = ObjectHero(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
-			obj.InitData();
-			obj.Storage = storage;
-			obj.Color = p_color;
-			obj.Name = name;
 			SceneObjects.push_back(std::make_unique<ObjectHero>(obj));
-			objectModel = obj;
+			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
 		default:
-		break;	
+			break;
+	}
+
+	if (objectModel != NULL) {
+		objectModel->InitData();
+		objectModel->Storage = storage;
+		objectModel->Color = p_color;
+		objectModel->Name = name;
 	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));

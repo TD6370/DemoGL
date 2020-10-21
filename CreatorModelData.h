@@ -49,7 +49,7 @@ public:
 
 	void AddModel(ModelData* newModel, string name);
 
-	ObjectData AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
+	std::shared_ptr<ObjectData> AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
 
 	void GenerateObjects();
 

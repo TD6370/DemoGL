@@ -42,3 +42,8 @@ bool ObjectNPC::CalculateTatget(vec3& resultTarget) {
 	return true;
 }
 
+void ObjectNPC::TargetCompleted()
+{
+	ActionObjectCurrent = Search;
+}
+
