@@ -45,4 +45,6 @@ public:
 	void CalculateNextPosition();
 
 	void TargetCompleted();
+
+	void LoadCursorRay();
 };

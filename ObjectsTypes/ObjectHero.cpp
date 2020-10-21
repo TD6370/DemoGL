@@ -6,6 +6,15 @@ void ObjectHero::InitData()
 {
 	ActionObjectCurrent = Search;
 	IsGravity = true;
+
+	LoadCursorRay();
+}
+
+void ObjectHero::LoadCursorRay()
+{
+	std::shared_ptr<ModelData> model = Storage->GetModelPrt("cursorRay");
+	auto obj = Storage->AddObject("CursorRay", model, CursorRay, vec3(-50, -55, 70));
+	obj->IndexObjectOwner = Index;
 }
 
 void ObjectHero::SaveHeroOperator(bool onlyVertical) {

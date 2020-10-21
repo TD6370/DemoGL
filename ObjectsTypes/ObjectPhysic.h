@@ -42,7 +42,7 @@ public:
 
 	bool CheckIsPolygon();
 
-	bool IsCollisionObject(int index, bool isNewPosition);
+	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
 	void SaveClusterObject(int index);
 };

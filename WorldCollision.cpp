@@ -420,6 +420,7 @@ vector<int> WorldCluster::GetVertexPolygonFromObject(int indexObj, vector<string
 vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition)
 {
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+	int indObjOwner = object->IndexObjectOwner;
 	int radius = object->ModelPtr->RadiusCollider;
 	vector<string> checkedZona = vector<string>();
 	vector<int> resultIndexObjects = vector<int>();
@@ -465,7 +466,7 @@ vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition)
 		{
 			vector<int> indObjsInSecor = Sectors->SectorsObjects[keyPosSectorStr];
 			for (const auto& nextIndObj : indObjsInSecor) {
-				if (nextIndObj == indexObj)
+				if (nextIndObj == indexObj || nextIndObj == indObjOwner)
 					continue;
 				resultIndexObjects.push_back(nextIndObj);
 			}
@@ -615,8 +616,9 @@ bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPositi
 }
 
 
-bool WorldCluster::IsCollisionObject(int indexObjMe, bool isNewPosition)
+bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
 {
+	indexObjHit = -1;
 	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition);
 	std::shared_ptr <ObjectData> objNext;
 	for (const auto& nextIndObj : indObjsInSecor) 
@@ -624,8 +626,10 @@ bool WorldCluster::IsCollisionObject(int indexObjMe, bool isNewPosition)
 		if (nextIndObj == indexObjMe)
 			continue;
 		objNext = Storage->GetObjectPrt(nextIndObj);
-		if (IsCollisionCircle(indexObjMe, objNext->Index, isNewPosition))
+		if (IsCollisionCircle(indexObjMe, objNext->Index, isNewPosition)) {
+			indexObjHit = nextIndObj;
 			return true;
+		}
 	}
 	return false;
 }

@@ -17,9 +17,12 @@ class ObjectCursorRay :
 	public ObjectDynamic
 {
 public:
-	GLfloat StartLenght = 5.f;
-	GLfloat EndLenght = 100.f;
-	int KeyPush = GLFW_MOUSE_BUTTON_1;
+	GLfloat StartLenght = 0.5f;
+	GLfloat EndLenght = 200.f;
+	int KeyPush = GLFW_MOUSE_BUTTON_2;
+
+	int SelectedObjIndex = -1;
+	int PrevousSelectedObjIndex = -1;
 
 	ObjectCursorRay(
 		int p_index,
@@ -37,7 +40,13 @@ public:
 
 	bool CheckIsLock();
 
+	void LockPolygonResult();
+
+	void LockResult();
+
 	void TargetCompleted();
 
 	void Push();
+
+	void ObjectSelected(int index);
 };

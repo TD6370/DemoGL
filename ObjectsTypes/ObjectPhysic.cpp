@@ -77,16 +77,14 @@ bool ObjectPhysic::CheckIsPolygon() {
 
 bool ObjectPhysic::CheckIsLock() {
 
-	if (TypeObj == Bullet) //CHILD CLASS
-		return false;
-
+	int indObjHit = -1;
 	bool isPolygon = CheckIsPolygon();
 	if (isPolygon)
 		LockPolygonResult();
 
 	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
 	if (!isNotValidMove)
-		isNotValidMove = IsCollisionObject(Index, true);
+		isNotValidMove = IsCollisionObject(Index, indObjHit, true);
 	if (isNotValidMove)
 	{
 		Color = vec3(1, 0, 0);
@@ -106,9 +104,9 @@ void ObjectPhysic::LockPolygonResult() {
 
 }
 
-bool ObjectPhysic::IsCollisionObject(int index, bool isNewPosition)
+bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosition)
 {
-	return Storage->Clusters->IsCollisionObject(index, isNewPosition);
+	return Storage->Clusters->IsCollisionObject(index, indexObjHit, isNewPosition);
 }
 
 void ObjectPhysic::SaveClusterObject(int index)

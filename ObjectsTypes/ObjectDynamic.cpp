@@ -84,6 +84,7 @@ void ObjectDynamic::LockObjectResult() {
 
 void ObjectDynamic::ActionSearch() {
 
+	int indObjHit = -1;
 	vec3 newTarget;
 	if (!CalculateTatget(newTarget))
 		return;
@@ -92,7 +93,7 @@ void ObjectDynamic::ActionSearch() {
 	if (isLock)
 		return;
 	NewPostranslate = newTarget;
-	isLock = IsCollisionObject(Index, true);
+	isLock = IsCollisionObject(Index, indObjHit, true);
 	if (isLock) {
 		NewPostranslate = Postranslate;
 		LockObjectResult();

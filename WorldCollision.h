@@ -45,7 +45,7 @@ public:
 
 	bool IsCollisionCircle(int indObjMe, int indObj2, bool isNewPosition = false);
 
-	bool IsCollisionObject(int indexObjMe, bool isNewPosition = false);
+	bool IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
 	
 	//std::vector<glm::vec3> GetPosVertextPolygon(int ind, int x_sector, int z_sector);
 

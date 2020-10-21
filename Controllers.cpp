@@ -96,11 +96,12 @@ void MouseEvents(
 	p_operator->m_MouseY = ypos;
 
 	bool isCeneter = false;
-	int state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+	int state = -1;
+	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
 	if (state == GLFW_PRESS)
 	{
-		isCeneter = true;
-		p_operator->m_start = false;
+		//isCeneter = true;
+		//p_operator->m_start = false;
 		p_inputs->MBT = GLFW_MOUSE_BUTTON_2;
 	}
 	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);

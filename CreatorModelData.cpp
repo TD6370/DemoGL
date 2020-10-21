@@ -94,6 +94,89 @@ void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 	MapModels.insert(std::pair<string, int>(name, index));
 }
 
+void CreatorModelData::LoadModels() {
+
+	ModelData nextModel = ModelData();
+	nextModel.PathShaderVertex = "basic.vert";
+	nextModel.PathShaderFrag = "basic.frag";
+	nextModel.PathTexture = "./Textures/testTexture.bmp";
+	//nextModel.PathTexture = "./Textures/syzanna.bmp";
+	//nextModel.PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModel.PathModel3D = "./Models3D/monkey.obj";
+	//nextModel.PathModel3D = "./Models3D/kub.obj";
+	nextModel.RadiusCollider = 1;
+	nextModel.Init();
+	AddModel(&nextModel, "mon");
+
+	ModelData nextModel2 = ModelData();
+	nextModel2.PathShaderVertex = "basic.vert";
+	nextModel2.PathShaderFrag = "basic.frag";
+	nextModel2.PathTexture = "./Textures/planet.bmp";
+	//nextModel2.PathModel3D = "./Models3D/kub.obj";
+	//nextModel2.PathModel3D = "./Models3D/monkey.obj";
+	nextModel2.PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModel2.RadiusCollider = 0.2;
+	nextModel2.Init();
+	AddModel(&nextModel2, "plane");
+
+	ModelData nextModel3 = ModelData();
+	nextModel3.PathShaderVertex = "basic.vert";
+	nextModel3.PathShaderFrag = "basic.frag";
+	nextModel3.PathModel3D = "./Models3D/kub.obj";
+	nextModel3.PathTexture = "./Textures/testTexture.bmp";
+	nextModel3.RadiusCollider = 1;
+	nextModel3.Init();
+	AddModel(&nextModel3, "box");
+
+
+	ModelData nextModel4 = ModelData();
+	nextModel4.PathShaderVertex = "basic.vert";
+	nextModel4.PathShaderFrag = "basic.frag";
+	nextModel4.PathModel3D = "./Models3D/Marker_Vector.obj";
+	nextModel4.PathTexture = "./Textures/testTexture.bmp";
+	nextModel4.RadiusCollider = 0.1;
+	nextModel4.Init();
+	AddModel(&nextModel4, "marker_Vector");
+
+	ModelData nextModel5 = ModelData();
+	nextModel5.PathShaderVertex = "basic.vert";
+	nextModel5.PathShaderFrag = "basic.frag";
+	nextModel5.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModel5.PathTexture = "./Textures/testTexture.bmp";
+	nextModel5.RadiusCollider = 0.1;
+	nextModel5.Init();
+	AddModel(&nextModel5, "marker_Cross");
+
+	ModelData nextModel6 = ModelData();
+	nextModel6.PathShaderVertex = "basic.vert";
+	nextModel6.PathShaderFrag = "basic.frag";
+	nextModel6.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModel6.PathTexture = "./Textures/testTexture.bmp";
+	nextModel6.RadiusCollider = 0.1;
+	nextModel6.Init();
+	AddModel(&nextModel6, "marker_Point");
+
+	ModelData nextModelHomo = ModelData();
+	nextModelHomo.PathShaderVertex = "basic.vert";
+	nextModelHomo.PathShaderFrag = "basic.frag";
+	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
+	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelHomo.PathTexture = "./Textures/future.bmp";
+	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
+	nextModelHomo.RadiusCollider = 1;
+	nextModelHomo.Init();
+	AddModel(&nextModelHomo, "homo");
+
+
+	ModelData nextModelCursorRay = ModelData();
+	nextModelCursorRay.PathShaderVertex = "basic.vert";
+	nextModelCursorRay.PathShaderFrag = "basic.frag";
+	nextModelCursorRay.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelCursorRay.PathTexture = "./Textures/future.bmp";
+	nextModelCursorRay.RadiusCollider = 0.1;
+	nextModelCursorRay.Init();
+	AddModel(&nextModelCursorRay, "cursorRay");
+}
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
 {
@@ -108,7 +191,8 @@ std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(string key)
 	return prt_model;
 }
 
-std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
+//std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
+std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
 
 	SceneObjectsLastIndex = SceneObjects.size();
 
@@ -183,10 +267,11 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storag
 	}
 
 	if (objectModel != NULL) {
-		objectModel->InitData();
-		objectModel->Storage = storage;
+		//objectModel->Storage = storage;
+		objectModel->Storage = this;
 		objectModel->Color = p_color;
 		objectModel->Name = name;
+		objectModel->InitData();
 	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));
@@ -228,87 +313,13 @@ void CreatorModelData::SaveObject(ObjectData* objData)
 	SceneObjects[objData->Index] = std::make_unique<ObjectData>(*objData);
 }
 
-void CreatorModelData::LoadModels() {
-
-	ModelData nextModel = ModelData();
-	nextModel.PathShaderVertex = "basic.vert";
-	nextModel.PathShaderFrag = "basic.frag";
-	nextModel.PathTexture = "./Textures/testTexture.bmp";
-	//nextModel.PathTexture = "./Textures/syzanna.bmp";
-	//nextModel.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel.PathModel3D = "./Models3D/monkey.obj";
-	//nextModel.PathModel3D = "./Models3D/kub.obj";
-	nextModel.RadiusCollider = 1;
-	nextModel.Init();
-	AddModel(&nextModel, "mon");
-
-	ModelData nextModel2 = ModelData();
-	nextModel2.PathShaderVertex = "basic.vert";
-	nextModel2.PathShaderFrag = "basic.frag";
-	nextModel2.PathTexture = "./Textures/planet.bmp";
-	//nextModel2.PathModel3D = "./Models3D/kub.obj";
-	//nextModel2.PathModel3D = "./Models3D/monkey.obj";
-	nextModel2.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel2.RadiusCollider = 0.2;
-	nextModel2.Init();
-	AddModel(&nextModel2, "plane");
-
-	ModelData nextModel3 = ModelData();
-	nextModel3.PathShaderVertex = "basic.vert";
-	nextModel3.PathShaderFrag = "basic.frag";
-	nextModel3.PathModel3D = "./Models3D/kub.obj";
-	nextModel3.PathTexture = "./Textures/testTexture.bmp";
-	nextModel3.RadiusCollider = 1;
-	nextModel3.Init();
-	AddModel(&nextModel3, "box");
-
-
-	ModelData nextModel4 = ModelData();
-	nextModel4.PathShaderVertex = "basic.vert";
-	nextModel4.PathShaderFrag = "basic.frag";
-	nextModel4.PathModel3D = "./Models3D/Marker_Vector.obj";
-	nextModel4.PathTexture = "./Textures/testTexture.bmp";
-	nextModel4.RadiusCollider = 0.1;
-	nextModel4.Init();
-	AddModel(&nextModel4, "marker_Vector");
-
-	ModelData nextModel5 = ModelData();
-	nextModel5.PathShaderVertex = "basic.vert";
-	nextModel5.PathShaderFrag = "basic.frag";
-	nextModel5.PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModel5.PathTexture = "./Textures/testTexture.bmp";
-	nextModel5.RadiusCollider = 0.1;
-	nextModel5.Init();
-	AddModel(&nextModel5, "marker_Cross");
-
-	ModelData nextModel6 = ModelData();
-	nextModel6.PathShaderVertex = "basic.vert";
-	nextModel6.PathShaderFrag = "basic.frag";
-	nextModel6.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModel6.PathTexture = "./Textures/testTexture.bmp";
-	nextModel6.RadiusCollider = 0.1;
-	nextModel6.Init();
-	AddModel(&nextModel6, "marker_Point");
-
-	ModelData nextModelHomo = ModelData();
-	nextModelHomo.PathShaderVertex = "basic.vert";
-	nextModelHomo.PathShaderFrag = "basic.frag";
-	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
-	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModelHomo.PathTexture = "./Textures/future.bmp";
-	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
-	nextModelHomo.RadiusCollider = 1;
-	nextModelHomo.Init();
-	AddModel(&nextModelHomo, "homo");
-}
-
 void CreatorModelData::LoadObjects() {
 
 	float offsetCentrePlane = 500;
 	float radiusPlane = 70;
 
 	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
-	AddObject(this, "Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
+	AddObject("Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
 	CurrentPolygonObject = GetObjectPrt("Plane");
 
 
@@ -316,7 +327,7 @@ void CreatorModelData::LoadObjects() {
 
     for (int i = 0; i < 20; i++)
 	{
-		AddObject(this, "Mon", modelMon, NPC);
+		AddObject("Mon", modelMon, NPC);
 	}
 
 	vec3 color_red = vec3(1, 0, 0);
@@ -326,30 +337,30 @@ void CreatorModelData::LoadObjects() {
 	vec3 color_yelow = vec3(0, 1, 1);
 
 	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
-	AddObject(this, "Box", modelBox, Block, vec3(-50, -55, 70));
-	AddObject(this, "Box2", modelBox, Block, vec3(-50, -55, 70));
+	AddObject("Box", modelBox, Block, vec3(-50, -55, 70));
+	AddObject("Box2", modelBox, Block, vec3(-50, -55, 70));
 	//AddObject(this, "Marker", modelBox, Block, vec3(0, -55, 0));
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
-	AddObject(this, "M_P_1", modelM_P, Block, vec3(-50, 0, 0));
-	AddObject(this, "M_P_2", modelM_P, Block, vec3(-50, 0, 0));
+	AddObject("M_P_1", modelM_P, Block, vec3(-50, 0, 0));
+	AddObject("M_P_2", modelM_P, Block, vec3(-50, 0, 0));
 
-	AddObject(this, "Bullet", modelM_P, Bullet, vec3(0, 0, 0));
-	AddObject(this, "BulletHero", modelM_P, BulletHero, vec3(0, 0, 0));
+	AddObject("Bullet", modelM_P, Bullet, vec3(0, 0, 0));
+	AddObject("BulletHero", modelM_P, BulletHero, vec3(0, 0, 0));
 	//AddObject(this, "Bullet", modelBox, Bullet, vec3(0, 0, 0));
 
 
 	std::shared_ptr<ModelData> modelM_C = GetModelPrt("marker_Cross");
-	AddObject(this, "M_C_1", modelM_C, Block, vec3(0, 0, -50));
-	AddObject(this, "M_C_2", modelM_C, Block, vec3(0, 0, -50));
+	AddObject("M_C_1", modelM_C, Block, vec3(0, 0, -50));
+	AddObject("M_C_2", modelM_C, Block, vec3(0, 0, -50));
 
 	std::shared_ptr<ModelData> modelM_V = GetModelPrt("marker_Vector");
-	AddObject(this, "M_V_1", modelM_V, Block, vec3(0, 0, 50), color_green);
-	AddObject(this, "M_V_2", modelM_V, Block, vec3(0, 0, 50), color_blue);
-	AddObject(this, "M_V_3", modelM_V, Block, vec3(0, 0, 50), color_yelow);
+	AddObject("M_V_1", modelM_V, Block, vec3(0, 0, 50), color_green);
+	AddObject("M_V_2", modelM_V, Block, vec3(0, 0, 50), color_blue);
+	AddObject("M_V_3", modelM_V, Block, vec3(0, 0, 50), color_yelow);
 
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
-	AddObject(this, "Hero", modeHero, Hero, vec3(0, 0, 0));
+	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
 	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
 	

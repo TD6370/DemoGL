@@ -40,6 +40,7 @@ protected:
 	std::string m_keyPosSectorStr;
 public:
 	GLfloat Speed = 0.5f;
+	int IndexObjectOwner = -1;
 	bool IsGravity = false;
 
 	CreatorModelData* Storage;
