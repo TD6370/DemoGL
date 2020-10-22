@@ -17,6 +17,9 @@
 //OpenGL Mathematics
 #include <glm/glm.hpp>
 
+using std::vector;
+using glm::vec2;
+
 class Plane;
 
 class ModelData {
@@ -35,6 +38,7 @@ public:
 	GLuint VBO = 0;
 	GLuint ShaderProgram = 0;
 	bool IsIndex = false;
+	bool IsDebug = false;
 
 	//-------------------
 	std::vector< glm::vec2 > UV;
@@ -62,9 +66,8 @@ public:
 
 	void SetModelInBuffer(bool isUpdate = true);
 
-	//void FillPlanes();
+	void DebugUV(vector<vec2> list_uv);
+	void DebugVec3(vector<vec3> list_v, std::string name);
 
-	//Plane* GetPlaneFromVertIndex(int indexVertPlane);
-
-	//Plane* GetPlanePrt(int indexPlane);
+	
 };

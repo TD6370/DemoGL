@@ -63,3 +63,18 @@ std::string GetReadFile2(const char* filePath) {
 	return content;
 }
 
+void WriteFile(std::string filePath, std::string data, std::string nameFile) {
+
+	if(filePath.length() ==0)
+		filePath = "F:\\Projects\\OpenGl\\DemoGL\\Debug\\debug_" + nameFile + ".txt";
+
+	std::ofstream out; 
+	out.open(filePath); //, std::ios_base::
+	const char* dataC = data.c_str();
+	if (out.is_open())
+	{
+		out << dataC << std::endl;
+	}
+	out.close();
+}
+

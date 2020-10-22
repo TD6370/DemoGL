@@ -8,6 +8,7 @@
 #include "LoaderModelObj.h"
 #include "LoadBmp.h"
 #include "GeometryLib.h"
+#include "FileReader.h"
 
 #include <string>
 #include <iostream>
@@ -20,6 +21,11 @@
 
 using std::vector;
 using glm::vec3;
+
+
+//#using <system.dll>
+//using namespace System::Diagnostics;
+
 
 ModelData::ModelData() {
 
@@ -52,6 +58,12 @@ void ModelData::Init() {
 		Indices,
 		isGetIndices);
 
+	if (IsDebug) {
+		DebugVec3(Normals, "Normals");
+		DebugVec3(Vertices, "Vertices");
+		DebugUV(UV);
+	}
+
 	if (!result)
 	{
 		fprintf(stderr, "Error load Model.obj");
@@ -79,6 +91,27 @@ void ModelData::Init() {
 	ConfUniform = ConfigUniform(ShaderProgram);
 
 	//FillPlanes();
+}
+
+void ModelData::DebugUV(vector<vec2> list_uv) {
+
+	std::string data = "";
+	for (const vec2 uv : list_uv)
+	{
+		//std::wcout << uv.x << "," << uv.y << std::endl;
+		data += std::to_string(uv.x)  + "," + std::to_string(uv.y) + '\n';
+	}
+	WriteFile("", data, "UV");
+}
+
+void ModelData::DebugVec3(vector<vec3> list_v, std::string name) {
+
+	std::string data = "";
+	for (const vec3 v : list_v)
+	{
+		data += std::to_string(v.x) + "," + std::to_string(v.y) + "," + std::to_string(v.z) + '\n';
+	}
+	WriteFile("", data, name);
 }
 
 void ModelData::SetVAO() {

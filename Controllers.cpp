@@ -157,12 +157,6 @@ void MouseEvents(
 		cos(verticalAngle) * cos(horizontalAngle)
 	);
 
-	/*p_operator->m_directionCursor = glm::vec3(
-		cos(verticalAngle - 0.2) * sin(horizontalAngle + 0.2),
-		sin(verticalAngle - 0.2),
-		cos(verticalAngle - 0.2) * cos(horizontalAngle + 0.2)
-	);*/
-
 	// Вектор «вправо»
 	p_operator->m_right = glm::vec3(
 		sin(horizontalAngle - 3.14f / 2.0f),

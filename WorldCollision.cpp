@@ -290,9 +290,9 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 			if (vers == 2) {
 				if (pos.y < object->PlaneDownPosition.y)
 					stateResult = COLLISE_UP;
-				else if (pos.y > object->PlaneDownPosition.y + 0.5) {
+				/*else if (pos.y > object->PlaneDownPosition.y + 0.5) {
 					stateResult = COLLISE_DOWN;
-				}
+				}*/
 			}
 			//--- version 3
 			if (vers == 3) {

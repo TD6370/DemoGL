@@ -1,0 +1,6 @@
+F:\Projects\OpenGl\myTest\testOpenGl\Debug\testOpenGl.exe
+F:\Projects\OpenGl\myTest\testOpenGl\Debug\testOpenGl.pdb
+F:\Projects\OpenGl\GraphGL\Debug\testOpenGl.exe
+F:\Projects\OpenGl\GraphGL\Debug\testOpenGl.pdb
+F:\Projects\OpenGl\DemoGL\Debug\testOpenGl.exe
+F:\Projects\OpenGl\DemoGL\Debug\testOpenGl.pdb

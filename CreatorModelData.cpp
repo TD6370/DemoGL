@@ -125,6 +125,7 @@ void CreatorModelData::LoadModels() {
 	nextModel3.PathModel3D = "./Models3D/kub.obj";
 	nextModel3.PathTexture = "./Textures/testTexture.bmp";
 	nextModel3.RadiusCollider = 1;
+	nextModel3.IsDebug = true;
 	nextModel3.Init();
 	AddModel(&nextModel3, "box");
 
@@ -173,7 +174,7 @@ void CreatorModelData::LoadModels() {
 	nextModelCursorRay.PathShaderFrag = "basic.frag";
 	nextModelCursorRay.PathModel3D = "./Models3D/Marker_Cross.obj";
 	nextModelCursorRay.PathTexture = "./Textures/future.bmp";
-	nextModelCursorRay.RadiusCollider = 0.1;
+	nextModelCursorRay.RadiusCollider = .1;
 	nextModelCursorRay.Init();
 	AddModel(&nextModelCursorRay, "cursorRay");
 }

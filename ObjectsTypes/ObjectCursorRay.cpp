@@ -33,6 +33,8 @@ void ObjectCursorRay::RunAction() {
 		}
 	}
 	RunTransform();
+	
+	//ObjectPhysic::RunAction();
 	Push();
 }
 

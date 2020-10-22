@@ -17,7 +17,7 @@ class ObjectCursorRay :
 	public ObjectDynamic
 {
 public:
-	GLfloat StartLenght = 0.5f;
+	GLfloat StartLenght = 0.1f;
 	GLfloat EndLenght = 200.f;
 	int KeyPush = GLFW_MOUSE_BUTTON_2;
 
