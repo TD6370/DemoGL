@@ -45,7 +45,8 @@ void ObjectDynamic::RunAction() {
 			break;
 		}
 	}
-	RunTransform();
+	//RunTransform();
+	ObjectData::ActionBase();
 }
 
 void ObjectDynamic::ActionMoving()

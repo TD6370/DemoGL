@@ -16,12 +16,14 @@ void ObjectPhysic::RunAction() {
 			GenStartPosition();
 			break;
 		case Stay:
+			//TestGravity();
 			break;
 		default:
 			break;
 		}
 	}
-	RunTransform();
+	//RunTransform();
+	ObjectData::ActionBase();
 }
 
 bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
@@ -78,14 +80,15 @@ bool ObjectPhysic::CheckIsPolygon() {
 bool ObjectPhysic::CheckIsLock() {
 
 	int indObjHit = -1;
-	bool isPolygon = CheckIsPolygon();
-	if (isPolygon)
+	bool isPolygonHit = CheckIsPolygon();
+	if (isPolygonHit)
 		LockPolygonResult();
 
-	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
-	if (!isNotValidMove)
-		isNotValidMove = IsCollisionObject(Index, indObjHit, true);
-	if (isNotValidMove)
+
+	bool isHit = IsContactWorldBorder(NewPostranslate);
+	if (!isHit)
+		isHit = IsCollisionObject(Index, indObjHit, true);
+	if (isHit)
 	{
 		Color = vec3(1, 0, 0);
 		LockResult();
@@ -95,6 +98,13 @@ bool ObjectPhysic::CheckIsLock() {
 		return false;
 	return true;
 }
+
+//void ObjectPhysic::TestGravity()
+//{
+//	if (Postranslate == Move)
+//		return;
+//	CheckIsLock();
+//}
 
 void ObjectPhysic::LockResult() {
 
@@ -112,6 +122,12 @@ bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosi
 void ObjectPhysic::SaveClusterObject(int index)
 {
 	Storage->Clusters->SaveClusterObject(index);
+}
+
+void ObjectPhysic::EventChange() {
+	if (IsSelected) {
+		Color = vec3(0, 1, 0);
+	}
 }
 
 

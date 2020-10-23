@@ -10,6 +10,7 @@
 #include "ObjectsTypes\ObjectNPC.h"
 #include "ObjectsTypes\ObjectBullet.h"
 #include "ObjectsTypes\ObjectCursorRay.h"
+#include "ObjectsTypes\ObjectBlock.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -222,10 +223,16 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
-		case Block:
+		case Solid:
 		case Terra: {
 			ObjectPhysic obj = ObjectPhysic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
+			objectModel = GetObjectPrt(obj.Index);
+			break;
+		}
+		case Block: {
+			ObjectBlock obj = ObjectBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectBlock>(obj));
 			objectModel = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -326,7 +333,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 0; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -338,13 +345,22 @@ void CreatorModelData::LoadObjects() {
 	vec3 color_yelow = vec3(0, 1, 1);
 
 	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
-	AddObject("Box", modelBox, Block, vec3(-50, -55, 70));
-	AddObject("Box2", modelBox, Block, vec3(-50, -55, 70));
+	//AddObject("Box", modelBox, Block, vec3(-50, -55, 70));
+	//AddObject("Box2", modelBox, Block, vec3(-50, -55, 70));
+	AddObject("Box", modelBox, Solid, vec3(-50, -55, 70));
+	AddObject("Box2", modelBox, Solid, vec3(-50, -55, 70));
+
+	AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
+	AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
+	AddObject("BlockBox2", modelBox, Block, vec3(-10, -50, -20));
+	AddObject("BlockBox3", modelBox, Block, vec3(-20, -50, -20));
+	
 	//AddObject(this, "Marker", modelBox, Block, vec3(0, -55, 0));
+	AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
-	AddObject("M_P_1", modelM_P, Block, vec3(-50, 0, 0));
-	AddObject("M_P_2", modelM_P, Block, vec3(-50, 0, 0));
+	AddObject("M_P_1", modelM_P, Solid, vec3(-50, 0, 0));
+	AddObject("M_P_2", modelM_P, Solid, vec3(-50, 0, 0));
 
 	AddObject("Bullet", modelM_P, Bullet, vec3(0, 0, 0));
 	AddObject("BulletHero", modelM_P, BulletHero, vec3(0, 0, 0));
@@ -352,13 +368,13 @@ void CreatorModelData::LoadObjects() {
 
 
 	std::shared_ptr<ModelData> modelM_C = GetModelPrt("marker_Cross");
-	AddObject("M_C_1", modelM_C, Block, vec3(0, 0, -50));
-	AddObject("M_C_2", modelM_C, Block, vec3(0, 0, -50));
+	AddObject("M_C_1", modelM_C, Solid, vec3(0, 0, -50));
+	AddObject("M_C_2", modelM_C, Solid, vec3(0, 0, -50));
 
 	std::shared_ptr<ModelData> modelM_V = GetModelPrt("marker_Vector");
-	AddObject("M_V_1", modelM_V, Block, vec3(0, 0, 50), color_green);
-	AddObject("M_V_2", modelM_V, Block, vec3(0, 0, 50), color_blue);
-	AddObject("M_V_3", modelM_V, Block, vec3(0, 0, 50), color_yelow);
+	AddObject("M_V_1", modelM_V, Solid, vec3(0, 0, 50), color_green);
+	AddObject("M_V_2", modelM_V, Solid, vec3(0, 0, 50), color_blue);
+	AddObject("M_V_3", modelM_V, Solid, vec3(0, 0, 50), color_yelow);
 
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
 	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));

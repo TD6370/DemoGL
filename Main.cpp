@@ -269,7 +269,6 @@ int main()
 				prevModelModel3D = model->PathModel3D;
 			}
 			else {
-
 				//printf("");
 			}
 
@@ -285,8 +284,11 @@ int main()
 			Storage->Inputs = &Inputs;
 			object->Action();
 
-			if (isUpdate)
-				model->SetVAO();
+			//TEST
+			if (object->TypeObj == Block) 
+				object->SetMesh();
+			else if (isUpdate)
+				object->SetMesh();
 
 			glBindVertexArray(model->VAO);
 

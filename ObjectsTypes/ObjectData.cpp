@@ -55,6 +55,15 @@ void ObjectData::InitData()
 
 }
 
+void ObjectData::ActionBase() {
+	RunTransform();
+	EventChange();
+}
+
+void ObjectData::EventChange() {
+
+}
+
 void ObjectData::RunAction() {
 
 	if (ActionObjectCurrent != Lock)
@@ -70,7 +79,7 @@ void ObjectData::RunAction() {
 				break;
 		}
 	}
-	RunTransform();
+	ActionBase();
 }
 
 void ObjectData::GenStartPosition() {
@@ -126,7 +135,7 @@ void ObjectData::Action()
 
 glm::vec3 ObjectData::GetVertexPosition(int indVertex)
 {
-	std::vector< glm::vec3 > verticesModel = ModelPtr->Vertices;
+	std::vector< glm::vec3 > verticesModel = GetVertices();// ModelPtr->Vertices;
 	//if (std::find(verticesModel.begin(), verticesModel.end(), indVertex) == verticesModel.end)
 	if (verticesModel.size() - 1 < indVertex)
 		return vec3(-1);
@@ -150,6 +159,14 @@ shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
 	return Planes[indexPlane];
 }
 
+
+std::vector<glm::vec3> ObjectData::GetVertices() {
+	return ModelPtr->Vertices;
+}
+
+void ObjectData::SetMesh() {
+	ModelPtr->SetVAO();
+}
 
 
 

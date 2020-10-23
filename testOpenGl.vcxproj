@@ -160,6 +160,7 @@
     <ClCompile Include="LoaderModelObj.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModelData.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectBlock.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectBullet.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="LoaderModelObj.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="ModelData.h" />
+    <ClInclude Include="ObjectsTypes\ObjectBlock.h" />
     <ClInclude Include="ObjectsTypes\ObjectBullet.h" />
     <ClInclude Include="ObjectsTypes\ObjectCursorRay.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />

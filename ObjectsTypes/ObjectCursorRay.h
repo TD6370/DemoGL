@@ -49,4 +49,8 @@ public:
 	void Push();
 
 	void ObjectSelected(int index);
+
+	void ClearSelected();
+
+	void SelectPositionOnPolygon();
 };

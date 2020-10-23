@@ -13,11 +13,12 @@ void ObjectPolygon::FillPlanes()
 		Postranslate,
 		TranslateAngle);
 
-	while (indVert < ModelPtr->Vertices.size())
+	//while (indVert < ModelPtr->Vertices.size())
+	while (indVert < GetVertices().size())
 	{
-		vec3 vertexNormA = ModelPtr->Vertices[indVert++];
-		vec3 vertexNormB = ModelPtr->Vertices[indVert++];
-		vec3 vertexNormC = ModelPtr->Vertices[indVert++];
+		vec3 vertexNormA = GetVertices()[indVert++];
+		vec3 vertexNormB = GetVertices()[indVert++];
+		vec3 vertexNormC = GetVertices()[indVert++];
 
 		//glm::vec3 posA = vec3(trans * vec4(vertexNormA, 1));
 		//glm::vec3 posB = vec3(trans * vec4(vertexNormB, 1));

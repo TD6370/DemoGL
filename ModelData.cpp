@@ -121,6 +121,13 @@ void ModelData::SetVAO() {
 		VAO, VBO);
 }
 
+void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
+	GenVertexArrayObject(IsIndex,
+		vertices,
+		Indices,
+		VAO, VBO);
+}
+
 void ModelData::SetModelInBuffer(bool isUpdate)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
@@ -128,3 +135,13 @@ void ModelData::SetModelInBuffer(bool isUpdate)
 	SetNormals(Normals, BufferNormal_ID);
 }
 
+ModelData ModelData::Clone() {
+	ModelData newModel = ModelData();
+	newModel.PathShaderVertex = PathShaderVertex;
+	newModel.PathShaderFrag = PathShaderFrag;
+	newModel.PathModel3D = PathModel3D;
+	newModel.PathTexture = PathTexture;
+	newModel.RadiusCollider = RadiusCollider;
+	newModel.Init();
+	return newModel;
+}

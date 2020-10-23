@@ -42,6 +42,7 @@ public:
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
 	bool IsGravity = false;
+	bool IsSelected = false;
 
 	CreatorModelData* Storage;
 
@@ -53,6 +54,7 @@ public:
 	//int RadiusCollider = 5;
 
 	std::shared_ptr<ModelData> ModelPtr;
+	std::vector< glm::vec3 > Vertices;
 	
 	vec3 Color = vec3(0);
 
@@ -93,6 +95,8 @@ public:
 
 	void virtual RunAction();
 
+	void ActionBase();
+
 	void RunTransform();
 
 	void Action();
@@ -106,6 +110,12 @@ public:
 	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
 
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
+
+	void virtual EventChange();
+
+	std::vector< glm::vec3 > virtual GetVertices();
+
+	void virtual SetMesh();
 };
 
 #endif

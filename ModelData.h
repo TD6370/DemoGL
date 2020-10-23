@@ -63,11 +63,17 @@ public:
 	void Init();
 
 	void SetVAO();
+	void SetVAO(std::vector< glm::vec3 > vertices);
 
 	void SetModelInBuffer(bool isUpdate = true);
 
 	void DebugUV(vector<vec2> list_uv);
 	void DebugVec3(vector<vec3> list_v, std::string name);
+	
 
+	ModelData Clone();
+
+	
+	
 	
 };

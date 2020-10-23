@@ -1,4 +1,5 @@
 #include "ObjectCursorRay.h"
+#include "ObjectBlock.h"
 
 #include "..\CreatorModelData.h"
 #include "..\TransformModel.h"
@@ -7,7 +8,7 @@
 void ObjectCursorRay::InitData()
 {
 	ActionObjectCurrent = Stay;
-	Speed = 2.f;
+	Speed = 0.5f;
 	IsGravity = false;
 }
 
@@ -66,6 +67,28 @@ void ObjectCursorRay::LockResult() {
 void ObjectCursorRay::LockPolygonResult() {
 	ActionObjectCurrent = Stay;
 	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
+	
+	SelectPositionOnPolygon();
+	SelectedObjIndex = -1;
+	ClearSelected();
+}
+
+void ObjectCursorRay::SelectPositionOnPolygon()
+{
+	if (SelectedObjIndex != -1) {
+		std::shared_ptr<ObjectData> selObject = Storage->GetObjectPrt(SelectedObjIndex);
+
+		//TEST
+		selObject->Vertices[0]++;
+		selObject->Vertices[1]++;
+		selObject->Vertices[2]++;
+
+		/*A* pa = ...;
+		B* pb1 = dynamic_cast<B*>(pa);
+		B* pb2 = static_cast<B*>(pa);
+		B* pb3 = (B*)pa;
+		B* pb4 = reinterpret_cast<B*>(pa);*/
+	}
 }
 
 void ObjectCursorRay::TargetCompleted()
@@ -77,7 +100,8 @@ void ObjectCursorRay::Push() {
 
 	if (Storage->Inputs->MBT == KeyPush) {
 		Storage->Inputs->MBT = -1;
-		vec3 posCursorObject = GetVectorForwardFace(Storage->MVP, StartLenght, Storage->Operator);
+		//vec3 posCursorObject = GetVectorForwardFace(Storage->MVP, StartLenght, Storage->Operator);
+		vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
 		vec3 posTarget = GetVectorForward(Storage->MVP, EndLenght, Storage->Operator);
 		Postranslate = posCursorObject;
 		Target = posTarget;
@@ -92,9 +116,16 @@ void ObjectCursorRay::ObjectSelected(int index) {
 
 	auto objectSelected = Storage->GetObjectPrt(SelectedObjIndex);
 	objectSelected->Color = vec3(0, 1, 0);
+	objectSelected->IsSelected = true;
+	ClearSelected();
+	PrevousSelectedObjIndex = index;
+}
+
+void ObjectCursorRay::ClearSelected() {
 	if (PrevousSelectedObjIndex != -1 && PrevousSelectedObjIndex != SelectedObjIndex) {
 		auto preObject = Storage->GetObjectPrt(PrevousSelectedObjIndex);
 		preObject->Color = vec3(0, 0, 0);
+		preObject->IsSelected = false;
 	}
-	PrevousSelectedObjIndex = index;
+	PrevousSelectedObjIndex = -1;
 }
