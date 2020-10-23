@@ -116,6 +116,8 @@ public:
 	std::vector< glm::vec3 > virtual GetVertices();
 
 	void virtual SetMesh();
+
+	void virtual MeshTransform();
 };
 
 #endif

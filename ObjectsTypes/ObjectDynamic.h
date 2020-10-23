@@ -50,7 +50,7 @@ public:
 
 	void LockResult();
 
-	void SaveNewPosition();
+	void virtual SaveNewPosition();
 
 	void virtual LockObjectResult();
 };

@@ -5,6 +5,7 @@
 //#include "..\TransformModel.h"
 #include "..\WorldCollision.h"
 #include "..\ModelData.h"
+#include "ObjectDynamic.h"
 
 void ObjectBlock::InitData()
 {
@@ -14,11 +15,24 @@ void ObjectBlock::InitData()
 }
 
 void ObjectBlock::LockPolygonResult() {
+	SaveNewPosition();
+}
+
+void ObjectBlock::LockResult() {
+	SaveNewPosition();
+}
+
+void ObjectBlock::SaveNewPosition()
+{
 	ActionObjectCurrent = Stay;
 	Move = Postranslate;
+	//Set position polygon
 	Move.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
-	Postranslate.y = NewPostranslate.y = Move.y;
+	NewPostranslate = Move;
+
 	Storage->Clusters->SaveClusterObject(Index);
+
+	Postranslate = NewPostranslate;
 }
 
 void ObjectBlock::RunAction() {
@@ -61,4 +75,13 @@ std::vector< glm::vec3 > ObjectBlock::GetVertices() {
 
 void ObjectBlock::SetMesh() {
 	ModelPtr->SetVAO(Vertices);
+}
+
+void ObjectBlock::MeshTransform() {
+
+	if (Vertices.size() != 0) {
+		Vertices[0]++;
+		Vertices[1]++;
+		Vertices[2]++;
+	}
 }

@@ -53,4 +53,6 @@ public:
 	void ClearSelected();
 
 	void SelectPositionOnPolygon();
+
+	void CusrsorAction();
 };

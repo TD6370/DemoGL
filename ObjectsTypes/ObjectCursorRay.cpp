@@ -62,12 +62,26 @@ bool ObjectCursorRay::CheckIsLock() {
 
 void ObjectCursorRay::LockResult() {
 	ActionObjectCurrent = Stay;
+
+	/*ActionObjectCurrent = Stay;
+	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
+
+	SelectPositionOnPolygon();
+	SelectedObjIndex = -1;
+	ClearSelected();*/
 }
 
 void ObjectCursorRay::LockPolygonResult() {
+	//LockResult();
+
 	ActionObjectCurrent = Stay;
 	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
 	
+	CusrsorAction();
+}
+
+void ObjectCursorRay::CusrsorAction() {
+
 	SelectPositionOnPolygon();
 	SelectedObjIndex = -1;
 	ClearSelected();
@@ -78,11 +92,8 @@ void ObjectCursorRay::SelectPositionOnPolygon()
 	if (SelectedObjIndex != -1) {
 		std::shared_ptr<ObjectData> selObject = Storage->GetObjectPrt(SelectedObjIndex);
 
-		//TEST
-		selObject->Vertices[0]++;
-		selObject->Vertices[1]++;
-		selObject->Vertices[2]++;
-
+		selObject->MeshTransform();
+		
 		/*A* pa = ...;
 		B* pb1 = dynamic_cast<B*>(pa);
 		B* pb2 = static_cast<B*>(pa);

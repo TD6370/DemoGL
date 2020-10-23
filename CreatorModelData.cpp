@@ -333,7 +333,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 0; i++)
+    for (int i = 0; i < 2; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

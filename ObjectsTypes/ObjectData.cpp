@@ -168,6 +168,9 @@ void ObjectData::SetMesh() {
 	ModelPtr->SetVAO();
 }
 
+void ObjectData::MeshTransform() {
+}
+
 
 
 

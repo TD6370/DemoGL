@@ -30,6 +30,7 @@ public:
 
 	void InitData();
 	void LockPolygonResult();
+	void LockResult();
 
 	void RunAction();
 	void TestGravity();
@@ -38,4 +39,8 @@ public:
 	std::vector< glm::vec3 > GetVertices();
 
 	void SetMesh();
+
+	void SaveNewPosition();
+
+	void MeshTransform();
 };
