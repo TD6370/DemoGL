@@ -33,6 +33,8 @@ void ObjectPolygon::FillPlanes()
 
 void ObjectPolygon::InitData()
 {
+	ObjectPhysic::InitData();
+
 	ActionObjectCurrent = Lock;
-	FillPlanes();
+	//FillPlanes();
 }

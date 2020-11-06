@@ -16,51 +16,39 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{f3f2bc06-85b4-4c94-a119-1e7f2da248ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{988ffb10-b84e-4e54-ac34-5c0112b0307f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rooms">
+      <UniqueIdentifier>{5b97c129-9afc-4d9e-a9f6-81cf5fed3585}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Browsers">
+      <UniqueIdentifier>{7fb1b514-c556-4efc-93d0-f1c21aa359cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{a3d20e8d-edf0-4580-a9df-b45ffaca4ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{a0f2a1be-ba64-4a71-a3c5-43c32149eaee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Dynamic">
+      <UniqueIdentifier>{99a919e0-d711-4e1a-93cf-04411e1fb36b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Phisics">
+      <UniqueIdentifier>{1a16423f-935e-4e0f-9e0c-276dc68f6d4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{57892ae8-3b2f-4aff-8fbd-76c7fda7eccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inputs">
+      <UniqueIdentifier>{fc6e1d25-d966-443a-b26a-9179deeab6f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="LoadBMP.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="LoaderModelObj.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Shaders.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformModel.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="FileReader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ConfigBuffers.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CreatorModelData.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Controllers.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ConfigUniformArg.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreSettings.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="OperationString.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldCollision.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BindHeader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="GeometryLib.cpp">
@@ -72,85 +60,85 @@
     <ClCompile Include="ObjectsTypes\ObjectData.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="WorldCollision.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="TransformModel.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="SceneConstruction.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="CreatorModelData.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRoom.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadBMP.cpp">
+      <Filter>Browsers</Filter>
+    </ClCompile>
+    <ClCompile Include="LoaderModelObj.cpp">
+      <Filter>Browsers</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Browsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Shaders.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigUniformArg.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigBuffers.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreSettings.cpp">
+      <Filter>Data</Filter>
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectHero.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectBullet.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp">
-      <Filter>Objects</Filter>
+    <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp">
+      <Filter>Objects\Dynamic</Filter>
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectBlock.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp">
+      <Filter>Objects\Dynamic</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp">
+      <Filter>Objects\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp">
+      <Filter>Objects\Phisics</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Controllers.cpp">
+      <Filter>Inputs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadBMP.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="LoaderModelObj.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Shaders.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformModel.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="FileReader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ConfigBuffers.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="CreatorModelData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Controllers.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ConfigUniformArg.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreSettings.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationString.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="WorldCollision.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BindHeader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="GeometryLib.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectPhysic.h">
-      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectData.h">
       <Filter>Objects</Filter>
@@ -158,26 +146,71 @@
     <ClInclude Include="ModelData.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectDynamic.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="SceneConstruction.h">
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectPolygon.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="CreatorModelData.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformModel.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldCollision.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneRoom.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Browsers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadBMP.h">
+      <Filter>Browsers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoaderModelObj.h">
+      <Filter>Browsers</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigBuffers.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigUniformArg.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Shaders.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreSettings.h">
+      <Filter>Data</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectHero.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectNPC.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectBullet.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Dynamic</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectCursorRay.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="ObjectsTypes\ObjectDynamic.h">
+      <Filter>Objects\Dynamic</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectBlock.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectCursorRay.h">
+      <Filter>Objects\Dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectPhysic.h">
+      <Filter>Objects\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectPolygon.h">
+      <Filter>Objects\Phisics</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Controllers.h">
+      <Filter>Inputs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

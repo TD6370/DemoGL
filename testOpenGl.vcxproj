@@ -145,7 +145,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BindHeader.cpp" />
     <ClCompile Include="ConfigBuffers.cpp" />
     <ClCompile Include="ConfigUniformArg.cpp">
       <FileType>CppCode</FileType>
@@ -170,12 +169,13 @@
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
     <ClCompile Include="OperationString.cpp" />
+    <ClCompile Include="SceneConstruction.cpp" />
+    <ClCompile Include="SceneRoom.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="TransformModel.cpp" />
     <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BindHeader.h" />
     <ClInclude Include="ConfigBuffers.h" />
     <ClInclude Include="ConfigUniformArg.h" />
     <ClInclude Include="Controllers.h" />
@@ -199,6 +199,8 @@
     <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SceneConstruction.h" />
+    <ClInclude Include="SceneRoom.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="TransformModel.h" />
     <ClInclude Include="WorldCollision.h" />

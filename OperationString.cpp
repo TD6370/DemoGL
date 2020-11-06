@@ -10,10 +10,6 @@ using std::string;
 std::string GetFile(const char* path)
 {
 	string pathStr = path;
-	//std::size_t found = pathStr.find_last_of("/\\");
-	//string file = pathStr.substr(found + 1);
-    
-    //--------------
     const size_t last_slash_idx = pathStr.find_last_of("\\/");
     if (std::string::npos != last_slash_idx)
     {

@@ -33,6 +33,7 @@
 
 #include "WorldCollision.h"
 
+/*
 void LoadImageBmp(const char* pathImage)
 {
 	unsigned int width;
@@ -67,6 +68,7 @@ void LoadImageBmp(const char* pathImage)
 	// И создаем сами мипмапы.
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
+*/
 
 CreatorModelData::CreatorModelData() {
 	
@@ -333,7 +335,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 20; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -347,8 +349,9 @@ void CreatorModelData::LoadObjects() {
 	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
 	//AddObject("Box", modelBox, Block, vec3(-50, -55, 70));
 	//AddObject("Box2", modelBox, Block, vec3(-50, -55, 70));
-	AddObject("Box", modelBox, Solid, vec3(-50, -55, 70));
-	AddObject("Box2", modelBox, Solid, vec3(-50, -55, 70));
+	AddObject("Box", modelBox, Solid, vec3(0, -35, 0));
+	AddObject("Box2", modelBox, Solid, vec3(0, -25, 0));
+	AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
 
 	AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
 	AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
@@ -356,7 +359,7 @@ void CreatorModelData::LoadObjects() {
 	AddObject("BlockBox3", modelBox, Block, vec3(-20, -50, -20));
 	
 	//AddObject(this, "Marker", modelBox, Block, vec3(0, -55, 0));
-	AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
+	
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
 	AddObject("M_P_1", modelM_P, Solid, vec3(-50, 0, 0));

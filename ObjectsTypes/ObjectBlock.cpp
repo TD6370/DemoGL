@@ -12,6 +12,8 @@ void ObjectBlock::InitData()
 	ActionObjectCurrent = Stay;
 	IsGravity = true;
 	Vertices = ModelPtr->Vertices;
+
+	ObjectPhysic::InitData();
 }
 
 void ObjectBlock::LockPolygonResult() {
@@ -30,7 +32,8 @@ void ObjectBlock::SaveNewPosition()
 	Move.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
 	NewPostranslate = Move;
 
-	Storage->Clusters->SaveClusterObject(Index);
+	//Storage->Clusters->SaveClusterObject(Index);
+	SaveToCluster();
 
 	Postranslate = NewPostranslate;
 }
@@ -79,9 +82,86 @@ void ObjectBlock::SetMesh() {
 
 void ObjectBlock::MeshTransform() {
 
+	int indexUpdate = 0;
+
 	if (Vertices.size() != 0) {
-		Vertices[0]++;
-		Vertices[1]++;
-		Vertices[2]++;
+
+		float offset = 0.1;
+		vec3 vertOffset = vec3(offset, 0, offset);
+
+		vec3 vertA =  GetBottom(indexUpdate);
+		vertA += vertOffset;
+		SetBottom(indexUpdate, vertA);
+
+		vec3 vertB = GetTop(indexUpdate);
+		vertB += vertOffset;
+		SetTop(indexUpdate, vertB);
 	}
+}
+
+vec3 ObjectBlock::GetBottom(int index) {
+	return BottomVectors[index];
+}
+
+vec3 ObjectBlock::GetTop(int index) {
+	return TopVectors[index];
+}
+
+void ObjectBlock::SetBottom(int index, vec3 value) {
+
+	vec3 oldValue = BottomVectors[index];
+	BottomVectors[index] = value;
+	int indVert = 0;
+	while (indVert < Vertices.size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			Vertices[indVert] = value;
+		}
+		indVert++;
+	}
+}
+
+void ObjectBlock::SetTop(int index, vec3 value) {
+	vec3 oldValue = TopVectors[index];
+	TopVectors[index] = value;
+	int indVert = 0;
+	while (indVert < Vertices.size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			Vertices[indVert] = value;
+		}
+		indVert++;
+	}
+}
+
+void ObjectBlock::FillPlanes()
+{
+	std::vector<vec3> CubeVectors;
+	int indexPlaneT = 0;
+	int indexPlaneB = 0;
+	int indVert = 0;
+
+	while (indVert < GetVertices().size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		indVert++;
+		bool isExist = std::find(CubeVectors.begin(), CubeVectors.end(), vertexNext) != CubeVectors.end();
+		if (isExist)
+			continue;
+
+		CubeVectors.push_back(vertexNext);
+		if (vertexNext.y < 0){
+			BottomVectors.insert(std::pair<int, vec3>(indexPlaneB, vertexNext));
+			indexPlaneB++;
+		}
+		else {
+			TopVectors.insert(std::pair<int, vec3>(indexPlaneT, vertexNext));
+			indexPlaneT++;
+		}
+	}
+	/*if (TopVectors.find(indVert) == TopVectors.end()) {}*/
 }

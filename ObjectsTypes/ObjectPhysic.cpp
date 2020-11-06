@@ -26,6 +26,11 @@ void ObjectPhysic::RunAction() {
 	ObjectData::ActionBase();
 }
 
+void ObjectPhysic::InitData() {
+	FillPlanes();
+}
+
+
 bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
 
 	World WorldSetting;
@@ -38,7 +43,8 @@ bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
 void ObjectPhysic::CheckStartPosition() {
 	if (!CheckIsLock())
 	{
-		SaveClusterObject(Index);
+		//SaveClusterObject(Index);
+		SaveToCluster();
 		Postranslate = NewPostranslate;
 		ActionObjectCurrent = Search;
 	}
@@ -106,6 +112,11 @@ bool ObjectPhysic::CheckIsLock() {
 //	CheckIsLock();
 //}
 
+void ObjectPhysic::FillPlanes()
+{
+
+}
+
 void ObjectPhysic::LockResult() {
 
 }
@@ -119,15 +130,15 @@ bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosi
 	return Storage->Clusters->IsCollisionObject(index, indexObjHit, isNewPosition);
 }
 
-void ObjectPhysic::SaveClusterObject(int index)
-{
-	Storage->Clusters->SaveClusterObject(index);
-}
-
 void ObjectPhysic::EventChange() {
 	if (IsSelected) {
 		Color = vec3(0, 1, 0);
 	}
+}
+
+void ObjectPhysic::SaveToCluster()
+{
+	Storage->Clusters->SaveClusterObject(Index);
 }
 
 

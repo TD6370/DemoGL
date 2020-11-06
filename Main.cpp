@@ -13,6 +13,7 @@
 #include "CoreSettings.h"
 #include "WorldCollision.h"
 #include "GeometryLib.h"
+#include "SceneConstruction.h"
 
 #include <iostream>
 #include <fstream>
@@ -62,6 +63,8 @@ CreatorModelData* Storage;
 
 ControllerInput Inputs;
 
+SceneConstruction Scene;
+
 void LoadDataModel()
 {
 	//bool isGen = true;
@@ -108,7 +111,7 @@ void CreateMVP(CoreMVP* ConfigMVP) {
 		ConfigMVP);
 }
 
-void GetVersioOpenGl()
+void GetVersionOpenGl()
 {
 	const GLubyte* renderer = glGetString(GL_RENDERER);
 	const GLubyte* vendor = glGetString(GL_VENDOR);
@@ -211,7 +214,7 @@ int main()
 	glfwSetScrollCallback(window, scroll_callback);
 
 	//Version OpenGL
-	GetVersioOpenGl();
+	GetVersionOpenGl();
 
 	//----------------------------------------------------
 	glEnable(GL_DEPTH_TEST);
@@ -289,6 +292,9 @@ int main()
 				object->SetMesh();
 			else if (isUpdate)
 				object->SetMesh();
+
+			//if (isUpdate)
+			//	object->SetMesh();
 
 			glBindVertexArray(model->VAO);
 

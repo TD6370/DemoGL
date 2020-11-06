@@ -28,6 +28,8 @@ public:
 			p_typeObj,
 			p_pos) {};
 
+	void InitData();
+
 	bool IsContactWorldBorder(vec3 pos);
 
 	bool virtual CheckIsLock();
@@ -44,9 +46,11 @@ public:
 
 	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
-	void SaveClusterObject(int index);
-
 	//void TestGravity();
 	void EventChange();
+
+	void SaveToCluster();
+
+	void virtual FillPlanes();
 };
 

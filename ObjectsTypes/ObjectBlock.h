@@ -18,6 +18,13 @@ class ObjectBlock :
 {
 public:
 
+	//std::vector<vec3> BottomVectors;
+	//std::vector<vec3> TopVectors;
+	std::map<int, vec3> TopVectors;
+	std::map<int, vec3> BottomVectors;
+	//std::vector<vec3> CubeVectors;
+	
+
 	ObjectBlock(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
@@ -43,4 +50,14 @@ public:
 	void SaveNewPosition();
 
 	void MeshTransform();
+
+	void FillPlanes();
+
+	vec3 GetBottom(int index);
+
+	vec3 GetTop(int index);
+
+	void SetBottom(int index, vec3 value);
+
+	void SetTop(int index, vec3 value);
 };

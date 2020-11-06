@@ -144,6 +144,7 @@ void ObjectDynamic::LockResult() {
 void ObjectDynamic::SaveNewPosition()
 {
 	Color = vec3(0);
-	Storage->Clusters->SaveClusterObject(Index);
+	SaveToCluster();
 	Postranslate = NewPostranslate;
 }
+
