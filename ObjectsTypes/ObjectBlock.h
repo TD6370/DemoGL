@@ -24,7 +24,6 @@ public:
 	std::map<int, vec3> BottomVectors;
 	//std::vector<vec3> CubeVectors;
 	
-
 	ObjectBlock(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,

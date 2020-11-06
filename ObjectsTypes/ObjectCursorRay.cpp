@@ -10,6 +10,7 @@ void ObjectCursorRay::InitData()
 	ActionObjectCurrent = Stay;
 	Speed = 0.5f;
 	IsGravity = false;
+	Storage->SceneParam->IndexCursorRayObj = Index;
 }
 
 void ObjectCursorRay::RunAction() {
@@ -91,9 +92,8 @@ void ObjectCursorRay::SelectPositionOnPolygon()
 {
 	if (SelectedObjIndex != -1) {
 		std::shared_ptr<ObjectData> selObject = Storage->GetObjectPrt(SelectedObjIndex);
-
 		selObject->MeshTransform();
-		
+
 		/*A* pa = ...;
 		B* pb1 = dynamic_cast<B*>(pa);
 		B* pb2 = static_cast<B*>(pa);

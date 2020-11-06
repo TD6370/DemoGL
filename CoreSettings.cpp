@@ -76,3 +76,9 @@ struct WorldSectors{
 	std::map <std::string, std::vector<int>> SectorsPlane;
 	std::map <std::string, std::vector<int>> SectorsObjects;
 };
+
+
+struct SceneParam {
+	int IndexCursorRayObj;
+};
+

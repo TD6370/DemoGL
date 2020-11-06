@@ -82,13 +82,25 @@ void ObjectBlock::SetMesh() {
 
 void ObjectBlock::MeshTransform() {
 
+	int indCursor = Storage->SceneParam->IndexCursorRayObj;
+	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
+	
+	//-- Param transform
 	int indexUpdate = 0;
+	
+	//-- Calculate transform
+	vec3 newPos = CusrorObj->Postranslate;
+	vec3 offsetPosScene = glm::normalize(newPos - Postranslate);
 
+	vec3 factorV = newPos/Postranslate;
+	float factor = factorV.x + factorV.z;
+	
+	vec3 vertBlock = GetBottom(indexUpdate);
+
+	vec3 vertOffset = vec3(offsetPosScene.x, 0, offsetPosScene.z);
+
+	//-- set transform
 	if (Vertices.size() != 0) {
-
-		float offset = 0.1;
-		vec3 vertOffset = vec3(offset, 0, offset);
-
 		vec3 vertA =  GetBottom(indexUpdate);
 		vertA += vertOffset;
 		SetBottom(indexUpdate, vertA);

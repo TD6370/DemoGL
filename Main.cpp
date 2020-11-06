@@ -65,12 +65,15 @@ ControllerInput Inputs;
 
 SceneConstruction Scene;
 
+SceneParam m_SceneParam;
+
 void LoadDataModel()
 {
 	//bool isGen = true;
 	bool isGen = false;
 	//Storage = CreatorModelData();
 	Storage = new CreatorModelData();
+	Storage->SceneParam = &m_SceneParam;
 	if (isGen)
 	{
 		Storage->LoadModels();
@@ -285,6 +288,7 @@ int main()
 			Storage->MVP = &ConfigMVP;
 			Storage->Operator = &m_OperatorG;
 			Storage->Inputs = &Inputs;
+			Storage->SceneParam = &m_SceneParam;
 			object->Action();
 
 			//TEST

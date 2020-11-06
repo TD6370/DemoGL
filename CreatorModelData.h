@@ -44,6 +44,7 @@ public:
 	CoreMVP* MVP;
 	Operator* Operator;
 	ControllerInput* Inputs;
+	SceneParam* SceneParam;
 
 	CreatorModelData();
 
