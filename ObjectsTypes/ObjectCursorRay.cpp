@@ -84,8 +84,8 @@ void ObjectCursorRay::LockPolygonResult() {
 void ObjectCursorRay::CusrsorAction() {
 
 	SelectPositionOnPolygon();
-	SelectedObjIndex = -1;
-	ClearSelected();
+	//SelectedObjIndex = -1;
+	ClearPrevousSelected();
 }
 
 void ObjectCursorRay::SelectPositionOnPolygon()
@@ -110,6 +110,7 @@ void ObjectCursorRay::TargetCompleted()
 void ObjectCursorRay::Push() {
 
 	if (Storage->Inputs->MBT == KeyPush) {
+		
 		Storage->Inputs->MBT = -1;
 		vec3 posCursorObject = GetVectorForwardFace(Storage->MVP, StartLenght, Storage->Operator);
 		//vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
@@ -117,6 +118,9 @@ void ObjectCursorRay::Push() {
 		Postranslate = posCursorObject;
 		Target = posTarget;
 		ActionObjectCurrent = Moving;
+	}
+	if (Storage->Inputs->MBT == KeyClear) {
+		ClearSelected();
 	}
 }
 
@@ -128,15 +132,22 @@ void ObjectCursorRay::ObjectSelected(int index) {
 	auto objectSelected = Storage->GetObjectPrt(SelectedObjIndex);
 	objectSelected->Color = vec3(0, 1, 0);
 	objectSelected->IsSelected = true;
-	ClearSelected();
+	objectSelected->SelectedEvent();
+	ClearPrevousSelected();
 	PrevousSelectedObjIndex = index;
 }
 
 void ObjectCursorRay::ClearSelected() {
+	SelectedObjIndex = -1;
+	ClearPrevousSelected();
+	UnselectedEvent();
+}
+
+void ObjectCursorRay::ClearPrevousSelected() {
 	if (PrevousSelectedObjIndex != -1 && PrevousSelectedObjIndex != SelectedObjIndex) {
 		auto preObject = Storage->GetObjectPrt(PrevousSelectedObjIndex);
-		preObject->Color = vec3(0, 0, 0);
 		preObject->IsSelected = false;
+		preObject->UnselectedEvent();
+		PrevousSelectedObjIndex = -1;
 	}
-	PrevousSelectedObjIndex = -1;
 }

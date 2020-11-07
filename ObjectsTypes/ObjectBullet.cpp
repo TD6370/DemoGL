@@ -45,7 +45,7 @@ void ObjectBullet::TargetCompleted()
 void ObjectBullet::Push() {
 
 	if (Storage->Inputs->MBT == KeyPush) {
-		Storage->Inputs->MBT = -1;
+		//Storage->Inputs->MBT = -1;
 		vec3 posCursorObject = GetVectorForwardFace(Storage->MVP, StartLenght, Storage->Operator);
 		vec3 posTarget = GetVectorForward(Storage->MVP, EndLenght, Storage->Operator);
 		Postranslate = posCursorObject;

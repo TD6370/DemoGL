@@ -6,6 +6,7 @@ void ObjectHero::InitData()
 {
 	ActionObjectCurrent = Search;
 	IsGravity = true;
+	Storage->SceneParam->IndexHeroObj = Index;
 
 	LoadCursorRay();
 }

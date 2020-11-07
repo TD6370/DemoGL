@@ -18,11 +18,9 @@ class ObjectBlock :
 {
 public:
 
-	//std::vector<vec3> BottomVectors;
-	//std::vector<vec3> TopVectors;
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
-	//std::vector<vec3> CubeVectors;
+	int IndexVertexTransform = -1;
 	
 	ObjectBlock(
 		int p_index,
@@ -39,8 +37,10 @@ public:
 	void LockResult();
 
 	void RunAction();
+	
 	void TestGravity();
-	void EventChange();
+
+	void SelectedEvent();
 
 	std::vector< glm::vec3 > GetVertices();
 
@@ -59,4 +59,7 @@ public:
 	void SetBottom(int index, vec3 value);
 
 	void SetTop(int index, vec3 value);
+
+	void SelectVertexBlock();
+		
 };

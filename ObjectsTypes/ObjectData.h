@@ -111,7 +111,8 @@ public:
 
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
 
-	void virtual EventChange();
+	void virtual SelectedEvent();
+	void virtual UnselectedEvent();
 
 	std::vector< glm::vec3 > virtual GetVertices();
 

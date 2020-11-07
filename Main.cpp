@@ -435,7 +435,11 @@ int main()
 			DrawGraph(shaderProgram, model);
 
 			isUpdate = false;
+
+			
 		}
+
+		Storage->Inputs->MBT = -1;
 
 		glfwSwapBuffers(window);
 	}

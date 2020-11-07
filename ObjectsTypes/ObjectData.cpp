@@ -57,11 +57,6 @@ void ObjectData::InitData()
 
 void ObjectData::ActionBase() {
 	RunTransform();
-	EventChange();
-}
-
-void ObjectData::EventChange() {
-
 }
 
 void ObjectData::RunAction() {
@@ -170,6 +165,13 @@ void ObjectData::SetMesh() {
 
 void ObjectData::MeshTransform() {
 }
+
+void ObjectData::SelectedEvent() {
+}
+
+void ObjectData::UnselectedEvent() {
+}
+
 
 
 

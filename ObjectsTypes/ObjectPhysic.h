@@ -47,7 +47,8 @@ public:
 	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
 	//void TestGravity();
-	void EventChange();
+	void SelectedEvent();
+	void UnselectedEvent();
 
 	void SaveToCluster();
 

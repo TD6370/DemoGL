@@ -130,10 +130,12 @@ bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosi
 	return Storage->Clusters->IsCollisionObject(index, indexObjHit, isNewPosition);
 }
 
-void ObjectPhysic::EventChange() {
-	if (IsSelected) {
-		Color = vec3(0, 1, 0);
-	}
+void ObjectPhysic::SelectedEvent() {
+	Color = vec3(0, 1, 0);
+}
+
+void ObjectPhysic::UnselectedEvent() {
+	Color = vec3(0, 0, 0);
 }
 
 void ObjectPhysic::SaveToCluster()

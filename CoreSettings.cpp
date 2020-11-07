@@ -80,5 +80,6 @@ struct WorldSectors{
 
 struct SceneParam {
 	int IndexCursorRayObj;
+	int IndexHeroObj;
 };
 

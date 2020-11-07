@@ -64,11 +64,36 @@ void ObjectBlock::TestGravity()
 	CheckIsLock();
 }
 
+void ObjectBlock::SelectVertexBlock() {
 
-void ObjectBlock::EventChange() {
-	if (IsSelected) {
-		Color = vec3(0, 1, 0);
+	vec3 posCursor;
+
+	int indCursor = Storage->SceneParam->IndexCursorRayObj;
+	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
+	posCursor = CusrorObj->Postranslate;
+
+	/*int indHero = Storage->SceneParam->IndexHeroObj;
+	std::shared_ptr<ObjectData> HeroObj = Storage->GetObjectPrt(indHero);
+	posCursor = HeroObj->Postranslate;*/
+
+	int distMin = -1;
+	for (int indV = 0; indV < 4; indV++) {
+		vec3 vertBlock = GetBottom(indV);
+
+		vertBlock += Postranslate;
+		int dist = glm::distance(vec2(posCursor.x, posCursor.z), vec2(vertBlock.x, vertBlock.z));
+
+		if (distMin == -1 || distMin > dist) {
+			distMin = dist;
+			IndexVertexTransform = indV;
+		}
 	}
+}
+
+void ObjectBlock::SelectedEvent() {
+
+	ObjectPhysic::SelectedEvent();
+	SelectVertexBlock();
 }
 
 std::vector< glm::vec3 > ObjectBlock::GetVertices() {
@@ -86,27 +111,21 @@ void ObjectBlock::MeshTransform() {
 	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
 	
 	//-- Param transform
-	int indexUpdate = 0;
+	int indexUpdate = IndexVertexTransform;
 	
 	//-- Calculate transform
 	vec3 newPos = CusrorObj->Postranslate;
-	vec3 offsetPosScene = glm::normalize(newPos - Postranslate);
-
-	vec3 factorV = newPos/Postranslate;
-	float factor = factorV.x + factorV.z;
-	
-	vec3 vertBlock = GetBottom(indexUpdate);
-
+	vec3 offsetPosScene = newPos - Postranslate;
 	vec3 vertOffset = vec3(offsetPosScene.x, 0, offsetPosScene.z);
 
 	//-- set transform
 	if (Vertices.size() != 0) {
 		vec3 vertA =  GetBottom(indexUpdate);
-		vertA += vertOffset;
+		vertA = vec3(vertOffset.x, vertA.y, vertOffset.z);
 		SetBottom(indexUpdate, vertA);
 
 		vec3 vertB = GetTop(indexUpdate);
-		vertB += vertOffset;
+		vertB = vec3(vertOffset.x, vertB.y, vertOffset.z);
 		SetTop(indexUpdate, vertB);
 	}
 }

@@ -20,6 +20,7 @@ public:
 	GLfloat StartLenght = 0.1f;
 	GLfloat EndLenght = 200.f;
 	int KeyPush = GLFW_MOUSE_BUTTON_2;
+	int KeyClear = GLFW_MOUSE_BUTTON_1;
 
 	int SelectedObjIndex = -1;
 	int PrevousSelectedObjIndex = -1;
@@ -51,6 +52,8 @@ public:
 	void ObjectSelected(int index);
 
 	void ClearSelected();
+	
+	void ClearPrevousSelected();
 
 	void SelectPositionOnPolygon();
 
