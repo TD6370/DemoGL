@@ -75,6 +75,7 @@ struct WorldSectors{
 	std::string NameTerraPlane;
 	std::map <std::string, std::vector<int>> SectorsPlane;
 	std::map <std::string, std::vector<int>> SectorsObjects;
+	std::map <std::string, std::vector<int>> SectorsBlocks;
 };
 
 

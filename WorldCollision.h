@@ -37,6 +37,10 @@ public:
 
 	void SaveClusterObject(int indexObj);
 
+	void SaveClusterDynamicColiderObject(int indexObj);
+
+	void SaveClusterBlockObject(int indexObj);
+
 	vector<int> GetSectorObjects(int indexObj, bool isNewPosition);
 
 	vector<int> GetVertexPolygonFromObject(int indexObj, vector<string>& checkedZona);
@@ -46,6 +50,10 @@ public:
 	bool IsCollisionCircle(int indObjMe, int indObj2, bool isNewPosition = false);
 
 	bool IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
+
+	bool IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
+
+	bool IsCollisionBlocks(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
 	
 	//std::vector<glm::vec3> GetPosVertextPolygon(int ind, int x_sector, int z_sector);
 

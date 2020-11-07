@@ -1,6 +1,8 @@
 //@@@
 #include "WorldCollision.h"
 #include "ModelData.h"
+#include "ObjectsTypes/ObjectPhysic.h"
+#include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectData.h"
 #include "GeometryLib.h"
 //----------------------
@@ -477,14 +479,79 @@ vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition)
 
 void WorldCluster::SaveClusterObject(int indexObj)
 {
+	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+	if (object->TypeObj == Block) {
+		SaveClusterBlockObject(indexObj);
+	}
+	else {
+		SaveClusterDynamicColiderObject(indexObj);
+	}
+}
+
+void WorldCluster::SaveClusterBlockObject(int indexObj) {
+
+	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+	
+	//ObjectBlock* objP = dynamic_cast<ObjectBlock*>(od);
+	shared_ptr <ObjectBlock> objectBlock = std::dynamic_pointer_cast<ObjectBlock>(object);
+	
+	map<int, vec3> blockVectors = objectBlock->BottomVectors;
+
+	//vec3 key;
+	//map <int, vec3> ::iterator it;
+	//it = blockVectors.find(key);
+	//if (it != blockVectors.end()) {}
+	vec3 leftTop = blockVectors[0];
+	vec3 rightBottom = blockVectors[0];
+	vec3 vertexNext;
+	vec3 blockPos = objectBlock->Postranslate;
+
+	for (std::map<int, vec3>::iterator it = blockVectors.begin(); it != blockVectors.end(); ++it)
+	{
+		vertexNext = it->second;
+		if (vertexNext.x < leftTop.x)
+			leftTop.x = vertexNext.x;
+		if (vertexNext.z < leftTop.z)
+			leftTop.z = vertexNext.z;
+		if (vertexNext.x > rightBottom.x)
+			rightBottom.x = vertexNext.x;
+		if (vertexNext.x > rightBottom.x)
+			rightBottom.x = vertexNext.x;
+	}
+
+	int minX = (leftTop.x + blockPos.x) / SectorSize;
+	int maxX = (rightBottom.x + blockPos.x) / SectorSize;
+	int minZ = (leftTop.z + blockPos.z) / SectorSize;
+	int maxZ = (rightBottom.z + blockPos.z) / SectorSize;
+
+	for (int x_sector = minX; x_sector <= maxX; x_sector++) {
+		for (int z_sector = minZ; z_sector <= maxZ; z_sector++) {
+			string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+			if (Sectors->SectorsBlocks.find(keyPosSectorStr) == Sectors->SectorsBlocks.end())
+			{
+				vector<int> value_objectIndexs = vector<int>();
+				value_objectIndexs.push_back(indexObj);
+				Sectors->SectorsBlocks.insert(std::pair<string, vector<int>>(keyPosSectorStr, value_objectIndexs));
+			}
+			else {
+				vector<int> value_objectIndexs = Sectors->SectorsBlocks[keyPosSectorStr];
+				value_objectIndexs.push_back(indexObj);
+				Sectors->SectorsBlocks[keyPosSectorStr] = value_objectIndexs;
+			}
+		}
+	}
+}
+
+void WorldCluster::SaveClusterDynamicColiderObject(int indexObj) {
+	
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
 	int radius = object->ModelPtr->RadiusCollider;
 	vector<string> checkedZona = vector<string>();
-
 	glm::vec3 pos;
 	//clear old  position in zona
-	for(int i=0;i<=5;i++)
-	{ 
+	for (int i = 0; i <= 5; i++)
+	{
 		pos = object->Postranslate;
 		if (i == 0)
 		{
@@ -530,7 +597,7 @@ void WorldCluster::SaveClusterObject(int indexObj)
 			Sectors->SectorsObjects[keyPosSectorStr] = value_objectIndexs;
 		}
 	}
-	
+
 	checkedZona.clear();
 
 	//save new position in zona
@@ -619,9 +686,19 @@ bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPositi
 bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
 {
 	indexObjHit = -1;
+	bool result = false;
+	result = IsCollisionDynamicObject(indexObjMe, indexObjHit, isNewPosition);
+	if(!result)
+		result = IsCollisionBlocks(indexObjMe, indexObjHit, isNewPosition);
+
+	return result;
+}
+
+bool WorldCluster::IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
+{
 	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition);
 	std::shared_ptr <ObjectData> objNext;
-	for (const auto& nextIndObj : indObjsInSecor) 
+	for (const auto& nextIndObj : indObjsInSecor)
 	{
 		if (nextIndObj == indexObjMe)
 			continue;
@@ -633,6 +710,13 @@ bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNe
 	}
 	return false;
 }
+
+bool WorldCluster::IsCollisionBlocks(int indexObjMe, int& indexObjHit, bool isNewPosition)
+{
+	return false;
+}
+
+
 
 
 
