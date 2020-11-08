@@ -55,6 +55,10 @@ public:
 
 	std::shared_ptr<ModelData> ModelPtr;
 	std::vector< glm::vec3 > Vertices;
+	std::vector< glm::vec2 > TextureUV;
+
+	bool IsTextureRepeat = false;
+	float TextureRepeat = 1;
 	
 	vec3 Color = vec3(0);
 
@@ -115,10 +119,15 @@ public:
 	void virtual UnselectedEvent();
 
 	std::vector< glm::vec3 > virtual GetVertices();
+	std::vector< glm::vec2 > virtual GetUV();
 
 	void virtual SetMesh();
 
 	void virtual MeshTransform();
+
+	void UpdateTextureUV();
+
+	void virtual ControlsEvents();
 };
 
 #endif

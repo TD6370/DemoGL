@@ -13,15 +13,22 @@
 //using glm::vec3;
 //using glm::vec2;
 
+
+
 class ObjectBlock :
 	public ObjectPhysic
 {
 public:
 
+	int KeyUpTopVertex = GLFW_KEY_KP_ADD;
+	int KeyDownTopVertex = GLFW_KEY_KP_SUBTRACT;
+
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
 	int IndexVertexTransform = -1;
-	
+
+	float StartLenghtWall = 1;
+			
 	ObjectBlock(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
@@ -64,4 +71,9 @@ public:
 
 	vec4 GetLine(int index);
 		
+	void UpdateTextureUV();
+
+	void CalculateTextureUV(bool isInit = false);
+
+	void ControlsEvents();
 };

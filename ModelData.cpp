@@ -135,6 +135,14 @@ void ModelData::SetModelInBuffer(bool isUpdate)
 	SetNormals(Normals, BufferNormal_ID);
 }
 
+void ModelData::SetUV(vector< vec2 > uv) {
+	SetBufferUV(uv, BufferUV_ID);
+}
+
+void ModelData::UpdateBufferUV() {
+	SetBufferUV(UV, BufferUV_ID);
+}
+
 ModelData ModelData::Clone() {
 	ModelData newModel = ModelData();
 	newModel.PathShaderVertex = PathShaderVertex;

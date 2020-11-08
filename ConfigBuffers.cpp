@@ -11,10 +11,11 @@
 
 #include <glm/glm.hpp>
 
-GLint VertexAttribNumer_UV = 2;
 GLint VertexAttribNumer_Position = 0;
 GLint VertexAttribNumer_Color = 1;
+GLint VertexAttribNumer_UV = 2;
 GLint VertexAttribNumer_Normals = 3;
+
 GLint TYPE_DRAW = GL_STATIC_DRAW;
 //GLint TYPE_DRAW = GL_DYNAMIC_DRAW;
 //GLint TYPE_DRAW = GL_STREAM_DRAW;
@@ -47,17 +48,32 @@ void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLui
 	// Биндим текстуру, и теперь все функции по работе с текстурами будут работать с этой
 	glBindTexture(GL_TEXTURE_2D, textureID);
 
+	int glParam_MAG_FILTER = GL_LINEAR; //GL_NEAREST
+	int glParam_MIN_FILTER = GL_LINEAR_MIPMAP_LINEAR; // GL_NEAREST
+
 	// Отправляем картинку в OpenGL текстуру
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
+	
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	// Когда картинка будет увеличиваться(нет большей Мипмапы), используем LINEAR фильтрацию
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	// Когда минимизируем — берем две ближних мипмапы и лиейно смешиваем цвета
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, glParam_MAG_FILTER);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, glParam_MIN_FILTER);
+
+	//repeat texture
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	// И создаем сами мипмапы.
 	glGenerateMipmap(GL_TEXTURE_2D);
+
+	//Unbind texture
+	//glBindTexture(GL_TEXTURE_2D, NULL);
 
 	//glBindTexture(GL_TEXTURE_2D, 0); // CLEAR
 }

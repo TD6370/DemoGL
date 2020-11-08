@@ -7,6 +7,7 @@
 #include "..\ModelData.h"
 #include "ObjectDynamic.h"
 
+
 void ObjectBlock::InitData()
 {
 	ActionObjectCurrent = Stay;
@@ -14,6 +15,9 @@ void ObjectBlock::InitData()
 	Vertices = ModelPtr->Vertices;
 
 	ObjectPhysic::InitData();
+
+	IsTextureRepeat = true;
+	CalculateTextureUV(true);
 }
 
 void ObjectBlock::LockPolygonResult() {
@@ -56,6 +60,32 @@ void ObjectBlock::RunAction() {
 	}
 	ObjectData::ActionBase();
 }
+
+void ObjectBlock::ControlsEvents() {
+
+	if (!IsSelected)
+		return;
+
+	if (Storage->Inputs->Key == KeyUpTopVertex || Storage->Inputs->Key == KeyDownTopVertex) {
+
+		//resize Vertical wall
+		if (IndexVertexTransform == -1)
+			return;
+
+		float upSize = 1;
+		if(Storage->Inputs->Key == KeyUpTopVertex)
+			upSize = 1;
+		if (Storage->Inputs->Key == KeyDownTopVertex)
+			upSize = -1;
+
+		vec3 vertSelect = GetTop(IndexVertexTransform);
+		vertSelect.y += upSize;;
+		SetTop(IndexVertexTransform, vertSelect);
+
+		SaveNewPosition();
+	}
+}
+
 
 void ObjectBlock::TestGravity()
 {
@@ -127,9 +157,11 @@ void ObjectBlock::MeshTransform() {
 		vec3 vertB = GetTop(indexUpdate);
 		vertB = vec3(vertOffset.x, vertB.y, vertOffset.z);
 		SetTop(indexUpdate, vertB);
-	}
 
-	SaveNewPosition();
+		SaveNewPosition();
+
+		CalculateTextureUV(false);
+	}
 }
 
 vec3 ObjectBlock::GetBottom(int index) {
@@ -209,4 +241,50 @@ vec4 ObjectBlock::GetLine(int index) {
 	
 	vec4 line = vec4(pos1.x + Postranslate.x, pos1.z + Postranslate.z, pos2.x + Postranslate.x, pos2.z + Postranslate.z);
 	return line;
+}
+
+void ObjectBlock::UpdateTextureUV() {
+	if (IsTextureRepeat) {
+		//std::vector< glm::vec2 > repeat_UV = StartUV;
+		std::vector< glm::vec2 > repeat_UV = ModelPtr->UV;
+		for (auto& uv : repeat_UV) {
+			uv.x *= TextureRepeat;
+			//uv.y *= TextureRepeat;
+		}
+		//ModelPtr->UV = repeat_UV;
+		TextureUV = repeat_UV;
+	}
+}
+
+void ObjectBlock::CalculateTextureUV(bool isInit) {
+	if (IsTextureRepeat) {
+		int factorRepeat = 1;
+		float x1, x2, y1, y2;
+		float maxLenght = -1;
+		float lenghtLine = 0;
+	
+		for (int indLine = 0; indLine < 4; indLine++) {
+			vec4 line = GetLine(indLine);
+			x1 = line.x;
+			y1 = line.y;
+			x2 = line.z;
+			y2 = line.w;
+			lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2));
+			if (lenghtLine > maxLenght) {
+				maxLenght = lenghtLine;
+			}
+		}
+		
+		if (isInit) {
+			StartLenghtWall = maxLenght;
+			TextureUV = ModelPtr->UV;
+		}
+		else
+			factorRepeat = maxLenght / StartLenghtWall;
+		
+		TextureRepeat = factorRepeat;
+
+		if (!isInit)
+			UpdateTextureUV();
+	}
 }

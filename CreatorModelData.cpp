@@ -129,6 +129,7 @@ void CreatorModelData::LoadModels() {
 	nextModel3.PathTexture = "./Textures/testTexture.bmp";
 	nextModel3.RadiusCollider = 1;
 	nextModel3.IsDebug = true;
+	//nextModel3.IsTextureRepeat = true;
 	nextModel3.Init();
 	AddModel(&nextModel3, "box");
 

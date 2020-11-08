@@ -39,9 +39,9 @@ public:
 	GLuint ShaderProgram = 0;
 	bool IsIndex = false;
 	bool IsDebug = false;
-
 	//-------------------
 	std::vector< glm::vec2 > UV;
+	//std::vector< glm::vec2 > StartUV;
 	std::vector< glm::vec3 > Normals;
 	std::vector< glm::vec3 > Vertices;
 	std::vector<unsigned int> Indices;
@@ -66,6 +66,9 @@ public:
 	void SetVAO(std::vector< glm::vec3 > vertices);
 
 	void SetModelInBuffer(bool isUpdate = true);
+
+	void SetUV(vector< vec2 > uv);
+	void UpdateBufferUV();
 
 	void DebugUV(vector<vec2> list_uv);
 	void DebugVec3(vector<vec3> list_v, std::string name);

@@ -27,6 +27,9 @@ void ObjectPhysic::RunAction() {
 }
 
 void ObjectPhysic::InitData() {
+
+	ObjectData::InitData();
+
 	FillPlanes();
 }
 

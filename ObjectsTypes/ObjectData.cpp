@@ -52,10 +52,11 @@ void ObjectData::InitData()
 			ActionObjectCurrent = Lock;
 			break;
 	}
-
+	//TextureUV = ModelPtr->UV;
 }
 
 void ObjectData::ActionBase() {
+	ControlsEvents();
 	RunTransform();
 }
 
@@ -159,6 +160,10 @@ std::vector<glm::vec3> ObjectData::GetVertices() {
 	return ModelPtr->Vertices;
 }
 
+std::vector<glm::vec2> ObjectData::GetUV() {
+	return ModelPtr->UV;
+}
+
 void ObjectData::SetMesh() {
 	ModelPtr->SetVAO();
 }
@@ -172,7 +177,14 @@ void ObjectData::SelectedEvent() {
 void ObjectData::UnselectedEvent() {
 }
 
+void ObjectData::UpdateTextureUV() {
+	if (TextureUV.size() == 0)
+		return;
+	ModelPtr->SetUV(TextureUV);
+}
 
+void ObjectData::ControlsEvents() {
+}
 
 
 

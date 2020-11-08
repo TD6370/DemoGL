@@ -254,6 +254,7 @@ int main()
 	vec3 SavePos;
 
 	int countObjects = Storage->SceneObjectsLastIndex;
+	bool isTextureRepeat = false;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -277,6 +278,19 @@ int main()
 			else {
 				//printf("");
 			}
+
+			//-------------------- Update texture UV
+			bool isTextRepeat = object->IsTextureRepeat;
+			if (isTextureRepeat && !isTextRepeat)
+			{
+				object->ModelPtr->UpdateBufferUV();
+				isTextureRepeat = false;
+			}
+			if (isTextRepeat) {
+				isTextureRepeat = isTextRepeat;
+				object->UpdateTextureUV();
+			}
+			//--------------------
 
 			if (isUpdate) {
 				shaderProgram = model->ShaderProgram;
@@ -440,6 +454,7 @@ int main()
 		}
 
 		Storage->Inputs->MBT = -1;
+		Storage->Inputs->Key = -1;
 
 		glfwSwapBuffers(window);
 	}
