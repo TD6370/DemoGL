@@ -61,5 +61,7 @@ public:
 	void SetTop(int index, vec3 value);
 
 	void SelectVertexBlock();
+
+	vec4 GetLine(int index);
 		
 };

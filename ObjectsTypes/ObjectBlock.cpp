@@ -128,6 +128,8 @@ void ObjectBlock::MeshTransform() {
 		vertB = vec3(vertOffset.x, vertB.y, vertOffset.z);
 		SetTop(indexUpdate, vertB);
 	}
+
+	SaveNewPosition();
 }
 
 vec3 ObjectBlock::GetBottom(int index) {
@@ -195,4 +197,16 @@ void ObjectBlock::FillPlanes()
 		}
 	}
 	/*if (TopVectors.find(indVert) == TopVectors.end()) {}*/
+}
+
+vec4 ObjectBlock::GetLine(int index) {
+	vec3 pos1 = BottomVectors[index];
+	vec3 pos2;
+	if(index<3)
+		pos2 = BottomVectors[index + 1];
+	else
+		pos2 = BottomVectors[0];
+	
+	vec4 line = vec4(pos1.x + Postranslate.x, pos1.z + Postranslate.z, pos2.x + Postranslate.x, pos2.z + Postranslate.z);
+	return line;
 }

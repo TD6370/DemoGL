@@ -419,13 +419,30 @@ vector<int> WorldCluster::GetVertexPolygonFromObject(int indexObj, vector<string
 	return resultVertex;
 }
 
-vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition)
+vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition, TypeObject typeObj)
 {
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
 	int indObjOwner = object->IndexObjectOwner;
 	int radius = object->ModelPtr->RadiusCollider;
 	vector<string> checkedZona = vector<string>();
 	vector<int> resultIndexObjects = vector<int>();
+
+	std::map <std::string, std::vector<int>> sectorsObjects;
+	switch (typeObj)
+	{
+		case TypeObject::Polygon:
+			sectorsObjects = Sectors->SectorsPlane;
+			break;
+		case TypeObject::Block:
+			sectorsObjects = Sectors->SectorsBlocks;
+			break;
+		case TypeObject::NPC:
+			sectorsObjects = Sectors->SectorsObjects;
+			break;
+		default:
+			sectorsObjects = Sectors->SectorsObjects;
+			break;
+	} 
 
 	glm::vec3 pos;
 	for (int i = 0; i <= 5; i++)
@@ -464,9 +481,9 @@ vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition)
 			continue;
 		checkedZona.push_back(keyPosSectorStr);
 
-		if (Sectors->SectorsObjects.find(keyPosSectorStr) != Sectors->SectorsObjects.end())
+		if (sectorsObjects.find(keyPosSectorStr) != sectorsObjects.end())
 		{
-			vector<int> indObjsInSecor = Sectors->SectorsObjects[keyPosSectorStr];
+			vector<int> indObjsInSecor = sectorsObjects[keyPosSectorStr];
 			for (const auto& nextIndObj : indObjsInSecor) {
 				if (nextIndObj == indexObj || nextIndObj == indObjOwner)
 					continue;
@@ -491,21 +508,35 @@ void WorldCluster::SaveClusterObject(int indexObj)
 void WorldCluster::SaveClusterBlockObject(int indexObj) {
 
 	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+
+	if (object->TypeObj != Block) {
+		return;
+	}
 	
 	//ObjectBlock* objP = dynamic_cast<ObjectBlock*>(od);
 	shared_ptr <ObjectBlock> objectBlock = std::dynamic_pointer_cast<ObjectBlock>(object);
-	
 	map<int, vec3> blockVectors = objectBlock->BottomVectors;
-
-	//vec3 key;
-	//map <int, vec3> ::iterator it;
-	//it = blockVectors.find(key);
-	//if (it != blockVectors.end()) {}
 	vec3 leftTop = blockVectors[0];
 	vec3 rightBottom = blockVectors[0];
 	vec3 vertexNext;
 	vec3 blockPos = objectBlock->Postranslate;
 
+	//clear old  position in zona
+	for (std::map<string, vector<int>>::iterator it = Sectors->SectorsBlocks.begin(); it != Sectors->SectorsBlocks.end(); ++it)
+	{
+		string keyPosSectorStr = it->first;
+		vector<int> value_objectIndexs = Sectors->SectorsBlocks[keyPosSectorStr];
+		for (int ind = value_objectIndexs.size() - 1; ind >= 0; ind--)
+		{
+			if (value_objectIndexs[ind] == indexObj) {
+				value_objectIndexs.erase(value_objectIndexs.begin() + ind);
+				Sectors->SectorsBlocks[keyPosSectorStr] = value_objectIndexs;
+			}
+		}
+	}
+	/*for (const auto& nextIndObj : indObjsInSecor){} */
+
+	//save new position in zona
 	for (std::map<int, vec3>::iterator it = blockVectors.begin(); it != blockVectors.end(); ++it)
 	{
 		vertexNext = it->second;
@@ -515,8 +546,8 @@ void WorldCluster::SaveClusterBlockObject(int indexObj) {
 			leftTop.z = vertexNext.z;
 		if (vertexNext.x > rightBottom.x)
 			rightBottom.x = vertexNext.x;
-		if (vertexNext.x > rightBottom.x)
-			rightBottom.x = vertexNext.x;
+		if (vertexNext.z > rightBottom.z)
+			rightBottom.z = vertexNext.z;
 	}
 
 	int minX = (leftTop.x + blockPos.x) / SectorSize;
@@ -651,6 +682,65 @@ void WorldCluster::SaveClusterDynamicColiderObject(int indexObj) {
 	}
 }
 
+bool WorldCluster::IsCollisionLineCircle(float x1, float y1, float x2, float y2,
+	float xC, float yC, float R)
+{
+	x1 -= xC;
+	y1 -= yC;
+	x2 -= xC;
+	y2 -= yC;
+
+	float dx = x2 - x1;
+	float dy = y2 - y1;
+
+	//составляем коэффициенты квадратного уравнения на пересечение прямой и окружности.
+	//если на отрезке [0..1] есть отрицательные значения, значит отрезок пересекает окружность
+	float a = dx * dx + dy * dy;
+	float b = 2. * (x1 * dx + y1 * dy);
+	float c = x1 * x1 + y1 * y1 - R * R;
+
+	//а теперь проверяем, есть ли на отрезке [0..1] решения
+	if (-b < 0)
+		return (c < 0);
+	if (-b < (2. * a))
+		return ((4. * a * c - b * b) < 0);
+
+	return (a + b + c < 0);
+}
+
+bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isNewPosition)
+{
+	std::shared_ptr <ObjectData> objectMe = Storage->GetObjectPrt(indObjMe);
+	std::shared_ptr <ObjectData> objectBlock = Storage->GetObjectPrt(indBlock);
+	float x1, y1, x2, y2, xC, yC, r;
+	bool isCollision = false;
+
+	if (isNewPosition) {
+		xC = objectMe->NewPostranslate.x;
+		yC = objectMe->NewPostranslate.z;
+	}
+	else {
+		xC = objectMe->Postranslate.x;
+		yC = objectMe->Postranslate.z;
+	}
+	r = objectMe->ModelPtr->RadiusCollider;
+
+	shared_ptr <ObjectBlock> objBlock = std::dynamic_pointer_cast<ObjectBlock>(objectBlock);
+	for (int indLine = 0; indLine < 4; indLine++) {
+		vec4 line =  objBlock->GetLine(indLine);
+		x1 = line.x;
+		y1 = line.y;
+		x2 = line.z;
+		y2 = line.w;
+
+		if (IsCollisionLineCircle(x1, y1, x2, y2, xC, yC, r)) {
+			isCollision = true;
+			break;
+		}
+	}
+	return isCollision;
+}
+
 bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPosition)
 {
 	double x1, x2, y1, y2, r1, r2;
@@ -696,7 +786,7 @@ bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNe
 
 bool WorldCluster::IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
 {
-	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition);
+	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition, NPC);
 	std::shared_ptr <ObjectData> objNext;
 	for (const auto& nextIndObj : indObjsInSecor)
 	{
@@ -713,6 +803,22 @@ bool WorldCluster::IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bo
 
 bool WorldCluster::IsCollisionBlocks(int indexObjMe, int& indexObjHit, bool isNewPosition)
 {
+	std::shared_ptr <ObjectData> objectMe = Storage->GetObjectPrt(indexObjMe);
+	if (objectMe->TypeObj == Block)
+		return false;
+
+	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition, Block);
+	std::shared_ptr <ObjectData> objNext;
+	for (const auto& nextIndObj : indObjsInSecor)
+	{
+		if (nextIndObj == indexObjMe)
+			continue;
+		objNext = Storage->GetObjectPrt(nextIndObj);
+		if (IsCollisionObjectToBlock(indexObjMe, objNext->Index, isNewPosition)) {
+			indexObjHit = nextIndObj;
+			return true;
+		}
+	}
 	return false;
 }
 
