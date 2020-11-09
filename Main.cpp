@@ -39,6 +39,8 @@ using glm::vec3;
 using glm::mat4;
 using std::shared_ptr;
 
+
+//--- CS
 const GLchar* pathShaderVertex = "basic.vert";
 const GLchar* pathShaderFrag = "basic.frag";
 const char* pathTextureTest = "./Textures/testTexture.bmp";
@@ -67,6 +69,12 @@ SceneConstruction Scene;
 
 SceneParam m_SceneParam;
 
+TransformModel m_transformModel;
+
+Controllers m_controllers;
+
+//---E_CS
+
 void LoadDataModel()
 {
 	//bool isGen = true;
@@ -91,7 +99,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-	KeyInput(window, key, scancode, action, mode,
+	m_controllers.KeyInput(window, key, scancode, action, mode,
 		&m_OperatorG,
 		&m_cameraG.paramCase,
 		m_speed, m_deltaTime, 
@@ -101,13 +109,13 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void SetMouseEvents(GLFWwindow* window)
 {
-	MouseEvents(window,	m_widthWindow, m_heightWindow, m_deltaTime, &m_OperatorG, &Inputs);
+	m_controllers.MouseEvents(window,	m_widthWindow, m_heightWindow, m_deltaTime, &m_OperatorG, &Inputs);
 }
 
 
 void CreateMVP(CoreMVP* ConfigMVP) {
 	
-	GenMVP(m_widthWindow,
+	m_transformModel.GenMVP(m_widthWindow,
 		m_heightWindow,
 		&m_OperatorG,
 		&m_cameraG,
@@ -168,9 +176,14 @@ void DrawGraph(GLuint shaderProgram, std::shared_ptr<ModelData> model)
 
 int main()
 {
+	//----------------------------- SC
 	m_cameraG = Camera();
 	m_OperatorG = Operator();
 	m_Lighting = Lighting();
+	//Scene = SceneConstruction();
+	m_transformModel = TransformModel();
+	m_controllers = Controllers();
+	//--------- E_CS
 
 	//Инициализация GLFW
 	glfwInit();
@@ -186,7 +199,7 @@ int main()
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	//bool isFullscreen = true;
-	bool isFullscreen = false;
+	bool isFullscreen = m_OperatorG.IsFullscreen;
 	GLFWmonitor* monitor = isFullscreen ? glfwGetPrimaryMonitor() : nullptr;
 	GLFWwindow* window = glfwCreateWindow(m_widthWindow, m_heightWindow, "LearnOpenGL", monitor, nullptr);
 	
@@ -234,6 +247,10 @@ int main()
 	//m_cameraG
 	//-----------
 
+
+	Scene = SceneConstruction(window);
+
+	//----------------------------- SC
 	LoadDataModel();
 
 	m_Lighting.positionLight = vec3(0, 0, 0);
@@ -255,12 +272,15 @@ int main()
 
 	int countObjects = Storage->SceneObjectsLastIndex;
 	bool isTextureRepeat = false;
+	//----------------------------- E_SC
 
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 		ClearScene();
+
 		SetMouseEvents(window);
+
 		CreateMVP(&ConfigMVP);
 		
 		for (int i = 0; i < countObjects + 1; i++)
@@ -444,7 +464,7 @@ int main()
 			model->ConfUniform.SetPositionLight(m_Lighting.positionLight);
 			
 			//------ Set Mouse position
-			model->ConfUniform.SetPositionMouse(m_OperatorG.m_positionCursorModel);
+			model->ConfUniform.SetPositionMouse(m_OperatorG.PositionCursorModel);
 
 			DrawGraph(shaderProgram, model);
 

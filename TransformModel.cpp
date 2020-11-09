@@ -23,6 +23,7 @@ using glm::vec4;
 using glm::mat4;
 
 //glm::mat4 Transform(GLuint shaderProgram, unsigned int index, int paramCase, ConfigUniform confUniform, bool IsNoTranf, 
+//glm::mat4 TransformModel::Transform(unsigned int index, int paramCase, bool IsNoTranf,
 glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 	glm::mat4 p_trans, 
 	glm::vec3 p_postranslate,
@@ -36,23 +37,6 @@ glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 
 	trans = glm::translate(trans, glm::vec3(p_postranslate.x, p_postranslate.y, p_postranslate.z));
 	trans = glm::rotate(trans, (glm::float32)p_angle, glm::vec3(0.0f, 1.0f, 0.0f));
-
-	/*
-	for (unsigned int i = 0; i < tramsformTypes.size(); i++) {
-		switch (tramsformTypes[i])
-		{
-			case RotateX:
-				trans = glm::rotate(trans, (float)angle, glm::vec3(1.0f, 0.0f, 0.0f));
-				break;
-			case RotateY:
-				trans = glm::rotate(trans, (float)angle, glm::vec3(0.0f, 1.0f, 0.0f));
-				break;
-			case RotateZ:
-				trans = glm::rotate(trans, (float)angle, glm::vec3(0.0f, 0.0f, 1.0f));
-				break;
-		}
-	}
-	*/
 
 	return trans;
 	//-----------------------------------------------------
@@ -127,7 +111,7 @@ void GenMVP(GLuint shaderProgram,
 	Operator* p_operator,
 	Camera p_camera)
 	*/
-void GenMVP(
+void TransformModel::GenMVP(
 		int m_widthWindow,
 		int m_heightWindow,
 		Operator* p_operator,
@@ -210,7 +194,7 @@ void GenMVP(
 	//GetPositionModelCursor(Projection, View, Model);
 	//p_operator.m_positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator.m_MouseX, p_operator.m_MouseY, m_widthWindow, m_heightWindow);
 	glm::vec3 positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator->m_MouseX, p_operator->m_MouseY, m_widthWindow, m_heightWindow);
-	p_operator->m_positionCursorModel = positionCursorModel;
+	p_operator->PositionCursorModel = positionCursorModel;
 	
 }
 

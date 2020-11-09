@@ -42,7 +42,8 @@ struct Operator {
 	bool m_start = false;
 	GLdouble MouseOffset_x, MouseOffset_y;
 	GLdouble m_MouseX = 0, m_MouseY = 0;
-	glm::vec3 m_positionCursorModel;
+	glm::vec3 PositionCursorModel;
+	bool IsFullscreen = false;
 };
 
 struct ControllerInput {

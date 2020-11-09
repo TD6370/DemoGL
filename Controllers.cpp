@@ -57,7 +57,7 @@ glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm:
 	vec3 posfar = glm::unProject(vecPosMouseFar, p_model, p_projection, viewportVec);
 	//vec3 posnear = glm::unProject(vecPosMouseNear, p_view * p_model, p_projection, viewportVec);
 	//vec3 posfar = glm::unProject(vecPosMouseFar, p_view * p_model, p_projection, viewportVec);
-	//m_positionCursorModel = posnear;
+	//PositionCursorModel = posnear;
 	return posnear;
 
 	/*
@@ -71,7 +71,7 @@ glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm:
 	*/
 }
 
-void MouseEvents(
+void Controllers::MouseEvents(
 	GLFWwindow* window,
 	int m_widthWindow, int m_heightWindow,
 	float m_deltaTime,
@@ -170,7 +170,7 @@ void MouseEvents(
 	p_operator->m_start = true;
 }
 
-void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
+void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 	Operator*  p_Operator,
 	GLfloat* paramCase,
 	float m_speed,
