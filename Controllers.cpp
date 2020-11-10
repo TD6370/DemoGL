@@ -1,5 +1,6 @@
 #include "Controllers.h"
 #include "CoreSettings.h"
+#include "SceneConstruction.h"
 
 #include <iostream>
 #include <fstream>
@@ -71,12 +72,20 @@ glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm:
 	*/
 }
 
+//void Controllers::MouseEvents(
+//	GLFWwindow* window,
+//	int m_widthWindow, int m_heightWindow,
+//	float m_deltaTime,
+//	Operator* p_operator,
+//	ControllerInput* p_inputs)
+
 void Controllers::MouseEvents(
 	GLFWwindow* window,
 	int m_widthWindow, int m_heightWindow,
-	float m_deltaTime,
+	SceneConstruction* Scene
+	/*float m_deltaTime,
 	Operator* p_operator,
-	ControllerInput* p_inputs)
+	ControllerInput* p_inputs*/)
 {
 
 	// горизонтальный угол : по -Z
@@ -92,8 +101,8 @@ void Controllers::MouseEvents(
 	// получаем координаты курсора
 	GLdouble xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
-	p_operator->m_MouseX = xpos;
-	p_operator->m_MouseY = ypos;
+	Scene->Oper->m_MouseX = xpos;
+	Scene->Oper->m_MouseY = ypos;
 
 	bool isCeneter = false;
 	int state = -1;
@@ -102,32 +111,32 @@ void Controllers::MouseEvents(
 	{
 		//isCeneter = true;
 		//p_operator->m_start = false;
-		p_inputs->MBT = GLFW_MOUSE_BUTTON_2;
+		Scene->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
 	}
 	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 	if (state == GLFW_PRESS)
 	{
-		p_inputs->MBT = GLFW_MOUSE_BUTTON_1;
+		Scene->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
 	}
 
 	//----------------------------
 	if (xpos >= m_widthWindow - 2) {
-		p_operator->MouseOffset_x += m_widthWindow / 2;
+		Scene->Oper->MouseOffset_x += m_widthWindow / 2;
 		glfwSetCursorPos(window, m_widthWindow / 2, ypos);
 		return;
 	}
 	if (xpos <= 0) {
-		p_operator->MouseOffset_x -= m_widthWindow / 2;
+		Scene->Oper->MouseOffset_x -= m_widthWindow / 2;
 		glfwSetCursorPos(window, m_widthWindow / 2, ypos);
 		return;
 	}
 	if (ypos >= m_heightWindow - 2) {
-		p_operator->MouseOffset_y += m_heightWindow / 2;
+		Scene->Oper->MouseOffset_y += m_heightWindow / 2;
 		glfwSetCursorPos(window, xpos, m_heightWindow / 2);
 		return;
 	}
 	if (ypos <= 0) {
-		p_operator->MouseOffset_y -= m_heightWindow / 2;
+		Scene->Oper->MouseOffset_y -= m_heightWindow / 2;
 		glfwSetCursorPos(window, xpos, m_heightWindow / 2);
 		return;
 	}
@@ -135,48 +144,52 @@ void Controllers::MouseEvents(
 
 
 	// Двигаем мышь в центр экрана
-	if (!p_operator->m_start)
+	if (!Scene->Oper->m_start)
 		glfwSetCursorPos(window, m_widthWindow / 2, m_heightWindow / 2);
 
 	if (isCeneter) {
-		p_operator->m_start = true;
+		Scene->Oper->m_start = true;
 		return;
 	}
 
 	//вычислим необходимые углы :
-	horizontalAngle += mouseSpeed * m_deltaTime * float(m_widthWindow / 2 - xpos - p_operator->MouseOffset_x);
-	verticalAngle += mouseSpeed * m_deltaTime * float(m_heightWindow / 2 - ypos - p_operator->MouseOffset_y);
+	horizontalAngle += mouseSpeed * Scene->m_deltaTime * float(m_widthWindow / 2 - xpos - Scene->Oper->MouseOffset_x);
+	verticalAngle += mouseSpeed * Scene->m_deltaTime * float(m_heightWindow / 2 - ypos - Scene->Oper->MouseOffset_y);
 
-	p_operator->VerticalAngle = verticalAngle;
-	p_operator->HorizontalAngle = horizontalAngle;
+	Scene->Oper->VerticalAngle = verticalAngle;
+	Scene->Oper->HorizontalAngle = horizontalAngle;
 
 	// направление : Преобразовываем сферические координаты в декартовы
-	p_operator->m_direction = glm::vec3(
+	Scene->Oper->m_direction = glm::vec3(
 		cos(verticalAngle) * sin(horizontalAngle),
 		sin(verticalAngle),
 		cos(verticalAngle) * cos(horizontalAngle)
 	);
 
 	// Вектор «вправо»
-	p_operator->m_right = glm::vec3(
+	Scene->Oper->m_right = glm::vec3(
 		sin(horizontalAngle - 3.14f / 2.0f),
 		0,
 		cos(horizontalAngle - 3.14f / 2.0f)
 	);
 
 	// Вектор «вверх»: перпендикуляр к направлению и к «вправо»
-	p_operator->m_up = glm::cross(p_operator->m_right, p_operator->m_direction);
+	Scene->Oper->m_up = glm::cross(Scene->Oper->m_right, Scene->Oper->m_direction);
 
-	p_operator->m_start = true;
+	Scene->Oper->m_start = true;
 }
 
+//void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
+//	Operator*  p_Operator,
+//	//GLfloat* paramCase,
+//	float m_speed,
+//	float m_deltaTime,
+//	ControllerInput* p_inputs)
 void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
-	Operator*  p_Operator,
-	GLfloat* paramCase,
-	float m_speed,
-	float m_deltaTime,
-	ControllerInput* p_inputs)
+	SceneConstruction* Scene)
 {
+	float m_speed = Scene->m_speed;
+	float m_deltaTime = Scene->m_deltaTime;
 	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 
 	// и приложение после этого закроется
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -185,34 +198,35 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	// Двигаемся вперед
 	if ((key == GLFW_KEY_UP || key == GLFW_KEY_W) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 		//if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
-		p_Operator->m_position += p_Operator->m_direction * m_deltaTime * m_speed;
+		Scene->Oper->m_position += Scene->Oper->m_direction * m_deltaTime * m_speed;
 	}
 	// Двигаемся назад
 	if ((key == GLFW_KEY_DOWN || key == GLFW_KEY_S) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 		//if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
-		p_Operator->m_position -= p_Operator->m_direction * m_deltaTime * m_speed;
+		Scene->Oper->m_position -= Scene->Oper->m_direction * m_deltaTime * m_speed;
 	}
 	// Шаг вправо
 	if ((key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 		//if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
-		p_Operator->m_position += p_Operator->m_right * m_deltaTime * m_speed;
+		Scene->Oper->m_position += Scene->Oper->m_right * m_deltaTime * m_speed;
 	}
 	// Шаг влево
 	if ((key == GLFW_KEY_LEFT || key == GLFW_KEY_A) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 		//if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
-		p_Operator->m_position -= p_Operator->m_right * m_deltaTime * m_speed;
+		Scene->Oper->m_position -= Scene->Oper->m_right * m_deltaTime * m_speed;
 	}
-
+	
 	if ((key == GLFW_KEY_0) && action == GLFW_PRESS)
-		*paramCase = 0;
+		Scene->Inputs->ParamCase = 0;
 	if ((key == GLFW_KEY_1) && action == GLFW_PRESS)
-		*paramCase = 1;
+		Scene->Inputs->ParamCase = 1;
 	if ((key == GLFW_KEY_2) && action == GLFW_PRESS)
-		*paramCase = 2;
+		Scene->Inputs->ParamCase = 2;
 	if ((key == GLFW_KEY_3) && action == GLFW_PRESS)
-		*paramCase = 3;
+		Scene->Inputs->ParamCase = 3;
 	if ((key == GLFW_KEY_4) && action == GLFW_PRESS)
-		*paramCase = 4;
+		Scene->Inputs->ParamCase = 4;
+		//*paramCase = 4;
 
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
 
@@ -221,6 +235,6 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 		//	camX = 0.0f;
 	}
 
-	p_inputs->Key = key;
+	Scene->Inputs->Key = key;
 }
 

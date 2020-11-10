@@ -23,7 +23,7 @@ struct Camera {
 	GLfloat lookCamX = 0.0f;
 	GLfloat lookCamY = 0.0f;
 	GLboolean isPerspective = true;
-	GLfloat paramCase = 0;
+	
 };
 
 struct Operator {
@@ -50,6 +50,7 @@ struct ControllerInput {
 
 	int Key = -1;
 	int MBT = -1;
+	GLfloat ParamCase = 0;
 };
 
 struct Lighting {

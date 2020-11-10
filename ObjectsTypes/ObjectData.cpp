@@ -116,7 +116,7 @@ string ObjectData::GetKeySectorPolygon(bool isNewPosition) {
 
 void ObjectData::RunTransform()
 {
-	glm::mat4 trans = Transform(1, Storage->Camera->paramCase, false,
+	glm::mat4 trans = Transform(1, Storage->Inputs->ParamCase, false,
 		glm::mat4(1.0f),
 		Postranslate,
 		TranslateAngle);
