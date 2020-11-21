@@ -63,9 +63,7 @@ private:
 	const char* prevModelTexture;
 	const char* prevModelModel3D;
 	GLuint last_VAO;
-	shared_ptr<ObjectData> ObjectCurrent;
-	shared_ptr<ModelData> ModelCurrent;
-
+	
 	bool test_isFerst = true;
 	vec3 SavePos;
 
@@ -79,9 +77,12 @@ private:
 	GLint indicesSize;
 
 protected:
-	bool isUpdate = false;
+	//bool isUpdate = false;
 
 public:
+	shared_ptr<ObjectData> ObjectCurrent;
+	shared_ptr<ModelData> ModelCurrent;
+
 	int m_widthWindow = 1024;
 	int m_heightWindow = 768;
 
@@ -129,7 +130,19 @@ public:
 
 	void WorkingRooms();
 
+	bool SetObject(int i, bool& isUpdate);
+	
+	
+	void SetDataToShaderAfter(bool isUpdate);
+
+	void SetDataToShaderBefore(bool isUpdate);
+
+
 	void Update();
+
+	void ObjectUpdate(int i);
+
+	//void Update_1();
 
 	void SetMouseEvents();
 

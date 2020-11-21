@@ -65,7 +65,7 @@ void ObjectDynamic::ActionMoving()
 
 void ObjectDynamic::ActionLook() {
 	float rangeLook = 0.1f;
-	if (TargetAngle - rangeLook < TranslateAngle && TargetAngle + rangeLook > TranslateAngle) {
+	if (TargetAngle.y - rangeLook < TranslateAngle.y && TargetAngle.y + rangeLook > TranslateAngle.y) {
 		NewPostranslate = vec3(0);
 		ActionObjectCurrent = Moving;
 	}
@@ -73,10 +73,10 @@ void ObjectDynamic::ActionLook() {
 	if (ActionObjectCurrent != Look)
 		return;
 
-	if (TargetAngle > TranslateAngle)
-		TranslateAngle += m_speedRotate;
+	if (TargetAngle.y > TranslateAngle.y)
+		TranslateAngle.y += m_speedRotate;
 	else
-		TranslateAngle -= m_speedRotate;
+		TranslateAngle.y -= m_speedRotate;
 }
 
 void ObjectDynamic::LockObjectResult() {
@@ -103,7 +103,7 @@ void ObjectDynamic::ActionSearch() {
 	Target = newTarget;
 
 	vec3 ray = normalize(Target - Postranslate);
-	TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
+	TargetAngle.y = glm::atan(ray.x, ray.z) + m_angleModel;
 
 	if (TypeObj == Hero)
 		ActionObjectCurrent = Moving; //Type 2.

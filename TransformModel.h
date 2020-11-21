@@ -15,11 +15,15 @@ glm::vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* ope
 
 glm::vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG);
 
+//glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
+//	glm::mat4 trans,
+//	glm::vec3 p_postranslate,
+//	GLfloat	 p_angle);
+
 glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 	glm::mat4 trans,
 	glm::vec3 p_postranslate,
-	GLfloat	 p_angle);
-
+	glm::vec3	 p_angle);
 
 class TransformModel {
 

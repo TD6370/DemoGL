@@ -19,7 +19,7 @@ void ObjectNPC::Pathfinding() {
 	Target.y = y;
 
 	vec3 ray = normalize(Target - Postranslate);
-	TargetAngle = glm::atan(ray.x, ray.z) + m_angleModel;
+	TargetAngle.y = glm::atan(ray.x, ray.z) + m_angleModel;
 
 	ActionObjectCurrent = Look;
 	return;

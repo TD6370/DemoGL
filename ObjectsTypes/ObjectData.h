@@ -38,11 +38,13 @@ protected:
 	GLfloat m_stepMove = 0;
 	GLfloat m_angleModel = 0.0;
 	std::string m_keyPosSectorStr;
+	bool IsVisible = true;
 public:
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
 	bool IsGravity = false;
 	bool IsSelected = false;
+	
 
 	CreatorModelData* Storage;
 
@@ -62,8 +64,9 @@ public:
 	
 	vec3 Color = vec3(0);
 
-	GLfloat TranslateAngle = 0;
-	GLfloat TargetAngle = 0;
+	//GLfloat TranslateAngle = 0;
+	vec3 TranslateAngle = vec3(0);
+	vec3 TargetAngle = vec3(0);
 	vec3 Postranslate = vec3(0);
 	vec3 NewPostranslate = vec3(0);
 	vec3 Move = vec3(0);
@@ -128,6 +131,10 @@ public:
 	void UpdateTextureUV();
 
 	void virtual ControlsEvents();
+
+	void Billboard();
+
+	bool virtual IsShow();
 };
 
 #endif

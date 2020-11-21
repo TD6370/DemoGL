@@ -11,6 +11,7 @@
 #include "ObjectsTypes\ObjectBullet.h"
 #include "ObjectsTypes\ObjectCursorRay.h"
 #include "ObjectsTypes\ObjectBlock.h"
+#include "ObjectsTypes\ObjectGUI.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -181,6 +182,20 @@ void CreatorModelData::LoadModels() {
 	nextModelCursorRay.RadiusCollider = .1;
 	nextModelCursorRay.Init();
 	AddModel(&nextModelCursorRay, "cursorRay");
+
+
+	ModelData nextModelGUI = ModelData();
+	nextModelGUI.PathShaderVertex = "basic.vert";
+	nextModelGUI.PathShaderFrag = "basic.frag";
+
+	nextModelGUI.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
+	//nextModelGUI.PathModel3D = "./Models3D/kub.obj";
+
+	nextModelGUI.PathTexture = "./Textures/future.bmp";
+	//nextModelCursorRay.PathTexture = "./Textures/future.bmp";
+	nextModelGUI.RadiusCollider = .1;
+	nextModelGUI.Init();
+	AddModel(&nextModelGUI, "conextGUI");
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -220,6 +235,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 	std::shared_ptr<ObjectData> objectModel;
 	switch (p_typeObj)
 	{
+		case GUI: {
+			ObjectGUI obj = ObjectGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			objectModel = GetObjectPrt(obj.Index);
+			break;
+		}
 		case Polygon: {
 			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
@@ -336,7 +357,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 1; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -382,6 +403,12 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
 	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
+
+
+	std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
+	//std::shared_ptr<ModelData> modelGUI = GetModelPrt("box");
+	AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0));
+
 	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
 	

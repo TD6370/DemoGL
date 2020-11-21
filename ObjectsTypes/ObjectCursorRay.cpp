@@ -47,10 +47,10 @@ bool ObjectCursorRay::CheckIsLock() {
 	if (isPolygon)
 		LockPolygonResult();
 
-	bool isNotValidMove = IsContactWorldBorder(NewPostranslate);
-	if (!isNotValidMove)
-		isNotValidMove = IsCollisionObject(Index, indObjHit, true);
-	if (isNotValidMove)
+	bool isLock = IsContactWorldBorder(NewPostranslate);
+	if (!isLock)
+		isLock = IsCollisionObject(Index, indObjHit, true);
+	if (isLock)
 	{
 		ObjectSelected(indObjHit);
 		LockResult();

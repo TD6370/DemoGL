@@ -16,9 +16,6 @@
     <Filter Include="Objects">
       <UniqueIdentifier>{f3f2bc06-85b4-4c94-a119-1e7f2da248ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{988ffb10-b84e-4e54-ac34-5c0112b0307f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Rooms">
       <UniqueIdentifier>{5b97c129-9afc-4d9e-a9f6-81cf5fed3585}</UniqueIdentifier>
     </Filter>
@@ -43,6 +40,12 @@
     <Filter Include="Inputs">
       <UniqueIdentifier>{fc6e1d25-d966-443a-b26a-9179deeab6f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects\GUI">
+      <UniqueIdentifier>{90fe3f84-16ce-4c9e-8189-51858f619cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Browsers\Engine">
+      <UniqueIdentifier>{988ffb10-b84e-4e54-ac34-5c0112b0307f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
@@ -61,16 +64,16 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="WorldCollision.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClCompile>
     <ClCompile Include="TransformModel.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClCompile>
     <ClCompile Include="SceneConstruction.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClCompile>
     <ClCompile Include="CreatorModelData.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClCompile>
     <ClCompile Include="SceneRoom.cpp">
       <Filter>Rooms</Filter>
@@ -126,6 +129,12 @@
     <ClCompile Include="Controllers.cpp">
       <Filter>Inputs</Filter>
     </ClCompile>
+    <ClCompile Include="RoomMarkerPlane.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectGUI.cpp">
+      <Filter>Objects\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -147,16 +156,16 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="SceneConstruction.h">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClInclude>
     <ClInclude Include="CreatorModelData.h">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClInclude>
     <ClInclude Include="TransformModel.h">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClInclude>
     <ClInclude Include="WorldCollision.h">
-      <Filter>Engine</Filter>
+      <Filter>Browsers\Engine</Filter>
     </ClInclude>
     <ClInclude Include="SceneRoom.h">
       <Filter>Rooms</Filter>
@@ -211,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="Controllers.h">
       <Filter>Inputs</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomMarkerPlane.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectGUI.h">
+      <Filter>Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

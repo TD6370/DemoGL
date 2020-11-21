@@ -146,4 +146,6 @@ void ObjectPhysic::SaveToCluster()
 	Storage->Clusters->SaveClusterObject(Index);
 }
 
-
+bool ObjectPhysic::IsShow() {
+	return IsVisible = true;
+}

@@ -12,13 +12,13 @@ using glm::vec3;
 using glm::vec2;
 
 
-class ObjectPhysic :
+class ObjectGUI :
 	public ObjectData
 {
 
 public:
 
-	ObjectPhysic(
+	ObjectGUI(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = NPC,
@@ -30,31 +30,10 @@ public:
 
 	void InitData();
 
-	bool IsContactWorldBorder(vec3 pos);
-
-	bool virtual CheckIsLock();
-
 	void RunAction();
 
-	void CheckStartPosition();
-
-	void virtual LockResult();
-
-	void virtual LockPolygonResult();
-
-	bool CheckIsPolygon();
-
-	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
-
-	//void TestGravity();
-	void SelectedEvent();
-	void UnselectedEvent();
-
-	void SaveToCluster();
-
-	void virtual FillPlanes();
+	void UpdateState();
 
 	bool IsShow();
 
 };
-

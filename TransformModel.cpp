@@ -27,7 +27,8 @@ using glm::mat4;
 glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 	glm::mat4 p_trans, 
 	glm::vec3 p_postranslate,
-	GLfloat p_angle)
+	glm::vec3 p_angle)
+	//GLfloat p_angle)
 	//, std::vector<int> tramsformTypes)
 {
 	glm::mat4 trans = glm::mat4(1.0f);
@@ -36,7 +37,10 @@ glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 		return trans;
 
 	trans = glm::translate(trans, glm::vec3(p_postranslate.x, p_postranslate.y, p_postranslate.z));
-	trans = glm::rotate(trans, (glm::float32)p_angle, glm::vec3(0.0f, 1.0f, 0.0f));
+	//trans = glm::rotate(trans, (glm::float32)p_angle, glm::vec3(0.0f, 1.0f, 0.0f));
+	trans = glm::rotate(trans, (glm::float32)p_angle.x, glm::vec3(1.0f, 0.0f, 0.0f));
+	trans = glm::rotate(trans, (glm::float32)p_angle.y, glm::vec3(0.0f, 1.0f, 0.0f));
+	trans = glm::rotate(trans, (glm::float32)p_angle.z, glm::vec3(0.0f, 0.0f, 1.0f));
 
 	return trans;
 	//-----------------------------------------------------

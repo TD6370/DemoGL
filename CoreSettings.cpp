@@ -12,8 +12,16 @@
 #include <vector>
 #include <map>
 
+#define M_PI 3.1415926535897932384626433832795
+
 struct World {
 	GLfloat Radius = 50; // 10;
+};
+
+struct SceneParam {
+	int IndexCursorRayObj;
+	int IndexHeroObj;
+	bool IsGUI = false;
 };
 
 struct Camera {
@@ -40,9 +48,11 @@ struct Operator {
 	float m_initialFoV = 45.0f;
 	float m_FoV = glm::radians(45.0f);
 	bool m_start = false;
+
 	GLdouble MouseOffset_x, MouseOffset_y;
 	GLdouble m_MouseX = 0, m_MouseY = 0;
 	glm::vec3 PositionCursorModel;
+
 	bool IsFullscreen = false;
 };
 
@@ -67,7 +77,7 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting }; // , EventControl };
 
-enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay };
+enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI};
 
 //enum TramsformType { RotateX, RotateY, RotateZ };
 
@@ -81,8 +91,5 @@ struct WorldSectors{
 };
 
 
-struct SceneParam {
-	int IndexCursorRayObj;
-	int IndexHeroObj;
-};
+
 
