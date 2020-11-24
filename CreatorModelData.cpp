@@ -196,6 +196,16 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI.RadiusCollider = .1;
 	nextModelGUI.Init();
 	AddModel(&nextModelGUI, "conextGUI");
+
+
+	ModelData nextModelGUI_2 = ModelData();
+	nextModelGUI_2.PathShaderVertex = "basic.vert";
+	nextModelGUI_2.PathShaderFrag = "basic.frag";
+	nextModelGUI_2.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
+	nextModelGUI_2.PathTexture = "./Textures/testTexture.bmp";
+	nextModelGUI_2.RadiusCollider = .1;
+	nextModelGUI_2.Init();
+	AddModel(&nextModelGUI_2, "conextGUI_2");
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -405,9 +415,7 @@ void CreatorModelData::LoadObjects() {
 	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
 
 
-	std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
-	//std::shared_ptr<ModelData> modelGUI = GetModelPrt("box");
-	AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0));
+	LoadObjectsGUI();
 
 	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
@@ -422,6 +430,18 @@ void CreatorModelData::LoadObjects() {
 			AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
 		}
 	}*/
+}
+
+void CreatorModelData::LoadObjectsGUI() {
+
+	std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
+	std::shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0));
+	std::shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+
+		string childObjName = objBackGUI->Name + "." + "objGUI";
+		string childModel = "conextGUI_2";
+
+		objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(0.1, 0.02));
 }
 
 void CreatorModelData::Load() {

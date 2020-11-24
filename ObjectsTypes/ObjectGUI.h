@@ -10,13 +10,15 @@
 using glm::vec4;
 using glm::vec3;
 using glm::vec2;
-
+using std::map;
+using std::string;
 
 class ObjectGUI :
 	public ObjectData
 {
 
 public:
+	vec3 StartPos = vec3(0);
 
 	ObjectGUI(
 		int p_index,
@@ -35,5 +37,7 @@ public:
 	void UpdateState();
 
 	bool IsShow();
+
+	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size);
 
 };

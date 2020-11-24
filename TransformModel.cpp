@@ -217,6 +217,36 @@ vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operator
 	return posFace;
 }
 
+vec3 GetVectorForwardFaceOffset(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG, vec3 posOffset) {
+	
+	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+
+	if(posOffset.x > 0)
+		vecPos += vec4(operatorG->m_right * posOffset.x, 1);
+	else if (posOffset.x < 0)
+		vecPos -= vec4(operatorG->m_right * posOffset.x, 1);
+
+	if (posOffset.y < 0)
+		vecPos += vec4(operatorG->m_up * posOffset.y, 1);
+	else if(posOffset.y > 0)
+		vecPos -= vec4(operatorG->m_up * posOffset.y, 1);
+
+
+	float offset = 1 / lenght;
+
+	vec3 directionFace = glm::vec3(
+		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
+		sin(operatorG->VerticalAngle - offset),
+		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
+	);
+
+	
+	vec3 direction = directionFace * lenght;
+	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+	
+	return posFace;
+}
+
 vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
 	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
 	vec3 direction = operatorG->m_direction * lenght;

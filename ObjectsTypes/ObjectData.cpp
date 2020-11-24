@@ -192,8 +192,21 @@ void ObjectData::Billboard() {
 	TranslateAngle.z = -Storage->Operator->VerticalAngle;
 }
 
-bool  ObjectData::IsShow() {
+bool ObjectData::IsShow() {
 	return IsVisible;
 }
 
+void ObjectData::AddChild(string key)
+{
+	ChildObjects.push_back(key);
+}
+
+std::shared_ptr<ObjectData> ObjectData::GetChild(string key)
+{
+	return Storage->GetObjectPrt(key);
+}
+
+void ObjectData::InitChildObjects() {
+
+}
 

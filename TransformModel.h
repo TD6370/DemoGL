@@ -13,6 +13,8 @@
 
 glm::vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG);
 
+glm::vec3 GetVectorForwardFaceOffset(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG, vec3 posOffset);
+
 glm::vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG);
 
 //glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,

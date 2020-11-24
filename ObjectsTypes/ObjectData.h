@@ -84,6 +84,7 @@ public:
 	vec3 PlaneDownPosition = vec3(0);
 	std::vector<vec3> TempVectors;
 	std::vector<shared_ptr<Plane>> Planes;
+	std::vector<string>  ChildObjects;
 
 	ObjectData();
 
@@ -132,9 +133,16 @@ public:
 
 	void virtual ControlsEvents();
 
-	void Billboard();
+	void virtual Billboard();
 
 	bool virtual IsShow();
+
+	void virtual InitChildObjects();
+
+	void AddChild(string key);
+
+	std::shared_ptr<ObjectData> GetChild(string key);
+	
 };
 
 #endif

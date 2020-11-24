@@ -69,6 +69,8 @@ public:
 
 	void LoadObjects();
 
+	void LoadObjectsGUI();
+
 	void LoadClusters();
 
 	void Load();

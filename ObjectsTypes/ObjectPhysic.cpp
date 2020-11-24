@@ -30,6 +30,8 @@ void ObjectPhysic::InitData() {
 
 	ObjectData::InitData();
 
+	IsVisible = true;
+
 	FillPlanes();
 }
 
@@ -147,5 +149,5 @@ void ObjectPhysic::SaveToCluster()
 }
 
 bool ObjectPhysic::IsShow() {
-	return IsVisible = true;
+	return IsVisible;
 }
