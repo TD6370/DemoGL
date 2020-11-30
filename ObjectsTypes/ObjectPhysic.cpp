@@ -1,6 +1,6 @@
 //---------------------
 #include "..\WorldCollision.h"
-//#include "..\ModelData.h"
+#include "..\ModelData.h"
 //#include "..\GeometryLib.h"
 //------------------------
 
@@ -119,7 +119,38 @@ bool ObjectPhysic::CheckIsLock() {
 
 void ObjectPhysic::FillPlanes()
 {
+	if (IsCubeModel()) {
+		Vertices = ModelPtr->Vertices;
+		FillPlanesCube();
+	}
+}
 
+void ObjectPhysic::FillPlanesCube()
+{
+	std::vector<vec3> CubeVectors;
+	int indexPlaneT = 0;
+	int indexPlaneB = 0;
+	int indVert = 0;
+
+	while (indVert < GetVertices().size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		indVert++;
+		bool isExist = std::find(CubeVectors.begin(), CubeVectors.end(), vertexNext) != CubeVectors.end();
+		if (isExist)
+			continue;
+
+		CubeVectors.push_back(vertexNext);
+		if (vertexNext.y < 0) {
+			BottomVectors.insert(std::pair<int, vec3>(indexPlaneB, vertexNext));
+			indexPlaneB++;
+		}
+		else {
+			TopVectors.insert(std::pair<int, vec3>(indexPlaneT, vertexNext));
+			indexPlaneT++;
+		}
+	}
+	/*if (TopVectors.find(indVert) == TopVectors.end()) {}*/
 }
 
 void ObjectPhysic::LockResult() {
@@ -150,4 +181,79 @@ void ObjectPhysic::SaveToCluster()
 
 bool ObjectPhysic::IsShow() {
 	return IsVisible;
+}
+
+
+//------------
+
+bool ObjectPhysic::IsCubeModel() {
+	return false;
+}
+
+std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
+	if (Vertices.size() != 0)
+	//if(TypeObj == Block)
+		return Vertices;
+	else	
+		return ObjectData::GetVertices();
+}
+
+void ObjectPhysic::SetMesh() {
+	if (Vertices.size() != 0)
+	//if (TypeObj == Block)
+		ModelPtr->SetVAO(Vertices);
+	else
+		ObjectData::SetMesh();
+}
+
+vec4 ObjectPhysic::GetLine(int index) {
+	vec3 pos1 = BottomVectors[index];
+	vec3 pos2;
+	if (index < 3)
+		pos2 = BottomVectors[index + 1];
+	else
+		pos2 = BottomVectors[0];
+
+	vec4 line = vec4(pos1.x + Postranslate.x, pos1.z + Postranslate.z, pos2.x + Postranslate.x, pos2.z + Postranslate.z);
+	return line;
+}
+
+
+vec3 ObjectPhysic::GetBottom(int index) {
+	return BottomVectors[index];
+}
+
+vec3 ObjectPhysic::GetTop(int index) {
+	return TopVectors[index];
+}
+
+void ObjectPhysic::SetBottom(int index, vec3 value) {
+
+	vec3 oldValue = BottomVectors[index];
+	BottomVectors[index] = value;
+	int indVert = 0;
+	while (indVert < Vertices.size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			Vertices[indVert] = value;
+		}
+		indVert++;
+	}
+}
+
+void ObjectPhysic::SetTop(int index, vec3 value) {
+	vec3 oldValue = TopVectors[index];
+	TopVectors[index] = value;
+	int indVert = 0;
+	while (indVert < Vertices.size())
+	{
+		vec3 vertexNext = GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			Vertices[indVert] = value;
+		}
+		indVert++;
+	}
 }

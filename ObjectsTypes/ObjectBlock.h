@@ -23,9 +23,9 @@ public:
 	int KeyUpTopVertex = GLFW_KEY_KP_ADD;
 	int KeyDownTopVertex = GLFW_KEY_KP_SUBTRACT;
 
-	std::map<int, vec3> TopVectors;
-	std::map<int, vec3> BottomVectors;
-	int IndexVertexTransform = -1;
+	//std::map<int, vec3> TopVectors;
+	//std::map<int, vec3> BottomVectors;
+	//int IndexVertexTransform = -1;
 
 	float StartLenghtWall = 1;
 			
@@ -49,27 +49,16 @@ public:
 
 	void SelectedEvent();
 
-	std::vector< glm::vec3 > GetVertices();
-
-	void SetMesh();
-
 	void SaveNewPosition();
 
 	void MeshTransform();
 
-	void FillPlanes();
-
-	vec3 GetBottom(int index);
-
-	vec3 GetTop(int index);
-
-	void SetBottom(int index, vec3 value);
-
-	void SetTop(int index, vec3 value);
-
+	//------------------
 	void SelectVertexBlock();
+	
+	bool IsCubeModel();
 
-	vec4 GetLine(int index);
+	//----------------------
 		
 	void UpdateTextureUV();
 

@@ -441,7 +441,10 @@ void CreatorModelData::LoadObjectsGUI() {
 		string childObjName = objBackGUI->Name + "." + "objGUI";
 		string childModel = "conextGUI_2";
 
-		objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(0.1, 0.02));
+		objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(0.1, 0.1));
+		//objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(0.1, 0.3));
+		//objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(10, 20));
+		//objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(1, 1));
 }
 
 void CreatorModelData::Load() {

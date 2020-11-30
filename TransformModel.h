@@ -25,7 +25,8 @@ glm::vec3 GetVectorForward(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operato
 glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 	glm::mat4 trans,
 	glm::vec3 p_postranslate,
-	glm::vec3	 p_angle);
+	glm::vec3 p_angle,
+	glm::vec3 p_size);
 
 class TransformModel {
 

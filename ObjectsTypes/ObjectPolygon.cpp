@@ -11,7 +11,8 @@ void ObjectPolygon::FillPlanes()
 	glm::mat4 trans = Transform(1, 0, false,
 		glm::mat4(1.0f),
 		Postranslate,
-		TranslateAngle);
+		TranslateAngle, 
+		Size);
 
 	//while (indVert < ModelPtr->Vertices.size())
 	while (indVert < GetVertices().size())

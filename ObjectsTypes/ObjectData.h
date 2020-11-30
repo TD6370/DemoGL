@@ -67,6 +67,7 @@ public:
 	//GLfloat TranslateAngle = 0;
 	vec3 TranslateAngle = vec3(0);
 	vec3 TargetAngle = vec3(0);
+	vec3 Size = vec3(0);
 	vec3 Postranslate = vec3(0);
 	vec3 NewPostranslate = vec3(0);
 	vec3 Move = vec3(0);

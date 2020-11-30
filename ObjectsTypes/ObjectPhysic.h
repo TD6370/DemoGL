@@ -15,8 +15,13 @@ using glm::vec2;
 class ObjectPhysic :
 	public ObjectData
 {
+private:
+	void FillPlanesCube();
 
 public:
+	std::map<int, vec3> TopVectors;
+	std::map<int, vec3> BottomVectors;
+	int IndexVertexTransform = -1;
 
 	ObjectPhysic(
 		int p_index,
@@ -53,8 +58,29 @@ public:
 	void SaveToCluster();
 
 	void virtual FillPlanes();
+	
 
 	bool IsShow();
+
+	//-----------
+
+	std::vector< glm::vec3 > GetVertices();
+
+	void SetMesh();
+
+	vec3 GetBottom(int index);
+
+	vec3 GetTop(int index);
+
+	void SetBottom(int index, vec3 value);
+
+	void SetTop(int index, vec3 value);
+
+	vec4 GetLine(int index);
+
+	//----------
+
+	bool virtual IsCubeModel();
 
 };
 

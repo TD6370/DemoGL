@@ -97,7 +97,8 @@ vec3 ObjectData::ToWorldPosition(vec3 pos) {
 	glm::mat4 trans = Transform(1, 0, false,
 		glm::mat4(1.0f),
 		Postranslate,
-		TranslateAngle);
+		TranslateAngle, 
+		Size);
 	glm::vec3 worldPos = vec3(trans * vec4(pos, 1));
 	return worldPos;
 }
@@ -119,7 +120,8 @@ void ObjectData::RunTransform()
 	glm::mat4 trans = Transform(1, Storage->Inputs->ParamCase, false,
 		glm::mat4(1.0f),
 		Postranslate,
-		TranslateAngle);
+		TranslateAngle,
+		Size);
 	//---------------------------------------------------
 	ModelPtr->ConfUniform.SetTransform(&trans);
 }
@@ -140,7 +142,8 @@ glm::vec3 ObjectData::GetVertexPosition(int indVertex)
 	glm::mat4 trans = Transform(1, 0, false,
 		glm::mat4(1.0f),
 		Postranslate,
-		TranslateAngle);
+		TranslateAngle, 
+		Size);
 	glm::vec3 posVert = vec3(trans * vec4(posNorm, 1));
 	return posVert;
 }
