@@ -62,48 +62,26 @@ void ObjectGUI::MeshTransform(vec3 vertOffset) {
 
 	if (Vertices.size() != 0) {
 
-		vec3 vertA = GetBottom(1);
-		vec3 vertB = GetBottom(0);
-		vec3 vertT = GetTop(0);
+		vec3 vertB0 = GetBottom(0);
+		vec3 vertB1 = GetBottom(1);
+		vec3 vertT0 = GetTop(0);
+		vec3 vertT1 = GetTop(1);
 
-		//vertA = vec3(vertA.x, (vertA.y - vertB.y)/10.5f, (vertA.z - vertT.z)/ 10.5f);
-		vertA = vec3(vertA.x, (vertA.y - vertB.y), vertA.z);
-		SetBottom(1, vertA);
+		float offsetY = 2 - vertOffset.y;
+		float offsetX = 2 - vertOffset.x;
+		/*float b0 = vertB0.x + vertB0.y + vertB0.z;
+		float b1 = vertB1.x + vertB1.y + vertB1.z;
+		float t0 = vertT0.x + vertT0.y + vertT0.z;
+		float t1 = vertT1.x + vertT1.y + vertT1.z;*/
 
-		//vertB = vec3(vertB.x, vertB.y * vertOffset.y, vertB.z);
-		//SetBottom(0, vertB);
-		
-		//vertT = vec3(vertT.x, vertT.y, vertT.z * vertOffset.x);
-		//SetTop(0, vertT);
+		vertB1 = vec3(vertB1.x, (vertB1.y + offsetY), vertB1.z + offsetX);
+		SetBottom(1, vertB1);
+
+		vertT0 = vec3(vertT0.x, (vertT0.y), vertT0.z + offsetX);
+		SetTop(0, vertT0);
+
+		vertB0 = vec3(vertB0.x, (vertB0.y + offsetY), vertB0.z);
+		SetBottom(0, vertB0);
 	}
 
-
-	//if (Vertices.size() != 0) {
-
-	//	vec3 vertA = GetBottom(1);
-	//	vertA = vec3(vertA.x, vertA.y * vertOffset.y, vertA.z * vertOffset.x);
-	//	SetBottom(1, vertA);
-
-	//	vec3 vertB = GetBottom(0);
-	//	vertB = vec3(vertB.x, vertB.y * vertOffset.y, vertB.z);
-	//	SetBottom(0, vertB);
-
-	//	vec3 vertT = GetTop(0);
-	//	vertT = vec3(vertT.x, vertT.y, vertT.z * vertOffset.x);
-	//	SetTop(0, vertT);
-	//}
-	/*if (Vertices.size() != 0) {
-
-		vec3 vertA = GetBottom(1);
-		vertA = vec3(vertA.x, vertA.y - vertOffset.y, vertA.z - vertOffset.x);
-		SetBottom(1, vertA);
-
-		vec3 vertB = GetBottom(0);
-		vertB = vec3(vertB.x, vertB.y - vertOffset.y, vertB.z);
-		SetBottom(0, vertB);
-
-		vec3 vertT = GetTop(0);
-		vertT = vec3(vertT.x, vertT.y, vertT.z - vertOffset.x);
-		SetTop(0, vertT);
-	}*/
 }
