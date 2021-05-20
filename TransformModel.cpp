@@ -208,6 +208,20 @@ void TransformModel::GenMVP(
 }
 
 
+//vec3 GetVectorForwardFace(GLfloat lenght) {
+//	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
+//	//float offset = 0.2f;
+//	float offset = 1 / lenght;
+//	vec3 directionFace = glm::vec3(
+//		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
+//		sin(operatorG->VerticalAngle - offset),
+//		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
+//	);
+//	vec3 direction = directionFace * lenght;
+//	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+//	return posFace;
+//}
+
 vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
 	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
 	//float offset = 0.2f;

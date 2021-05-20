@@ -19,12 +19,15 @@
 
 using std::vector;
 using glm::vec2;
+using std::string;
 
 class Plane;
 
 class ModelData {
 
 public:
+	string Name;
+
 	const GLchar* PathShaderVertex = "basic.vert";
 	const GLchar* PathShaderFrag = "basic.frag";
 	const char* PathTexture = "./Textures/testTexture.bmp";
@@ -58,6 +61,8 @@ public:
 
 	float RadiusCollider = 5;
 
+	bool IsCubeModel = false;
+
 	ModelData();
 
 	void Init();
@@ -76,7 +81,5 @@ public:
 
 	ModelData Clone();
 
-	
-	
 	
 };

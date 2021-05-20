@@ -51,9 +51,9 @@ public:
 
 	bool IsShow();
 
-	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size);
+	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, vec3 color = vec3(0));
 
 	bool IsCubeModel();
 
-	void MeshTransform(vec3 size);
+	void SetSizeControl(vec3 size);
 };

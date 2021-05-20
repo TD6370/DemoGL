@@ -153,3 +153,5 @@ ModelData ModelData::Clone() {
 	newModel.Init();
 	return newModel;
 }
+
+

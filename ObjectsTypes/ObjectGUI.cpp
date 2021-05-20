@@ -38,16 +38,18 @@ bool ObjectGUI::IsCubeModel() {
 }
 
 
-void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size)
+void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, vec3 color)
 {
-	vec3 color = vec3(1, 1, 0);
+	//vec3 color = vec3(1, 1, 0);
+	if(color == vec3(0))
+		color = vec3(1, 1, 0);
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
 	auto obj = Storage->AddObject(nameObject, model, GUI, StartPos, color);
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
 	objGUI->IndexObjectOwner = Index;
 	objGUI->StartPos = startPosChild;
 	objGUI->Color = color;
-	objGUI->MeshTransform(vec3(size.x, size.y, 1));
+	objGUI->SetSizeControl(vec3(size.x, size.y, 1));
 
 	//resize mesh
 
@@ -57,15 +59,15 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 
 
 
-void ObjectGUI::MeshTransform(vec3 vertOffset) {
+void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 	//-- set transform
 
 	if (Vertices.size() != 0) {
 
-		vec3 vertB0 = GetBottom(0);
-		vec3 vertB1 = GetBottom(1);
-		vec3 vertT0 = GetTop(0);
-		vec3 vertT1 = GetTop(1);
+		vec3 vertBottomLeft = GetBottom(0);
+		vec3 vertBottomRight = GetBottom(1);
+		vec3 vertTopLeft = GetTop(0);
+		vec3 vertTopRight = GetTop(1);
 
 		float offsetY = 2 - vertOffset.y;
 		float offsetX = 2 - vertOffset.x;
@@ -74,14 +76,14 @@ void ObjectGUI::MeshTransform(vec3 vertOffset) {
 		float t0 = vertT0.x + vertT0.y + vertT0.z;
 		float t1 = vertT1.x + vertT1.y + vertT1.z;*/
 
-		vertB1 = vec3(vertB1.x, (vertB1.y + offsetY), vertB1.z + offsetX);
-		SetBottom(1, vertB1);
+		vertTopLeft = vec3(vertTopLeft.x, (vertTopLeft.y), vertTopLeft.z + offsetX);
+		SetTop(0, vertTopLeft);
 
-		vertT0 = vec3(vertT0.x, (vertT0.y), vertT0.z + offsetX);
-		SetTop(0, vertT0);
+		vertBottomLeft = vec3(vertBottomLeft.x, (vertBottomLeft.y + offsetY), vertBottomLeft.z);
+		SetBottom(0, vertBottomLeft);
 
-		vertB0 = vec3(vertB0.x, (vertB0.y + offsetY), vertB0.z);
-		SetBottom(0, vertB0);
+		vertBottomRight = vec3(vertBottomRight.x, (vertBottomRight.y + offsetY), vertBottomRight.z + offsetX);
+		SetBottom(1, vertBottomRight);
+
 	}
-
 }

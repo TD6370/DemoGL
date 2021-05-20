@@ -1,7 +1,7 @@
 
 //---------------------
 //#include "..\CreatorModelData.h"
-#include "..\WorldCollision.h"
+#include "..\WorldCollision.h" //--<< #include "CreatorModelData.h"  
 //#include "..\CoreSettings.h"
 #include "..\ModelData.h"
 #include "..\GeometryLib.h"

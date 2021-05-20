@@ -27,29 +27,7 @@ class CreatorModelData;
 class ControllerInput;
 class TransformModel;
 class Controllers;
-
-
 //class GLFWwindow;
-
-//struct CoreMVP;
-
-//Camera* Cam;
-
-//Operator* Oper;
-
-//Lighting* Light;
-
-//SceneParam* Scene;
-
-//CreatorModelData* Storage;
-
-//ControllerInput* Inputs;
-
-//CoreMVP* ConfigMVP;
-
-//TransformModel* TransModel;
-
-//Controllers* Contrl;
 
 using std::vector;
 using std::shared_ptr;

@@ -7,6 +7,8 @@
 #include "Controllers.h"
 #include "ModelData.h"
 #include "ObjectsTypes/ObjectData.h"
+#include "ObjectsTypes/ObjectDynamic.h"
+
 
 #include "CoreSettings.h"
 //#include "WorldCollision.h"
@@ -121,16 +123,20 @@ void SceneConstruction::SetDataToShaderAfter(bool isUpdate) {
 
 void SceneConstruction::SetDataToShaderBefore(bool isUpdate) {
 	
-	//TEST
-	if (ObjectCurrent->TypeObj == Block)
+	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
+	/*
+	if(isCubeModel)
 		ObjectCurrent->SetMesh();
 	else if (isUpdate)
+		ObjectCurrent->SetMesh();
+		*/
+	if (isCubeModel || isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);
 
 	if (isUpdate)
-		ModelCurrent->SetModelInBuffer(isUpdate);
+		ModelCurrent->SetModelInBuffer(isUpdate); // isUpdate -- ??????
 
 	//-------------------- Set color
 	//model->ConfUniform.SetColor(vec3(0, 0, 0), true);

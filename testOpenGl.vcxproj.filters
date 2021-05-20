@@ -43,7 +43,7 @@
     <Filter Include="Objects\GUI">
       <UniqueIdentifier>{90fe3f84-16ce-4c9e-8189-51858f619cde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Browsers\Engine">
+    <Filter Include="Engine">
       <UniqueIdentifier>{988ffb10-b84e-4e54-ac34-5c0112b0307f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -64,16 +64,16 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="WorldCollision.cpp">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="TransformModel.cpp">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SceneConstruction.cpp">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="CreatorModelData.cpp">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="SceneRoom.cpp">
       <Filter>Rooms</Filter>
@@ -135,6 +135,9 @@
     <ClCompile Include="ObjectsTypes\ObjectGUI.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SceneSerialize.cpp">
+      <Filter>Browsers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -156,16 +159,16 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="SceneConstruction.h">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="CreatorModelData.h">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="TransformModel.h">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="WorldCollision.h">
-      <Filter>Browsers\Engine</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="SceneRoom.h">
       <Filter>Rooms</Filter>
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectGUI.h">
       <Filter>Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSerialize.h">
+      <Filter>Browsers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

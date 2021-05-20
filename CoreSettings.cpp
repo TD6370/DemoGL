@@ -16,6 +16,8 @@
 
 struct World {
 	GLfloat Radius = 50; // 10;
+	std::string PathObjects =  "\\Data\\Objects";
+	std::string PathModels = "\\Data\\Models";
 };
 
 struct SceneParam {

@@ -173,6 +173,7 @@
     <ClCompile Include="RoomMarkerPlane.cpp" />
     <ClCompile Include="SceneConstruction.cpp" />
     <ClCompile Include="SceneRoom.cpp" />
+    <ClCompile Include="SceneSerialize.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="TransformModel.cpp" />
     <ClCompile Include="WorldCollision.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="RoomMarkerPlane.h" />
     <ClInclude Include="SceneConstruction.h" />
     <ClInclude Include="SceneRoom.h" />
+    <ClInclude Include="SceneSerialize.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="TransformModel.h" />
     <ClInclude Include="WorldCollision.h" />

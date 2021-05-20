@@ -67,23 +67,28 @@ void ObjectBlock::ControlsEvents() {
 		return;
 
 	if (Storage->Inputs->Key == KeyUpTopVertex || Storage->Inputs->Key == KeyDownTopVertex) {
-
-		//resize Vertical wall
-		if (IndexVertexTransform == -1)
-			return;
-
-		float upSize = 1;
-		if(Storage->Inputs->Key == KeyUpTopVertex)
-			upSize = 1;
-		if (Storage->Inputs->Key == KeyDownTopVertex)
-			upSize = -1;
-
-		vec3 vertSelect = GetTop(IndexVertexTransform);
-		vertSelect.y += upSize;;
-		SetTop(IndexVertexTransform, vertSelect);
-
-		SaveNewPosition();
+		
+		ResizeVerticaleWall();
 	}
+}
+
+void ObjectBlock::ResizeVerticaleWall() {
+
+	//resize Vertical wall
+	if (IndexVertexTransform == -1)
+		return;
+
+	float upSize = 1;
+	if (Storage->Inputs->Key == KeyUpTopVertex)
+		upSize = 1;
+	if (Storage->Inputs->Key == KeyDownTopVertex)
+		upSize = -1;
+
+	vec3 vertSelect = GetTop(IndexVertexTransform);
+	vertSelect.y += upSize;;
+	SetTop(IndexVertexTransform, vertSelect);
+
+	SaveNewPosition();
 }
 
 
@@ -185,14 +190,14 @@ void ObjectBlock::CalculateTextureUV(bool isInit) {
 			y1 = line.y;
 			x2 = line.z;
 			y2 = line.w;
-			lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2));
+			lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2)); // lenght wall
 			if (lenghtLine > maxLenght) {
 				maxLenght = lenghtLine;
 			}
 		}
 		
 		if (isInit) {
-			StartLenghtWall = maxLenght;
+			StartLenghtWall = maxLenght; //start len resize wall -> max len wal
 			TextureUV = ModelPtr->UV;
 		}
 		else

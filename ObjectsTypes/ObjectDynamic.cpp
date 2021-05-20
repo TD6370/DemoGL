@@ -105,6 +105,7 @@ void ObjectDynamic::ActionSearch() {
 	vec3 ray = normalize(Target - Postranslate);
 	TargetAngle.y = glm::atan(ray.x, ray.z) + m_angleModel;
 
+	//<<!!!>>
 	if (TypeObj == Hero)
 		ActionObjectCurrent = Moving; //Type 2.
 	if (TypeObj == NPC)

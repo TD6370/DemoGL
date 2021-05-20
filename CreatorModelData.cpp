@@ -78,6 +78,7 @@ CreatorModelData::CreatorModelData() {
 void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 
 	int index = Models.size();
+	newModel->Name = name;
 	Models.push_back(std::make_unique<ModelData>(*newModel));
 	
 	bool isGenName = name.length() == 0;
@@ -130,6 +131,7 @@ void CreatorModelData::LoadModels() {
 	nextModel3.PathTexture = "./Textures/testTexture.bmp";
 	nextModel3.RadiusCollider = 1;
 	nextModel3.IsDebug = true;
+	nextModel3.IsCubeModel = true;
 	//nextModel3.IsTextureRepeat = true;
 	nextModel3.Init();
 	AddModel(&nextModel3, "box");
@@ -194,6 +196,7 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI.PathTexture = "./Textures/future.bmp";
 	//nextModelCursorRay.PathTexture = "./Textures/future.bmp";
 	nextModelGUI.RadiusCollider = .1;
+	nextModelGUI.IsCubeModel = true;
 	nextModelGUI.Init();
 	AddModel(&nextModelGUI, "conextGUI");
 
@@ -204,6 +207,7 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI_2.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
 	nextModelGUI_2.PathTexture = "./Textures/testTexture.bmp";
 	nextModelGUI_2.RadiusCollider = .1;
+	nextModelGUI_2.IsCubeModel = true;
 	nextModelGUI_2.Init();
 	AddModel(&nextModelGUI_2, "conextGUI_2");
 }
@@ -367,7 +371,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 10; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -420,9 +424,9 @@ void CreatorModelData::LoadObjects() {
 	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
 
 	
-	/* for (int x = 0; x < 20; x++)
+	/* for (int x = 0; x < 5; x++)
 	{
-		for (int z = 0; z < 20; z++)
+		for (int z = 0; z < 5; z++)
 		{
 			int o_x = -offsetCentrePlane + (radiusPlane * x);
 			int o_z = -offsetCentrePlane + (radiusPlane * z);
@@ -438,10 +442,22 @@ void CreatorModelData::LoadObjectsGUI() {
 	std::shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0));
 	std::shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
 
-		string childObjName = objBackGUI->Name + "." + "objGUI";
+		string caption;
 		string childModel = "conextGUI_2";
+		string objName;
 
-		objBackGUI->ConfigInterface(childObjName, childModel, "TEST", vec3(.05, .05, 0.01), vec2(0.4, 0.2));
+		objName = "TEST1";
+		caption = objBackGUI->Name + "." + objName;
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
+
+		objName = "TEST2";
+		caption = objBackGUI->Name + "." + objName;
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));
+
+		
+		objName = "TEST3";
+		caption = objBackGUI->Name + "." + objName;
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(0.4, 0.2));
 }
 
 void CreatorModelData::Load() {

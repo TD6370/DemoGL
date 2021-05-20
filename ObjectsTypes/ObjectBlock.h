@@ -62,6 +62,8 @@ public:
 		
 	void UpdateTextureUV();
 
+	void ResizeVerticaleWall();
+
 	void CalculateTextureUV(bool isInit = false);
 
 	void ControlsEvents();
