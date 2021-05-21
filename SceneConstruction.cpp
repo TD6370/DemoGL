@@ -1,7 +1,8 @@
 #include "SceneConstruction.h"
 //#include "SceneRoom.h"
 //#include "CreatorModelData.h"
-#include "SceneRoom.h"
+#include "Rooms\SceneRoom.h"
+#include "Rooms\RoomMarkerPlane.h"
 #include "CreatorModelData.h"
 #include "TransformModel.h"
 #include "Controllers.h"
@@ -82,6 +83,9 @@ void SceneConstruction::ConfigRoom() {
 
 	SceneRoom* room = new SceneRoom("Base", this);
 	AddRoom(room);
+
+	RoomMarkerPlane* roomMarkers = new RoomMarkerPlane("Markers", this);
+	Rooms.push_back(std::make_unique<RoomMarkerPlane>(*roomMarkers));
 }
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
@@ -200,98 +204,6 @@ void SceneConstruction::Update()
 		ObjectUpdate(i);
 
 		WorkingRooms();
-
-		//====================== WorkingRooms
-
-			//---------------- Marker Plane
-			if (ObjectCurrent->Name == "Plane") {
-				vec3 vectorsParams[10];
-
-				ModelCurrent->ConfUniform.SetParamCase(55);
-
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				vector<string> checkedZona;
-			
-				if (objectObserver->PlaneDownIndex != -1)
-				{
-					shared_ptr<Plane> planeV = ObjectCurrent->GetPlanePrt(objectObserver->PlaneDownIndex);
-					vectorsParams[0] = planeV->V0;
-					vectorsParams[1] = planeV->V1;
-					vectorsParams[1] = planeV->V2;
-					ModelCurrent->ConfUniform.SetVectorsParams(vectorsParams);
-				}
-			}
-
-			//--- Target - cursor
-			/*if (object->Name == "Mon") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Box");
-				vec3 target = objectObserver->Postranslate;
-				object->Target = vec3(target.x, object->Postranslate.y, target.z);
-			}*/
-
-			//--- Object Mon - cursor -- !!!!!!
-			if (ObjectCurrent->Name == "Mon" && Inputs->ParamCase == 2) {
-				vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-				//vec3 posCursorObject = vec3(vecPos.x, vecPos.y, vecPos.z) + m_OperatorG.m_direction * 25.f;
-				vec3 posCursorObject = vec3(vecPos.x, ObjectCurrent->Postranslate.y, vecPos.z) + Oper->m_direction * 20.f;
-				ObjectCurrent->Postranslate = posCursorObject;
-			}
-
-			//--- Mouse camera object
-			/*if (object->Name == "Box") {
-				vec4 vecPos = glm::inverse(ConfigMVP.View) * vec4(1);
-				vec3 posCursorObject = vec3(vecPos.x, vecPos.y, vecPos.z) + m_OperatorG.m_direction * 25.f;
-				object->Postranslate = posCursorObject;
-			}*/
-
-			//--- Target
-			/*if (object->Name == "Box2") {
-				std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
-				object->Postranslate = objectObserver->Target;
-			}*/
-
-			//object->TempVectors.push_back(nearestSphereIntersectionPoint);
-			//object->TempVectors.push_back(nearestPolygonIntersectionPoint);
-			//if (object->Name == "M_P_1") {
-			//	std::shared_ptr <ObjectData> objectObserver = Storage.GetObjectPrt("Mon");
-			//	if(objectObserver->TempVectors.size() > 1)
-			//		object->Postranslate = objectObserver->TempVectors[0]; //nearestSphereIntersectionPoint - green
-			//}
-			if (ObjectCurrent->Name == "M_V_1") {
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				if (objectObserver->TempVectors.size() > 0)
-					ObjectCurrent->Postranslate = objectObserver->TempVectors[0];
-			}
-			if (ObjectCurrent->Name == "M_V_2") {
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				if (objectObserver->TempVectors.size() > 1)
-					ObjectCurrent->Postranslate = objectObserver->TempVectors[1];
-			}
-			if (ObjectCurrent->Name == "M_V_3") {
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				if (objectObserver->TempVectors.size() > 2)
-					ObjectCurrent->Postranslate = objectObserver->TempVectors[2];
-			}
-			if (ObjectCurrent->Name == "M_C_2") {
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				ObjectCurrent->Postranslate = objectObserver->PlaneDownPosition;
-			}
-
-
-			if (ObjectCurrent->Name == "M_C_1") {
-				std::shared_ptr <ObjectData> objectObserver = Storage->GetObjectPrt("Mon");
-				ObjectCurrent->Postranslate = objectObserver->Postranslate; //nearestPolygonIntersectionPoint - blue
-			}
-
-			//----- Light position
-			std::shared_ptr <ObjectData> objectLight = Storage->GetObjectPrt("Mon"); //Box2
-			Light->positionLight = vec3(objectLight->Postranslate.x, objectLight->Postranslate.y + 15.f, objectLight->Postranslate.z);
-			ModelCurrent->ConfUniform.SetPositionLight(Light->positionLight);
-
-			//------ Set Mouse position
-			ModelCurrent->ConfUniform.SetPositionMouse(Oper->PositionCursorModel);
-
-		//=================== end WorkingRooms
 
 		DrawGraph();
 	}

@@ -203,7 +203,7 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 
 	if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
 	{
-		Scene->Scene->IsGUI = !Scene->Scene->IsGUI;
+		Scene->Scene->IsGUI = !Scene->Scene->IsGUI; //Tab - user interface
 	}
 
 	if (!Scene->Scene->IsGUI) {

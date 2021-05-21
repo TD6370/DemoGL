@@ -7,6 +7,7 @@
 
 using std::string;
 using std::vector;
+using std::shared_ptr;
 using glm::vec3;
 
 class ModelData;
@@ -65,8 +66,13 @@ public:
 	virtual ~SceneSerialize();
 
 	void Save(ObjectData obj);
+
+	void Save(shared_ptr<ObjectData> obj);
 	
-	void Save(ModelData obj);
+	void Save(ModelData model);
+
+	void Save(shared_ptr<ModelData> model);
+	
 
 	void Save();
 

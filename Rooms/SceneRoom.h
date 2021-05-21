@@ -1,8 +1,8 @@
 #pragma once
 
 //#include "ModelData.h"
-#include "Controllers.h"
-#include "SceneConstruction.h"
+//#include "Controllers.h"
+//#include "SceneConstruction.h"
 
 #include <fstream>
 
@@ -13,9 +13,11 @@ class SceneConstruction;
 class SceneRoom
 {
 protected:
-	SceneConstruction* SceneConstructor;
+	//SceneConstruction* Scene;
 
 public:
+	SceneConstruction* Scene;
+
 	string Name;
 	
 	SceneRoom(string Name, SceneConstruction* sceneConstructor);

@@ -93,7 +93,6 @@ public:
 
 	vector<shared_ptr<SceneRoom>> Rooms;
 
-
 	SceneConstruction();
 
 	SceneConstruction(GLFWwindow* Window);

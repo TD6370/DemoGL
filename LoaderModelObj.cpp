@@ -83,9 +83,9 @@ bool LoadModelObj(const char* filePath,
 
 			//--- set indexes
 			if (isGetIndices) {
-				out_indices.push_back(vertexIndex[0]);
-				out_indices.push_back(vertexIndex[1]);
-				out_indices.push_back(vertexIndex[2]);
+				out_indices.push_back(vertexIndex[0]); //vertexIndex[0] - 1 ????
+				out_indices.push_back(vertexIndex[1]); //
+				out_indices.push_back(vertexIndex[2]); //
 			}
 						
 			// По каждой вершине каждого треугольника

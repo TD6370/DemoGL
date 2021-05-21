@@ -170,9 +170,9 @@
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
     <ClCompile Include="OperationString.cpp" />
-    <ClCompile Include="RoomMarkerPlane.cpp" />
+    <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
+    <ClCompile Include="Rooms\SceneRoom.cpp" />
     <ClCompile Include="SceneConstruction.cpp" />
-    <ClCompile Include="SceneRoom.cpp" />
     <ClCompile Include="SceneSerialize.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="TransformModel.cpp" />
@@ -203,9 +203,9 @@
     <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="RoomMarkerPlane.h" />
+    <ClInclude Include="Rooms\RoomMarkerPlane.h" />
+    <ClInclude Include="Rooms\SceneRoom.h" />
     <ClInclude Include="SceneConstruction.h" />
-    <ClInclude Include="SceneRoom.h" />
     <ClInclude Include="SceneSerialize.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="TransformModel.h" />

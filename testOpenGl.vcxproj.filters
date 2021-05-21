@@ -75,9 +75,6 @@
     <ClCompile Include="CreatorModelData.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneRoom.cpp">
-      <Filter>Rooms</Filter>
-    </ClCompile>
     <ClCompile Include="LoadBMP.cpp">
       <Filter>Browsers</Filter>
     </ClCompile>
@@ -129,14 +126,17 @@
     <ClCompile Include="Controllers.cpp">
       <Filter>Inputs</Filter>
     </ClCompile>
-    <ClCompile Include="RoomMarkerPlane.cpp">
-      <Filter>Rooms</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectGUI.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
     <ClCompile Include="SceneSerialize.cpp">
       <Filter>Browsers</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\RoomMarkerPlane.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\SceneRoom.cpp">
+      <Filter>Rooms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,9 +169,6 @@
     </ClInclude>
     <ClInclude Include="WorldCollision.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneRoom.h">
-      <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="FileReader.h">
       <Filter>Browsers</Filter>
@@ -224,14 +221,17 @@
     <ClInclude Include="Controllers.h">
       <Filter>Inputs</Filter>
     </ClInclude>
-    <ClInclude Include="RoomMarkerPlane.h">
-      <Filter>Rooms</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectGUI.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
     <ClInclude Include="SceneSerialize.h">
       <Filter>Browsers</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\RoomMarkerPlane.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\SceneRoom.h">
+      <Filter>Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
