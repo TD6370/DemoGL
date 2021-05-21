@@ -44,7 +44,7 @@ SceneConstruction* Scene;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	Scene->Oper->m_FoV = glm::radians(Scene->Oper->m_initialFoV += yoffset);
+	Scene->Storage->Oper->m_FoV = glm::radians(Scene->Storage->Oper->m_initialFoV += yoffset);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)

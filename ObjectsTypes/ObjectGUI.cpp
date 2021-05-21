@@ -16,21 +16,21 @@ void ObjectGUI::InitData() {
 
 void ObjectGUI::UpdateState() {
 
-	if (!Storage->SceneParam->IsGUI)
+	if (!Storage->SceneData->IsGUI)
 		return;
 
 	float zOrder = 3.8;
 	if (StartPos == vec3(0)) {
-		Postranslate = NewPostranslate = GetVectorForwardFace(Storage->MVP, zOrder, Storage->Operator);
+		Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, zOrder, Storage->Oper);
 	}else	{
-		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->MVP, zOrder - 0.01f, Storage->Operator , StartPos);
+		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, zOrder - 0.01f, Storage->Oper , StartPos);
 	}
 
 	Billboard();
 }
 
 bool ObjectGUI::IsShow() {
-	return Storage->SceneParam->IsGUI;
+	return Storage->SceneData->IsGUI;
 }
 
 bool ObjectGUI::IsCubeModel() {

@@ -6,7 +6,7 @@ void ObjectHero::InitData()
 {
 	ActionObjectCurrent = Search;
 	IsGravity = true;
-	Storage->SceneParam->IndexHeroObj = Index;
+	Storage->SceneData->IndexHeroObj = Index;
 
 	LoadCursorRay();
 }
@@ -26,28 +26,28 @@ void ObjectHero::SaveHeroOperator(bool onlyVertical) {
 
 	//Object to Operator
 	if (onlyVertical) {
-		float opDown = Storage->Operator->m_position.y - heroHeight;
+		float opDown = Storage->Oper->m_position.y - heroHeight;
 		float speed = (NewPostranslate.y - opDown) / steps;
 		float newPosOperatorY = opDown + speed;
 		
 		//Storage->Operator->m_position.y = NewPostranslate.y + heroHeight;
-		Storage->Operator->m_position.y = newPosOperatorY + heroHeight;
+		Storage->Oper->m_position.y = newPosOperatorY + heroHeight;
 	}
 	else {
 		vec3 stepsV = vec3(steps);
-		vec3 opPos = Storage->Operator->m_position;
+		vec3 opPos = Storage->Oper->m_position;
 		opPos.y -= heroHeight;
 		vec3 speed = (NewPostranslate - opPos) / stepsV;
 		vec3 newPosOperator = opPos + speed;
 
 		//Storage->Operator->m_position = vec3(NewPostranslate.x, NewPostranslate.y + heroHeight, NewPostranslate.z);
-		Storage->Operator->m_position = vec3(newPosOperator.x, newPosOperator.y + heroHeight, newPosOperator.z);
+		Storage->Oper->m_position = vec3(newPosOperator.x, newPosOperator.y + heroHeight, newPosOperator.z);
 	}
 }
 
 vec3 ObjectHero::GetOperatorPosition()
 {
-	return Storage->Operator->m_position;
+	return Storage->Oper->m_position;
 }
 
 void ObjectHero::LockObjectResult() {

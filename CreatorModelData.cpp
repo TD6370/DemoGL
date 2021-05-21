@@ -73,7 +73,16 @@ void LoadImageBmp(const char* pathImage)
 
 CreatorModelData::CreatorModelData() {
 	
+	Cam = new Camera();
+	ConfigMVP = new CoreMVP();
+	Oper = new Operator();
+	Inputs = new ControllerInput;
+	SceneData = new SceneParam;
 }
+
+CreatorModelData::~CreatorModelData() {
+}
+
 
 void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 

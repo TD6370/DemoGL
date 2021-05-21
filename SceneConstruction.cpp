@@ -44,16 +44,12 @@ SceneConstruction::SceneConstruction(GLFWwindow* window) {
 void SceneConstruction::Init() {
 
 	Rooms = vector<shared_ptr<SceneRoom>>();
-	Cam = new Camera();
-	Oper = new Operator();
+	
 
 	Light = new Lighting();
 	Light->positionLight = vec3(0, 0, 0);
 
-	Scene = new SceneParam;
-	Storage = new CreatorModelData;
-	Inputs = new ControllerInput;
-	ConfigMVP = new CoreMVP();
+	Storage = new CreatorModelData();
 
 	TransModel = new TransformModel();
 	Contrl = new Controllers();
@@ -68,7 +64,7 @@ void SceneConstruction::LoadDataModel()
 	//bool isGen = true;
 	bool isGen = false;
 	Storage = new CreatorModelData();
-	Storage->SceneParam = Scene;
+	//Storage->SceneParam = Scene; //(---)
 	if (isGen)
 	{
 		Storage->LoadModels();
@@ -99,7 +95,7 @@ void SceneConstruction::WorkingRooms() {
 	}
 }
 
-void SceneConstruction::SetDataToShaderAfter(bool isUpdate) {
+void SceneConstruction::PreparationDataFromShader(bool isUpdate) {
 	
 	bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
 	if (isTextureRepeat && !isTextRepeat)
@@ -117,23 +113,12 @@ void SceneConstruction::SetDataToShaderAfter(bool isUpdate) {
 		glUseProgram(ShaderProgram);
 		last_VAO = ModelCurrent->VAO;
 	}
-
-	Storage->Camera = Cam;
-	Storage->MVP = ConfigMVP;
-	Storage->Operator = Oper;
-	Storage->Inputs = Inputs;
-	Storage->SceneParam = Scene;
 }
 
-void SceneConstruction::SetDataToShaderBefore(bool isUpdate) {
+void SceneConstruction::SetDataToShader(bool isUpdate) {
 	
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
-	/*
-	if(isCubeModel)
-		ObjectCurrent->SetMesh();
-	else if (isUpdate)
-		ObjectCurrent->SetMesh();
-		*/
+
 	if (isCubeModel || isUpdate)
 		ObjectCurrent->SetMesh();
 
@@ -143,19 +128,17 @@ void SceneConstruction::SetDataToShaderBefore(bool isUpdate) {
 		ModelCurrent->SetModelInBuffer(isUpdate); // isUpdate -- ??????
 
 	//-------------------- Set color
-	//model->ConfUniform.SetColor(vec3(0, 0, 0), true);
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
 	//---------------------- Set param Case
-	//model->ConfUniform.SetParamCase(m_cameraG.paramCase);
-	ModelCurrent->ConfUniform.SetParamCase(Inputs->ParamCase);
+	ModelCurrent->ConfUniform.SetParamCase(Storage->Inputs->ParamCase);
 	//---------------------- Set MVP
-	ModelCurrent->ConfUniform.SetMVP(ConfigMVP->MVP);
+	ModelCurrent->ConfUniform.SetMVP(Storage->ConfigMVP->MVP);//(---)
 
 	//VIEW param
-	ModelCurrent->ConfUniform.SetView(ConfigMVP->View);
+	ModelCurrent->ConfUniform.SetView(Storage->ConfigMVP->View);
 
 	//MODEL param
-	ModelCurrent->ConfUniform.SetModel(ConfigMVP->Model);
+	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
 }
 
 bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
@@ -176,17 +159,16 @@ bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
 
 void SceneConstruction::ObjectUpdate(int i) {
 
-	//bool isUpdate = SetObject(i);
 	bool isUpdate = false;
 	bool isShow = SetObject(i, isUpdate);
 	if (!isShow)
 		return;
 
-	SetDataToShaderAfter(isUpdate);
+	PreparationDataFromShader(isUpdate);
 
 	ObjectCurrent->Action();
 
-	SetDataToShaderBefore(isUpdate);
+	SetDataToShader(isUpdate);
 }
 
 void SceneConstruction::Update()
@@ -221,9 +203,9 @@ void SceneConstruction::GenMVP() {
 
 	TransModel->GenMVP(m_widthWindow,
 		m_heightWindow,
-		Oper,
-		Cam,
-		ConfigMVP);
+		Storage->Oper,
+		Storage->Cam,
+		Storage->ConfigMVP);
 }
 
 void SceneConstruction::ClearScene() {

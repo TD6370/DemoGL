@@ -72,7 +72,7 @@ void SceneRoom::Work() {
 	Scene->ModelCurrent->ConfUniform.SetPositionLight(Scene->Light->positionLight);
 
 	//------ Set Mouse position
-	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Oper->PositionCursorModel);
+	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Storage->Oper->PositionCursorModel);
 
 	//------ Serialization
 	int F2_Key = 000;

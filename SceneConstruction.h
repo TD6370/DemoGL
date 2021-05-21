@@ -73,19 +73,9 @@ public:
 
 	GLuint ShaderProgram;
 
-	Camera* Cam;
-
-	Operator* Oper;
-
 	Lighting* Light;
 
-	SceneParam* Scene;
-
 	CreatorModelData* Storage;
-
-	ControllerInput* Inputs;
-
-	CoreMVP* ConfigMVP;
 
 	TransformModel* TransModel;
 
@@ -110,9 +100,9 @@ public:
 	bool SetObject(int i, bool& isUpdate);
 	
 	
-	void SetDataToShaderAfter(bool isUpdate);
+	void SetDataToShader(bool isUpdate);
 
-	void SetDataToShaderBefore(bool isUpdate);
+	void PreparationDataFromShader(bool isUpdate);
 
 
 	void Update();

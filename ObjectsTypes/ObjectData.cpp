@@ -191,8 +191,8 @@ void ObjectData::ControlsEvents() {
 
 void ObjectData::Billboard() {
 
-	TranslateAngle.y = Storage->Operator->HorizontalAngle + (0.5 * M_PI);
-	TranslateAngle.z = -Storage->Operator->VerticalAngle;
+	TranslateAngle.y = Storage->Oper->HorizontalAngle + (0.5 * M_PI);
+	TranslateAngle.z = -Storage->Oper->VerticalAngle;
 }
 
 bool ObjectData::IsShow() {

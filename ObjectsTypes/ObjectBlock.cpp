@@ -103,7 +103,7 @@ void ObjectBlock::SelectVertexBlock() {
 
 	vec3 posCursor;
 
-	int indCursor = Storage->SceneParam->IndexCursorRayObj;
+	int indCursor = Storage->SceneData->IndexCursorRayObj;
 	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
 	posCursor = CusrorObj->Postranslate;
 
@@ -133,7 +133,7 @@ void ObjectBlock::SelectedEvent() {
 
 void ObjectBlock::MeshTransform() {
 
-	int indCursor = Storage->SceneParam->IndexCursorRayObj;
+	int indCursor = Storage->SceneData->IndexCursorRayObj;
 	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
 	
 	//-- Param transform

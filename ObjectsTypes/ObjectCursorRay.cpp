@@ -10,7 +10,7 @@ void ObjectCursorRay::InitData()
 	ActionObjectCurrent = Stay;
 	Speed = 0.5f;
 	IsGravity = false;
-	Storage->SceneParam->IndexCursorRayObj = Index;
+	Storage->SceneData->IndexCursorRayObj = Index;
 }
 
 void ObjectCursorRay::RunAction() {
@@ -112,9 +112,9 @@ void ObjectCursorRay::Push() {
 	if (Storage->Inputs->MBT == KeyPush) {
 		
 		Storage->Inputs->MBT = -1;
-		vec3 posCursorObject = GetVectorForwardFace(Storage->MVP, StartLenght, Storage->Operator);
+		vec3 posCursorObject = GetVectorForwardFace(Storage->ConfigMVP, StartLenght, Storage->Oper);
 		//vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
-		vec3 posTarget = GetVectorForward(Storage->MVP, EndLenght, Storage->Operator);
+		vec3 posTarget = GetVectorForward(Storage->ConfigMVP, EndLenght, Storage->Oper);
 		Postranslate = posCursorObject;
 		Target = posTarget;
 		ActionObjectCurrent = Moving;

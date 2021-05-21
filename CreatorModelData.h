@@ -6,7 +6,6 @@
 #include "ConfigUniformArg.h"
 #include "CoreSettings.h"
 
-
 #include <string>
 #include <vector>
 #include <map>
@@ -39,18 +38,18 @@ public:
 	map<string, int> MapModels;
 	map<string, int> MapSceneObjects;
 	WorldCluster* Clusters;
-
-	Camera* Camera;
-	CoreMVP* MVP;
-	Operator* Operator;
+		
+	CoreMVP* ConfigMVP;
 	ControllerInput* Inputs;
-	SceneParam* SceneParam;
+	Operator* Oper;
+	Camera* Cam;
+	SceneParam* SceneData;
 
 	CreatorModelData();
+	~CreatorModelData();
 
 	void AddModel(ModelData* newModel, string name);
 
-	//std::shared_ptr<ObjectData> AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
 	std::shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
 
 	void GenerateObjects();
