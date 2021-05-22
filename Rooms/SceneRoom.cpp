@@ -6,15 +6,12 @@
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 
-#include "..\SceneSerialize.h"
+//#include "..\SceneSerialize.h"
 
 
 SceneRoom::SceneRoom(std::string name, SceneConstruction* sceneConstructor) {
 	Name = name;
 	Scene = sceneConstructor;
-
-	//Scene->Cam->camX;
-	Init();
 }
 
 
@@ -74,17 +71,5 @@ void SceneRoom::Work() {
 	//------ Set Mouse position
 	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Storage->Oper->PositionCursorModel);
 
-	//------ Serialization
-	int F2_Key = 000;
-	if (Scene->Storage->Inputs->Key == F2_Key) {
-
-		SceneSerialize* serializer = new SceneSerialize();
-		serializer->Save(Scene->ObjectCurrent);
-		//serializer->Save();
-		//serializer->Save(Scene->ModelCurrent);
-		//serializer->Save(Scene->ObjectCurrent->ModelPtr);
-	}
-
 	//=================== end WorkingRooms
-
 }

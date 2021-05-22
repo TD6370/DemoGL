@@ -67,6 +67,9 @@ public:
 	float m_speed = 1.0f; //3.0f = 3  в секунду
 	float m_deltaTime = 0.3f;//0.3f
 	float m_lastFrame = 0.0f;
+
+	bool IsFirstCurrentObject;
+	bool IsLastCurrentObject;
 	//--------------
 
 	GLFWwindow* Window;
@@ -109,8 +112,6 @@ public:
 
 	void ObjectUpdate(int i);
 
-	//void Update_1();
-
 	void SetMouseEvents();
 
 	void GenMVP();
@@ -118,5 +119,12 @@ public:
 	void ClearScene();
 
 	void DrawGraph();
+
+	//----------- TODO:
+	//CoreMVP* GetMVP();
+	//ControllerInput* GetInputs();
+	//Operator* GetOperator();
+	//Camera* GetCamera();
+	//SceneParam* GetSceneData();
 };
 

@@ -3,6 +3,8 @@
 //#include "CreatorModelData.h"
 #include "Rooms\SceneRoom.h"
 #include "Rooms\RoomMarkerPlane.h"
+#include "Rooms\RoomSerializeScene.h"
+
 #include "CreatorModelData.h"
 #include "TransformModel.h"
 #include "Controllers.h"
@@ -10,11 +12,9 @@
 #include "ObjectsTypes/ObjectData.h"
 #include "ObjectsTypes/ObjectDynamic.h"
 
-
 #include "CoreSettings.h"
 //#include "WorldCollision.h"
 #include "GeometryLib.h"
-
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -30,6 +30,7 @@ using std::string;
 using glm::vec3;
 using glm::vec4;
 using glm::mat4;
+using std::make_unique;
 
 SceneConstruction::SceneConstruction() {
 }
@@ -78,14 +79,20 @@ void SceneConstruction::LoadDataModel()
 void SceneConstruction::ConfigRoom() {
 
 	SceneRoom* room = new SceneRoom("Base", this);
+	room->Init();
 	AddRoom(room);
 
 	RoomMarkerPlane* roomMarkers = new RoomMarkerPlane("Markers", this);
-	Rooms.push_back(std::make_unique<RoomMarkerPlane>(*roomMarkers));
+	roomMarkers->Init();
+	Rooms.push_back(make_unique<RoomMarkerPlane>(*roomMarkers));
+
+	RoomSerializeScene* roomSerializator = new RoomSerializeScene("Serialize", this);
+	roomSerializator->Init();
+	Rooms.push_back(make_unique<RoomSerializeScene>(*roomSerializator));
 }
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
-	Rooms.push_back(std::make_unique<SceneRoom>(*room));
+	Rooms.push_back(make_unique<SceneRoom>(*room));
 }
 
 void SceneConstruction::WorkingRooms() {
@@ -146,7 +153,10 @@ bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isShow = ObjectCurrent->IsShow();
 	ModelCurrent = ObjectCurrent->ModelPtr;
-		//----- Start
+	IsFirstCurrentObject = indObj == 0;
+	IsLastCurrentObject = countObjects == indObj;
+	
+	//----- Start
 	if (prevModelTexture != ModelCurrent->PathTexture || prevModelModel3D != ModelCurrent->PathModel3D)
 	{
 		isUpdate = true;
@@ -192,6 +202,7 @@ void SceneConstruction::Update()
 
 	Storage->Inputs->MBT = -1;
 	Storage->Inputs->Key = -1;
+	Storage->Inputs->Action = -1;
 }
 
 void SceneConstruction::SetMouseEvents() {

@@ -138,6 +138,9 @@
     <ClCompile Include="Rooms\SceneRoom.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
+    <ClCompile Include="Rooms\RoomSerializeScene.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -231,6 +234,9 @@
       <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="Rooms\SceneRoom.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\RoomSerializeScene.h">
       <Filter>Rooms</Filter>
     </ClInclude>
   </ItemGroup>

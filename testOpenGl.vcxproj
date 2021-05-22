@@ -171,6 +171,7 @@
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
     <ClCompile Include="OperationString.cpp" />
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
+    <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
     <ClCompile Include="Rooms\SceneRoom.cpp" />
     <ClCompile Include="SceneConstruction.cpp" />
     <ClCompile Include="SceneSerialize.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rooms\RoomMarkerPlane.h" />
+    <ClInclude Include="Rooms\RoomSerializeScene.h" />
     <ClInclude Include="Rooms\SceneRoom.h" />
     <ClInclude Include="SceneConstruction.h" />
     <ClInclude Include="SceneSerialize.h" />

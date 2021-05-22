@@ -4,7 +4,10 @@
 
 #include <sstream>
 #include <iostream>
+//#include <vector>
+#include <map>
 
+using std::map;
 using std::string;
 using std::vector;
 using std::shared_ptr;
@@ -17,9 +20,9 @@ struct ObjectFileds {
 	string Name = "Name: ";
 	string Type = "Type: ";
 	string Model = "Model: ";
-	string Postranslate = "Postranslate: ";
+	string Postranslate = "Pos: ";
 	string Target = "Target: ";
-	string ActionObjectCurrent = "ActionObjectCurrent: ";
+	string ActionObjectCurrent = "Action: ";
 };
 
 //const GLchar* PathShaderVertex = "basic.vert";
@@ -55,32 +58,45 @@ struct ModelFileds {
 class SceneSerialize
 {
 private:
-	std::stringstream m_streamObjects;
-	std::stringstream m_streamModels;
+
+	string m_dataObjects;
+	string m_dataModels;
+	string m_stringSeparator;
+
+	map<ActionObject, string> m_mapNamesTypesActions;
+	map<string, ActionObject> m_mapTypesActions;
+
+	map<TypeObject, string> m_mapNamesTypesObjects;
+	map<string, TypeObject> m_mapTypesObjects;
 
 public:
-	//CreatorModelData* Storage;
 
 	SceneSerialize();
 	
 	virtual ~SceneSerialize();
 
-	void Save(ObjectData obj);
+	//void Save(ObjectData obj);
 
 	void Save(shared_ptr<ObjectData> obj);
 	
-	void Save(ModelData model);
+	//void Save(ModelData model);
 
 	void Save(shared_ptr<ModelData> model);
 	
-
+	//-------------
 	void Save();
 
-	//void Load(string path, ObjectData& obj, TypeObject type);
 	void Load();
-
 	//-------------
 
 	string Vec3Str(vec3 vec);
+
+	string GetNameType(TypeObject typeObj);
+	TypeObject GetTypeObject(string name);
+	void AddNextType(TypeObject typeObj, string Name);
+
+	string GetNameType(ActionObject typeObj);
+	ActionObject GetTypeAction(string name);
+	void AddNextType(ActionObject typeObj, string Name);
 };
 

@@ -251,5 +251,6 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	}
 
 	Scene->Storage->Inputs->Key = key;
+	Scene->Storage->Inputs->Action = action;
 }
 

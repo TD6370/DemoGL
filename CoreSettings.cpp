@@ -16,8 +16,8 @@
 
 struct World {
 	GLfloat Radius = 50; // 10;
-	std::string PathObjects =  "\\Data\\Objects";
-	std::string PathModels = "\\Data\\Models";
+	std::string PathObjects = "./Data/Objects";
+	std::string PathModels = "./Data/Models";
 };
 
 struct SceneParam {
@@ -61,6 +61,7 @@ struct Operator {
 struct ControllerInput {
 
 	int Key = -1;
+	int Action = -1;
 	int MBT = -1;
 	GLfloat ParamCase = 0;
 };
