@@ -36,7 +36,6 @@ WorldCluster::WorldCluster() {
 
 void WorldCluster::PlaneClusterization()
 {
-
 	std::shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
 	std::shared_ptr<ModelData> model = object->ModelPtr;
 	//std::vector< glm::vec3 > vertices = model->Vertices;

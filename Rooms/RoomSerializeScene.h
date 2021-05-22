@@ -19,7 +19,8 @@ class RoomSerializeScene : public SceneRoom
 private:
 
 	SceneSerialize* _serializer;
-	const int _saveKey = GLFW_KEY_F2;
+	const int m_saveKey = GLFW_KEY_F2;
+	const int m_loadKey = GLFW_KEY_F4;
 
 public:
 	RoomSerializeScene(string Name, SceneConstruction* sceneConstructor)
@@ -28,5 +29,9 @@ public:
 	void Init();
 	void Config();
 	void Work();
+
+	void Save();
+	void Load();
+	void LoadObjects();
 };
 

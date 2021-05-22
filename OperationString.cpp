@@ -7,6 +7,22 @@
 
 using std::string;
 
+//template<typename T, typename P>
+//T remove_if(T beg, T end, P pred)
+//{
+//    T dest = beg;
+//    for (T itr = beg; itr != end; ++itr)
+//        if (!pred(*itr))
+//            *(dest++) = *itr;
+//    return dest;
+//}
+
+string Trim(string str) {
+    str.erase(remove_if(str.begin(), str.end(), isspace), str.end());
+    return str;
+}
+
+
 std::string GetFile(const char* path)
 {
 	string pathStr = path;

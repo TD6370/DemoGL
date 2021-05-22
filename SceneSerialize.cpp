@@ -4,6 +4,8 @@
 #include "ModelData.h"
 #include "ObjectsTypes\ObjectData.h"
 
+#include "OperationString.h"
+
 //#include <vector>
 //#include <map>
 //
@@ -43,40 +45,42 @@ SceneSerialize::~SceneSerialize() {
 
 
 }
-
+ 
+// -------------------- Serialize	->	ObjectData
 
 void  SceneSerialize::Save(shared_ptr<ObjectData> obj) {
 
 	ObjectFileds fileds;
 	std::stringstream streamObjects;
 
-	streamObjects << fileds.Type << GetNameType(obj->TypeObj) << "\n";
-	streamObjects << fileds.Name << obj->Name << "\n";
-	streamObjects << fileds.Model << obj->ModelPtr->Name << "\n";
+	streamObjects << fileds.Type << " " << GetNameType(obj->TypeObj) << "\n";
+	streamObjects << fileds.Name << " " << obj->Name << "\n";
+	streamObjects << fileds.Model << " " << obj->ModelPtr->Name << "\n";
 
-	streamObjects << fileds.Postranslate << Vec3Str(obj->Postranslate) << "\n";
-	streamObjects << fileds.Target << Vec3Str(obj->Target) << "\n";
-	streamObjects << fileds.ActionObjectCurrent << GetNameType(obj->ActionObjectCurrent) << "\n";
+	streamObjects << fileds.Postranslate << " " << Vec3Str(obj->Postranslate) << "\n";
+	streamObjects << fileds.Target << " " << Vec3Str(obj->Target) << "\n";
+	streamObjects << fileds.ActionObjectCurrent << " " << GetNameType(obj->ActionObjectCurrent) << "\n";
 	streamObjects << m_stringSeparator << "\n";
 	
 	m_dataObjects.append(streamObjects.str());
 }
 
-//void  SceneSerialize::Save(ObjectData obj) {
-//}
+// -------------------- Serialize	->	ModelData
 
 void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 
 	std::stringstream streamModels;
 	ModelFileds fileds;
 
-	streamModels << fileds.Name << model->Name << "\n";
+	streamModels << fileds.Name << " " << model->Name << "\n";
+	streamModels << fileds.PathShaderVertex << " " << model->PathShaderVertex << "\n";
+	streamModels << fileds.PathShaderFrag << " " << model->PathShaderFrag << "\n";
+	streamModels << fileds.PathTexture << " " << model->PathTexture << "\n";
+	streamModels << fileds.PathModel3D << " " << model->PathModel3D << "\n";
+	streamModels << m_stringSeparator << " " << "\n";
 
 	m_dataModels.append(streamModels.str());
 }
-
-//void  SceneSerialize::Save(ModelData model) {
-//}
 
 std::string SceneSerialize::Vec3Str(glm::vec3 vec) {
 	std::ostringstream os;
@@ -160,7 +164,7 @@ void SceneSerialize::Save() {
 
 	if (!m_dataObjects.empty()) //не пустая  (!m_streamObjects.rdbuf()->in_avail()) /  (!m_streamObjects.str().empty())
 	{
-		filePath = WorldSetting.PathObjects + "/Objects.txt";
+		filePath = WorldSetting.PathObjects;
 
 		out.open(filePath);
 		if (out.is_open())
@@ -173,8 +177,7 @@ void SceneSerialize::Save() {
 
 	if (!m_dataModels.empty())
 	{
-		filePath = WorldSetting.PathModels + "/Models.txt";
-		std::getline(std::cin, filePath);
+		filePath = WorldSetting.PathModels;
 		out.open(filePath);
 		if (out.is_open())
 		{
@@ -190,7 +193,105 @@ void SceneSerialize::Save() {
 //
 //}
 
-void  SceneSerialize::Load() {
+void SceneSerialize::Load(bool isOnlyObjects) {
 
+	World WorldSetting;
+	string filePath;
+	std::ifstream in;
+	//ObjectFileds* filedsObj = new ObjectFileds;
+	string stringSeparator;
+	string lineStr;
+	int lineInt;
+	float lineF;
 
+	filePath = WorldSetting.PathObjects;
+
+	in.open(filePath);
+
+	/*if (!in.is_open()) {
+		std::cerr << "Could not read file " << filePath << ". File does not exist." << std::endl;
+		return NULL;
+	}*/
+
+	//---- load objects
+
+	if (in.is_open())
+	{
+		FiledsObjects.clear();
+
+		while (!in.eof()) {
+			//std::getline(in, line);
+
+			ObjectFileds* filedsObj = new ObjectFileds;
+
+			if (in >> lineStr && lineStr == filedsObj->Type)
+				in >> filedsObj->Type;
+			else
+				break;
+			if (in >> lineStr && lineStr == filedsObj->Name)
+				in >> filedsObj->Name;
+			if (in >> lineStr && lineStr == filedsObj->Model)
+				in >> filedsObj->Model;
+
+			if (in >> lineStr && lineStr == filedsObj->Postranslate) {
+				in >> filedsObj->SetPostranslate.x;
+				in >> filedsObj->SetPostranslate.y;
+				in >> filedsObj->SetPostranslate.z;
+			}
+
+			if (in >> lineStr && lineStr == filedsObj->Target) {
+				in >> filedsObj->SetTarget.x;
+				in >> filedsObj->SetTarget.y;
+				in >> filedsObj->SetTarget.z;
+			}
+
+			if (in >> lineStr && lineStr == filedsObj->ActionObjectCurrent)
+				in >> filedsObj->ActionObjectCurrent;
+			
+			in >> stringSeparator;
+
+			FiledsObjects.push_back(std::make_unique<ObjectFileds>(*filedsObj));
+		}
+	}
+	in.close();
+
+	if (isOnlyObjects)
+		return;
+	
+	//---- load models
+
+	filePath = WorldSetting.PathModels;
+
+	in.open(filePath);
+
+	if (in.is_open())
+	{
+		FiledsModels.clear();
+		while (!in.eof()) {
+
+			ModelFileds* filedsModel = new ModelFileds;
+
+			if (in >> lineStr && lineStr == filedsModel->Name)
+				in >> filedsModel->Name;
+			else
+				break;
+
+			if (in >> lineStr && lineStr == filedsModel->PathShaderVertex)
+				in >> filedsModel->PathShaderVertex;
+
+			if (in >> lineStr && lineStr == filedsModel->PathShaderFrag)
+				in >> filedsModel->PathShaderFrag;
+
+			if (in >> lineStr && lineStr == filedsModel->PathTexture)
+				in >> filedsModel->PathTexture;
+
+			if (in >> lineStr && lineStr == filedsModel->PathModel3D)
+				in >> filedsModel->PathModel3D;
+			
+			in >> stringSeparator;
+
+			FiledsModels.push_back(std::make_unique<ModelFileds>(*filedsModel));
+		}
+	}
+	in.close();
 }

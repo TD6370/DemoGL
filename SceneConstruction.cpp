@@ -15,6 +15,8 @@
 #include "CoreSettings.h"
 //#include "WorldCollision.h"
 #include "GeometryLib.h"
+#include "Rooms/RoomSerializeScene.h"
+#include "SceneSerialize.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -62,18 +64,18 @@ void SceneConstruction::Init() {
 
 void SceneConstruction::LoadDataModel()
 {
-	//bool isGen = true;
-	bool isGen = false;
 	Storage = new CreatorModelData();
-	//Storage->SceneParam = Scene; //(---)
-	if (isGen)
+	Storage->Load();
+
+	//bool isGen = true;
+	/*if (isGen)
 	{
 		Storage->LoadModels();
 		Storage->GenerateObjects();
 	}
 	else {
 		Storage->Load();
-	}
+	}*/
 }
 
 void SceneConstruction::ConfigRoom() {
@@ -93,6 +95,13 @@ void SceneConstruction::ConfigRoom() {
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
 	Rooms.push_back(make_unique<SceneRoom>(*room));
+}
+
+void SceneConstruction::ResetRooms() {
+
+	for (auto room : Rooms) {
+		room->IsOnceComplete = false;
+	}
 }
 
 void SceneConstruction::WorkingRooms() {
@@ -183,11 +192,19 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 void SceneConstruction::Update()
 {
+	ResetRooms();
+
 	ClearScene();
 
 	SetMouseEvents();
 
 	GenMVP();
+
+	if (IsBreakUpdate()) {
+		DrawGraph();
+		WorkingRooms();
+		return;
+	}
 
 	countObjects = Storage->SceneObjectsLastIndex;
 
@@ -197,12 +214,22 @@ void SceneConstruction::Update()
 
 		WorkingRooms();
 
+		if (IsBreakUpdate())
+			break;
+
 		DrawGraph();
 	}
 
 	Storage->Inputs->MBT = -1;
 	Storage->Inputs->Key = -1;
 	Storage->Inputs->Action = -1;
+}
+
+bool SceneConstruction::IsBreakUpdate()
+{
+	if (Storage->SceneObjects.size() == 0)
+		return true;
+	return false;
 }
 
 void SceneConstruction::SetMouseEvents() {

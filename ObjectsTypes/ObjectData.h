@@ -45,7 +45,6 @@ public:
 	bool IsGravity = false;
 	bool IsSelected = false;
 	
-
 	CreatorModelData* Storage;
 
 	TypeObject TypeObj;
@@ -74,7 +73,6 @@ public:
 	vec3 Target = vec3(0);
 	std::vector<int> tramsformTypes;
 	ActionObject ActionObjectCurrent;
-
 
 	int minDist = 5;
 	int DistanceTarget = 20;

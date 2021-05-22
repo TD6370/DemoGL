@@ -23,16 +23,59 @@ void RoomSerializeScene::Init() {
 	_serializer = new SceneSerialize();
 }
 
+void RoomSerializeScene::Load() {
+	_serializer->Load();
+	Scene->Storage->LoadObjects(_serializer->FiledsObjects);
+	Scene->Storage->LoadModels(_serializer->FiledsModels);
+
+	IsOnceComplete = true;
+}
+
+void RoomSerializeScene::LoadObjects() {
+	_serializer->Load(true);
+	Scene->Storage->LoadObjects(_serializer->FiledsObjects);
+
+	IsOnceComplete = true;
+}
+
+
+void RoomSerializeScene::Save() {
+	if (Scene->IsBreakUpdate())
+		return;
+
+	_serializer->Save(Scene->ObjectCurrent);
+	//_serializer->Save(Scene->ObjectCurrent->ModelPtr);
+
+	if (Scene->IsLastCurrentObject) {
+		for (auto model : Scene->Storage->Models)
+		{
+			_serializer->Save(model);
+		}
+		_serializer->Save();
+	}
+}
+
+
 void RoomSerializeScene::Work() {
 
 	//------ Serialization
 
-	if (Scene->Storage->Inputs->Key == _saveKey &&
+	if (Scene->Storage->Inputs->Key == m_saveKey &&
 		Scene->Storage->Inputs->Action == GLFW_PRESS) {
 		
-		_serializer->Save(Scene->ObjectCurrent);
-		if (Scene->IsLastCurrentObject)
-			_serializer->Save();
+		Save();
+	}
+
+	//------ Deserialization
+
+	if (Scene->Storage->Inputs->Key == m_loadKey &&
+		Scene->Storage->Inputs->Action == GLFW_PRESS) {
+
+		if (!IsOnceComplete)
+		{
+			//Load();
+			LoadObjects();
+		}
 	}
 
 }

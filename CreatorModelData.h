@@ -5,6 +5,7 @@
 
 #include "ConfigUniformArg.h"
 #include "CoreSettings.h"
+//#include "SceneSerialize.h"
 
 #include <string>
 #include <vector>
@@ -23,6 +24,8 @@ class ModelData;
 class ObjectData;
 class WorldCluster;
 class ControllerInput;
+class ObjectFileds;
+class ModelFileds;
 
 class CreatorModelData {
 protected:
@@ -68,11 +71,19 @@ public:
 
 	void LoadObjects();
 
+	void LoadModels(vector<shared_ptr<ModelFileds>> filedsModels);
+
+	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects);
+
 	void LoadObjectsGUI();
 
 	void LoadClusters();
 
 	void Load();
+
+	void ClearObjects();
+
+	void ClearModels();
 };
 
 

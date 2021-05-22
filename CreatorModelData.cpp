@@ -13,6 +13,9 @@
 #include "ObjectsTypes\ObjectBlock.h"
 #include "ObjectsTypes\ObjectGUI.h"
 
+#include "SceneSerialize.h"
+#include "Rooms\RoomSerializeScene.h"
+
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
 
@@ -83,6 +86,14 @@ CreatorModelData::CreatorModelData() {
 CreatorModelData::~CreatorModelData() {
 }
 
+void CreatorModelData::ClearObjects() {
+
+	if(SceneObjects.size() != 0)
+		SceneObjects.clear();
+	if (MapSceneObjects.size() != 0)
+		MapSceneObjects.clear();
+}
+
 
 void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 
@@ -108,7 +119,44 @@ void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 	MapModels.insert(std::pair<string, int>(name, index));
 }
 
+
+void CreatorModelData::ClearModels() {
+
+}
+
+void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels) 
+{
+	if (filedsModels.size() == 0)
+		return;
+
+	ClearModels();
+
+	int i = 0;
+
+	for (auto fieldsModel : filedsModels) {
+
+		ModelData nextModel = ModelData();
+		nextModel.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
+		nextModel.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
+		nextModel.PathTexture = fieldsModel->PathTexture.c_str();
+		nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
+		nextModel.RadiusCollider = 1;
+		nextModel.Init();
+		AddModel(&nextModel, fieldsModel->Name);
+
+		i++;
+	}
+}
+
+
 void CreatorModelData::LoadModels() {
+
+	SceneSerialize* serializer = new SceneSerialize();
+	serializer->Load();
+	LoadModels(serializer->FiledsModels);
+
+	if (Models.size() > 0)
+		return;
 
 	ModelData nextModel = ModelData();
 	nextModel.PathShaderVertex = "basic.vert";
@@ -268,6 +316,8 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
 			objectModel = GetObjectPrt(obj.Index);
+			if(!CurrentPolygonObject)
+				CurrentPolygonObject = objectModel;
 			break;
 		}
 		case Solid:
@@ -368,14 +418,49 @@ void CreatorModelData::SaveObject(ObjectData* objData)
 	SceneObjects[objData->Index] = std::make_unique<ObjectData>(*objData);
 }
 
+void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData) {
+
+	if (objectsData.size() == 0)
+		return;
+
+	ClearObjects();
+
+	SceneSerialize* serializer = new SceneSerialize();
+	int i = 0;
+
+	for (auto objFields : objectsData) {
+
+		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
+		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
+			
+
+		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->SetPostranslate);
+		newObj->Target = objFields->SetTarget;
+
+		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
+		newObj->ActionObjectCurrent = typeAction;
+
+		//auto obj = GetObjectPrt(objFields->Name);
+		i++;
+	}
+
+}
+
 void CreatorModelData::LoadObjects() {
+
+	SceneSerialize* serializer = new SceneSerialize();
+	serializer->Load();
+	LoadObjects(serializer->FiledsObjects);
+
+	if (SceneObjects.size() > 0)
+		return;
 
 	float offsetCentrePlane = 500;
 	float radiusPlane = 70;
 
 	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
 	AddObject("Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
-	CurrentPolygonObject = GetObjectPrt("Plane");
+	//CurrentPolygonObject = GetObjectPrt("Plane");
 
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
@@ -391,20 +476,17 @@ void CreatorModelData::LoadObjects() {
 	vec3 color_violet = vec3(1, 0, 1);
 	vec3 color_yelow = vec3(0, 1, 1);
 
-	std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
-	//AddObject("Box", modelBox, Block, vec3(-50, -55, 70));
-	//AddObject("Box2", modelBox, Block, vec3(-50, -55, 70));
-	AddObject("Box", modelBox, Solid, vec3(0, -35, 0));
-	AddObject("Box2", modelBox, Solid, vec3(0, -25, 0));
-	AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
+	// ------- Wall
 
-	AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
-	AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
-	AddObject("BlockBox2", modelBox, Block, vec3(-10, -50, -20));
-	AddObject("BlockBox3", modelBox, Block, vec3(-20, -50, -20));
-	
-	//AddObject(this, "Marker", modelBox, Block, vec3(0, -55, 0));
-	
+		std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
+		AddObject("Box", modelBox, Solid, vec3(0, -35, 0));
+		AddObject("Box2", modelBox, Solid, vec3(0, -25, 0));
+		AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
+
+		AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
+		AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
+		AddObject("BlockBox2", modelBox, Block, vec3(-10, -50, -20));
+		AddObject("BlockBox3", modelBox, Block, vec3(-20, -50, -20));
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
 	AddObject("M_P_1", modelM_P, Solid, vec3(-50, 0, 0));

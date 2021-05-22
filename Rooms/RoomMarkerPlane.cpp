@@ -16,6 +16,9 @@ void RoomMarkerPlane::Init() {
 
 void RoomMarkerPlane::Work() {
 
+	if (Scene->IsBreakUpdate())
+		return;
+
 	string name = Scene->ObjectCurrent->Name;
 
 	if (Scene->ObjectCurrent->Name == "Plane") {

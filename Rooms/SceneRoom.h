@@ -12,13 +12,12 @@ class SceneConstruction;
 
 class SceneRoom
 {
-protected:
-	//SceneConstruction* Scene;
 
 public:
 	SceneConstruction* Scene;
 
 	string Name;
+	bool IsOnceComplete;
 	
 	SceneRoom(string Name, SceneConstruction* sceneConstructor);
 

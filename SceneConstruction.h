@@ -98,6 +98,10 @@ public:
 
 	void AddRoom(SceneRoom* room);
 
+	bool IsBreakUpdate();
+
+	void ResetRooms();
+
 	void WorkingRooms();
 
 	bool SetObject(int i, bool& isUpdate);

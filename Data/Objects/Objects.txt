@@ -8,72 +8,72 @@ Action: Lock
 Type: NPC
 Name: Mon
 Model: mon
-Pos: -0.303848 -52.9294 40.8295
-Target: -15.2829 -51.1759 29.7923
+Pos: -19.6369 -53.0421 -4.7449
+Target: -27.9299 -53.0496 -10.2686
 Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_2
 Model: mon
-Pos: -38.8198 -52.6687 -36.2559
-Target: -20.8198 -52.6687 -42.2559
+Pos: -20.376 -53.0112 36.5504
+Target: -7.37602 -53.0112 23.5504
 Action: Look
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_3
 Model: mon
-Pos: -43.9983 -52.9492 13.4395
-Target: -46.3143 -52.8161 17.8398
+Pos: 31.7919 -51.7107 20.3411
+Target: 13.8525 -51.3815 38.2805
 Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_4
 Model: mon
-Pos: -10.8413 -52.9732 18.2751
-Target: -3.38973 -51.5218 24.4122
+Pos: -42.7963 -52.9702 16.8101
+Target: -46.6963 -53.0007 11.6101
 Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_5
 Model: mon
-Pos: 22.163 -50.8455 16.163
-Target: 24.3203 -50.3266 6.26536
+Pos: -14.4649 -53.0519 1.18821
+Target: -22.4649 -53.0519 20.1882
 Action: Look
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_6
 Model: mon
-Pos: 19.8757 -52.0867 17.0351
-Target: 34.8757 -52.0867 8.03513
+Pos: -44.7604 -52.9549 -5.93751
+Target: -38.7604 -52.9549 10.0625
 Action: Look
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_7
 Model: mon
-Pos: -46.7958 -52.7999 6.45704
-Target: -31.7958 -52.7999 -4.54296
-Action: Look
+Pos: 34.4544 -53.0384 -34.0117
+Target: 39.4788 -53.0191 -28.2695
+Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_8
 Model: mon
-Pos: -49.991 -52.8464 -12.2249
-Target: -47.9218 -51.4889 -16.4176
-Action: Look
+Pos: -30.155 -53.0267 17.5635
+Target: -28.9535 -53.0336 12.0508
+Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_9
 Model: mon
-Pos: 10.5646 -46.4438 34.4248
-Target: 29.5646 -46.4438 24.4248
-Action: Look
+Pos: 4.59912 -53.0091 0.171615
+Target: 8.79234 -53.0067 13.4501
+Action: Moving
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon_10
 Model: mon
-Pos: -18.3128 -53.0255 7.50753
-Target: -22.9792 -52.8576 0.231345
-Action: Moving
+Pos: 22.5156 -50.4193 16.7983
+Target: 11.5156 -50.4193 10.7983
+Action: Look
 ------------------------------------------------------------------
 Type: Solid
 Name: Box
@@ -148,54 +148,124 @@ Action: Stay
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Pos: 0 0 0
-Target: 0 0 0
-Action: Stay
+Pos: 1.10901 -52.862 4.66536
+Target: 83.167 -56.2828 -35.0003
+Action: Moving
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: -0.303848 -52.9294 40.8295
+Pos: -19.6369 -53.0421 -4.7449
 Target: 0 0 0
 Action: Lock
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: 0.0971401 -55.0508 41.1249
+Pos: -19.2207 -55.0403 -4.46772
 Target: 0 0 0
 Action: Lock
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: -2.44561 -55.0464 39.3058
+Pos: -21.7798 -55.0269 -5.50179
 Target: 0 0 0
 Action: Lock
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: 0.774797 -55.0496 42.4968
+Pos: -18.6071 -55.0463 -2.30106
 Target: 0 0 0
 Action: Lock
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: 0.745869 -55.0574 39.3003
+Pos: -18.5818 -55.0412 -5.50099
 Target: 0 0 0
 Action: Lock
 ------------------------------------------------------------------
 Type: Hero
 Name: Hero
 Model: homo
-Pos: 0 -54.0171 5
-Target: 0 -54.0171 5
+Pos: -5.91016 -54.0315 8.05994
+Target: -5.91016 -54.0315 8.05994
 Action: Search
 ------------------------------------------------------------------
 Type: CursorRay
 Name: CursorRay
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33_34
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33_34_35
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33_34_35_36
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33_34_35_36_37
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay_29_30_31_32_33_34_35_36_37_38
 Model: cursorRay
 Pos: -50 -55 70
 Target: 0 0 0

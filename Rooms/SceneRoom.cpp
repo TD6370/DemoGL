@@ -63,13 +63,27 @@ void SceneRoom::Work() {
 	//		object->Postranslate = objectObserver->TempVectors[0]; //nearestSphereIntersectionPoint - green
 	//}
 
+	if (Scene->IsBreakUpdate())
+		return;
+
 	//----- Light position
-	std::shared_ptr <ObjectData> objectLight =  Scene->Storage->GetObjectPrt("Mon"); //Box2
+	std::shared_ptr <ObjectData> objectLight = Scene->Storage->GetObjectPrt("Mon"); //Box2
 	Scene->Light->positionLight = vec3(objectLight->Postranslate.x, objectLight->Postranslate.y + 15.f, objectLight->Postranslate.z);
 	Scene->ModelCurrent->ConfUniform.SetPositionLight(Scene->Light->positionLight);
 
 	//------ Set Mouse position
 	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Storage->Oper->PositionCursorModel);
+
+	//------ Delete all objects on scene
+	if (Scene->Storage->Inputs->Key == GLFW_KEY_F8 &&
+		Scene->Storage->Inputs->Action == GLFW_PRESS) {
+
+		if (!IsOnceComplete)
+		{
+			Scene->Storage->ClearObjects();
+			IsOnceComplete = true;
+		}
+	}
 
 	//=================== end WorkingRooms
 }

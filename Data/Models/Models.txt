@@ -1,0 +1,61 @@
+Name: mon
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/monkey.obj
+------------------------------------------------------------------ 
+Name: plane
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/planet.bmp
+PathModel3D: ./Models3D/polygonPlane.obj
+------------------------------------------------------------------ 
+Name: box
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/kub.obj
+------------------------------------------------------------------ 
+Name: marker_Vector
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Vector.obj
+------------------------------------------------------------------ 
+Name: marker_Cross
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Cross.obj
+------------------------------------------------------------------ 
+Name: marker_Point
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Point.obj
+------------------------------------------------------------------ 
+Name: homo
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/future.bmp
+PathModel3D: ./Models3D/Marker_Point.obj
+------------------------------------------------------------------ 
+Name: cursorRay
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/future.bmp
+PathModel3D: ./Models3D/Marker_Cross.obj
+------------------------------------------------------------------ 
+Name: conextGUI
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/future.bmp
+PathModel3D: ./Models3D/InterfacePlaneT11.obj
+------------------------------------------------------------------ 
+Name: conextGUI_2
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/InterfacePlaneT11.obj
+------------------------------------------------------------------ 
+

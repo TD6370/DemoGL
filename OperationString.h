@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 
-std::string GetFile(const char* path);
+using std::string;
 
+string GetFile(const char* path);
 
+string Trim(string path);

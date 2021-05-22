@@ -4,7 +4,7 @@
 
 #include <sstream>
 #include <iostream>
-//#include <vector>
+#include <vector>
 #include <map>
 
 using std::map;
@@ -17,42 +17,22 @@ class ModelData;
 class ObjectData;
 
 struct ObjectFileds {
-	string Name = "Name: ";
-	string Type = "Type: ";
-	string Model = "Model: ";
-	string Postranslate = "Pos: ";
-	string Target = "Target: ";
-	string ActionObjectCurrent = "Action: ";
+	string Name = "Name:";
+	string Type = "Type:";
+	string Model = "Model:";
+	string Postranslate = "Pos:";
+	vec3 SetPostranslate;
+	string Target = "Target:";
+	vec3 SetTarget;
+	string ActionObjectCurrent = "Action:";
 };
 
-//const GLchar* PathShaderVertex = "basic.vert";
-//const GLchar* PathShaderFrag = "basic.frag";
-//const char* PathTexture = "./Textures/testTexture.bmp";
-//const char* PathModel3D = "./Models3D/monkey.obj";
-//
-//ConfigUniform ConfUniform;
-//
-//GLint TrianglesCount = 0;
-//GLint IndicesSize = 0;
-//GLuint VAO = 0;
-//GLuint VBO = 0;
-//GLuint ShaderProgram = 0;
-//bool IsIndex = false;
-//bool IsDebug = false;
-////-------------------
-//std::vector< glm::vec2 > UV;
-////std::vector< glm::vec2 > StartUV;
-//std::vector< glm::vec3 > Normals;
-//std::vector< glm::vec3 > Vertices;
-//std::vector<unsigned int> Indices;
-////std::vector<Plane>* Planes;
-//
-//unsigned int WidthImage;
-//unsigned int HeightImage;
-
 struct ModelFileds {
-	string Name = "Name: ";
-	
+	string Name = "Name:";
+	string PathShaderVertex = "PathShaderVertex:";
+	string PathShaderFrag = "PathShaderFrag:";
+	string PathTexture = "PathTexture:";
+	string PathModel3D = "PathModel3D:";
 };
 
 class SceneSerialize
@@ -70,23 +50,21 @@ private:
 	map<string, TypeObject> m_mapTypesObjects;
 
 public:
+	vector<shared_ptr<ObjectFileds>> FiledsObjects;
+	vector<shared_ptr<ModelFileds>> FiledsModels;
 
 	SceneSerialize();
 	
 	virtual ~SceneSerialize();
 
-	//void Save(ObjectData obj);
-
 	void Save(shared_ptr<ObjectData> obj);
-	
-	//void Save(ModelData model);
 
 	void Save(shared_ptr<ModelData> model);
 	
 	//-------------
 	void Save();
 
-	void Load();
+	void Load(bool isOnlyObjects = false);
 	//-------------
 
 	string Vec3Str(vec3 vec);
