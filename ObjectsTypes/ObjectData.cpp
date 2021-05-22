@@ -213,3 +213,8 @@ void ObjectData::InitChildObjects() {
 
 }
 
+map<string, string> ObjectData::GetOthersFiels() {
+
+	map<string, string> result;
+	return result;
+}

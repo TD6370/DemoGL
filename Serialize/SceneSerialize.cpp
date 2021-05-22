@@ -1,10 +1,10 @@
 #include "SceneSerialize.h"
 
-#include "CreatorModelData.h"  
-#include "ModelData.h"
-#include "ObjectsTypes\ObjectData.h"
+#include "../CreatorModelData.h"  
+#include "../ModelData.h"
+#include "../ObjectsTypes/ObjectData.h"
 
-#include "OperationString.h"
+#include "../OperationString.h"
 
 //#include <vector>
 //#include <map>
@@ -30,7 +30,6 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::CursorRay, "CursorRay");
 	AddNextType(TypeObject::GUI, "GUI");
 
-	//enum ActionObject { Moving, Stay, Look, Search, Lock, Starting }; 
 	//Create map types action object
 	AddNextType(ActionObject::Moving, "Moving");
 	AddNextType(ActionObject::Stay, "Stay");
@@ -46,6 +45,30 @@ SceneSerialize::~SceneSerialize() {
 
 }
  
+//m_dataObjects.append(streamObjects.str());
+
+// -------------------- Serialize	->	ObjectData Other fields
+
+void  SceneSerialize::SaveOthers(map<string, string> otherFields) {
+
+	//!!!!!!!!!!!!!!!!!!!!
+	return;
+
+	ObjectFileds fileds;
+	std::stringstream streamObjects;
+
+	for (auto pair : otherFields) 
+	{
+		string fieldName = pair.first;
+		string value = pair.second;
+		streamObjects << fieldName << " " << value << "\n";
+	}
+	
+	streamObjects << m_stringSeparator << "\n";
+
+	m_dataObjects.append(streamObjects.str());
+}
+
 // -------------------- Serialize	->	ObjectData
 
 void  SceneSerialize::Save(shared_ptr<ObjectData> obj) {
@@ -234,15 +257,15 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 				in >> filedsObj->Model;
 
 			if (in >> lineStr && lineStr == filedsObj->Postranslate) {
-				in >> filedsObj->SetPostranslate.x;
-				in >> filedsObj->SetPostranslate.y;
-				in >> filedsObj->SetPostranslate.z;
+				in >> filedsObj->PostranslateValue.x;
+				in >> filedsObj->PostranslateValue.y;
+				in >> filedsObj->PostranslateValue.z;
 			}
 
 			if (in >> lineStr && lineStr == filedsObj->Target) {
-				in >> filedsObj->SetTarget.x;
-				in >> filedsObj->SetTarget.y;
-				in >> filedsObj->SetTarget.z;
+				in >> filedsObj->TargetValue.x;
+				in >> filedsObj->TargetValue.y;
+				in >> filedsObj->TargetValue.z;
 			}
 
 			if (in >> lineStr && lineStr == filedsObj->ActionObjectCurrent)

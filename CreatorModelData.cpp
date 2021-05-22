@@ -13,7 +13,7 @@
 #include "ObjectsTypes\ObjectBlock.h"
 #include "ObjectsTypes\ObjectGUI.h"
 
-#include "SceneSerialize.h"
+#include "Serialize/SceneSerialize.h"
 #include "Rooms\RoomSerializeScene.h"
 
 #include "LoadBmp.h"
@@ -434,8 +434,8 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData)
 		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
 			
 
-		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->SetPostranslate);
-		newObj->Target = objFields->SetTarget;
+		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue);
+		newObj->Target = objFields->TargetValue;
 
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
 		newObj->ActionObjectCurrent = typeAction;

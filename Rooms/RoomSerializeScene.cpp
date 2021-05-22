@@ -1,12 +1,12 @@
 #include "RoomSerializeScene.h"
 
-//#include "..\SceneConstruction.h"
-//#include "..\GeometryLib.h"
-#include "..\ObjectsTypes\ObjectData.h"
-#include "..\CreatorModelData.h"
-#include "..\ModelData.h"
+//#include "../SceneConstruction.h"
+//#include "../GeometryLib.h"
+#include "../ObjectsTypes/ObjectData.h"
+#include "../CreatorModelData.h"
+#include "../ModelData.h"
 
-#include "..\SceneSerialize.h"
+#include "../Serialize/SceneSerialize.h"
 
 //#define GLEW_STATIC
 #include <GL/glew.h>
@@ -44,7 +44,9 @@ void RoomSerializeScene::Save() {
 		return;
 
 	_serializer->Save(Scene->ObjectCurrent);
-	//_serializer->Save(Scene->ObjectCurrent->ModelPtr);
+
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	_serializer->SaveOthers(Scene->ObjectCurrent->GetOthersFiels());
 
 	if (Scene->IsLastCurrentObject) {
 		for (auto model : Scene->Storage->Models)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CoreSettings.h"
+#include "../CoreSettings.h"
 
 #include <sstream>
 #include <iostream>
@@ -16,15 +16,24 @@ using glm::vec3;
 class ModelData;
 class ObjectData;
 
+enum TypeValue { String, Int, Float, Vec2, Vec3, Vec4 };
+
+//struct FieldValue {
+//	string Value;
+//	TypeValue Type;
+//};
+
 struct ObjectFileds {
 	string Name = "Name:";
 	string Type = "Type:";
 	string Model = "Model:";
 	string Postranslate = "Pos:";
-	vec3 SetPostranslate;
+	vec3 PostranslateValue;
 	string Target = "Target:";
-	vec3 SetTarget;
+	vec3 TargetValue;
 	string ActionObjectCurrent = "Action:";
+
+	map<string, string> OtherFields;
 };
 
 struct ModelFileds {
@@ -61,11 +70,14 @@ public:
 
 	void Save(shared_ptr<ModelData> model);
 	
+	void  SaveOthers(map<string, string> otherFields);
 	//-------------
 	void Save();
 
 	void Load(bool isOnlyObjects = false);
 	//-------------
+
+	//string GetValue(string nameField, TypeValue value);
 
 	string Vec3Str(vec3 vec);
 

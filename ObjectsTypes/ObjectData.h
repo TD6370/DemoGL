@@ -17,6 +17,7 @@
 #include <glm/gtc/random.hpp>
 
 #include <fstream>
+#include <map>
 
 using glm::vec4;
 using glm::vec3;
@@ -24,6 +25,7 @@ using glm::vec2;
 using glm::linearRand;
 using std::string;
 using std::shared_ptr;
+using std::map;
 
 class Plane;
 class ModelData;
@@ -142,6 +144,7 @@ public:
 
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
+	map<string, string> virtual GetOthersFiels();
 };
 
 #endif

@@ -16,7 +16,7 @@
 //#include "WorldCollision.h"
 #include "GeometryLib.h"
 #include "Rooms/RoomSerializeScene.h"
-#include "SceneSerialize.h"
+#include "Serialize/SceneSerialize.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>

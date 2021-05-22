@@ -46,6 +46,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{988ffb10-b84e-4e54-ac34-5c0112b0307f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Browsers\Serialize">
+      <UniqueIdentifier>{c1ce9be3-0919-4a2d-b357-4a0ae23fdfaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
@@ -129,9 +132,6 @@
     <ClCompile Include="ObjectsTypes\ObjectGUI.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="SceneSerialize.cpp">
-      <Filter>Browsers</Filter>
-    </ClCompile>
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
@@ -140,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="Rooms\RoomSerializeScene.cpp">
       <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialize\SceneSerialize.cpp">
+      <Filter>Browsers\Serialize</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +230,6 @@
     <ClInclude Include="ObjectsTypes\ObjectGUI.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="SceneSerialize.h">
-      <Filter>Browsers</Filter>
-    </ClInclude>
     <ClInclude Include="Rooms\RoomMarkerPlane.h">
       <Filter>Rooms</Filter>
     </ClInclude>
@@ -238,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Rooms\RoomSerializeScene.h">
       <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialize\SceneSerialize.h">
+      <Filter>Browsers\Serialize</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

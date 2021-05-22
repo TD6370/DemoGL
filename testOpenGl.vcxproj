@@ -174,7 +174,7 @@
     <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
     <ClCompile Include="Rooms\SceneRoom.cpp" />
     <ClCompile Include="SceneConstruction.cpp" />
-    <ClCompile Include="SceneSerialize.cpp" />
+    <ClCompile Include="Serialize\SceneSerialize.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="TransformModel.cpp" />
     <ClCompile Include="WorldCollision.cpp" />
@@ -208,7 +208,7 @@
     <ClInclude Include="Rooms\RoomSerializeScene.h" />
     <ClInclude Include="Rooms\SceneRoom.h" />
     <ClInclude Include="SceneConstruction.h" />
-    <ClInclude Include="SceneSerialize.h" />
+    <ClInclude Include="Serialize\SceneSerialize.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="TransformModel.h" />
     <ClInclude Include="WorldCollision.h" />
