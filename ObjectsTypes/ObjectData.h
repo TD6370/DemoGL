@@ -30,6 +30,7 @@ using std::map;
 class Plane;
 class ModelData;
 class CreatorModelData;
+struct ObjectFiledsSpecific;
 
 class ObjectData
 {
@@ -144,7 +145,11 @@ public:
 
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
-	map<string, string> virtual GetOthersFiels();
+	//#SaveFieldSpecific
+
+	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
+
+	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };
 
 #endif

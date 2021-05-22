@@ -13,6 +13,7 @@ using std::string;
 
 class SceneConstruction;
 class SceneSerialize;
+struct ObjectFiledsSpecific;
 
 class RoomSerializeScene : public SceneRoom
 {

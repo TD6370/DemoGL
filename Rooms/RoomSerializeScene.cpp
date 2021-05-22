@@ -7,6 +7,7 @@
 #include "../ModelData.h"
 
 #include "../Serialize/SceneSerialize.h"
+//#include "SceneSerialize.h"
 
 //#define GLEW_STATIC
 #include <GL/glew.h>
@@ -25,7 +26,7 @@ void RoomSerializeScene::Init() {
 
 void RoomSerializeScene::Load() {
 	_serializer->Load();
-	Scene->Storage->LoadObjects(_serializer->FiledsObjects);
+	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
 	Scene->Storage->LoadModels(_serializer->FiledsModels);
 
 	IsOnceComplete = true;
@@ -33,7 +34,8 @@ void RoomSerializeScene::Load() {
 
 void RoomSerializeScene::LoadObjects() {
 	_serializer->Load(true);
-	Scene->Storage->LoadObjects(_serializer->FiledsObjects);
+	//#SaveFieldSpecific
+	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
 
 	IsOnceComplete = true;
 }
@@ -45,8 +47,9 @@ void RoomSerializeScene::Save() {
 
 	_serializer->Save(Scene->ObjectCurrent);
 
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	_serializer->SaveOthers(Scene->ObjectCurrent->GetOthersFiels());
+	//#SaveFieldSpecific
+	vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
+	_serializer->SaveSpecific(specificFiels);
 
 	if (Scene->IsLastCurrentObject) {
 		for (auto model : Scene->Storage->Models)

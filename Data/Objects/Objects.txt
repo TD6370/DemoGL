@@ -1,0 +1,232 @@
+Type: Polygon
+Name: Plane
+Model: plane
+Pos: -20 -55 70
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: NPC
+Name: Mon
+Model: mon
+Pos: -12.8767 -52.8532 31.5652
+Target: -19.8767 -52.8532 11.5652
+Action: Look
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_2
+Model: mon
+Pos: -24.1263 -52.9896 -41.1537
+Target: -20.8198 -52.6687 -42.2559
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_3
+Model: mon
+Pos: -41.1346 -52.9504 26.5926
+Target: -38.9294 -52.9414 33.2085
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_4
+Model: mon
+Pos: -7.20198 -53.0326 23.7901
+Target: -17.602 -52.8718 31.5901
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_5
+Model: mon
+Pos: 22.5866 -52.2328 14.2195
+Target: 24.3203 -50.3266 6.26536
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_6
+Model: mon
+Pos: 22.618 -50.9258 20.5309
+Target: 30.0754 -52.0867 31.1732
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_7
+Model: mon
+Pos: -34.2993 -52.9708 -2.70704
+Target: -31.7958 -52.7999 -4.54296
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_8
+Model: mon
+Pos: -49.991 -52.8464 -12.2249
+Target: -47.9218 -51.4889 -16.4176
+Action: Look
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_9
+Model: mon
+Pos: 15.8102 -42.3974 31.664
+Target: 29.5646 -46.4438 24.4248
+Action: Moving
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_10
+Model: mon
+Pos: -28.8396 -52.9915 -7.07286
+Target: -34.5502 -53.0062 -14.5406
+Action: Moving
+------------------------------------------------------------------
+Type: Solid
+Name: Box
+Model: box
+Pos: 0 -35 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: Box2
+Model: box
+Pos: 0 -25 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: Box3
+Model: box
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox
+Model: box
+Pos: -10 -54.019 -10
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox1
+Model: box
+Pos: -20 -54.0329 -10
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox2
+Model: box
+Pos: -10 -53.9908 -20
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox3
+Model: box
+Pos: -20 -53.9883 -20
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_1
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_2
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Bullet
+Name: Bullet
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: BulletHero
+Name: BulletHero
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_1
+Model: marker_Cross
+Pos: -12.8767 -52.8532 31.5652
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_2
+Model: marker_Cross
+Pos: -12.5157 -55.0565 31.8312
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_1
+Model: marker_Vector
+Pos: -12.1567 -55.0542 29.7384
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_2
+Model: marker_Vector
+Pos: -15.3736 -55.0513 32.9539
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_3
+Model: marker_Vector
+Pos: -12.1442 -55.0576 32.9499
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: Hero
+Name: Hero
+Model: homo
+Pos: 0 -54.0171 5
+Target: 0 -54.0171 5
+Action: Search
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay
+Model: cursorRay
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Stay
+------------------------------------------------------------------
+Type: GUI
+Name: BackContectGUI
+Model: conextGUI
+Pos: 0 -50 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: GUI
+Name: TEST1
+Model: conextGUI_2
+Pos: 0 0 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: GUI
+Name: TEST2
+Model: conextGUI_2
+Pos: 0 0 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+Type: GUI
+Name: TEST3
+Model: conextGUI_2
+Pos: 0 0 0
+Target: 0 0 0
+Action: Lock
+------------------------------------------------------------------
+

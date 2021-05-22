@@ -23,9 +23,10 @@ using std::string;
 class ModelData;
 class ObjectData;
 class WorldCluster;
-class ControllerInput;
-class ObjectFileds;
-class ModelFileds;
+struct ControllerInput;
+struct ObjectFileds;
+struct ModelFileds; //#Error 3
+struct ObjectFiledsSpecific;
 
 class CreatorModelData {
 protected:
@@ -73,7 +74,7 @@ public:
 
 	void LoadModels(vector<shared_ptr<ModelFileds>> filedsModels);
 
-	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects);
+	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects, vector<vector<ObjectFiledsSpecific>> objectsDataOthers);
 
 	void LoadObjectsGUI();
 

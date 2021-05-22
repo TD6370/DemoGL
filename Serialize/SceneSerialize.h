@@ -18,10 +18,6 @@ class ObjectData;
 
 enum TypeValue { String, Int, Float, Vec2, Vec3, Vec4 };
 
-//struct FieldValue {
-//	string Value;
-//	TypeValue Type;
-//};
 
 struct ObjectFileds {
 	string Name = "Name:";
@@ -44,6 +40,11 @@ struct ModelFileds {
 	string PathModel3D = "PathModel3D:";
 };
 
+struct ObjectFiledsSpecific {
+	string FieldName;
+	string Value;
+};
+
 class SceneSerialize
 {
 private:
@@ -51,6 +52,7 @@ private:
 	string m_dataObjects;
 	string m_dataModels;
 	string m_stringSeparator;
+	string m_specificFields;
 
 	map<ActionObject, string> m_mapNamesTypesActions;
 	map<string, ActionObject> m_mapTypesActions;
@@ -60,7 +62,9 @@ private:
 
 public:
 	vector<shared_ptr<ObjectFileds>> FiledsObjects;
+	vector<vector<ObjectFiledsSpecific>> FiledsObjectsSpecific; //#SaveFieldSpecific
 	vector<shared_ptr<ModelFileds>> FiledsModels;
+	
 
 	SceneSerialize();
 	
@@ -70,7 +74,8 @@ public:
 
 	void Save(shared_ptr<ModelData> model);
 	
-	void  SaveOthers(map<string, string> otherFields);
+	//#SaveFieldSpecific
+	void  SaveSpecific(vector<ObjectFiledsSpecific>& otherFields);
 	//-------------
 	void Save();
 

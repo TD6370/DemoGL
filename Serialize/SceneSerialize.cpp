@@ -16,6 +16,7 @@ SceneSerialize::SceneSerialize() {
 	m_dataObjects = std::string();
 	m_dataModels = std::string();
 	m_stringSeparator = "------------------------------------------------------------------";
+	m_specificFields = "Specific:";
 
 	//Create map types objects
 	AddNextType(TypeObject::Polygon, "Polygon");
@@ -45,23 +46,24 @@ SceneSerialize::~SceneSerialize() {
 
 }
  
-//m_dataObjects.append(streamObjects.str());
+// -------------------- Serialize	->	ObjectData specific fields
+//#SaveFieldSpecific
+void  SceneSerialize::SaveSpecific(vector<ObjectFiledsSpecific>& specificFields) {
 
-// -------------------- Serialize	->	ObjectData Other fields
-
-void  SceneSerialize::SaveOthers(map<string, string> otherFields) {
-
-	//!!!!!!!!!!!!!!!!!!!!
+	//#SaveFieldSpecific
 	return;
 
 	ObjectFileds fileds;
 	std::stringstream streamObjects;
 
-	for (auto pair : otherFields) 
+	if (specificFields.size() == 0)
+		return;
+
+	streamObjects << m_specificFields << "\n";
+	
+	for (auto field : specificFields)
 	{
-		string fieldName = pair.first;
-		string value = pair.second;
-		streamObjects << fieldName << " " << value << "\n";
+		streamObjects << field.FieldName << " " << field.Value << "\n";
 	}
 	
 	streamObjects << m_stringSeparator << "\n";
@@ -70,7 +72,6 @@ void  SceneSerialize::SaveOthers(map<string, string> otherFields) {
 }
 
 // -------------------- Serialize	->	ObjectData
-
 void  SceneSerialize::Save(shared_ptr<ObjectData> obj) {
 
 	ObjectFileds fileds;
@@ -223,6 +224,7 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 	std::ifstream in;
 	//ObjectFileds* filedsObj = new ObjectFileds;
 	string stringSeparator;
+	string specificFields;
 	string lineStr;
 	int lineInt;
 	float lineF;
@@ -241,41 +243,73 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 	if (in.is_open())
 	{
 		FiledsObjects.clear();
+		FiledsObjectsSpecific.clear();
+		vector<ObjectFiledsSpecific> specificFiels;
+
+		//vector<shared_ptr<ObjectFiledsSpecific>>* specificFiels;
+		//vector<shared_ptr<ObjectFiledsSpecific>> specificFiels;
+
+		bool isNext = false;
+
+		ObjectFileds filedsObj;
+		ObjectFileds filedsObjResult;
 
 		while (!in.eof()) {
 			//std::getline(in, line);
 
-			ObjectFileds* filedsObj = new ObjectFileds;
+			if (in >> lineStr && lineStr == filedsObj.Type) {
+				if (isNext)
+				{
+					FiledsObjectsSpecific.push_back(specificFiels);
+					FiledsObjects.push_back(std::make_unique<ObjectFileds>(filedsObjResult));
+					isNext = false;
+				}
 
-			if (in >> lineStr && lineStr == filedsObj->Type)
-				in >> filedsObj->Type;
-			else
-				break;
-			if (in >> lineStr && lineStr == filedsObj->Name)
-				in >> filedsObj->Name;
-			if (in >> lineStr && lineStr == filedsObj->Model)
-				in >> filedsObj->Model;
+				in >> filedsObj.Type;
+			}
+			else {
+				if (lineStr.size() == 0) {
+					break;
+				}
+			}
+			if (in >> lineStr && lineStr == filedsObj.Name)
+				in >> filedsObj.Name;
+			if (in >> lineStr && lineStr == filedsObj.Model)
+				in >> filedsObj.Model;
 
-			if (in >> lineStr && lineStr == filedsObj->Postranslate) {
-				in >> filedsObj->PostranslateValue.x;
-				in >> filedsObj->PostranslateValue.y;
-				in >> filedsObj->PostranslateValue.z;
+			if (in >> lineStr && lineStr == filedsObj.Postranslate) {
+				in >> filedsObj.PostranslateValue.x;
+				in >> filedsObj.PostranslateValue.y;
+				in >> filedsObj.PostranslateValue.z;
 			}
 
-			if (in >> lineStr && lineStr == filedsObj->Target) {
-				in >> filedsObj->TargetValue.x;
-				in >> filedsObj->TargetValue.y;
-				in >> filedsObj->TargetValue.z;
+			if (in >> lineStr && lineStr == filedsObj.Target) {
+				in >> filedsObj.TargetValue.x;
+				in >> filedsObj.TargetValue.y;
+				in >> filedsObj.TargetValue.z;
 			}
 
-			if (in >> lineStr && lineStr == filedsObj->ActionObjectCurrent)
-				in >> filedsObj->ActionObjectCurrent;
-			
-			in >> stringSeparator;
+			if (in >> lineStr && lineStr == filedsObj.ActionObjectCurrent)
+				in >> filedsObj.ActionObjectCurrent;
 
-			FiledsObjects.push_back(std::make_unique<ObjectFileds>(*filedsObj));
+			if (in >> lineStr && lineStr == m_stringSeparator) {
+
+				filedsObjResult = filedsObj;
+				filedsObj = ObjectFileds();
+				isNext = true;
+			}
+			else if (lineStr == m_specificFields)
+			{
+				//#SaveFieldSpecific
+				ObjectFiledsSpecific fieldsSpecific = ObjectFiledsSpecific();
+				in >> fieldsSpecific.FieldName;
+				in >> fieldsSpecific.Value;
+				specificFiels.push_back(fieldsSpecific);
+			}
 		}
 	}
+
+	
 	in.close();
 
 	if (isOnlyObjects)

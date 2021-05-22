@@ -1,12 +1,13 @@
 
 //---------------------
-//#include "..\CreatorModelData.h"
-#include "..\WorldCollision.h" //--<< #include "CreatorModelData.h"  
-//#include "..\CoreSettings.h"
-#include "..\ModelData.h"
-#include "..\GeometryLib.h"
+//#include "../CreatorModelData.h"
+#include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
+//#include "../CoreSettings.h"
+#include "../ModelData.h"
+#include "../GeometryLib.h"
 //------------------------
 #include "ObjectData.h"
+#include "../Serialize/SceneSerialize.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -213,8 +214,15 @@ void ObjectData::InitChildObjects() {
 
 }
 
-map<string, string> ObjectData::GetOthersFiels() {
+//------ #SaveFieldSpecific
 
-	map<string, string> result;
+vector<ObjectFiledsSpecific> ObjectData::GetSpecificFiels() {
+
+	vector<ObjectFiledsSpecific> result;
 	return result;
+}
+
+void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
+
+
 }

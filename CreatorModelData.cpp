@@ -2,19 +2,19 @@
 #include "CreatorModelData.h"
 #include "WorldCollision.h"
 #include "ModelData.h"
-#include "ObjectsTypes\ObjectData.h"
-#include "ObjectsTypes\ObjectPhysic.h"
-#include "ObjectsTypes\ObjectDynamic.h"
-#include "ObjectsTypes\ObjectPolygon.h"
-#include "ObjectsTypes\ObjectHero.h"
-#include "ObjectsTypes\ObjectNPC.h"
-#include "ObjectsTypes\ObjectBullet.h"
-#include "ObjectsTypes\ObjectCursorRay.h"
-#include "ObjectsTypes\ObjectBlock.h"
-#include "ObjectsTypes\ObjectGUI.h"
+#include "ObjectsTypes/ObjectData.h"
+#include "ObjectsTypes/ObjectPhysic.h"
+#include "ObjectsTypes/ObjectDynamic.h"
+#include "ObjectsTypes/ObjectPolygon.h"
+#include "ObjectsTypes/ObjectHero.h"
+#include "ObjectsTypes/ObjectNPC.h"
+#include "ObjectsTypes/ObjectBullet.h"
+#include "ObjectsTypes/ObjectCursorRay.h"
+#include "ObjectsTypes/ObjectBlock.h"
+#include "ObjectsTypes/ObjectGUI.h"
 
 #include "Serialize/SceneSerialize.h"
-#include "Rooms\RoomSerializeScene.h"
+#include "Rooms/RoomSerializeScene.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -418,7 +418,9 @@ void CreatorModelData::SaveObject(ObjectData* objData)
 	SceneObjects[objData->Index] = std::make_unique<ObjectData>(*objData);
 }
 
-void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData) {
+
+//#SaveFieldSpecific
+void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData, vector<vector<ObjectFiledsSpecific>> objectsDataSpecific) {
 
 	if (objectsData.size() == 0)
 		return;
@@ -426,6 +428,7 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData)
 	ClearObjects();
 
 	SceneSerialize* serializer = new SceneSerialize();
+	vector<ObjectFiledsSpecific> specificFields;
 	int i = 0;
 
 	for (auto objFields : objectsData) {
@@ -440,7 +443,10 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData)
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
 		newObj->ActionObjectCurrent = typeAction;
 
-		//auto obj = GetObjectPrt(objFields->Name);
+		//#SaveFieldSpecific
+		specificFields = objectsDataSpecific[i];
+		newObj->SetSpecificFiels(specificFields);
+
 		i++;
 	}
 
@@ -450,7 +456,7 @@ void CreatorModelData::LoadObjects() {
 
 	SceneSerialize* serializer = new SceneSerialize();
 	serializer->Load();
-	LoadObjects(serializer->FiledsObjects);
+	LoadObjects(serializer->FiledsObjects, serializer->FiledsObjectsSpecific);
 
 	if (SceneObjects.size() > 0)
 		return;
