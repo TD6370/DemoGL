@@ -10,10 +10,12 @@
 #include <GLFW/glfw3.h>
 
 using std::string;
+using std::shared_ptr;
 
 class SceneConstruction;
 class SceneSerialize;
 struct ObjectFiledsSpecific;
+class ObjectData;
 
 class RoomSerializeScene : public SceneRoom
 {
@@ -34,5 +36,7 @@ public:
 	void Save();
 	void Load();
 	void LoadObjects();
+
+	bool IsValidSave(shared_ptr<ObjectData> object);
 };
 

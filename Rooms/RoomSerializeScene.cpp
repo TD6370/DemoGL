@@ -40,16 +40,25 @@ void RoomSerializeScene::LoadObjects() {
 	IsOnceComplete = true;
 }
 
+bool RoomSerializeScene::IsValidSave(shared_ptr<ObjectData> object) 
+{
+	if ((Scene->ObjectCurrent->TypeObj == TypeObject::CursorRay))
+		return false;
+	return true;
+}
 
 void RoomSerializeScene::Save() {
+
 	if (Scene->IsBreakUpdate())
 		return;
 
-	_serializer->Save(Scene->ObjectCurrent);
+	if (IsValidSave(Scene->ObjectCurrent)) {
+		_serializer->Save(Scene->ObjectCurrent);
 
-	//#SaveFieldSpecific
-	vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
-	_serializer->SaveSpecific(specificFiels);
+		//#SaveFieldSpecific
+		vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
+		_serializer->SaveSpecific(specificFiels);
+	}
 
 	if (Scene->IsLastCurrentObject) {
 		for (auto model : Scene->Storage->Models)

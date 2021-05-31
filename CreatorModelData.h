@@ -27,6 +27,7 @@ struct ControllerInput;
 struct ObjectFileds;
 struct ModelFileds; //#Error 3
 struct ObjectFiledsSpecific;
+//enum TypeObject;
 
 class CreatorModelData {
 protected:
@@ -85,6 +86,12 @@ public:
 	void ClearObjects();
 
 	void ClearModels();
+
+	bool IsExistObjectByName(string key);
+
+	bool IsExistObjectByType(TypeObject type);
+
+	bool IsExistObject(TypeObject typeObj);
 };
 
 

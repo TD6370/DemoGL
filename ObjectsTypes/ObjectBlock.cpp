@@ -146,6 +146,7 @@ void ObjectBlock::MeshTransform() {
 
 	//-- set transform
 	if (Vertices.size() != 0) {
+
 		vec3 vertA =  GetBottom(indexUpdate);
 		vertA = vec3(vertOffset.x, vertA.y, vertOffset.z);
 		SetBottom(indexUpdate, vertA);

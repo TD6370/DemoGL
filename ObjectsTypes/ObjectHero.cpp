@@ -13,6 +13,9 @@ void ObjectHero::InitData()
 
 void ObjectHero::LoadCursorRay()
 {
+	if (Storage->IsExistObjectByType(TypeObject::CursorRay))
+		return;
+
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt("cursorRay");
 	auto obj = Storage->AddObject("CursorRay", model, CursorRay, vec3(-50, -55, 70));
 	obj->IndexObjectOwner = Index;

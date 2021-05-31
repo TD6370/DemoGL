@@ -101,6 +101,10 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 	streamModels << fileds.PathShaderFrag << " " << model->PathShaderFrag << "\n";
 	streamModels << fileds.PathTexture << " " << model->PathTexture << "\n";
 	streamModels << fileds.PathModel3D << " " << model->PathModel3D << "\n";
+
+	streamModels << fileds.RadiusCollider << " " << model->RadiusCollider << "\n";
+	streamModels << fileds.IsCubeModel << " " << model->IsCubeModel << "\n";
+	
 	streamModels << m_stringSeparator << " " << "\n";
 
 	m_dataModels.append(streamModels.str());
@@ -344,6 +348,12 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 
 			if (in >> lineStr && lineStr == filedsModel->PathModel3D)
 				in >> filedsModel->PathModel3D;
+
+			if (in >> lineStr && lineStr == filedsModel->RadiusCollider)
+				in >> filedsModel->RadiusCollider;
+
+			if (in >> lineStr && lineStr == filedsModel->IsCubeModel)
+				in >> filedsModel->IsCubeModel;
 			
 			in >> stringSeparator;
 

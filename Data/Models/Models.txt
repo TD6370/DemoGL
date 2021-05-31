@@ -3,59 +3,79 @@ PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/monkey.obj
+RadiusCollider: 1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: plane
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/planet.bmp
 PathModel3D: ./Models3D/polygonPlane.obj
+RadiusCollider: 0.2
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: box
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/kub.obj
+RadiusCollider: 1
+IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: marker_Vector
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/Marker_Vector.obj
+RadiusCollider: 0.1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: marker_Cross
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/Marker_Cross.obj
+RadiusCollider: 0.1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: marker_Point
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/Marker_Point.obj
+RadiusCollider: 0.1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: homo
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/future.bmp
 PathModel3D: ./Models3D/Marker_Point.obj
+RadiusCollider: 1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: cursorRay
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/future.bmp
 PathModel3D: ./Models3D/Marker_Cross.obj
+RadiusCollider: 0.1
+IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: conextGUI
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/future.bmp
 PathModel3D: ./Models3D/InterfacePlaneT11.obj
+RadiusCollider: 0.1
+IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: conextGUI_2
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
 PathModel3D: ./Models3D/InterfacePlaneT11.obj
+RadiusCollider: 0.1
+IsCubeModel: 1
 ------------------------------------------------------------------ 
 

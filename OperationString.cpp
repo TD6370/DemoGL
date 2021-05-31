@@ -22,6 +22,13 @@ string Trim(string str) {
     return str;
 }
 
+bool Str_bool(std::string const& s) {
+
+    //bool b;
+    //std::istringstream m("1") >> b;
+
+    return s != "0";
+}
 
 std::string GetFile(const char* path)
 {

@@ -140,7 +140,8 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 		nextModel.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
 		nextModel.PathTexture = fieldsModel->PathTexture.c_str();
 		nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
-		nextModel.RadiusCollider = 1;
+		nextModel.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
+		nextModel.IsCubeModel = Str_bool(fieldsModel->IsCubeModel);
 		nextModel.Init();
 		AddModel(&nextModel, fieldsModel->Name);
 
@@ -282,8 +283,20 @@ std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(string key)
 	return prt_model;
 }
 
+bool CreatorModelData::IsExistObject(TypeObject typeObj)
+{
+	if ((typeObj == TypeObject::CursorRay ||
+		 typeObj == TypeObject::Hero) // ||	typeObj == TypeObject::GUI
+			&& IsExistObjectByType(typeObj))
+				return true;
+	return false;
+}
+
 //std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
 std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
+
+	if (IsExistObject(p_typeObj))
+		return NULL;
 
 	SceneObjectsLastIndex = SceneObjects.size();
 
@@ -396,6 +409,24 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
+
+bool CreatorModelData::IsExistObjectByName(string key)
+{
+	map <string, int> ::iterator it;
+	it = MapSceneObjects.find(key);
+	return it != MapSceneObjects.end();
+}
+
+bool CreatorModelData::IsExistObjectByType(TypeObject type)
+{
+	for (auto item : SceneObjects) {
+		if(item->TypeObj == type)
+			return true;
+	}
+	return false;
+}
+
+
 void CreatorModelData::GenerateObjects()
 {
 	for (int i = 0; i < LimitSceneObjects; i++)
@@ -438,6 +469,9 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 			
 
 		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue);
+		if (newObj == NULL)
+			continue;
+
 		newObj->Target = objFields->TargetValue;
 
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
@@ -471,7 +505,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 100; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

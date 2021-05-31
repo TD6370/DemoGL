@@ -114,6 +114,7 @@ void SceneConstruction::WorkingRooms() {
 void SceneConstruction::PreparationDataFromShader(bool isUpdate) {
 	
 	bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
+
 	if (isTextureRepeat && !isTextRepeat)
 	{
 		ObjectCurrent->ModelPtr->UpdateBufferUV();
@@ -164,7 +165,7 @@ bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
-	
+
 	//----- Start
 	if (prevModelTexture != ModelCurrent->PathTexture || prevModelModel3D != ModelCurrent->PathModel3D)
 	{
@@ -200,13 +201,13 @@ void SceneConstruction::Update()
 
 	GenMVP();
 
+	countObjects = Storage->SceneObjectsLastIndex;
+
 	if (IsBreakUpdate()) {
 		DrawGraph();
 		WorkingRooms();
 		return;
 	}
-
-	countObjects = Storage->SceneObjectsLastIndex;
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
@@ -228,6 +229,8 @@ void SceneConstruction::Update()
 bool SceneConstruction::IsBreakUpdate()
 {
 	if (Storage->SceneObjects.size() == 0)
+		return true;
+	if(countObjects != Storage->SceneObjectsLastIndex)
 		return true;
 	return false;
 }

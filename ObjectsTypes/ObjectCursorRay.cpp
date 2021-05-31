@@ -73,7 +73,6 @@ void ObjectCursorRay::LockResult() {
 }
 
 void ObjectCursorRay::LockPolygonResult() {
-	//LockResult();
 
 	ActionObjectCurrent = Stay;
 	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
@@ -92,6 +91,7 @@ void ObjectCursorRay::SelectPositionOnPolygon()
 {
 	if (SelectedObjIndex != -1) {
 		std::shared_ptr<ObjectData> selObject = Storage->GetObjectPrt(SelectedObjIndex);
+
 		selObject->MeshTransform();
 
 		/*A* pa = ...;

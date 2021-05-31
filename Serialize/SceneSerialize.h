@@ -32,12 +32,15 @@ struct ObjectFileds {
 	map<string, string> OtherFields;
 };
 
+
 struct ModelFileds {
 	string Name = "Name:";
 	string PathShaderVertex = "PathShaderVertex:";
 	string PathShaderFrag = "PathShaderFrag:";
 	string PathTexture = "PathTexture:";
 	string PathModel3D = "PathModel3D:";
+	string RadiusCollider = "RadiusCollider:";
+	string IsCubeModel = "IsCubeModel:";
 };
 
 struct ObjectFiledsSpecific {

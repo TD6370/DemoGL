@@ -67,6 +67,7 @@ void ObjectDynamic::ActionLook() {
 	float rangeLook = 0.1f;
 	if (TargetAngle.y - rangeLook < TranslateAngle.y && TargetAngle.y + rangeLook > TranslateAngle.y) {
 		NewPostranslate = vec3(0);
+
 		ActionObjectCurrent = Moving;
 	}
 
