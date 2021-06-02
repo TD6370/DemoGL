@@ -1,6 +1,8 @@
 #include "ObjectGUI.h"
 #include "ObjectPhysic.h"
 #include "..\CreatorModelData.h"
+#include "..\Serialize\SceneSerialize.h"
+
 
 void ObjectGUI::RunAction() {
 
@@ -37,10 +39,8 @@ bool ObjectGUI::IsCubeModel() {
 	return true;
 }
 
-
 void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, vec3 color)
 {
-	//vec3 color = vec3(1, 1, 0);
 	if(color == vec3(0))
 		color = vec3(1, 1, 0);
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
@@ -48,16 +48,10 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
 	objGUI->IndexObjectOwner = Index;
 	objGUI->StartPos = startPosChild;
+	objGUI->Size = size;
 	objGUI->Color = color;
 	objGUI->SetSizeControl(vec3(size.x, size.y, 1));
-
-	//resize mesh
-
-	//objGUI->Size = vec3(size.x, size.y, 1);
-	//objGUI->Size = vec3(size.x,size.y,1);
 }
-
-
 
 void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 	//-- set transform
@@ -86,4 +80,31 @@ void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 		SetBottom(1, vertBottomRight);
 
 	}
+}
+
+//------ #FieldSpecific
+
+vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
+
+	SceneSerialize* serializer = new SceneSerialize();
+
+	vector<ObjectFiledsSpecific> result { 
+		{"StartPos:", serializer->Vec3Str(StartPos)} ,
+		{"Size:", serializer->Vec2Str(Size)}
+	};
+
+	return result;
+}
+
+void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
+
+	if (IndexObjectOwner == -1) //Back GUI
+		return;
+
+	SceneSerialize* serializer = new SceneSerialize();
+
+	StartPos = serializer->StrToVec3(filedsSpecific[0].Value);
+	Size = serializer->StrToVec3(filedsSpecific[1].Value);
+	
+	SetSizeControl(vec3(Size.x, Size.y, 1));
 }

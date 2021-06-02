@@ -13,6 +13,7 @@ using glm::vec3;
 using glm::vec2;
 using std::map;
 using std::string;
+using std::shared_ptr;
 
 class ObjectGUI :
 	public ObjectPhysic
@@ -21,17 +22,7 @@ class ObjectGUI :
 
 public:
 	vec3 StartPos = vec3(0);
-	//vec2 SizeControl = vec2(.1f,1.f);
-
-	/*ObjectGUI(
-		int p_index,
-		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = NPC,
-		vec3 p_pos = vec3(0))
-		: ObjectData(p_index,
-			p_model,
-			p_typeObj,
-			p_pos) {};*/
+	vec2 Size = vec2(0);
 
 	ObjectGUI(
 		int p_index,
@@ -56,4 +47,10 @@ public:
 	bool IsCubeModel();
 
 	void SetSizeControl(vec3 size);
+
+	//#FieldSpecific
+
+	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
+
+	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };

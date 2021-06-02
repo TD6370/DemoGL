@@ -466,9 +466,9 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
 		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
-			
-
+	
 		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue);
+	
 		if (newObj == NULL)
 			continue;
 
@@ -476,6 +476,10 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
 		newObj->ActionObjectCurrent = typeAction;
+
+		newObj->IndexObjectOwner = std::stoi(objFields->IndexObjectOwner);
+
+		newObj->Color = objFields->ColorValue;
 
 		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
@@ -505,7 +509,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

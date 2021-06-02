@@ -23,6 +23,7 @@ struct World {
 struct SceneParam {
 	int IndexCursorRayObj;
 	int IndexHeroObj;
+	int IndexGUIObj;
 	bool IsGUI = false;
 };
 

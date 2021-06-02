@@ -51,13 +51,13 @@ SceneSerialize::~SceneSerialize() {
 void  SceneSerialize::SaveSpecific(vector<ObjectFiledsSpecific>& specificFields) {
 
 	//#SaveFieldSpecific
-	return;
-
-	ObjectFileds fileds;
-	std::stringstream streamObjects;
+	//return;
 
 	if (specificFields.size() == 0)
 		return;
+
+	ObjectFileds fileds;
+	std::stringstream streamObjects;
 
 	streamObjects << m_specificFields << "\n";
 	
@@ -72,7 +72,7 @@ void  SceneSerialize::SaveSpecific(vector<ObjectFiledsSpecific>& specificFields)
 }
 
 // -------------------- Serialize	->	ObjectData
-void  SceneSerialize::Save(shared_ptr<ObjectData> obj) {
+void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 
 	ObjectFileds fileds;
 	std::stringstream streamObjects;
@@ -84,7 +84,12 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj) {
 	streamObjects << fileds.Postranslate << " " << Vec3Str(obj->Postranslate) << "\n";
 	streamObjects << fileds.Target << " " << Vec3Str(obj->Target) << "\n";
 	streamObjects << fileds.ActionObjectCurrent << " " << GetNameType(obj->ActionObjectCurrent) << "\n";
-	streamObjects << m_stringSeparator << "\n";
+
+	streamObjects << fileds.IndexObjectOwner << " " << obj->IndexObjectOwner << "\n";
+	streamObjects << fileds.Color << " " << Vec3Str(obj->Color) << "\n";
+
+	if(!isSpecificExist)
+		streamObjects << m_stringSeparator << "\n";
 	
 	m_dataObjects.append(streamObjects.str());
 }
@@ -114,6 +119,35 @@ std::string SceneSerialize::Vec3Str(glm::vec3 vec) {
 	std::ostringstream os;
 	os << vec.x << " " << vec.y << " " << vec.z;
 	return os.str();
+}
+
+std::string SceneSerialize::Vec2Str(glm::vec2 vec) {
+	std::ostringstream os;
+	os << vec.x << " " << vec.y;
+	return os.str();
+}
+
+vec3 SceneSerialize::StrToVec3(string& value) {
+	std::stringstream streamFieldValue;
+	vec3 result;
+
+	streamFieldValue.str(value);
+	streamFieldValue >> result.x;
+	streamFieldValue >> result.y;
+	streamFieldValue >> result.z;
+
+	return result;
+}
+
+vec2 SceneSerialize::StrToVec2(string& value) {
+	std::stringstream streamFieldValue;
+	vec2 result;
+
+	streamFieldValue.str(value);
+	streamFieldValue >> result.x;
+	streamFieldValue >> result.y;
+
+	return result;
 }
 
 //-------------------------------------- ActionObject
@@ -250,64 +284,77 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 		FiledsObjectsSpecific.clear();
 		vector<ObjectFiledsSpecific> specificFiels;
 
-		//vector<shared_ptr<ObjectFiledsSpecific>>* specificFiels;
-		//vector<shared_ptr<ObjectFiledsSpecific>> specificFiels;
-
 		bool isNext = false;
+		bool isSpecificFields = false;
 
 		ObjectFileds filedsObj;
 		ObjectFileds filedsObjResult;
+		ObjectFiledsSpecific fieldsSpecific = ObjectFiledsSpecific();
 
 		while (!in.eof()) {
-			//std::getline(in, line);
 
-			if (in >> lineStr && lineStr == filedsObj.Type) {
+			if (!isSpecificFields)
+			{
 				if (isNext)
 				{
 					FiledsObjectsSpecific.push_back(specificFiels);
 					FiledsObjects.push_back(std::make_unique<ObjectFileds>(filedsObjResult));
+					specificFiels.clear();
 					isNext = false;
 				}
+				if (in >> lineStr && lineStr == filedsObj.Type) {
+					in >> filedsObj.Type;
+				}
+				else {
+					if (lineStr.size() == 0) {
+						break;
+					}
+				}
+				if (in >> lineStr && lineStr == filedsObj.Name)
+					in >> filedsObj.Name;
+				if (in >> lineStr && lineStr == filedsObj.Model)
+					in >> filedsObj.Model;
 
-				in >> filedsObj.Type;
-			}
-			else {
-				if (lineStr.size() == 0) {
-					break;
+				if (in >> lineStr && lineStr == filedsObj.Postranslate) {
+					in >> filedsObj.PostranslateValue.x;
+					in >> filedsObj.PostranslateValue.y;
+					in >> filedsObj.PostranslateValue.z;
+				}
+
+				if (in >> lineStr && lineStr == filedsObj.Target) {
+					in >> filedsObj.TargetValue.x;
+					in >> filedsObj.TargetValue.y;
+					in >> filedsObj.TargetValue.z;
+				}
+
+				if (in >> lineStr && lineStr == filedsObj.ActionObjectCurrent)
+					in >> filedsObj.ActionObjectCurrent;
+
+				if (in >> lineStr && lineStr == filedsObj.IndexObjectOwner)
+					in >> filedsObj.IndexObjectOwner;
+
+				if (in >> lineStr && lineStr == filedsObj.Color) {
+					in >> filedsObj.ColorValue.x;
+					in >> filedsObj.ColorValue.y;
+					in >> filedsObj.ColorValue.z;
 				}
 			}
-			if (in >> lineStr && lineStr == filedsObj.Name)
-				in >> filedsObj.Name;
-			if (in >> lineStr && lineStr == filedsObj.Model)
-				in >> filedsObj.Model;
-
-			if (in >> lineStr && lineStr == filedsObj.Postranslate) {
-				in >> filedsObj.PostranslateValue.x;
-				in >> filedsObj.PostranslateValue.y;
-				in >> filedsObj.PostranslateValue.z;
-			}
-
-			if (in >> lineStr && lineStr == filedsObj.Target) {
-				in >> filedsObj.TargetValue.x;
-				in >> filedsObj.TargetValue.y;
-				in >> filedsObj.TargetValue.z;
-			}
-
-			if (in >> lineStr && lineStr == filedsObj.ActionObjectCurrent)
-				in >> filedsObj.ActionObjectCurrent;
 
 			if (in >> lineStr && lineStr == m_stringSeparator) {
 
 				filedsObjResult = filedsObj;
 				filedsObj = ObjectFileds();
+				isSpecificFields = false;
 				isNext = true;
 			}
 			else if (lineStr == m_specificFields)
 			{
-				//#SaveFieldSpecific
-				ObjectFiledsSpecific fieldsSpecific = ObjectFiledsSpecific();
-				in >> fieldsSpecific.FieldName;
-				in >> fieldsSpecific.Value;
+				isSpecificFields = true;
+			}
+			else if (isSpecificFields) 
+			{
+				fieldsSpecific.FieldName = lineStr;
+				std::getline(in, fieldsSpecific.Value);
 				specificFiels.push_back(fieldsSpecific);
 			}
 		}

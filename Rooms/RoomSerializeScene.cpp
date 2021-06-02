@@ -53,10 +53,15 @@ void RoomSerializeScene::Save() {
 		return;
 
 	if (IsValidSave(Scene->ObjectCurrent)) {
-		_serializer->Save(Scene->ObjectCurrent);
-
+		
 		//#SaveFieldSpecific
 		vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
+		bool isSpecificExist = specificFiels.size() != 0;
+		
+		_serializer->Save(Scene->ObjectCurrent, isSpecificExist);
+
+		
+		//vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
 		_serializer->SaveSpecific(specificFiels);
 	}
 

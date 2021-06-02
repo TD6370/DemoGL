@@ -12,6 +12,7 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 using glm::vec3;
+using glm::vec2;
 
 class ModelData;
 class ObjectData;
@@ -28,6 +29,9 @@ struct ObjectFileds {
 	string Target = "Target:";
 	vec3 TargetValue;
 	string ActionObjectCurrent = "Action:";
+	string IndexObjectOwner = "IndexObjectOwner:";
+	string Color = "Color:";
+	vec3 ColorValue;
 
 	map<string, string> OtherFields;
 };
@@ -73,7 +77,7 @@ public:
 	
 	virtual ~SceneSerialize();
 
-	void Save(shared_ptr<ObjectData> obj);
+	void Save(shared_ptr<ObjectData> obj, bool isSpecificExist);
 
 	void Save(shared_ptr<ModelData> model);
 	
@@ -88,6 +92,12 @@ public:
 	//string GetValue(string nameField, TypeValue value);
 
 	string Vec3Str(vec3 vec);
+
+	string Vec2Str(vec2 vec);
+
+	vec3 StrToVec3(string& value);
+
+	vec2 StrToVec2(string& value);
 
 	string GetNameType(TypeObject typeObj);
 	TypeObject GetTypeObject(string name);
