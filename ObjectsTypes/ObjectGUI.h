@@ -50,7 +50,7 @@ public:
 
 	//#FieldSpecific
 
-	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
+	vector<ObjectFiledsSpecific> GetSpecificFiels();
 
-	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };

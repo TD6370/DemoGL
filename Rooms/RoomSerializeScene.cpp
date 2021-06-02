@@ -54,6 +54,10 @@ void RoomSerializeScene::Save() {
 
 	if (IsValidSave(Scene->ObjectCurrent)) {
 		
+		//TEST
+		//auto str = Scene->ObjectCurrent->Name;
+		//auto str2 = Scene->ObjectCurrent->TypeObj;
+
 		//#SaveFieldSpecific
 		vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
 		bool isSpecificExist = specificFiels.size() != 0;

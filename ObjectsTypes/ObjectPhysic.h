@@ -15,15 +15,13 @@ using glm::vec2;
 class ObjectPhysic :
 	public ObjectData
 {
-private:
+protected:
 	void FillPlanesCube();
 	
 public:
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
 
-	//std::map<int, vec3> TopVectors;
-	//std::map<int, vec3> BottomVectors;
 	int IndexVertexTransform = -1;
 
 	ObjectPhysic(

@@ -12,7 +12,12 @@
 //using glm::vec4;
 //using glm::vec3;
 //using glm::vec2;
+using std::string;
 
+struct BlockFileds {
+	string Vertex = "Vertex:";
+	string UV = "UV:";
+};
 
 
 class ObjectBlock :
@@ -22,10 +27,6 @@ public:
 
 	int KeyUpTopVertex = GLFW_KEY_KP_ADD;
 	int KeyDownTopVertex = GLFW_KEY_KP_SUBTRACT;
-
-	//std::map<int, vec3> TopVectors;
-	//std::map<int, vec3> BottomVectors;
-	//int IndexVertexTransform = -1;
 
 	float StartLenghtWall = 1;
 			
@@ -67,4 +68,8 @@ public:
 	void CalculateTextureUV(bool isInit = false);
 
 	void ControlsEvents();
+
+	vector<ObjectFiledsSpecific> GetSpecificFiels();
+
+	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };

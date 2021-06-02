@@ -132,6 +132,9 @@ void ObjectPhysic::FillPlanesCube()
 	int indexPlaneB = 0;
 	int indVert = 0;
 
+	BottomVectors.clear();
+	TopVectors.clear();
+
 	while (indVert < GetVertices().size())
 	{
 		vec3 vertexNext = GetVertices()[indVert];
