@@ -109,6 +109,9 @@ void ObjectCursorRay::TargetCompleted()
 
 void ObjectCursorRay::Push() {
 
+	if (Storage->SceneData->IsGUI)
+		return;
+
 	if (Storage->Inputs->MBT == KeyPush) {
 		
 		Storage->Inputs->MBT = -1;

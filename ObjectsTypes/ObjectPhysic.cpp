@@ -221,7 +221,6 @@ vec4 ObjectPhysic::GetLine(int index) {
 	return line;
 }
 
-
 vec3 ObjectPhysic::GetBottom(int index) {
 	return BottomVectors[index];
 }
@@ -259,4 +258,24 @@ void ObjectPhysic::SetTop(int index, vec3 value) {
 		}
 		indVert++;
 	}
+}
+
+
+void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
+
+	glm::mat4 MVP = Storage->ConfigMVP->MVP;
+	glm::mat4 transform = TransformResult;
+	vec3 vertBottomLeft = GetBottom(0);
+	vec3 vertBottomRight = GetBottom(1);
+	vec3 vertTopLeft = GetTop(0);
+	vec3 vertTopRight = GetTop(1);
+	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
+	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
+	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
+	vec3 posWorldTR = MVP * transform * vec4(vertTopRight, 1.0);
+	zOrder = posWorldTR.z;
+	startPos.x = posWorldBL.x, 
+	startPos.y = posWorldTL.y;
+	endPos.x = posWorldBR.x;
+	endPos.y = posWorldBL.y;
 }

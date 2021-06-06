@@ -1,9 +1,10 @@
 #include "SceneConstruction.h"
 //#include "SceneRoom.h"
 //#include "CreatorModelData.h"
-#include "Rooms\SceneRoom.h"
-#include "Rooms\RoomMarkerPlane.h"
-#include "Rooms\RoomSerializeScene.h"
+#include "Rooms/SceneRoom.h"
+#include "Rooms/RoomMarkerPlane.h"
+#include "Rooms/RoomSerializeScene.h"
+#include "Rooms/RoomUseInterface.h"
 
 #include "CreatorModelData.h"
 #include "TransformModel.h"
@@ -13,9 +14,7 @@
 #include "ObjectsTypes/ObjectDynamic.h"
 
 #include "CoreSettings.h"
-//#include "WorldCollision.h"
 #include "GeometryLib.h"
-#include "Rooms/RoomSerializeScene.h"
 #include "Serialize/SceneSerialize.h"
 
 #include <glm/glm.hpp>
@@ -78,19 +77,27 @@ void SceneConstruction::LoadDataModel()
 	}*/
 }
 
+//*** introduction
 void SceneConstruction::ConfigRoom() {
 
+	//*** create Aspect
 	SceneRoom* room = new SceneRoom("Base", this);
 	room->Init();
+	//*** join point
 	AddRoom(room);
 
 	RoomMarkerPlane* roomMarkers = new RoomMarkerPlane("Markers", this);
 	roomMarkers->Init();
+	//*** join point
 	Rooms.push_back(make_unique<RoomMarkerPlane>(*roomMarkers));
 
 	RoomSerializeScene* roomSerializator = new RoomSerializeScene("Serialize", this);
 	roomSerializator->Init();
 	Rooms.push_back(make_unique<RoomSerializeScene>(*roomSerializator));
+
+	RoomUseInterface* roomInterface = new RoomUseInterface("Interface", this);
+	roomInterface->Init();
+	Rooms.push_back(make_unique<RoomUseInterface>(*roomInterface));
 }
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
@@ -104,9 +111,11 @@ void SceneConstruction::ResetRooms() {
 	}
 }
 
+//*** Pointcut
 void SceneConstruction::WorkingRooms() {
 
 	for(auto room : Rooms){
+		//*** Advice
 		room->Work();
 	}
 }
@@ -224,6 +233,7 @@ void SceneConstruction::Update()
 	Storage->Inputs->MBT = -1;
 	Storage->Inputs->Key = -1;
 	Storage->Inputs->Action = -1;
+	Storage->Inputs->ActionMouse = -1;
 }
 
 bool SceneConstruction::IsBreakUpdate()

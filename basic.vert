@@ -51,8 +51,6 @@ void main()
 	gl_Position = MVP * transform *vec4(position, 1.0);
 
 	//-- Light position
-	//vec3 LightPosition_worldspace= setColor;
-	//vec3 LightPosition_worldspace= vec3(sin(fTime)*2f,0.0f,cos(fTime)*2f);
 	vec3 LightPosition_worldspace = (inverse(transform) * vec4(lightPos, 1.0)).xyz;
 
 	//------- dist light
@@ -90,15 +88,6 @@ void main()
 	cosAlpha = clamp( dot( E,R ), 0,1 );
 	//--------------------------------------	
 
-	
-	//gl_Position = vec4(position.x, position.y, position.z, 1.0);
-
-	// ---------- Выходная позиция нашей вершины: MVP * position
-	//gl_Position = MVP *vec4(position, 1.0);
-	//bug
-	//gl_Position = transform *vec4(position, 1.0);
-	//gl_Position *= MVP;
-	//gl_Position = MVP * transform *vec4(position, 1.0);
 
 	// ---- OUT 
 	//fragmentColor = vertexColor;
@@ -106,11 +95,8 @@ void main()
 	UV = vertexUV;
 	fragParamCase = paramCase;
 	fragPosMouse = setPosMouse;
-	//fragPos= position;
 	fragPos= vec3(gl_Position.x,gl_Position.y,gl_Position.z);
 	fragTime = fTime;
 
 	fragLightDist = distLight; 
-
-	//gl_Position = vec4(vertexColor.x, vertexColor.y, vertexColor.z, 1.0);
 }

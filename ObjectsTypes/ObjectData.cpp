@@ -123,6 +123,8 @@ void ObjectData::RunTransform()
 		Postranslate,
 		TranslateAngle,
 		Size);
+
+	TransformResult = trans;
 	//---------------------------------------------------
 	ModelPtr->ConfUniform.SetTransform(&trans);
 }

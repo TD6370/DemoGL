@@ -21,7 +21,7 @@ void RoomMarkerPlane::Work() {
 
 	string name = Scene->ObjectCurrent->Name;
 
-	if (Scene->ObjectCurrent->Name == "Plane") {
+	if (name == "Plane") {
 		vec3 vectorsParams[10];
 
 		Scene->ModelCurrent->ConfUniform.SetParamCase(55);
@@ -40,27 +40,27 @@ void RoomMarkerPlane::Work() {
 	}
 
 
-	if (Scene->ObjectCurrent->Name == "M_V_1") {
+	if (name == "M_V_1") {
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		if (objectObserver->TempVectors.size() > 0)
 			Scene->ObjectCurrent->Postranslate = objectObserver->TempVectors[0];
 	}
-	if (Scene->ObjectCurrent->Name == "M_V_2") {
+	if (name == "M_V_2") {
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		if (objectObserver->TempVectors.size() > 1)
 			Scene->ObjectCurrent->Postranslate = objectObserver->TempVectors[1];
 	}
-	if (Scene->ObjectCurrent->Name == "M_V_3") {
+	if (name == "M_V_3") {
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		if (objectObserver->TempVectors.size() > 2)
 			Scene->ObjectCurrent->Postranslate = objectObserver->TempVectors[2];
 	}
-	if (Scene->ObjectCurrent->Name == "M_C_2") {
+	if (name == "M_C_2") {
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		Scene->ObjectCurrent->Postranslate = objectObserver->PlaneDownPosition;
 	}
 
-	if (Scene->ObjectCurrent->Name == "M_C_1") {
+	if (name == "M_C_1") {
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		Scene->ObjectCurrent->Postranslate = objectObserver->Postranslate; //nearestPolygonIntersectionPoint - blue
 	}

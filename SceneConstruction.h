@@ -34,6 +34,7 @@ using std::shared_ptr;
 using std::string;
 using glm::vec3;
 
+//*** Data Pipeline Aspects (DPA)
 class SceneConstruction
 {
 private:
@@ -94,14 +95,17 @@ public:
 
 	void LoadDataModel();
 
+	//*** introduction
 	void ConfigRoom();
 
+	//*** add Aspect
 	void AddRoom(SceneRoom* room);
 
 	bool IsBreakUpdate();
 
 	void ResetRooms();
 
+	//*** Pointcut
 	void WorkingRooms();
 
 	bool SetObject(int i, bool& isUpdate);

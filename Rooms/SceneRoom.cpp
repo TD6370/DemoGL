@@ -23,6 +23,19 @@ void SceneRoom::Init() {
 	
 }
 
+//*** Advice before
+void SceneRoom::BeforeWork() {}
+
+//*** Advice after
+void SceneRoom::AfterWork() {}
+
+//*** Advice first
+void SceneRoom::FirstWork() {}
+
+//*** Advice last
+void SceneRoom::LastWork() {}
+
+//*** Advice (after default)
 void SceneRoom::Work() {
 
 	//====================== WorkingRooms

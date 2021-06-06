@@ -10,9 +10,9 @@ Color: 0 0 0
 Type: NPC
 Name: Mon
 Model: mon
-Pos: -43.0105 -52.9176 15.2559
-Target: -37.0105 -52.9176 31.2559
-Action: Look
+Pos: 10.7431 -52.9712 5.10906
+Target: 24.583 -52.7566 14.3357
+Action: Moving
 IndexObjectOwner: -1
 Color: 0 0 0
 ------------------------------------------------------------------
@@ -52,42 +52,42 @@ Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
 Specific:
-Vertex: 28.6228 9 0.482685
-Vertex: 28.6228 -1 0.482685
-Vertex: 18.7129 -1 -19.2984
-Vertex: 28.6228 9 0.482685
-Vertex: 18.7129 -1 -19.2984
-Vertex: 18.7129 1 -19.2984
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
 Vertex: -1 -1 1
 Vertex: -1 1 1
-Vertex: 18.7129 1 -19.2984
+Vertex: -1 1 -1
 Vertex: -1 -1 1
-Vertex: 18.7129 1 -19.2984
-Vertex: 18.7129 -1 -19.2984
-Vertex: 5.33225 -1 9.83076
-Vertex: 5.33225 9 9.83076
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
 Vertex: -1 -1 1
-Vertex: 5.33225 9 9.83076
+Vertex: 0.999999 1 1
 Vertex: -1 1 1
 Vertex: -1 -1 1
-Vertex: 28.6228 -1 0.482685
-Vertex: 28.6228 9 0.482685
-Vertex: 5.33225 -1 9.83076
-Vertex: 28.6228 9 0.482685
-Vertex: 5.33225 9 9.83076
-Vertex: 5.33225 -1 9.83076
-Vertex: 28.6228 9 0.482685
-Vertex: 18.7129 1 -19.2984
-Vertex: 5.33225 9 9.83076
-Vertex: 18.7129 1 -19.2984
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
 Vertex: -1 1 1
-Vertex: 5.33225 9 9.83076
-Vertex: 28.6228 -1 0.482685
-Vertex: 5.33225 -1 9.83076
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
 Vertex: -1 -1 1
-Vertex: 28.6228 -1 0.482685
+Vertex: 1 -1 -1
 Vertex: -1 -1 1
-Vertex: 18.7129 -1 -19.2984
+Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox1
@@ -104,35 +104,35 @@ Vertex: -1 -1 -1
 Vertex: 1 1 -1
 Vertex: -1 -1 -1
 Vertex: -1 1 -1
-Vertex: -8.62815 -1 17.113
-Vertex: -8.62815 1 17.113
+Vertex: -1 -1 1
+Vertex: -1 1 1
 Vertex: -1 1 -1
-Vertex: -8.62815 -1 17.113
+Vertex: -1 -1 1
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
-Vertex: 5.16112 -1 18.0098
-Vertex: 5.16112 1 18.0098
-Vertex: -8.62815 -1 17.113
-Vertex: 5.16112 1 18.0098
-Vertex: -8.62815 1 17.113
-Vertex: -8.62815 -1 17.113
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: 5.16112 -1 18.0098
+Vertex: 1 -1 1
 Vertex: 1 1 -1
-Vertex: 5.16112 1 18.0098
-Vertex: 5.16112 -1 18.0098
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
 Vertex: 1 1 -1
 Vertex: -1 1 -1
-Vertex: 5.16112 1 18.0098
+Vertex: 0.999999 1 1
 Vertex: -1 1 -1
-Vertex: -8.62815 1 17.113
-Vertex: 5.16112 1 18.0098
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
 Vertex: 1 -1 -1
-Vertex: 5.16112 -1 18.0098
-Vertex: -8.62815 -1 17.113
+Vertex: 1 -1 1
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
-Vertex: -8.62815 -1 17.113
+Vertex: -1 -1 1
 Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
@@ -144,42 +144,42 @@ Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
 Specific:
-Vertex: 5.215 1 -16.4045
-Vertex: 5.215 -1 -16.4045
-Vertex: -1.61222 -1 -17.9065
-Vertex: 5.215 1 -16.4045
-Vertex: -1.61222 -1 -17.9065
-Vertex: -1.61222 7 -17.9065
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
 Vertex: -1 -1 1
 Vertex: -1 1 1
-Vertex: -1.61222 7 -17.9065
+Vertex: -1 1 -1
 Vertex: -1 -1 1
-Vertex: -1.61222 7 -17.9065
-Vertex: -1.61222 -1 -17.9065
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
 Vertex: 1 -1 1
 Vertex: 0.999999 1 1
 Vertex: -1 -1 1
 Vertex: 0.999999 1 1
 Vertex: -1 1 1
 Vertex: -1 -1 1
-Vertex: 5.215 -1 -16.4045
-Vertex: 5.215 1 -16.4045
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
 Vertex: 1 -1 1
-Vertex: 5.215 1 -16.4045
+Vertex: 1 1 -1
 Vertex: 0.999999 1 1
 Vertex: 1 -1 1
-Vertex: 5.215 1 -16.4045
-Vertex: -1.61222 7 -17.9065
+Vertex: 1 1 -1
+Vertex: -1 1 -1
 Vertex: 0.999999 1 1
-Vertex: -1.61222 7 -17.9065
+Vertex: -1 1 -1
 Vertex: -1 1 1
 Vertex: 0.999999 1 1
-Vertex: 5.215 -1 -16.4045
+Vertex: 1 -1 -1
 Vertex: 1 -1 1
 Vertex: -1 -1 1
-Vertex: 5.215 -1 -16.4045
+Vertex: 1 -1 -1
 Vertex: -1 -1 1
-Vertex: -1.61222 -1 -17.9065
+Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox3
@@ -257,8 +257,8 @@ Color: 0 0 0
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Pos: 52.6479 -86.7211 5.92192
-Target: 55.2044 -87.8563 7.44863
+Pos: 0 0 0
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 0 0 0
@@ -266,7 +266,7 @@ Color: 0 0 0
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: -43.0105 -52.9176 15.2559
+Pos: 10.7431 -52.9712 5.10906
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -275,7 +275,7 @@ Color: 0 0 0
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: -42.6945 -54.9622 14.8721
+Pos: 10.3271 -54.9775 4.83174
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -284,7 +284,7 @@ Color: 0 0 0
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: -44.0415 -54.9574 13.6975
+Pos: 7.15379 -54.9768 4.23006
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -293,7 +293,7 @@ Color: 0 1 0
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: -40.8569 -54.9696 16.9068
+Pos: 10.4939 -54.9905 7.39114
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -302,7 +302,7 @@ Color: 0 0 1
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: -40.8597 -54.971 13.715
+Pos: 10.5079 -54.9766 4.21938
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -320,7 +320,7 @@ Color: 0 0 0
 Type: GUI
 Name: BackContectGUI
 Model: conextGUI
-Pos: 0 -50 0
+Pos: -2.44119 -52.3936 4.30221
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -332,11 +332,11 @@ Size: 0 0
 Type: GUI
 Name: TEST1
 Model: conextGUI_2
-Pos: 0 0 0
+Pos: -2.41985 -52.4439 4.25597
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: 20
-Color: 1 1 0
+Color: 0 0 0
 Specific:
 StartPos: 0.05 0.05 0.01
 Size: 0.1 0.1
@@ -344,11 +344,11 @@ Size: 0.1 0.1
 Type: GUI
 Name: TEST2
 Model: conextGUI_2
-Pos: 0 0 0
+Pos: -2.35472 -52.4439 4.01461
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: 20
-Color: 0 1 1
+Color: 0 0 0
 Specific:
 StartPos: 0.3 0.05 0.01
 Size: 0.1 0.1
@@ -356,11 +356,11 @@ Size: 0.1 0.1
 Type: GUI
 Name: TEST3
 Model: conextGUI_2
-Pos: 0 0 0
+Pos: -2.42593 -52.5938 4.25433
 Target: 0 0 0
-Action: Lock
+Action: Woking
 IndexObjectOwner: 20
-Color: 1 1 0
+Color: 0 1 0
 Specific:
 StartPos: 0.05 0.2 0.01
 Size: 0.4 0.2

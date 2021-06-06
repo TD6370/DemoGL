@@ -64,6 +64,7 @@ struct ControllerInput {
 	int Key = -1;
 	int Action = -1;
 	int MBT = -1;
+	int ActionMouse = -1;
 	GLfloat ParamCase = 0;
 };
 
@@ -77,9 +78,11 @@ struct CoreMVP {
 	glm::mat4 Model;
 	// Итоговая матрица ModelViewProjection, которая является результатом перемножения наших трех матриц
 	glm::mat4 MVP;
+
+	glm::mat4 Projection;
 };
 
-enum ActionObject { Moving, Stay, Look, Search, Lock, Starting }; // , EventControl };
+enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking }; // , EventControl };
 
 enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI};
 

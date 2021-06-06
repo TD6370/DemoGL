@@ -260,6 +260,7 @@ using glm::dot;
         }
     }
 
+   
     //................
 
 
@@ -349,11 +350,10 @@ using glm::dot;
         // Return the distance to the [first] intersecting point
         return (v - sqrt(d));
     }
-
-    
+     
     //The whole process of finding the final sphere intersection pointand polygon intersection finally boils down to a few lines of code :
-    // find polygon intersection point. By default we assume its equal to the 
-    // plane intersection point. In that case we already know the distance to it.
+  // find polygon intersection point. By default we assume its equal to the 
+  // plane intersection point. In that case we already know the distance to it.
     void Plane::CalculatePolygonIntersectionPoint()
     {
         vec3 polyIPoint = P_Point;
@@ -374,6 +374,19 @@ using glm::dot;
             }
         }
         //--
+    }
+
+
+    bool CheckPointInRectangle(vec3& point, vec2& startPos, vec2& endPos)
+    {
+        if(point.x > startPos.x &&
+            point.y < startPos.y &&
+            point.x < endPos.x &&
+            point.y > endPos.y)
+        {
+            return true;
+        }
+        return false;
     }
 
     //0000000000000000

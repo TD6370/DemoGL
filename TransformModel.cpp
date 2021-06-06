@@ -199,32 +199,17 @@ void TransformModel::GenMVP(
 	ConfigMVP->Model = Model;
 	ConfigMVP->View = View;
 	ConfigMVP->MVP = MVP;
+	ConfigMVP->Projection = Projection;
 
-	//GetPositionModelCursor(Projection, View, Model);
-	//p_operator.m_positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator.m_MouseX, p_operator.m_MouseY, m_widthWindow, m_heightWindow);
-	glm::vec3 positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator->m_MouseX, p_operator->m_MouseY, m_widthWindow, m_heightWindow);
-	p_operator->PositionCursorModel = positionCursorModel;
-	
+	//glm::vec3 positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator->m_MouseX, p_operator->m_MouseY, m_widthWindow, m_heightWindow);
+	//p_operator->PositionCursorModel = positionCursorModel;
+	p_operator->PositionCursorModel = vec3(0);
 }
 
 
-//vec3 GetVectorForwardFace(GLfloat lenght) {
-//	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-//	//float offset = 0.2f;
-//	float offset = 1 / lenght;
-//	vec3 directionFace = glm::vec3(
-//		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
-//		sin(operatorG->VerticalAngle - offset),
-//		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
-//	);
-//	vec3 direction = directionFace * lenght;
-//	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
-//	return posFace;
-//}
-
 vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
 	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-	//float offset = 0.2f;
+	
 	float offset = 1 / lenght;
 	vec3 directionFace = glm::vec3(
 		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
@@ -258,11 +243,10 @@ vec3 GetVectorForwardFaceOffset(CoreMVP* ConfigMVP, GLfloat lenght, Operator* op
 		sin(operatorG->VerticalAngle - offset),
 		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
 	);
-
-	
+		
 	vec3 direction = directionFace * lenght;
 	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
-	
+
 	return posFace;
 }
 

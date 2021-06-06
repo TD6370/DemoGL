@@ -79,6 +79,7 @@ public:
 
 	vec4 GetLine(int index);
 
+	void GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 	//----------
 
 	bool virtual IsCubeModel();

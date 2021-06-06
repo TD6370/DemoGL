@@ -23,6 +23,7 @@ using glm::vec4;
 using glm::vec3;
 using glm::vec2;
 using glm::linearRand;
+using glm::mat4;
 using std::string;
 using std::shared_ptr;
 using std::map;
@@ -76,6 +77,7 @@ public:
 	vec3 Target = vec3(0);
 	std::vector<int> tramsformTypes;
 	ActionObject ActionObjectCurrent;
+	mat4 TransformResult;
 
 	int minDist = 5;
 	int DistanceTarget = 20;

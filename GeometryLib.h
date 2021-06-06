@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <glm/glm.hpp>
 
 using glm::vec4;
@@ -9,7 +10,10 @@ using glm::vec2;
 //enum {INTERSECTS, FRONT, BEHIND } ClassifySphereType;
 enum { FRONT, INTERSECTS, BEHIND };
 
+
 bool CheckPointInTriangle(vec3 point, vec3 a, vec3 b, vec3 c);
+
+bool CheckPointInRectangle(vec3& point, vec2& startPos, vec2& endPos);
 
 class Plane {
 public:

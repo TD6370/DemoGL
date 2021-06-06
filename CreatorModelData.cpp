@@ -588,7 +588,6 @@ void CreatorModelData::LoadObjectsGUI() {
 		objName = "TEST2";
 		caption = objBackGUI->Name + "." + objName;
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));
-
 		
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;

@@ -49,15 +49,12 @@
     <Filter Include="Browsers\Serialize">
       <UniqueIdentifier>{c1ce9be3-0919-4a2d-b357-4a0ae23fdfaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{dd8cc210-2f3f-4ed2-845e-fdf7a3473ed8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OperationString.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryLib.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ModelData.cpp">
@@ -144,18 +141,21 @@
     <ClCompile Include="Serialize\SceneSerialize.cpp">
       <Filter>Browsers\Serialize</Filter>
     </ClCompile>
+    <ClCompile Include="Rooms\RoomUseInterface.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryLib.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationString.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="OperationString.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryLib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectData.h">
@@ -241,6 +241,15 @@
     </ClInclude>
     <ClInclude Include="Serialize\SceneSerialize.h">
       <Filter>Browsers\Serialize</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\RoomUseInterface.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLib.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationString.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

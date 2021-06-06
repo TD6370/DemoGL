@@ -7,8 +7,22 @@
 void ObjectGUI::RunAction() {
 
 	UpdateState();
+
+	if (ActionObjectCurrent != Lock)
+	{
+		switch (ActionObjectCurrent)
+		{
+			case Woking:
+				Work();
+				break;
+			default:
+				DefaultSate();
+				break;
+		}
+	}
 	ObjectData::ActionBase();
 }
+
 
 void ObjectGUI::InitData() {
 
@@ -21,13 +35,18 @@ void ObjectGUI::UpdateState() {
 	if (!Storage->SceneData->IsGUI)
 		return;
 
-	float zOrder = 3.8;
+	vec3 directionOut = vec3(0);
+	PanelDepth = 3.8;
+	//PanelDepth = 4.8;
+	//PanelDepth = 5.8;
+	//PanelDepth = 6.8;
 	if (StartPos == vec3(0)) {
-		Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, zOrder, Storage->Oper);
+		Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, PanelDepth, Storage->Oper);
 	}else	{
-		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, zOrder - 0.01f, Storage->Oper , StartPos);
+		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper , StartPos);
 	}
 
+	//StateRunning();
 	Billboard();
 }
 
@@ -82,8 +101,6 @@ void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 	}
 }
 
-//------ #FieldSpecific
-
 vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
 
 	SceneSerialize* serializer = new SceneSerialize();
@@ -107,4 +124,22 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	Size = serializer->StrToVec3(filedsSpecific[1].Value);
 	
 	SetSizeControl(vec3(Size.x, Size.y, 1));
+}
+
+void ObjectGUI::Click() {
+	ActionObjectCurrent = Woking;
+}
+
+void ObjectGUI::Work() {
+
+	Color = m_color_work;
+	//ActionObjectCurrent = Stay;
+}
+
+void ObjectGUI::DefaultSate() {
+
+	if (Color == m_color_work)
+	{
+		Color = vec3(0); //default color
+	}
 }
