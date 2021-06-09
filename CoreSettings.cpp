@@ -86,6 +86,8 @@ enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking }; // , E
 
 enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI};
 
+enum TypeModel { ModelBase, ModelGUI };
+
 //enum TramsformType { RotateX, RotateY, RotateZ };
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};

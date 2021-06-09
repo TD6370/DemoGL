@@ -31,13 +31,37 @@ ModelData::ModelData() {
 
 }
 
+//struct StringHelper {
+//	const char* p;
+//	StringHelper(const std::string& s) : p(s.c_str()) {}
+//	operator const char** () { return &p; }
+//};
+
 void ModelData::Init() {
+	
+	string pathShaderVertStr = std::string();
+	pathShaderVertStr.append(PathShaderFolder);
+	pathShaderVertStr.append(PathShaderVertex);
+	const GLchar* pathShaderVert = pathShaderVertStr.c_str();
 	//Load vertex shader
-	GLuint vertShader = GenShader(PathShaderVertex, true);
+	GLuint vertShader = GenShader(pathShaderVert, true);
+
+	string pathShaderFragStr = std::string();
+	pathShaderFragStr.append(PathShaderFolder);
+	pathShaderFragStr.append(PathShaderFrag);
+	const GLchar* pathShaderFrag = pathShaderFragStr.c_str();
+
+	
 
 	//Load fragment shader
-	GLuint fragShader = GenShader(PathShaderFrag, false);
+	GLuint fragShader = GenShader(pathShaderFrag, false);
 	//----------------------------------------------------
+
+	//----- test
+	if (PathShaderVertex == "TextUI.vert") {
+		GLuint ShaderProgram = ProgramConfig(vertShader, fragShader);
+	}
+
 	ShaderProgram = ProgramConfig(vertShader, fragShader);
 
 	//------------------------------- Load texture
@@ -88,10 +112,27 @@ void ModelData::Init() {
 
 	SetModelInBuffer();
 
-	ConfUniform = ConfigUniform(ShaderProgram);
+	ConfigUniform();
 
 	//FillPlanes();
 }
+
+//---------------------------------------------------
+
+void ModelData::ConfigUniform() {
+
+	//if(TypeMaterial == TypeModel::ModelBase)
+		ConfUniform = ConfigUniformBase(ShaderProgram);
+	//if (TypeMaterial == TypeModel::ModelGUI)
+	//	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
+}
+
+void ModelGUI::ConfigUniform() {
+
+	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
+}
+
+//---------------------------------------------------
 
 void ModelData::DebugUV(vector<vec2> list_uv) {
 

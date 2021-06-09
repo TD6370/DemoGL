@@ -16,9 +16,19 @@
 #include "CoreSettings.h"
 #include "GeometryLib.h"
 #include "Serialize/SceneSerialize.h"
+#include "ConfigUniformArg.h"
+
+#include "./ObjectsTypes/ObjectGUI.h"
+
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+//#include "..\SceneConstruction.h"
+//#include "..\ObjectsTypes\ObjectData.h"
+
+//#include "..\CreatorModelData.h"
+//#include "..\ModelData.h"
 
 //#include <iostream>
 //#include <fstream>
@@ -165,6 +175,15 @@ void SceneConstruction::SetDataToShader(bool isUpdate) {
 
 	//MODEL param
 	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+
+	if (Storage->SceneData->IsGUI == true)
+	{
+		if (ObjectCurrent->TypeObj == GUI) 
+		{
+			std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(ObjectCurrent);
+			ModelCurrent->ConfUniform.SeMessage(objGUI->Message);
+		}
+	}
 }
 
 bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {

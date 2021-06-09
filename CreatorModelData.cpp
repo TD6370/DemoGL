@@ -268,6 +268,17 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI_2.IsCubeModel = true;
 	nextModelGUI_2.Init();
 	AddModel(&nextModelGUI_2, "conextGUI_2");
+
+	//---GUI -- control -- TextBlock
+	/*ModelData textBlock = ModelData();
+	textBlock.PathShaderVertex = "TextUI.vert";
+	textBlock.PathShaderFrag = "TextUI.frag";
+	textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
+	textBlock.PathTexture = "./Textures/testTexture.bmp";
+	textBlock.RadiusCollider = .1;
+	textBlock.IsCubeModel = true;
+	textBlock.Init();
+	AddModel(&textBlock, "TextBlockModel");*/
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -591,6 +602,7 @@ void CreatorModelData::LoadObjectsGUI() {
 		
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;
+		childModel = "TextBlockModel";
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(0.4, 0.2));
 }
 

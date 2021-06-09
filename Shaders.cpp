@@ -68,11 +68,13 @@ GLuint ProgramConfig(GLuint vertShader, GLuint fragShader)
 	GLint success;
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
 	if (!success) {
-		GLchar* infoLog = 0;
-		//glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-		glGetProgramInfoLog(shaderProgram, 1024, NULL, infoLog);
-		fprintf(stderr, "Shader log:\n%s", infoLog);
-		delete[] infoLog;
+		//-----------------------------------
+		//glGetProgramInfoLog
+		char temp[1024];
+		glGetProgramInfoLog(shaderProgram, 1024, 0, temp);
+		fprintf(stderr, "Failed to link program:\n%s\n", temp);
+		glDeleteProgram(shaderProgram);
+		exit(EXIT_FAILURE);
 	}
 	//remove shaders
 	glDeleteShader(vertShader);

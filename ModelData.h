@@ -7,6 +7,7 @@
 #include "ConfigUniformArg.h"
 #include "LoaderModelObj.h"
 #include "LoadBmp.h"
+#include "CoreSettings.h"
 
 #include <string>
 #include <iostream>
@@ -27,12 +28,13 @@ class ModelData {
 
 public:
 	string Name;
-
-	const GLchar* PathShaderVertex = "basic.vert";
-	const GLchar* PathShaderFrag = "basic.frag";
+	string PathShaderFolder = "./Shaders/";
+	string PathShaderVertex = "basic.vert";
+	string PathShaderFrag = "basic.frag";
 	const char* PathTexture = "./Textures/testTexture.bmp";
 	const char* PathModel3D = "./Models3D/monkey.obj";
 
+	TypeModel TypeMaterial = TypeModel::ModelBase;
 	ConfigUniform ConfUniform;
 
 	GLint TrianglesCount = 0;
@@ -66,6 +68,7 @@ public:
 	ModelData();
 
 	void Init();
+	void virtual ConfigUniform();
 
 	void SetVAO();
 	void SetVAO(std::vector< glm::vec3 > vertices);
@@ -82,4 +85,15 @@ public:
 	ModelData Clone();
 
 	
+};
+
+class ModelGUI : public ModelData {
+
+public:
+	
+	ModelGUI():ModelData() {
+		ConfigUniform();
+	};
+
+	void ConfigUniform();
 };

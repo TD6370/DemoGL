@@ -5,6 +5,7 @@
 //#include "TransformModel.h"
 //#include "Controllers.h"
 #include "CoreSettings.h"
+//#include "ConfigUniformArg.h"
 
 //---------
 #define GLEW_STATIC
