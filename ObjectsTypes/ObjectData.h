@@ -58,9 +58,10 @@ public:
 	int Index = 0;
 	//int RadiusCollider = 5;
 
-	std::shared_ptr<ModelData> ModelPtr;
-	std::vector< glm::vec3 > Vertices;
-	std::vector< glm::vec2 > TextureUV;
+	shared_ptr<ModelData> ModelPtr;
+	vector <vec3> Vertices;
+	vector <vec2> TextureUV;
+	vector <vec3> Buffer;
 
 	bool IsTextureRepeat = false;
 	float TextureRepeat = 1;

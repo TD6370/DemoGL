@@ -85,6 +85,9 @@ void main()
     //else
         color =  text1 * colorText;	
 
+    //TEST
+    color = vec4(texture( textureSampler, uv ).rgb, alpha );	
+
     //color = text1.xxxx + text2;
     //color = text1.xxxx;
 }

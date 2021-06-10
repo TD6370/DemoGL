@@ -32,5 +32,5 @@ void main()
 	UV = vertexUV;
 	fragParamCase = paramCase;
 	fragTime = fTime;
-	message = setMessage;
+	//message = setMessage;
 }

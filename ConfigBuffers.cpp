@@ -33,7 +33,12 @@ GLfloat* GenVertices(int* size)
 	return vertices;
 }
 */
-
+GLuint InitBuffer()
+{
+	GLuint uvBuffer;
+	glGenBuffers(1, &uvBuffer);
+	return uvBuffer;
+}
 
 GLuint InitImage()
 {
@@ -84,6 +89,7 @@ GLuint InitUV()
 	glGenBuffers(1, &uvBuffer);
 	return uvBuffer;
 }
+
 
 void SetBufferUV(std::vector< glm::vec2 >& uv_data, GLuint uvBuffer) {
 	//—оздайте буфер и заполните его точно так же, как и в предыдущих случа€х :
@@ -148,6 +154,36 @@ void SetNormals(std::vector< glm::vec3 >& normals, GLuint normalbuffer)
 	glEnableVertexAttribArray(VertexAttribNumer_Normals);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+}
+
+void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbuffer)
+{
+	//—оздайте буфер и заполните его точно так же, как и в предыдущих случа€х :
+	//glGenBuffers(1, &colorbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+
+	//GL_STATIC_DRAW: данные либо никогда не будут измен€тьс€, либо будут измен€тьс€ очень редко;
+	//GL_DYNAMIC_DRAW: данные будут мен€тьс€ довольно часто;
+	//GL_STREAM_DRAW: данные будут мен€тьс€ при каждой отрисовке.
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), &colors[0], TYPE_DRAW);
+
+	// онфигурирование почти такое же :
+	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	glVertexAttribPointer(
+		VertexAttribNumer_Color,                                // атрибут. Ќет особых причин писать 1, главное, чтобы совпадало со значением в шейдере.
+		3,                                // размер
+		GL_FLOAT,                         // тип
+		GL_FALSE,                         // нормализировано ли?
+		0,                                // шаг
+		(void*)0                          //смещение в буфере
+	);
+	glEnableVertexAttribArray(VertexAttribNumer_Color);
+
+	//4. ќтв€зываем VAO
+	//glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+	//layout(location = 1) in vec3 vertexColor;
 }
 
 void GenBufferColors()

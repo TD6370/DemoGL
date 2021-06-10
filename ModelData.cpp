@@ -31,14 +31,8 @@ ModelData::ModelData() {
 
 }
 
-//struct StringHelper {
-//	const char* p;
-//	StringHelper(const std::string& s) : p(s.c_str()) {}
-//	operator const char** () { return &p; }
-//};
+void ModelData::ConstructShaderProgramm() {
 
-void ModelData::Init() {
-	
 	string pathShaderVertStr = std::string();
 	pathShaderVertStr.append(PathShaderFolder);
 	pathShaderVertStr.append(PathShaderVertex);
@@ -51,18 +45,13 @@ void ModelData::Init() {
 	pathShaderFragStr.append(PathShaderFrag);
 	const GLchar* pathShaderFrag = pathShaderFragStr.c_str();
 
-	
-
 	//Load fragment shader
 	GLuint fragShader = GenShader(pathShaderFrag, false);
-	//----------------------------------------------------
-
-	//----- test
-	if (PathShaderVertex == "TextUI.vert") {
-		GLuint ShaderProgram = ProgramConfig(vertShader, fragShader);
-	}
 
 	ShaderProgram = ProgramConfig(vertShader, fragShader);
+}
+
+void ModelData::LoadingTexture() {
 
 	//------------------------------- Load texture
 	DataImage = LoadBmp(PathTexture, &WidthImage, &HeightImage);
@@ -72,6 +61,9 @@ void ModelData::Init() {
 		return;
 	}
 	//---------------------------------------- Load mesh
+}
+
+void ModelData::LoadModelData() {
 
 	bool isGetIndices = false;
 	bool result = false;
@@ -109,29 +101,15 @@ void ModelData::Init() {
 	Texture_ID = InitImage();
 	BufferUV_ID = InitUV();
 	BufferNormal_ID = InitNormals();
-
-	SetModelInBuffer();
-
-	ConfigUniform();
-
-	//FillPlanes();
+	BufferColor_ID = InitBuffer();
 }
 
 //---------------------------------------------------
 
 void ModelData::ConfigUniform() {
 
-	//if(TypeMaterial == TypeModel::ModelBase)
-		ConfUniform = ConfigUniformBase(ShaderProgram);
-	//if (TypeMaterial == TypeModel::ModelGUI)
-	//	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
+	ConfUniform = ConfigUniformBase(ShaderProgram);
 }
-
-void ModelGUI::ConfigUniform() {
-
-	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
-}
-
 //---------------------------------------------------
 
 void ModelData::DebugUV(vector<vec2> list_uv) {
@@ -169,11 +147,12 @@ void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 		VAO, VBO);
 }
 
-void ModelData::SetModelInBuffer(bool isUpdate)
+void ModelData::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
 	SetBufferUV(UV, BufferUV_ID);
 	SetNormals(Normals, BufferNormal_ID);
+	
 }
 
 void ModelData::SetUV(vector< vec2 > uv) {
@@ -182,6 +161,21 @@ void ModelData::SetUV(vector< vec2 > uv) {
 
 void ModelData::UpdateBufferUV() {
 	SetBufferUV(UV, BufferUV_ID);
+}
+
+void ModelData::Init() {
+
+	ConstructShaderProgramm();
+
+	LoadingTexture();
+
+	LoadModelData();
+
+	SetModelInBuffer();
+
+	ConfigUniform();
+
+	//FillPlanes();
 }
 
 ModelData ModelData::Clone() {
@@ -194,5 +188,38 @@ ModelData ModelData::Clone() {
 	newModel.Init();
 	return newModel;
 }
+
+//---------------- Model GUI
+
+void ModelGUI::Init() {
+
+	ConstructShaderProgramm();
+
+	LoadingTexture();
+
+	LoadModelData();
+
+	SetModelInBuffer();
+
+	ConfigUniform();
+}
+
+//void ModelGUI::ConfigUniform() {
+//
+//	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
+//}
+
+void ModelGUI::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer)
+{
+	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+	SetBufferUV(UV, BufferUV_ID);
+	SetNormals(Normals, BufferNormal_ID);
+
+	if (buffer.size() == 0)
+		return;
+
+	GenBufferColors(buffer, BufferColor_ID);
+}
+//----------------------------
 
 

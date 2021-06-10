@@ -2,7 +2,7 @@
 #include "ObjectPhysic.h"
 #include "..\CreatorModelData.h"
 #include "..\Serialize\SceneSerialize.h"
-
+#include "..\ModelData.h"
 
 void ObjectGUI::RunAction() {
 
@@ -47,6 +47,7 @@ void ObjectGUI::UpdateState() {
 	}
 
 	//StateRunning();
+	
 	Billboard();
 }
 
@@ -62,8 +63,13 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 {
 	if(color == vec3(0))
 		color = vec3(1, 1, 0);
+
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
-	auto obj = Storage->AddObject(nameObject, model, GUI, StartPos, color);
+	auto modelGUI = std::dynamic_pointer_cast<ModelGUI>(model);
+	if (modelGUI != nullptr)
+		model = modelGUI;
+
+	shared_ptr<ObjectData> obj = Storage->AddObject(nameObject, model, GUI, StartPos, color);
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
 	objGUI->IndexObjectOwner = Index;
 	objGUI->StartPos = startPosChild;

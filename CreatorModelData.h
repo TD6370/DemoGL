@@ -55,6 +55,8 @@ public:
 
 	void AddModel(ModelData* newModel, string name);
 
+	void AddModelCustom(shared_ptr<ModelData> newModel, string name);
+
 	std::shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
 
 	void GenerateObjects();

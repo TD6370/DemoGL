@@ -41,7 +41,9 @@ class SceneConstruction
 private:
 	int prevIndexModel = -1;
 	const char* prevModelTexture;
-	const char* prevModelModel3D;
+	const char* prevModel3D;
+	string prevShaderVert;
+	string prevShaderFrag;
 	GLuint last_VAO;
 	
 	bool test_isFerst = true;
@@ -49,6 +51,9 @@ private:
 
 	int countObjects = 0;
 	bool isTextureRepeat = false;
+
+	bool m_isUpdateShaderProgramm = false;
+	bool m_isUpdate = false;
 
 	const GLchar* pathShaderVertex = "basic.vert";
 	const GLchar* pathShaderFrag = "basic.frag";
@@ -109,12 +114,11 @@ public:
 	//*** Pointcut
 	void WorkingRooms();
 
-	bool SetObject(int i, bool& isUpdate);
+	bool SetObject(int i);
 	
-	
-	void SetDataToShader(bool isUpdate);
+	void SetDataToShader();
 
-	void PreparationDataFromShader(bool isUpdate);
+	void PreparationDataFromShader();
 
 
 	void Update();

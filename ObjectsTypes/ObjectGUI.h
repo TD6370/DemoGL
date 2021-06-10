@@ -38,7 +38,7 @@ public:
 		: ObjectPhysic(p_index,
 			p_model,
 			p_typeObj,
-			p_pos) {};
+			p_pos) 	{};
 
 	void InitData();
 

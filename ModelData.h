@@ -20,7 +20,10 @@
 
 using std::vector;
 using glm::vec2;
+using glm::vec3;
 using std::string;
+
+static vector<vec3> DEFAULT_VECTOR_V3;
 
 class Plane;
 
@@ -34,7 +37,7 @@ public:
 	const char* PathTexture = "./Textures/testTexture.bmp";
 	const char* PathModel3D = "./Models3D/monkey.obj";
 
-	TypeModel TypeMaterial = TypeModel::ModelBase;
+	//TypeModel TypeMaterial = TypeModel::ModelBase;
 	ConfigUniform ConfUniform;
 
 	GLint TrianglesCount = 0;
@@ -60,6 +63,7 @@ public:
 	GLuint Texture_ID;
 	GLuint BufferUV_ID;
 	GLuint BufferNormal_ID;
+	GLuint BufferColor_ID;
 
 	float RadiusCollider = 5;
 
@@ -67,24 +71,28 @@ public:
 
 	ModelData();
 
-	void Init();
+	void virtual Init();
+
+	void ConstructShaderProgramm();
+
+	void virtual LoadingTexture();
+
+	void LoadModelData();
+
 	void virtual ConfigUniform();
 
 	void SetVAO();
-	void SetVAO(std::vector< glm::vec3 > vertices);
+	void SetVAO(vector<vec3> vertices);
 
-	void SetModelInBuffer(bool isUpdate = true);
+	void virtual SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 
 	void SetUV(vector< vec2 > uv);
 	void UpdateBufferUV();
 
 	void DebugUV(vector<vec2> list_uv);
-	void DebugVec3(vector<vec3> list_v, std::string name);
+	void DebugVec3(vector<vec3> list_v, string name);
 	
-
 	ModelData Clone();
-
-	
 };
 
 class ModelGUI : public ModelData {
@@ -92,8 +100,10 @@ class ModelGUI : public ModelData {
 public:
 	
 	ModelGUI():ModelData() {
-		ConfigUniform();
+		//Init();
 	};
 
-	void ConfigUniform();
+	void Init();
+
+	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 };

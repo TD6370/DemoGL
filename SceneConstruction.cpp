@@ -130,7 +130,7 @@ void SceneConstruction::WorkingRooms() {
 	}
 }
 
-void SceneConstruction::PreparationDataFromShader(bool isUpdate) {
+void SceneConstruction::PreparationDataFromShader() {
 	
 	bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
 
@@ -144,24 +144,43 @@ void SceneConstruction::PreparationDataFromShader(bool isUpdate) {
 		ObjectCurrent->UpdateTextureUV();
 	}
 
-	if (isUpdate) {
+	if (m_isUpdate) {
 		ShaderProgram = ModelCurrent->ShaderProgram;
 		glUseProgram(ShaderProgram);
 		last_VAO = ModelCurrent->VAO;
 	}
 }
 
-void SceneConstruction::SetDataToShader(bool isUpdate) {
+void SceneConstruction::SetDataToShader() {
 	
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
 
-	if (isCubeModel || isUpdate)
+	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->TypeObj == GUI;
+	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->TypeObj == GUI;
+	if (isDisabledGUI)
+		return;
+
+	if (isCubeModel || m_isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);
 
-	if (isUpdate)
-		ModelCurrent->SetModelInBuffer(isUpdate); // isUpdate -- ??????
+	std::shared_ptr<ObjectGUI> objGUI;
+	shared_ptr<ModelGUI> modelGUI;
+
+	if (isEnableGUI) {
+		objGUI = std::dynamic_pointer_cast<ObjectGUI>(ObjectCurrent);
+		modelGUI = std::dynamic_pointer_cast<ModelGUI>(ModelCurrent);
+	}
+
+	if (m_isUpdate) {
+		if (isEnableGUI && modelGUI != nullptr) {
+			modelGUI->SetModelInBuffer(m_isUpdate, objGUI->Buffer);
+		}
+		else {
+			ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer);
+		}
+	}
 
 	//-------------------- Set color
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
@@ -175,18 +194,9 @@ void SceneConstruction::SetDataToShader(bool isUpdate) {
 
 	//MODEL param
 	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
-
-	if (Storage->SceneData->IsGUI == true)
-	{
-		if (ObjectCurrent->TypeObj == GUI) 
-		{
-			std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(ObjectCurrent);
-			ModelCurrent->ConfUniform.SeMessage(objGUI->Message);
-		}
-	}
 }
 
-bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
+bool SceneConstruction::SetObject(int indObj) {
 
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isShow = ObjectCurrent->IsShow();
@@ -194,29 +204,32 @@ bool SceneConstruction::SetObject(int indObj, bool& isUpdate) {
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
 
-	//----- Start
-	if (prevModelTexture != ModelCurrent->PathTexture || prevModelModel3D != ModelCurrent->PathModel3D)
-	{
-		isUpdate = true;
+	m_isUpdate = prevModelTexture != ModelCurrent->PathTexture || prevModel3D != ModelCurrent->PathModel3D;
+	if (m_isUpdate) {
 		prevModelTexture = ModelCurrent->PathTexture;
-		prevModelModel3D = ModelCurrent->PathModel3D;
+		prevModel3D = ModelCurrent->PathModel3D;
 	}
-	
+
+	m_isUpdateShaderProgramm = prevShaderVert != ModelCurrent->PathShaderVertex || prevShaderFrag != ModelCurrent->PathShaderFrag;
+	if (m_isUpdateShaderProgramm) {
+		prevShaderVert = ModelCurrent->PathShaderVertex;
+		prevShaderFrag = ModelCurrent->PathShaderFrag;
+	}
+
 	return isShow;
 }
 
 void SceneConstruction::ObjectUpdate(int i) {
 
-	bool isUpdate = false;
-	bool isShow = SetObject(i, isUpdate);
+	bool isShow = SetObject(i);
 	if (!isShow)
 		return;
 
-	PreparationDataFromShader(isUpdate);
+	PreparationDataFromShader();
 
 	ObjectCurrent->Action();
 
-	SetDataToShader(isUpdate);
+	SetDataToShader();
 }
 
 void SceneConstruction::Update()

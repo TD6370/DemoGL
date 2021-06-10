@@ -37,42 +37,9 @@
 
 #include "WorldCollision.h"
 
-/*
-void LoadImageBmp(const char* pathImage)
-{
-	unsigned int width;
-	unsigned int height;
+#include <typeinfo>
 
-	//pathTextureTest
-	unsigned char* data = LoadBmp(pathImage, &width, &height);
-	if (data == NULL)
-	{
-		std::cerr << "Could not read image file " << pathImage << ". File does not exist." << std::endl;
-		return;
-	}
-
-	// Создаем одну OpenGL текстуру
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	// Биндим текстуру, и теперь все функции по работе с текстурами будут работать с этой
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	//GLint width  = 200;
-	//GLint height = 200;
-
-	// Отправляем картинку в OpenGL текстуру
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	// Когда картинка будет увеличиваться(нет большей Мипмапы), используем LINEAR фильтрацию
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// Когда минимизируем — берем две ближних мипмапы и лиейно смешиваем цвета
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	// И создаем сами мипмапы.
-	glGenerateMipmap(GL_TEXTURE_2D);
-}
-*/
+using std::shared_ptr;
 
 CreatorModelData::CreatorModelData() {
 	
@@ -94,11 +61,35 @@ void CreatorModelData::ClearObjects() {
 		MapSceneObjects.clear();
 }
 
+void CreatorModelData::AddModelCustom(shared_ptr<ModelData> newModel, std::string name) {
+
+	int index = Models.size();
+	index--;
+	newModel->Name = name;
+
+	bool isGenName = name.length() == 0;
+	if (!isGenName) {
+		map <string, int> ::iterator it;
+		it = MapModels.find(name);
+		if (it != MapModels.end()) {
+			//isGenName = true;
+			name += "_" + std::to_string(index);
+		}
+	}
+
+	if (isGenName) {
+		string file = GetFile(newModel->PathModel3D);
+		name += file + "_" + std::to_string(index);
+	}
+
+	MapModels.insert(std::pair<string, int>(name, index));
+}
 
 void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
 
 	int index = Models.size();
 	newModel->Name = name;
+	
 	Models.push_back(std::make_unique<ModelData>(*newModel));
 	
 	bool isGenName = name.length() == 0;
@@ -270,15 +261,17 @@ void CreatorModelData::LoadModels() {
 	AddModel(&nextModelGUI_2, "conextGUI_2");
 
 	//---GUI -- control -- TextBlock
-	/*ModelData textBlock = ModelData();
+	ModelGUI textBlock = ModelGUI();
 	textBlock.PathShaderVertex = "TextUI.vert";
 	textBlock.PathShaderFrag = "TextUI.frag";
 	textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
-	textBlock.PathTexture = "./Textures/testTexture.bmp";
+	textBlock.PathTexture = "./Textures/Alphabet.bmp";
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
 	textBlock.Init();
-	AddModel(&textBlock, "TextBlockModel");*/
+	Models.push_back(std::make_unique<ModelGUI>(textBlock));
+	auto modelGUI = GetModelPrt(Models.size()-1);
+	AddModelCustom(modelGUI, "TextBlockModel");
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -327,84 +320,84 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		name += fileModel + "_" + std::to_string(SceneObjectsLastIndex);
 	}
 
-	std::shared_ptr<ObjectData> objectModel;
+	std::shared_ptr<ObjectData> object;
 	switch (p_typeObj)
 	{
 		case GUI: {
 			ObjectGUI obj = ObjectGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Polygon: {
 			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			if(!CurrentPolygonObject)
-				CurrentPolygonObject = objectModel;
+				CurrentPolygonObject = object;
 			break;
 		}
 		case Solid:
 		case Terra: {
 			ObjectPhysic obj = ObjectPhysic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Block: {
 			ObjectBlock obj = ObjectBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBlock>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case NPC:
 		{
 			ObjectNPC obj = ObjectNPC(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectNPC>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Bullet:
 		{
 			ObjectDynamic obj = ObjectDynamic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case CursorRay:
 		{
 			ObjectCursorRay obj = ObjectCursorRay(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorRay>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case BulletHero:
 		{
 			ObjectBullet obj = ObjectBullet(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBullet>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Hero: {
 			ObjectHero obj = ObjectHero(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectHero>(obj));
-			objectModel = GetObjectPrt(obj.Index);
+			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		default:
 			break;
 	}
 
-	if (objectModel != NULL) {
+	if (object != NULL) {
 		//objectModel->Storage = storage;
-		objectModel->Storage = this;
-		objectModel->Color = p_color;
-		objectModel->Name = name;
-		objectModel->InitData();
+		object->Storage = this;
+		object->Color = p_color;
+		object->Name = name;
+		object->InitData();
 	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));
-	return objectModel;
+	return object;
 }
 
 std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(int index)
@@ -600,10 +593,11 @@ void CreatorModelData::LoadObjectsGUI() {
 		caption = objBackGUI->Name + "." + objName;
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));
 		
-		objName = "TEST3";
+		objName = "TextBlockObject";
 		caption = objBackGUI->Name + "." + objName;
 		childModel = "TextBlockModel";
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(0.4, 0.2));
+		//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(0.4, 0.2));
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(1.9, 1.9));
 }
 
 void CreatorModelData::Load() {
