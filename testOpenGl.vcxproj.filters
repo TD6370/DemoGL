@@ -150,6 +150,9 @@
     <ClCompile Include="OperationString.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectTextBlock.cpp">
+      <Filter>Objects\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="OperationString.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectTextBlock.h">
+      <Filter>Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

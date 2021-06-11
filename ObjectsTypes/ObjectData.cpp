@@ -19,7 +19,8 @@
 
 using std::shared_ptr;
 
-ObjectData::ObjectData() {};
+ObjectData::ObjectData() {
+};
 
 ObjectData::ObjectData(int p_index,
 	std::shared_ptr<ModelData> p_model,

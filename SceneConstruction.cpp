@@ -132,16 +132,21 @@ void SceneConstruction::WorkingRooms() {
 
 void SceneConstruction::PreparationDataFromShader() {
 	
-	bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
+	//TEST
+	auto bname = ObjectCurrent->Name;
 
-	if (isTextureRepeat && !isTextRepeat)
+	if (!m_isUpdate)
 	{
-		ObjectCurrent->ModelPtr->UpdateBufferUV();
-		isTextureRepeat = false;
-	}
-	if (isTextRepeat) {
-		isTextureRepeat = isTextRepeat;
-		ObjectCurrent->UpdateTextureUV();
+		bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
+		if (isTextureRepeat && !isTextRepeat)
+		{
+			ObjectCurrent->ModelPtr->UpdateBufferUV();
+			isTextureRepeat = false;
+		}
+		if (isTextRepeat) {
+			isTextureRepeat = isTextRepeat;
+			ObjectCurrent->UpdateTextureUV();
+		}
 	}
 
 	if (m_isUpdate) {
@@ -150,6 +155,7 @@ void SceneConstruction::PreparationDataFromShader() {
 		last_VAO = ModelCurrent->VAO;
 	}
 }
+
 
 void SceneConstruction::SetDataToShader() {
 	
@@ -175,10 +181,10 @@ void SceneConstruction::SetDataToShader() {
 
 	if (m_isUpdate) {
 		if (isEnableGUI && modelGUI != nullptr) {
-			modelGUI->SetModelInBuffer(m_isUpdate, objGUI->Buffer);
+			modelGUI->SetModelInBuffer(m_isUpdate, objGUI->Buffer, ObjectCurrent->TextureUV);
 		}
 		else {
-			ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer);
+			ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV);
 		}
 	}
 

@@ -165,7 +165,7 @@ bool ObjectBlock::IsCubeModel() {
 	return true;
 }
 
-void ObjectBlock::UpdateTextureUV() {
+void ObjectBlock::ResizeTextureUV() {
 	if (IsTextureRepeat) {
 		//std::vector< glm::vec2 > repeat_UV = StartUV;
 		std::vector< glm::vec2 > repeat_UV = ModelPtr->UV;
@@ -207,7 +207,7 @@ void ObjectBlock::CalculateTextureUV(bool isInit) {
 		TextureRepeat = factorRepeat;
 
 		if (!isInit)
-			UpdateTextureUV();
+			ResizeTextureUV();
 	}
 }
 

@@ -34,7 +34,9 @@ void RoomUseInterface::Work() {
 		IndexObjectSelected = -1;
 	}
 
-	if (Scene->ObjectCurrent->TypeObj != GUI)
+	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	//if (Scene->ObjectCurrent->TypeObj != GUI)
+	if(objGUI == nullptr)
 		return;
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
@@ -42,7 +44,7 @@ void RoomUseInterface::Work() {
 	bool isSelect = false;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
-	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	//std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
 	vec3 posCursor = GetMousePosWorld();
 	

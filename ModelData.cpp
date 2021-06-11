@@ -21,6 +21,7 @@
 
 using std::vector;
 using glm::vec3;
+using glm::vec2;
 
 
 //#using <system.dll>
@@ -147,12 +148,16 @@ void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 		VAO, VBO);
 }
 
-void ModelData::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer)
+void ModelData::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer, vector<vec2>& uv)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-	SetBufferUV(UV, BufferUV_ID);
+	//SetBufferUV(UV, BufferUV_ID);
+	if (&uv == nullptr || uv.size() == 0)
+		SetBufferUV(UV, BufferUV_ID);
+	else
+		SetBufferUV(uv, BufferUV_ID);
+
 	SetNormals(Normals, BufferNormal_ID);
-	
 }
 
 void ModelData::SetUV(vector< vec2 > uv) {
@@ -209,10 +214,15 @@ void ModelGUI::Init() {
 //	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
 //}
 
-void ModelGUI::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer)
+void ModelGUI::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-	SetBufferUV(UV, BufferUV_ID);
+
+	if(uv.size() == 0)
+		SetBufferUV(UV, BufferUV_ID);
+	else
+		SetBufferUV(uv, BufferUV_ID);
+
 	SetNormals(Normals, BufferNormal_ID);
 
 	if (buffer.size() == 0)

@@ -1,6 +1,8 @@
 #pragma once
 #include "ObjectData.h"
 #include "ObjectPhysic.h"
+//#include "ObjectTextBlock.h"
+#include "../CoreSettings.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,9 +25,9 @@ private :
 
 public:
 	//TODO: inTextBlosk object
-	string Message = std::string();
+	//string Message = std::string();
 	vec3 StartPos = vec3(0);
-	vec2 Size = vec2(0);
+	vec2 SizePanel = vec2(0);
 	float PanelDepth;
 
 	string CommandName;
@@ -33,7 +35,7 @@ public:
 	ObjectGUI(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = NPC,
+		TypeObject p_typeObj = TypeObject::GUI,
 		vec3 p_pos = vec3(0))
 		: ObjectPhysic(p_index,
 			p_model,
@@ -44,15 +46,15 @@ public:
 
 	void RunAction();
 
-	void UpdateState();
+	void virtual UpdateState();
 
 	bool IsShow();
 
-	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, vec3 color = vec3(0));
+	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 
 	bool IsCubeModel();
 
-	void SetSizeControl(vec3 size);
+	void virtual SetSizeControl(vec3 size);
 
 	void virtual Click();
 	
@@ -63,4 +65,8 @@ public:
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+
+	//-------------
+
+	void ResizeTextureUV();
 };

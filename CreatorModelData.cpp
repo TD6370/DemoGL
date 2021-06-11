@@ -12,6 +12,7 @@
 #include "ObjectsTypes/ObjectCursorRay.h"
 #include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectGUI.h"
+#include "ObjectsTypes/ObjectTextBlock.h"
 
 #include "Serialize/SceneSerialize.h"
 #include "Rooms/RoomSerializeScene.h"
@@ -140,140 +141,6 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 	}
 }
 
-
-void CreatorModelData::LoadModels() {
-
-	SceneSerialize* serializer = new SceneSerialize();
-	serializer->Load();
-	LoadModels(serializer->FiledsModels);
-
-	if (Models.size() > 0)
-		return;
-
-	ModelData nextModel = ModelData();
-	nextModel.PathShaderVertex = "basic.vert";
-	nextModel.PathShaderFrag = "basic.frag";
-	nextModel.PathTexture = "./Textures/testTexture.bmp";
-	//nextModel.PathTexture = "./Textures/syzanna.bmp";
-	//nextModel.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel.PathModel3D = "./Models3D/monkey.obj";
-	//nextModel.PathModel3D = "./Models3D/kub.obj";
-	nextModel.RadiusCollider = 1;
-	nextModel.Init();
-	AddModel(&nextModel, "mon");
-
-	ModelData nextModel2 = ModelData();
-	nextModel2.PathShaderVertex = "basic.vert";
-	nextModel2.PathShaderFrag = "basic.frag";
-	nextModel2.PathTexture = "./Textures/planet.bmp";
-	//nextModel2.PathModel3D = "./Models3D/kub.obj";
-	//nextModel2.PathModel3D = "./Models3D/monkey.obj";
-	nextModel2.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel2.RadiusCollider = 0.2;
-	nextModel2.Init();
-	AddModel(&nextModel2, "plane");
-
-	ModelData nextModel3 = ModelData();
-	nextModel3.PathShaderVertex = "basic.vert";
-	nextModel3.PathShaderFrag = "basic.frag";
-	nextModel3.PathModel3D = "./Models3D/kub.obj";
-	nextModel3.PathTexture = "./Textures/testTexture.bmp";
-	nextModel3.RadiusCollider = 1;
-	nextModel3.IsDebug = true;
-	nextModel3.IsCubeModel = true;
-	//nextModel3.IsTextureRepeat = true;
-	nextModel3.Init();
-	AddModel(&nextModel3, "box");
-
-
-	ModelData nextModel4 = ModelData();
-	nextModel4.PathShaderVertex = "basic.vert";
-	nextModel4.PathShaderFrag = "basic.frag";
-	nextModel4.PathModel3D = "./Models3D/Marker_Vector.obj";
-	nextModel4.PathTexture = "./Textures/testTexture.bmp";
-	nextModel4.RadiusCollider = 0.1;
-	nextModel4.Init();
-	AddModel(&nextModel4, "marker_Vector");
-
-	ModelData nextModel5 = ModelData();
-	nextModel5.PathShaderVertex = "basic.vert";
-	nextModel5.PathShaderFrag = "basic.frag";
-	nextModel5.PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModel5.PathTexture = "./Textures/testTexture.bmp";
-	nextModel5.RadiusCollider = 0.1;
-	nextModel5.Init();
-	AddModel(&nextModel5, "marker_Cross");
-
-	ModelData nextModel6 = ModelData();
-	nextModel6.PathShaderVertex = "basic.vert";
-	nextModel6.PathShaderFrag = "basic.frag";
-	nextModel6.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModel6.PathTexture = "./Textures/testTexture.bmp";
-	nextModel6.RadiusCollider = 0.1;
-	nextModel6.Init();
-	AddModel(&nextModel6, "marker_Point");
-
-	ModelData nextModelHomo = ModelData();
-	nextModelHomo.PathShaderVertex = "basic.vert";
-	nextModelHomo.PathShaderFrag = "basic.frag";
-	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
-	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModelHomo.PathTexture = "./Textures/future.bmp";
-	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
-	nextModelHomo.RadiusCollider = 1;
-	nextModelHomo.Init();
-	AddModel(&nextModelHomo, "homo");
-
-
-	ModelData nextModelCursorRay = ModelData();
-	nextModelCursorRay.PathShaderVertex = "basic.vert";
-	nextModelCursorRay.PathShaderFrag = "basic.frag";
-	nextModelCursorRay.PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModelCursorRay.PathTexture = "./Textures/future.bmp";
-	nextModelCursorRay.RadiusCollider = .1;
-	nextModelCursorRay.Init();
-	AddModel(&nextModelCursorRay, "cursorRay");
-
-
-	ModelData nextModelGUI = ModelData();
-	nextModelGUI.PathShaderVertex = "basic.vert";
-	nextModelGUI.PathShaderFrag = "basic.frag";
-
-	nextModelGUI.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
-	//nextModelGUI.PathModel3D = "./Models3D/kub.obj";
-
-	nextModelGUI.PathTexture = "./Textures/future.bmp";
-	//nextModelCursorRay.PathTexture = "./Textures/future.bmp";
-	nextModelGUI.RadiusCollider = .1;
-	nextModelGUI.IsCubeModel = true;
-	nextModelGUI.Init();
-	AddModel(&nextModelGUI, "conextGUI");
-
-
-	ModelData nextModelGUI_2 = ModelData();
-	nextModelGUI_2.PathShaderVertex = "basic.vert";
-	nextModelGUI_2.PathShaderFrag = "basic.frag";
-	nextModelGUI_2.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
-	nextModelGUI_2.PathTexture = "./Textures/testTexture.bmp";
-	nextModelGUI_2.RadiusCollider = .1;
-	nextModelGUI_2.IsCubeModel = true;
-	nextModelGUI_2.Init();
-	AddModel(&nextModelGUI_2, "conextGUI_2");
-
-	//---GUI -- control -- TextBlock
-	ModelGUI textBlock = ModelGUI();
-	textBlock.PathShaderVertex = "TextUI.vert";
-	textBlock.PathShaderFrag = "TextUI.frag";
-	textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
-	textBlock.PathTexture = "./Textures/Alphabet.bmp";
-	textBlock.RadiusCollider = .1;
-	textBlock.IsCubeModel = true;
-	textBlock.Init();
-	Models.push_back(std::make_unique<ModelGUI>(textBlock));
-	auto modelGUI = GetModelPrt(Models.size()-1);
-	AddModelCustom(modelGUI, "TextBlockModel");
-}
-
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
 {
 	std::shared_ptr<ModelData> prt_model = Models[index];
@@ -326,6 +193,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		case GUI: {
 			ObjectGUI obj = ObjectGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			object = GetObjectPrt(obj.Index);
+			break;
+		}
+		case TextBlock: {
+			ObjectTextBlock obj = ObjectTextBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectTextBlock>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -494,6 +367,157 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 }
 
+void CreatorModelData::LoadModels() {
+
+	SceneSerialize* serializer = new SceneSerialize();
+	serializer->Load();
+	LoadModels(serializer->FiledsModels);
+
+	if (Models.size() > 0)
+		return;
+
+	ModelData nextModel = ModelData();
+	nextModel.PathShaderVertex = "basic.vert";
+	nextModel.PathShaderFrag = "basic.frag";
+	nextModel.PathTexture = "./Textures/testTexture.bmp";
+	//nextModel.PathTexture = "./Textures/syzanna.bmp";
+	//nextModel.PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModel.PathModel3D = "./Models3D/monkey.obj";
+	//nextModel.PathModel3D = "./Models3D/kub.obj";
+	nextModel.RadiusCollider = 1;
+	nextModel.Init();
+	AddModel(&nextModel, "mon");
+
+	ModelData nextModel2 = ModelData();
+	nextModel2.PathShaderVertex = "basic.vert";
+	nextModel2.PathShaderFrag = "basic.frag";
+	nextModel2.PathTexture = "./Textures/planet.bmp";
+	//nextModel2.PathModel3D = "./Models3D/kub.obj";
+	//nextModel2.PathModel3D = "./Models3D/monkey.obj";
+	nextModel2.PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModel2.RadiusCollider = 0.2;
+	nextModel2.Init();
+	AddModel(&nextModel2, "plane");
+
+	ModelData nextModel3 = ModelData();
+	nextModel3.PathShaderVertex = "basic.vert";
+	nextModel3.PathShaderFrag = "basic.frag";
+	nextModel3.PathModel3D = "./Models3D/kub.obj";
+	nextModel3.PathTexture = "./Textures/testTexture.bmp";
+	nextModel3.RadiusCollider = 1;
+	nextModel3.IsDebug = true;
+	nextModel3.IsCubeModel = true;
+	//nextModel3.IsTextureRepeat = true;
+	nextModel3.Init();
+	AddModel(&nextModel3, "box");
+
+
+	ModelData nextModel4 = ModelData();
+	nextModel4.PathShaderVertex = "basic.vert";
+	nextModel4.PathShaderFrag = "basic.frag";
+	nextModel4.PathModel3D = "./Models3D/Marker_Vector.obj";
+	nextModel4.PathTexture = "./Textures/testTexture.bmp";
+	nextModel4.RadiusCollider = 0.1;
+	nextModel4.Init();
+	AddModel(&nextModel4, "marker_Vector");
+
+	ModelData nextModel5 = ModelData();
+	nextModel5.PathShaderVertex = "basic.vert";
+	nextModel5.PathShaderFrag = "basic.frag";
+	nextModel5.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModel5.PathTexture = "./Textures/testTexture.bmp";
+	nextModel5.RadiusCollider = 0.1;
+	nextModel5.Init();
+	AddModel(&nextModel5, "marker_Cross");
+
+	ModelData nextModel6 = ModelData();
+	nextModel6.PathShaderVertex = "basic.vert";
+	nextModel6.PathShaderFrag = "basic.frag";
+	nextModel6.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModel6.PathTexture = "./Textures/testTexture.bmp";
+	nextModel6.RadiusCollider = 0.1;
+	nextModel6.Init();
+	AddModel(&nextModel6, "marker_Point");
+
+	ModelData nextModelHomo = ModelData();
+	nextModelHomo.PathShaderVertex = "basic.vert";
+	nextModelHomo.PathShaderFrag = "basic.frag";
+	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
+	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelHomo.PathTexture = "./Textures/future.bmp";
+	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
+	nextModelHomo.RadiusCollider = 1;
+	nextModelHomo.Init();
+	AddModel(&nextModelHomo, "homo");
+
+
+	ModelData nextModelCursorRay = ModelData();
+	nextModelCursorRay.PathShaderVertex = "basic.vert";
+	nextModelCursorRay.PathShaderFrag = "basic.frag";
+	nextModelCursorRay.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelCursorRay.PathTexture = "./Textures/future.bmp";
+	nextModelCursorRay.RadiusCollider = .1;
+	nextModelCursorRay.Init();
+	AddModel(&nextModelCursorRay, "cursorRay");
+
+
+	ModelData nextModelGUI = ModelData();
+	nextModelGUI.PathShaderVertex = "basic.vert";
+	nextModelGUI.PathShaderFrag = "basic.frag";
+
+	//nextModelGUI.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
+	nextModelGUI.PathModel3D = "./Models3D/Frame.obj";
+	//nextModelGUI.PathModel3D = "./Models3D/kub.obj";
+
+	nextModelGUI.PathTexture = "./Textures/future.bmp";
+	//nextModelCursorRay.PathTexture = "./Textures/future.bmp";
+	nextModelGUI.RadiusCollider = .1;
+	nextModelGUI.IsCubeModel = true;
+	nextModelGUI.Init();
+	AddModel(&nextModelGUI, "conextGUI");
+
+
+	ModelData nextModelGUI_2 = ModelData();
+	nextModelGUI_2.PathShaderVertex = "basic.vert";
+	nextModelGUI_2.PathShaderFrag = "basic.frag";
+	nextModelGUI_2.PathModel3D = "./Models3D/Frame.obj";
+	nextModelGUI_2.PathTexture = "./Textures/testTexture.bmp";
+	nextModelGUI_2.RadiusCollider = .1;
+	nextModelGUI_2.IsCubeModel = true;
+	nextModelGUI_2.Init();
+	AddModel(&nextModelGUI_2, "conextGUI_2");
+
+
+	ModelData nextModelGUI_T = ModelData();
+	nextModelGUI_T.PathShaderVertex = "basic.vert";
+	nextModelGUI_T.PathShaderFrag = "basic.frag";
+	nextModelGUI_T.PathModel3D = "./Models3D/Frame.obj";
+	//nextModelGUI_T.PathModel3D = "./Models3D/FrameT3.obj";
+	nextModelGUI_T.PathTexture = "./Textures/syzanna.bmp";
+	nextModelGUI_T.RadiusCollider = .1;
+	nextModelGUI_T.IsCubeModel = true;
+	nextModelGUI_T.Init();
+	AddModel(&nextModelGUI_T, "conextGUI_T");
+
+	//---GUI -- control -- TextBlock
+	ModelGUI textBlock = ModelGUI();
+	textBlock.PathShaderVertex = "basic.vert";
+	textBlock.PathShaderFrag = "basic.frag";
+	//textBlock.PathShaderVertex = "TextUI.vert";
+	//textBlock.PathShaderFrag = "TextUI.frag";
+	//textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
+	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
+	//textBlock.PathModel3D = "./Models3D/Frame.obj";
+	//textBlock.PathTexture = "./Textures/Alphabet.bmp";
+	textBlock.PathTexture = "./Textures/syzanna.bmp";
+	textBlock.RadiusCollider = .1;
+	textBlock.IsCubeModel = true;
+	textBlock.Init();
+	Models.push_back(std::make_unique<ModelGUI>(textBlock));
+	auto modelGUI = GetModelPrt(Models.size() - 1);
+	AddModelCustom(modelGUI, "TextBlockModel");
+}
+
 void CreatorModelData::LoadObjects() {
 
 	SceneSerialize* serializer = new SceneSerialize();
@@ -509,7 +533,6 @@ void CreatorModelData::LoadObjects() {
 	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
 	AddObject("Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
 	//CurrentPolygonObject = GetObjectPrt("Plane");
-
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
@@ -583,21 +606,29 @@ void CreatorModelData::LoadObjectsGUI() {
 
 		string caption;
 		string childModel = "conextGUI_2";
+		//childModel = "conextGUI_T";
 		string objName;
 
-		objName = "TEST1";
+		/*objName = "TEST1";
 		caption = objBackGUI->Name + "." + objName;
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
 
+		
 		objName = "TEST2";
 		caption = objBackGUI->Name + "." + objName;
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));*/
 		
+
+		objName = "TEST3";
+		caption = objBackGUI->Name + "." + objName;
+		childModel = "conextGUI_T";
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(1.1, 0.2));
+				
 		objName = "TextBlockObject";
 		caption = objBackGUI->Name + "." + objName;
 		childModel = "TextBlockModel";
-		//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(0.4, 0.2));
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .2, 0.01), vec2(1.9, 1.9));
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0, 0, 0));
+		//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(-.15, -.15, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0, 0, 0));
 }
 
 void CreatorModelData::Load() {

@@ -61,7 +61,7 @@ public:
 
 	//----------------------
 		
-	void UpdateTextureUV();
+	void ResizeTextureUV();
 
 	void ResizeVerticaleWall();
 

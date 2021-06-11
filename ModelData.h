@@ -24,6 +24,7 @@ using glm::vec3;
 using std::string;
 
 static vector<vec3> DEFAULT_VECTOR_V3;
+static vector<vec2> DEFAULT_VECTOR_V2;
 
 class Plane;
 
@@ -84,7 +85,7 @@ public:
 	void SetVAO();
 	void SetVAO(vector<vec3> vertices);
 
-	void virtual SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3);
+	void virtual SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, vector<vec2>& uv = DEFAULT_VECTOR_V2);
 
 	void SetUV(vector< vec2 > uv);
 	void UpdateBufferUV();
@@ -105,5 +106,5 @@ public:
 
 	void Init();
 
-	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3);
+	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, vector<vec2>& uv = DEFAULT_VECTOR_V2);
 };

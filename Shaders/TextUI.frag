@@ -24,6 +24,8 @@ void main()
     float alpha = 1.0f;
     float bordB = 0.97;
     float bordR = 0.975;
+    //float bordB = 0.01;
+    //float bordR = 0.5;
     vec2 uv = UV;
 
     //-----------------------------------
@@ -42,7 +44,6 @@ void main()
         numSyb = text[index];
         
         float stepNext =  float(index);
-        //vec2 sempS = fragCoord/iResolution.xy;
         vec2 sempS = uv;
         //--- Size
         sempS.x *= 5.5;
@@ -55,14 +56,16 @@ void main()
         sempS.x += stepX;
 
         //--- offset Y
-         float nextY =  -.145 * (floor(float(numSyb)/float(colSymbRow)));
+        float nextY =  -.145 * (floor(float(numSyb)/float(colSymbRow)));
         float stepY = -.475 + nextY;
+
         sempS.y += stepY;
         
         //---- border
         float offsetBorder = stepNext * 0.55 * 0.05;
         vec2 bl = vec2(step(0.0,uv.x - offsetBorder) , step(bordB,uv.y));       // bottom-left
         vec2 tr = vec2(step(bordR - offsetBorder,1.0-uv.x) , step(0.0,1.0-uv.y));   // top-right
+
         float brd = bl.x * bl.y * tr.x * tr.y;
         vec2 res = (brd * sempS);
         
@@ -75,8 +78,16 @@ void main()
     vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
     //vec4 text2 = vec4(texture( textureSampler2, UV ).rgb, alpha );
 
+    //TEST
+    //vec3 colorTest = vec3(1.0,1.0,0.);
+    //vec4 colorTest = fragmentColor;
+
     //vec4 colorText = vec4(0.984,0.773,0.196,1.);
     vec4 colorText = vec4(fragmentColor,alpha);
+    //vec4 colorText = vec4(vec3(1.0,1.0,0.),alpha);
+    //TEST
+    //vec4 colorText = vec4(colorTest, alpha);
+
     text1 =SDF(text1);
 
     //float limit = 0.3;
@@ -86,9 +97,12 @@ void main()
         color =  text1 * colorText;	
 
     //TEST
-    color = vec4(texture( textureSampler, uv ).rgb, alpha );	
+    //color = vec4(texture( textureSampler, uv ).rgb, alpha );	
 
     //color = text1.xxxx + text2;
     //color = text1.xxxx;
+
+
+    //color =  vec4(fragmentColor,alpha);
 }
 

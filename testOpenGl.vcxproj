@@ -169,6 +169,7 @@
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectTextBlock.cpp" />
     <ClCompile Include="OperationString.cpp" />
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
     <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="ObjectsTypes\ObjectNPC.h" />
     <ClInclude Include="ObjectsTypes\ObjectPhysic.h" />
     <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
+    <ClInclude Include="ObjectsTypes\ObjectTextBlock.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rooms\RoomMarkerPlane.h" />
