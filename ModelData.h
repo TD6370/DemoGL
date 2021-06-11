@@ -96,11 +96,11 @@ public:
 	ModelData Clone();
 };
 
-class ModelGUI : public ModelData {
+class ModelFrame : public ModelData {
 
 public:
-	
-	ModelGUI():ModelData() {
+
+	ModelFrame() :ModelData() {
 		//Init();
 	};
 
@@ -108,3 +108,17 @@ public:
 
 	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, vector<vec2>& uv = DEFAULT_VECTOR_V2);
 };
+
+class ModelTextBlock : public ModelFrame {
+
+public:
+	
+	ModelTextBlock():ModelFrame() {
+		//Init();
+	};
+
+	/*void Init();
+
+	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, vector<vec2>& uv = DEFAULT_VECTOR_V2);*/
+};
+

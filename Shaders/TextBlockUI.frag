@@ -70,6 +70,7 @@ void main()
     int index =0;
 
     int numSyb = numSymbol;
+    //numSyb = min(33,max(0,int(abs(sin(fragTime)))));
 
     vec2 uv = UV;
     vec2 sempS = UV;
@@ -80,7 +81,6 @@ void main()
     //--- offset X Y
     float sizeofNextSymb = .1427;
     float stepX = (sizeofNextSymb * float(numSyb)) - 0.00;
-        
     sempS.x += stepX;
 
     //------------------------- Y
@@ -88,21 +88,15 @@ void main()
     float stepY = -.15 + nextY;
     sempS.y += stepY;
     
-    
     //---- border
     vec2 bl = vec2(step(0.05,uv.x) , step(bordB,uv.y));       // bottom-left
     vec2 tr = vec2(step(bordR,1.0-uv.x) , step(0.05,1.0-uv.y));   // top-right
     float brd = bl.x * bl.y * tr.x * tr.y;
-    vec2 res = (brd * sempS);
-    
-    if(result == vec2(0))
-        result = res;
-    else 
-        result +=res;
-    
+    result = (brd * sempS);
+
     //anima
-    //result.x += cos(result.y*cos(iTime));
-    //result.y +=sin(result.x*sin(iTime)*.01);
+    result.x += cos(result.y*cos(fragTime));
+    result.y +=sin(result.x*sin(fragTime)*.01);
     
     vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
 
@@ -111,9 +105,9 @@ void main()
     //-----------
     //text1 =SDF2(text1);
     //-----------
-    //text1 =SDF4(text1);
+    text1 =SDF4(text1);
     //----------- GlowEffect
-    text1 = GlowEffect(text1);
+    //text1 = GlowEffect(text1);
     //----------- outline
     //text1 =Outline(text1);
     //---------------------

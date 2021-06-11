@@ -194,9 +194,43 @@ ModelData ModelData::Clone() {
 	return newModel;
 }
 
+//---------------- Model Frame
+
+void  ModelFrame::Init() {
+
+	ConstructShaderProgramm();
+
+	LoadingTexture();
+
+	LoadModelData();
+
+	SetModelInBuffer();
+
+	ConfigUniform();
+}
+
+void  ModelFrame::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv)
+{
+	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+
+	if (uv.size() == 0)
+		SetBufferUV(UV, BufferUV_ID);
+	else
+		SetBufferUV(uv, BufferUV_ID);
+
+	SetNormals(Normals, BufferNormal_ID);
+
+	if (buffer.size() == 0)
+		return;
+
+	GenBufferColors(buffer, BufferColor_ID);
+}
+//----------------------------
+
 //---------------- Model GUI
 
-void ModelGUI::Init() {
+/*
+void  ModelTextBlock::Init() {
 
 	ConstructShaderProgramm();
 
@@ -214,7 +248,7 @@ void ModelGUI::Init() {
 //	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
 //}
 
-void ModelGUI::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv)
+void  ModelTextBlock::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
 
@@ -230,6 +264,10 @@ void ModelGUI::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2
 
 	GenBufferColors(buffer, BufferColor_ID);
 }
+
+*/
 //----------------------------
+
+
 
 

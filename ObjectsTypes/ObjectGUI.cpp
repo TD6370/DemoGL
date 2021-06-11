@@ -65,12 +65,14 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	if(color == vec3(0))
 		color = vec3(1, 1, 0);
 
-	bool isTextBlock = true;
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
-	auto modelGUI = std::dynamic_pointer_cast<ModelGUI>(model);
-	if (modelGUI != nullptr) {
-		model = modelGUI;
-		isTextBlock = true;
+	auto  modelTextBlock = std::dynamic_pointer_cast<ModelTextBlock>(model);
+	if (modelTextBlock != nullptr) {
+		model = modelTextBlock;
+	}
+	auto modelFrame = std::dynamic_pointer_cast<ModelFrame>(model);
+	if (modelFrame != nullptr) {
+		model = modelFrame;
 	}
 
 	shared_ptr<ObjectData> obj = Storage->AddObject(nameObject, model, p_typeObj, StartPos, color);

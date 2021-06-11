@@ -500,25 +500,28 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI_T.Init();
 	AddModel(&nextModelGUI_T, "conextGUI_T");
 
+	ModelFrame modelFrame = ModelFrame();
+	modelFrame.PathShaderVertex = "FrameUI.vert";
+	modelFrame.PathShaderFrag = "FrameUI.frag";
+	modelFrame.PathModel3D = "./Models3D/Frame.obj";
+	modelFrame.PathTexture = "./Textures/syzanna.bmp";
+	modelFrame.RadiusCollider = .1;
+	modelFrame.IsCubeModel = true;
+	modelFrame.Init();
+	AddModel(&modelFrame, "FrameModel");
+
 	//---GUI -- control -- TextBlock
-	ModelGUI textBlock = ModelGUI();
-	//textBlock.PathShaderVertex = "basic.vert";
-	//textBlock.PathShaderFrag = "basic.frag";
-	//textBlock.PathShaderVertex = "TextUI.vert";
-	//textBlock.PathShaderFrag = "TextUI.frag";
+	ModelTextBlock textBlock = ModelTextBlock();
 	textBlock.PathShaderVertex = "TextBlockUI.vert";
 	textBlock.PathShaderFrag = "TextBlockUI.frag";
-	//textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
 	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
-	//textBlock.PathModel3D = "./Models3D/Frame.obj";
 	textBlock.PathTexture = "./Textures/Alphabet.bmp";
-	//textBlock.PathTexture = "./Textures/syzanna.bmp";
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
 	textBlock.Init();
-	Models.push_back(std::make_unique<ModelGUI>(textBlock));
-	auto modelGUI = GetModelPrt(Models.size() - 1);
-	AddModelCustom(modelGUI, "TextBlockModel");
+	Models.push_back(std::make_unique<ModelTextBlock>(textBlock));
+	auto textBlockPrt = GetModelPrt(Models.size() - 1);
+	AddModelCustom(textBlockPrt, "TextBlockModel");
 }
 
 void CreatorModelData::LoadObjects() {
@@ -624,8 +627,8 @@ void CreatorModelData::LoadObjectsGUI() {
 
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;
-		childModel = "conextGUI_T";
-		//childModel = "TextBlockModel";
+		//childModel = "conextGUI_T";
+		childModel = "FrameModel";
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(1.1, 0.2));
 				
 		objName = "TextBlockObject";
