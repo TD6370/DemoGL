@@ -33,7 +33,7 @@ private:
 	vec3 color_blue = vec3(0, 0, 1);
 	vec3 color_green = vec3(0, 1, 0);
 	vec3 color_violet = vec3(1, 0, 1);
-	vec3 color_yelow = vec3(0, 1, 1);
+	vec3 color_yelow = vec3(1, 1, 0);
 	vec3 color_none = vec3(0, 0, 0);
 	vec3 color_selected = vec3(0, 0, 0);
 	vec2 m_tempMousePos = vec2(0);

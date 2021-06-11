@@ -109,7 +109,8 @@ void ObjectDynamic::ActionSearch() {
 	//<<!!!>>
 	if (TypeObj == Hero)
 		ActionObjectCurrent = Moving; //Type 2.
-	if (TypeObj == NPC)
+	//if (TypeObj == NPC)
+	if (IsNPC)
 		ActionObjectCurrent = Look;
 }
 //----------

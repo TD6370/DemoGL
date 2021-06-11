@@ -45,15 +45,15 @@ private:
 	string prevShaderVert;
 	string prevShaderFrag;
 	GLuint last_VAO;
-	
+
 	bool test_isFerst = true;
 	vec3 SavePos;
-
 	int countObjects = 0;
-	bool isTextureRepeat = false;
 
+	bool isTextureRepeat = false;
 	bool m_isUpdateShaderProgramm = false;
 	bool m_isUpdate = false;
+	bool m_isEnableGUI = false;
 
 	const GLchar* pathShaderVertex = "basic.vert";
 	const GLchar* pathShaderFrag = "basic.frag";

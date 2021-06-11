@@ -26,7 +26,9 @@ public:
 		: ObjectDynamic(p_index,
 			p_model,
 			p_typeObj,
-			p_pos) {};
+			p_pos) {
+		IsNPC = true;
+	};
 
 	void InitData();
 

@@ -494,6 +494,7 @@ void CreatorModelData::LoadModels() {
 	nextModelGUI_T.PathModel3D = "./Models3D/Frame.obj";
 	//nextModelGUI_T.PathModel3D = "./Models3D/FrameT3.obj";
 	nextModelGUI_T.PathTexture = "./Textures/syzanna.bmp";
+	//nextModelGUI_T.PathTexture = "./Textures/Alphabet.bmp";
 	nextModelGUI_T.RadiusCollider = .1;
 	nextModelGUI_T.IsCubeModel = true;
 	nextModelGUI_T.Init();
@@ -501,15 +502,17 @@ void CreatorModelData::LoadModels() {
 
 	//---GUI -- control -- TextBlock
 	ModelGUI textBlock = ModelGUI();
-	textBlock.PathShaderVertex = "basic.vert";
-	textBlock.PathShaderFrag = "basic.frag";
+	//textBlock.PathShaderVertex = "basic.vert";
+	//textBlock.PathShaderFrag = "basic.frag";
 	//textBlock.PathShaderVertex = "TextUI.vert";
 	//textBlock.PathShaderFrag = "TextUI.frag";
+	textBlock.PathShaderVertex = "TextBlockUI.vert";
+	textBlock.PathShaderFrag = "TextBlockUI.frag";
 	//textBlock.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
 	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
 	//textBlock.PathModel3D = "./Models3D/Frame.obj";
-	//textBlock.PathTexture = "./Textures/Alphabet.bmp";
-	textBlock.PathTexture = "./Textures/syzanna.bmp";
+	textBlock.PathTexture = "./Textures/Alphabet.bmp";
+	//textBlock.PathTexture = "./Textures/syzanna.bmp";
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
 	textBlock.Init();
@@ -622,6 +625,7 @@ void CreatorModelData::LoadObjectsGUI() {
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;
 		childModel = "conextGUI_T";
+		//childModel = "TextBlockModel";
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(1.1, 0.2));
 				
 		objName = "TextBlockObject";

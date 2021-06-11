@@ -79,17 +79,8 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	objGUI->StartPos = startPosChild;
 	objGUI->SizePanel = size;
 	objGUI->Color = color;
-	//objGUI->IsTextureRepeat = isTextBlock;
-	objGUI->IsTextureRepeat = true;
-	if (p_typeObj == TypeObject::TextBlock)
-	{
-		shared_ptr<ObjectTextBlock> objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(objGUI);
-		objTextBlock->SetSizeControl(vec3(size.x, size.y, 1));
-	}
-	else
-	{
-		objGUI->SetSizeControl(vec3(size.x, size.y, 1));
-	}
+	//objGUI->IsTextureRepeat = true;
+	objGUI->SetSizeControl(vec3(size.x, size.y, 1));
 }
 
 

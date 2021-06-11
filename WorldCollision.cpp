@@ -496,7 +496,8 @@ vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition, Typ
 void WorldCluster::SaveClusterObject(int indexObj)
 {
 	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
-	if (object->TypeObj == Block) {
+	//if (object->TypeObj == Block) {
+	if (object->IsBlock) {
 		SaveClusterBlockObject(indexObj);
 	}
 	else {

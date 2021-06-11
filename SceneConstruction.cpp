@@ -160,32 +160,24 @@ void SceneConstruction::PreparationDataFromShader() {
 void SceneConstruction::SetDataToShader() {
 	
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
-
-	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->TypeObj == GUI;
-	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->TypeObj == GUI;
+	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
+	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
+	
 	if (isDisabledGUI)
 		return;
+
+	if (m_isEnableGUI != ObjectCurrent->IsGUI) {
+		m_isEnableGUI = ObjectCurrent->IsGUI;
+		m_isUpdate = true;
+	}
 
 	if (isCubeModel || m_isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);
 
-	std::shared_ptr<ObjectGUI> objGUI;
-	shared_ptr<ModelGUI> modelGUI;
-
-	if (isEnableGUI) {
-		objGUI = std::dynamic_pointer_cast<ObjectGUI>(ObjectCurrent);
-		modelGUI = std::dynamic_pointer_cast<ModelGUI>(ModelCurrent);
-	}
-
 	if (m_isUpdate) {
-		if (isEnableGUI && modelGUI != nullptr) {
-			modelGUI->SetModelInBuffer(m_isUpdate, objGUI->Buffer, ObjectCurrent->TextureUV);
-		}
-		else {
-			ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV);
-		}
+		ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV);
 	}
 
 	//-------------------- Set color

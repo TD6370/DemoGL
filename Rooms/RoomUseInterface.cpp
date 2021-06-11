@@ -16,6 +16,7 @@ void RoomUseInterface::Config() {
 
 void RoomUseInterface::Init() {
 	
+	//color_selected = color_yelow;
 	color_selected = color_yelow;
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
@@ -40,7 +41,11 @@ void RoomUseInterface::Work() {
 		return;
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
-		
+
+	bool isFocused = objGUI->IsFocused;
+	if (!isFocused)
+		return;
+
 	bool isSelect = false;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
@@ -53,14 +58,17 @@ void RoomUseInterface::Work() {
 		IndexObjectSelected = objGUI->Index;
 		isSelect = true;
 	}
+	
 
 	if (isSelect &&
+		isFocused &&
 		Scene->Storage->Inputs->MBT == m_KeyPush &&
 		Scene->Storage->Inputs->ActionMouse == GLFW_PRESS) {
 		objGUI->Click();
 	}
 
-	if (objGUI->ActionObjectCurrent != Woking) {
+	if (objGUI->ActionObjectCurrent != Woking &&
+		isFocused ) {
 		if (isSelect) {
 			objGUI->Color = color_selected;
 		}

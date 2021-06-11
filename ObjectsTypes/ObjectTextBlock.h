@@ -36,7 +36,9 @@ public:
 		: ObjectGUI(p_index,
 			p_model,
 			p_typeObj,
-			p_pos) {};
+			p_pos) {
+		IsFocused = false;
+	};
 
 
 	~ObjectTextBlock();

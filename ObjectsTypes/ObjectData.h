@@ -46,8 +46,14 @@ protected:
 public:
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
-	bool IsGravity = false;
 	bool IsSelected = false;
+
+	//Options
+	bool IsGravity = false;
+	bool IsGUI = false;
+	bool IsTextureRepeat = false;
+	bool IsNPC = false;
+	bool IsBlock = false;
 	
 	CreatorModelData* Storage;
 
@@ -63,9 +69,7 @@ public:
 	vector <vec2> TextureUV;
 	vector <vec3> Buffer;
 
-	bool IsTextureRepeat = false;
 	float TextureRepeat = 1;
-	
 	vec3 Color = vec3(0);
 
 	//GLfloat TranslateAngle = 0;
