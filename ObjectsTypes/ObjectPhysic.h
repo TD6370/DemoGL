@@ -32,7 +32,9 @@ public:
 		: ObjectData(p_index,
 			p_model,
 			p_typeObj,
-			p_pos) {};
+			p_pos) {
+		IsCubeModel = false;
+	};
 
 	void InitData();
 
@@ -61,7 +63,7 @@ public:
 	void virtual FillPlanes();
 	
 
-	bool IsShow();
+	bool GetVisible();
 
 	//-----------
 
@@ -86,7 +88,7 @@ public:
 	void virtual GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 	//----------
 
-	bool virtual IsCubeModel();
+	//bool virtual IsCubeModel();
 
 };
 

@@ -46,6 +46,7 @@ public:
 		IsGUI = true;
 		IsFocused = true;
 		IsAbsolutePosition = false;
+		IsCubeModel = true;
 	};
 
 	void InitData();
@@ -54,11 +55,11 @@ public:
 
 	void virtual UpdateState();
 
-	bool IsShow();
+	bool GetVisible();
 
 	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 
-	bool IsCubeModel();
+	//bool IsCubeModel();
 
 	void virtual SetSizeControl(vec3 size);
 

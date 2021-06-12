@@ -50,31 +50,18 @@ public:
 
 	~ObjectTextBlock();
 
-	void InitData();
-
-	void RunAction();
-
-	void UpdateState();
-
 	void CreateMessage();
 
 	void MeshTransform();
 
-	bool IsCubeModel();
 
-	void FillPlanes();
-
-	//void ResizeTextureUV();
-
-	//void virtual Click();
-
-	//void virtual Work();
-
+	//void RunAction();
 	//void virtual DefaultSate();
+	//void virtual Click();
+	//void virtual Work();
 
 	//-------------
 
 	//vector<ObjectFiledsSpecific> GetSpecificFiels();
-
 	//void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };

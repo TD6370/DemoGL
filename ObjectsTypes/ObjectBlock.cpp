@@ -161,10 +161,6 @@ void ObjectBlock::MeshTransform() {
 	}
 }
 
-bool ObjectBlock::IsCubeModel() {
-	return true;
-}
-
 void ObjectBlock::ResizeTextureUV() {
 	if (IsTextureRepeat) {
 		//std::vector< glm::vec2 > repeat_UV = StartUV;

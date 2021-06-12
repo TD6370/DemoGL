@@ -119,7 +119,7 @@ bool ObjectPhysic::CheckIsLock() {
 
 void ObjectPhysic::FillPlanes()
 {
-	if (IsCubeModel()) {
+	if (IsCubeModel) {
 		Vertices = ModelPtr->Vertices;
 		FillPlanesCube();
 	}
@@ -184,16 +184,16 @@ void ObjectPhysic::SaveToCluster()
 	Storage->Clusters->SaveClusterObject(Index);
 }
 
-bool ObjectPhysic::IsShow() {
+bool ObjectPhysic::GetVisible() {
 	return IsVisible;
 }
 
 
 //------------
 
-bool ObjectPhysic::IsCubeModel() {
-	return false;
-}
+//bool ObjectPhysic::IsCubeModel() {
+//	return false;
+//}
 
 std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 	if (Vertices.size() != 0)

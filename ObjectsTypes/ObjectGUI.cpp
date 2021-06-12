@@ -43,22 +43,33 @@ void ObjectGUI::UpdateState() {
 	//PanelDepth = 4.8;
 	//PanelDepth = 5.8;
 	//PanelDepth = 6.8;
-	if (StartPos == vec3(0)) {
-		Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, PanelDepth, Storage->Oper);
-	}else	{
-		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper , StartPos);
-	}
 
+	if(IsAbsolutePosition)
+	{
+		vec3 startPos = vec3(StartPos.x - 0.97, StartPos.y - 0.97, StartPos.z); //when SetSizeControl - is disabled
+		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, startPos);
+	}
+	else {
+		if (StartPos == vec3(0)) {
+			Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, PanelDepth, Storage->Oper);
+		}
+		else {
+			Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, StartPos);
+		}
+	}
 	Billboard();
 }
 
-bool ObjectGUI::IsShow() {
+bool ObjectGUI::GetVisible() {
+
+	//TODO:: IndexObjectOwner 
+
 	return Storage->SceneData->IsGUI;
 }
 
-bool ObjectGUI::IsCubeModel() {
-	return true;
-}
+//bool ObjectGUI::IsCubeModel() {
+//	return true;
+//}
 
 void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
 {

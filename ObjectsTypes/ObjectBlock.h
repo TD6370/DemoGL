@@ -40,6 +40,7 @@ public:
 			p_typeObj,
 			p_pos) {
 		IsBlock = true;
+		IsCubeModel = true;
 	};
 
 	void InitData();
@@ -58,8 +59,6 @@ public:
 
 	//------------------
 	void SelectVertexBlock();
-	
-	bool IsCubeModel();
 
 	//----------------------
 		

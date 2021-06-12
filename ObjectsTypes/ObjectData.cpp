@@ -208,7 +208,7 @@ void ObjectData::Billboard() {
 	TranslateAngle.z = -Storage->Oper->VerticalAngle;
 }
 
-bool ObjectData::IsShow() {
+bool ObjectData::GetVisible() {
 	return IsVisible;
 }
 

@@ -42,18 +42,19 @@ protected:
 	GLfloat m_stepMove = 0;
 	GLfloat m_angleModel = 0.0;
 	std::string m_keyPosSectorStr;
-	bool IsVisible = true;
 public:
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
 	bool IsSelected = false;
 
 	//Options
+	bool IsVisible = true;
 	bool IsGravity = false;
 	bool IsGUI = false;
 	bool IsTextureRepeat = false;
 	bool IsNPC = false;
 	bool IsBlock = false;
+	bool IsCubeModel = false;
 	bool IsAbsolutePosition = true;
 	
 	CreatorModelData* Storage;
@@ -120,16 +121,18 @@ public:
 	void RunTransform();
 
 	void Action();
+
+	//---------------
 	
-	vec3 GetVertexPosition(int indVertex);
+	vec3 GetVertexPosition(int indVertex); //------- geometric ???
 
-	vec3 ToWorldPosition(vec3 pos);
+	vec3 ToWorldPosition(vec3 pos); //------- geometric ???
 
-	string GetKeySectorPolygon(bool isNewPosition = true);
+	string GetKeySectorPolygon(bool isNewPosition = true); //------- geometric ???
 
-	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
+	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane); //------- geometric ???
 
-	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
+	std::shared_ptr<Plane> GetPlanePrt(int indexPlane); //------- geometric ???
 
 	void virtual SelectedEvent();
 	void virtual UnselectedEvent();
@@ -140,27 +143,38 @@ public:
 
 	void virtual SetMesh();
 
-	void virtual MeshTransform();
+	void virtual MeshTransform(); //------- geometric ???
 
 	void virtual ControlsEvents();
 
-	void virtual Billboard();
+	void virtual Billboard(); //------- geometric ???
 
-	bool virtual IsShow();
+	bool virtual GetVisible();
 
 	void virtual InitChildObjects();
 
 	void AddChild(string key);
-
-	void UpdateTextureUV();
-
+		
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
-	//#SaveFieldSpecific
+	
+
+	void UpdateTextureUV(); //------- geometric ???
+
+	//-------- SaveFieldSpecific
 
 	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
 
 	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+
+	// ---- geometric Box
+
+	//void UpdateState();
+	//bool IsCubeModel();
+	//void FillPlanes(); //TEST
+	//void ResizeTextureUV();
+	//---------------------
+
 };
 
 #endif

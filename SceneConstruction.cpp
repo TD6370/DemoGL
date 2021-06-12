@@ -201,7 +201,7 @@ void SceneConstruction::SetDataToShader() {
 bool SceneConstruction::SetObject(int indObj) {
 
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
-	bool isShow = ObjectCurrent->IsShow();
+	bool isVisible = ObjectCurrent->GetVisible();
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
@@ -218,13 +218,13 @@ bool SceneConstruction::SetObject(int indObj) {
 		prevShaderFrag = ModelCurrent->PathShaderFrag;
 	}
 
-	return isShow;
+	return isVisible;
 }
 
 void SceneConstruction::ObjectUpdate(int i) {
 
-	bool isShow = SetObject(i);
-	if (!isShow)
+	bool isVisible = SetObject(i);
+	if (!isVisible)
 		return;
 
 	PreparationDataFromShader();

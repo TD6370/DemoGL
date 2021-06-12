@@ -24,18 +24,6 @@ ObjectTextBlock::~ObjectTextBlock()
 
 }
 
-void ObjectTextBlock::InitData()
-{
-	ObjectGUI::InitData();
-
-	//CreateMessage();
-	//Color = vec3(0.2,0.5,0.1);
-}
-
-void ObjectTextBlock::RunAction() {
-
-	ObjectGUI::RunAction();
-}
 
 void ObjectTextBlock::CreateMessage() {
 
@@ -178,28 +166,7 @@ void ObjectTextBlock::MeshTransform() {
 	FillPlanesCube();
 }
 
-void ObjectTextBlock::FillPlanes()
-{
-	
-}
 
-bool ObjectTextBlock::IsCubeModel() {
-	return true;
-}
-
-void ObjectTextBlock::UpdateState() {
-
-	if (!Storage->SceneData->IsGUI)
-		return;
-
-	vec3 directionOut = vec3(0);
-	PanelDepth = 3.8;
-	
-	vec3 startPos = vec3(StartPos.x - 0.97, StartPos.y - 0.97, StartPos.z); //when SetSizeControl - is disabled
-	Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, startPos);
-
-	Billboard();
-}
 
 
 
