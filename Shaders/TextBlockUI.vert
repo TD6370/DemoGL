@@ -25,13 +25,9 @@ void main()
 	gl_Position = MVP * transform *vec4(position, 1.0);
 
 	// ---- OUT 
-	//fragmentColor = vertexColor;
 	fragmentColor = setColor; 
 	UV = vertexUV;
 	fragParamCase = paramCase;
 	fragTime = fTime;
-	//numSymbol = 1;//vertexUV.x;
-	//numSymbol = min(33,int(position.x));
-	//numSymbol = min(33,max(0,int(abs(gl_Position.x + gl_Position.y))));
-	numSymbol = min(33,max(0,int(abs(sin(fragTime)))));
+	numSymbol = int(vertexColor.x);
 }

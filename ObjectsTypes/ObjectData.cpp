@@ -171,6 +171,15 @@ std::vector<glm::vec2> ObjectData::GetUV() {
 	return ModelPtr->UV;
 }
 
+std::vector<glm::vec3> ObjectData::GetNormals() {
+
+	if (Normals.size() != 0) 
+		return Normals;
+	else
+		return ModelPtr->Normals;
+}
+
+
 void ObjectData::SetMesh() {
 	ModelPtr->SetVAO();
 }

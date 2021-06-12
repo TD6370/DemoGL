@@ -52,7 +52,6 @@ SceneConstruction::SceneConstruction(GLFWwindow* window) {
 	Init();
 }
 
-//void SceneConstruction::Init(Operator* p_oper, Lighting* p_light, SceneParam* p_scene, CreatorModelData* p_storage, ControllerInput* p_inputs) {
 void SceneConstruction::Init() {
 
 	Rooms = vector<shared_ptr<SceneRoom>>();
@@ -159,6 +158,9 @@ void SceneConstruction::PreparationDataFromShader() {
 
 void SceneConstruction::SetDataToShader() {
 	
+	//TEST
+	std::cout << ObjectCurrent->Name << "\n";
+
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
 	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
 	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
@@ -170,14 +172,15 @@ void SceneConstruction::SetDataToShader() {
 		m_isEnableGUI = ObjectCurrent->IsGUI;
 		m_isUpdate = true;
 	}
-
+	
 	if (isCubeModel || m_isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);
 
 	if (m_isUpdate) {
-		ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV);
+		auto normals = ObjectCurrent->GetNormals();
+		ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV, normals);
 	}
 
 	//-------------------- Set color
@@ -306,7 +309,11 @@ void SceneConstruction::DrawGraph()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	bool isIndex = ModelCurrent->IsIndex;
+
+	
 	GLint trianglesCount = ModelCurrent->TrianglesCount;
+	if(ObjectCurrent->TrianglesCount > 0)
+		trianglesCount = ObjectCurrent->TrianglesCount;
 
 	if (isIndex) {
 		glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);

@@ -66,10 +66,12 @@ public:
 
 	shared_ptr<ModelData> ModelPtr;
 	vector <vec3> Vertices;
+	vector <vec3> Normals;
 	vector <vec2> TextureUV;
 	vector <vec3> Buffer;
 
 	float TextureRepeat = 1;
+	GLint TrianglesCount = 0;
 	vec3 Color = vec3(0);
 
 	//GLfloat TranslateAngle = 0;
@@ -133,12 +135,11 @@ public:
 
 	std::vector< glm::vec3 > virtual GetVertices();
 	std::vector< glm::vec2 > virtual GetUV();
+	std::vector< glm::vec3 > virtual GetNormals();
 
 	void virtual SetMesh();
 
 	void virtual MeshTransform();
-
-	void UpdateTextureUV();
 
 	void virtual ControlsEvents();
 
@@ -149,6 +150,8 @@ public:
 	void virtual InitChildObjects();
 
 	void AddChild(string key);
+
+	void UpdateTextureUV();
 
 	std::shared_ptr<ObjectData> GetChild(string key);
 	

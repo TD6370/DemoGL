@@ -14,17 +14,22 @@
 using glm::vec4;
 using glm::vec3;
 using glm::vec2;
-//using std::map;
+using std::map;
 using std::string;
+using std::vector;
 using std::shared_ptr;
 
 
 class ObjectTextBlock :
 	public ObjectGUI
 {
+protected:
+	map<string, int> mapAlphabet;
+	vector<int> MessageCode;
 
 public:
 	string Message = std::string();
+	
 
 	//ObjectTextBlock() {};
 
@@ -49,9 +54,17 @@ public:
 
 	void UpdateState();
 
+	void CreateMessage();
+
+	void MeshTransform();
+
 	void SetSizeControl(vec3 size);
 
 	void GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
+
+	bool IsCubeModel();
+
+	void FillPlanes();
 
 	//void ResizeTextureUV();
 

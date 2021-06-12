@@ -4,8 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <set>
-
-using std::string;
+//#include <map>
+//
+//using std::string;
+//using std::map;
 
 //template<typename T, typename P>
 //T remove_if(T beg, T end, P pred)
@@ -16,6 +18,16 @@ using std::string;
 //            *(dest++) = *itr;
 //    return dest;
 //}
+
+bool IsMapContains_StrInt(map <string, int> inMap, string key)
+{
+    bool result = false;;
+    map <string, int> ::iterator it;
+    it = inMap.find(key);
+    if (it != inMap.end())
+        result = true;
+    return result;
+}
 
 string Trim(string str) {
     str.erase(remove_if(str.begin(), str.end(), isspace), str.end());

@@ -516,6 +516,12 @@ void CreatorModelData::LoadModels() {
 	textBlock.PathShaderFrag = "TextBlockUI.frag";
 	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
 	textBlock.PathTexture = "./Textures/Alphabet.bmp";
+
+	//TEST
+	//textBlock.PathShaderVertex = "FrameUI.vert";
+	//textBlock.PathShaderFrag = "FrameUI.frag";
+	//textBlock.PathTexture = "./Textures/syzanna.bmp";
+
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
 	textBlock.Init();
@@ -624,18 +630,16 @@ void CreatorModelData::LoadObjectsGUI() {
 		caption = objBackGUI->Name + "." + objName;
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));*/
 		
-
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;
-		//childModel = "conextGUI_T";
 		childModel = "FrameModel";
 		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(1.1, 0.2));
 				
 		objName = "TextBlockObject";
-		caption = objBackGUI->Name + "." + objName;
+		caption = "привет мир, и доброе утро";
 		childModel = "TextBlockModel";
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0, 0, 0));
-		//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(-.15, -.15, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0, 0, 0));
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0.2, 0.5, 0.1));
+			
 }
 
 void CreatorModelData::Load() {

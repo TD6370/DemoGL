@@ -27,6 +27,7 @@ void main()
     vec2 tr = vec2(step(bordR,1.0-uv.x) , step(0.05,1.0-uv.y));   // top-right
     float brd = bl.x * bl.y * tr.x * tr.y;
     result = (brd * sempS);
+    //result = UV;
   
     //anima
     //result.x += cos(result.y*cos(fragTime));

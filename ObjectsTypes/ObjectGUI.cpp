@@ -62,8 +62,8 @@ bool ObjectGUI::IsCubeModel() {
 
 void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
 {
-	if(color == vec3(0))
-		color = vec3(1, 1, 0);
+	//if(color == vec3(0))
+	//	color = vec3(1, 1, 0);
 
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
 	auto  modelTextBlock = std::dynamic_pointer_cast<ModelTextBlock>(model);
@@ -83,6 +83,12 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	objGUI->Color = color;
 	//objGUI->IsTextureRepeat = true;
 	objGUI->SetSizeControl(vec3(size.x, size.y, 1));
+
+	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
+	if (objTextBlock != nullptr) {
+		objTextBlock->Message = caption;
+		objTextBlock->CreateMessage();
+	}
 }
 
 

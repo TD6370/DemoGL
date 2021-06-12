@@ -195,7 +195,6 @@ bool ObjectPhysic::IsCubeModel() {
 
 std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 	if (Vertices.size() != 0)
-	//if(TypeObj == Block)
 		return Vertices;
 	else	
 		return ObjectData::GetVertices();

@@ -70,7 +70,6 @@ void main()
     int index =0;
 
     int numSyb = numSymbol;
-    //numSyb = min(33,max(0,int(abs(sin(fragTime)))));
 
     vec2 uv = UV;
     vec2 sempS = UV;
@@ -95,17 +94,17 @@ void main()
     result = (brd * sempS);
 
     //anima
-    result.x += cos(result.y*cos(fragTime));
-    result.y +=sin(result.x*sin(fragTime)*.01);
+    //result.x += cos(result.y*cos(fragTime));
+    //result.y +=sin(result.x*sin(fragTime)*.01);
     
     vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
 
     //--------- SDF
 	//text1 =SDF1(text1);
     //-----------
-    //text1 =SDF2(text1);
+    text1 =SDF2(text1);
     //-----------
-    text1 =SDF4(text1);
+    //text1 =SDF4(text1);
     //----------- GlowEffect
     //text1 = GlowEffect(text1);
     //----------- outline
