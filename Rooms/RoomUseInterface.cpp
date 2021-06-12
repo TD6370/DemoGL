@@ -36,29 +36,26 @@ void RoomUseInterface::Work() {
 	}
 
 	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-	//if (Scene->ObjectCurrent->TypeObj != GUI)
 	if(objGUI == nullptr)
 		return;
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
 
 	bool isFocused = objGUI->IsFocused;
-	if (!isFocused)
-		return;
 
 	bool isSelect = false;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
-	//std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+
 	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
 	vec3 posCursor = GetMousePosWorld();
 	
 	if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
 	{
+		std::cout << "Select: " << objGUI->Name << "\n";
 		IndexObjectSelected = objGUI->Index;
 		isSelect = true;
 	}
-	
 
 	if (isSelect &&
 		isFocused &&
@@ -67,13 +64,16 @@ void RoomUseInterface::Work() {
 		objGUI->Click();
 	}
 
+	if (!isFocused)
+		return;
+
 	if (objGUI->ActionObjectCurrent != Woking &&
 		isFocused ) {
 		if (isSelect) {
 			objGUI->Color = color_selected;
 		}
 		else {
-			objGUI->Color = color_none;
+			objGUI->Color = color_default;
 		}
 	}
 }

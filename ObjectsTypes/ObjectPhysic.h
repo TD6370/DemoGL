@@ -70,8 +70,12 @@ public:
 	void SetMesh();
 
 	vec3 GetBottom(int index);
+	vec3 GetBottomFirst();
+	vec3 GetBottomLast();
 
 	vec3 GetTop(int index);
+	vec3 GetTopFirst();
+	vec3 GetTopLast();
 
 	void SetBottom(int index, vec3 value);
 

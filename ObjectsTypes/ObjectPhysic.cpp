@@ -153,6 +153,8 @@ void ObjectPhysic::FillPlanesCube()
 			indexPlaneT++;
 		}
 	}
+	auto test = "";
+
 	/*if (TopVectors.find(indVert) == TopVectors.end()) {}*/
 }
 
@@ -224,8 +226,24 @@ vec3 ObjectPhysic::GetBottom(int index) {
 	return BottomVectors[index];
 }
 
+vec3 ObjectPhysic::GetBottomFirst() {
+	return BottomVectors[0];
+}
+
+vec3 ObjectPhysic::GetBottomLast() {
+	return BottomVectors[BottomVectors.size() - 1];
+}
+
 vec3 ObjectPhysic::GetTop(int index) {
 	return TopVectors[index];
+}
+
+vec3 ObjectPhysic::GetTopFirst() {
+	return TopVectors[0];
+}
+
+vec3 ObjectPhysic::GetTopLast() {
+	return TopVectors[TopVectors.size() - 1];
 }
 
 void ObjectPhysic::SetBottom(int index, vec3 value) {
@@ -263,10 +281,26 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 
 	glm::mat4 MVP = Storage->ConfigMVP->MVP;
 	glm::mat4 transform = TransformResult;
-	vec3 vertBottomLeft = GetBottom(1);
-	vec3 vertBottomRight = GetBottom(0);
-	vec3 vertTopLeft = GetTop(1);
-	vec3 vertTopRight = GetTop(0);
+
+	vec3 vertBottomLeft;
+	vec3 vertBottomRight;
+	vec3 vertTopLeft;
+	vec3 vertTopRight;
+
+	if (IsAbsolutePosition)
+	{
+		vertBottomLeft = GetBottomFirst();
+		vertBottomRight = GetBottomLast();
+		vertTopLeft = GetTopFirst();
+		vertTopRight = GetTopLast();
+	}
+	else {
+		vertBottomLeft = GetBottomLast();
+		vertBottomRight = GetBottomFirst();
+		vertTopLeft = GetTopLast();
+		vertTopRight = GetTopFirst();
+	}
+
 	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
 	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
 	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);

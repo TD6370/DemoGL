@@ -159,7 +159,8 @@ void SceneConstruction::PreparationDataFromShader() {
 void SceneConstruction::SetDataToShader() {
 	
 	//TEST
-	std::cout << ObjectCurrent->Name << "\n";
+	//std::cout << ObjectCurrent->Name << "\n";
+	//auto nameTest =  ObjectCurrent->Name;
 
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
 	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;

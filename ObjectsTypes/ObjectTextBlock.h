@@ -29,9 +29,6 @@ protected:
 
 public:
 	string Message = std::string();
-	
-
-	//ObjectTextBlock() {};
 
 	ObjectTextBlock(
 		int p_index,
@@ -42,7 +39,12 @@ public:
 			p_model,
 			p_typeObj,
 			p_pos) {
-		IsFocused = false;
+		
+		IsAbsolutePosition = true;
+		//IsFocused = false;
+
+		//--- TEST
+		IsFocused = true;
 	};
 
 
@@ -57,10 +59,6 @@ public:
 	void CreateMessage();
 
 	void MeshTransform();
-
-	void SetSizeControl(vec3 size);
-
-	void GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 
 	bool IsCubeModel();
 

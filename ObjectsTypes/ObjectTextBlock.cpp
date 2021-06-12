@@ -175,39 +175,16 @@ void ObjectTextBlock::MeshTransform() {
 		//IsTextureRepeat = true;
 	//std::cout << ss1.str();
 	//std::cout << std::endl;
-	//FillPlanesCube();
+	FillPlanesCube();
 }
 
 void ObjectTextBlock::FillPlanes()
 {
-
+	
 }
 
 bool ObjectTextBlock::IsCubeModel() {
 	return true;
-}
-
-void ObjectTextBlock::SetSizeControl(vec3 vertOffset) {
-
-}
-
-void ObjectTextBlock::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
-
-	glm::mat4 MVP = Storage->ConfigMVP->MVP;
-	glm::mat4 transform = TransformResult;
-	vec3 vertBottomLeft = GetBottom(1);
-	vec3 vertBottomRight = GetBottom(0);
-	vec3 vertTopLeft = GetTop(1);
-	vec3 vertTopRight = GetTop(0);
-	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
-	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
-	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
-	vec3 posWorldTR = MVP * transform * vec4(vertTopRight, 1.0);
-	zOrder = posWorldTR.z;
-	startPos.x = posWorldBL.x,
-		startPos.y = posWorldTL.y;
-	endPos.x = posWorldBR.x;
-	endPos.y = posWorldBL.y;
 }
 
 void ObjectTextBlock::UpdateState() {

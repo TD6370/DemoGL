@@ -62,7 +62,8 @@ vec4 GlowEffect(in vec4 inColor ){
 
 void main()
 {
-	float alpha = 1.0f;
+	float alpha = 0.0f;
+    float alphaOff = 1.0f;
     float bordB = 0.1;
     float bordR = 0.1;
     int colSymbRow = 7;
@@ -97,7 +98,7 @@ void main()
     //result.x += cos(result.y*cos(fragTime));
     //result.y +=sin(result.x*sin(fragTime)*.01);
     
-    vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
+    vec4 text1 = texture( textureSampler, result );	
 
     //--------- SDF
 	//text1 =SDF1(text1);
@@ -112,17 +113,11 @@ void main()
     //---------------------
 
     vec4 colorText = vec4(0.984,0.773,0.196,1.);
-    
-    //float gran = 0.85;
-    //float gran = 0.015;
-    //float gran = 0.3;
-    //if(text1.r < gran)
-    //    fragColor = text2;
-    //else
-    //    color =  text1 * colorText;
-        
-    //fragColor = text1;
 
-    //color =  text1 * colorText;
+    float limitAlpha = 0.1;
+    float sumColor = text1.r * text1.g * text1.b;
+    alpha = smoothstep(0.0, 0.5, sumColor);
+    //alpha = step(0.001, sumColor);
+    
     color =  text1 * vec4(fragmentColor, alpha );
 }

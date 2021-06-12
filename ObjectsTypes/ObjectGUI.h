@@ -45,6 +45,7 @@ public:
 			p_pos) 	{
 		IsGUI = true;
 		IsFocused = true;
+		IsAbsolutePosition = false;
 	};
 
 	void InitData();

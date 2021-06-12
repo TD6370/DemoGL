@@ -54,6 +54,7 @@ public:
 	bool IsTextureRepeat = false;
 	bool IsNPC = false;
 	bool IsBlock = false;
+	bool IsAbsolutePosition = true;
 	
 	CreatorModelData* Storage;
 

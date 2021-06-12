@@ -62,8 +62,8 @@ bool ObjectGUI::IsCubeModel() {
 
 void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
 {
-	//if(color == vec3(0))
-	//	color = vec3(1, 1, 0);
+	if(color == vec3(0))
+		color = vec3(1);
 
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
 	auto  modelTextBlock = std::dynamic_pointer_cast<ModelTextBlock>(model);
@@ -94,7 +94,8 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 
 void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 
-	//return;
+	if (IsAbsolutePosition)
+		return;
 
 	//-- set transform
 	if (Vertices.size() != 0) {

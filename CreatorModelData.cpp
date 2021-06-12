@@ -460,46 +460,17 @@ void CreatorModelData::LoadModels() {
 	nextModelCursorRay.Init();
 	AddModel(&nextModelCursorRay, "cursorRay");
 
+	ModelFrame ContextFrame = ModelFrame();
+	ContextFrame.PathShaderVertex = "FrameUI.vert";
+	ContextFrame.PathShaderFrag = "FrameUI.frag";
+	ContextFrame.PathModel3D = "./Models3D/Frame.obj";
+	ContextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
+	ContextFrame.RadiusCollider = .1;
+	ContextFrame.IsCubeModel = true;
+	ContextFrame.Init();
+	AddModel(&ContextFrame, "conextFrame");
 
-	ModelData nextModelGUI = ModelData();
-	nextModelGUI.PathShaderVertex = "basic.vert";
-	nextModelGUI.PathShaderFrag = "basic.frag";
-
-	//nextModelGUI.PathModel3D = "./Models3D/InterfacePlaneT11.obj";
-	nextModelGUI.PathModel3D = "./Models3D/Frame.obj";
-	//nextModelGUI.PathModel3D = "./Models3D/kub.obj";
-
-	nextModelGUI.PathTexture = "./Textures/future.bmp";
-	//nextModelCursorRay.PathTexture = "./Textures/future.bmp";
-	nextModelGUI.RadiusCollider = .1;
-	nextModelGUI.IsCubeModel = true;
-	nextModelGUI.Init();
-	AddModel(&nextModelGUI, "conextGUI");
-
-
-	ModelData nextModelGUI_2 = ModelData();
-	nextModelGUI_2.PathShaderVertex = "basic.vert";
-	nextModelGUI_2.PathShaderFrag = "basic.frag";
-	nextModelGUI_2.PathModel3D = "./Models3D/Frame.obj";
-	nextModelGUI_2.PathTexture = "./Textures/testTexture.bmp";
-	nextModelGUI_2.RadiusCollider = .1;
-	nextModelGUI_2.IsCubeModel = true;
-	nextModelGUI_2.Init();
-	AddModel(&nextModelGUI_2, "conextGUI_2");
-
-
-	ModelData nextModelGUI_T = ModelData();
-	nextModelGUI_T.PathShaderVertex = "basic.vert";
-	nextModelGUI_T.PathShaderFrag = "basic.frag";
-	nextModelGUI_T.PathModel3D = "./Models3D/Frame.obj";
-	//nextModelGUI_T.PathModel3D = "./Models3D/FrameT3.obj";
-	nextModelGUI_T.PathTexture = "./Textures/syzanna.bmp";
-	//nextModelGUI_T.PathTexture = "./Textures/Alphabet.bmp";
-	nextModelGUI_T.RadiusCollider = .1;
-	nextModelGUI_T.IsCubeModel = true;
-	nextModelGUI_T.Init();
-	AddModel(&nextModelGUI_T, "conextGUI_T");
-
+	//---GUI -- control -- Frame
 	ModelFrame modelFrame = ModelFrame();
 	modelFrame.PathShaderVertex = "FrameUI.vert";
 	modelFrame.PathShaderFrag = "FrameUI.frag";
@@ -516,11 +487,6 @@ void CreatorModelData::LoadModels() {
 	textBlock.PathShaderFrag = "TextBlockUI.frag";
 	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
 	textBlock.PathTexture = "./Textures/Alphabet.bmp";
-
-	//TEST
-	//textBlock.PathShaderVertex = "FrameUI.vert";
-	//textBlock.PathShaderFrag = "FrameUI.frag";
-	//textBlock.PathTexture = "./Textures/syzanna.bmp";
 
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
@@ -612,9 +578,10 @@ void CreatorModelData::LoadObjects() {
 
 void CreatorModelData::LoadObjectsGUI() {
 
-	std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
-	std::shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0));
-	std::shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+	//std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
+	shared_ptr<ModelData> modelGUI = GetModelPrt("conextFrame");
+	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
 
 		string caption;
 		string childModel = "conextGUI_2";
@@ -633,7 +600,7 @@ void CreatorModelData::LoadObjectsGUI() {
 		objName = "TEST3";
 		caption = objBackGUI->Name + "." + objName;
 		childModel = "FrameModel";
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(1.1, 0.2));
+		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
 				
 		objName = "TextBlockObject";
 		caption = "привет мир, и доброе утро";
