@@ -313,12 +313,12 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 		vertTopRight = GetTopFirst();
 	}
 	//TEST ----------------------
-	vec3 posWorld = MVP * transform * vec4(vertBottomLeft, 1.0);
+	/*vec3 posWorld = MVP * transform * vec4(vertBottomLeft, 1.0);
 	vec3 vertPos = vec3();
 	vec4 vertPos1 = vec4(posWorld, 1.0) * glm::inverse(MVP);
 	vertPos1 *= glm::inverse(transform);
 	vertPos = vec3(vertPos1.x, vertPos1.y, vertPos1.z);
-	bool isEquals = vertPos == vertBottomLeft;
+	bool isEquals = vertPos == vertBottomLeft;*/
 	//-----------------------
 	
 	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);

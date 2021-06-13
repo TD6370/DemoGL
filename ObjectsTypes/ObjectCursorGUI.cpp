@@ -49,7 +49,8 @@ void ObjectCursorGUI::SaveNewPosition() {
 	glm::mat4 MVP = Storage->ConfigMVP->MVP;
 	glm::mat4 transform = TransformResult;
 	//vec3 posWorldBL =   MVP * transform * vec4(NewPostranslate, 1.0);
-	vec3 posWorld = glm::inverse(MVP) * glm::inverse(transform) * vec4(NewPostranslate, 1.0);
+	//vec3 posWorld = glm::inverse(MVP) * glm::inverse(transform) * vec4(NewPostranslate, 1.0);
+	vec3 posWorld = vec3(0);
 
 	Postranslate = vec3(posWorld.x, posWorld.y, Postranslate.z);
 	//Postranslate = posWorld;
