@@ -85,7 +85,7 @@ void SceneRoom::Work() {
 	Scene->ModelCurrent->ConfUniform.SetPositionLight(Scene->Light->positionLight);
 
 	//------ Set Mouse position
-	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Storage->Oper->PositionCursorModel);
+	Scene->ModelCurrent->ConfUniform.SetPositionMouse(Scene->Storage->Oper->PositionCursorWorld);
 
 	//------ Delete all objects on scene
 	if (Scene->Storage->Inputs->Key == GLFW_KEY_F8 &&

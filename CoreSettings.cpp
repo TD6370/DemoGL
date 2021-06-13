@@ -21,9 +21,10 @@ struct World {
 };
 
 struct SceneParam {
-	int IndexCursorRayObj;
-	int IndexHeroObj;
-	int IndexGUIObj;
+	int IndexCursorRayObj = -1;
+	int IndexHeroObj = -1;
+	int IndexGUIObj = -1;
+	int IndexCursorGUI = -1;
 	bool IsGUI = false;
 };
 
@@ -54,7 +55,7 @@ struct Operator {
 
 	GLdouble MouseOffset_x, MouseOffset_y;
 	GLdouble m_MouseX = 0, m_MouseY = 0;
-	glm::vec3 PositionCursorModel;
+	glm::vec3 PositionCursorWorld;
 
 	bool IsFullscreen = false;
 };
@@ -84,7 +85,8 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking }; // , EventControl };
 
-enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock};
+enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI
+};
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 

@@ -210,6 +210,17 @@ void ObjectPhysic::SetMesh() {
 		ObjectData::SetMesh();
 }
 
+float ObjectPhysic::GetLineLenght(int index) {
+
+	vec4 line = GetLine(index);
+	float x1 = line.x;
+	float y1 = line.y;
+	float x2 = line.z;
+	float y2 = line.w;
+	float lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2)); // lenght wall
+	return lenghtLine;
+}
+
 vec4 ObjectPhysic::GetLine(int index) {
 	vec3 pos1 = BottomVectors[index];
 	vec3 pos2;
@@ -287,7 +298,8 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 	vec3 vertTopLeft;
 	vec3 vertTopRight;
 
-	if (IsAbsolutePosition)
+	//if (IsAbsolutePosition)
+	if(TypeObj == TextBlock)
 	{
 		vertBottomLeft = GetBottomFirst();
 		vertBottomRight = GetBottomLast();
@@ -300,7 +312,15 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 		vertTopLeft = GetTopLast();
 		vertTopRight = GetTopFirst();
 	}
-
+	//TEST ----------------------
+	vec3 posWorld = MVP * transform * vec4(vertBottomLeft, 1.0);
+	vec3 vertPos = vec3();
+	vec4 vertPos1 = vec4(posWorld, 1.0) * glm::inverse(MVP);
+	vertPos1 *= glm::inverse(transform);
+	vertPos = vec3(vertPos1.x, vertPos1.y, vertPos1.z);
+	bool isEquals = vertPos == vertBottomLeft;
+	//-----------------------
+	
 	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
 	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
 	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
@@ -312,3 +332,17 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 	endPos.y = posWorldBL.y;
 }
 
+void ObjectPhysic::ActionMoving()
+{
+
+}
+
+void ObjectPhysic::CalculateNextPosition() {
+
+}
+
+void ObjectPhysic::SaveNewPosition() {
+
+}
+
+//void virtual SaveNewPosition();

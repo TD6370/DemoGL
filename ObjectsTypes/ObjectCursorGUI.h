@@ -1,9 +1,11 @@
 #pragma once
 
-#include "ObjectData.h"
-#include "ObjectGUI.h"
-#include "ObjectPhysic.h"
+#include "../ModelData.h"
+#include "./ObjectData.h"
+#include "./ObjectGUI.h"
+#include "./ObjectPhysic.h"
 #include "../CoreSettings.h"
+#include "../CreatorModelData.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -19,18 +21,13 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 
-
-class ObjectTextBlock :
+class ObjectCursorGUI :
 	public ObjectGUI
 {
 protected:
-	map<string, int> mapAlphabet;
-	vector<int> MessageCode;
-
 public:
-	string Message = std::string();
 
-	ObjectTextBlock(
+	ObjectCursorGUI(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj = TypeObject::TextBlock,
@@ -39,29 +36,38 @@ public:
 			p_model,
 			p_typeObj,
 			p_pos) {
-		
-		IsAbsolutePosition = true;
-		//IsFocused = false;
 
-		//--- TEST
-		IsFocusable = true;
+		IsAbsolutePosition = true;
+		IsFocusable = false;
+		IsTransformable = false;
+		IsUsable = false;
+		//TEST
+		//IsFocusable = true;
+		//IsUsable = true;
+		
+		//ActionObjectCurrent = ActionObject::Woking;
 	};
 
+	~ObjectCursorGUI();
 
-	~ObjectTextBlock();
+	/*void CreateMessage();
+	void MeshTransform();*/
 
-	void CreateMessage();
-
-	void MeshTransform();
-
-
+	void InitData();
+	
 	//void RunAction();
 	//void virtual DefaultSate();
 	//void virtual Click();
-	//void virtual Work();
+
+	void ActionMoving();
+	void CalculateNextPosition();
+	void SaveNewPosition();
+
+	void Work();
 
 	//-------------
 
 	//vector<ObjectFiledsSpecific> GetSpecificFiels();
 	//void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };
+

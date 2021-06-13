@@ -203,7 +203,7 @@ void TransformModel::GenMVP(
 
 	//glm::vec3 positionCursorModel = GetPositionModelCursor(Projection, View, Model, p_operator->m_MouseX, p_operator->m_MouseY, m_widthWindow, m_heightWindow);
 	//p_operator->PositionCursorModel = positionCursorModel;
-	p_operator->PositionCursorModel = vec3(0);
+	//p_operator->PositionCursorModel = vec3(0);
 }
 
 

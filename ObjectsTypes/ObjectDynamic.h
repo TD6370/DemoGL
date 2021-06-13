@@ -40,7 +40,7 @@ public:
 
 	bool virtual CalculateTatget(vec3& resultTarget);
 
-	void virtual CalculateNextPosition();
+	void CalculateNextPosition();
 
 	void virtual Pathfinding();
 
@@ -50,7 +50,7 @@ public:
 
 	void LockResult();
 
-	void virtual SaveNewPosition();
+	void SaveNewPosition();
 
 	void virtual LockObjectResult();
 };

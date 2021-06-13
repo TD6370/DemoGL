@@ -56,6 +56,9 @@ public:
 	bool IsBlock = false;
 	bool IsCubeModel = false;
 	bool IsAbsolutePosition = true;
+	bool IsFocusable;
+	bool IsTransformable;
+	bool IsUsable;
 	
 	CreatorModelData* Storage;
 

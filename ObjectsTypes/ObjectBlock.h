@@ -41,6 +41,7 @@ public:
 			p_pos) {
 		IsBlock = true;
 		IsCubeModel = true;
+		IsTransformable = true;
 	};
 
 	void InitData();

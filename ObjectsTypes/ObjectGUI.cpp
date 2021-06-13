@@ -17,6 +17,9 @@ void ObjectGUI::RunAction() {
 			case Woking:
 				Work();
 				break;
+			case Moving:
+				ActionMoving();
+				break;
 			default:
 				DefaultSate();
 				break;
@@ -31,6 +34,9 @@ void ObjectGUI::InitData() {
 
 	ObjectPhysic::InitData();
 	Size = vec3(0);
+
+	if (Storage->SceneData->IndexGUIObj == -1)
+		Storage->SceneData->IndexGUIObj = Index;
 }
 
 void ObjectGUI::UpdateState() {
@@ -43,10 +49,35 @@ void ObjectGUI::UpdateState() {
 	//PanelDepth = 4.8;
 	//PanelDepth = 5.8;
 	//PanelDepth = 6.8;
+	//float offsetOfCenter = 0.97;
 
 	if(IsAbsolutePosition)
 	{
-		vec3 startPos = vec3(StartPos.x - 0.97, StartPos.y - 0.97, StartPos.z); //when SetSizeControl - is disabled
+		
+		float offsetOfCenter = 0; //0.97;
+		//--- Test
+		//offsetOfCenter = 0.97;
+		//auto test = Name;
+		if (TypeObj == CursorGUI)
+		{
+			offsetOfCenter = 0;
+		}
+		//-----------------------------
+		int indOwner = IndexObjectOwner;
+		if (indOwner == -1)
+			indOwner = Storage->SceneData->IndexGUIObj;
+		if (IndexObjectOwner != -1)
+		{
+			auto obj = Storage->GetObjectPrt(IndexObjectOwner);
+			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(obj);
+			float lenghtLineOwner = objPh->GetLineLenght(0);
+			float lenghtLine = GetLineLenght(0);
+			float offsetOwner = lenghtLineOwner/2;
+			float offsetAbs = lenghtLine / 2;
+			offsetOfCenter = offsetOwner - offsetAbs;
+		}
+
+		vec3 startPos = vec3(StartPos.x - offsetOfCenter, StartPos.y - offsetOfCenter, StartPos.z); //when SetSizeControl - is disabled
 		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, startPos);
 	}
 	else {
@@ -87,6 +118,7 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	}
 
 	shared_ptr<ObjectData> obj = Storage->AddObject(nameObject, model, p_typeObj, StartPos, color);
+
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
 	objGUI->IndexObjectOwner = Index;
 	objGUI->StartPos = startPosChild;

@@ -54,6 +54,10 @@ public:
 
 	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
+	void virtual ActionMoving(); 
+	void virtual CalculateNextPosition();
+	void virtual SaveNewPosition();
+
 	//void TestGravity();
 	void SelectedEvent();
 	void UnselectedEvent();
@@ -84,6 +88,8 @@ public:
 	void SetTop(int index, vec3 value);
 
 	vec4 GetLine(int index);
+
+	float GetLineLenght(int index);
 
 	void virtual GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 	//----------

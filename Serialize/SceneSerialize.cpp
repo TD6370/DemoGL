@@ -30,6 +30,8 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::BulletHero, "BulletHero");
 	AddNextType(TypeObject::CursorRay, "CursorRay");
 	AddNextType(TypeObject::GUI, "GUI");
+	AddNextType(TypeObject::TextBlock, "TextBlock");
+	AddNextType(TypeObject::CursorGUI, "CursorGUI");
 
 	//Create map types action object
 	AddNextType(ActionObject::Moving, "Moving");

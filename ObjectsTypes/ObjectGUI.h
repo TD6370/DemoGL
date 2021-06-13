@@ -24,8 +24,7 @@ private :
 	vec3 m_color_work = vec3(0, 1, 0); //green
 
 public:
-	bool IsFocused;
-
+	
 	//TODO: inTextBlosk object
 	//string Message = std::string();
 	vec3 StartPos = vec3(0);
@@ -44,7 +43,9 @@ public:
 			p_typeObj,
 			p_pos) 	{
 		IsGUI = true;
-		IsFocused = true;
+		IsFocusable = true;
+		IsTransformable = true;
+		IsUsable = true;
 		IsAbsolutePosition = false;
 		IsCubeModel = true;
 	};

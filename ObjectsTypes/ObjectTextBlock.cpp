@@ -24,7 +24,6 @@ ObjectTextBlock::~ObjectTextBlock()
 
 }
 
-
 void ObjectTextBlock::CreateMessage() {
 
 	mapAlphabet = map<string, int>{

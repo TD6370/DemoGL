@@ -229,6 +229,12 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 	PreparationDataFromShader();
 
+	//TEST
+	if (ObjectCurrent->Name == "CursorGUI")
+	{
+		auto t = true;
+	}
+
 	ObjectCurrent->Action();
 
 	SetDataToShader();

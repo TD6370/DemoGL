@@ -41,34 +41,40 @@ void RoomUseInterface::Work() {
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
 
-	bool isFocused = objGUI->IsFocused;
+	bool isFocusable = objGUI->IsFocusable;
+	bool isTransformable = objGUI->IsTransformable;
+	bool isUsable = objGUI->IsUsable;
+	
 
 	bool isSelect = false;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
-
-	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
+		
 	vec3 posCursor = GetMousePosWorld();
 	
-	if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
+	if (isUsable)
 	{
-		std::cout << "Select: " << objGUI->Name << "\n";
-		IndexObjectSelected = objGUI->Index;
-		isSelect = true;
+		objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
+		if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
+		{
+			std::cout << "Select: " << objGUI->Name << "\n";
+			IndexObjectSelected = objGUI->Index;
+			isSelect = true;
+		}
+
+		if (isSelect &&
+			isFocusable &&
+			Scene->Storage->Inputs->MBT == m_KeyPush &&
+			Scene->Storage->Inputs->ActionMouse == GLFW_PRESS) {
+			objGUI->Click();
+		}
 	}
 
-	if (isSelect &&
-		isFocused &&
-		Scene->Storage->Inputs->MBT == m_KeyPush &&
-		Scene->Storage->Inputs->ActionMouse == GLFW_PRESS) {
-		objGUI->Click();
-	}
-
-	if (!isFocused)
+	if (!isFocusable)
 		return;
 
 	if (objGUI->ActionObjectCurrent != Woking &&
-		isFocused ) {
+		isFocusable) {
 		if (isSelect) {
 			objGUI->Color = color_selected;
 		}
@@ -107,6 +113,9 @@ vec3 RoomUseInterface::GetMousePosWorld() {
 		mat4 projectionPerspective = perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 		vec3 screenPos = vec3(mouseX, winHeight - mouseY, depthMouse);
 		m_tempMousePosWorld = unProject(screenPos, model, m_projectionPerspective, viewportVec);
+		Scene->Storage->Oper->PositionCursorWorld = m_tempMousePosWorld;
+		//auto mouseX = Scene->Storage->Oper->m_MouseX;
+		//auto mouseY = Scene->Storage->Oper->m_MouseY;
 
 		if (m_isDebug) {
 

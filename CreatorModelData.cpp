@@ -13,6 +13,7 @@
 #include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectGUI.h"
 #include "ObjectsTypes/ObjectTextBlock.h"
+#include "ObjectsTypes/ObjectCursorGUI.h"
 
 #include "Serialize/SceneSerialize.h"
 #include "Rooms/RoomSerializeScene.h"
@@ -199,6 +200,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		case TextBlock: {
 			ObjectTextBlock obj = ObjectTextBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectTextBlock>(obj));
+			object = GetObjectPrt(obj.Index);
+			break;
+		}
+		case CursorGUI: {
+			ObjectCursorGUI obj = ObjectCursorGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -460,15 +467,17 @@ void CreatorModelData::LoadModels() {
 	nextModelCursorRay.Init();
 	AddModel(&nextModelCursorRay, "cursorRay");
 
-	ModelFrame ContextFrame = ModelFrame();
-	ContextFrame.PathShaderVertex = "FrameUI.vert";
-	ContextFrame.PathShaderFrag = "FrameUI.frag";
-	ContextFrame.PathModel3D = "./Models3D/Frame.obj";
-	ContextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
-	ContextFrame.RadiusCollider = .1;
-	ContextFrame.IsCubeModel = true;
-	ContextFrame.Init();
-	AddModel(&ContextFrame, "conextFrame");
+	ModelFrame contextFrame = ModelFrame();
+	contextFrame.PathShaderVertex = "FrameUI.vert";
+	contextFrame.PathShaderFrag = "FrameUI.frag";
+	contextFrame.PathModel3D = "./Models3D/Frame.obj";
+	contextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
+	contextFrame.RadiusCollider = .1;
+	contextFrame.IsCubeModel = true;
+	contextFrame.Init();
+	Models.push_back(std::make_unique<ModelFrame>(contextFrame));
+	auto contextFramePrt = GetModelPrt(Models.size() - 1);
+	AddModelCustom(contextFramePrt, "ConextFrameModel");
 
 	//---GUI -- control -- Frame
 	ModelFrame modelFrame = ModelFrame();
@@ -479,7 +488,9 @@ void CreatorModelData::LoadModels() {
 	modelFrame.RadiusCollider = .1;
 	modelFrame.IsCubeModel = true;
 	modelFrame.Init();
-	AddModel(&modelFrame, "FrameModel");
+	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+	auto modelFramePrt = GetModelPrt(Models.size() - 1);
+	AddModelCustom(modelFramePrt, "FrameModel");
 
 	//---GUI -- control -- TextBlock
 	ModelTextBlock textBlock = ModelTextBlock();
@@ -487,14 +498,78 @@ void CreatorModelData::LoadModels() {
 	textBlock.PathShaderFrag = "TextBlockUI.frag";
 	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
 	textBlock.PathTexture = "./Textures/Alphabet.bmp";
-
 	textBlock.RadiusCollider = .1;
 	textBlock.IsCubeModel = true;
 	textBlock.Init();
 	Models.push_back(std::make_unique<ModelTextBlock>(textBlock));
 	auto textBlockPrt = GetModelPrt(Models.size() - 1);
 	AddModelCustom(textBlockPrt, "TextBlockModel");
+
+	//AddModel(&textBlock, "TextBlockModel");
+
+	//---GUI -- control -- Cursor
+	ModelFrame curcorModel = ModelFrame();
+	curcorModel.PathShaderVertex = "FrameUI.vert";
+	curcorModel.PathShaderFrag = "FrameUI.frag";
+	curcorModel.PathModel3D = "./Models3D/Cursor.obj";
+	//curcorModel.PathModel3D = "./Models3D/TextBlock.obj";
+	curcorModel.PathTexture = "./Textures/Cursor.bmp";
+	curcorModel.RadiusCollider = .1;
+	curcorModel.IsCubeModel = true;
+	curcorModel.Init();
+	Models.push_back(std::make_unique<ModelFrame>(curcorModel));
+	auto curcorModelPrt = GetModelPrt(Models.size() - 1);
+	AddModelCustom(curcorModelPrt, "CursorModel");
+	//AddModel(&curcorModel, "CursorModel");
 }
+
+void CreatorModelData::LoadObjectsGUI() {
+
+	//// ---- Object Cursor GUI
+	//shared_ptr<ModelData> modelCursorGUI = GetModelPrt("CursorModel");
+	//shared_ptr<ObjectData> objCursorGUI_Data = AddObject("CursorGUI", modelCursorGUI, CursorGUI, vec3(.2, .2, 0.01), vec3(1));
+	//shared_ptr<ObjectGUI> objCursorGUI = std::dynamic_pointer_cast<ObjectGUI>(objCursorGUI_Data);
+
+	// ---- Object Context frame GUI
+	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
+	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+
+	// ---- Object frame
+	string caption;
+	string childModel = "conextGUI_2";
+	//childModel = "conextGUI_T";
+	string objName;
+
+	/*objName = "TEST1";
+	caption = objBackGUI->Name + "." + objName;
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
+
+
+	objName = "TEST2";
+	caption = objBackGUI->Name + "." + objName;
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));*/
+
+	// ---- Object frame
+	objName = "TEST3";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "FrameModel";
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
+
+	// ---- Object text block GUI
+	objName = "TextBlockObject";
+	caption = "привет мир, и доброе утро";
+	childModel = "TextBlockModel";
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+
+	// ---- Object Cursor GUI
+	objName = "CursorGUI";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "CursorModel";
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+
+}
+
 
 void CreatorModelData::LoadObjects() {
 
@@ -574,39 +649,6 @@ void CreatorModelData::LoadObjects() {
 			AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
 		}
 	}*/
-}
-
-void CreatorModelData::LoadObjectsGUI() {
-
-	//std::shared_ptr<ModelData> modelGUI = GetModelPrt("conextGUI");
-	shared_ptr<ModelData> modelGUI = GetModelPrt("conextFrame");
-	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
-
-		string caption;
-		string childModel = "conextGUI_2";
-		//childModel = "conextGUI_T";
-		string objName;
-
-		/*objName = "TEST1";
-		caption = objBackGUI->Name + "." + objName;
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
-
-		
-		objName = "TEST2";
-		caption = objBackGUI->Name + "." + objName;
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));*/
-		
-		objName = "TEST3";
-		caption = objBackGUI->Name + "." + objName;
-		childModel = "FrameModel";
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
-				
-		objName = "TextBlockObject";
-		caption = "привет мир, и доброе утро";
-		childModel = "TextBlockModel";
-		objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TypeObject::TextBlock, vec3(0.2, 0.5, 0.1));
-			
 }
 
 void CreatorModelData::Load() {

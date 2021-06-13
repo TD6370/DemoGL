@@ -182,12 +182,7 @@ void ObjectBlock::CalculateTextureUV(bool isInit) {
 		float lenghtLine = 0;
 	
 		for (int indLine = 0; indLine < 4; indLine++) {
-			vec4 line = GetLine(indLine);
-			x1 = line.x;
-			y1 = line.y;
-			x2 = line.z;
-			y2 = line.w;
-			lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2)); // lenght wall
+			lenghtLine = GetLineLenght(indLine);
 			if (lenghtLine > maxLenght) {
 				maxLenght = lenghtLine;
 			}
