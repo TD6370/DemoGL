@@ -12,6 +12,8 @@
 #include <glm/gtc/random.hpp>
 
 #include <fstream>
+#include <sstream>
+#include <ostream>
 
 using glm::vec4;
 using glm::vec3;
@@ -20,10 +22,15 @@ using std::map;
 using std::string;
 using std::vector;
 using std::shared_ptr;
+using std::stringstream;
 
 class ObjectCursorGUI :
 	public ObjectGUI
 {
+private :
+	vec3 tempMousePos = vec3(0);
+	string m_stringDebug;
+
 protected:
 public:
 

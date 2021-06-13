@@ -57,7 +57,7 @@ void RoomUseInterface::Work() {
 		objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
 		if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
 		{
-			std::cout << "Select: " << objGUI->Name << "\n";
+			//std::cout << "Select: " << objGUI->Name << "\n";
 			IndexObjectSelected = objGUI->Index;
 			isSelect = true;
 		}

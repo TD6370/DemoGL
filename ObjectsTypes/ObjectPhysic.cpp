@@ -299,7 +299,7 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 	vec3 vertTopRight;
 
 	//if (IsAbsolutePosition)
-	if(TypeObj == TextBlock)
+	if (TypeObj == TextBlock)
 	{
 		vertBottomLeft = GetBottomFirst();
 		vertBottomRight = GetBottomLast();
@@ -312,15 +312,7 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 		vertTopLeft = GetTopLast();
 		vertTopRight = GetTopFirst();
 	}
-	//TEST ----------------------
-	/*vec3 posWorld = MVP * transform * vec4(vertBottomLeft, 1.0);
-	vec3 vertPos = vec3();
-	vec4 vertPos1 = vec4(posWorld, 1.0) * glm::inverse(MVP);
-	vertPos1 *= glm::inverse(transform);
-	vertPos = vec3(vertPos1.x, vertPos1.y, vertPos1.z);
-	bool isEquals = vertPos == vertBottomLeft;*/
-	//-----------------------
-	
+
 	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
 	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
 	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);

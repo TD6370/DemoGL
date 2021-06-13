@@ -514,6 +514,7 @@ void CreatorModelData::LoadModels() {
 	curcorModel.PathModel3D = "./Models3D/Cursor.obj";
 	//curcorModel.PathModel3D = "./Models3D/TextBlock.obj";
 	curcorModel.PathTexture = "./Textures/Cursor.bmp";
+	//curcorModel.PathTexture = "./Textures/CursorT2.bmp";
 	curcorModel.RadiusCollider = .1;
 	curcorModel.IsCubeModel = true;
 	curcorModel.Init();
@@ -566,6 +567,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 
 }

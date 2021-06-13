@@ -49,15 +49,11 @@ void ObjectGUI::UpdateState() {
 	//PanelDepth = 4.8;
 	//PanelDepth = 5.8;
 	//PanelDepth = 6.8;
-	//float offsetOfCenter = 0.97;
 
-	if(IsAbsolutePosition)
+	if (IsAbsolutePosition)
 	{
 		
-		float offsetOfCenter = 0; //0.97;
-		//--- Test
-		//offsetOfCenter = 0.97;
-		//auto test = Name;
+		float offsetOfCenter = 0;
 		if (TypeObj == CursorGUI)
 		{
 			offsetOfCenter = 0;
@@ -97,10 +93,6 @@ bool ObjectGUI::GetVisible() {
 
 	return Storage->SceneData->IsGUI;
 }
-
-//bool ObjectGUI::IsCubeModel() {
-//	return true;
-//}
 
 void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
 {
