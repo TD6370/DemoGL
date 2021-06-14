@@ -20,6 +20,9 @@ void ObjectGUI::RunAction() {
 			case Moving:
 				ActionMoving();
 				break;
+			case Transforming:
+				ActionTransforming();
+				break;
 			default:
 				DefaultSate();
 				break;
@@ -27,6 +30,14 @@ void ObjectGUI::RunAction() {
 	}
 	
 	ObjectData::ActionBase();
+}
+
+void ObjectGUI::ActionMoving()
+{
+	if (ActionObjectCurrent != Moving)
+		return;
+
+	Color = m_color_transforming;
 }
 
 
@@ -37,6 +48,8 @@ void ObjectGUI::InitData() {
 
 	if (Storage->SceneData->IndexGUIObj == -1)
 		Storage->SceneData->IndexGUIObj = Index;
+
+	ActionObjectCurrent = Stay;
 }
 
 void ObjectGUI::UpdateState() {
@@ -46,18 +59,11 @@ void ObjectGUI::UpdateState() {
 
 	vec3 directionOut = vec3(0);
 	PanelDepth = 3.8;
-	//PanelDepth = 4.8;
-	//PanelDepth = 5.8;
-	//PanelDepth = 6.8;
+	//float panelOrderZ = (0.01f);
 
 	if (IsAbsolutePosition)
 	{
-		
 		float offsetOfCenter = 0;
-		if (TypeObj == CursorGUI)
-		{
-			offsetOfCenter = 0;
-		}
 		//-----------------------------
 		int indOwner = IndexObjectOwner;
 		if (indOwner == -1)
@@ -74,14 +80,16 @@ void ObjectGUI::UpdateState() {
 		}
 
 		vec3 startPos = vec3(StartPos.x - offsetOfCenter, StartPos.y - offsetOfCenter, StartPos.z); //when SetSizeControl - is disabled
-		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, startPos);
+		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, 
+																	PanelDepth - StartPos.z, 
+																	Storage->Oper, startPos);
 	}
 	else {
 		if (StartPos == vec3(0)) {
 			Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, PanelDepth, Storage->Oper);
 		}
 		else {
-			Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - 0.01f, Storage->Oper, StartPos);
+			Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - StartPos.z, Storage->Oper, StartPos);
 		}
 	}
 	Billboard();

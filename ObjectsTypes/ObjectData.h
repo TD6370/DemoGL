@@ -65,6 +65,7 @@ public:
 	TypeObject TypeObj;
 	ColliseState CollisionPolygonState;
 	std::string Name;
+	ActionObject ActionObjectCurrent;
 
 	int Index = 0;
 	//int RadiusCollider = 5;
@@ -88,7 +89,7 @@ public:
 	vec3 Move = vec3(0);
 	vec3 Target = vec3(0);
 	std::vector<int> tramsformTypes;
-	ActionObject ActionObjectCurrent;
+	//ActionObject ActionObjectCurrent;
 	mat4 TransformResult;
 
 	int minDist = 5;

@@ -55,6 +55,7 @@ public:
 	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
 	void virtual ActionMoving(); 
+	void virtual ActionTransforming();
 	void virtual CalculateNextPosition();
 	void virtual SaveNewPosition();
 
@@ -92,6 +93,8 @@ public:
 	float GetLineLenght(int index);
 
 	void virtual GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
+	vec2 GetStartPositWorld();
+	
 	//----------
 
 	//bool virtual IsCubeModel();

@@ -63,7 +63,7 @@ private:
 
 protected:
 	//bool isUpdate = false;
-
+	
 public:
 	shared_ptr<ObjectData> ObjectCurrent;
 	shared_ptr<ModelData> ModelCurrent;
@@ -77,6 +77,9 @@ public:
 
 	bool IsFirstCurrentObject;
 	bool IsLastCurrentObject;
+
+	string DebugMessage = "";
+	string DebugMessageAppend = "";
 	//--------------
 
 	GLFWwindow* Window;
@@ -127,11 +130,15 @@ public:
 
 	void SetMouseEvents();
 
+	void SetMouseButtonEvents();
+
 	void GenMVP();
 
 	void ClearScene();
 
 	void DrawGraph();
+
+	void Debug(string msg);
 
 	//----------- TODO:
 	//CoreMVP* GetMVP();

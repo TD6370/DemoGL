@@ -467,11 +467,13 @@ void CreatorModelData::LoadModels() {
 	nextModelCursorRay.Init();
 	AddModel(&nextModelCursorRay, "cursorRay");
 
+	//---GUI -- control -- Background frame
 	ModelFrame contextFrame = ModelFrame();
 	contextFrame.PathShaderVertex = "FrameUI.vert";
 	contextFrame.PathShaderFrag = "FrameUI.frag";
 	contextFrame.PathModel3D = "./Models3D/Frame.obj";
-	contextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
+	//contextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
+	contextFrame.PathTexture = "./Textures/future.bmp";
 	contextFrame.RadiusCollider = .1;
 	contextFrame.IsCubeModel = true;
 	contextFrame.Init();
@@ -542,6 +544,13 @@ void CreatorModelData::LoadObjectsGUI() {
 	//childModel = "conextGUI_T";
 	string objName;
 
+	// ---- Object Cursor GUI
+	objName = "CursorGUI";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "CursorModel";
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+
 	/*objName = "TEST1";
 	caption = objBackGUI->Name + "." + objName;
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
@@ -555,6 +564,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "TEST3";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
 
 	// ---- Object text block GUI
@@ -562,14 +572,6 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "привет мир, и доброе утро";
 	childModel = "TextBlockModel";
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
-
-	// ---- Object Cursor GUI
-	objName = "CursorGUI";
-	caption = objBackGUI->Name + "." + objName;
-	childModel = "CursorModel";
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
-
 }
 
 

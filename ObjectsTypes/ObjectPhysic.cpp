@@ -324,7 +324,38 @@ void ObjectPhysic::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 	endPos.y = posWorldBL.y;
 }
 
+vec2 ObjectPhysic::GetStartPositWorld() {
+
+	glm::mat4 MVP = Storage->ConfigMVP->MVP;
+	glm::mat4 transform = TransformResult;
+
+	vec3 vertBottomLeft;
+	vec3 vertTopLeft;
+
+	if (TypeObj == TextBlock)
+	{
+		vertBottomLeft = GetBottomFirst();
+		vertTopLeft = GetTopFirst();
+	}
+	else {
+		vertBottomLeft = GetBottomLast();
+		vertTopLeft = GetTopLast();
+	}
+
+	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
+	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
+	vec2 startPos;
+	startPos.x = posWorldBL.x,
+	startPos.y = posWorldTL.y;
+	return startPos;
+}
+
 void ObjectPhysic::ActionMoving()
+{
+
+}
+
+void ObjectPhysic::ActionTransforming()
 {
 
 }

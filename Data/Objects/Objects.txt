@@ -1,0 +1,369 @@
+Type: Polygon
+Name: Plane
+Model: plane
+Pos: -20 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon
+Model: mon
+Pos: 43.674 -52.9677 26.6421
+Target: 47.3211 -51.2111 21.8728
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: Box
+Model: box
+Pos: 0 -35 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: Box2
+Model: box
+Pos: 0 -25 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: Box3
+Model: box
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox
+Model: box
+Pos: -10 -54.019 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox1
+Model: box
+Pos: -20 -54.0329 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox2
+Model: box
+Pos: -10 -53.9908 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox3
+Model: box
+Pos: -20 -53.9883 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_1
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_2
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Bullet
+Name: Bullet
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: BulletHero
+Name: BulletHero
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_1
+Model: marker_Cross
+Pos: 43.674 -52.9677 26.6421
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_2
+Model: marker_Cross
+Pos: 43.3808 -55.0973 27.0255
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_1
+Model: marker_Vector
+Pos: 45.5382 -55.1028 26.5133
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 0
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_2
+Model: marker_Vector
+Pos: 42.3207 -55.0964 26.5229
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_3
+Model: marker_Vector
+Pos: 42.3476 -55.0974 29.7322
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 1
+------------------------------------------------------------------
+Type: Hero
+Name: Hero
+Model: homo
+Pos: 0 -54.0171 5
+Target: 0 -54.0171 5
+Action: Search
+IndexObjectOwner: -1
+Color: 0 0 0
+------------------------------------------------------------------
+Type: GUI
+Name: BackContectGUI
+Model: ConextFrameModel
+Pos: 0.205165 -52.8569 2.48007
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Specific:
+StartPos: 0 0 0
+SizePanel: 0 0
+------------------------------------------------------------------
+Type: CursorGUI
+Name: CursorGUI
+Model: CursorModel
+Pos: 0.304796 -53.3938 2.58817
+Target: 0 0 0
+Action: Moving
+IndexObjectOwner: 20
+Color: 0.2 0.5 0.1
+Specific:
+StartPos: 1.06231 1.52697 0.03
+SizePanel: 0.05 0.05
+------------------------------------------------------------------
+Type: GUI
+Name: TEST3
+Model: FrameModel
+Pos: 0.772473 -53.6751 2.62555
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+Specific:
+StartPos: 0.573061 0.826853 0.01
+SizePanel: 1.1 0.2
+------------------------------------------------------------------
+Type: TextBlock
+Name: TextBlockObject
+Model: TextBlockModel
+Pos: -0.546257 -53.4626 2.53686
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+Specific:
+StartPos: 0.231654 1.59243 0.01
+SizePanel: 1.5 1
+Message: привет мир, и доброе утро
+------------------------------------------------------------------
+

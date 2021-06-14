@@ -98,11 +98,11 @@ void ObjectTextBlock::MeshTransform() {
 	
 	if(Vertices.size() == 0)
 		Vertices = ModelPtr->Vertices;
-
 	if(Normals.size() == 0)
 		Normals = ModelPtr->Normals;
 	if (TextureUV.size() == 0)
 		TextureUV = ModelPtr->UV;
+
 	vector<vec3> vertexFrame = Vertices;
 	vector<vec2> textureUV = TextureUV;
 	vector<vec3> normals = Normals;
@@ -163,6 +163,39 @@ void ObjectTextBlock::MeshTransform() {
 	//std::cout << ss1.str();
 	//std::cout << std::endl;
 	FillPlanesCube();
+}
+
+vector<ObjectFiledsSpecific> ObjectTextBlock::GetSpecificFiels() {
+
+	vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
+
+	//SceneSerialize* serializer = new SceneSerialize();
+	result.push_back({ "Message:", Message });
+
+	return result;
+}
+
+void ObjectTextBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
+
+	if (IndexObjectOwner == -1) //Back GUI
+		return;
+
+	ObjectGUI::SetSpecificFiels(filedsSpecific);
+
+	//SceneSerialize* serializer = new SceneSerialize();
+
+	//Message = filedsSpecific[0].Value;
+	Message = filedsSpecific[filedsSpecific.size()-1].Value;
+
+	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+	
+	
+	Vertices.clear();
+	Normals.clear();
+	TextureUV.clear();
+	Buffer.clear();
+
+	CreateMessage();
 }
 
 

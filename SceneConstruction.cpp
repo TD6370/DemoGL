@@ -160,7 +160,7 @@ void SceneConstruction::SetDataToShader() {
 	
 	//TEST
 	//std::cout << ObjectCurrent->Name << "\n";
-	//auto nameTest =  ObjectCurrent->Name;
+	auto nameTest =  ObjectCurrent->Name;
 
 	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
 	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
@@ -258,6 +258,11 @@ void SceneConstruction::Update()
 		return;
 	}
 
+	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
+	if (Storage->Inputs->MBT != -1) {
+		Debug("Input MBT");
+	}
+
 	for (int i = 0; i < countObjects + 1; i++)
 	{
 		ObjectUpdate(i);
@@ -270,10 +275,21 @@ void SceneConstruction::Update()
 		DrawGraph();
 	}
 
+	Debug("Clear Inputs");
+
 	Storage->Inputs->MBT = -1;
 	Storage->Inputs->Key = -1;
 	Storage->Inputs->Action = -1;
 	Storage->Inputs->ActionMouse = -1;
+}
+
+void SceneConstruction::Debug(string msg) {
+	if (DebugMessage != msg)
+	{
+		DebugMessage = msg;
+		DebugMessageAppend.append(msg);
+		DebugMessageAppend.append("\n");
+	}
 }
 
 bool SceneConstruction::IsBreakUpdate()
@@ -288,7 +304,16 @@ bool SceneConstruction::IsBreakUpdate()
 void SceneConstruction::SetMouseEvents() {
 
 	Contrl->MouseEvents(Window, m_widthWindow, m_heightWindow, this);
+	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 }
+
+void SceneConstruction::SetMouseButtonEvents() {
+
+	Contrl->MouseButtonEvents(Window, this);
+	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
+}
+
+
 
 void SceneConstruction::GenMVP() {
 

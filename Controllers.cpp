@@ -36,6 +36,25 @@ vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4
 	return posnear;
 }
 
+void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene)
+{
+	int state = -1;
+	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+	if (state == GLFW_PRESS)
+	{
+		//isCeneter = true;
+		//p_operator->m_start = false;
+		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
+		Scene->Storage->Inputs->ActionMouse = state;
+	}
+	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+	if (state == GLFW_PRESS)
+	{
+		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
+		Scene->Storage->Inputs->ActionMouse = state;
+		Scene->Debug("MouseEvents Set MBT");
+	}
+}
 
 void Controllers::MouseEvents(
 	GLFWwindow* window,
@@ -53,6 +72,7 @@ void Controllers::MouseEvents(
 	//m_deltaTime = float(currentTime- m_lastFrame);
 	//m_lastFrame = currentTime;
 
+
 	// получаем координаты курсора
 	GLdouble xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
@@ -61,21 +81,22 @@ void Controllers::MouseEvents(
 	
 
 	bool isCeneter = false;
-	int state = -1;
-	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-	if (state == GLFW_PRESS)
-	{
-		//isCeneter = true;
-		//p_operator->m_start = false;
-		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
-		Scene->Storage->Inputs->ActionMouse = state;
-	}
-	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-	if (state == GLFW_PRESS)
-	{
-		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
-		Scene->Storage->Inputs->ActionMouse = state;
-	}
+	//int state = -1;
+	//state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+	//if (state == GLFW_PRESS)
+	//{
+	//	//isCeneter = true;
+	//	//p_operator->m_start = false;
+	//	Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
+	//	Scene->Storage->Inputs->ActionMouse = state;
+	//}
+	//state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+	//if (state == GLFW_PRESS)
+	//{
+	//	Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
+	//	Scene->Storage->Inputs->ActionMouse = state;
+	//	Scene->Debug("MouseEvents Set MBT");
+	//}
 
 	//----------------------------
 	if (!Scene->Storage->SceneData->IsGUI) {
@@ -149,6 +170,8 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 {
 	float m_speed = Scene->m_speed;
 	float m_deltaTime = Scene->m_deltaTime;
+
+
 	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 
 	// и приложение после этого закроется
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)

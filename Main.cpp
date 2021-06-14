@@ -53,6 +53,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		Scene);
 }
 
+//The callback function receives the mouse button, button actionand modifier bits.
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	//Scene->SetMouseEvents();
+	Scene->SetMouseButtonEvents();
+}
+
+
 void GetVersionOpenGl()
 {
 	const GLubyte* renderer = glGetString(GL_RENDERER);
@@ -118,6 +126,13 @@ int main()
 	//mouse events
 	glfwSetScrollCallback(window, scroll_callback);
 
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	
+	//-- Cursor
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
 	//Version OpenGL
 	GetVersionOpenGl();
 
@@ -137,8 +152,11 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
-		glfwPollEvents();
-
+		//update input events
+		//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+		glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
+		//glfwWaitEventsTimeout(1); /1
+				
 		Scene->Update();
 
 		glfwSwapBuffers(window);

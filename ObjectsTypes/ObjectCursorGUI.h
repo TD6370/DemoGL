@@ -28,8 +28,6 @@ class ObjectCursorGUI :
 	public ObjectGUI
 {
 private :
-	vec3 tempMousePos = vec3(0);
-	string m_stringDebug;
 
 protected:
 public:
@@ -51,8 +49,7 @@ public:
 		//TEST
 		//IsFocusable = true;
 		//IsUsable = true;
-		
-		//ActionObjectCurrent = ActionObject::Woking;
+		ActionObjectCurrent = ActionObject::Moving;
 	};
 
 	~ObjectCursorGUI();
@@ -67,11 +64,8 @@ public:
 	//void virtual Click();
 
 	void ActionMoving();
-	void CalculateNextPosition();
 	void SaveNewPosition();
-
 	void Work();
-
 	//-------------
 
 	//vector<ObjectFiledsSpecific> GetSpecificFiels();

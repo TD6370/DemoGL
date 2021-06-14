@@ -83,7 +83,7 @@ struct CoreMVP {
 	glm::mat4 Projection;
 };
 
-enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking }; // , EventControl };
+enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming }; // , EventControl };
 
 enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI
 };

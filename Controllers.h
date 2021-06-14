@@ -32,6 +32,8 @@ public:
 		int m_widthWindow, int m_heightWindow,
 		SceneConstruction* Scene);
 
+	void MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene);
+
 	//void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 	//	Operator* m_operator,
 	//	//GLfloat* paramCase,

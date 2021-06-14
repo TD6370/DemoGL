@@ -44,7 +44,11 @@ private:
 	mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
 
+	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
+	vec3 CursorMovePos = vec3(0);
+	vec3 SelectObjectOffsetPos = vec3(0);
+
 public:
 		
 	RoomUseInterface(string Name, SceneConstruction* sceneConstructor)

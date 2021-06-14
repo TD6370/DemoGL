@@ -4,6 +4,8 @@
 #include "ObjectGUI.h"
 #include "ObjectPhysic.h"
 #include "../CoreSettings.h"
+#include "../CreatorModelData.h"
+#include "../Serialize/SceneSerialize.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -62,6 +64,6 @@ public:
 
 	//-------------
 
-	//vector<ObjectFiledsSpecific> GetSpecificFiels();
-	//void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+	vector<ObjectFiledsSpecific> GetSpecificFiels();
+	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 };

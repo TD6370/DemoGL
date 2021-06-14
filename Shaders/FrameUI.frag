@@ -54,8 +54,6 @@ void main()
     
     vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
 
-    
-
     //-- back alpha
     //float limitAlpha = 0.99;
     float limitAlpha = 0.9;
@@ -63,9 +61,11 @@ void main()
        text1.g > limitAlpha && 
        text1.b > limitAlpha){
         //--------- SDF
-	    vec4 text2 =SDF1(text1);
-        vec4 text3 =SDF2(text1);
-        text1 = text2 - text3;
+	    //vec4 text2 =SDF1(text1);
+        //vec4 text3 =SDF2(text1);
+        //text1 = text2 - text3;
+        //alpha =0.0;
+        alpha =1. - text1.r;
     }
 
     //-----------------

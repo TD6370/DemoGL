@@ -41,7 +41,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(ActionObject::Lock, "Lock");
 	AddNextType(ActionObject::Starting, "Starting");
 	AddNextType(ActionObject::Woking, "Woking");
-	
+	AddNextType(ActionObject::Transforming, "Transforming");
 	//AddNextType(ActionObject::, "");
 }
 

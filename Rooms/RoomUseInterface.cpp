@@ -32,7 +32,7 @@ void RoomUseInterface::Work() {
 		return;
 
 	if (Scene->IsFirstCurrentObject) {
-		IndexObjectSelected = -1;
+		IndexObjectFocused = -1;
 	}
 
 	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
@@ -44,38 +44,57 @@ void RoomUseInterface::Work() {
 	bool isFocusable = objGUI->IsFocusable;
 	bool isTransformable = objGUI->IsTransformable;
 	bool isUsable = objGUI->IsUsable;
-	
-
-	bool isSelect = false;
+	bool isFocused = false;
+	bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
-		
-	vec3 posCursor = GetMousePosWorld();
+
+	if (objGUI->TypeObj == TypeObject::CursorGUI) {
+		CursorMovePos = objGUI->StartPos;
+	}
 	
 	if (isUsable)
 	{
+		if (isFocusable && isTransformable && objGUI->ActionObjectCurrent == ActionObject::Moving && IndexObjectSelected == objGUI->Index)
+		{
+			Scene->Debug("GUI moving");
+			vec3 newPos = CursorMovePos - SelectObjectOffsetPos;
+			objGUI->StartPos = vec3(newPos.x, newPos.y, objGUI->StartPos.z);
+		}
+
+		vec3 posCursor = GetMousePosWorld();
 		objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
 		if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
 		{
 			//std::cout << "Select: " << objGUI->Name << "\n";
-			IndexObjectSelected = objGUI->Index;
-			isSelect = true;
+			IndexObjectFocused = objGUI->Index;
+			isFocused = true;
 		}
 
-		if (isSelect &&
-			isFocusable &&
-			Scene->Storage->Inputs->MBT == m_KeyPush &&
-			Scene->Storage->Inputs->ActionMouse == GLFW_PRESS) {
-			objGUI->Click();
+		if (isFocusable && isCursorClickEvent) {
+
+			if (objGUI->ActionObjectCurrent == ActionObject::Moving && IndexObjectSelected == objGUI->Index)
+			{
+				Scene->Debug("Complete moving");
+				IndexObjectSelected == -1;
+				objGUI->ActionObjectCurrent = ActionObject::Stay;
+			}
+			else if (isFocused) 
+			{
+				Scene->Debug("Start moving");
+				objGUI->Click();
+				objGUI->ActionObjectCurrent = ActionObject::Moving;
+				IndexObjectSelected = objGUI->Index;
+				SelectObjectOffsetPos = CursorMovePos - objGUI->StartPos;
+			}
 		}
 	}
 
 	if (!isFocusable)
 		return;
 
-	if (objGUI->ActionObjectCurrent != Woking &&
-		isFocusable) {
-		if (isSelect) {
+	if (isFocusable && objGUI->ActionObjectCurrent == Stay) {
+		if (isFocused) {
 			objGUI->Color = color_selected;
 		}
 		else {
