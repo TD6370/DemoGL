@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 #include <iostream>
 #include <map>
 
@@ -11,6 +12,11 @@ string GetFile(const char* path);
 
 string Trim(string path);
 
-bool Str_bool(std::string const& s);
+bool StrToBool(string const& s);
+
+//bool StrToBool(string str);
 
 bool IsMapContains_StrInt(map <string, int> inMap, string key);
+
+string FormatTypeName(string text);
+

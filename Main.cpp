@@ -153,8 +153,8 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		//update input events
-		//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
-		glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
+		glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+		//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
 		//glfwWaitEventsTimeout(1); /1
 				
 		Scene->Update();

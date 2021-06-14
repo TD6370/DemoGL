@@ -1,4 +1,5 @@
 Name: mon
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
@@ -7,6 +8,7 @@ RadiusCollider: 1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: plane
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/planet.bmp
@@ -15,6 +17,7 @@ RadiusCollider: 0.2
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: box
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
@@ -23,6 +26,7 @@ RadiusCollider: 1
 IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: marker_Vector
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
@@ -31,6 +35,7 @@ RadiusCollider: 0.1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: marker_Cross
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
@@ -39,6 +44,7 @@ RadiusCollider: 0.1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: marker_Point
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/testTexture.bmp
@@ -47,6 +53,7 @@ RadiusCollider: 0.1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: homo
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/future.bmp
@@ -55,6 +62,7 @@ RadiusCollider: 1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: cursorRay
+TypeName: ModelData
 PathShaderVertex: basic.vert
 PathShaderFrag: basic.frag
 PathTexture: ./Textures/future.bmp
@@ -63,6 +71,7 @@ RadiusCollider: 0.1
 IsCubeModel: 0
 ------------------------------------------------------------------ 
 Name: ConextFrameModel
+TypeName: ModelFrame
 PathShaderVertex: FrameUI.vert
 PathShaderFrag: FrameUI.frag
 PathTexture: ./Textures/future.bmp
@@ -71,6 +80,7 @@ RadiusCollider: 0.1
 IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: FrameModel
+TypeName: ModelFrame
 PathShaderVertex: FrameUI.vert
 PathShaderFrag: FrameUI.frag
 PathTexture: ./Textures/syzanna.bmp
@@ -79,6 +89,7 @@ RadiusCollider: 0.1
 IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: TextBlockModel
+TypeName: ModelTextBlock
 PathShaderVertex: TextBlockUI.vert
 PathShaderFrag: TextBlockUI.frag
 PathTexture: ./Textures/Alphabet.bmp
@@ -87,6 +98,7 @@ RadiusCollider: 0.1
 IsCubeModel: 1
 ------------------------------------------------------------------ 
 Name: CursorModel
+TypeName: ModelFrame
 PathShaderVertex: FrameUI.vert
 PathShaderFrag: FrameUI.frag
 PathTexture: ./Textures/Cursor.bmp

@@ -26,8 +26,6 @@ private :
 
 public:
 	
-	//TODO: inTextBlosk object
-	//string Message = std::string();
 	vec3 StartPos = vec3(0);
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
@@ -56,13 +54,11 @@ public:
 
 	void RunAction();
 
-	void virtual UpdateState();
+	void UpdateState();
 
 	bool GetVisible();
 
 	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
-
-	//bool IsCubeModel();
 
 	void virtual SetSizeControl(vec3 size);
 

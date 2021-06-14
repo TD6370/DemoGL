@@ -6,7 +6,7 @@
 #include <set>
 //#include <map>
 //
-//using std::string;
+using std::string;
 //using std::map;
 
 //template<typename T, typename P>
@@ -18,6 +18,23 @@
 //            *(dest++) = *itr;
 //    return dest;
 //}
+
+/* for (char c : text)
+{
+    string symb(1, c);
+    result.append(c);
+    //result.replace(text.begin(), text.begin() + 6, "");
+}*/
+
+string FormatTypeName(string text)
+{
+    string result = "";
+    std::stringstream streamText;
+    streamText.str(text);
+    streamText >> result; //class
+    streamText >> result; //name
+    return result;
+}
 
 bool IsMapContains_StrInt(map <string, int> inMap, string key)
 {
@@ -34,12 +51,15 @@ string Trim(string str) {
     return str;
 }
 
-bool Str_bool(std::string const& s) {
-
-    //bool b;
-    //std::istringstream m("1") >> b;
-
+bool StrToBool(std::string const& s) {
     return s != "0";
+}
+
+bool StrToBool(string str) {
+    std::istringstream is(str);
+    bool b;
+    is >> std::boolalpha >> b;
+    return b;
 }
 
 std::string GetFile(const char* path)

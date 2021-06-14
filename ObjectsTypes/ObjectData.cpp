@@ -57,6 +57,10 @@ void ObjectData::InitData()
 	//TextureUV = ModelPtr->UV;
 }
 
+void ObjectData::UpdateState() {
+
+}
+
 void ObjectData::ActionBase() {
 	ControlsEvents();
 	RunTransform();

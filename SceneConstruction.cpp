@@ -202,6 +202,16 @@ bool SceneConstruction::SetObject(int indObj) {
 
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isVisible = ObjectCurrent->GetVisible();
+
+	//-- test fail model
+	/*if (ObjectCurrent->ModelPtr->Vertices.size() == 0 ||
+		ObjectCurrent->ModelPtr->Normals.size() == 0 ||
+		ObjectCurrent->ModelPtr->UV.size() == 0)
+	{
+		string failName = ObjectCurrent->Name;
+		string failNameModel = ObjectCurrent->ModelPtr->Name;
+	}*/
+
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
@@ -256,11 +266,6 @@ void SceneConstruction::Update()
 		DrawGraph();
 		WorkingRooms();
 		return;
-	}
-
-	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
-	if (Storage->Inputs->MBT != -1) {
-		Debug("Input MBT");
 	}
 
 	for (int i = 0; i < countObjects + 1; i++)

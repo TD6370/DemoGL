@@ -63,7 +63,7 @@ void CreatorModelData::ClearObjects() {
 		MapSceneObjects.clear();
 }
 
-void CreatorModelData::AddModelCustom(shared_ptr<ModelData> newModel, std::string name) {
+void CreatorModelData::AddModel(shared_ptr<ModelData> newModel, std::string name) {
 
 	int index = Models.size();
 	index--;
@@ -87,32 +87,6 @@ void CreatorModelData::AddModelCustom(shared_ptr<ModelData> newModel, std::strin
 	MapModels.insert(std::pair<string, int>(name, index));
 }
 
-void CreatorModelData::AddModel(ModelData* newModel, std::string name) {
-
-	int index = Models.size();
-	newModel->Name = name;
-	
-	Models.push_back(std::make_unique<ModelData>(*newModel));
-	
-	bool isGenName = name.length() == 0;
-	if (!isGenName) {
-		map <string, int> ::iterator it;
-		it = MapModels.find(name);
-		if (it != MapModels.end()) {
-			//isGenName = true;
-			name += "_" + std::to_string(index);
-		}
-	}
-	
-	if (isGenName) {
-		string file = GetFile(newModel->PathModel3D);
-		name += file + "_" + std::to_string(index);
-	}
-	
-	MapModels.insert(std::pair<string, int>(name, index));
-}
-
-
 void CreatorModelData::ClearModels() {
 
 }
@@ -128,18 +102,65 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 
 	for (auto fieldsModel : filedsModels) {
 
-		ModelData nextModel = ModelData();
-		nextModel.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
-		nextModel.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
-		nextModel.PathTexture = fieldsModel->PathTexture.c_str();
-		nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
-		nextModel.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
-		nextModel.IsCubeModel = Str_bool(fieldsModel->IsCubeModel);
-		nextModel.Init();
-		AddModel(&nextModel, fieldsModel->Name);
+		std::shared_ptr<ModelData> nextModelPrt;
+
+		string typeModel = fieldsModel->TypeName;
+		if (typeModel == "ModelFrame") {
+			auto modelFrame = ModelFrame();
+			Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+			nextModelPrt = GetModelPrt(Models.size() - 1);
+		}
+		if (typeModel == "ModelTextBlock") {
+			auto modelTextBlock = ModelTextBlock();
+			Models.push_back(std::make_unique<ModelTextBlock>(modelTextBlock));
+			nextModelPrt = GetModelPrt(Models.size() - 1);
+		}
+		
+		if(nextModelPrt == nullptr){
+			ModelData nextModel = ModelData();
+			Models.push_back(std::make_unique<ModelData>(nextModel));
+			nextModelPrt = GetModelPrt(Models.size() - 1);
+		}
+
+		nextModelPrt->PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
+		nextModelPrt->PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
+		nextModelPrt->PathTexture = fieldsModel->PathTexture.c_str();
+		nextModelPrt->PathModel3D = fieldsModel->PathModel3D.c_str();
+		nextModelPrt->RadiusCollider = std::stof(fieldsModel->RadiusCollider);
+		nextModelPrt->IsCubeModel = StrToBool(fieldsModel->IsCubeModel);
+		nextModelPrt->Init();
+
+		AddModel(nextModelPrt, fieldsModel->Name);
 
 		i++;
 	}
+
+	//-------------------------------
+
+	//for (auto fieldsModel : filedsModels) {
+
+	//	ModelData nextModel;
+
+	//	string typeModel = fieldsModel->TypeName;
+	//	if (typeModel == "ModelFrame") {
+	//		nextModel = ModelFrame();
+	//	}
+	//	if (typeModel == "ModelTextBlock") {
+	//		nextModel = ModelTextBlock();
+	//	}
+
+	//	//ModelData nextModel = ModelData();
+	//	nextModel.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
+	//	nextModel.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
+	//	nextModel.PathTexture = fieldsModel->PathTexture.c_str();
+	//	nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
+	//	nextModel.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
+	//	nextModel.IsCubeModel = StrToBool(fieldsModel->IsCubeModel);
+	//	nextModel.Init();
+	//	AddModel(&nextModel, fieldsModel->Name);
+
+	//	i++;
+	//}
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -365,10 +386,26 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 		newObj->Color = objFields->ColorValue;
 
+		OptionsObject opt = objFields->Options;
+		newObj->IsVisible = StrToBool(opt.IsVisible);
+		newObj->IsGravity = StrToBool(opt.IsGravity);
+		newObj->IsGUI = StrToBool(opt.IsGUI);
+		newObj->IsTextureRepeat = StrToBool(opt.IsTextureRepeat);
+		newObj->IsNPC = StrToBool(opt.IsNPC);
+		newObj->IsBlock = StrToBool(opt.IsBlock);
+		newObj->IsCubeModel = StrToBool(opt.IsCubeModel);
+		newObj->IsAbsolutePosition = StrToBool(opt.IsAbsolutePosition);
+		newObj->IsFocusable = StrToBool(opt.IsFocusable);
+		newObj->IsTransformable = StrToBool(opt.IsTransformable);
+		newObj->IsUsable = StrToBool(opt.IsUsable);
+		//newObj-> = StrToBool(opt.);
+		
 		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
 		newObj->SetSpecificFiels(specificFields);
 
+		//--- After init
+		newObj->UpdateState();
 		i++;
 	}
 
@@ -383,155 +420,152 @@ void CreatorModelData::LoadModels() {
 	if (Models.size() > 0)
 		return;
 
+	std::shared_ptr<ModelData> nextModelPrt;
+
 	ModelData nextModel = ModelData();
-	nextModel.PathShaderVertex = "basic.vert";
-	nextModel.PathShaderFrag = "basic.frag";
-	nextModel.PathTexture = "./Textures/testTexture.bmp";
-	//nextModel.PathTexture = "./Textures/syzanna.bmp";
-	//nextModel.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel.PathModel3D = "./Models3D/monkey.obj";
-	//nextModel.PathModel3D = "./Models3D/kub.obj";
-	nextModel.RadiusCollider = 1;
-	nextModel.Init();
-	AddModel(&nextModel, "mon");
+	Models.push_back(std::make_unique<ModelData>(nextModel));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->PathModel3D = "./Models3D/monkey.obj";
+	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "mon");
 
 	ModelData nextModel2 = ModelData();
-	nextModel2.PathShaderVertex = "basic.vert";
-	nextModel2.PathShaderFrag = "basic.frag";
-	nextModel2.PathTexture = "./Textures/planet.bmp";
-	//nextModel2.PathModel3D = "./Models3D/kub.obj";
-	//nextModel2.PathModel3D = "./Models3D/monkey.obj";
-	nextModel2.PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModel2.RadiusCollider = 0.2;
-	nextModel2.Init();
-	AddModel(&nextModel2, "plane");
+	Models.push_back(std::make_unique<ModelData>(nextModel2));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathTexture = "./Textures/planet.bmp";
+	nextModelPrt->PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModelPrt->RadiusCollider = 0.2;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "plane");
 
 	ModelData nextModel3 = ModelData();
-	nextModel3.PathShaderVertex = "basic.vert";
-	nextModel3.PathShaderFrag = "basic.frag";
-	nextModel3.PathModel3D = "./Models3D/kub.obj";
-	nextModel3.PathTexture = "./Textures/testTexture.bmp";
-	nextModel3.RadiusCollider = 1;
-	nextModel3.IsDebug = true;
-	nextModel3.IsCubeModel = true;
-	//nextModel3.IsTextureRepeat = true;
-	nextModel3.Init();
-	AddModel(&nextModel3, "box");
-
+	Models.push_back(std::make_unique<ModelData>(nextModel3));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/kub.obj";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->IsDebug = true;
+	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "box");
 
 	ModelData nextModel4 = ModelData();
-	nextModel4.PathShaderVertex = "basic.vert";
-	nextModel4.PathShaderFrag = "basic.frag";
-	nextModel4.PathModel3D = "./Models3D/Marker_Vector.obj";
-	nextModel4.PathTexture = "./Textures/testTexture.bmp";
-	nextModel4.RadiusCollider = 0.1;
-	nextModel4.Init();
-	AddModel(&nextModel4, "marker_Vector");
+	Models.push_back(std::make_unique<ModelData>(nextModel4));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Marker_Vector.obj";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "marker_Vector");
 
 	ModelData nextModel5 = ModelData();
-	nextModel5.PathShaderVertex = "basic.vert";
-	nextModel5.PathShaderFrag = "basic.frag";
-	nextModel5.PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModel5.PathTexture = "./Textures/testTexture.bmp";
-	nextModel5.RadiusCollider = 0.1;
-	nextModel5.Init();
-	AddModel(&nextModel5, "marker_Cross");
+	Models.push_back(std::make_unique<ModelData>(nextModel5));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "marker_Cross");
 
 	ModelData nextModel6 = ModelData();
-	nextModel6.PathShaderVertex = "basic.vert";
-	nextModel6.PathShaderFrag = "basic.frag";
-	nextModel6.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModel6.PathTexture = "./Textures/testTexture.bmp";
-	nextModel6.RadiusCollider = 0.1;
-	nextModel6.Init();
-	AddModel(&nextModel6, "marker_Point");
+	Models.push_back(std::make_unique<ModelData>(nextModel6));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "marker_Point");
 
 	ModelData nextModelHomo = ModelData();
-	nextModelHomo.PathShaderVertex = "basic.vert";
-	nextModelHomo.PathShaderFrag = "basic.frag";
-	//nextModelHomo.PathModel3D = "./Models3D/homo.obj";
-	nextModelHomo.PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModelHomo.PathTexture = "./Textures/future.bmp";
-	//nextModelHomo.PathTexture = "./Textures/t2.bmp";
-	nextModelHomo.RadiusCollider = 1;
-	nextModelHomo.Init();
-	AddModel(&nextModelHomo, "homo");
-
+	Models.push_back(std::make_unique<ModelData>(nextModelHomo));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelPrt->PathTexture = "./Textures/future.bmp";
+	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "homo");
 
 	ModelData nextModelCursorRay = ModelData();
-	nextModelCursorRay.PathShaderVertex = "basic.vert";
-	nextModelCursorRay.PathShaderFrag = "basic.frag";
-	nextModelCursorRay.PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModelCursorRay.PathTexture = "./Textures/future.bmp";
-	nextModelCursorRay.RadiusCollider = .1;
-	nextModelCursorRay.Init();
-	AddModel(&nextModelCursorRay, "cursorRay");
+	Models.push_back(std::make_unique<ModelData>(nextModelCursorRay));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "basic.vert";
+	nextModelPrt->PathShaderFrag = "basic.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelPrt->PathTexture = "./Textures/future.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "cursorRay");
 
 	//---GUI -- control -- Background frame
 	ModelFrame contextFrame = ModelFrame();
-	contextFrame.PathShaderVertex = "FrameUI.vert";
-	contextFrame.PathShaderFrag = "FrameUI.frag";
-	contextFrame.PathModel3D = "./Models3D/Frame.obj";
-	//contextFrame.PathTexture = "./Textures/InterfacePlane.bmp";
-	contextFrame.PathTexture = "./Textures/future.bmp";
-	contextFrame.RadiusCollider = .1;
-	contextFrame.IsCubeModel = true;
-	contextFrame.Init();
 	Models.push_back(std::make_unique<ModelFrame>(contextFrame));
-	auto contextFramePrt = GetModelPrt(Models.size() - 1);
-	AddModelCustom(contextFramePrt, "ConextFrameModel");
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
+	nextModelPrt->PathTexture = "./Textures/future.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "ConextFrameModel");
 
 	//---GUI -- control -- Frame
 	ModelFrame modelFrame = ModelFrame();
-	modelFrame.PathShaderVertex = "FrameUI.vert";
-	modelFrame.PathShaderFrag = "FrameUI.frag";
-	modelFrame.PathModel3D = "./Models3D/Frame.obj";
-	modelFrame.PathTexture = "./Textures/syzanna.bmp";
-	modelFrame.RadiusCollider = .1;
-	modelFrame.IsCubeModel = true;
-	modelFrame.Init();
 	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
-	auto modelFramePrt = GetModelPrt(Models.size() - 1);
-	AddModelCustom(modelFramePrt, "FrameModel");
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
+	nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "FrameModel");
 
 	//---GUI -- control -- TextBlock
 	ModelTextBlock textBlock = ModelTextBlock();
-	textBlock.PathShaderVertex = "TextBlockUI.vert";
-	textBlock.PathShaderFrag = "TextBlockUI.frag";
-	textBlock.PathModel3D = "./Models3D/TextBlock.obj";
-	textBlock.PathTexture = "./Textures/Alphabet.bmp";
-	textBlock.RadiusCollider = .1;
-	textBlock.IsCubeModel = true;
-	textBlock.Init();
 	Models.push_back(std::make_unique<ModelTextBlock>(textBlock));
-	auto textBlockPrt = GetModelPrt(Models.size() - 1);
-	AddModelCustom(textBlockPrt, "TextBlockModel");
-
-	//AddModel(&textBlock, "TextBlockModel");
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "TextBlockUI.vert";
+	nextModelPrt->PathShaderFrag = "TextBlockUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/TextBlock.obj";
+	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "TextBlockModel");
 
 	//---GUI -- control -- Cursor
 	ModelFrame curcorModel = ModelFrame();
-	curcorModel.PathShaderVertex = "FrameUI.vert";
-	curcorModel.PathShaderFrag = "FrameUI.frag";
-	curcorModel.PathModel3D = "./Models3D/Cursor.obj";
-	//curcorModel.PathModel3D = "./Models3D/TextBlock.obj";
-	curcorModel.PathTexture = "./Textures/Cursor.bmp";
-	//curcorModel.PathTexture = "./Textures/CursorT2.bmp";
-	curcorModel.RadiusCollider = .1;
-	curcorModel.IsCubeModel = true;
-	curcorModel.Init();
 	Models.push_back(std::make_unique<ModelFrame>(curcorModel));
-	auto curcorModelPrt = GetModelPrt(Models.size() - 1);
-	AddModelCustom(curcorModelPrt, "CursorModel");
-	//AddModel(&curcorModel, "CursorModel");
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Cursor.obj";
+	nextModelPrt->PathTexture = "./Textures/Cursor.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "CursorModel");
 }
 
 void CreatorModelData::LoadObjectsGUI() {
-
-	//// ---- Object Cursor GUI
-	//shared_ptr<ModelData> modelCursorGUI = GetModelPrt("CursorModel");
-	//shared_ptr<ObjectData> objCursorGUI_Data = AddObject("CursorGUI", modelCursorGUI, CursorGUI, vec3(.2, .2, 0.01), vec3(1));
-	//shared_ptr<ObjectGUI> objCursorGUI = std::dynamic_pointer_cast<ObjectGUI>(objCursorGUI_Data);
 
 	// ---- Object Context frame GUI
 	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");

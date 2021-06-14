@@ -114,6 +114,8 @@ public:
 
 	void virtual InitData();
 
+	void virtual UpdateState(); //after fill options
+
 	void GenStartPosition();
 
 	void virtual CheckStartPosition();

@@ -6,15 +6,37 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon
 Model: mon
-Pos: 43.674 -52.9677 26.6421
-Target: 47.3211 -51.2111 21.8728
-Action: Moving
+Pos: -17.6711 -53.0418 25.1785
+Target: -29.6711 -53.0418 34.1785
+Action: Look
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: Box
@@ -24,6 +46,17 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: Box2
@@ -33,6 +66,17 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: Box3
@@ -42,6 +86,17 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox
@@ -51,6 +106,17 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsBlock: 1
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -64,26 +130,26 @@ Vertex: -1 1 -1
 Vertex: -1 -1 1
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
-Vertex: 1 -1 1
-Vertex: 0.999999 1 1
+Vertex: 7.02825 -1 8.40296
+Vertex: 7.02825 1 8.40296
 Vertex: -1 -1 1
-Vertex: 0.999999 1 1
+Vertex: 7.02825 1 8.40296
 Vertex: -1 1 1
 Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: 1 -1 1
+Vertex: 7.02825 -1 8.40296
 Vertex: 1 1 -1
-Vertex: 0.999999 1 1
-Vertex: 1 -1 1
+Vertex: 7.02825 1 8.40296
+Vertex: 7.02825 -1 8.40296
 Vertex: 1 1 -1
 Vertex: -1 1 -1
-Vertex: 0.999999 1 1
+Vertex: 7.02825 1 8.40296
 Vertex: -1 1 -1
 Vertex: -1 1 1
-Vertex: 0.999999 1 1
+Vertex: 7.02825 1 8.40296
 Vertex: 1 -1 -1
-Vertex: 1 -1 1
+Vertex: 7.02825 -1 8.40296
 Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: -1 -1 1
@@ -97,6 +163,17 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsBlock: 1
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -143,6 +220,17 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsBlock: 1
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -189,6 +277,17 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsBlock: 1
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -235,6 +334,17 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_P_2
@@ -244,6 +354,17 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Bullet
 Name: Bullet
@@ -253,60 +374,137 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Pos: 0 0 0
-Target: 0 0 0
+Pos: -44.211 -95.9094 -68.1195
+Target: -45.6828 -97.3459 -70.5411
 Action: Stay
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: 43.674 -52.9677 26.6421
+Pos: -17.6711 -53.0418 25.1785
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: 43.3808 -55.0973 27.0255
+Pos: -17.3674 -55.0535 25.5756
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: 45.5382 -55.1028 26.5133
+Pos: -18.6156 -55.0478 23.3506
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 1 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: 42.3207 -55.0964 26.5229
+Pos: -18.6303 -55.055 26.5475
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: 42.3476 -55.0974 29.7322
+Pos: -15.3921 -55.0529 26.5479
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: Hero
 Name: Hero
@@ -316,15 +514,37 @@ Target: 0 -54.0171 5
 Action: Search
 IndexObjectOwner: -1
 Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 ------------------------------------------------------------------
 Type: GUI
 Name: BackContectGUI
 Model: ConextFrameModel
-Pos: 0.205165 -52.8569 2.48007
+Pos: -2.28943 -52.4896 6.10678
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
 StartPos: 0 0 0
 SizePanel: 0 0
@@ -332,38 +552,71 @@ SizePanel: 0 0
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Pos: 0.304796 -53.3938 2.58817
+Pos: -2.33873 -52.9338 5.94446
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 20
 Color: 0.2 0.5 0.1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 Specific:
-StartPos: 1.06231 1.52697 0.03
+StartPos: 1.12641 1.4042 0.03
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Pos: 0.772473 -53.6751 2.62555
+Pos: -2.59151 -52.8118 5.49044
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
-StartPos: 0.573061 0.826853 0.01
+StartPos: 0.686106 0.322267 0.01
 SizePanel: 1.1 0.2
 ------------------------------------------------------------------
 Type: TextBlock
 Name: TextBlockObject
 Model: TextBlockModel
-Pos: -0.546257 -53.4626 2.53686
+Pos: -1.74707 -51.6324 7.14373
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
 Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsBlock: 0
+IsCubeModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
 Specific:
-StartPos: 0.231654 1.59243 0.01
+StartPos: -0.190344 0.122749 0.01
 SizePanel: 1.5 1
-Message: привет мир, и доброе утро
+Message:        привет мир, и доброе утро
 ------------------------------------------------------------------
 

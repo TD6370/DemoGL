@@ -8,6 +8,7 @@
 #include "LoaderModelObj.h"
 #include "LoadBmp.h"
 #include "CoreSettings.h"
+#include "OperationString.h"
 
 #include <string>
 #include <iostream>
@@ -37,6 +38,7 @@ public:
 	string PathShaderFrag = "basic.frag";
 	const char* PathTexture = "./Textures/testTexture.bmp";
 	const char* PathModel3D = "./Models3D/monkey.obj";
+	string TypeName;
 
 	//TypeModel TypeMaterial = TypeModel::ModelBase;
 	ConfigUniform ConfUniform;
@@ -72,6 +74,8 @@ public:
 
 	ModelData();
 
+	void virtual InitBase();
+
 	void virtual Init();
 
 	void ConstructShaderProgramm();
@@ -103,7 +107,6 @@ class ModelFrame : public ModelData {
 public:
 
 	ModelFrame() :ModelData() {
-		//Init();
 	};
 
 	void Init();
@@ -118,11 +121,8 @@ class ModelTextBlock : public ModelFrame {
 public:
 	
 	ModelTextBlock():ModelFrame() {
-		//Init();
 	};
 
-	/*void Init();
-
-	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, vector<vec2>& uv = DEFAULT_VECTOR_V2);*/
+	void Init();
 };
 

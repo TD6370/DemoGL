@@ -50,6 +50,9 @@ void ObjectGUI::InitData() {
 		Storage->SceneData->IndexGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
+
+	//TEST
+	//UpdateState();
 }
 
 void ObjectGUI::UpdateState() {

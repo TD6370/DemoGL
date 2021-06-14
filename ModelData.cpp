@@ -172,7 +172,7 @@ void ModelData::UpdateBufferUV() {
 	SetBufferUV(UV, BufferUV_ID);
 }
 
-void ModelData::Init() {
+void ModelData::InitBase() {
 
 	ConstructShaderProgramm();
 
@@ -185,6 +185,14 @@ void ModelData::Init() {
 	ConfigUniform();
 
 	//FillPlanes();
+}
+
+
+void ModelData::Init() {
+
+	TypeName = FormatTypeName(typeid(this).name());
+
+	InitBase();
 }
 
 ModelData ModelData::Clone() {
@@ -202,7 +210,11 @@ ModelData ModelData::Clone() {
 
 void  ModelFrame::Init() {
 
-	ConstructShaderProgramm();
+	TypeName = FormatTypeName(typeid(this).name());
+	
+	InitBase();
+
+	/*ConstructShaderProgramm();
 
 	LoadingTexture();
 
@@ -210,7 +222,7 @@ void  ModelFrame::Init() {
 
 	SetModelInBuffer();
 
-	ConfigUniform();
+	ConfigUniform();*/
 }
 
 void  ModelFrame::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv, vector<vec3>& normals)
@@ -227,54 +239,18 @@ void  ModelFrame::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<v
 	else
 		SetNormals(normals, BufferNormal_ID);
 
-	if (buffer.size() == 0)
-		return;
-
-	GenBufferColors(buffer, BufferColor_ID);
+	if (buffer.size() != 0)
+		GenBufferColors(buffer, BufferColor_ID);
 }
-//----------------------------
+//---------------------------- ModelTextBlock
 
-//---------------- Model GUI
-
-/*
 void  ModelTextBlock::Init() {
 
-	ConstructShaderProgramm();
+	TypeName = FormatTypeName(typeid(this).name());
 
-	LoadingTexture();
-
-	LoadModelData();
-
-	SetModelInBuffer();
-
-	ConfigUniform();
+	InitBase();
 }
-
-//void ModelGUI::ConfigUniform() {
-//
-//	ConfUniform = ConfigUniformTextGUI(ShaderProgram);
-//}
-
-void  ModelTextBlock::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv)
-{
-	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-
-	if(uv.size() == 0)
-		SetBufferUV(UV, BufferUV_ID);
-	else
-		SetBufferUV(uv, BufferUV_ID);
-
-	SetNormals(Normals, BufferNormal_ID);
-
-	if (buffer.size() == 0)
-		return;
-
-	GenBufferColors(buffer, BufferColor_ID);
-}
-
-*/
-//----------------------------
-
+//----------------------------------
 
 
 

@@ -19,6 +19,20 @@ class ObjectData;
 
 enum TypeValue { String, Int, Float, Vec2, Vec3, Vec4 };
 
+struct OptionsObject {
+	string IsVisible = "IsVisible:";
+	string IsGravity = "IsGravity:";
+	string IsGUI = "IsGUI:";
+	string IsTextureRepeat = "IsTextureRepeat:";
+	string IsNPC = "IsNPC:";
+	string IsBlock = "IsBlock:";
+	string IsCubeModel = "IsCubeModel:";
+	string IsAbsolutePosition = "IsAbsolutePosition:";
+	string IsFocusable = "IsFocusable:";
+	string IsTransformable = "IsTransformable:";
+	string IsUsable = "IsUsable:";
+	bool Value;
+};
 
 struct ObjectFileds {
 	string Name = "Name:";
@@ -32,6 +46,7 @@ struct ObjectFileds {
 	string IndexObjectOwner = "IndexObjectOwner:";
 	string Color = "Color:";
 	vec3 ColorValue;
+	OptionsObject Options;
 
 	map<string, string> OtherFields;
 };
@@ -45,6 +60,7 @@ struct ModelFileds {
 	string PathModel3D = "PathModel3D:";
 	string RadiusCollider = "RadiusCollider:";
 	string IsCubeModel = "IsCubeModel:";
+	string TypeName = "TypeName:";
 };
 
 struct ObjectFiledsSpecific {

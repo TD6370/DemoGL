@@ -6,10 +6,6 @@
 
 #include "../OperationString.h"
 
-//#include <vector>
-//#include <map>
-//
-//using std::map;
 
 SceneSerialize::SceneSerialize() {
 
@@ -46,16 +42,11 @@ SceneSerialize::SceneSerialize() {
 }
 
 SceneSerialize::~SceneSerialize() {
-
-
 }
  
 // -------------------- Serialize	->	ObjectData specific fields
 //#SaveFieldSpecific
 void  SceneSerialize::SaveSpecific(vector<ObjectFiledsSpecific>& specificFields) {
-
-	//#SaveFieldSpecific
-	//return;
 
 	if (specificFields.size() == 0)
 		return;
@@ -92,6 +83,20 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.IndexObjectOwner << " " << obj->IndexObjectOwner << "\n";
 	streamObjects << fileds.Color << " " << Vec3Str(obj->Color) << "\n";
 
+	//Options
+	streamObjects << fileds.Options.IsVisible << " " << obj->IsVisible << "\n";
+	streamObjects << fileds.Options.IsGravity << " " << obj->IsGravity << "\n";
+	streamObjects << fileds.Options.IsGUI << " " << obj->IsGUI << "\n";
+	streamObjects << fileds.Options.IsTextureRepeat << " " << obj->IsTextureRepeat << "\n";
+	streamObjects << fileds.Options.IsNPC << " " << obj->IsNPC << "\n";
+	streamObjects << fileds.Options.IsBlock << " " << obj->IsBlock << "\n";
+	streamObjects << fileds.Options.IsCubeModel << " " << obj->IsCubeModel << "\n";
+	streamObjects << fileds.Options.IsAbsolutePosition << " " << obj->IsAbsolutePosition << "\n";
+	streamObjects << fileds.Options.IsFocusable << " " << obj->IsFocusable << "\n";
+	streamObjects << fileds.Options.IsTransformable << " " << obj->IsTransformable << "\n";
+	streamObjects << fileds.Options.IsUsable << " " << obj->IsUsable << "\n";
+	
+
 	if(!isSpecificExist)
 		streamObjects << m_stringSeparator << "\n";
 	
@@ -106,6 +111,7 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 	ModelFileds fileds;
 
 	streamModels << fileds.Name << " " << model->Name << "\n";
+	streamModels << fileds.TypeName << " " << model->TypeName << "\n";
 	streamModels << fileds.PathShaderVertex << " " << model->PathShaderVertex << "\n";
 	streamModels << fileds.PathShaderFrag << " " << model->PathShaderFrag << "\n";
 	streamModels << fileds.PathTexture << " " << model->PathTexture << "\n";
@@ -254,11 +260,6 @@ void SceneSerialize::Save() {
 	}
 }
 
-//void  SceneSerialize::Load(string path, ObjectData& obj, TypeObject type) {
-//	
-//
-//}
-
 void SceneSerialize::Load(bool isOnlyObjects) {
 
 	World WorldSetting;
@@ -342,6 +343,31 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.ColorValue.y;
 					in >> filedsObj.ColorValue.z;
 				}
+
+				if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
+					in >> filedsObj.Options.IsVisible;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsGravity)
+					in >> filedsObj.Options.IsGravity;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsGUI)
+					in >> filedsObj.Options.IsGUI;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsTextureRepeat)
+					in >> filedsObj.Options.IsTextureRepeat;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsNPC)
+					in >> filedsObj.Options.IsNPC;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsBlock)
+					in >> filedsObj.Options.IsBlock;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsCubeModel)
+					in >> filedsObj.Options.IsCubeModel;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsAbsolutePosition)
+					in >> filedsObj.Options.IsAbsolutePosition;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsFocusable)
+					in >> filedsObj.Options.IsFocusable;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsTransformable)
+					in >> filedsObj.Options.IsTransformable;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsUsable)
+					in >> filedsObj.Options.IsUsable;
+		/*		if (in >> lineStr && lineStr == filedsObj.Options.)
+					in >> filedsObj.Options.;*/
 			}
 
 			if (in >> lineStr && lineStr == m_stringSeparator) {
@@ -388,6 +414,9 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			else
 				break;
 
+			if (in >> lineStr && lineStr == filedsModel->TypeName)
+				in >> filedsModel->TypeName;
+
 			if (in >> lineStr && lineStr == filedsModel->PathShaderVertex)
 				in >> filedsModel->PathShaderVertex;
 
@@ -405,6 +434,8 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 
 			if (in >> lineStr && lineStr == filedsModel->IsCubeModel)
 				in >> filedsModel->IsCubeModel;
+
+		
 			
 			in >> stringSeparator;
 
