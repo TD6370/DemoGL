@@ -181,15 +181,11 @@ void ObjectTextBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecif
 		return;
 
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
-
 	//SceneSerialize* serializer = new SceneSerialize();
 
-	//Message = filedsSpecific[0].Value;
 	Message = filedsSpecific[filedsSpecific.size()-1].Value;
 
 	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
-	
-	
 	Vertices.clear();
 	Normals.clear();
 	TextureUV.clear();

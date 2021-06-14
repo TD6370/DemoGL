@@ -23,6 +23,8 @@ class ObjectGUI :
 private :
 	vec3 m_color_work = vec3(0, 1, 0); //green
 	vec3 m_color_transforming = vec3(0.1, 0.8, 0.1); //green
+	string hyst_posit = "";
+	vec3 tmp_posit = vec3();
 
 public:
 	

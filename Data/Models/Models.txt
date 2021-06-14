@@ -74,7 +74,7 @@ Name: ConextFrameModel
 TypeName: ModelFrame
 PathShaderVertex: FrameUI.vert
 PathShaderFrag: FrameUI.frag
-PathTexture: ./Textures/future.bmp
+PathTexture: ./Textures/Frame.bmp
 PathModel3D: ./Models3D/Frame.obj
 RadiusCollider: 0.1
 IsCubeModel: 1
@@ -100,8 +100,8 @@ IsCubeModel: 1
 Name: CursorModel
 TypeName: ModelFrame
 PathShaderVertex: FrameUI.vert
-PathShaderFrag: FrameUI.frag
-PathTexture: ./Textures/Cursor.bmp
+PathShaderFrag: CursorUI.frag
+PathTexture: ./Textures/CursorB.bmp
 PathModel3D: ./Models3D/Cursor.obj
 RadiusCollider: 0.1
 IsCubeModel: 1

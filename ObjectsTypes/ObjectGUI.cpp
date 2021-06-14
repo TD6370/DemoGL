@@ -50,15 +50,20 @@ void ObjectGUI::InitData() {
 		Storage->SceneData->IndexGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
-
-	//TEST
-	//UpdateState();
 }
 
 void ObjectGUI::UpdateState() {
 
 	if (!Storage->SceneData->IsGUI)
 		return;
+
+	//================================================== TEST
+	/*std::stringstream ss;
+	ss << "Name: " << Name << "  Model:" << ModelPtr->Name << "\n";
+	ss << "SP: " << StartPos.x << " " << StartPos.y << "\n\n";
+	ss << "PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
+	string spStart = ss.str();*/
+	//==================================================
 
 	vec3 directionOut = vec3(0);
 	PanelDepth = 3.8;
@@ -86,6 +91,21 @@ void ObjectGUI::UpdateState() {
 		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, 
 																	PanelDepth - StartPos.z, 
 																	Storage->Oper, startPos);
+
+		//================================================== TEST
+		//TEST -- hystory move pos TextBox
+		/*if (Postranslate != tmp_posit && TypeObj == TextBlock)
+		{
+			std::stringstream ssEnd;
+			ssEnd << "END PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
+			string totalEnd = ssEnd.str();
+			tmp_posit = Postranslate;
+			if(hyst_posit.size()==0)
+				hyst_posit.append(spStart);
+			hyst_posit.append(totalEnd);
+			hyst_posit.append("--------------------------------");
+		}*/
+		//==================================================
 	}
 	else {
 		if (StartPos == vec3(0)) {

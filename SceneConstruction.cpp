@@ -203,31 +203,26 @@ bool SceneConstruction::SetObject(int indObj) {
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isVisible = ObjectCurrent->GetVisible();
 
-	//-- test fail model
-	/*if (ObjectCurrent->ModelPtr->Vertices.size() == 0 ||
-		ObjectCurrent->ModelPtr->Normals.size() == 0 ||
-		ObjectCurrent->ModelPtr->UV.size() == 0)
-	{
-		string failName = ObjectCurrent->Name;
-		string failNameModel = ObjectCurrent->ModelPtr->Name;
-	}*/
-
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
 
-	m_isUpdate = prevModelTexture != ModelCurrent->PathTexture || prevModel3D != ModelCurrent->PathModel3D;
-	if (m_isUpdate) {
+	if (prevModelTexture != ModelCurrent->PathTexture) {
 		prevModelTexture = ModelCurrent->PathTexture;
-		prevModel3D = ModelCurrent->PathModel3D;
+		m_isUpdate = true;
 	}
-
-	m_isUpdateShaderProgramm = prevShaderVert != ModelCurrent->PathShaderVertex || prevShaderFrag != ModelCurrent->PathShaderFrag;
-	if (m_isUpdateShaderProgramm) {
+	if (prevModel3D != ModelCurrent->PathModel3D) {
+		prevModel3D = ModelCurrent->PathModel3D;
+		m_isUpdate = true;
+	}
+	if (prevShaderVert != ModelCurrent->PathShaderVertex) {
+		m_isUpdateShaderProgramm = true;
 		prevShaderVert = ModelCurrent->PathShaderVertex;
+	}
+	if (prevShaderFrag != ModelCurrent->PathShaderFrag) {
+		m_isUpdateShaderProgramm = true;
 		prevShaderFrag = ModelCurrent->PathShaderFrag;
 	}
-
 	return isVisible;
 }
 

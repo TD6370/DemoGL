@@ -25,6 +25,7 @@ vec4 SDF2(in vec4 inColor )
 }
 
 
+// ---------------- FRAME
 void main()
 {
 	//float alpha = 1.0f;
@@ -65,10 +66,11 @@ void main()
         //vec4 text3 =SDF2(text1);
         //text1 = text2 - text3;
         //alpha =0.0;
-        alpha =1. - text1.r;
+        //alpha =1. - text1.r;
     }
 
     //-----------------
     vec4 colorText = vec4( fragmentColor * vec3(0.5), alpha);
     color =  text1 * colorText;
 }
+// ---------------- FRAME

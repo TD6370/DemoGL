@@ -519,7 +519,8 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->PathShaderFrag = "FrameUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	nextModelPrt->PathTexture = "./Textures/future.bmp";
+	//nextModelPrt->PathTexture = "./Textures/future.bmp";
+	nextModelPrt->PathTexture = "./Textures/Frame.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsCubeModel = true;
 	nextModelPrt->Init();
@@ -556,9 +557,12 @@ void CreatorModelData::LoadModels() {
 	Models.push_back(std::make_unique<ModelFrame>(curcorModel));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	//nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathShaderFrag = "CursorUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/Cursor.obj";
-	nextModelPrt->PathTexture = "./Textures/Cursor.bmp";
+	//nextModelPrt->PathTexture = "./Textures/Cursor.bmp";
+	nextModelPrt->PathTexture = "./Textures/CursorB.bmp";
+	//nextModelPrt->PathTexture = "./Textures/CursorSDF.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsCubeModel = true;
 	nextModelPrt->Init();
@@ -579,11 +583,11 @@ void CreatorModelData::LoadObjectsGUI() {
 	string objName;
 
 	// ---- Object Cursor GUI
-	objName = "CursorGUI";
-	caption = objBackGUI->Name + "." + objName;
-	childModel = "CursorModel";
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	//objName = "CursorGUI";
+	//caption = objBackGUI->Name + "." + objName;
+	//childModel = "CursorModel";
+	////objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 
 	/*objName = "TEST1";
 	caption = objBackGUI->Name + "." + objName;
@@ -606,6 +610,13 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "привет мир, и доброе утро";
 	childModel = "TextBlockModel";
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+
+	// ---- Object Cursor GUI (Last is alpha background fix)
+	objName = "CursorGUI";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "CursorModel";
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 
 

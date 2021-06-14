@@ -385,6 +385,8 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			{
 				fieldsSpecific.FieldName = lineStr;
 				std::getline(in, fieldsSpecific.Value);
+				if (fieldsSpecific.Value[0] == char(' ')) //remove split
+					fieldsSpecific.Value.erase(0, 1);
 				specificFiels.push_back(fieldsSpecific);
 			}
 		}
