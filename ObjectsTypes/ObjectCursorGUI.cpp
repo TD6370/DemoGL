@@ -28,6 +28,7 @@ void ObjectCursorGUI::ActionMoving()
 
 void ObjectCursorGUI::SaveNewPosition() {
 
+	//--- Set position Cursor
 	vec3 mouse = Storage->Oper->PositionCursorWorld;
 	vec2 startPosRect = GetStartPositWorld();
 

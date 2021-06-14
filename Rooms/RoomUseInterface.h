@@ -21,9 +21,11 @@ using glm::vec4;
 using glm::vec3;
 using glm::vec2;
 using glm::mat4;
-using std::string;
 using glm::perspective;
+using std::string;
+using std::shared_ptr;
 
+class ObjectGUI;
 class SceneConstruction;
 
 class RoomUseInterface : public SceneRoom
@@ -40,10 +42,12 @@ private:
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
 	string m_stringDebug = "";
+	
 	bool m_isDebug = false;
 	mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
 
+	bool IsFocused = false;
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
 	vec3 CursorMovePos = vec3(0);
@@ -62,5 +66,13 @@ public:
 	void Config();
 	void Work();
 
+	//-------- Move control
+	void EventStartMovingControl(shared_ptr<ObjectGUI> objGUI);
+	void EventMovingControl(shared_ptr<ObjectGUI> objGUI);
+	bool EventEndMovingControl(shared_ptr<ObjectGUI> objGUI);
+
+	//-------- Focus control
+	bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
+	void EventFocusControl(shared_ptr<ObjectGUI> objGUI);
 };
 

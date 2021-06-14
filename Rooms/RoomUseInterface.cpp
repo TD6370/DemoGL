@@ -23,6 +23,82 @@ void RoomUseInterface::Init() {
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 }
 
+void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
+
+	if (!IsFocused)
+		return;
+
+	Scene->Debug("Start moving");
+	obj->Click();
+	obj->ActionObjectCurrent = ActionObject::Moving;
+	IndexObjectSelected = obj->Index;
+	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
+}
+
+//--- Moving to Cusror position
+void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
+
+	if (IndexObjectSelected != obj->Index)
+		return;
+	if (!obj->IsFocusable)
+		return;
+	if(!obj->IsTransformable)
+		return;
+	if (obj->ActionObjectCurrent != ActionObject::Moving)
+		return;
+
+	Scene->Debug("GUI moving");
+	vec3 newPos = CursorMovePos - SelectObjectOffsetPos;
+	obj->StartPos = vec3(newPos.x, newPos.y, obj->StartPos.z);
+}
+
+bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> objGUI) {
+
+	//if (IndexObjectSelected != objGUI->Index)	//-- when click after order
+	//	return false;
+	if(objGUI->ActionObjectCurrent != ActionObject::Moving)
+		return false;
+
+	Scene->Debug("Complete moving");
+	IndexObjectSelected == -1;
+	objGUI->ActionObjectCurrent = ActionObject::Stay;
+
+	return true;
+}
+
+bool RoomUseInterface::IsFocusedControl(std::shared_ptr<ObjectGUI> objGUI) {
+
+	vec2 endPosRect, startPosRect;
+	float zOrder;
+	bool isFocused = false;
+
+	//--- Focused
+	vec3 posCursor = GetMousePosWorld();
+	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
+	if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
+	{
+		//std::cout << "Select: " << objGUI->Name << "\n";
+		IndexObjectFocused = objGUI->Index;
+		isFocused = true;
+	}
+
+	return isFocused;
+}
+
+void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> objGUI) {
+	if (objGUI->ActionObjectCurrent != Stay)
+		return;
+	if (!objGUI->IsFocusable)
+		return;
+
+	if (IsFocused) {
+		objGUI->Color = color_selected;
+	}
+	else {
+		objGUI->Color = color_default;
+	}
+}
+
 void RoomUseInterface::Work() {
 
 	if (Scene->Storage->SceneData->IsGUI == false)
@@ -30,6 +106,8 @@ void RoomUseInterface::Work() {
 
 	if (Scene->IsBreakUpdate())
 		return;
+
+	IsFocused = false;
 
 	if (Scene->IsFirstCurrentObject) {
 		IndexObjectFocused = -1;
@@ -41,66 +119,33 @@ void RoomUseInterface::Work() {
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
 
-	bool isFocusable = objGUI->IsFocusable;
-	bool isTransformable = objGUI->IsTransformable;
-	bool isUsable = objGUI->IsUsable;
-	bool isFocused = false;
 	bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
-	vec2 endPosRect, startPosRect;
-	float zOrder;
 
 	if (objGUI->TypeObj == TypeObject::CursorGUI) {
 		CursorMovePos = objGUI->StartPos;
 	}
 	
-	if (isUsable)
+	if (objGUI->IsUsable)
 	{
-		if (isFocusable && isTransformable && objGUI->ActionObjectCurrent == ActionObject::Moving && IndexObjectSelected == objGUI->Index)
-		{
-			Scene->Debug("GUI moving");
-			vec3 newPos = CursorMovePos - SelectObjectOffsetPos;
-			objGUI->StartPos = vec3(newPos.x, newPos.y, objGUI->StartPos.z);
-		}
+		//--- Moving to Cusror position
+		EventMovingControl(objGUI);
 
-		vec3 posCursor = GetMousePosWorld();
-		objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
-		if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
-		{
-			//std::cout << "Select: " << objGUI->Name << "\n";
-			IndexObjectFocused = objGUI->Index;
-			isFocused = true;
-		}
+		//--- Focused
+		IsFocused = IsFocusedControl(objGUI);
 
-		if (isFocusable && isCursorClickEvent) {
+		//-- Click events on control
+		if (objGUI->IsFocusable && isCursorClickEvent) {
 
-			if (objGUI->ActionObjectCurrent == ActionObject::Moving && IndexObjectSelected == objGUI->Index)
-			{
-				Scene->Debug("Complete moving");
-				IndexObjectSelected == -1;
-				objGUI->ActionObjectCurrent = ActionObject::Stay;
-			}
-			else if (isFocused) 
-			{
-				Scene->Debug("Start moving");
-				objGUI->Click();
-				objGUI->ActionObjectCurrent = ActionObject::Moving;
-				IndexObjectSelected = objGUI->Index;
-				SelectObjectOffsetPos = CursorMovePos - objGUI->StartPos;
-			}
+			//-- End action on control
+			bool isEndMovingControl = EventEndMovingControl(objGUI);
+			//----Start action Moving Control
+			if(!isEndMovingControl)
+				EventStartMovingControl(objGUI);
 		}
 	}
 
-	if (!isFocusable)
-		return;
-
-	if (isFocusable && objGUI->ActionObjectCurrent == Stay) {
-		if (isFocused) {
-			objGUI->Color = color_selected;
-		}
-		else {
-			objGUI->Color = color_default;
-		}
-	}
+	//===== Event Focus Control
+	EventFocusControl(objGUI);
 }
 
 vec3 RoomUseInterface::GetMousePosWorld() {

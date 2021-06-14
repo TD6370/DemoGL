@@ -21,9 +21,9 @@ IsUsable: 1
 Type: NPC
 Name: Mon
 Model: mon
-Pos: 36.8903 -52.9157 25.1794
-Target: 28.8903 -52.9157 20.1794
-Action: Look
+Pos: -17.3354 -53.0478 36.4169
+Target: -7.28915 -53.0117 25.8419
+Action: Moving
 IndexObjectOwner: -1
 Color: 0 0 0
 IsVisible: 1
@@ -105,7 +105,7 @@ Pos: -10 -54.019 -10
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
-Color: 0 0 0
+Color: 1 1 1
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -162,7 +162,7 @@ Pos: -20 -54.0329 -10
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
-Color: 0 0 0
+Color: 1 1 1
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -409,7 +409,7 @@ IsUsable: 1
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: 36.8903 -52.9157 25.1794
+Pos: -17.3354 -53.0478 36.4169
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -429,7 +429,7 @@ IsUsable: 1
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: 36.6509 -54.8433 24.7406
+Pos: -17.6798 -55.0508 36.7794
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -449,7 +449,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: 36.0464 -55.0654 23.3094
+Pos: -18.5997 -55.0518 36.1843
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -469,7 +469,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: 36.6575 -54.1291 27.4201
+Pos: -15.3619 -55.0453 39.3584
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -489,7 +489,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: 39.783 -54.1484 27.4186
+Pos: -15.3681 -55.0474 36.1518
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -509,8 +509,8 @@ IsUsable: 1
 Type: Hero
 Name: Hero
 Model: homo
-Pos: 29.8936 -54.0236 -2.94883
-Target: 29.8936 -54.0236 -2.94883
+Pos: 0 -54.0171 5
+Target: 0 -54.0171 5
 Action: Search
 IndexObjectOwner: -1
 Color: 0 0 0
@@ -529,7 +529,7 @@ IsUsable: 1
 Type: GUI
 Name: BackContectGUI
 Model: ConextFrameModel
-Pos: -0.141625 -52.3057 2.47149
+Pos: -0.0692687 -52.7933 2.46676
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -552,7 +552,7 @@ SizePanel: 0 0
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Pos: 0.379148 -52.9377 2.39903
+Pos: 0.096621 -53.21 2.5129
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
@@ -569,13 +569,13 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.52432 0.633046 0.01
+StartPos: 0.162573 0.420384 0.01
 SizePanel: 1.1 0.2
 ------------------------------------------------------------------
 Type: TextBlock
 Name: TextBlockObject
 Model: TextBlockModel
-Pos: -0.668783 -51.8865 2.54978
+Pos: 0.0118042 -52.0601 2.39303
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
@@ -592,14 +592,14 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.448551 0.558926 0.01
+StartPos: 1.065 0.24372 0.01
 SizePanel: 1.5 1
 Message: привет мир, и доброе утро
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Pos: 0.0095799 -52.7384 2.46072
+Pos: -0.229297 -53.245 2.55743
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 20
@@ -616,7 +616,7 @@ IsFocusable: 0
 IsTransformable: 0
 IsUsable: 0
 Specific:
-StartPos: 1.11104 1.39182 0.03
+StartPos: 0.795139 1.40849 0.03
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 
