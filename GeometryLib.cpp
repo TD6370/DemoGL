@@ -389,6 +389,25 @@ using glm::dot;
         return false;
     }
 
+    bool CheckPointInRectangleBorder(vec3& point, vec2& startPos, vec2& endPos, float size)
+    {
+        if (point.x > startPos.x &&
+            point.y < startPos.y &&
+            point.x < endPos.x &&
+            point.y > endPos.y)
+        {
+            bool isRightB = point.x > endPos.x - size;
+            bool isLeftB = point.x < startPos.x + size;
+            bool isTopB = point.y > startPos.y - size;
+            bool isBottomB = point.y < endPos.y + size;
+
+            //bool result = isRightB || isLeftB || isTopB || isBottomB;
+            bool result = isRightB && isBottomB;
+            return result;
+        }
+        return false;
+    }
+
     //0000000000000000
     
     

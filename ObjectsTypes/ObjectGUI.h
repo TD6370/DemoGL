@@ -25,6 +25,9 @@ private :
 	vec3 m_color_transforming = vec3(0.1, 0.8, 0.1); //green
 	string hyst_posit = "";
 	vec3 tmp_posit = vec3();
+	vec3 start_vertBottomLeft = vec3(0);
+	vec3 start_vertBottomRight = vec3(0);
+	vec3 start_vertTopLeft = vec3(0);
 
 public:
 	
@@ -63,6 +66,7 @@ public:
 	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 
 	void virtual SetSizeControl(vec3 size);
+	void virtual SizeControlUpdate();
 
 	void virtual Click();
 	

@@ -15,6 +15,8 @@ bool CheckPointInTriangle(vec3 point, vec3 a, vec3 b, vec3 c);
 
 bool CheckPointInRectangle(vec3& point, vec2& startPos, vec2& endPos);
 
+bool CheckPointInRectangleBorder(vec3& point, vec2& startPos, vec2& endPos, float boderSize);
+
 class Plane {
 public:
     int Index;

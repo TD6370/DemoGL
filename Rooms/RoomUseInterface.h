@@ -39,8 +39,10 @@ private:
 	vec3 color_none = vec3(0);
 	vec3 color_default = vec3(1);
 	vec3 color_selected = vec3(0, 0, 0);
+	vec3 color_resize = vec3(1, 0, 0);
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
+	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
 	
 	bool m_isDebug = false;
@@ -48,10 +50,15 @@ private:
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
 
 	bool IsFocused = false;
+	bool IsCursorClickEvent = false;
+	bool IsCursorClickEventConst = false;
+	bool IsCheckBorder = false;
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
+	float FocusedOrder = -1;
 	vec3 CursorMovePos = vec3(0);
 	vec3 SelectObjectOffsetPos = vec3(0);
+	vec2 m_startSizePanel = vec2(0);
 
 public:
 		
@@ -60,7 +67,7 @@ public:
 
 	~RoomUseInterface();
 
-	vec3 GetMousePosWorld();
+	void CalculateMousePosWorld();
 
 	void Init();
 	void Config();
@@ -71,8 +78,14 @@ public:
 	void EventMovingControl(shared_ptr<ObjectGUI> objGUI);
 	bool EventEndMovingControl(shared_ptr<ObjectGUI> objGUI);
 
+	//-------- Resize control
+	void EventStartResizeControl(shared_ptr<ObjectGUI> objGUI);
+	void EventResizeControl(shared_ptr<ObjectGUI> objGUI);
+	bool EventEndResizeControl(shared_ptr<ObjectGUI> objGUI);
+
 	//-------- Focus control
-	bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
+	//bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
+	void CheckFocusBoxAndBorderControl(shared_ptr<ObjectGUI> objGUI);
 	void EventFocusControl(shared_ptr<ObjectGUI> objGUI);
 };
 

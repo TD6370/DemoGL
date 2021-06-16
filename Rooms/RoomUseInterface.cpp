@@ -23,19 +23,32 @@ void RoomUseInterface::Init() {
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 }
 
+//==================================== START MOVE
 void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
-
+	if (!obj->IsFocusable)
+		return;
+	if (!IsCursorClickEvent)
+		return;
 	if (!IsFocused)
+		return;
+	if(obj->ActionObjectCurrent == ActionObject::Transforming)
+		return;
+
+	if (IndexObjectSelected != -1)	//-- when click after order
 		return;
 
 	Scene->Debug("Start moving");
-	obj->Click();
+	//obj->Click();
 	obj->ActionObjectCurrent = ActionObject::Moving;
 	IndexObjectSelected = obj->Index;
 	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
+
+	IsCursorClickEvent = false;//!!!
 }
 
-//--- Moving to Cusror position
+#pragma region MOVE
+
+//----------------------- MOVE
 void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 
 	if (IndexObjectSelected != obj->Index)
@@ -52,37 +65,135 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	obj->StartPos = vec3(newPos.x, newPos.y, obj->StartPos.z);
 }
 
-bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> objGUI) {
-
-	//if (IndexObjectSelected != objGUI->Index)	//-- when click after order
-	//	return false;
-	if(objGUI->ActionObjectCurrent != ActionObject::Moving)
+//----------------------- END MOVE
+bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
+	if (!obj->IsFocusable)
+		return false;
+	if (!IsCursorClickEvent)
 		return false;
 
-	Scene->Debug("Complete moving");
-	IndexObjectSelected == -1;
-	objGUI->ActionObjectCurrent = ActionObject::Stay;
+	if (IndexObjectSelected != obj->Index)	//-- when click after order
+		return false;
 
+	if(obj->ActionObjectCurrent != ActionObject::Moving)
+		return false;
+
+	Scene->Debug("End moving");
+	IndexObjectSelected = -1;	//???
+	obj->ActionObjectCurrent = ActionObject::Stay;
+	
+	//TODO:
+	IsCursorClickEvent = false; //---- VVVV
 	return true;
 }
 
-bool RoomUseInterface::IsFocusedControl(std::shared_ptr<ObjectGUI> objGUI) {
+#pragma endregion
 
+//==================================== START RESIZE
+void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
+	if (!obj->IsFocusable)
+		return;
+	if (!IsCursorClickEvent)
+		return;
+	if (!IsFocused)
+		return;
+	if (obj->ActionObjectCurrent == ActionObject::Moving)
+		return;
+	if (IndexObjectSelected != -1)	//-- when click after order
+		return;
+	if (!IsCheckBorder)
+		return;
+
+	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
+
+	Scene->Debug("Start resize");
+	//obj->Click();
+	obj->ActionObjectCurrent = ActionObject::Transforming;
+	obj->Color = color_resize;
+	IndexObjectSelected = obj->Index;
+	m_startSizePanel = obj->SizePanel;
+	IsCursorClickEvent = false;//!!!
+}
+
+//----------------------- RESIZE
+void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
+	if (IndexObjectSelected != obj->Index)
+		return;
+	if (!obj->IsFocusable)
+		return;
+	if (!obj->IsTransformable)
+		return;
+	if (obj->ActionObjectCurrent != ActionObject::Transforming)
+		return;
+
+	Scene->Debug("GUI resize");
+
+	
+	float sizePanelX = CursorMovePos.x - obj->StartPos.x;
+	float sizePanelY = CursorMovePos.y - obj->StartPos.y;
+	/*vec3 stepMouse = CursorMovePos - SelectObjectOffsetPos;
+	sizePanelX -= stepMouse.x;
+	sizePanelY -= stepMouse.y;*/
+	//sizePanelX -= SelectObjectOffsetPos.x;
+	//sizePanelY -= SelectObjectOffsetPos.y;
+	float kBord = 0.15;
+	sizePanelX += m_sizeBorder * kBord;
+	sizePanelY += m_sizeBorder * kBord;
+	//sizePanelX += glm::pow(m_sizeBorder, 2);
+	//sizePanelY += glm::pow(m_sizeBorder, 2);
+
+	if (sizePanelX < 0.01 || sizePanelY < 0.01)
+		return;
+
+	obj->SizePanel.x = sizePanelX;
+	obj->SizePanel.y = sizePanelY;
+	obj->SizeControlUpdate();
+}
+
+//----------------------- END RESIZE
+bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
+	if(!obj->IsFocusable)
+		return false;
+	if (!IsCursorClickEvent)
+		return false;
+	if (obj->ActionObjectCurrent != ActionObject::Transforming)
+		return false;
+	if (IndexObjectSelected != obj->Index)
+		return false;
+
+	Scene->Debug("End resize");
+	IndexObjectSelected = -1;
+	obj->ActionObjectCurrent = ActionObject::Stay;
+
+	IsCursorClickEvent = false;
+	return true;
+}
+//----------------------- FOCUS
+void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> objGUI) {
+
+	bool isCheckOrder = true;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
-	bool isFocused = false;
+	IsFocused = false;
 
-	//--- Focused
-	vec3 posCursor = GetMousePosWorld();
 	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
-	if (CheckPointInRectangle(posCursor, startPosRect, endPosRect))
-	{
-		//std::cout << "Select: " << objGUI->Name << "\n";
-		IndexObjectFocused = objGUI->Index;
-		isFocused = true;
-	}
 
-	return isFocused;
+	//--- Check Focused
+	if (CheckPointInRectangle(m_tempMousePosWorld, startPosRect, endPosRect))
+	{
+		if (IndexObjectFocused != -1 && objGUI->Index < FocusedOrder)
+			isCheckOrder = false;
+
+		if (isCheckOrder) {
+			FocusedOrder = objGUI->Index;
+			IndexObjectFocused = objGUI->Index;
+			IsFocused = true;
+		}
+	}
+	if (isCheckOrder) {
+		//--- Check Focused border
+		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
+	}
 }
 
 void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> objGUI) {
@@ -95,9 +206,15 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> objGUI) {
 		objGUI->Color = color_selected;
 	}
 	else {
+		if (IndexObjectFocused == objGUI->Index) {
+			FocusedOrder = -1;
+			IndexObjectFocused = -1;
+		}
 		objGUI->Color = color_default;
 	}
 }
+
+//====================================
 
 void RoomUseInterface::Work() {
 
@@ -110,7 +227,8 @@ void RoomUseInterface::Work() {
 	IsFocused = false;
 
 	if (Scene->IsFirstCurrentObject) {
-		IndexObjectFocused = -1;
+		//IndexObjectFocused = -1;
+		IsCursorClickEvent = IsCursorClickEventConst = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 	}
 
 	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
@@ -119,36 +237,51 @@ void RoomUseInterface::Work() {
 	if (Scene->ObjectCurrent->IndexObjectOwner == -1)
 		return;
 
-	bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
+	//--- Focused
+	CalculateMousePosWorld();
+
+	//IsCursorClickEvent = IsCursorClickEventConst = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 
 	if (objGUI->TypeObj == TypeObject::CursorGUI) {
 		CursorMovePos = objGUI->StartPos;
 	}
-	
+
 	if (objGUI->IsUsable)
 	{
 		//--- Moving to Cusror position
 		EventMovingControl(objGUI);
 
-		//--- Focused
-		IsFocused = IsFocusedControl(objGUI);
+		//--- Resize control to Cusror position
+		EventResizeControl(objGUI);
 
-		//-- Click events on control
-		if (objGUI->IsFocusable && isCursorClickEvent) {
+		//--- Focus box & focus Border
+		CheckFocusBoxAndBorderControl(objGUI);
 
-			//-- End action on control
-			bool isEndMovingControl = EventEndMovingControl(objGUI);
-			//----Start action Moving Control
-			if(!isEndMovingControl)
-				EventStartMovingControl(objGUI);
-		}
+		//-- End event resize control
+		//bool isEndRsizeControl = 
+		EventEndResizeControl(objGUI);
+		//////-- Start event resize colntrol
+		//if (!isEndRsizeControl)
+		EventStartResizeControl(objGUI);
+
+		//-- End event on control
+		//bool isEndMovingControl = 
+		EventEndMovingControl(objGUI);
+		//----Start event Moving Control
+		//if (!isEndMovingControl)
+		EventStartMovingControl(objGUI);
 	}
 
 	//===== Event Focus Control
 	EventFocusControl(objGUI);
+
+	//------------- Total orders
+	if (Scene->IsLastCurrentObject) {
+
+	}
 }
 
-vec3 RoomUseInterface::GetMousePosWorld() {
+void RoomUseInterface::CalculateMousePosWorld() {
 
 	auto mouseX = Scene->Storage->Oper->m_MouseX;
 	auto mouseY = Scene->Storage->Oper->m_MouseY;
@@ -207,6 +340,5 @@ vec3 RoomUseInterface::GetMousePosWorld() {
 			}
 		}
 	}
-	return m_tempMousePosWorld;
 }
 

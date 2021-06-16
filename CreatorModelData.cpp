@@ -609,7 +609,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "TextBlockObject";
 	caption = "привет мир, и доброе утро";
 	childModel = "TextBlockModel";
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.01), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";

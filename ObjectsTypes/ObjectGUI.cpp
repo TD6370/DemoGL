@@ -157,6 +157,43 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	}
 }
 
+void ObjectGUI::SizeControlUpdate()
+{
+	SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+}
+
+//void ObjectGUI::SetSizeControl(vec3 vertOffset) {
+//
+//	if (IsAbsolutePosition)
+//		return;
+//
+//	//-- set transform
+//	if (Vertices.size() != 0) {
+//
+//		vec3 vertBottomLeft = GetBottom(1);
+//		vec3 vertBottomRight = GetBottom(0);
+//		vec3 vertTopLeft = GetTop(1);
+//		vec3 vertTopRight = GetTop(0);
+//
+//		float factorOffset = 1.1;
+//		float offsetY = 2 - vertOffset.y;
+//		float offsetX = 2 - vertOffset.x;
+//		offsetX *= factorOffset;
+//		offsetY *= factorOffset;
+//
+//		//float factor = vertTopLeft.y - vertBottomLeft.y;
+//
+//
+//		vertTopLeft = vec3(vertTopLeft.x, vertTopLeft.y, offsetX);
+//		SetTop(1, vertTopLeft);
+//
+//		vertBottomLeft = vec3(vertBottomLeft.x, offsetY, vertBottomLeft.z);
+//		SetBottom(1, vertBottomLeft);
+//
+//		vertBottomRight = vec3(vertBottomRight.x, offsetY,  offsetX);
+//		SetBottom(0, vertBottomRight);
+//	}
+//}
 
 void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 
@@ -166,24 +203,26 @@ void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 	//-- set transform
 	if (Vertices.size() != 0) {
 
-		vec3 vertBottomLeft = GetBottom(1);
-		vec3 vertBottomRight = GetBottom(0);
-		vec3 vertTopLeft = GetTop(1);
-		vec3 vertTopRight = GetTop(0);
+		if (start_vertBottomLeft == vec3(0)) {
+			start_vertBottomLeft = GetBottom(1); 
+			start_vertBottomRight = GetBottom(0);
+			start_vertTopLeft = GetTop(1);
+		}
+		//vec3 vertTopRight = GetTop(0);
 
 		float offsetY = 2 - vertOffset.y;
 		float offsetX = 2 - vertOffset.x;
 
-		float factor = vertTopLeft.y - vertBottomLeft.y;
+		//float factor = vertTopLeft.y - vertBottomLeft.y;
 
 
-		vertTopLeft = vec3(vertTopLeft.x, (vertTopLeft.y), vertTopLeft.z + offsetX);
+		vec3 vertTopLeft = vec3(start_vertTopLeft.x, (start_vertTopLeft.y), start_vertTopLeft.z + offsetX);
 		SetTop(1, vertTopLeft);
 
-		vertBottomLeft = vec3(vertBottomLeft.x, (vertBottomLeft.y + offsetY), vertBottomLeft.z);
+		vec3 vertBottomLeft = vec3(start_vertBottomLeft.x, (start_vertBottomLeft.y + offsetY), start_vertBottomLeft.z);
 		SetBottom(1, vertBottomLeft);
 
-		vertBottomRight = vec3(vertBottomRight.x, (vertBottomRight.y + offsetY), vertBottomRight.z + offsetX);
+		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
 		SetBottom(0, vertBottomRight);
 	}
 }
