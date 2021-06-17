@@ -7,6 +7,7 @@
 #include "..\WorldCollision.h"
 #include "..\ModelData.h"
 #include "..\OperationString.h"
+#include "../GeomertyShapes//ShapeBase.h" //#####
 
 #include <sstream>
 

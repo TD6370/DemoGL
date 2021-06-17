@@ -1,5 +1,5 @@
 ﻿#include "ObjectCursorGUI.h"
-
+#include "../GeomertyShapes//ShapeBase.h"
 
 ObjectCursorGUI::~ObjectCursorGUI()
 {
@@ -30,7 +30,7 @@ void ObjectCursorGUI::SaveNewPosition() {
 
 	//--- Set position Cursor
 	vec3 mouse = Storage->Oper->PositionCursorWorld;
-	vec2 startPosRect = GetStartPositWorld();
+	vec2 startPosRect = Shape->GetStartPositWorld(this);
 
 	bool notX = false;
 	bool notY = false;

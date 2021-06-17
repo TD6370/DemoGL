@@ -73,8 +73,8 @@ void ShapeBase::FillVertextBox(ObjectPhysic* obj)
 	int indexPlaneB = 0;
 	int indVert = 0;
 
-	obj->BottomVectors.clear();
-	obj->TopVectors.clear();
+	BottomVectors.clear();
+	TopVectors.clear();
 
 	while (indVert < obj->GetVertices().size())
 	{
@@ -88,12 +88,155 @@ void ShapeBase::FillVertextBox(ObjectPhysic* obj)
 		if (vertexNext.y < 0) {
 
 			//TODO:	BottomVectors -> Shape
-			obj->BottomVectors.insert(std::pair<int, vec3>(indexPlaneB, vertexNext));
+			BottomVectors.insert(std::pair<int, vec3>(indexPlaneB, vertexNext));
 			indexPlaneB++;
 		}
 		else {
-			obj->TopVectors.insert(std::pair<int, vec3>(indexPlaneT, vertexNext));
+			TopVectors.insert(std::pair<int, vec3>(indexPlaneT, vertexNext));
 			indexPlaneT++;
 		}
 	}
+}
+
+
+//=========================
+float ShapeBase::GetLineLenght(ObjectPhysic* obj, int index) {
+
+	vec4 line = GetLine(obj, index);
+	float x1 = line.x;
+	float y1 = line.y;
+	float x2 = line.z;
+	float y2 = line.w;
+	float lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2)); // lenght wall
+	return lenghtLine;
+}
+
+vec4 ShapeBase::GetLine(ObjectPhysic* obj, int index) {
+	vec3 pos1 = BottomVectors[index];
+	vec3 pos2;
+	if (index < 3)
+		pos2 = BottomVectors[index + 1];
+	else
+		pos2 = BottomVectors[0];
+
+	vec4 line = vec4(pos1.x + obj->Postranslate.x, pos1.z + obj->Postranslate.z, pos2.x + obj->Postranslate.x, pos2.z + obj->Postranslate.z);
+	return line;
+}
+
+
+vec3 ShapeBase::GetBottom(int index) {
+	return BottomVectors[index];
+}
+
+vec3 ShapeBase::GetBottomFirst() {
+	return BottomVectors[0];
+}
+
+vec3 ShapeBase::GetBottomLast() {
+	return BottomVectors[BottomVectors.size() - 1];
+}
+
+vec3 ShapeBase::GetTop(int index) {
+	return TopVectors[index];
+}
+
+vec3 ShapeBase::GetTopFirst() {
+	return TopVectors[0];
+}
+
+vec3 ShapeBase::GetTopLast() {
+	return TopVectors[TopVectors.size() - 1];
+}
+
+void ShapeBase::SetBottom(ObjectPhysic* obj,int index, vec3 value) {
+
+	vec3 oldValue = BottomVectors[index];
+	BottomVectors[index] = value;
+	int indVert = 0;
+	while (indVert < obj->Vertices.size())
+	{
+		vec3 vertexNext = obj->GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			obj->Vertices[indVert] = value;
+		}
+		indVert++;
+	}
+}
+
+void ShapeBase::SetTop(ObjectPhysic* obj, int index, vec3 value) {
+	vec3 oldValue = TopVectors[index];
+	TopVectors[index] = value;
+	int indVert = 0;
+	while (indVert < obj->Vertices.size())
+	{
+		vec3 vertexNext = obj->GetVertices()[indVert];
+		if (oldValue == vertexNext)
+		{
+			obj->Vertices[indVert] = value;
+		}
+		indVert++;
+	}
+}
+
+void ShapeBase::GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder) {
+
+	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP;
+	glm::mat4 transform = obj->TransformResult;
+
+	vec3 vertBottomLeft;
+	vec3 vertBottomRight;
+	vec3 vertTopLeft;
+	vec3 vertTopRight;
+
+	//if (IsAbsolutePosition)
+	if (obj->TypeObj == TextBlock)
+	{
+		vertBottomLeft = GetBottomFirst();
+		vertBottomRight = GetBottomLast();
+		vertTopLeft = GetTopFirst();
+		vertTopRight = GetTopLast();
+	}
+	else {
+		vertBottomLeft = GetBottomLast();
+		vertBottomRight = GetBottomFirst();
+		vertTopLeft = GetTopLast();
+		vertTopRight = GetTopFirst();
+	}
+
+	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
+	vec3 posWorldBR = MVP * transform * vec4(vertBottomRight, 1.0);
+	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
+	vec3 posWorldTR = MVP * transform * vec4(vertTopRight, 1.0);
+	zOrder = posWorldTR.z;
+	startPos.x = posWorldBL.x,
+		startPos.y = posWorldTL.y;
+	endPos.x = posWorldBR.x;
+	endPos.y = posWorldBL.y;
+}
+
+vec2 ShapeBase::GetStartPositWorld(ObjectPhysic* obj) {
+
+	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP;
+	glm::mat4 transform = obj->TransformResult;
+
+	vec3 vertBottomLeft;
+	vec3 vertTopLeft;
+
+	if (obj->TypeObj == TextBlock)
+	{
+		vertBottomLeft = GetBottomFirst();
+		vertTopLeft = GetTopFirst();
+	}
+	else {
+		vertBottomLeft = GetBottomLast();
+		vertTopLeft = GetTopLast();
+	}
+
+	vec3 posWorldBL = MVP * transform * vec4(vertBottomLeft, 1.0);
+	vec3 posWorldTL = MVP * transform * vec4(vertTopLeft, 1.0);
+	vec2 startPos;
+	startPos.x = posWorldBL.x,
+		startPos.y = posWorldTL.y;
+	return startPos;
 }

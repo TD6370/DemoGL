@@ -40,7 +40,9 @@ class ObjectPhysic;
 class ShapeBase
 {
 public:
-
+public:
+	std::map<int, vec3> TopVectors;
+	std::map<int, vec3> BottomVectors;
 	std::vector<shared_ptr<Plane>> Planes;
 
 	ShapeBase();
@@ -56,4 +58,26 @@ public:
 	void FillPlanes(ObjectData* obj);
 
 	void FillVertextBox(ObjectPhysic* obj);
+
+	//===========
+
+	vec3 GetBottom(int index);
+	vec3 GetBottomFirst();
+	vec3 GetBottomLast();
+
+	vec3 GetTop(int index);
+	vec3 GetTopFirst();
+	vec3 GetTopLast();
+
+	void SetBottom(ObjectPhysic* obj, int index, vec3 value);
+
+	void SetTop(ObjectPhysic* obj, int index, vec3 value);
+
+	vec4 GetLine(ObjectPhysic* obj, int index);
+
+	float GetLineLenght(ObjectPhysic* obj, int index);
+
+	void virtual GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder);
+
+	vec2 GetStartPositWorld(ObjectPhysic* obj);
 };

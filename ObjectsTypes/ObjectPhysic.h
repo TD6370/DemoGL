@@ -20,8 +20,8 @@ class ObjectPhysic :
 	//void FillPlanesCube();
 	
 public:
-	std::map<int, vec3> TopVectors;
-	std::map<int, vec3> BottomVectors;
+	//std::map<int, vec3> TopVectors; //===========
+	//std::map<int, vec3> BottomVectors; //==============
 
 	int IndexVertexTransform = -1;
 
@@ -79,26 +79,6 @@ public:
 	std::vector< glm::vec3 > GetVertices();
 
 	void SetMesh();
-
-	vec3 GetBottom(int index);
-	vec3 GetBottomFirst();
-	vec3 GetBottomLast();
-
-	vec3 GetTop(int index);
-	vec3 GetTopFirst();
-	vec3 GetTopLast();
-
-	void SetBottom(int index, vec3 value);
-
-	void SetTop(int index, vec3 value);
-
-	vec4 GetLine(int index);
-
-	float GetLineLenght(int index);
-
-	void virtual GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
-	vec2 GetStartPositWorld();
-
 	
 };
 

@@ -521,7 +521,7 @@ void WorldCluster::SaveClusterBlockObject(int indexObj) {
 	
 	//ObjectBlock* objP = dynamic_cast<ObjectBlock*>(od);
 	shared_ptr <ObjectBlock> objectBlock = std::dynamic_pointer_cast<ObjectBlock>(object);
-	map<int, vec3> blockVectors = objectBlock->BottomVectors;
+	map<int, vec3> blockVectors = objectBlock->Shape->BottomVectors;
 	vec3 leftTop = blockVectors[0];
 	vec3 rightBottom = blockVectors[0];
 	vec3 vertexNext;
@@ -733,7 +733,7 @@ bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isN
 
 	shared_ptr <ObjectBlock> objBlock = std::dynamic_pointer_cast<ObjectBlock>(objectBlock);
 	for (int indLine = 0; indLine < 4; indLine++) {
-		vec4 line =  objBlock->GetLine(indLine);
+		vec4 line =  objBlock->Shape->GetLine(objBlock.get(), indLine);
 		x1 = line.x;
 		y1 = line.y;
 		x2 = line.z;

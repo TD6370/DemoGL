@@ -5,6 +5,8 @@
 #include "..\ModelData.h"
 #include "../CoreSettings.h"
 #include "ObjectTextBlock.h"
+#include "../GeomertyShapes//ShapeBase.h"
+
 
 void ObjectGUI::RunAction() {
 
@@ -80,8 +82,8 @@ void ObjectGUI::UpdateState() {
 		{
 			auto obj = Storage->GetObjectPrt(IndexObjectOwner);
 			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(obj);
-			float lenghtLineOwner = objPh->GetLineLenght(0);
-			float lenghtLine = GetLineLenght(0);
+			float lenghtLineOwner = objPh->Shape->GetLineLenght(objPh.get(), 0);
+			float lenghtLine = Shape->GetLineLenght(this, 0);
 			float offsetOwner = lenghtLineOwner/2;
 			float offsetAbs = lenghtLine / 2;
 			offsetOfCenter = offsetOwner - offsetAbs;
@@ -204,9 +206,9 @@ void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 	if (Vertices.size() != 0) {
 
 		if (start_vertBottomLeft == vec3(0)) {
-			start_vertBottomLeft = GetBottom(1); 
-			start_vertBottomRight = GetBottom(0);
-			start_vertTopLeft = GetTop(1);
+			start_vertBottomLeft = Shape->GetBottom(1);
+			start_vertBottomRight = Shape->GetBottom(0);
+			start_vertTopLeft = Shape->GetTop(1);
 		}
 		//vec3 vertTopRight = GetTop(0);
 
@@ -217,13 +219,13 @@ void ObjectGUI::SetSizeControl(vec3 vertOffset) {
 
 
 		vec3 vertTopLeft = vec3(start_vertTopLeft.x, (start_vertTopLeft.y), start_vertTopLeft.z + offsetX);
-		SetTop(1, vertTopLeft);
+		Shape->SetTop(this, 1, vertTopLeft);
 
 		vec3 vertBottomLeft = vec3(start_vertBottomLeft.x, (start_vertBottomLeft.y + offsetY), start_vertBottomLeft.z);
-		SetBottom(1, vertBottomLeft);
+		Shape->SetBottom(this, 1, vertBottomLeft);
 
 		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
-		SetBottom(0, vertBottomRight);
+		Shape->SetBottom(this, 0, vertBottomRight);
 	}
 }
 

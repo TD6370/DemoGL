@@ -14,6 +14,7 @@
 #include "ObjectsTypes/ObjectGUI.h"
 #include "ObjectsTypes/ObjectTextBlock.h"
 #include "ObjectsTypes/ObjectCursorGUI.h"
+#include "GeomertyShapes//ShapeBase.h" //###
 
 #include "Serialize/SceneSerialize.h"
 #include "Rooms/RoomSerializeScene.h"

@@ -86,9 +86,9 @@ void ObjectBlock::ResizeVerticaleWall() {
 	if (Storage->Inputs->Key == KeyDownTopVertex)
 		upSize = -1;
 
-	vec3 vertSelect = GetTop(IndexVertexTransform);
+	vec3 vertSelect = Shape->GetTop(IndexVertexTransform);
 	vertSelect.y += upSize;;
-	SetTop(IndexVertexTransform, vertSelect);
+	Shape->SetTop(this, IndexVertexTransform, vertSelect);
 
 	SaveNewPosition();
 }
@@ -115,7 +115,8 @@ void ObjectBlock::SelectVertexBlock() {
 
 	int distMin = -1;
 	for (int indV = 0; indV < 4; indV++) {
-		vec3 vertBlock = GetBottom(indV);
+		//vec3 vertBlock = GetBottom(indV);
+		vec3 vertBlock = Shape->GetBottom(indV);
 
 		vertBlock += Postranslate;
 		int dist = glm::distance(vec2(posCursor.x, posCursor.z), vec2(vertBlock.x, vertBlock.z));
@@ -149,13 +150,15 @@ void ObjectBlock::MeshTransform() {
 	//-- set transform
 	if (Vertices.size() != 0) {
 
-		vec3 vertA =  GetBottom(indexUpdate);
-		vertA = vec3(vertOffset.x, vertA.y, vertOffset.z);
-		SetBottom(indexUpdate, vertA);
+		//vec3 vertA =  GetBottom(indexUpdate);
+		vec3 vertA = Shape->GetBottom(indexUpdate);
 
-		vec3 vertB = GetTop(indexUpdate);
+		vertA = vec3(vertOffset.x, vertA.y, vertOffset.z);
+		Shape->SetBottom(this, indexUpdate, vertA);
+
+		vec3 vertB = Shape->GetTop(indexUpdate);
 		vertB = vec3(vertOffset.x, vertB.y, vertOffset.z);
-		SetTop(indexUpdate, vertB);
+		Shape->SetTop(this, indexUpdate, vertB);
 
 		SaveNewPosition();
 
@@ -184,7 +187,7 @@ void ObjectBlock::CalculateTextureUV(bool isInit) {
 		float lenghtLine = 0;
 	
 		for (int indLine = 0; indLine < 4; indLine++) {
-			lenghtLine = GetLineLenght(indLine);
+			lenghtLine = Shape->GetLineLenght(this, indLine);
 			if (lenghtLine > maxLenght) {
 				maxLenght = lenghtLine;
 			}

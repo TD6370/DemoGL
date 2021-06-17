@@ -6,6 +6,7 @@
 #include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
+#include "../GeomertyShapes//ShapeBase.h"
 
 RoomUseInterface::~RoomUseInterface() {
 }
@@ -176,7 +177,7 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 	float zOrder;
 	IsFocused = false;
 
-	objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
+	objGUI->Shape->GetPositRect(objGUI.get(), startPosRect, endPosRect, zOrder);
 
 	//--- Check Focused
 	if (CheckPointInRectangle(m_tempMousePosWorld, startPosRect, endPosRect))
@@ -321,7 +322,7 @@ void RoomUseInterface::CalculateMousePosWorld() {
 			vec2 endPosRect = vec2(0);
 			float zOrder;
 			std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-			objGUI->GetPositRect(startPosRect, endPosRect, zOrder);
+			objGUI->Shape->GetPositRect(objGUI.get(), startPosRect, endPosRect, zOrder);
 			std::stringstream ss;
 			ss << "---------------------------------\n"
 				<< "Mouse depth: " << depthMouse << " \n"
