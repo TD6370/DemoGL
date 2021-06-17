@@ -6,6 +6,7 @@
 #include "..\CoreSettings.h"
 #include "..\ConfigUniformArg.h"
 #include "..\TransformModel.h"
+//#include "../GeomertyShapes/ShapeBase.h"
 
 //#include "ObjectPhysic.h"
 

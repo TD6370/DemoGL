@@ -35,6 +35,7 @@ using std::map;
 class Plane;
 //class ModelData;
 class ObjectData;
+class ObjectPhysic;
 
 class ShapeBase
 {
@@ -45,10 +46,14 @@ public:
 	ShapeBase();
 
 	~ShapeBase();
+
 	vec3 GetVertexWorldPosition(ObjectData* obj, int indVertex);
 
 	vec3 ToWorldPosition(ObjectData* obj, vec3 pos);
 
 	string GetKeySectorPolygon(ObjectData* obj, bool isNewPosition);
 
+	void FillPlanes(ObjectData* obj);
 
+	void FillVertextBox(ObjectPhysic* obj);
+};
