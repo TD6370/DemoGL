@@ -152,6 +152,9 @@
     <ClCompile Include="Controllers.cpp" />
     <ClCompile Include="CoreSettings.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="GeomertyShapes\ShapeBase.cpp" />
+    <ClCompile Include="GeomertyShapes\ShapeHexagon.cpp" />
+    <ClCompile Include="GeomertyShapes\ShapeSquare.cpp" />
     <ClCompile Include="GeometryLib.cpp" />
     <ClCompile Include="gl_coreCpp_4_3.cpp" />
     <ClCompile Include="LoadBMP.cpp" />
@@ -188,6 +191,9 @@
     <ClInclude Include="Controllers.h" />
     <ClInclude Include="CoreSettings.h" />
     <ClInclude Include="FileReader.h" />
+    <ClInclude Include="GeomertyShapes\ShapeBase.h" />
+    <ClInclude Include="GeomertyShapes\ShapeHexagon.h" />
+    <ClInclude Include="GeomertyShapes\ShapeSquare.h" />
     <ClInclude Include="GeometryLib.h" />
     <ClInclude Include="gl_coreCpp_4_3.hpp" />
     <ClInclude Include="LoadBMP.h" />

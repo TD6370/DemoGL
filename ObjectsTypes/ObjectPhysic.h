@@ -11,12 +11,13 @@ using glm::vec4;
 using glm::vec3;
 using glm::vec2;
 
+class ShapeHexagon;
 
 class ObjectPhysic :
 	public ObjectData
 {
-protected:
-	void FillPlanesCube();
+//protected:
+	//void FillPlanesCube();
 	
 public:
 	std::map<int, vec3> TopVectors;
@@ -34,6 +35,8 @@ public:
 			p_typeObj,
 			p_pos) {
 		IsCubeModel = false;
+
+		
 	};
 
 	void InitData();
@@ -71,6 +74,7 @@ public:
 	bool GetVisible();
 
 	//-----------
+	ShapeHexagon* GetShapeHexagon();
 
 	std::vector< glm::vec3 > GetVertices();
 
@@ -94,10 +98,7 @@ public:
 
 	void virtual GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 	vec2 GetStartPositWorld();
+
 	
-	//----------
-
-	//bool virtual IsCubeModel();
-
 };
 

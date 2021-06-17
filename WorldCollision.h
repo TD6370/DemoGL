@@ -5,6 +5,7 @@
 
 #include "CoreSettings.h"
 #include "CreatorModelData.h"  //------<<<
+#include "./GeomertyShapes/ShapeBase.h"
 
 //OpenGL Mathematics
 #include <glm/glm.hpp>
@@ -17,6 +18,7 @@
 #include <map>
 
 class Plane;
+class ShapeBase;
 
 using std::string;
 using std::vector;
@@ -30,6 +32,7 @@ public:
 	int SectorSize = 10;// 100;
 	CreatorModelData* Storage;
 	WorldSectors* Sectors;
+	ShapeBase* Shape;
 	
 	WorldCluster();
 	

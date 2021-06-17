@@ -1,6 +1,7 @@
 //---------------------
 #include "..\WorldCollision.h"
 #include "..\ModelData.h"
+#include "../GeomertyShapes/ShapeHexagon.h"  //!!!!!!!!!!!!!!!!!!
 //#include "..\GeometryLib.h"
 //------------------------
 
@@ -32,7 +33,18 @@ void ObjectPhysic::InitData() {
 
 	IsVisible = true;
 
+	if (IsCubeModel) {
+		Shape = new ShapeHexagon();
+	}
+
 	FillPlanes();
+}
+
+
+ShapeHexagon* ObjectPhysic::GetShapeHexagon() {
+
+	ShapeHexagon* ph = static_cast<ShapeHexagon*>(Shape);
+	return ph;
 }
 
 
@@ -120,42 +132,11 @@ bool ObjectPhysic::CheckIsLock() {
 void ObjectPhysic::FillPlanes()
 {
 	if (IsCubeModel) {
+
 		Vertices = ModelPtr->Vertices;
-		FillPlanesCube();
+		ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
+		Shape->FillVertextBox(objPhysic);
 	}
-}
-
-void ObjectPhysic::FillPlanesCube()
-{
-	std::vector<vec3> CubeVectors;
-	int indexPlaneT = 0;
-	int indexPlaneB = 0;
-	int indVert = 0;
-
-	BottomVectors.clear();
-	TopVectors.clear();
-
-	while (indVert < GetVertices().size())
-	{
-		vec3 vertexNext = GetVertices()[indVert];
-		indVert++;
-		bool isExist = std::find(CubeVectors.begin(), CubeVectors.end(), vertexNext) != CubeVectors.end();
-		if (isExist)
-			continue;
-
-		CubeVectors.push_back(vertexNext);
-		if (vertexNext.y < 0) {
-			BottomVectors.insert(std::pair<int, vec3>(indexPlaneB, vertexNext));
-			indexPlaneB++;
-		}
-		else {
-			TopVectors.insert(std::pair<int, vec3>(indexPlaneT, vertexNext));
-			indexPlaneT++;
-		}
-	}
-	auto test = "";
-
-	/*if (TopVectors.find(indVert) == TopVectors.end()) {}*/
 }
 
 void ObjectPhysic::LockResult() {

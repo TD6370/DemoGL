@@ -7,6 +7,8 @@
 #include "..\ModelData.h"
 #include "ObjectDynamic.h"
 #include "..\Serialize\SceneSerialize.h"
+#include "../GeomertyShapes/ShapeHexagon.h"
+#include "../GeomertyShapes/ShapeBase.h"
 
 void ObjectBlock::InitData()
 {
@@ -240,7 +242,14 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 		//if (fieldValue.FieldName == filedsName->UV)
 		//	TextureUV.push_back(serializer->StrToVec2(fieldValue.Value));
 	}
-	ObjectPhysic::FillPlanesCube();
+
+	//ObjectPhysic::FillPlanesCube();
+	//GetShapeHexagon()->FillPlanesCube(this);
+	//FillPlanesCube(this);
+
+	//++++++++++++++++++++++++++++++++ #????#
+	ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
+	Shape->FillVertextBox(objPhysic);
 
 	// --- ver2.UV
 	CalculateTextureUV(false); 

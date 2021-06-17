@@ -162,7 +162,9 @@ void ObjectTextBlock::MeshTransform() {
 		//IsTextureRepeat = true;
 	//std::cout << ss1.str();
 	//std::cout << std::endl;
-	FillPlanesCube();
+
+	ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
+	Shape->FillVertextBox(objPhysic);
 }
 
 vector<ObjectFiledsSpecific> ObjectTextBlock::GetSpecificFiels() {

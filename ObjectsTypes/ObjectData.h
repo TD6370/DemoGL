@@ -28,6 +28,7 @@ using std::string;
 using std::shared_ptr;
 using std::map;
 
+class ShapeBase;
 class Plane;
 class ModelData;
 class CreatorModelData;
@@ -61,6 +62,7 @@ public:
 	bool IsUsable;
 	
 	CreatorModelData* Storage;
+	ShapeBase* Shape;
 
 	TypeObject TypeObj;
 	ColliseState CollisionPolygonState;
@@ -100,7 +102,7 @@ public:
 	int PlaneDownIndex = -1;
 	vec3 PlaneDownPosition = vec3(0);
 	std::vector<vec3> TempVectors;
-	std::vector<shared_ptr<Plane>> Planes;
+	//std::vector<shared_ptr<Plane>> Planes;		//-----(#3.))
 	std::vector<string>  ChildObjects;
 
 	ObjectData();
@@ -129,16 +131,9 @@ public:
 	void Action();
 
 	//---------------
-	
-	vec3 GetVertexPosition(int indVertex); //------- geometric ???
+	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
 
-	vec3 ToWorldPosition(vec3 pos); //------- geometric ???
-
-	string GetKeySectorPolygon(bool isNewPosition = true); //------- geometric ???
-
-	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane); //------- geometric ???
-
-	std::shared_ptr<Plane> GetPlanePrt(int indexPlane); //------- geometric ???
+	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
 
 	void virtual SelectedEvent();
 	void virtual UnselectedEvent();
@@ -163,8 +158,6 @@ public:
 		
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
-	
-
 	void UpdateTextureUV(); //------- geometric ???
 
 	//-------- SaveFieldSpecific
@@ -172,14 +165,6 @@ public:
 	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
 
 	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
-
-	// ---- geometric Box
-
-	//void UpdateState();
-	//bool IsCubeModel();
-	//void FillPlanes(); //TEST
-	//void ResizeTextureUV();
-	//---------------------
 
 };
 

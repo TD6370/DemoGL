@@ -8,6 +8,7 @@
 //------------------------
 #include "ObjectData.h"
 #include "../Serialize/SceneSerialize.h"
+//#include "../GeomertyShapes/ShapeBase.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -33,6 +34,11 @@ ObjectData::ObjectData(int p_index,
 	ModelPtr = p_model;
 	m_keyPosSectorStr = "";
 	PlaneDownIndex = -1;
+
+	Shape = new ShapeBase();
+	/*Shape = new ShapeBase();
+	Shape->Obj = std::shared_ptr<ObjectData>(this);
+	Shape->Obj = this;*/
 }
 
 ObjectData::~ObjectData()
@@ -99,27 +105,17 @@ void ObjectData::CheckStartPosition() {
 
 }
 
-vec3 ObjectData::ToWorldPosition(vec3 pos) {
-	glm::mat4 trans = Transform(1, 0, false,
-		glm::mat4(1.0f),
-		Postranslate,
-		TranslateAngle, 
-		Size);
-	glm::vec3 worldPos = vec3(trans * vec4(pos, 1));
-	return worldPos;
-}
-
-string ObjectData::GetKeySectorPolygon(bool isNewPosition) {
-	vec3 pos = vec3();
-	if (isNewPosition)
-		pos = NewPostranslate;
-	else
-		pos = Postranslate;
-
-	int x_sector = pos.x / Storage->Clusters->SectorSizePlane;
-	int z_sector = pos.z / Storage->Clusters->SectorSizePlane;
-	return std::to_string(x_sector) + "_" + std::to_string(z_sector);
-}
+//string ObjectData::GetKeySectorPolygon(bool isNewPosition) {
+//	vec3 pos = vec3();
+//	if (isNewPosition)
+//		pos = NewPostranslate;
+//	else
+//		pos = Postranslate;
+//
+//	int x_sector = pos.x / Storage->Clusters->SectorSizePlane;
+//	int z_sector = pos.z / Storage->Clusters->SectorSizePlane;
+//	return std::to_string(x_sector) + "_" + std::to_string(z_sector);
+//}
 
 void ObjectData::RunTransform()
 {
@@ -139,31 +135,23 @@ void ObjectData::Action()
 	RunAction();
 }
 
+/*
 glm::vec3 ObjectData::GetVertexPosition(int indVertex)
 {
-	std::vector< glm::vec3 > verticesModel = GetVertices();// ModelPtr->Vertices;
-	//if (std::find(verticesModel.begin(), verticesModel.end(), indVertex) == verticesModel.end)
-	if (verticesModel.size() - 1 < indVertex)
-		return vec3(-1);
-
-	glm::vec3 posNorm = verticesModel[indVertex];
-	glm::mat4 trans = Transform(1, 0, false,
-		glm::mat4(1.0f),
-		Postranslate,
-		TranslateAngle, 
-		Size);
-	glm::vec3 posVert = vec3(trans * vec4(posNorm, 1));
-	return posVert;
+	return ShapeObj->GetVertexPosition(indVertex);
 }
+*/
 
 shared_ptr<Plane> ObjectData::GetPlaneFromVertIndex(int indexVertPlane) {
 	
-	return Planes[(int)indexVertPlane / 3];
+	//return Planes[(int)indexVertPlane / 3];
+	return Shape->Planes[(int)indexVertPlane / 3];
 }
 
 shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
 
-	return Planes[indexPlane];
+	//return Planes[indexPlane];
+	return Shape->Planes[indexPlane];
 }
 
 

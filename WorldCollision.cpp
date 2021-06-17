@@ -32,23 +32,27 @@ vec3 color_yelow = vec3(0, 1, 1);
 
 WorldCluster::WorldCluster() {
 	Sectors = new WorldSectors();
+
+	Shape = new ShapeBase();
 }
 
 void WorldCluster::PlaneClusterization()
 {
+
 	std::shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
 	std::shared_ptr<ModelData> model = object->ModelPtr;
 	//std::vector< glm::vec3 > vertices = model->Vertices;
 	//std::vector<Plane> planes = *object->Planes;
-	std::vector<shared_ptr<Plane>> planes = object->Planes;
+	std::vector<shared_ptr<Plane>> planes = object->Shape->Planes;
 
 	//for (const auto& vec : planes) {
 	//for (int indVert = 0; indVert < vertices.size(); indVert++)
 	for (shared_ptr<Plane> plane : planes)
 	{
-		vec3 posWorldA = object->ToWorldPosition(plane->V0);
-		vec3 posWorldB = object->ToWorldPosition(plane->V1);
-		vec3 posWorldC = object->ToWorldPosition(plane->V2);
+
+		vec3 posWorldA = Shape->ToWorldPosition(object.get(), plane->V0);
+		vec3 posWorldB = Shape->ToWorldPosition(object.get(), plane->V1);
+		vec3 posWorldC = Shape->ToWorldPosition(object.get(), plane->V2);
 
 		vec3 planeArr[3] = { posWorldA , posWorldB  , posWorldC };
 

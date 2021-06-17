@@ -52,6 +52,9 @@
     <Filter Include="Helpers">
       <UniqueIdentifier>{dd8cc210-2f3f-4ed2-845e-fdf7a3473ed8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GeomertyShapes">
+      <UniqueIdentifier>{d586b73e-bf38-4430-8e59-264bd4bb9aba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
@@ -155,6 +158,15 @@
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectCursorGUI.cpp">
       <Filter>Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GeomertyShapes\ShapeBase.cpp">
+      <Filter>GeomertyShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="GeomertyShapes\ShapeHexagon.cpp">
+      <Filter>GeomertyShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="GeomertyShapes\ShapeSquare.cpp">
+      <Filter>GeomertyShapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +274,15 @@
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectCursorGUI.h">
       <Filter>Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GeomertyShapes\ShapeBase.h">
+      <Filter>GeomertyShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="GeomertyShapes\ShapeHexagon.h">
+      <Filter>GeomertyShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="GeomertyShapes\ShapeSquare.h">
+      <Filter>GeomertyShapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
