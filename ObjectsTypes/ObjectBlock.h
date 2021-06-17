@@ -25,10 +25,8 @@ class ObjectBlock :
 	public ObjectPhysic
 {
 public:
-
 	int KeyUpTopVertex = GLFW_KEY_KP_ADD;
 	int KeyDownTopVertex = GLFW_KEY_KP_SUBTRACT;
-
 	float StartLenghtWall = 1;
 			
 	ObjectBlock(
@@ -40,8 +38,8 @@ public:
 			p_model,
 			p_typeObj,
 			p_pos) {
-		IsBlock = true;
-		IsCubeModel = true;
+		IsHexagonModel = true;
+		IsSquareModel = true;
 		IsTransformable = true;
 	};
 
@@ -59,18 +57,9 @@ public:
 
 	void MeshTransform();
 
-	//------------------
-	void SelectVertexBlock();
+	void ControlsEvents();
 
 	//----------------------
-		
-	void ResizeTextureUV();
-
-	void ResizeVerticaleWall();
-
-	void CalculateTextureUV(bool isInit = false);
-
-	void ControlsEvents();
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 

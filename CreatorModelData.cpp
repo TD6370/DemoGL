@@ -128,7 +128,7 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 		nextModelPrt->PathTexture = fieldsModel->PathTexture.c_str();
 		nextModelPrt->PathModel3D = fieldsModel->PathModel3D.c_str();
 		nextModelPrt->RadiusCollider = std::stof(fieldsModel->RadiusCollider);
-		nextModelPrt->IsCubeModel = StrToBool(fieldsModel->IsCubeModel);
+		nextModelPrt->IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
 		nextModelPrt->Init();
 
 		AddModel(nextModelPrt, fieldsModel->Name);
@@ -156,7 +156,7 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 	//	nextModel.PathTexture = fieldsModel->PathTexture.c_str();
 	//	nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
 	//	nextModel.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
-	//	nextModel.IsCubeModel = StrToBool(fieldsModel->IsCubeModel);
+	//	nextModel.IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
 	//	nextModel.Init();
 	//	AddModel(&nextModel, fieldsModel->Name);
 
@@ -393,8 +393,8 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->IsGUI = StrToBool(opt.IsGUI);
 		newObj->IsTextureRepeat = StrToBool(opt.IsTextureRepeat);
 		newObj->IsNPC = StrToBool(opt.IsNPC);
-		newObj->IsBlock = StrToBool(opt.IsBlock);
-		newObj->IsCubeModel = StrToBool(opt.IsCubeModel);
+		newObj->IsHexagonModel = StrToBool(opt.IsHexagonModel);
+		newObj->IsSquareModel = StrToBool(opt.IsSquareModel);
 		newObj->IsAbsolutePosition = StrToBool(opt.IsAbsolutePosition);
 		newObj->IsFocusable = StrToBool(opt.IsFocusable);
 		newObj->IsTransformable = StrToBool(opt.IsTransformable);
@@ -454,7 +454,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->RadiusCollider = 1;
 	nextModelPrt->IsDebug = true;
-	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "box");
 
@@ -523,7 +523,7 @@ void CreatorModelData::LoadModels() {
 	//nextModelPrt->PathTexture = "./Textures/future.bmp";
 	nextModelPrt->PathTexture = "./Textures/Frame.bmp";
 	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "ConextFrameModel");
 
@@ -536,7 +536,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
 	nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
 	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "FrameModel");
 
@@ -549,7 +549,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/TextBlock.obj";
 	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
 	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "TextBlockModel");
 
@@ -565,7 +565,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/CursorB.bmp";
 	//nextModelPrt->PathTexture = "./Textures/CursorSDF.bmp";
 	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsCubeModel = true;
+	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "CursorModel");
 }

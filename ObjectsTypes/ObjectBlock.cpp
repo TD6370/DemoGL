@@ -12,6 +12,11 @@
 
 void ObjectBlock::InitData()
 {
+	/*if (IsSquareModel) {
+		Shape = new ShapeHexagon();
+	}*/
+	Shape = new ShapeHexagon();
+
 	ActionObjectCurrent = Stay;
 	IsGravity = true;
 	//Vertices = ModelPtr->Vertices;
@@ -19,7 +24,8 @@ void ObjectBlock::InitData()
 	ObjectPhysic::InitData();
 
 	IsTextureRepeat = true;
-	CalculateTextureUV(true);
+	//CalculateTextureUV(true);
+	GetShapeHexagon()->CalculateTextureUV(this, true);
 }
 
 void ObjectBlock::LockPolygonResult() {
@@ -70,29 +76,9 @@ void ObjectBlock::ControlsEvents() {
 
 	if (Storage->Inputs->Key == KeyUpTopVertex || Storage->Inputs->Key == KeyDownTopVertex) {
 		
-		ResizeVerticaleWall();
+		GetShapeHexagon()->ResizeVerticaleWall(this, KeyUpTopVertex, KeyDownTopVertex);
 	}
 }
-
-void ObjectBlock::ResizeVerticaleWall() {
-
-	//resize Vertical wall
-	if (IndexVertexTransform == -1)
-		return;
-
-	float upSize = 1;
-	if (Storage->Inputs->Key == KeyUpTopVertex)
-		upSize = 1;
-	if (Storage->Inputs->Key == KeyDownTopVertex)
-		upSize = -1;
-
-	vec3 vertSelect = Shape->GetTop(IndexVertexTransform);
-	vertSelect.y += upSize;;
-	Shape->SetTop(this, IndexVertexTransform, vertSelect);
-
-	SaveNewPosition();
-}
-
 
 void ObjectBlock::TestGravity()
 {
@@ -101,37 +87,10 @@ void ObjectBlock::TestGravity()
 	CheckIsLock();
 }
 
-void ObjectBlock::SelectVertexBlock() {
-
-	vec3 posCursor;
-
-	int indCursor = Storage->SceneData->IndexCursorRayObj;
-	std::shared_ptr<ObjectData> CusrorObj = Storage->GetObjectPrt(indCursor);
-	posCursor = CusrorObj->Postranslate;
-
-	/*int indHero = Storage->SceneParam->IndexHeroObj;
-	std::shared_ptr<ObjectData> HeroObj = Storage->GetObjectPrt(indHero);
-	posCursor = HeroObj->Postranslate;*/
-
-	int distMin = -1;
-	for (int indV = 0; indV < 4; indV++) {
-		//vec3 vertBlock = GetBottom(indV);
-		vec3 vertBlock = Shape->GetBottom(indV);
-
-		vertBlock += Postranslate;
-		int dist = glm::distance(vec2(posCursor.x, posCursor.z), vec2(vertBlock.x, vertBlock.z));
-
-		if (distMin == -1 || distMin > dist) {
-			distMin = dist;
-			IndexVertexTransform = indV;
-		}
-	}
-}
-
 void ObjectBlock::SelectedEvent() {
 
 	ObjectPhysic::SelectedEvent();
-	SelectVertexBlock();
+	GetShapeHexagon()->SelectVertexBlock(this);
 }
 
 void ObjectBlock::MeshTransform() {
@@ -162,48 +121,8 @@ void ObjectBlock::MeshTransform() {
 
 		SaveNewPosition();
 
-		CalculateTextureUV(false);
-	}
-}
-
-void ObjectBlock::ResizeTextureUV() {
-	if (IsTextureRepeat) {
-		//std::vector< glm::vec2 > repeat_UV = StartUV;
-		std::vector< glm::vec2 > repeat_UV = ModelPtr->UV;
-		for (auto& uv : repeat_UV) {
-			uv.x *= TextureRepeat;
-			//uv.y *= TextureRepeat;
-		}
-		//ModelPtr->UV = repeat_UV;
-		TextureUV = repeat_UV;
-	}
-}
-
-void ObjectBlock::CalculateTextureUV(bool isInit) {
-	if (IsTextureRepeat) {
-		int factorRepeat = 1;
-		float x1, x2, y1, y2;
-		float maxLenght = -1;
-		float lenghtLine = 0;
-	
-		for (int indLine = 0; indLine < 4; indLine++) {
-			lenghtLine = Shape->GetLineLenght(this, indLine);
-			if (lenghtLine > maxLenght) {
-				maxLenght = lenghtLine;
-			}
-		}
-		
-		if (isInit) {
-			StartLenghtWall = maxLenght; //start len resize wall -> max len wal
-			TextureUV = ModelPtr->UV;
-		}
-		else
-			factorRepeat = maxLenght / StartLenghtWall;
-		
-		TextureRepeat = factorRepeat;
-
-		if (!isInit)
-			ResizeTextureUV();
+		//CalculateTextureUV(false);
+		GetShapeHexagon()->CalculateTextureUV(this, false);
 	}
 }
 
@@ -255,5 +174,5 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 	Shape->FillVertextBox(objPhysic);
 
 	// --- ver2.UV
-	CalculateTextureUV(false); 
+	GetShapeHexagon()->CalculateTextureUV(this, false); //CalculateTextureUV(false);
 }

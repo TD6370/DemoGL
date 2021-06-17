@@ -44,6 +44,7 @@ public:
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
 	std::vector<shared_ptr<Plane>> Planes;
+	ObjectPhysic* m_obj;
 
 	ShapeBase();
 
@@ -77,7 +78,9 @@ public:
 
 	float GetLineLenght(ObjectPhysic* obj, int index);
 
-	void virtual GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder);
+	void GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder);
 
 	vec2 GetStartPositWorld(ObjectPhysic* obj);
+
+	void Billboard(ObjectPhysic* obj);
 };

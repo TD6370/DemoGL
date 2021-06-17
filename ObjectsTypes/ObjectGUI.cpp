@@ -5,12 +5,29 @@
 #include "..\ModelData.h"
 #include "../CoreSettings.h"
 #include "ObjectTextBlock.h"
-#include "../GeomertyShapes//ShapeBase.h"
+#include "../GeomertyShapes/ShapeBase.h"
+#include "../GeomertyShapes/ShapeSquare.h"
+
+
+void ObjectGUI::InitData() {
+
+	Shape = new ShapeSquare();
+	
+	ObjectPhysic::InitData();
+
+	Size = vec3(0);
+
+	if (Storage->SceneData->IndexGUIObj == -1)
+		Storage->SceneData->IndexGUIObj = Index;
+
+	ActionObjectCurrent = Stay;
+}
 
 
 void ObjectGUI::RunAction() {
 
-	UpdateState();
+	//UpdateState();
+	GetShapeSquare()->UpdateState(this);
 
 	if (ActionObjectCurrent != Lock)
 	{
@@ -43,83 +60,6 @@ void ObjectGUI::ActionMoving()
 }
 
 
-void ObjectGUI::InitData() {
-
-	ObjectPhysic::InitData();
-	Size = vec3(0);
-
-	if (Storage->SceneData->IndexGUIObj == -1)
-		Storage->SceneData->IndexGUIObj = Index;
-
-	ActionObjectCurrent = Stay;
-}
-
-void ObjectGUI::UpdateState() {
-
-	if (!Storage->SceneData->IsGUI)
-		return;
-
-	//================================================== TEST
-	/*std::stringstream ss;
-	ss << "Name: " << Name << "  Model:" << ModelPtr->Name << "\n";
-	ss << "SP: " << StartPos.x << " " << StartPos.y << "\n\n";
-	ss << "PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
-	string spStart = ss.str();*/
-	//==================================================
-
-	vec3 directionOut = vec3(0);
-	PanelDepth = 3.8;
-	//float panelOrderZ = (0.01f);
-
-	if (IsAbsolutePosition)
-	{
-		float offsetOfCenter = 0;
-		//-----------------------------
-		int indOwner = IndexObjectOwner;
-		if (indOwner == -1)
-			indOwner = Storage->SceneData->IndexGUIObj;
-		if (IndexObjectOwner != -1)
-		{
-			auto obj = Storage->GetObjectPrt(IndexObjectOwner);
-			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(obj);
-			float lenghtLineOwner = objPh->Shape->GetLineLenght(objPh.get(), 0);
-			float lenghtLine = Shape->GetLineLenght(this, 0);
-			float offsetOwner = lenghtLineOwner/2;
-			float offsetAbs = lenghtLine / 2;
-			offsetOfCenter = offsetOwner - offsetAbs;
-		}
-
-		vec3 startPos = vec3(StartPos.x - offsetOfCenter, StartPos.y - offsetOfCenter, StartPos.z); //when SetSizeControl - is disabled
-		Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, 
-																	PanelDepth - StartPos.z, 
-																	Storage->Oper, startPos);
-
-		//================================================== TEST
-		//TEST -- hystory move pos TextBox
-		/*if (Postranslate != tmp_posit && TypeObj == TextBlock)
-		{
-			std::stringstream ssEnd;
-			ssEnd << "END PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
-			string totalEnd = ssEnd.str();
-			tmp_posit = Postranslate;
-			if(hyst_posit.size()==0)
-				hyst_posit.append(spStart);
-			hyst_posit.append(totalEnd);
-			hyst_posit.append("--------------------------------");
-		}*/
-		//==================================================
-	}
-	else {
-		if (StartPos == vec3(0)) {
-			Postranslate = NewPostranslate = GetVectorForwardFace(Storage->ConfigMVP, PanelDepth, Storage->Oper);
-		}
-		else {
-			Postranslate = NewPostranslate = GetVectorForwardFaceOffset(Storage->ConfigMVP, PanelDepth - StartPos.z, Storage->Oper, StartPos);
-		}
-	}
-	Billboard();
-}
-
 bool ObjectGUI::GetVisible() {
 
 	//TODO:: IndexObjectOwner 
@@ -150,7 +90,9 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	objGUI->SizePanel = size;
 	objGUI->Color = color;
 	//objGUI->IsTextureRepeat = true;
-	objGUI->SetSizeControl(vec3(size.x, size.y, 1));
+
+	//objGUI->SetSizeControl(vec3(size.x, size.y, 1));
+	objGUI->GetShapeSquare()->SetSizeControl(objGUI.get(), vec3(size.x, size.y, 1));
 
 	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
 	if (objTextBlock != nullptr) {
@@ -161,84 +103,10 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 
 void ObjectGUI::SizeControlUpdate()
 {
-	SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+	GetShapeSquare()->SetSizeControl(this, vec3(SizePanel.x, SizePanel.y, 1));
 }
 
-//void ObjectGUI::SetSizeControl(vec3 vertOffset) {
-//
-//	if (IsAbsolutePosition)
-//		return;
-//
-//	//-- set transform
-//	if (Vertices.size() != 0) {
-//
-//		vec3 vertBottomLeft = GetBottom(1);
-//		vec3 vertBottomRight = GetBottom(0);
-//		vec3 vertTopLeft = GetTop(1);
-//		vec3 vertTopRight = GetTop(0);
-//
-//		float factorOffset = 1.1;
-//		float offsetY = 2 - vertOffset.y;
-//		float offsetX = 2 - vertOffset.x;
-//		offsetX *= factorOffset;
-//		offsetY *= factorOffset;
-//
-//		//float factor = vertTopLeft.y - vertBottomLeft.y;
-//
-//
-//		vertTopLeft = vec3(vertTopLeft.x, vertTopLeft.y, offsetX);
-//		SetTop(1, vertTopLeft);
-//
-//		vertBottomLeft = vec3(vertBottomLeft.x, offsetY, vertBottomLeft.z);
-//		SetBottom(1, vertBottomLeft);
-//
-//		vertBottomRight = vec3(vertBottomRight.x, offsetY,  offsetX);
-//		SetBottom(0, vertBottomRight);
-//	}
-//}
-
-void ObjectGUI::SetSizeControl(vec3 vertOffset) {
-
-	if (IsAbsolutePosition)
-		return;
-
-	//-- set transform
-	if (Vertices.size() != 0) {
-
-		if (start_vertBottomLeft == vec3(0)) {
-			start_vertBottomLeft = Shape->GetBottom(1);
-			start_vertBottomRight = Shape->GetBottom(0);
-			start_vertTopLeft = Shape->GetTop(1);
-		}
-		//vec3 vertTopRight = GetTop(0);
-
-		float offsetY = 2 - vertOffset.y;
-		float offsetX = 2 - vertOffset.x;
-
-		//float factor = vertTopLeft.y - vertBottomLeft.y;
-
-
-		vec3 vertTopLeft = vec3(start_vertTopLeft.x, (start_vertTopLeft.y), start_vertTopLeft.z + offsetX);
-		Shape->SetTop(this, 1, vertTopLeft);
-
-		vec3 vertBottomLeft = vec3(start_vertBottomLeft.x, (start_vertBottomLeft.y + offsetY), start_vertBottomLeft.z);
-		Shape->SetBottom(this, 1, vertBottomLeft);
-
-		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
-		Shape->SetBottom(this, 0, vertBottomRight);
-	}
-}
-
-
-void ObjectGUI::ResizeTextureUV() {
-	if (IsTextureRepeat) {
-		std::vector< glm::vec2 > repeat_UV = ModelPtr->UV;
-		for (auto& uv : repeat_UV) {
-			uv.y *= TextureRepeat;
-		}
-		TextureUV = repeat_UV;
-	}
-}
+//----------------------------------------------------------------
 
 vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
 
@@ -262,8 +130,11 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	StartPos = serializer->StrToVec3(filedsSpecific[0].Value);
 	SizePanel = serializer->StrToVec2(filedsSpecific[1].Value);
 	
-	SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+	GetShapeSquare()->SetSizeControl(this, vec3(SizePanel.x, SizePanel.y, 1));
 }
+
+//----------------------------------------------------------------
 
 void ObjectGUI::Click() {
 	ActionObjectCurrent = Woking;

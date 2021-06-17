@@ -194,11 +194,11 @@ void ObjectData::UpdateTextureUV() {
 void ObjectData::ControlsEvents() {
 }
 
-void ObjectData::Billboard() {
-
-	TranslateAngle.y = Storage->Oper->HorizontalAngle + (0.5 * M_PI);
-	TranslateAngle.z = -Storage->Oper->VerticalAngle;
-}
+//void ObjectData::Billboard() {
+//
+//	TranslateAngle.y = Storage->Oper->HorizontalAngle + (0.5 * M_PI);
+//	TranslateAngle.z = -Storage->Oper->VerticalAngle;
+//}
 
 bool ObjectData::GetVisible() {
 	return IsVisible;

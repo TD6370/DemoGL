@@ -12,16 +12,13 @@ using glm::vec3;
 using glm::vec2;
 
 class ShapeHexagon;
+class ShapeSquare;
 
 class ObjectPhysic :
 	public ObjectData
 {
-//protected:
-	//void FillPlanesCube();
 	
 public:
-	//std::map<int, vec3> TopVectors; //===========
-	//std::map<int, vec3> BottomVectors; //==============
 
 	int IndexVertexTransform = -1;
 
@@ -34,7 +31,7 @@ public:
 			p_model,
 			p_typeObj,
 			p_pos) {
-		IsCubeModel = false;
+		IsSquareModel = false;
 
 		
 	};
@@ -69,12 +66,13 @@ public:
 	void SaveToCluster();
 
 	void virtual FillPlanes();
-	
 
 	bool GetVisible();
 
 	//-----------
 	ShapeHexagon* GetShapeHexagon();
+
+	ShapeSquare* GetShapeSquare();
 
 	std::vector< glm::vec3 > GetVertices();
 

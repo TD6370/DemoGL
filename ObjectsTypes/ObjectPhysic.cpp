@@ -2,6 +2,7 @@
 #include "..\WorldCollision.h"
 #include "..\ModelData.h"
 #include "../GeomertyShapes/ShapeHexagon.h"  //!!!!!!!!!!!!!!!!!!
+#include "../GeomertyShapes/ShapeSquare.h"  //!!!!!!!!!!!!!!!!!!
 //#include "..\GeometryLib.h"
 //------------------------
 
@@ -33,20 +34,21 @@ void ObjectPhysic::InitData() {
 
 	IsVisible = true;
 
-	if (IsCubeModel) {
-		Shape = new ShapeHexagon();
-	}
-
 	FillPlanes();
 }
 
-
 ShapeHexagon* ObjectPhysic::GetShapeHexagon() {
 
-	ShapeHexagon* ph = static_cast<ShapeHexagon*>(Shape);
-	return ph;
+	ShapeHexagon* shapeCast = static_cast<ShapeHexagon*>(Shape);
+	return shapeCast;
 }
 
+ShapeSquare* ObjectPhysic::GetShapeSquare() {
+
+	ShapeSquare* shapeCast = static_cast<ShapeSquare*>(Shape);
+	return shapeCast;
+}
+//ShapeSquare* GetShapeSquare();
 
 bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
 
@@ -131,7 +133,7 @@ bool ObjectPhysic::CheckIsLock() {
 
 void ObjectPhysic::FillPlanes()
 {
-	if (IsCubeModel) {
+	if (IsSquareModel) {
 
 		Vertices = ModelPtr->Vertices;
 		ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
@@ -169,13 +171,6 @@ bool ObjectPhysic::GetVisible() {
 	return IsVisible;
 }
 
-
-//------------
-
-//bool ObjectPhysic::IsCubeModel() {
-//	return false;
-//}
-
 std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 	if (Vertices.size() != 0)
 		return Vertices;
@@ -208,5 +203,3 @@ void ObjectPhysic::CalculateNextPosition() {
 void ObjectPhysic::SaveNewPosition() {
 
 }
-
-//void virtual SaveNewPosition();

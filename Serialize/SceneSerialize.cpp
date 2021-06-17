@@ -89,8 +89,8 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.Options.IsGUI << " " << obj->IsGUI << "\n";
 	streamObjects << fileds.Options.IsTextureRepeat << " " << obj->IsTextureRepeat << "\n";
 	streamObjects << fileds.Options.IsNPC << " " << obj->IsNPC << "\n";
-	streamObjects << fileds.Options.IsBlock << " " << obj->IsBlock << "\n";
-	streamObjects << fileds.Options.IsCubeModel << " " << obj->IsCubeModel << "\n";
+	streamObjects << fileds.Options.IsHexagonModel << " " << obj->IsHexagonModel << "\n";
+	streamObjects << fileds.Options.IsSquareModel << " " << obj->IsSquareModel << "\n";
 	streamObjects << fileds.Options.IsAbsolutePosition << " " << obj->IsAbsolutePosition << "\n";
 	streamObjects << fileds.Options.IsFocusable << " " << obj->IsFocusable << "\n";
 	streamObjects << fileds.Options.IsTransformable << " " << obj->IsTransformable << "\n";
@@ -118,7 +118,7 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 	streamModels << fileds.PathModel3D << " " << model->PathModel3D << "\n";
 
 	streamModels << fileds.RadiusCollider << " " << model->RadiusCollider << "\n";
-	streamModels << fileds.IsCubeModel << " " << model->IsCubeModel << "\n";
+	streamModels << fileds.IsSquareModel << " " << model->IsSquareModel << "\n";
 	
 	streamModels << m_stringSeparator << " " << "\n";
 
@@ -354,10 +354,10 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.Options.IsTextureRepeat;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsNPC)
 					in >> filedsObj.Options.IsNPC;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsBlock)
-					in >> filedsObj.Options.IsBlock;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsCubeModel)
-					in >> filedsObj.Options.IsCubeModel;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsHexagonModel)
+					in >> filedsObj.Options.IsHexagonModel;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsSquareModel)
+					in >> filedsObj.Options.IsSquareModel;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsAbsolutePosition)
 					in >> filedsObj.Options.IsAbsolutePosition;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsFocusable)
@@ -434,8 +434,8 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			if (in >> lineStr && lineStr == filedsModel->RadiusCollider)
 				in >> filedsModel->RadiusCollider;
 
-			if (in >> lineStr && lineStr == filedsModel->IsCubeModel)
-				in >> filedsModel->IsCubeModel;
+			if (in >> lineStr && lineStr == filedsModel->IsSquareModel)
+				in >> filedsModel->IsSquareModel;
 
 		
 			

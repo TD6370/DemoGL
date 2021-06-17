@@ -65,7 +65,6 @@ void ShapeBase::FillPlanes(ObjectData* obj)
 	}
 }
 
-
 void ShapeBase::FillVertextBox(ObjectPhysic* obj)
 {
 	std::vector<vec3> CubeVectors;
@@ -239,4 +238,11 @@ vec2 ShapeBase::GetStartPositWorld(ObjectPhysic* obj) {
 	startPos.x = posWorldBL.x,
 		startPos.y = posWorldTL.y;
 	return startPos;
+}
+
+
+void ShapeBase::Billboard(ObjectPhysic* obj) {
+
+	obj->TranslateAngle.y = obj->Storage->Oper->HorizontalAngle + (0.5 * M_PI);
+	obj->TranslateAngle.z = -obj->Storage->Oper->VerticalAngle;
 }

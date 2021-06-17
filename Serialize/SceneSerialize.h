@@ -25,8 +25,8 @@ struct OptionsObject {
 	string IsGUI = "IsGUI:";
 	string IsTextureRepeat = "IsTextureRepeat:";
 	string IsNPC = "IsNPC:";
-	string IsBlock = "IsBlock:";
-	string IsCubeModel = "IsCubeModel:";
+	string IsHexagonModel = "IsHexagonModel:";
+	string IsSquareModel = "IsSquareModel:";
 	string IsAbsolutePosition = "IsAbsolutePosition:";
 	string IsFocusable = "IsFocusable:";
 	string IsTransformable = "IsTransformable:";
@@ -59,7 +59,7 @@ struct ModelFileds {
 	string PathTexture = "PathTexture:";
 	string PathModel3D = "PathModel3D:";
 	string RadiusCollider = "RadiusCollider:";
-	string IsCubeModel = "IsCubeModel:";
+	string IsSquareModel = "IsSquareModel:";
 	string TypeName = "TypeName:";
 };
 

@@ -503,7 +503,7 @@ void WorldCluster::SaveClusterObject(int indexObj)
 {
 	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
 	//if (object->TypeObj == Block) {
-	if (object->IsBlock) {
+	if (object->IsHexagonModel) {
 		SaveClusterBlockObject(indexObj);
 	}
 	else {

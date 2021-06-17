@@ -70,7 +70,7 @@ public:
 
 	float RadiusCollider = 5;
 
-	bool IsCubeModel = false;
+	bool IsSquareModel = false;
 
 	ModelData();
 

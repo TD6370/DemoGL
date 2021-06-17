@@ -51,7 +51,7 @@ public:
 		IsTransformable = true;
 		IsUsable = true;
 		IsAbsolutePosition = false;
-		IsCubeModel = true;
+		IsSquareModel = true;
 		ActionObjectCurrent = ActionObject::Stay;
 	};
 
@@ -59,14 +59,9 @@ public:
 
 	void RunAction();
 
-	void UpdateState();
-
 	bool GetVisible();
 
 	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
-
-	void virtual SetSizeControl(vec3 size);
-	void virtual SizeControlUpdate();
 
 	void virtual Click();
 	
@@ -76,11 +71,12 @@ public:
 
 	void ActionMoving();
 
+	//-------------
+
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 
-	//-------------
+	void virtual SizeControlUpdate();
 
-	void ResizeTextureUV();
 };

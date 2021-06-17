@@ -162,7 +162,7 @@ void SceneConstruction::SetDataToShader() {
 	//std::cout << ObjectCurrent->Name << "\n";
 	auto nameTest =  ObjectCurrent->Name;
 
-	bool isCubeModel = ObjectCurrent->ModelPtr->IsCubeModel;
+	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel;
 	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
 	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
 	
@@ -174,7 +174,7 @@ void SceneConstruction::SetDataToShader() {
 		m_isUpdate = true;
 	}
 	
-	if (isCubeModel || m_isUpdate)
+	if (IsSquareModel || m_isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);

@@ -45,31 +45,34 @@ protected:
 	GLfloat m_angleModel = 0.0;
 	std::string m_keyPosSectorStr;
 public:
+	string Name;
+	TypeObject TypeObj;
+	ActionObject ActionObjectCurrent;
+
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
 	bool IsSelected = false;
 
-	//Options
-	bool IsVisible = true;
-	bool IsGravity = false;
+	// -----------  Options ---------------------
 	bool IsGUI = false;
-	bool IsTextureRepeat = false;
 	bool IsNPC = false;
-	bool IsBlock = false;
-	bool IsCubeModel = false;
-	bool IsAbsolutePosition = true;
+	bool IsHexagonModel = false;
+	bool IsSquareModel = false;
+
+	bool IsVisible = true;
 	bool IsFocusable;
 	bool IsTransformable;
 	bool IsUsable;
+
+	bool IsAbsolutePosition = true;
+	bool IsTextureRepeat = false;
+	bool IsGravity = false;
+	//----------------------------------------
 	
 	CreatorModelData* Storage;
 	ShapeBase* Shape;
-
-	TypeObject TypeObj;
 	ColliseState CollisionPolygonState;
-	std::string Name;
-	ActionObject ActionObjectCurrent;
-
+	
 	int Index = 0;
 	//int RadiusCollider = 5;
 
@@ -145,11 +148,9 @@ public:
 
 	void virtual SetMesh();
 
-	void virtual MeshTransform(); //------- geometric ???
-
+	void UpdateTextureUV();
+	
 	void virtual ControlsEvents();
-
-	void virtual Billboard(); //------- geometric ???
 
 	bool virtual GetVisible();
 
@@ -159,7 +160,9 @@ public:
 		
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
-	void UpdateTextureUV(); //------- geometric ???
+	//-----------------------------
+	
+	void virtual MeshTransform(); //------- geometric ???
 
 	//-------- SaveFieldSpecific
 
