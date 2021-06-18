@@ -11,6 +11,7 @@
 //#include "../TransformModel.h"
 //#include "..\ConfigUniformArg.h"
 #include "../ObjectsTypes/ObjectPhysic.h"
+#include "../ObjectsTypes/ObjectGUI.h"
 
 //#define GLEW_STATIC
 #include <GL/glew.h>
@@ -36,6 +37,7 @@ class Plane;
 //class ModelData;
 class ObjectData;
 class ObjectPhysic;
+class ObjectGUI;
 
 class ShapeBase
 {
@@ -47,6 +49,7 @@ public:
 	//ObjectPhysic* m_obj;
 	ObjectData* m_obj;
 	ObjectPhysic* m_objPhysic;
+	ObjectGUI* m_objGUI;
 	bool IsContainObject = true;
 
 	ShapeBase();
@@ -55,6 +58,7 @@ public:
 
 	void UpdateShapeInfo(ObjectPhysic* m_obj);
 	void UpdateShapeInfo(ObjectData* m_obj);
+	void UpdateShapeInfo(ObjectGUI* m_obj);
 
 	//--------------------------------------
 

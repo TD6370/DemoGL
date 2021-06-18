@@ -57,7 +57,7 @@ void ShapeHexagon::ResizeVerticaleWall(int keyUpTopVertex, int keyDownTopVertex)
 
 	vec3 vertSelect = GetTop(obj->IndexVertexTransform);
 	vertSelect.y += upSize;;
-	//SetTop(obj, obj->IndexVertexTransform, vertSelect);
+	
 	SetTop(obj->IndexVertexTransform, vertSelect);
 
 	obj->SaveNewPosition();

@@ -12,6 +12,7 @@
 void ObjectGUI::InitData() {
 
 	Shape = new ShapeSquare();
+	Shape->UpdateShapeInfo(this);
 	
 	ObjectPhysic::InitData();
 
@@ -26,8 +27,6 @@ void ObjectGUI::InitData() {
 
 void ObjectGUI::RunAction() {
 
-	//UpdateState();
-	GetShapeSquare()->UpdateState(this);
 
 	if (ActionObjectCurrent != Lock)
 	{
@@ -92,7 +91,7 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 	//objGUI->IsTextureRepeat = true;
 
 	//objGUI->SetSizeControl(vec3(size.x, size.y, 1));
-	objGUI->GetShapeSquare()->SetSizeControl(objGUI.get(), vec3(size.x, size.y, 1));
+	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
 
 	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
 	if (objTextBlock != nullptr) {
@@ -103,7 +102,7 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 
 void ObjectGUI::SizeControlUpdate()
 {
-	GetShapeSquare()->SetSizeControl(this, vec3(SizePanel.x, SizePanel.y, 1));
+	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 }
 
 //----------------------------------------------------------------
@@ -130,8 +129,7 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	StartPos = serializer->StrToVec3(filedsSpecific[0].Value);
 	SizePanel = serializer->StrToVec2(filedsSpecific[1].Value);
 	
-	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
-	GetShapeSquare()->SetSizeControl(this, vec3(SizePanel.x, SizePanel.y, 1));
+	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 }
 
 //----------------------------------------------------------------

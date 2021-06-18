@@ -6,8 +6,8 @@ ShapeSquare::~ShapeSquare() {
 }
 
 
-void ShapeSquare::UpdateState(ObjectGUI* obj) {
-
+void ShapeSquare::UpdateState() {
+	ObjectGUI* obj = m_objGUI;
 	if (!obj->Storage->SceneData->IsGUI)
 		return;
 
@@ -72,8 +72,8 @@ void ShapeSquare::UpdateState(ObjectGUI* obj) {
 	Billboard();
 }
 
-void ShapeSquare::SetSizeControl(ObjectGUI* obj, vec3 vertOffset) {
-
+void ShapeSquare::SetSizeControl(vec3 vertOffset) {
+	ObjectGUI* obj = m_objGUI;
 	if (obj->IsAbsolutePosition)
 		return;
 
@@ -109,7 +109,8 @@ void ShapeSquare::SetSizeControl(ObjectGUI* obj, vec3 vertOffset) {
 
 
 
-void ShapeSquare::ResizeTextureUV(ObjectGUI* obj) {
+void ShapeSquare::ResizeTextureUV() {
+	ObjectGUI* obj = m_objGUI;
 	if (obj->IsTextureRepeat) {
 		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->UV;
 		for (auto& uv : repeat_UV) {

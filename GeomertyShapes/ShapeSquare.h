@@ -29,11 +29,11 @@ public:
 
 	~ShapeSquare();
 
-	void UpdateState(ObjectGUI* obj);
+	void UpdateState();
 
-	void SetSizeControl(ObjectGUI* obj, vec3 vertOffset);
+	void SetSizeControl(vec3 vertOffset);
 
-	void ResizeTextureUV(ObjectGUI* obj);
+	void ResizeTextureUV();
 };
 
 

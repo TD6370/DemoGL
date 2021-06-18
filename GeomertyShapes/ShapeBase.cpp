@@ -20,6 +20,12 @@ void ShapeBase::UpdateShapeInfo(ObjectData* obj)
 	m_obj = obj;
 }
 
+void ShapeBase::UpdateShapeInfo(ObjectGUI* obj)
+{
+	m_obj = obj;
+	m_objGUI = obj;
+}
+
 
 vec3 ShapeBase::GetVertexWorldPosition(int indVertex)
 {
