@@ -31,13 +31,13 @@ public:
 
 	~ShapeHexagon();
 	
-	void SelectVertexBlock(ObjectPhysic* obj);
+	void SelectVertexBlock();
 
-	void ResizeTextureUV(ObjectPhysic* obj);
+	void ResizeTextureUV();
 
-	void ResizeVerticaleWall(ObjectPhysic* obj, int keyUpTopVertex, int keyDownTopVertex);
+	void ResizeVerticaleWall(int keyUpTopVertex, int keyDownTopVertex);
 
-	void CalculateTextureUV(ObjectPhysic* obj, bool isInit);
+	void CalculateTextureUV(bool isInit);
 
 };
 

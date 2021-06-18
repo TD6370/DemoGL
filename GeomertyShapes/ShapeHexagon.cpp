@@ -5,8 +5,9 @@ ShapeHexagon::~ShapeHexagon() {
 
 }
 
-void ShapeHexagon::SelectVertexBlock(ObjectPhysic* obj) {
+void ShapeHexagon::SelectVertexBlock() {
 
+	ObjectPhysic* obj = m_objPhysic;
 	vec3 posCursor;
 
 	int indCursor = obj->Storage->SceneData->IndexCursorRayObj;
@@ -31,7 +32,8 @@ void ShapeHexagon::SelectVertexBlock(ObjectPhysic* obj) {
 	}
 }
 
-void ShapeHexagon::ResizeTextureUV(ObjectPhysic* obj) {
+void ShapeHexagon::ResizeTextureUV() {
+	ObjectPhysic* obj = m_objPhysic;
 	if (obj->IsTextureRepeat) {
 		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->UV;
 		for (auto& uv : repeat_UV) {
@@ -41,8 +43,8 @@ void ShapeHexagon::ResizeTextureUV(ObjectPhysic* obj) {
 	}
 }
 
-void ShapeHexagon::ResizeVerticaleWall(ObjectPhysic* obj, int keyUpTopVertex, int keyDownTopVertex) {
-
+void ShapeHexagon::ResizeVerticaleWall(int keyUpTopVertex, int keyDownTopVertex) {
+	ObjectPhysic* obj = m_objPhysic;
 	//resize Vertical wall
 	if (obj->IndexVertexTransform == -1)
 		return;
@@ -55,13 +57,16 @@ void ShapeHexagon::ResizeVerticaleWall(ObjectPhysic* obj, int keyUpTopVertex, in
 
 	vec3 vertSelect = GetTop(obj->IndexVertexTransform);
 	vertSelect.y += upSize;;
-	SetTop(obj, obj->IndexVertexTransform, vertSelect);
+	//SetTop(obj, obj->IndexVertexTransform, vertSelect);
+	SetTop(obj->IndexVertexTransform, vertSelect);
 
 	obj->SaveNewPosition();
 }
 
 
-void ShapeHexagon::CalculateTextureUV(ObjectPhysic* obj, bool isInit) {
+void ShapeHexagon::CalculateTextureUV(bool isInit) {
+	ObjectPhysic* obj = m_objPhysic;
+
 	if (obj->IsTextureRepeat) {
 		int factorRepeat = 1;
 		float x1, x2, y1, y2;
@@ -69,7 +74,7 @@ void ShapeHexagon::CalculateTextureUV(ObjectPhysic* obj, bool isInit) {
 		float lenghtLine = 0;
 
 		for (int indLine = 0; indLine < 4; indLine++) {
-			lenghtLine = GetLineLenght(obj, indLine);
+			lenghtLine = GetLineLenght(indLine);
 			if (lenghtLine > maxLenght) {
 				maxLenght = lenghtLine;
 			}
@@ -85,6 +90,6 @@ void ShapeHexagon::CalculateTextureUV(ObjectPhysic* obj, bool isInit) {
 		obj->TextureRepeat = factorRepeat;
 
 		if (!isInit)
-			ResizeTextureUV(obj);
+			ResizeTextureUV();
 	}
 }

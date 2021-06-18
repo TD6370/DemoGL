@@ -46,14 +46,16 @@ void WorldCluster::PlaneClusterization()
 	//std::vector<Plane> planes = *object->Planes;
 	std::vector<shared_ptr<Plane>> planes = object->Shape->Planes;
 
+	//TEST
+	auto info = object->GetInfo();
+
 	//for (const auto& vec : planes) {
 	//for (int indVert = 0; indVert < vertices.size(); indVert++)
 	for (shared_ptr<Plane> plane : planes)
 	{
-
-		vec3 posWorldA = Shape->ToWorldPosition(object.get(), plane->V0);
-		vec3 posWorldB = Shape->ToWorldPosition(object.get(), plane->V1);
-		vec3 posWorldC = Shape->ToWorldPosition(object.get(), plane->V2);
+		vec3 posWorldA = object->Shape->ToWorldPosition(plane->V0);
+		vec3 posWorldB = object->Shape->ToWorldPosition(plane->V1);
+		vec3 posWorldC = object->Shape->ToWorldPosition(plane->V2);
 
 		vec3 planeArr[3] = { posWorldA , posWorldB  , posWorldC };
 
@@ -733,7 +735,7 @@ bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isN
 
 	shared_ptr <ObjectBlock> objBlock = std::dynamic_pointer_cast<ObjectBlock>(objectBlock);
 	for (int indLine = 0; indLine < 4; indLine++) {
-		vec4 line =  objBlock->Shape->GetLine(objBlock.get(), indLine);
+		vec4 line =  objBlock->Shape->GetLine(indLine);
 		x1 = line.x;
 		y1 = line.y;
 		x2 = line.z;

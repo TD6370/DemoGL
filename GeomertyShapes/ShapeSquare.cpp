@@ -33,8 +33,8 @@ void ShapeSquare::UpdateState(ObjectGUI* obj) {
 		{
 			auto objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
 			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(objOwn);
-			float lenghtLineOwner = objPh->Shape->GetLineLenght(objPh.get(), 0);
-			float lenghtLine = obj->Shape->GetLineLenght(obj, 0);
+			float lenghtLineOwner = objPh->Shape->GetLineLenght(0);
+			float lenghtLine = obj->Shape->GetLineLenght(0);
 			float offsetOwner = lenghtLineOwner / 2;
 			float offsetAbs = lenghtLine / 2;
 			offsetOfCenter = offsetOwner - offsetAbs;
@@ -69,7 +69,7 @@ void ShapeSquare::UpdateState(ObjectGUI* obj) {
 			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->Storage->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->Storage->Oper, obj->StartPos);
 		}
 	}
-	Billboard(obj);
+	Billboard();
 }
 
 void ShapeSquare::SetSizeControl(ObjectGUI* obj, vec3 vertOffset) {
@@ -94,13 +94,16 @@ void ShapeSquare::SetSizeControl(ObjectGUI* obj, vec3 vertOffset) {
 
 
 		vec3 vertTopLeft = vec3(start_vertTopLeft.x, (start_vertTopLeft.y), start_vertTopLeft.z + offsetX);
-		SetTop(obj, 1, vertTopLeft);
+		//SetTop(obj, 1, vertTopLeft);
+		SetTop(1, vertTopLeft);
 
 		vec3 vertBottomLeft = vec3(start_vertBottomLeft.x, (start_vertBottomLeft.y + offsetY), start_vertBottomLeft.z);
-		SetBottom(obj, 1, vertBottomLeft);
+		//SetBottom(obj, 1, vertBottomLeft);
+		SetBottom(1, vertBottomLeft);
 
 		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
-		SetBottom(obj, 0, vertBottomRight);
+		//SetBottom(obj, 0, vertBottomRight);
+		SetBottom(0, vertBottomRight);
 	}
 }
 

@@ -10,6 +10,8 @@
 
 void ObjectPhysic::RunAction() {
 
+	auto info = GetInfo();
+
 	if (ActionObjectCurrent != Lock)
 	{
 		switch (ActionObjectCurrent)
@@ -29,6 +31,8 @@ void ObjectPhysic::RunAction() {
 }
 
 void ObjectPhysic::InitData() {
+
+	Shape->UpdateShapeInfo(this);
 
 	ObjectData::InitData();
 
@@ -137,7 +141,7 @@ void ObjectPhysic::FillPlanes()
 
 		Vertices = ModelPtr->Vertices;
 		ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
-		Shape->FillVertextBox(objPhysic);
+		Shape->FillVertextBox();
 	}
 }
 

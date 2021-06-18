@@ -44,21 +44,29 @@ public:
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
 	std::vector<shared_ptr<Plane>> Planes;
-	ObjectPhysic* m_obj;
+	//ObjectPhysic* m_obj;
+	ObjectData* m_obj;
+	ObjectPhysic* m_objPhysic;
+	bool IsContainObject = true;
 
 	ShapeBase();
 
 	~ShapeBase();
 
-	vec3 GetVertexWorldPosition(ObjectData* obj, int indVertex);
+	void UpdateShapeInfo(ObjectPhysic* m_obj);
+	void UpdateShapeInfo(ObjectData* m_obj);
 
-	vec3 ToWorldPosition(ObjectData* obj, vec3 pos);
+	//--------------------------------------
 
-	string GetKeySectorPolygon(ObjectData* obj, bool isNewPosition);
+	vec3 GetVertexWorldPosition(int indVertex);
 
-	void FillPlanes(ObjectData* obj);
+	vec3 ToWorldPosition(vec3 pos);
 
-	void FillVertextBox(ObjectPhysic* obj);
+	string GetKeySectorPolygon(bool isNewPosition);
+
+	void FillPlanes();
+
+	void FillVertextBox();
 
 	//===========
 
@@ -70,17 +78,17 @@ public:
 	vec3 GetTopFirst();
 	vec3 GetTopLast();
 
-	void SetBottom(ObjectPhysic* obj, int index, vec3 value);
+	void SetBottom(int index, vec3 value);
 
-	void SetTop(ObjectPhysic* obj, int index, vec3 value);
+	void SetTop(int index, vec3 value);
 
-	vec4 GetLine(ObjectPhysic* obj, int index);
+	vec4 GetLine(int index);
 
-	float GetLineLenght(ObjectPhysic* obj, int index);
+	float GetLineLenght(int index);
 
-	void GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder);
+	void GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 
-	vec2 GetStartPositWorld(ObjectPhysic* obj);
+	vec2 GetStartPositWorld();
 
-	void Billboard(ObjectPhysic* obj);
+	void Billboard();
 };

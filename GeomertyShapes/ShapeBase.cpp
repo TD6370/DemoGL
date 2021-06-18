@@ -8,18 +8,36 @@ ShapeBase::~ShapeBase() {
 
 }
 
-vec3 ShapeBase::GetVertexWorldPosition(ObjectData* obj, int indVertex)
+//void ShapeBase::UpdateShapeInfo(ObjectData* obj)
+void ShapeBase::UpdateShapeInfo(ObjectPhysic* obj)
 {
+	m_obj = obj;
+	m_objPhysic = obj;
+}
+
+void ShapeBase::UpdateShapeInfo(ObjectData* obj)
+{
+	m_obj = obj;
+}
+
+
+vec3 ShapeBase::GetVertexWorldPosition(int indVertex)
+{
+	ObjectData* obj	= m_obj;
+
 	std::vector<vec3 > verticesModel = obj->GetVertices();
 	if (verticesModel.size() - 1 < indVertex)
 		return vec3(-1);
 
 	vec3 posNorm = verticesModel[indVertex];
 
-	return ToWorldPosition(obj, posNorm);
+	return ToWorldPosition(posNorm);
 }
 
-vec3 ShapeBase::ToWorldPosition(ObjectData* obj, vec3 pos) {
+vec3 ShapeBase::ToWorldPosition(vec3 pos) {
+
+	ObjectData* obj = m_obj;
+
 	glm::mat4 trans = Transform(1, 0, false,
 		glm::mat4(1.0f),
 		obj->Postranslate,
@@ -29,7 +47,10 @@ vec3 ShapeBase::ToWorldPosition(ObjectData* obj, vec3 pos) {
 	return worldPos;
 }
 
-string ShapeBase::GetKeySectorPolygon(ObjectData* obj, bool isNewPosition) {
+string ShapeBase::GetKeySectorPolygon(bool isNewPosition) {
+	
+	ObjectData* obj = m_obj;
+
 	vec3 pos = vec3();
 	if (isNewPosition)
 		pos = obj->NewPostranslate;
@@ -42,8 +63,10 @@ string ShapeBase::GetKeySectorPolygon(ObjectData* obj, bool isNewPosition) {
 }
 
 
-void ShapeBase::FillPlanes(ObjectData* obj)
+void ShapeBase::FillPlanes()
 {
+	ObjectData* obj = m_obj;
+
 	int indVert = 0;
 	int indexPlane = 0;
 
@@ -65,8 +88,10 @@ void ShapeBase::FillPlanes(ObjectData* obj)
 	}
 }
 
-void ShapeBase::FillVertextBox(ObjectPhysic* obj)
+void ShapeBase::FillVertextBox()
 {
+	ObjectPhysic* obj = m_objPhysic;
+
 	std::vector<vec3> CubeVectors;
 	int indexPlaneT = 0;
 	int indexPlaneB = 0;
@@ -99,9 +124,11 @@ void ShapeBase::FillVertextBox(ObjectPhysic* obj)
 
 
 //=========================
-float ShapeBase::GetLineLenght(ObjectPhysic* obj, int index) {
+float ShapeBase::GetLineLenght(int index) {
 
-	vec4 line = GetLine(obj, index);
+	ObjectPhysic* obj = m_objPhysic;
+
+	vec4 line = GetLine(index);
 	float x1 = line.x;
 	float y1 = line.y;
 	float x2 = line.z;
@@ -110,7 +137,10 @@ float ShapeBase::GetLineLenght(ObjectPhysic* obj, int index) {
 	return lenghtLine;
 }
 
-vec4 ShapeBase::GetLine(ObjectPhysic* obj, int index) {
+vec4 ShapeBase::GetLine(int index) {
+
+	ObjectPhysic* obj = m_objPhysic;
+
 	vec3 pos1 = BottomVectors[index];
 	vec3 pos2;
 	if (index < 3)
@@ -147,7 +177,9 @@ vec3 ShapeBase::GetTopLast() {
 	return TopVectors[TopVectors.size() - 1];
 }
 
-void ShapeBase::SetBottom(ObjectPhysic* obj,int index, vec3 value) {
+void ShapeBase::SetBottom(int index, vec3 value) {
+
+	ObjectPhysic* obj = m_objPhysic;
 
 	vec3 oldValue = BottomVectors[index];
 	BottomVectors[index] = value;
@@ -163,7 +195,10 @@ void ShapeBase::SetBottom(ObjectPhysic* obj,int index, vec3 value) {
 	}
 }
 
-void ShapeBase::SetTop(ObjectPhysic* obj, int index, vec3 value) {
+void ShapeBase::SetTop(int index, vec3 value) {
+
+	ObjectPhysic* obj = m_objPhysic;
+
 	vec3 oldValue = TopVectors[index];
 	TopVectors[index] = value;
 	int indVert = 0;
@@ -178,7 +213,9 @@ void ShapeBase::SetTop(ObjectPhysic* obj, int index, vec3 value) {
 	}
 }
 
-void ShapeBase::GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, float& zOrder) {
+void ShapeBase::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
+
+	ObjectPhysic* obj = m_objPhysic;
 
 	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP;
 	glm::mat4 transform = obj->TransformResult;
@@ -214,7 +251,9 @@ void ShapeBase::GetPositRect(ObjectPhysic* obj, vec2& startPos, vec2& endPos, fl
 	endPos.y = posWorldBL.y;
 }
 
-vec2 ShapeBase::GetStartPositWorld(ObjectPhysic* obj) {
+vec2 ShapeBase::GetStartPositWorld() {
+
+	ObjectPhysic* obj = m_objPhysic;
 
 	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP;
 	glm::mat4 transform = obj->TransformResult;
@@ -241,8 +280,9 @@ vec2 ShapeBase::GetStartPositWorld(ObjectPhysic* obj) {
 }
 
 
-void ShapeBase::Billboard(ObjectPhysic* obj) {
+void ShapeBase::Billboard() {
 
+	ObjectPhysic* obj = m_objPhysic;
 	obj->TranslateAngle.y = obj->Storage->Oper->HorizontalAngle + (0.5 * M_PI);
 	obj->TranslateAngle.z = -obj->Storage->Oper->VerticalAngle;
 }

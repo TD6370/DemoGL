@@ -8,7 +8,7 @@
 
 void ObjectPolygon::FillPlanes()
 {
-	Shape->FillPlanes(this);
+	Shape->FillPlanes();
 }
 
 

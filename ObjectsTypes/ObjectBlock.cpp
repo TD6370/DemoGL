@@ -25,7 +25,7 @@ void ObjectBlock::InitData()
 
 	IsTextureRepeat = true;
 	//CalculateTextureUV(true);
-	GetShapeHexagon()->CalculateTextureUV(this, true);
+	GetShapeHexagon()->CalculateTextureUV(true);
 }
 
 void ObjectBlock::LockPolygonResult() {
@@ -76,7 +76,7 @@ void ObjectBlock::ControlsEvents() {
 
 	if (Storage->Inputs->Key == KeyUpTopVertex || Storage->Inputs->Key == KeyDownTopVertex) {
 		
-		GetShapeHexagon()->ResizeVerticaleWall(this, KeyUpTopVertex, KeyDownTopVertex);
+		GetShapeHexagon()->ResizeVerticaleWall(KeyUpTopVertex, KeyDownTopVertex);
 	}
 }
 
@@ -90,7 +90,7 @@ void ObjectBlock::TestGravity()
 void ObjectBlock::SelectedEvent() {
 
 	ObjectPhysic::SelectedEvent();
-	GetShapeHexagon()->SelectVertexBlock(this);
+	GetShapeHexagon()->SelectVertexBlock();
 }
 
 void ObjectBlock::MeshTransform() {
@@ -113,16 +113,18 @@ void ObjectBlock::MeshTransform() {
 		vec3 vertA = Shape->GetBottom(indexUpdate);
 
 		vertA = vec3(vertOffset.x, vertA.y, vertOffset.z);
-		Shape->SetBottom(this, indexUpdate, vertA);
+		//Shape->SetBottom(this, indexUpdate, vertA);
+		Shape->SetBottom(indexUpdate, vertA);
 
 		vec3 vertB = Shape->GetTop(indexUpdate);
 		vertB = vec3(vertOffset.x, vertB.y, vertOffset.z);
-		Shape->SetTop(this, indexUpdate, vertB);
+		//Shape->SetTop(this, indexUpdate, vertB);
+		Shape->SetTop(indexUpdate, vertB);
 
 		SaveNewPosition();
 
 		//CalculateTextureUV(false);
-		GetShapeHexagon()->CalculateTextureUV(this, false);
+		GetShapeHexagon()->CalculateTextureUV(false);
 	}
 }
 
@@ -171,8 +173,8 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 
 	//++++++++++++++++++++++++++++++++ #????#
 	ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
-	Shape->FillVertextBox(objPhysic);
+	Shape->FillVertextBox();
 
 	// --- ver2.UV
-	GetShapeHexagon()->CalculateTextureUV(this, false); //CalculateTextureUV(false);
+	GetShapeHexagon()->CalculateTextureUV(false); 
 }

@@ -160,6 +160,8 @@ public:
 		
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
+	string GetInfo();
+
 	//-----------------------------
 	
 	void virtual MeshTransform(); //------- geometric ???

@@ -36,6 +36,8 @@ ObjectData::ObjectData(int p_index,
 	PlaneDownIndex = -1;
 
 	Shape = new ShapeBase();
+	Shape->UpdateShapeInfo(this);
+	
 	/*Shape = new ShapeBase();
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/
@@ -216,6 +218,16 @@ std::shared_ptr<ObjectData> ObjectData::GetChild(string key)
 
 void ObjectData::InitChildObjects() {
 
+}
+
+string ObjectData::GetInfo() {
+
+	SceneSerialize* sceneSerialize = new SceneSerialize();
+	string typeName = sceneSerialize->GetNameType(TypeObj);
+
+	std::stringstream ss;
+	ss << "Name: " << Name << " T:" + typeName;
+	return ss.str();
 }
 
 //------ #SaveFieldSpecific

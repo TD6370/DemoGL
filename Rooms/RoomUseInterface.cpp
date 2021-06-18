@@ -177,7 +177,7 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 	float zOrder;
 	IsFocused = false;
 
-	objGUI->Shape->GetPositRect(objGUI.get(), startPosRect, endPosRect, zOrder);
+	objGUI->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
 
 	//--- Check Focused
 	if (CheckPointInRectangle(m_tempMousePosWorld, startPosRect, endPosRect))
@@ -322,7 +322,7 @@ void RoomUseInterface::CalculateMousePosWorld() {
 			vec2 endPosRect = vec2(0);
 			float zOrder;
 			std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-			objGUI->Shape->GetPositRect(objGUI.get(), startPosRect, endPosRect, zOrder);
+			objGUI->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
 			std::stringstream ss;
 			ss << "---------------------------------\n"
 				<< "Mouse depth: " << depthMouse << " \n"

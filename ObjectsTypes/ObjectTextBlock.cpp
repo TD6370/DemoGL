@@ -164,8 +164,7 @@ void ObjectTextBlock::MeshTransform() {
 	//std::cout << ss1.str();
 	//std::cout << std::endl;
 
-	ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
-	Shape->FillVertextBox(objPhysic);
+	Shape->FillVertextBox();
 }
 
 vector<ObjectFiledsSpecific> ObjectTextBlock::GetSpecificFiels() {
