@@ -518,10 +518,12 @@ void CreatorModelData::LoadModels() {
 	Models.push_back(std::make_unique<ModelFrame>(contextFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	//nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathShaderFrag = "ContextUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
 	//nextModelPrt->PathTexture = "./Textures/future.bmp";
-	nextModelPrt->PathTexture = "./Textures/Frame.bmp";
+	//nextModelPrt->PathTexture = "./Textures/Frame.bmp";
+	nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
@@ -534,7 +536,8 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->PathShaderFrag = "FrameUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
+	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
+	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
@@ -604,7 +607,8 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
 
 	// ---- Object text block GUI
 	objName = "TextBlockObject";

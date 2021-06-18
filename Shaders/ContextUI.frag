@@ -31,16 +31,10 @@ vec4 SDF2(in vec4 inColor )
 	return vec4(res,1.0);
 }
 
-bool CheckParam(in float param, in float chekValue)
-{
-    float correctParam = 0.01;
-    return param > chekValue - correctParam && param < chekValue + correctParam;
-}
 
-// ---------------- FRAME
+// ---------------- CONTEXT
 void main()
 {
-    
     float alpha = 1.0f;
     float bord = 0.01;
     float bordB = bord;
@@ -49,7 +43,7 @@ void main()
     float bordL = bord;
     vec2 result = vec2(0);
     int index =0;
-    vec2 uv = UV;
+    //vec2 uv = UV;
     result = UV;
 
     //------------  BORDERS ------------------------------
@@ -62,21 +56,32 @@ void main()
 //------------------------
     float smSt = 0.5; //0.3;
     float smEn = 1.2; //1.0;
-    float smA = 0.58;
-    float smB = 1.55;
+    //float smA = 0.6;
+    //float smB = 1.5;
+    //float smA = 0.5;
+        //float smA = 0.49;
+        //float smB = 1.49;
+    //float smB = 1.5;
 
-  	float y =  smoothstep(smSt, smEn, uv.y + smA);
-    float x =  smoothstep(smSt, smEn, uv.x + smA);
-    float x1 = smoothstep(smSt, smEn, smB - uv.x);
-    float y1 = smoothstep(smSt, smEn, smB - uv.y);
+    float smA = 0.1;
+    float smB = 0.9;
+
+  	//float y =  smoothstep(smSt, smEn, uv.y + smA);
+    //float x =  smoothstep(smSt, smEn, uv.x + smA);
+    //float x1 = smoothstep(smSt, smEn, smB - uv.x);
+    //float y1 = smoothstep(smSt, smEn, smB - uv.y);
+    //float y =  smoothstep(smSt, smEn, uv.y);
+    //float x =  smoothstep(smSt, smEn, uv.x);
+    //float x1 = smoothstep(smSt, smEn, uv.x);
+    //float y1 = smoothstep(smSt, smEn, uv.y);
+     float y =  smoothstep(smSt, smEn, UV.y);
+    float x =  smoothstep(smSt, smEn, UV.x);
+    float x1 = smoothstep(smSt, smEn, UV.x);
+    float y1 = smoothstep(smSt, smEn, UV.y);
 
     float al;
-    //float hor = x * x1;
-    //float ver = y * y1;
-    float korrUV = 3.5;
-    float hor = (x * x1) * korrUV;
-    float ver = (y * y1) * korrUV;
-
+    float hor = x * x1;
+    float ver = y * y1;
     al = ver * hor;
     float vh = ver * hor;
     float kvad;
@@ -84,10 +89,9 @@ void main()
     kvad = 0.64 - (fract(ver * 1.8)  * fract(hor * 1.8));
     romb = 0.41 - fract(sin(ver * 3.)*cos(hor * 1.5));
 
-    //----- Test
-    //al = UV.y;
+    al = UV.y;
     //----------------------------
-    	//al = clamp(vh ,0.1,.7);
+    	//al = clamp(vh,0.1,.7);
         //al*=1.5;
     //----------------------------
     	//al = clamp(ver,0.,.8)  * clamp(hor,0.,.8);
@@ -119,30 +123,28 @@ void main()
     //-- OFF
     //al = 1.0;
     //-----------   PARAM  --------------------------------------
-    if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
+    if(fragParamCase == m_startResizeParamShaderID)   //= 3 Rsize
     {
         //alpha = al;
-    } else if(CheckParam(fragParamCase,m_startMoveParamShaderID))   //= 2    Move
+    } else if(fragParamCase == m_startMoveParamShaderID)   //= 2    Move
     {
         //alpha = al;
-    } else if(CheckParam(fragParamCase,m_startClickParamShaderID))   //= 5   Click (Work)
+    } else if(fragParamCase == m_startClickParamShaderID)   //= 5   Click (Work)
     {
         //alpha = al;
-    } else if(CheckParam(fragParamCase,m_startCheckBorderParamShaderID))   //= 4 Border
+    } else if(fragParamCase == m_startCheckBorderParamShaderID)   //= 4 Border
     {
         //alpha = al;
-    } else if(CheckParam(fragParamCase,m_startFocusParamShaderID))   //= 1   Focus
+    } else if(fragParamCase == m_startFocusParamShaderID)   //= 1   Focus
     {
-        alpha = al;
-    } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
+        //alpha = al;
+    } else if(fragParamCase == m_startDefaultParamShaderID)   //= 0     Default
     {
         //alpha = al;
     }   
-
     //alpha = al;
-    //alpha += 0.6;
-    //alpha *= 5.;
-    //alpha *= 7.;
+    //alpha += 0.1;
+    //alpha *= 6.2;
     //-----------   AMINA   --------------------------------------
     //
     //if(fragParamCase == m_startClickParamShaderID)
@@ -151,11 +153,16 @@ void main()
     //    result.y +=sin(result.x*sin(fragTime)*.01);
     //}
     //-------------------------------------------------
-    vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
+    //vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
     //-------------------------------------------------
-    //vec4 text1 = vec4(texture( textureSampler, result ).rgb, 1.0 );	
-    
-    //-------------------------------------------------
+    vec4 text1 = vec4(texture( textureSampler, result ).rgb, 1.0 );	
+    //text1.r *= alpha;
+    //text1.g *= alpha;
+    //text1.b *= alpha;
+    //text1.r *= alpha;
+    //text1.r *= UV.y;
+    //text1.g *= UV.y;
+    //text1.b *= UV.y;
     //text1.r *= alpha;
     //text1.g *= alpha;
     //text1.b *= alpha;
@@ -187,4 +194,4 @@ void main()
     //color =  vec4(text1.xyz, alpha);
     color =  text1;
 }
-// ---------------- FRAME
+// ---------------- CONTEXT

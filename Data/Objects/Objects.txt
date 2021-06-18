@@ -1,0 +1,622 @@
+Type: Polygon
+Name: Plane
+Model: plane
+Pos: -20 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: NPC
+Name: Mon
+Model: mon
+Pos: -13.4796 -53.0525 28.8392
+Target: -11.1719 -53.0467 23.3007
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box
+Model: box
+Pos: 0 -35 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box2
+Model: box
+Pos: 0 -25 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box3
+Model: box
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox
+Model: box
+Pos: -10 -54.019 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox1
+Model: box
+Pos: -20 -54.0329 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox2
+Model: box
+Pos: -10 -53.9908 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox3
+Model: box
+Pos: -20 -53.9883 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_1
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_2
+Model: marker_Point
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Bullet
+Name: Bullet
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: BulletHero
+Name: BulletHero
+Model: marker_Point
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_1
+Model: marker_Cross
+Pos: -13.4796 -53.0525 28.8392
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_2
+Model: marker_Cross
+Pos: -13.6719 -55.0535 29.3007
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_1
+Model: marker_Vector
+Pos: -15.3921 -55.0529 26.5479
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 0
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_2
+Model: marker_Vector
+Pos: -15.3831 -55.0519 29.7505
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_3
+Model: marker_Vector
+Pos: -12.1567 -55.0542 29.7384
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Hero
+Name: Hero
+Model: homo
+Pos: 0 -54.0171 5
+Target: 0 -54.0171 5
+Action: Search
+IndexObjectOwner: -1
+Color: 0 0 0
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: GUI
+Name: BackContectGUI
+Model: ConextFrameModel
+Pos: 0.106828 -52.4656 2.46001
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0 0 0
+SizePanel: 0 0
+------------------------------------------------------------------
+Type: GUI
+Name: TEST3
+Model: FrameModel
+Pos: 0.291601 -52.641 2.47261
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.184809 0.175356 0.01
+SizePanel: 1.63404 1.64119
+------------------------------------------------------------------
+Type: TextBlock
+Name: TextBlockObject
+Model: TextBlockModel
+Pos: -0.476522 -51.8053 2.46717
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.396766 0.319515 0.011
+SizePanel: 1.5 1
+Message: привет мир, и доброе утро
+------------------------------------------------------------------
+Type: CursorGUI
+Name: CursorGUI
+Model: CursorModel
+Pos: 0.245567 -53.443 2.48076
+Target: 0 0 0
+Action: Moving
+IndexObjectOwner: 20
+Color: 0.2 0.5 0.1
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+Specific:
+StartPos: 1.09864 1.93466 0.03
+SizePanel: 0.05 0.05
+------------------------------------------------------------------
+
