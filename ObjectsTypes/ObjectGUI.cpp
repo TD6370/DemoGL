@@ -73,9 +73,9 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 		color = vec3(1);
 
 	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
-	auto  modelTextBlock = std::dynamic_pointer_cast<ModelTextBlock>(model);
-	if (modelTextBlock != nullptr) {
-		model = modelTextBlock;
+	auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
+	if (modelTextBox != nullptr) {
+		model = modelTextBox;
 	}
 	auto modelFrame = std::dynamic_pointer_cast<ModelFrame>(model);
 	if (modelFrame != nullptr) {

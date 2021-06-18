@@ -242,9 +242,9 @@ void  ModelFrame::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<v
 	if (buffer.size() != 0)
 		GenBufferColors(buffer, BufferColor_ID);
 }
-//---------------------------- ModelTextBlock
+//---------------------------- ModelTextBox
 
-void  ModelTextBlock::Init() {
+void  ModelTextBox::Init() {
 
 	TypeName = FormatTypeName(typeid(this).name());
 

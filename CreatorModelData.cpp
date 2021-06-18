@@ -111,9 +111,9 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 			Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
-		if (typeModel == "ModelTextBlock") {
-			auto modelTextBlock = ModelTextBlock();
-			Models.push_back(std::make_unique<ModelTextBlock>(modelTextBlock));
+		if (typeModel == "ModelTextBox") {
+			auto modelTextBox = ModelTextBox();
+			Models.push_back(std::make_unique<ModelTextBox>(modelTextBox));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 		
@@ -146,8 +146,8 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 	//	if (typeModel == "ModelFrame") {
 	//		nextModel = ModelFrame();
 	//	}
-	//	if (typeModel == "ModelTextBlock") {
-	//		nextModel = ModelTextBlock();
+	//	if (typeModel == "ModelTextBox") {
+	//		nextModel = ModelTextBox();
 	//	}
 
 	//	//ModelData nextModel = ModelData();
@@ -541,8 +541,8 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "FrameModel");
 
 	//---GUI -- control -- TextBlock
-	ModelTextBlock textBlock = ModelTextBlock();
-	Models.push_back(std::make_unique<ModelTextBlock>(textBlock));
+	ModelTextBox textBlock = ModelTextBox();
+	Models.push_back(std::make_unique<ModelTextBox>(textBlock));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->PathShaderVertex = "TextBlockUI.vert";
 	nextModelPrt->PathShaderFrag = "TextBlockUI.frag";

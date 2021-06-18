@@ -140,6 +140,8 @@ public:
 
 	void Debug(string msg);
 
+
+	float GetParamCase();
 	//----------- TODO:
 	//CoreMVP* GetMVP();
 	//ControllerInput* GetInputs();

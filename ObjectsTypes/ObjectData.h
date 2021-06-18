@@ -85,6 +85,7 @@ public:
 	float TextureRepeat = 1;
 	GLint TrianglesCount = 0;
 	vec3 Color = vec3(0);
+	GLfloat ParamCase = -1;
 
 	//GLfloat TranslateAngle = 0;
 	vec3 TranslateAngle = vec3(0);

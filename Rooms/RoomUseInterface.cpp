@@ -44,6 +44,8 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 	IndexObjectSelected = obj->Index;
 	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
 
+	obj->ParamCase = m_startMoveParamShaderID;
+
 	IsCursorClickEvent = false;//!!!
 }
 
@@ -64,6 +66,7 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	Scene->Debug("GUI moving");
 	vec3 newPos = CursorMovePos - SelectObjectOffsetPos;
 	obj->StartPos = vec3(newPos.x, newPos.y, obj->StartPos.z);
+	
 }
 
 //----------------------- END MOVE
@@ -85,6 +88,8 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	
 	//TODO:
 	IsCursorClickEvent = false; //---- VVVV
+	obj->ParamCase = m_startDefaultParamShaderID;
+
 	return true;
 }
 
@@ -114,7 +119,10 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 	IndexObjectSelected = obj->Index;
 	m_startSizePanel = obj->SizePanel;
 	IsCursorClickEvent = false;//!!!
+	obj->ParamCase = m_startResizeParamShaderID;
 }
+
+
 
 //----------------------- RESIZE
 void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
@@ -167,54 +175,68 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 	obj->ActionObjectCurrent = ActionObject::Stay;
 
 	IsCursorClickEvent = false;
+	obj->ParamCase = m_startDefaultParamShaderID;
 	return true;
 }
+
 //----------------------- FOCUS
-void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> objGUI) {
+void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
 
 	bool isCheckOrder = true;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
 	IsFocused = false;
 
-	objGUI->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
+	obj->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
 
 	//--- Check Focused
 	if (CheckPointInRectangle(m_tempMousePosWorld, startPosRect, endPosRect))
 	{
-		if (IndexObjectFocused != -1 && objGUI->Index < FocusedOrder)
+		if (IndexObjectFocused != -1 && obj->Index < FocusedOrder)
 			isCheckOrder = false;
 
 		if (isCheckOrder) {
-			FocusedOrder = objGUI->Index;
-			IndexObjectFocused = objGUI->Index;
+			FocusedOrder = obj->Index;
+			IndexObjectFocused = obj->Index;
 			IsFocused = true;
+			obj->ParamCase = m_startFocusParamShaderID;
 		}
 	}
 	if (isCheckOrder) {
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
+		obj->ParamCase = m_startCheckBorderParamShaderID;
 	}
 }
 
-void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> objGUI) {
-	if (objGUI->ActionObjectCurrent != Stay)
+void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
+	if (obj->ActionObjectCurrent != Stay)
 		return;
-	if (!objGUI->IsFocusable)
+	if (!obj->IsFocusable)
 		return;
 
 	if (IsFocused) {
-		objGUI->Color = color_selected;
+		obj->Color = color_selected;
+		obj->ParamCase = m_startFocusParamShaderID;
 	}
 	else {
-		if (IndexObjectFocused == objGUI->Index) {
+		if (IndexObjectFocused == obj->Index) {
 			FocusedOrder = -1;
 			IndexObjectFocused = -1;
+			obj->ParamCase = m_startDefaultParamShaderID;
 		}
-		objGUI->Color = color_default;
+		obj->Color = color_default;
 	}
 }
 
+//==========================================
+//obj->ParamCase = m_startResizeParamShaderID;
+//float m_startDefaultParamShaderID = 0;
+//float m_startFocusParamShaderID = 1;
+//float m_startMoveParamShaderID = 2;
+//float m_startResizeParamShaderID = 3;
+//float m_startClickParamShaderID = 4;
+//m_startCheckBorderParamShaderID
 //====================================
 
 void RoomUseInterface::Work() {

@@ -116,11 +116,11 @@ public:
 		vector<vec3>& normals= DEFAULT_VECTOR_V3);
 };
 
-class ModelTextBlock : public ModelFrame {
+class ModelTextBox : public ModelFrame {
 
 public:
 	
-	ModelTextBlock():ModelFrame() {
+	ModelTextBox():ModelFrame() {
 	};
 
 	void Init();

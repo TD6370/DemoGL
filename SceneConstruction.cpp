@@ -187,7 +187,8 @@ void SceneConstruction::SetDataToShader() {
 	//-------------------- Set color
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
 	//---------------------- Set param Case
-	ModelCurrent->ConfUniform.SetParamCase(Storage->Inputs->ParamCase);
+	//ModelCurrent->ConfUniform.SetParamCase(Storage->Inputs->ParamCase);
+	ModelCurrent->ConfUniform.SetParamCase(GetParamCase());
 	//---------------------- Set MVP
 	ModelCurrent->ConfUniform.SetMVP(Storage->ConfigMVP->MVP);//(---)
 
@@ -196,6 +197,13 @@ void SceneConstruction::SetDataToShader() {
 
 	//MODEL param
 	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+}
+
+float SceneConstruction::GetParamCase() {
+	float paramCase = ObjectCurrent->ParamCase;
+	if(paramCase == -1)
+		paramCase = Storage->Inputs->ParamCase;
+	return paramCase;
 }
 
 bool SceneConstruction::SetObject(int indObj) {

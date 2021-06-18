@@ -44,6 +44,12 @@ private:
 	vec3 m_tempMousePosWorld = vec3(0);
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
+	float m_startDefaultParamShaderID = 0;
+	float m_startFocusParamShaderID = 1;
+	float m_startMoveParamShaderID = 2;
+	float m_startResizeParamShaderID = 3;
+	float m_startCheckBorderParamShaderID = 4;
+	float m_startClickParamShaderID = 5;
 	
 	bool m_isDebug = false;
 	mat4 m_projectionPerspective;
