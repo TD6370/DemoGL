@@ -27,6 +27,7 @@ void ObjectGUI::InitData() {
 
 void ObjectGUI::RunAction() {
 
+	GetShapeSquare()->UpdateState();
 
 	if (ActionObjectCurrent != Lock)
 	{
