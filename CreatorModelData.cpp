@@ -537,7 +537,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathShaderFrag = "FrameUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
 	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->PathTexture = "./Textures/testTexture3.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();

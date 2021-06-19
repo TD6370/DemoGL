@@ -37,6 +37,16 @@ bool CheckParam(in float param, in float chekValue)
     return param > chekValue - correctParam && param < chekValue + correctParam;
 }
 
+    //y = mod(x,0.5); // x по модулю 0.5
+    //y = fract(x); // возвращает дробную часть аргумента
+    //y = ceil(x);  // ближайшее целое, большее либо равное x
+    //y = floor(x); // ближайшее целое, меньшее либо равное x
+    //y = sign(x);  // знак x
+    //y = abs(x);   // абсолютное значение x
+    //y = clamp(x,0.0,1.0); // ограничение x промежутком от 0.0 до 1.0
+    //y = min(0.0,x);   // меньшее из x и 0.0
+    //y = max(0.0,x);   // большее из x и 0.0 
+
 // ---------------- FRAME
 void main()
 {
@@ -81,26 +91,46 @@ void main()
     float vh = ver * hor;
     float kvad;
     float romb;
-    kvad = 0.64 - (fract(ver * 1.8)  * fract(hor * 1.8));
-    romb = 0.41 - fract(sin(ver * 3.)*cos(hor * 1.5));
+    //kvad = 0.64 - (fract(ver * 1.8)  * fract(hor * 1.8));
+    //romb = 0.41 - fract(sin(ver * 3.)*cos(hor * 1.5));
+    float circle = ((ver * hor)-0.5);
+    float korrBordBox = 1.;
+    float korrBordBox2 = 1.;
+
+    kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
+    romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
 
     //----- Test
     //al = UV.y;
-    //----------------------------
+    //----------------------------  X
     	//al = clamp(vh ,0.1,.7);
         //al*=1.5;
     //----------------------------
-    	//al = clamp(ver,0.,.8)  * clamp(hor,0.,.8);
-        //al*=1.5;
-        //al = clamp(ver,0.0,1.8)*.4  * clamp(hor,0.,.9)*.3;
-    	//al*=13.1;
-    //----------------------------
-    	//al =0.584 - (fract(ver*1.564)  * fract(hor*1.708));
-        //al =0.58 - (fract(ver*1.5)  * fract(hor*1.708));
-     //----------------------------
-        //al = romb + kvad;
-        //al = romb + kvad+(vh*.6);
-        //al = kvad + (vh*1.1);
+    	// al = clamp(ver,0.,.8)  * clamp(hor,0.,.8);
+        // al*=1.5;
+    //---------------------------- V
+        //korrBordBox = .7;
+        //al =  1. - (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
+    //---------------------------- V
+        // korrBordBox = .7;
+        // al =  (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
+        // al += 0.7;
+//--------------    V
+        // float korrBordBox = 0.38;//krest
+        // al = 1. - (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
+//-------------- krest + circle     V
+        // float korrBordBox = 0.379;//krest
+        // al =.1 - (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
+        // al *= 5.5;
+        // al = al + circle * 1.;
+        // al += 0.4;
+    //---------------------------- V
+        // kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
+        // romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
+        // al = (romb * kvad);
+    //----------------------------  V
+        korrBordBox =.1;
+        al = (kvad-0.5) + ((vh*0.5)-0.5);
     //---------------------
     	//al = 1.496- max(.6, kvad * 1.1);
     //----------------------------
@@ -139,10 +169,6 @@ void main()
         //alpha = al;
     }   
 
-    //alpha = al;
-    //alpha += 0.6;
-    //alpha *= 5.;
-    //alpha *= 7.;
     //-----------   AMINA   --------------------------------------
     //
     //if(fragParamCase == m_startClickParamShaderID)
@@ -151,40 +177,71 @@ void main()
     //    result.y +=sin(result.x*sin(fragTime)*.01);
     //}
     //-------------------------------------------------
-    vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
+    //vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
     //-------------------------------------------------
     //vec4 text1 = vec4(texture( textureSampler, result ).rgb, 1.0 );	
-    
     //-------------------------------------------------
-    //text1.r *= alpha;
-    //text1.g *= alpha;
-    //text1.b *= alpha;
+    vec4 textureBase = vec4(texture( textureSampler, result ).rgb, 1.0 );	
+    //vec3 startColor = fragmentColor * vec3(0.5);
+    vec3 startColor = fragmentColor;
+    vec4 colorText = vec4(startColor, 1.);
 
-    // ---------------------- 
-    //float limitAlpha = 0.9;
-    //if( text1.r > limitAlpha && 
-    //   text1.g > limitAlpha && 
-    //   text1.b > limitAlpha){
-        //--------- SDF
-	    //vec4 text2 =SDF1(text1);
-        //vec4 text3 =SDF2(text1);
-        //text1 = text2 - text3;
-        //alpha =0.0;
-        //alpha =1. - text1.r;
-    //}
+    //--------- Color + Mask
+    vec4 text = vec4(1.);
+    float contrastColorM = 0.3;
+    //float contrastColor = 0.5;
+    //float dark = (1. - alpha) * contrastColor;
+    float darkM = (1. - alpha) * contrastColorM;
+    
+//==================
+    alpha = clamp(alpha,0.0,1.0);
+    //alpha = min(1.0, alpha);
+    //alpha = max(0.0, alpha);
 
-    //-----------------
-        //vec4 colorText = vec4( fragmentColor * vec3(0.5), alpha);
-    //color =  text1 * colorText;
-    //-----------------
-    //vec4 colorText = vec4( fragmentColor * vec3(0.5), 1.0);
-    //color =  text1 * colorText;
-    //-----------------
-    //vec4 colorText = vec4( fragmentColor * vec3(0.5), 1.0);
-    //vec4 colorE =  text1 * colorText;
-    //color =  vec4(colorE.xyz, alpha);
-    //-----------------
-    //color =  vec4(text1.xyz, alpha);
-    color =  text1;
+    //======================================================
+    //bool isTest = true;
+    bool isTest = false;
+    // if(!isTest)
+    // {
+        //======================================================
+        text.r = textureBase.r - (.5 - alpha/2.);
+        text.g = textureBase.g - (.5 - alpha/2.);
+        text.b = textureBase.b - (.5 - alpha/2.);
+
+        //-- low color 
+        //text.r = max(text.r, startColor.r * dark);
+        //text.g = max(text.g, startColor.g * dark);
+        //text.b = max(text.b ,startColor.b * dark); 
+        //-- low color 
+        text.r = max(text.r, startColor.r - darkM);
+        text.g = max(text.g, startColor.g - darkM);
+        text.b = max(text.b ,startColor.b - darkM);
+        //-- original color
+        // text.r = max(text.r, startColor.r);
+        // text.g = max(text.g, startColor.g);
+        // text.b = max(text.b ,startColor.b);
+    
+        // text.r = clamp(text.r, text.r, textureBase.r);
+        // text.g = clamp(text.g, text.g, textureBase.g);
+        // text.b = clamp(text.b, text.b, textureBase.b);
+
+        text.r = min(textureBase.r, text.r);
+        text.g = min(textureBase.g, text.g);
+        text.b = min(textureBase.b, text.b);
+        //======================================================
+    // }
+    // else
+    // {
+    //     text.r = textureBase.r * alpha;
+    //     text.g = textureBase.g * alpha;
+    //     text.b = textureBase.b * alpha;
+    // }
+    //==================
+    //text.r = alpha;
+    //text.g = alpha;
+    //text.b = alpha;
+    //==================
+
+    color =  text;
 }
 // ---------------- FRAME
