@@ -62,6 +62,13 @@ bool StrToBool(string str) {
     return b;
 }
 
+bool IsCompareF(float a, float b)
+{
+    float step = 0.01;
+    float res = fabs(a - b);
+    return res < step;
+}
+
 std::string GetFile(const char* path)
 {
 	string pathStr = path;

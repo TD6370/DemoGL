@@ -20,3 +20,5 @@ bool IsMapContains_StrInt(map <string, int> inMap, string key);
 
 string FormatTypeName(string text);
 
+bool IsCompareF(float a, float b);
+

@@ -39,7 +39,8 @@ private:
 	vec3 color_none = vec3(0);
 	vec3 color_default = vec3(1);
 	vec3 color_selected = vec3(0, 0, 0);
-	vec3 color_resize = vec3(1, 0, 0);
+	//vec3 color_resize = vec3(0.38, 0.159, .235);
+	vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
 	float m_sizeBorder = 0.2;
@@ -50,7 +51,8 @@ private:
 	float m_startResizeParamShaderID = 3;
 	float m_startCheckBorderParamShaderID = 4;
 	float m_startClickParamShaderID = 5;
-	
+	float m_CurrentStartedEventID = -1;
+		
 	bool m_isDebug = false;
 	mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
@@ -93,5 +95,7 @@ public:
 	//bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
 	void CheckFocusBoxAndBorderControl(shared_ptr<ObjectGUI> objGUI);
 	void EventFocusControl(shared_ptr<ObjectGUI> objGUI);
+
+	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
 };
 
