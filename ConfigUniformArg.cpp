@@ -121,7 +121,7 @@ void ConfigUniform::SetTransform(mat4* trans)
 	glUniformMatrix4fv(m_transformLocID, 1, GL_FALSE, glm::value_ptr(*trans));
 }
 
-void ConfigUniform::SeMessage(string message)
+void ConfigUniform::SetMessage(string message)
 {
 	if (m_messageID == 0)
 		return;
@@ -136,10 +136,21 @@ void ConfigUniform::SeMessage(string message)
 	glUniform1iv(m_messageID, 50, messageRsult);
 }
 
-//--------------------- Base
-ConfigUniformBase::~ConfigUniformBase(){}
+void ConfigUniform::SetWidth(GLfloat width) {
+	if (m_widthID == 0)
+		return;
+	glUniform1f(m_widthID, width);
+}
 
-void ConfigUniformBase::Init()
+void ConfigUniform::SetHeight(GLfloat height) {
+	if (m_heightID == 0)
+		return;
+	glUniform1f(m_heightID, height);
+}
+
+//------------
+
+void ConfigUniform::Init()
 {
 	m_setColorID = glGetUniformLocation(m_shaderProgram, "setColor");
 	m_setPosMouseID = glGetUniformLocation(m_shaderProgram, "setPosMouse");
@@ -149,14 +160,9 @@ void ConfigUniformBase::Init()
 	m_filterVectorsID = glGetUniformLocation(m_shaderProgram, "filterVectors");
 }
 
-//---------------------- GUI
-ConfigUniformTextGUI::~ConfigUniformTextGUI(){}
-
-void ConfigUniformTextGUI::Init()
+void ConfigUniform::InitBox()
 {
-	m_setColorID = glGetUniformLocation(m_shaderProgram, "setColor");
-	m_paramCaseID = glGetUniformLocation(m_shaderProgram, "paramCase");
-	m_vertexTimeID = glGetUniformLocation(m_shaderProgram, "fTime");
-	//m_messageID = glGetUniformLocation(m_shaderProgram, "setMessage");
+	m_heightID = glGetUniformLocation(m_shaderProgram, "height");
+	m_widthID = glGetUniformLocation(m_shaderProgram, "width");
+
 }
-//-----------------------

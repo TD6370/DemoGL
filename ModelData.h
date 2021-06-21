@@ -23,11 +23,13 @@ using std::vector;
 using glm::vec2;
 using glm::vec3;
 using std::string;
+using std::shared_ptr;
 
 static vector<vec3> DEFAULT_VECTOR_V3;
 static vector<vec2> DEFAULT_VECTOR_V2;
 
 class Plane;
+class ModelFrame; //!!!
 
 class ModelData {
 
@@ -40,7 +42,6 @@ public:
 	const char* PathModel3D = "./Models3D/monkey.obj";
 	string TypeName;
 
-	//TypeModel TypeMaterial = TypeModel::ModelBase;
 	ConfigUniform ConfUniform;
 
 	GLint TrianglesCount = 0;
@@ -52,11 +53,9 @@ public:
 	bool IsDebug = false;
 	//-------------------
 	std::vector< glm::vec2 > UV;
-	//std::vector< glm::vec2 > StartUV;
 	std::vector< glm::vec3 > Normals;
 	std::vector< glm::vec3 > Vertices;
 	std::vector<unsigned int> Indices;
-	//std::vector<Plane>* Planes;
 
 	unsigned int WidthImage;
 	unsigned int HeightImage;
@@ -84,14 +83,15 @@ public:
 
 	void LoadModelData();
 
-	void virtual ConfigUniform();
+	void virtual InitUniform();
 
 	void SetVAO();
 	void SetVAO(vector<vec3> vertices);
 
-	void virtual SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, 
-		vector<vec2>& uv = DEFAULT_VECTOR_V2, 
-		vector<vec3>& normals = DEFAULT_VECTOR_V3);
+	void virtual SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
+									vector<vec3>& normals = DEFAULT_VECTOR_V3);
+
+	void virtual SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 
 	void SetUV(vector< vec2 > uv);
 	void UpdateBufferUV();
@@ -111,9 +111,13 @@ public:
 
 	void Init();
 
-	void SetModelInBuffer(bool isUpdate = true, vector<vec3>& buffer = DEFAULT_VECTOR_V3, 
-		vector<vec2>& uv = DEFAULT_VECTOR_V2, 
-		vector<vec3>& normals= DEFAULT_VECTOR_V3);
+	void InitUniform();
+
+	void SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
+
+	void SetWidth(GLfloat width);
+	void SetHeight(GLfloat width);
+
 };
 
 class ModelTextBox : public ModelFrame {

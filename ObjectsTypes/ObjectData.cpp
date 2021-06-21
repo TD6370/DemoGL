@@ -65,6 +65,12 @@ void ObjectData::InitData()
 	//TextureUV = ModelPtr->UV;
 }
 
+void ObjectData::SetDataToShader() {
+	auto normals = GetNormals();
+	ModelPtr->SetModelInBuffer(TextureUV, normals);
+	ModelPtr->SetBuffer(Buffer);
+}
+
 void ObjectData::UpdateState() {
 
 }

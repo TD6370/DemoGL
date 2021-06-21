@@ -88,7 +88,12 @@ public:
 
 	vec4 GetLine(int index);
 
+	vec4 GetLineVert(int index);
+
 	float GetLineLenght(int index);
+
+	float GetLineVertLenght(int index);
+	
 
 	void GetPositRect(vec2& startPos, vec2& endPos, float& zOrder);
 

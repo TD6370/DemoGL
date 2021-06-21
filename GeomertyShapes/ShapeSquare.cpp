@@ -77,6 +77,8 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 	if (obj->IsAbsolutePosition)
 		return;
 
+	SaveSizeFactor(true);
+
 	//-- set transform
 	if (obj->Vertices.size() != 0) {
 
@@ -105,9 +107,34 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 		//SetBottom(obj, 0, vertBottomRight);
 		SetBottom(0, vertBottomRight);
 	}
+
+	SaveSizeFactor();
 }
 
+void ShapeSquare::SaveSizeFactor(bool isInit) {
 
+	if (WidthFactor < 0)
+	{
+		if (isInit) {
+			m_startWightLenght = GetLineLenght(0);
+			m_startHeightLenght = GetLineVertLenght(0);
+			return;
+		}
+		WidthFactor = 1;
+		HeightFactor = 1;
+		return;
+	}
+	if (isInit)
+		return;
+
+	//Save factor size
+	float endWightLenght = GetLineLenght(0);
+	float endHeightLenght = GetLineVertLenght(0);
+	WidthFactor = m_startWightLenght / endWightLenght;
+	HeightFactor = m_startWightLenght / endHeightLenght;
+	WidthFactor = glm::abs(WidthFactor);
+	HeightFactor = glm::abs(HeightFactor);
+}
 
 void ShapeSquare::ResizeTextureUV() {
 	ObjectGUI* obj = m_objGUI;

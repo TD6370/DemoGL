@@ -1,8 +1,5 @@
 #pragma once
 
-//#include "ConfigUniformArg.cpp"
-
-
 #define GLEW_STATIC
 #include <GL/glew.h>
 
@@ -26,9 +23,12 @@ class ConfigUniform
 protected:
 	int m_setColorID = 0;
 	int m_setPosMouseID = 0;
+	int m_transformLocID = 0; //unsigned int
+
 	int m_paramCaseID = 0;
 	int m_vertexTimeID = 0;
-	int m_transformLocID = 0; //unsigned int
+	int m_widthID = 0;
+	int m_heightID = 0;
 
 	int m_lightPosID = 0;
 	int m_filterVectorsID = 0;
@@ -46,7 +46,9 @@ public:
 	ConfigUniform(GLuint shaderProgram);
 	~ConfigUniform();
 
-	void virtual Init() {};
+	void Init();
+
+	void InitBox();
 
 	void SetMVP(mat4 MVP);
 
@@ -66,40 +68,10 @@ public:
 
 	void SetTransform(mat4* trans);
 
-	void SeMessage(string message);
-};
+	void SetMessage(string message);
 
+	void SetWidth(GLfloat width);
 
-class ConfigUniformBase : public ConfigUniform
-{
-
-
-public:
-
-	ConfigUniformBase();
-	~ConfigUniformBase();
-
-	ConfigUniformBase(GLuint shaderProgram) : ConfigUniform(shaderProgram) {
+	void SetHeight(GLfloat height);
 	
-		Init();
-	};
-		
-	void Init();
-};
-
-class ConfigUniformTextGUI : public ConfigUniform
-{
-
-
-public:
-
-	ConfigUniformTextGUI();
-	~ConfigUniformTextGUI();
-
-	ConfigUniformTextGUI(GLuint shaderProgram) : ConfigUniform(shaderProgram) {
-
-		Init();
-	};
-
-	void Init();
 };

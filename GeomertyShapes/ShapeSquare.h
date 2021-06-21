@@ -23,8 +23,15 @@ private:
 	vec3 start_vertBottomLeft = vec3(0);
 	vec3 start_vertBottomRight = vec3(0);
 	vec3 start_vertTopLeft = vec3(0);
+	float m_startWightLenght = 0;
+	float m_startHeightLenght = 0;
+
+	void SaveSizeFactor(bool isInit = false);
 
 public:
+	float WidthFactor = -1;
+	float HeightFactor = -1;
+
 	ShapeSquare() :ShapeBase() {};
 
 	~ShapeSquare();

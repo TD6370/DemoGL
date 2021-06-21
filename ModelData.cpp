@@ -107,9 +107,10 @@ void ModelData::LoadModelData() {
 
 //---------------------------------------------------
 
-void ModelData::ConfigUniform() {
+void ModelData::InitUniform() {
 
-	ConfUniform = ConfigUniformBase(ShaderProgram);
+	ConfUniform = ConfigUniform(ShaderProgram);
+	ConfUniform.Init();
 }
 //---------------------------------------------------
 
@@ -148,7 +149,7 @@ void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 		VAO, VBO);
 }
 
-void ModelData::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer, vector<vec2>& uv, vector<vec3>& normals)
+void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals)
 {
 	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
 	//SetBufferUV(UV, BufferUV_ID);
@@ -162,6 +163,11 @@ void ModelData::SetModelInBuffer(bool isUpdate, std::vector< glm::vec3>& buffer,
 		SetNormals(Normals, BufferNormal_ID);
 	else
 		SetNormals(normals, BufferNormal_ID);
+}
+
+void ModelData::SetBuffer(std::vector< glm::vec3>& buffer)
+{
+	
 }
 
 void ModelData::SetUV(vector< vec2 > uv) {
@@ -182,7 +188,7 @@ void ModelData::InitBase() {
 
 	SetModelInBuffer();
 
-	ConfigUniform();
+	InitUniform();
 
 	//FillPlanes();
 }
@@ -222,25 +228,29 @@ void  ModelFrame::Init() {
 
 	SetModelInBuffer();
 
-	ConfigUniform();*/
+	InitUniform();*/
 }
 
-void  ModelFrame::SetModelInBuffer(bool isUpdate, vector<vec3>& buffer, vector<vec2>& uv, vector<vec3>& normals)
+void ModelFrame::InitUniform() {
+
+	ModelData::InitUniform();
+	ConfUniform.InitBox();
+}
+
+void ModelFrame::SetBuffer(std::vector< glm::vec3>& buffer)
 {
-	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-
-	if (uv.size() == 0)
-		SetBufferUV(UV, BufferUV_ID);
-	else
-		SetBufferUV(uv, BufferUV_ID);
-	
-	if(normals.size()==0)
-		SetNormals(Normals, BufferNormal_ID);
-	else
-		SetNormals(normals, BufferNormal_ID);
-
 	if (buffer.size() != 0)
 		GenBufferColors(buffer, BufferColor_ID);
+}
+
+void ModelFrame::SetWidth(GLfloat width) 
+{
+	ConfUniform.SetWidth(width);
+}
+
+void ModelFrame::SetHeight(GLfloat height) 
+{
+	ConfUniform.SetHeight(height);
 }
 //---------------------------- ModelTextBox
 

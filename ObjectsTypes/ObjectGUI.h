@@ -57,6 +57,8 @@ public:
 
 	void InitData();
 
+	void SetDataToShader();
+
 	void RunAction();
 
 	bool GetVisible();

@@ -158,6 +158,31 @@ vec4 ShapeBase::GetLine(int index) {
 	return line;
 }
 
+float ShapeBase::GetLineVertLenght(int index) {
+	ObjectPhysic* obj = m_objPhysic;
+
+	vec4 line = GetLineVert(index);
+	float x1 = line.x;
+	float y1 = line.y;
+	float x2 = line.z;
+	float y2 = line.w;
+	float lenghtLine = glm::distance(vec2(x1, y1), vec2(x2, y2)); // lenght wall
+	return lenghtLine;
+}
+
+vec4 ShapeBase::GetLineVert(int index) {
+
+	ObjectPhysic* obj = m_objPhysic;
+
+	vec3 pos1 = BottomVectors[index];
+	vec3 pos2 = TopVectors[index];
+	
+	vec4 line = vec4(pos1.x + obj->Postranslate.x, 
+					 pos1.z + obj->Postranslate.z, 
+					 pos2.x + obj->Postranslate.x, 
+					 pos2.z + obj->Postranslate.z);
+	return line;
+}
 
 vec3 ShapeBase::GetBottom(int index) {
 	return BottomVectors[index];

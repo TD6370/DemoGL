@@ -24,6 +24,23 @@ void ObjectGUI::InitData() {
 	ActionObjectCurrent = Stay;
 }
 
+void ObjectGUI::SetDataToShader() {
+
+	ObjectData::SetDataToShader();
+
+	auto modelFrame =std::dynamic_pointer_cast<ModelFrame>(ModelPtr);
+	if (modelFrame == nullptr) {
+		return;
+	}
+
+	float width = GetShapeSquare()->WidthFactor;
+	float height = GetShapeSquare()->HeightFactor;
+	if (width < 0)
+		return;
+	modelFrame->SetWidth(width);
+	modelFrame->SetHeight(height);
+}
+
 
 void ObjectGUI::RunAction() {
 

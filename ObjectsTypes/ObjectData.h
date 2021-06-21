@@ -121,6 +121,8 @@ public:
 
 	void virtual InitData();
 
+	void virtual SetDataToShader();
+
 	void virtual UpdateState(); //after fill options
 
 	void GenStartPosition();

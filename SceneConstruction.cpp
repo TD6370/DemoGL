@@ -180,8 +180,7 @@ void SceneConstruction::SetDataToShader() {
 	glBindVertexArray(ModelCurrent->VAO);
 
 	if (m_isUpdate) {
-		auto normals = ObjectCurrent->GetNormals();
-		ModelCurrent->SetModelInBuffer(m_isUpdate, ObjectCurrent->Buffer, ObjectCurrent->TextureUV, normals);
+		ObjectCurrent->SetDataToShader();
 	}
 
 	//-------------------- Set color
@@ -197,6 +196,12 @@ void SceneConstruction::SetDataToShader() {
 
 	//MODEL param
 	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+
+	//------ Set Mouse position
+	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+
+
+	//--- Set Width & height
 }
 
 float SceneConstruction::GetParamCase() {
