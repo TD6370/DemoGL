@@ -4,6 +4,8 @@ in vec3 fragmentColor;
 in vec2 UV;
 in float fragParamCase;
 in float fragTime;
+in float fragWidth;
+in float fragHeight;
 	
     float m_startDefaultParamShaderID = 0.;     //= 0
 	float m_startFocusParamShaderID = 1.;       //= 1
@@ -52,6 +54,7 @@ float KrestCircleBorder(in float al, in float ver, in float hor)
 
 float AngleSharpBorder(in vec2 uv)
 {
+   
     float smSt, smEn, smA, smB, y, x, x1, y1, hor, ver, vh, kvad, al;
     smSt = 0.56; //0.555; 
     smEn = 0.75; // 0.7; //size
@@ -61,6 +64,7 @@ float AngleSharpBorder(in vec2 uv)
     x =  smoothstep(smSt, smEn, uv.x + smA);
     x1 = smoothstep(smSt, smEn, smB - uv.x);
     y1 = smoothstep(smSt, smEn, smB - uv.y);
+
     hor = (x * x1); 
     ver = (y * y1); 
     vh = x * x1 * y * y1;
@@ -70,6 +74,66 @@ float AngleSharpBorder(in vec2 uv)
     float bordBase = 0.85; //0.9;
     al = kvad * (vh + bordBase);
     return al;
+} 
+
+float ChessBoard(in vec2 uv)
+{
+    vec2 uv2 = uv;
+    float w;
+    float h;
+    float res;
+    
+    w = fragWidth  / 2.;
+    h = fragHeight / 2.;
+
+    w/=-w*w;
+    //h/=1./h*h*h;
+    h/=2./h*h*h;
+    
+    //------------------------------- normalize 2
+    //w/=-w*w;
+    //h/=h*h;
+    //------------------------------- normalize
+    //w/=-w;
+    //h/=-h;
+    //------------------------------- normalize
+    // w = floor(fragWidth) / 2.;
+    // h = floor(fragHeight)/ 2.;
+    // w/=-w;
+    // h/=-h;
+    //-------------------------------
+
+    //--- repeat
+    float sizeK = 20.;  //????
+    float sizeX = (w * sizeK);
+    float sizeY = (h * sizeK);
+    uv2.x *= sizeX;
+    uv2.y *= sizeY;
+    uv2 = fract(uv2);
+    //---------------------------
+
+    //CHESS BOARD 
+    vec2 bl = step(vec2(0,0.5), uv2);
+    vec2 bl2 = step(vec2(0.5,0),uv2);
+
+    float pct = bl.x * bl.y;
+    float pct2 = bl2.x * bl2.y;
+    pct = pct + pct2;
+    float pct4 = 1. - pct;
+   	pct /=pct4 ;
+    
+    res = pct;
+
+    //--------------
+    // float d = length( abs(uv)-0.45 );
+    // res *= fract(d*10.0);
+    //res *= fract(res*30.0);
+    // res *= 3.0;      // Scale up the space by 3
+    // res = fract(res);
+    //vec3(fract(d*10.0))
+    //res = pow(res, 5.);
+
+    return res;
 }
 
 bool CheckParam(in float param, in float chekValue)
@@ -129,6 +193,8 @@ void main()
     vec2 result = vec2(0);
     int index =0;
     vec2 uv = UV;
+    float sizeX = fragWidth;
+    float sizeY = fragHeight;
     result = UV;
 
     //------------  BORDERS ------------------------------
@@ -162,6 +228,9 @@ void main()
     float x1 = smoothstep(smSt, smEn, smB - uv.x);
     float y1 = smoothstep(smSt, smEn, smB - uv.y);
 
+    //-------   Offset size object  ----------------
+    // x /= pow(sizeX,sizeX);
+    // y /= pow(sizeY,sizeY);
     //TEST -----------------------
     // y =  smoothstep(smSt, smEn, uv.y);
     // x =  smoothstep(smSt, smEn, uv.x);
@@ -242,7 +311,12 @@ void main()
     //---------------------------- V   Angle Sharp
     if(isResizeParam)
     {
-        al = AngleSharpBorder(uv);
+        //al = AngleSharpBorder(uv);
+        al = ChessBoard(uv);
+        //-------   Offset size object  ----------------
+        //al *= sizeX / sizeY;
+        // x /= pow(sizeX,sizeX);
+        // y /= pow(sizeY,sizeY);
     }
     //----------------------------  V   KrestCircle
         //korrBordBox =.1;
@@ -307,12 +381,18 @@ void main()
     float darkM = (1. - alpha) * contrastColor;
     
 //==================
-    alpha = clamp(alpha,0.,1.);
+    // if(!isResizeParam)
+    // {
+        alpha = clamp(alpha,0.,1.);
+    // }
+
     //======================================================
     text.r = textureBase.r - (.5 - alpha/2.);
     text.g = textureBase.g - (.5 - alpha/2.);
     text.b = textureBase.b - (.5 - alpha/2.);
 
+// if(!isResizeParam)
+// {
     //-- low color 
     text.r = max(text.r, startColor.r - darkM);
     text.g = max(text.g, startColor.g - darkM);
@@ -329,7 +409,7 @@ void main()
     text.r = min(textureBase.r, text.r);
     text.g = min(textureBase.g, text.g);
     text.b = min(textureBase.b, text.b);
-
+// }
     // TEST
     //text.rgb = clamp(text.rgb ,textureBase.rgb , startColor.rgb - darkM);
     //======================================================
@@ -347,5 +427,7 @@ void main()
     //==================
 
     color =  text;
+
+    //color = vec4(1.5);
 }
 // ---------------- FRAME

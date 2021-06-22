@@ -9,6 +9,8 @@ out vec3 fragmentColor;
 out vec2 UV;
 out float fragParamCase;
 out float fragTime;
+out float fragWidth;
+out float fragHeight;
 
 uniform mat4 MVP;
 uniform mat4 VIEW;
@@ -18,6 +20,8 @@ uniform vec3 setColor;
 uniform float paramCase;
 uniform mat4 transform;
 uniform float fTime;
+uniform float width;
+uniform float height;
 
 void main()
 {
@@ -28,4 +32,6 @@ void main()
 	UV = vertexUV;
 	fragParamCase = paramCase;
 	fragTime = fTime;
+	fragWidth = width;
+	fragHeight = height;
 }

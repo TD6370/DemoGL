@@ -139,12 +139,28 @@ void ConfigUniform::SetMessage(string message)
 void ConfigUniform::SetWidth(GLfloat width) {
 	if (m_widthID == 0)
 		return;
+	
+	//TEST
+	string w = std::to_string(width);
+	if (m_debug1 != w) {
+		m_debug1 = w;
+		std::cout << " W: " << width << "\n";
+	}
+
 	glUniform1f(m_widthID, width);
 }
 
 void ConfigUniform::SetHeight(GLfloat height) {
 	if (m_heightID == 0)
 		return;
+	
+	//TEST
+	string h = std::to_string(height);
+	if (m_debug2 != h) {
+		m_debug2 = h;
+		std::cout << " H: " << height << "\n";
+	}
+
 	glUniform1f(m_heightID, height);
 }
 
@@ -162,7 +178,6 @@ void ConfigUniform::Init()
 
 void ConfigUniform::InitBox()
 {
-	m_heightID = glGetUniformLocation(m_shaderProgram, "height");
 	m_widthID = glGetUniformLocation(m_shaderProgram, "width");
-
+	m_heightID = glGetUniformLocation(m_shaderProgram, "height");
 }

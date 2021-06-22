@@ -39,6 +39,9 @@ protected:
 	
 	int m_messageID = 0;
 
+	string m_debug1 = std::string();
+	string m_debug2 = std::string();
+
 	GLuint m_shaderProgram;
 public:
 	
