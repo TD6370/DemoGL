@@ -193,6 +193,7 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 	vec2 endPosRect, startPosRect;
 	float zOrder;
 	IsFocused = false;
+	IsCheckBorder = false;
 
 	obj->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
 
@@ -207,15 +208,15 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 			IndexObjectFocused = obj->Index;
 			IsFocused = true;
 			
-			if (!isOrderParam)
-				SetCurrentEventParam(obj, m_startFocusParamShaderID);
+			/*if (!isOrderParam)
+				SetCurrentEventParam(obj, m_startFocusParamShaderID);*/
 		}
 	}
 	if (isCheckOrder) {
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
-		if (!isOrderParam)
-			SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);
+		/*if (!isOrderParam)
+			SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);*/
 	}
 }
 
@@ -229,7 +230,12 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 	if (IsFocused) {
 		obj->Color = color_selected;
 		if (!isOrderParam)
-			SetCurrentEventParam(obj, m_startFocusParamShaderID);
+		{ 
+			if (IsCheckBorder)
+				SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);
+			else
+				SetCurrentEventParam(obj, m_startFocusParamShaderID);
+		}
 	}
 	else {
 		if (IndexObjectFocused == obj->Index) {

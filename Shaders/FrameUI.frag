@@ -76,8 +76,26 @@ float AngleSharpBorder(in vec2 uv)
     return al;
 } 
 
+float ChessBoardBase(vec2 uv)
+{
+    float xOffset = step(fract(uv.y), 0.5) * 0.5;
+    return step(fract(uv.x + xOffset), 0.5);
+}
+
+float ChessBoardBase2(vec2 uv)
+{
+    vec2 bl = step(vec2(0,0.5), uv);
+    vec2 bl2 = step(vec2(0.5,0), uv);
+    float pct = (bl.x * bl.y) + (bl2.x * bl2.y);
+    float res = pct/(1. - pct);
+    return res;
+}
+
 float ChessBoard(in vec2 uv)
 {
+    float speed = 0.1;
+    float anima = fract(fragTime * speed);
+
     vec2 uv2 = uv;
     float w;
     float h;
@@ -85,55 +103,47 @@ float ChessBoard(in vec2 uv)
     
     w = fragWidth  / 2.;
     h = fragHeight / 2.;
+    //----------------------normalize
+    w/=w*w;
+    h*=(1/h);
+    //h/=(1./h)*pow(h,2);
 
-    w/=-w*w;
-    //h/=1./h*h*h;
-    h/=2./h*h*h;
-    
-    //------------------------------- normalize 2
-    //w/=-w*w;
-    //h/=h*h;
-    //------------------------------- normalize
-    //w/=-w;
-    //h/=-h;
-    //------------------------------- normalize
-    // w = floor(fragWidth) / 2.;
-    // h = floor(fragHeight)/ 2.;
-    // w/=-w;
-    // h/=-h;
-    //-------------------------------
+//--------- anima ---- 
+uv2.x -=anima;
+uv2.y +=anima;
+//----------------------
 
     //--- repeat
-    float sizeK = 20.;  //????
+    float sizeK = 10.;
     float sizeX = (w * sizeK);
     float sizeY = (h * sizeK);
     uv2.x *= sizeX;
     uv2.y *= sizeY;
     uv2 = fract(uv2);
     //---------------------------
-
-    //CHESS BOARD 
-    vec2 bl = step(vec2(0,0.5), uv2);
-    vec2 bl2 = step(vec2(0.5,0),uv2);
-
-    float pct = bl.x * bl.y;
-    float pct2 = bl2.x * bl2.y;
-    pct = pct + pct2;
-    float pct4 = 1. - pct;
-   	pct /=pct4 ;
     
-    res = pct;
-
-    //--------------
-    // float d = length( abs(uv)-0.45 );
-    // res *= fract(d*10.0);
-    //res *= fract(res*30.0);
-    // res *= 3.0;      // Scale up the space by 3
-    // res = fract(res);
-    //vec3(fract(d*10.0))
-    //res = pow(res, 5.);
+    //CHESS BOARD 
+    res = ChessBoardBase2(uv2);
+    //res = ChessBoardBase(uv2);
 
     return res;
+}
+
+vec2 NormalizeSize()
+{
+    float sizeK = 10.;
+    float w;
+    float h;
+   
+    w = fragWidth  / 2.;
+    h = fragHeight / 2.;
+    //----------------------normalize
+    w/=w*w;
+    //h*=(1/h);
+    
+    h/=h*h;
+
+    return vec2(w,h);
 }
 
 bool CheckParam(in float param, in float chekValue)
@@ -152,6 +162,205 @@ bool CheckParam(in float param, in float chekValue)
     //y = min(0.0,x);   // меньшее из x и 0.0
     //y = max(0.0,x);   // большее из x и 0.0 
 
+//======================================
+
+float ChessBoardAnima(vec2 uv, float f, float numLine)
+{
+    float direct = 1. + (-2. * numLine);
+    float anima = fract(fragTime * 2.);
+
+    uv.x *= direct;
+    uv.y *= direct;
+    
+    uv.x -= anima * (1. - f);
+    uv.y -= anima * f;
+    
+    //float xOffset = step(fract(uv.x), 0.5) * 0.5;
+    float xOffset = step(fract(uv.x), 0.5) * 0.5;
+    float res = step(fract(uv.y + xOffset), 0.5);
+    return res;
+}
+
+float BorderBord(vec2 uv1, float HorVer, float numLine)
+{
+    float step2 = (0.1 * (1. - HorVer));
+    float step1=  (0.1 * HorVer);
+    float stepLine1 = (0.1 * (1. - numLine));
+    float stepLine2 =  (0.1 * numLine);
+    
+    float boardSize = 0.01;//0.005;
+    boardSize = 0.005;
+    float bord =.1;
+    float korrLB = 0.085;
+    float korrRT = 0.985;
+
+    // ========= size correct
+    //vec2 size = NormalizeSize();
+    //uv1.x *=size.x/1.6;
+    //uv1.y *=size.y/1.6;
+    //===================
+    
+    // left
+    float lim_blX = uv1.x + step2 + stepLine2 - boardSize + korrLB ;
+    //size.x = min(1.,size.x );
+
+    float blX = step(bord, lim_blX) ;
+    // bottom
+    float lim_blY =uv1.y + step1 + stepLine1 - boardSize + korrLB;
+    float blY = step(bord, lim_blY) ;
+    // bottom-left
+    vec2 bl = vec2(blX , blY);  
+    // right
+    float lim_rtX = korrRT + step2 - uv1.x + stepLine1 - boardSize;
+    float rtX = step(0.0, lim_rtX);
+    // top
+    float lim_rtY = korrRT + step1 + stepLine2 - uv1.y - boardSize;
+    float rtY = step(0.0, lim_rtY);
+    // top-right
+    vec2 tr = vec2(rtX , rtY);   
+    
+    float brd = bl.x * bl.y * tr.x * tr.y;
+    return brd;
+}
+
+float BorderSnake(vec2 uv)
+{
+    //--- repeat
+    vec2 st = uv;
+    float sizeK = 20.;
+
+    vec2 size = NormalizeSize();
+    st.x *= size.x;
+    st.y *= size.y;
+
+
+    st.x *= sizeK;
+    st.y *= sizeK;
+    st = fract(st);
+    
+    //----  border  ----------------------- 
+    float brd = BorderBord(uv, 1., 0.);
+    float brd1 = BorderBord(uv, 1., 1.);
+    float brd2 = BorderBord(uv, 0., 0.);
+    float brd3 = BorderBord(uv, 0., 1.);
+         
+    //----  ChessBoard  -----------------------
+    float color = ChessBoardAnima(st, 1., 0.);
+    color += brd;
+    float color2 = ChessBoardAnima(st, 0., 0.);
+    color2 +=brd2;
+    float color1 = ChessBoardAnima(st, 1., 1.);
+    color1 +=brd1;
+    float color3 = ChessBoardAnima(st, 0., 1.);
+    color3 +=brd3;
+
+    color = color * color1 * color2 * color3;
+    return color;
+}
+
+//===========================
+const float offset = 1.0 / 300.0;  
+
+vec4 ConvolutionMat3x3(vec2 uv)
+{
+    vec2 offsets[9] = vec2[](
+        vec2(-offset,  offset), // top-left
+        vec2( 0.0f,    offset), // top-center
+        vec2( offset,  offset), // top-right
+        vec2(-offset,  0.0f),   // center-left
+        vec2( 0.0f,    0.0f),   // center-center
+        vec2( offset,  0.0f),   // center-right
+        vec2(-offset, -offset), // bottom-left
+        vec2( 0.0f,   -offset), // bottom-center
+        vec2( offset, -offset)  // bottom-right    
+    );
+
+    // float kernel[9] = float[](
+    //     -1, -1, -1,
+    //     -1,  9, -1,
+    //     -1, -1, -1
+    // );
+    //  float kernel[9] = float[](
+    //     0, 1, 0,
+    //     1, -3, 1,
+    //     0, 1, 0
+    // );
+    float kernel[9] = float[](
+        0.0625,  0.125,  0.0625,
+        0.125,   0.25,   0.125,
+        0.0625,  0.125,  0.0625
+    );
+
+    //--- Anima
+    vec2 size = NormalizeSize();
+    //uv.x*=size.x;
+    //uv.y*=size.y;
+    float anima = fract(fragTime * 0.5);
+    //uv.x*=anima;
+    //uv.y*=anima;
+    //uv.x+=anima;
+    //uv.y+=anima;
+
+    float a = anima;
+    //a = cos(uv.x) * sin(uv.y);// * (1./size.y);
+    a *=1./anima;
+    // float kernel[9] = float[](
+    //     -a, -a, -a,
+    //     -a,  9, -a,
+    //     -a, -a, -a
+    // );
+
+    //-----
+    vec3 col = vec3(0.0);
+    vec3 sampleTex[9];
+
+    for(int i = 0; i < 9; i++)
+    {
+        sampleTex[i] = vec3(texture(textureSampler,uv + offsets[i]));
+    }
+    //-----
+    // vec3 col = vec3(0.0);
+    // for(int i = 0; i < 9; i++)
+    //     col += sampleTex[i] * kernel[i];
+    //-----
+    // kernel[9] = float[](
+    //     sampleTex[0],  sampleTex[1],  sampleTex[2],
+    //     sampleTex[3],  sampleTex[4],  sampleTex[5],
+    //     sampleTex[6],  sampleTex[7],  sampleTex[8]
+    // );
+
+    // kernel[9] = float[9](
+    //     sampleTex[0].r,  sampleTex[1].r,  sampleTex[2].r,
+    //     sampleTex[0].r,  sampleTex[1].r,  sampleTex[2].r,
+    //     sampleTex[3].r,  sampleTex[4].r,  sampleTex[8].r
+    // );
+
+    col = vec3(0.0);
+    for(int i = 0; i < 9; i++)
+        col += sampleTex[i] * kernel[i];
+ 
+    return vec4(col, 1.0);
+}  
+
+//--------- BloomZoom
+vec4 BloomZoom(in vec2 uv) {
+
+    vec3 color = vec3(0.0);
+    vec2 toCenter = vec2(.5) - uv;
+    float offset = 1.;
+    float maxIter = 5.;
+    for (float t = 0.0; t <= maxIter; t++) {
+        float percent = (t + offset) / 20.0;
+        //float percent = (t + offset) / fract(iTime*0.1);
+        //color += texture(iChannel0, uv + toCenter * percent).rgb;
+        color += vec3(texture(textureSampler,uv + toCenter * percent).rgb);
+    }
+    return vec4(color / maxIter, 1.);
+}
+
+
+//======================
+
 // ---------------- FRAME
 void main()
 {
@@ -159,6 +368,9 @@ void main()
     if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
     {
         isResizeParam = true; 
+        //TETS
+        //isCheckBorderParam = true; 
+
     } else if(CheckParam(fragParamCase,m_startMoveParamShaderID))   //= 2    Move
     {
         isMoveParamS = true; 
@@ -173,6 +385,8 @@ void main()
         isFocusParam = true; 
         //TEST
         //isResizeParam = true;
+         //isCheckBorderParam = true; 
+         isMoveParamS = true; 
     } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
     {
         isDefaultParam = true; 
@@ -195,6 +409,7 @@ void main()
     vec2 uv = UV;
     float sizeX = fragWidth;
     float sizeY = fragHeight;
+    float contrastColor = 0.3;
     result = UV;
 
     //------------  BORDERS ------------------------------
@@ -313,11 +528,21 @@ void main()
     {
         //al = AngleSharpBorder(uv);
         al = ChessBoard(uv);
+        //-------
+        //float an = BorderSnake(uv);
+        //al *= an;
+        //al = an;
         //-------   Offset size object  ----------------
         //al *= sizeX / sizeY;
         // x /= pow(sizeX,sizeX);
         // y /= pow(sizeY,sizeY);
     }
+    //-------------------------
+    if(isCheckBorderParam)
+    {
+        al = BorderSnake(uv);
+    }
+    
     //----------------------------  V   KrestCircle
         //korrBordBox =.1;
         //al = (kvad-0.5) + ((vh*0.5)-0.5);
@@ -350,7 +575,9 @@ void main()
         //alpha = al;
     } else if(isCheckBorderParam)   //= 4 Border
     {
-        //alpha = al;
+        alpha = al;
+        contrastColor = .9;
+
     } else if(isFocusParam)   //= 1   Focus
     {
         alpha = al;
@@ -366,18 +593,31 @@ void main()
     //    result.x += cos(result.y*cos(fragTime));
     //    result.y +=sin(result.x*sin(fragTime)*.01);
     //}
+    //=------------------------------
+
+    
+
     //-------------------------------------------------
     //vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
     //-------------------------------------------------
     //vec4 text1 = vec4(texture( textureSampler, result ).rgb, 1.0 );	
     //-------------------------------------------------
     vec4 textureBase = vec4(texture( textureSampler, result ).rgb, 1.0 );	
+    
+    //-------------------------------------------------
+    if(isMoveParamS)
+    {
+        //vec2 nextUV = result;
+        //vec4 textBlend = vec4(texture( textureSampler, nextUV ).rgb, 1.0 );	    
+        //textureBase = ConvolutionMat3x3(result);
+        textureBase = BloomZoom(result);
+    }   
+    //-------------------------------------------------
     vec3 startColor = fragmentColor;
     vec4 colorText = vec4(startColor, 1.);
 
     //--------- Color + Mask
     vec4 text = vec4(1.);
-    float contrastColor = 0.3;
     float darkM = (1. - alpha) * contrastColor;
     
 //==================
