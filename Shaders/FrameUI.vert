@@ -12,6 +12,8 @@ out float fragTime;
 out float fragWidth;
 out float fragHeight;
 
+out vec3 fragPosMove;
+
 uniform mat4 MVP;
 uniform mat4 VIEW;
 uniform mat4 MODEL;
@@ -22,6 +24,7 @@ uniform mat4 transform;
 uniform float fTime;
 uniform float width;
 uniform float height;
+uniform vec3 posMove;
 
 void main()
 {
@@ -34,4 +37,5 @@ void main()
 	fragTime = fTime;
 	fragWidth = width;
 	fragHeight = height;
+	fragPosMove = posMove;
 }

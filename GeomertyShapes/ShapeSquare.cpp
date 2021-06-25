@@ -69,6 +69,9 @@ void ShapeSquare::UpdateState() {
 			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->Storage->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->Storage->Oper, obj->StartPos);
 		}
 	}
+
+	SavePosFactor(obj->StartPos, obj->Postranslate);
+
 	Billboard();
 }
 
@@ -118,6 +121,8 @@ void ShapeSquare::SaveSizeFactor(bool isInit) {
 		if (isInit) {
 			m_startWightLenght = GetLineLenght(0);
 			m_startHeightLenght = GetLineVertLenght(0);
+			m_lastWightLenght = m_startWightLenght;
+			m_lastHeightLenght = m_startHeightLenght;
 			return;
 		}
 		WidthFactor = 1;
@@ -127,13 +132,41 @@ void ShapeSquare::SaveSizeFactor(bool isInit) {
 	if (isInit)
 		return;
 
-	//Save factor size
+		//Save factor size
 	float endWightLenght = GetLineLenght(0);
 	float endHeightLenght = GetLineVertLenght(0);
+	//----------------- PosMoveFactor
+	PosMoveSizeFactor.x = endWightLenght - m_lastWightLenght;
+	PosMoveSizeFactor.y = endHeightLenght - m_lastHeightLenght;
+
+	m_lastWightLenght = endWightLenght;
+	m_lastHeightLenght = endHeightLenght;
+	//-----------------
+
 	WidthFactor = m_startWightLenght / endWightLenght;
 	HeightFactor = m_startWightLenght / endHeightLenght;
 	WidthFactor = glm::abs(WidthFactor);
 	HeightFactor = glm::abs(HeightFactor);
+}
+
+void ShapeSquare::SavePosFactor(vec3 posGUI, vec3 posWorld) {
+
+	if (posWorld == vec3(0) || posGUI == vec3(0))
+	{
+		m_lastPosGUI = posGUI;
+		m_lastPosWorld = posWorld;
+		return;
+	}
+
+	/*PosMoveFactor.x = m_lastPosGUI.x - posGUI.x;
+	PosMoveFactor.y = m_lastPosWorld.y - posWorld.y*/;
+	vec3 posMoveFactor = m_lastPosWorld - posWorld;
+	if(posMoveFactor != vec3(0))
+		PosMoveFactor = posMoveFactor;
+
+	m_lastPosGUI = posGUI;
+	m_lastPosWorld = posWorld;
+	
 }
 
 void ShapeSquare::ResizeTextureUV() {

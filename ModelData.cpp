@@ -252,6 +252,17 @@ void ModelFrame::SetHeight(GLfloat height)
 {
 	ConfUniform.SetHeight(height);
 }
+
+void ModelFrame::SetPosMove(vec3 posMove)
+{
+	ConfUniform.SetPosMove(posMove);
+}
+
+void ModelFrame::SetPosMoveSize(vec3 posMoveS)
+{
+	ConfUniform.SetPosMoveSize(posMoveS);
+}
+
 //---------------------------- ModelTextBox
 
 void  ModelTextBox::Init() {

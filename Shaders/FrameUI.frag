@@ -6,6 +6,7 @@ in float fragParamCase;
 in float fragTime;
 in float fragWidth;
 in float fragHeight;
+in vec3 fragPosMove;
 	
     float m_startDefaultParamShaderID = 0.;     //= 0
 	float m_startFocusParamShaderID = 1.;       //= 1
@@ -344,21 +345,40 @@ vec4 ConvolutionMat3x3(vec2 uv)
 
 //--------- BloomZoom
 vec4 BloomZoom(in vec2 uv) {
-
+    float anima = fract(fragTime * 0.1);
+    vec2 move = normalize(fragPosMove.xy);
     vec3 color = vec3(0.0);
-    vec2 toCenter = vec2(.5) - uv;
+    vec2 center = vec2(0.5);
+    move *=-1;
+    //-------------------
+
+    //--- anima ---
+    vec2 moveA = vec2(0);
+    moveA.x = sin(fragTime * 0.5);
+    moveA.y = cos(fragTime * 0.5);
+    vec2 moveC = vec2(0.1);
+    moveC *= moveA;
+    //----------------------
+    moveC.x = mix(moveC.x, move.x, 0.1);
+    moveC.y = mix(moveC.y, move.y, 0.1);
+    center.x = (moveC.x / 2.)  + 0.5;
+    center.y = (moveC.y / 2.)  + 0.5;
+    //-------------------
+
+    //vec2 toCenter = vec2(.5) - uv;
+    vec2 toCenter = center - uv;
     float offset = 1.;
     float maxIter = 5.;
+    float zoom = 20.0;
+    //zoom = fract(fragTime * 0.1) + move;
+
     for (float t = 0.0; t <= maxIter; t++) {
-        float percent = (t + offset) / 20.0;
+        float percent = (t + offset) / zoom;
         //float percent = (t + offset) / fract(iTime*0.1);
-        //color += texture(iChannel0, uv + toCenter * percent).rgb;
         color += vec3(texture(textureSampler,uv + toCenter * percent).rgb);
     }
     return vec4(color / maxIter, 1.);
 }
-
-
 //======================
 
 // ---------------- FRAME
@@ -368,8 +388,6 @@ void main()
     if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
     {
         isResizeParam = true; 
-        //TETS
-        //isCheckBorderParam = true; 
 
     } else if(CheckParam(fragParamCase,m_startMoveParamShaderID))   //= 2    Move
     {
@@ -386,11 +404,12 @@ void main()
         //TEST
         //isResizeParam = true;
          //isCheckBorderParam = true; 
-         isMoveParamS = true; 
+         //isMoveParamS = true; 
     } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
     {
         isDefaultParam = true; 
     }   
+    //-----------------------------
     //     isResizeParam = true; 
     //     isMoveParamS = true; 
     //   isClickParam = true; 
@@ -412,55 +431,17 @@ void main()
     float contrastColor = 0.3;
     result = UV;
 
-    //------------  BORDERS ------------------------------
-    //---- standart
-    //vec2 bl = vec2(step(bordL,uv.x) , step(bordB,uv.y));       // bottom-left
-    //vec2 tr = vec2(step(bordR,1.0-uv.x) , step(bordT,1.0-uv.y));   // top-right
-    //float brd = bl.x * bl.y * tr.x * tr.y;
-    //    result = (brd * UV);
-    //---- ef 
-
-
-//------------------------
+    //------------------------
     float smSt = 0.5; //0.3;
     float smEn = 1.2; //1.0;
     float smA = 0.58;
     float smB = 1.55;
-
-    //-----------------------------
-    //---- standart
-    // vec2 bl = vec2(smoothstep(smSt, smEn,uv.x) , smoothstep(smSt, smEn,uv.y));       // bottom-left
-    // vec2 tr = vec2(smoothstep(smSt, smEn,1.0-uv.x) , smoothstep(smSt, smEn,1.0-uv.y));   // top-right
-    // float brd = bl.x * bl.y * tr.x * tr.y;
-    // float x_1 = smoothstep(smSt, smEn,uv.x);
-    // float y_1 = smoothstep(smSt, smEn,uv.y);
-    // float x_2 = smoothstep(smSt, smEn,1.0-uv.x)
-    // float Y_2 = smoothstep(smSt, smEn,1.0-uv.y)
     //-----------------------------------
 
   	float y =  smoothstep(smSt, smEn, uv.y + smA);
     float x =  smoothstep(smSt, smEn, uv.x + smA);
     float x1 = smoothstep(smSt, smEn, smB - uv.x);
     float y1 = smoothstep(smSt, smEn, smB - uv.y);
-
-    //-------   Offset size object  ----------------
-    // x /= pow(sizeX,sizeX);
-    // y /= pow(sizeY,sizeY);
-    //TEST -----------------------
-    // y =  smoothstep(smSt, smEn, uv.y);
-    // x =  smoothstep(smSt, smEn, uv.x);
-    // x1 = smoothstep(smSt, smEn, 1.0-uv.x);
-    // y1 = smoothstep(smSt, smEn, 1.0-uv.y);
-    //x = step(bordL - 0.1,x);
-    //y = step(bordL - 0.1,y);
-    //-----------------------
-
-    //---------- ANIMA zOrder
-    //  y+=(0.5 - x)/2.*cos(fragTime);
-    //  x+=(0.5 - y)/2.*cos(fragTime);
-    //  y1+=(0.5 - x1)/2.*cos(fragTime);
-    //  x1+=(0.5 - y1)/2.*cos(fragTime);
-    //------------------------
 
     bool isTest = true; // false;
     float al;
@@ -472,6 +453,7 @@ void main()
     float anima = cos(fragTime * speed);
     float stepZ = 6.;//5.5;
     float offsetBordA = 11.5;
+    
     if(isFocusParam)
     {
         float animaZ = anima * -anima; //timeline normaalize
@@ -482,43 +464,15 @@ void main()
     
     float hor = (x * x1) * korrUV;
     float ver = (y * y1) * korrUV;
-    
-    //--- test
-    // //float korrUV =1.45;
-    // float korrUV =1.25;
-    // float hor = (x * (x1+0.04)) + korrUV;
-    // float ver = (y * (y1+0.04)) + korrUV;
-    //-----------------------
-
     al = ver * hor;
     float vh = ver * hor;
-    
-    //------------------
     float kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
     float romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
     float circle = ((ver * hor)-0.5);
     float korrBordBox = 1.;
     float korrBordBox2 = 1.;
+    //------------------
 
-    //----- Test
-    //al =  x * x1 * y * y1;
-
-    //al = UV.y;
-    //----------------------------  Bord circle
-    	//al = clamp(vh ,0.1,.7);
-        //al*=1.5;
-    //---------------------------- Bord box
-    	//al = clamp(ver,0.,.8)  * clamp(hor,0.,.8);
-        //al*=1.5;
-        //---------------------------- V Plitka
-        // korrBordBox = .7;
-        // al =  (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
-        // al += 0.7;
-//--------------    V   Krest
-        // korrBordBox = 0.38;
-        // al = 1. - (fract(ver * korrBordBox)  * fract(hor * korrBordBox));
-//-------------- krest + circle     V
-    //if((isFocusParam && !isTest))
     if(isFocusParam)
     {
         al = KrestCircleBorder(al, ver, hor);
@@ -542,23 +496,6 @@ void main()
     {
         al = BorderSnake(uv);
     }
-    
-    //----------------------------  V   KrestCircle
-        //korrBordBox =.1;
-        //al = (kvad-0.5) + ((vh*0.5)-0.5);
-    //---------------------
-    	//al = 1.496- max(.6, kvad * 1.1);
-    //----------------------------
-    	//al = (hor*2.2 -0.7) *  (ver*2.2-0.7);
-    //----------------------------
-        //float al1 = ver / hor;
-        //float al2 = hor / ver;
-        //al = (al2*1.5 -0.6) * (al1*1.7-0.7);
-    //-------------------
-    //alpha = al;
-    
-    //---- TEST
-    //al = 0.480 - fract(sin(ver*3.044)*cos(hor*1.500))*7.212;
 
 
     //-- OFF
@@ -591,24 +528,14 @@ void main()
     //if(fragParamCase == m_startClickParamShaderID)
     //{
     //    result.x += cos(result.y*cos(fragTime));
-    //    result.y +=sin(result.x*sin(fragTime)*.01);
+    //    result.y += sin(result.x*sin(fragTime)*.01);
     //}
     //=------------------------------
 
-    
-
-    //-------------------------------------------------
-    //vec4 text1 = vec4(texture( textureSampler, result ).rgb, alpha );	
-    //-------------------------------------------------
-    //vec4 text1 = vec4(texture( textureSampler, result ).rgb, 1.0 );	
-    //-------------------------------------------------
     vec4 textureBase = vec4(texture( textureSampler, result ).rgb, 1.0 );	
-    
     //-------------------------------------------------
     if(isMoveParamS)
     {
-        //vec2 nextUV = result;
-        //vec4 textBlend = vec4(texture( textureSampler, nextUV ).rgb, 1.0 );	    
         //textureBase = ConvolutionMat3x3(result);
         textureBase = BloomZoom(result);
     }   
@@ -621,18 +548,13 @@ void main()
     float darkM = (1. - alpha) * contrastColor;
     
 //==================
-    // if(!isResizeParam)
-    // {
-        alpha = clamp(alpha,0.,1.);
-    // }
+    alpha = clamp(alpha,0.,1.);
 
     //======================================================
     text.r = textureBase.r - (.5 - alpha/2.);
     text.g = textureBase.g - (.5 - alpha/2.);
     text.b = textureBase.b - (.5 - alpha/2.);
 
-// if(!isResizeParam)
-// {
     //-- low color 
     text.r = max(text.r, startColor.r - darkM);
     text.g = max(text.g, startColor.g - darkM);
@@ -649,21 +571,6 @@ void main()
     text.r = min(textureBase.r, text.r);
     text.g = min(textureBase.g, text.g);
     text.b = min(textureBase.b, text.b);
-// }
-    // TEST
-    //text.rgb = clamp(text.rgb ,textureBase.rgb , startColor.rgb - darkM);
-    //======================================================
-    // }
-    // else
-    // {
-    //     text.r = textureBase.r * alpha;
-    //     text.g = textureBase.g * alpha;
-    //     text.b = textureBase.b * alpha;
-    // }
-    //==================
-    //text.r = alpha;
-    //text.g = alpha;
-    //text.b = alpha;
     //==================
 
     color =  text;

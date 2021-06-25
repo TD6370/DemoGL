@@ -117,7 +117,9 @@ public:
 
 	void SetWidth(GLfloat width);
 	void SetHeight(GLfloat width);
-
+	void SetPosMove(vec3 posMove);
+	void SetPosMoveSize(vec3 posMoveS);
+	
 };
 
 class ModelTextBox : public ModelFrame {

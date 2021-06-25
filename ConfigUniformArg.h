@@ -29,6 +29,8 @@ protected:
 	int m_vertexTimeID = 0;
 	int m_widthID = 0;
 	int m_heightID = 0;
+	int m_posMoveID = 0;
+	int m_posMoveSizeID = 0;
 
 	int m_lightPosID = 0;
 	int m_filterVectorsID = 0;
@@ -77,4 +79,9 @@ public:
 
 	void SetHeight(GLfloat height);
 	
+	void SetPosMove(vec3 height);
+
+	void SetPosMoveSize(vec3 height);
+	
+
 };

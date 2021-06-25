@@ -35,10 +35,14 @@ void ObjectGUI::SetDataToShader() {
 
 	float width = GetShapeSquare()->WidthFactor;
 	float height = GetShapeSquare()->HeightFactor;
+	vec3 posMove = GetShapeSquare()->PosMoveFactor;
+	vec3 posMoveSize = GetShapeSquare()->PosMoveSizeFactor;
 	if (width < 0)
 		return;
 	modelFrame->SetWidth(width);
 	modelFrame->SetHeight(height);
+	modelFrame->SetPosMove(posMove);
+	modelFrame->SetPosMoveSize(posMoveSize);
 }
 
 
