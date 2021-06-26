@@ -344,7 +344,7 @@ vec4 ConvolutionMat3x3(vec2 uv)
 }  
 
 //--------- BloomZoom
-vec4 BloomZoom(in vec2 uv) {
+vec3 BloomZoom(in vec2 uv) {
     float anima = fract(fragTime * 0.1);
     vec2 move = normalize(fragPosMove.xy);
     vec3 color = vec3(0.0);
@@ -356,6 +356,8 @@ vec4 BloomZoom(in vec2 uv) {
     vec2 moveA = vec2(0);
     moveA.x = sin(fragTime * 0.5);
     moveA.y = cos(fragTime * 0.5);
+    //TODO: step (centr)
+
     vec2 moveC = vec2(0.1);
     moveC *= moveA;
     //----------------------
@@ -377,8 +379,51 @@ vec4 BloomZoom(in vec2 uv) {
         //float percent = (t + offset) / fract(iTime*0.1);
         color += vec3(texture(textureSampler,uv + toCenter * percent).rgb);
     }
-    return vec4(color / maxIter, 1.);
+    return vec3(color / maxIter);
 }
+
+//--- Ripples
+//vec3 Ripples(vec2 uv)
+float Ripples(vec2 uv)
+{
+    float iTime = fragTime;
+    vec2 center = vec2(0.5,0.5);
+    float speed =.6;
+    vec3 color;
+    float anima = sin(fract(iTime * speed));
+    vec3 col = vec4(uv,0.5+0.5*sin(iTime),1.0).xyz;
+    //=======================        
+        //float invAr = iResolution.y / iResolution.x;
+        //float x = (center.x-uv.x);
+        //float y = (center.y-uv.y) *invAr;
+        //float r = -sqrt(x*x + y*y); //uncoment this line to symmetric ripples
+        //float r = -(x*x + y*y);
+        //color = 1.0 + 0.5*sin((r+iTime*speed)/0.013);
+        //color = 1.0 + 0.5*sin(r*+200.3)/0.013;
+    //=======================
+    //uv.x /= anima;
+    //uv.y /= anima;
+    //=======================
+    //float rad = 1.7;
+    float rad = 1.7;
+    float circles = 25.;
+    anima = sin(fract(iTime * speed)) * cos(fract(iTime * speed) + 0.5) * rad;
+    float d = length(abs(uv - .5));
+    d = (fract(d) - fract(anima));
+    d *= pow(sin(d * circles), 2.) ;
+    //color = vec3(anima - d - sin(anima));
+    float result = anima - d - sin(anima);
+    //--------------------
+    //float d = length(abs(uv-.5));
+    //d = (fract(d) - fract(anima));
+    //d *= pow(sin(d*20.),2.) ;
+    //color = vec3((anima - d) - (sin(anima*1.0)));
+    //=============================
+
+    //return color;
+    return 1. - result;
+}
+
 //======================
 
 // ---------------- FRAME
@@ -392,6 +437,7 @@ void main()
     } else if(CheckParam(fragParamCase,m_startMoveParamShaderID))   //= 2    Move
     {
         isMoveParamS = true; 
+        
     } else if(CheckParam(fragParamCase,m_startClickParamShaderID))   //= 5   Click (Work)
     {
         isClickParam = true; 
@@ -400,11 +446,12 @@ void main()
         isCheckBorderParam = true; 
     } else if(CheckParam(fragParamCase,m_startFocusParamShaderID))   //= 1   Focus
     {
-        isFocusParam = true; 
+        //isFocusParam = true; 
         //TEST
         //isResizeParam = true;
          //isCheckBorderParam = true; 
          //isMoveParamS = true; 
+          isClickParam = true; 
     } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
     {
         isDefaultParam = true; 
@@ -417,6 +464,7 @@ void main()
     //   isFocusParam = true; 
     //   isDefaultParam = true; 
     //-----------------------------
+    vec3 startColor = fragmentColor;
     float alpha = 1.0f;
     float bord = 0.01;
     float bordB = bord;
@@ -465,71 +513,62 @@ void main()
     float hor = (x * x1) * korrUV;
     float ver = (y * y1) * korrUV;
     al = ver * hor;
-    float vh = ver * hor;
-    float kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
-    float romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
-    float circle = ((ver * hor)-0.5);
-    float korrBordBox = 1.;
-    float korrBordBox2 = 1.;
-    //------------------
-
-    if(isFocusParam)
-    {
-        al = KrestCircleBorder(al, ver, hor);
-    }
-    //---------------------------- V   Angle Sharp
-    if(isResizeParam)
-    {
-        //al = AngleSharpBorder(uv);
-        al = ChessBoard(uv);
-        //-------
-        //float an = BorderSnake(uv);
-        //al *= an;
-        //al = an;
-        //-------   Offset size object  ----------------
-        //al *= sizeX / sizeY;
-        // x /= pow(sizeX,sizeX);
-        // y /= pow(sizeY,sizeY);
-    }
-    //-------------------------
-    if(isCheckBorderParam)
-    {
-        al = BorderSnake(uv);
-    }
-
-
-    //-- OFF
-    //al = 1.0;
+    // float vh = ver * hor;
+    // float kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
+    // float romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
+    // float circle = ((ver * hor)-0.5);
+    // float korrBordBox = 1.;
+    // float korrBordBox2 = 1.;
+     
     //-----------   PARAM  --------------------------------------
+   
     if(isResizeParam)   //= 3 Rsize
     {
+        alpha = ChessBoard(uv);
+    }   
+    else if(isMoveParamS)   //= 2    Move
+    {
+        //alpha = al;
+    } 
+    else if(isClickParam)   //= 5   Click (Work)
+    {
+        al = Ripples(uv);
+        //al = 1. - al;
+        contrastColor = .6;
+        startColor = vec3(.60);
         alpha = al;
-    } else if(isMoveParamS)   //= 2    Move
+    } 
+    else if(isCheckBorderParam)   //= 4 Border
     {
-        //alpha = al;
-    } else if(isClickParam)   //= 5   Click (Work)
-    {
-        //alpha = al;
-    } else if(isCheckBorderParam)   //= 4 Border
-    {
+        al = BorderSnake(uv);
         alpha = al;
         contrastColor = .9;
-
-    } else if(isFocusParam)   //= 1   Focus
+    } 
+    else if(isFocusParam)   //= 1   Focus
     {
+        al = KrestCircleBorder(al, ver, hor);
         alpha = al;
+        contrastColor = .8;
+        startColor = vec3(.60);
+
     } else if(isDefaultParam)   //= 0     Default
     {
         //alpha = al;
     }   
-
+   
     //-----------   AMINA   --------------------------------------
     //
-    //if(fragParamCase == m_startClickParamShaderID)
-    //{
+     if(isClickParam)
+     {
     //    result.x += cos(result.y*cos(fragTime));
     //    result.y += sin(result.x*sin(fragTime)*.01);
-    //}
+
+        float anima = sin(fragTime) * cos(fragTime) - fragTime * 5.;
+        result.x += cos(uv.y * cos(anima * 0.1));
+        result.y += sin(uv.x * sin(anima * 0.1));
+
+
+     }
     //=------------------------------
 
     vec4 textureBase = vec4(texture( textureSampler, result ).rgb, 1.0 );	
@@ -537,10 +576,16 @@ void main()
     if(isMoveParamS)
     {
         //textureBase = ConvolutionMat3x3(result);
-        textureBase = BloomZoom(result);
+        textureBase = vec4( BloomZoom(result) - 0.1, 1.);
     }   
+    if(isClickParam)   //= 5   Click (Work)
+    {
+        //al = Ripples(uv);
+        //textureBase = vec4( Ripples(uv), 1.);
+        //alpha = al;
+    } 
     //-------------------------------------------------
-    vec3 startColor = fragmentColor;
+    
     vec4 colorText = vec4(startColor, 1.);
 
     //--------- Color + Mask

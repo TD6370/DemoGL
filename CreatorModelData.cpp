@@ -539,8 +539,8 @@ void CreatorModelData::LoadModels() {
 	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
 	//nextModelPrt->PathTexture = "./Textures/testTexture3.bmp";
 	//nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	//nextModelPrt->PathTexture = "./Textures/InventCase.bmp";
-	nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
+	nextModelPrt->PathTexture = "./Textures/InventCase2.bmp";
+	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init();
