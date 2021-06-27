@@ -446,12 +446,12 @@ void main()
         isCheckBorderParam = true; 
     } else if(CheckParam(fragParamCase,m_startFocusParamShaderID))   //= 1   Focus
     {
-        //isFocusParam = true; 
+        isFocusParam = true; 
         //TEST
         //isResizeParam = true;
          //isCheckBorderParam = true; 
          //isMoveParamS = true; 
-          isClickParam = true; 
+         // isClickParam = true; 
     } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
     {
         isDefaultParam = true; 
@@ -563,9 +563,9 @@ void main()
     //    result.x += cos(result.y*cos(fragTime));
     //    result.y += sin(result.x*sin(fragTime)*.01);
 
-        float anima = sin(fragTime) * cos(fragTime) - fragTime * 5.;
-        result.x += cos(uv.y * cos(anima * 0.1));
-        result.y += sin(uv.x * sin(anima * 0.1));
+        // float anima = sin(fragTime) * cos(fragTime) - fragTime * 5.;
+        // result.x += cos(uv.y * cos(anima * 0.1));
+        // result.y += sin(uv.x * sin(anima * 0.1));
 
 
      }

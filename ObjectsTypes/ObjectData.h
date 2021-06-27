@@ -48,7 +48,7 @@ public:
 	string Name;
 	TypeObject TypeObj;
 	ActionObject ActionObjectCurrent;
-
+	
 	GLfloat Speed = 0.5f;
 	int IndexObjectOwner = -1;
 	bool IsSelected = false;
@@ -72,7 +72,8 @@ public:
 	CreatorModelData* Storage;
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;
-	
+	CommandParams* SceneCommand;
+
 	int Index = 0;
 	//int RadiusCollider = 5;
 

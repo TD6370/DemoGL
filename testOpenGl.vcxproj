@@ -175,6 +175,8 @@
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectTextBlock.cpp" />
     <ClCompile Include="OperationString.cpp" />
+    <ClCompile Include="Rooms\AspectDispatcherCommands.cpp" />
+    <ClCompile Include="Rooms\AspectFactoryObjects.cpp" />
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
     <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
     <ClCompile Include="Rooms\RoomUseInterface.cpp" />
@@ -215,6 +217,8 @@
     <ClInclude Include="ObjectsTypes\ObjectTextBlock.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Rooms\AspectDispatcherCommands.h" />
+    <ClInclude Include="Rooms\AspectFactoryObjects.h" />
     <ClInclude Include="Rooms\RoomMarkerPlane.h" />
     <ClInclude Include="Rooms\RoomSerializeScene.h" />
     <ClInclude Include="Rooms\RoomUseInterface.h" />

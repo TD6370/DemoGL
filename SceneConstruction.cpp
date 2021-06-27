@@ -5,6 +5,8 @@
 #include "Rooms/RoomMarkerPlane.h"
 #include "Rooms/RoomSerializeScene.h"
 #include "Rooms/RoomUseInterface.h"
+#include "Rooms/AspectFactoryObjects.h"
+#include "Rooms/AspectDispatcherCommands.h"
 
 #include "CreatorModelData.h"
 #include "TransformModel.h"
@@ -65,6 +67,8 @@ void SceneConstruction::Init() {
 	TransModel = new TransformModel();
 	Contrl = new Controllers();
 
+	CurrentSceneCommand = new CommandParams();
+
 	LoadDataModel();
 	
 	ConfigRoom();
@@ -107,6 +111,15 @@ void SceneConstruction::ConfigRoom() {
 	RoomUseInterface* roomInterface = new RoomUseInterface("Interface", this);
 	roomInterface->Init();
 	Rooms.push_back(make_unique<RoomUseInterface>(*roomInterface));
+
+	AspectDispatcherCommands* dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
+	dispatcherCommands->Init();
+	Rooms.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
+	
+
+	factoryObjects = new AspectFactoryObjects("FactoryObjects", this);
+	factoryObjects->Init();
+	
 }
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
@@ -247,12 +260,6 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 	PreparationDataFromShader();
 
-	//TEST
-	if (ObjectCurrent->Name == "CursorGUI")
-	{
-		auto t = true;
-	}
-
 	ObjectCurrent->Action();
 
 	SetDataToShader();
@@ -269,12 +276,19 @@ void SceneConstruction::Update()
 	GenMVP();
 
 	countObjects = Storage->SceneObjectsLastIndex;
-
 	if (IsBreakUpdate()) {
 		DrawGraph();
 		WorkingRooms();
 		return;
 	}
+
+	FactoryObjectsWork();
+
+	/*if (IsBreakUpdate()) {
+		DrawGraph();
+		WorkingRooms();
+		return;
+	}*/
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
@@ -374,4 +388,9 @@ void SceneConstruction::DrawGraph()
 	glDisableClientState(GL_NORMAL_ARRAY);*/
 
 	glBindVertexArray(0);
+}
+
+void SceneConstruction::FactoryObjectsWork() {
+
+	factoryObjects->Work();
 }

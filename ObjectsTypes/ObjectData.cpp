@@ -38,6 +38,9 @@ ObjectData::ObjectData(int p_index,
 	Shape = new ShapeBase();
 	Shape->UpdateShapeInfo(this);
 	
+	SceneCommand = new CommandParams();
+	SceneCommand->Enable = false;
+
 	/*Shape = new ShapeBase();
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/

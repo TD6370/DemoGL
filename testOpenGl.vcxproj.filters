@@ -168,6 +168,12 @@
     <ClCompile Include="GeomertyShapes\ShapeSquare.cpp">
       <Filter>GeomertyShapes</Filter>
     </ClCompile>
+    <ClCompile Include="Rooms\AspectFactoryObjects.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\AspectDispatcherCommands.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -283,6 +289,12 @@
     </ClInclude>
     <ClInclude Include="GeomertyShapes\ShapeSquare.h">
       <Filter>GeomertyShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\AspectFactoryObjects.h">
+      <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\AspectDispatcherCommands.h">
+      <Filter>Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

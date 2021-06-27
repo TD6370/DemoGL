@@ -28,6 +28,7 @@ class CreatorModelData;
 class ControllerInput;
 class TransformModel;
 class Controllers;
+class AspectFactoryObjects;
 //class GLFWwindow;
 
 using std::vector;
@@ -96,6 +97,9 @@ public:
 
 	vector<shared_ptr<SceneRoom>> Rooms;
 
+	AspectFactoryObjects* factoryObjects;
+
+
 	SceneConstruction();
 
 	SceneConstruction(GLFWwindow* Window);
@@ -140,6 +144,7 @@ public:
 
 	void Debug(string msg);
 
+	void FactoryObjectsWork();
 
 	float GetParamCase();
 	//----------- TODO:

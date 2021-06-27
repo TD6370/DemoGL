@@ -163,7 +163,7 @@ void ObjectGUI::Click() {
 void ObjectGUI::Work() {
 
 	Color = m_color_work;
-	//ActionObjectCurrent = Stay;
+	ActionObjectCurrent = Stay; //Off
 }
 
 void ObjectGUI::DefaultSate() {

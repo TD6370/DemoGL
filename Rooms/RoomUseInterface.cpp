@@ -22,10 +22,13 @@ void RoomUseInterface::Init() {
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
+	IsEditControls = false;
 }
 
 //==================================== START MOVE
 void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
+	if (!IsEditControls)
+		return;
 	if (!obj->IsFocusable)
 		return;
 	if (!IsCursorClickEvent)
@@ -54,6 +57,8 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 //----------------------- MOVE
 void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 
+	if (!IsEditControls)
+		return;
 	if (IndexObjectSelected != obj->Index)
 		return;
 	if (!obj->IsFocusable)
@@ -71,6 +76,8 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 
 //----------------------- END MOVE
 bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
+	if (!IsEditControls)
+		return false;
 	if (!obj->IsFocusable)
 		return false;
 	if (!IsCursorClickEvent)
@@ -97,6 +104,8 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 
 //==================================== START RESIZE
 void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
+	if (!IsEditControls)
+		return;
 	if (!obj->IsFocusable)
 		return;
 	if (!IsCursorClickEvent)
@@ -130,6 +139,8 @@ void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float val
 
 //----------------------- RESIZE
 void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
+	if (!IsEditControls)
+		return;
 	if (IndexObjectSelected != obj->Index)
 		return;
 	if (!obj->IsFocusable)
@@ -167,6 +178,8 @@ void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
 
 //----------------------- END RESIZE
 bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
+	if (!IsEditControls)
+		return false;
 	if(!obj->IsFocusable)
 		return false;
 	if (!IsCursorClickEvent)
@@ -207,16 +220,11 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 			FocusedOrder = obj->Index;
 			IndexObjectFocused = obj->Index;
 			IsFocused = true;
-			
-			/*if (!isOrderParam)
-				SetCurrentEventParam(obj, m_startFocusParamShaderID);*/
 		}
 	}
 	if (isCheckOrder) {
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
-		/*if (!isOrderParam)
-			SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);*/
 	}
 }
 
@@ -231,7 +239,7 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		obj->Color = color_selected;
 		if (!isOrderParam)
 		{ 
-			if (IsCheckBorder)
+			if (IsCheckBorder && IsEditControls)
 				SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);
 			else
 				SetCurrentEventParam(obj, m_startFocusParamShaderID);
@@ -247,6 +255,32 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		obj->Color = color_default;
 	}
 }
+
+//==================================== START CLICK 
+void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
+	if (IsEditControls)
+		return;
+	if (!obj->IsFocusable)
+		return;
+	if (!IsCursorClickEvent)
+		return;
+	if (!IsFocused)
+		return;
+	if (obj->ActionObjectCurrent == ActionObject::Transforming)
+		return;
+
+	//if (IndexObjectSelected != -1)	//-- when click after order
+	//	return;
+
+	Scene->Debug("Start click");
+	obj->Click();
+	SetCurrentEventParam(obj, m_startClickParamShaderID);
+	//obj->ActionObjectCurrent = ActionObject::Moving;
+	//IndexObjectSelected = obj->Index;
+	
+	IsCursorClickEvent = false;//!!!
+}
+
 
 //==========================================
 //obj->ParamCase = m_startResizeParamShaderID;
@@ -298,6 +332,9 @@ void RoomUseInterface::Work() {
 
 		//--- Focus box & focus Border
 		CheckFocusBoxAndBorderControl(objGUI);
+
+		//----Start event Click Control
+		EventStartClickControl(objGUI);
 
 		//-- End event resize control
 		//bool isEndRsizeControl = 

@@ -90,6 +90,15 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
+enum SceneCommands { CreateObject, DeleteObject };
+
+struct CommandParams {
+	bool Enable;
+	SceneCommands SceneCommand;
+	int SourceIndex;
+	int TargetIndex;
+};
+
 struct WorldSectors{
 	std::string NameTerraPlane;
 	std::map <std::string, std::vector<int>> SectorsPlane;

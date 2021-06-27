@@ -61,6 +61,7 @@ private:
 	bool IsCursorClickEvent = false;
 	bool IsCursorClickEventConst = false;
 	bool IsCheckBorder = false;
+	bool IsEditControls = false;
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
 	float FocusedOrder = -1;
@@ -95,6 +96,9 @@ public:
 	//bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
 	void CheckFocusBoxAndBorderControl(shared_ptr<ObjectGUI> objGUI);
 	void EventFocusControl(shared_ptr<ObjectGUI> objGUI);
+
+	//-------- Click control
+	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
 
 	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
 };
