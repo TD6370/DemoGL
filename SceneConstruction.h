@@ -99,6 +99,7 @@ public:
 
 	AspectFactoryObjects* factoryObjects;
 
+	CommandParams* CurrentSceneCommand;
 
 	SceneConstruction();
 
