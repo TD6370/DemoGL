@@ -72,7 +72,7 @@ public:
 	CreatorModelData* Storage;
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;
-	CommandParams* SceneCommand;
+	CommandPack* SceneCommand;
 
 	int Index = 0;
 	//int RadiusCollider = 5;

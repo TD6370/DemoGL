@@ -51,6 +51,12 @@ string Trim(string str) {
     return str;
 }
 
+
+string BoolToStr(bool value)
+{
+    return value == 0 ? "0" : "1";
+}
+
 bool StrToBool(std::string const& s) {
     return s != "0";
 }

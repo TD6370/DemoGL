@@ -47,6 +47,7 @@ struct ObjectFileds {
 	string Color = "Color:";
 	vec3 ColorValue;
 	OptionsObject Options;
+	string Command = "Command:";
 
 	map<string, string> OtherFields;
 };
@@ -82,6 +83,10 @@ private:
 
 	map<TypeObject, string> m_mapNamesTypesObjects;
 	map<string, TypeObject> m_mapTypesObjects;
+
+	map<TypeCommand, string> m_mapNamesTypesCommands;
+	map<string, TypeCommand> m_mapTypesCommands;
+	
 
 public:
 	vector<shared_ptr<ObjectFileds>> FiledsObjects;
@@ -122,5 +127,9 @@ public:
 	string GetNameType(ActionObject typeObj);
 	ActionObject GetTypeAction(string name);
 	void AddNextType(ActionObject typeObj, string Name);
+
+	string GetNameType(TypeCommand typeObj);
+	TypeCommand GetTypeCommands(string name);
+	void AddNextType(TypeCommand typeObj, string Name);
 };
 

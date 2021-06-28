@@ -67,7 +67,7 @@ void SceneConstruction::Init() {
 	TransModel = new TransformModel();
 	Contrl = new Controllers();
 
-	CurrentSceneCommand = new CommandParams();
+	CurrentSceneCommand = CommandPack();
 
 	LoadDataModel();
 	
@@ -393,4 +393,16 @@ void SceneConstruction::DrawGraph()
 void SceneConstruction::FactoryObjectsWork() {
 
 	factoryObjects->Work();
+}
+
+bool SceneConstruction::ReadCommand(TypeCommand commandType)
+{
+	CommandPack* command = &CurrentSceneCommand;
+	if (command->Enable && command->CommandType == commandType) {
+		command->Enable = false;
+		command->CommandType = None;
+		return true;
+	}
+
+	return false;
 }

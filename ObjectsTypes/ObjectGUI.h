@@ -20,7 +20,7 @@ using std::shared_ptr;
 class ObjectGUI :
 	public ObjectPhysic
 {
-private :
+protected :
 	vec3 m_color_work = vec3(0, 1, 0); //green
 	vec3 m_color_transforming = vec3(0.1, 0.8, 0.1); //green
 	string hyst_posit = "";
@@ -35,7 +35,7 @@ public:
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
 
-	string CommandName;
+	//string CommandName;
 
 	ObjectGUI(
 		int p_index,
@@ -63,7 +63,7 @@ public:
 
 	bool GetVisible();
 
-	void ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
+	shared_ptr<ObjectData> ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 
 	void virtual Click();
 	

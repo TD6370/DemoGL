@@ -38,7 +38,7 @@ ObjectData::ObjectData(int p_index,
 	Shape = new ShapeBase();
 	Shape->UpdateShapeInfo(this);
 	
-	SceneCommand = new CommandParams();
+	SceneCommand = new CommandPack();
 	SceneCommand->Enable = false;
 
 	/*Shape = new ShapeBase();
@@ -238,6 +238,7 @@ string ObjectData::GetInfo() {
 	ss << "Name: " << Name << " T:" + typeName;
 	return ss.str();
 }
+
 
 //------ #SaveFieldSpecific
 

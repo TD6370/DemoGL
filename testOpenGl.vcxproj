@@ -164,6 +164,7 @@
     <ClCompile Include="ModelData.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectBlock.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectBullet.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectButton.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectCursorGUI.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="ModelData.h" />
     <ClInclude Include="ObjectsTypes\ObjectBlock.h" />
     <ClInclude Include="ObjectsTypes\ObjectBullet.h" />
+    <ClInclude Include="ObjectsTypes\ObjectButton.h" />
     <ClInclude Include="ObjectsTypes\ObjectCursorGUI.h" />
     <ClInclude Include="ObjectsTypes\ObjectCursorRay.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />

@@ -1,10 +1,13 @@
 #include "ObjectGUI.h"
 #include "ObjectPhysic.h"
+#include "ObjectTextBlock.h"
+#include "ObjectButton.h"
+
 #include "..\CreatorModelData.h"
 #include "..\Serialize\SceneSerialize.h"
 #include "..\ModelData.h"
 #include "../CoreSettings.h"
-#include "ObjectTextBlock.h"
+
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../GeomertyShapes/ShapeSquare.h"
 
@@ -88,7 +91,7 @@ bool ObjectGUI::GetVisible() {
 	return Storage->SceneData->IsGUI;
 }
 
-void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
+shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
 {
 	if(color == vec3(0))
 		color = vec3(1);
@@ -120,6 +123,8 @@ void ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObj
 		objTextBlock->Message = caption;
 		objTextBlock->CreateMessage();
 	}
+
+	return objGUI;
 }
 
 void ObjectGUI::SizeControlUpdate()

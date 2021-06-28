@@ -14,6 +14,8 @@ string Trim(string path);
 
 bool StrToBool(string const& s);
 
+string BoolToStr(bool value);
+
 //bool StrToBool(string str);
 
 bool IsMapContains_StrInt(map <string, int> inMap, string key);

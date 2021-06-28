@@ -12,6 +12,13 @@
 #include <vector>
 #include <map>
 
+using std::vector;
+using glm::vec4;
+using glm::vec3;
+using glm::vec2;
+using std::string;
+using std::map;
+
 #define M_PI 3.1415926535897932384626433832795
 
 struct World {
@@ -85,27 +92,36 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming }; // , EventControl };
 
-enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI
+enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI, Button
 };
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
-enum SceneCommands { CreateObject, DeleteObject };
+enum TypeCommand { None, CreateObject, DeleteObject, SelectPosForObject, EditGUI_OnOff };
 
-struct CommandParams {
+struct CommandPack {
 	bool Enable;
-	SceneCommands SceneCommand;
+	TypeCommand CommandType;
 	int SourceIndex;
 	int TargetIndex;
+	map <string, int> Options = map <string, int>{};
 };
 
 struct WorldSectors{
-	std::string NameTerraPlane;
-	std::map <std::string, std::vector<int>> SectorsPlane;
-	std::map <std::string, std::vector<int>> SectorsObjects;
-	std::map <std::string, std::vector<int>> SectorsBlocks;
+	string NameTerraPlane;
+	map <string, vector<int>> SectorsPlane;
+	map <string, vector<int>> SectorsObjects;
+	map <string, vector<int>> SectorsBlocks;
 };
 
-
+struct GUIAnimation
+{
+	int StartDefaultParamShaderID = 0;
+	int StartFocusParamShaderID = 1;
+	int StartMoveParamShaderID = 2;
+	int StartResizeParamShaderID = 3;
+	int StartCheckBorderParamShaderID = 4;
+	int StartClickParamShaderID = 5;
+}; // AnimationGUI;
 
 

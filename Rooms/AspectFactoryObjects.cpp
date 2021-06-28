@@ -22,15 +22,9 @@ void AspectFactoryObjects::Work() {
 	if (Scene->IsBreakUpdate())
 		return;
 
-	if (Scene->CurrentSceneCommand->Enable == false)
-		return;
-
-	CommandParams* command = Scene->CurrentSceneCommand;
-
-	//enum SceneCommands { CreateObject, DeleteObject };
-	if (command->SceneCommand == CreateObject) {
-
-		Scene->CurrentSceneCommand->Enable = false;
-		return;
+	//--- Create object
+	if (Scene->ReadCommand(CreateObject))
+	{
+		CommandPack command = Scene->CurrentSceneCommand;
 	}
 }

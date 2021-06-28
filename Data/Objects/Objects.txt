@@ -6,6 +6,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -21,11 +22,12 @@ IsUsable: 1
 Type: NPC
 Name: Mon
 Model: mon
-Pos: -32.3 -52.9788 -9.80118
-Target: -25.3967 -52.983 -6.6633
-Action: Moving
+Pos: -15.0568 -53.0403 17.2887
+Target: -10.0568 -53.0403 5.28866
+Action: Look
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -46,6 +48,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -66,6 +69,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -86,6 +90,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -106,6 +111,7 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -163,6 +169,7 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -220,6 +227,7 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -277,6 +285,7 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -334,6 +343,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -354,6 +364,7 @@ Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -374,6 +385,7 @@ Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -389,11 +401,12 @@ IsUsable: 1
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Pos: 51.5761 -47.5052 -76.0532
-Target: 53.0821 -47.3581 -78.4189
+Pos: 0 0 0
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -409,11 +422,12 @@ IsUsable: 1
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: -32.3 -52.9788 -9.80118
+Pos: -15.0568 -53.0403 17.2887
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -429,11 +443,12 @@ IsUsable: 1
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: -32.7552 -54.9799 -10.0081
+Pos: -14.7701 -55.0373 17.6983
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -449,11 +464,12 @@ IsUsable: 1
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: -34.4497 -54.9775 -11.8813
+Pos: -15.3348 -55.0361 16.9405
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 1 0
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -469,11 +485,12 @@ IsUsable: 1
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: -34.44 -54.9741 -8.65704
+Pos: -15.3652 -55.0427 20.1426
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 0 1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -489,11 +506,12 @@ IsUsable: 1
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: -31.2823 -54.9831 -8.66049
+Pos: -12.1465 -55.0452 20.132
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
 Color: 0 1 1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -514,6 +532,7 @@ Target: 0 -54.0171 5
 Action: Search
 IndexObjectOwner: -1
 Color: 0 0 0
+Command: None
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -529,11 +548,12 @@ IsUsable: 1
 Type: GUI
 Name: BackContectGUI
 Model: ConextFrameModel
-Pos: -0.0495877 -52.6496 2.45814
+Pos: 0.0358791 -52.5216 2.45673
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -552,11 +572,12 @@ SizePanel: 0 0
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Pos: 0.0178303 -52.7005 2.46857
+Pos: 0.0970638 -52.7231 2.47892
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
-Color: 1 1 0
+Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -569,17 +590,68 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.0666285 0.0515234 0.01
-SizePanel: 1.52658 1.6526
+StartPos: 0.0606012 0.201783 0.02
+SizePanel: 1.535 1.02407
 ------------------------------------------------------------------
-Type: TextBlock
-Name: TextBlockObject
-Model: TextBlockModel
-Pos: -0.492797 -53.049 2.51108
+Type: Button
+Name: ButtonEditOn
+Model: ButtonModel
+Pos: 0.0467493 -52.5312 2.48868
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
 Color: 1 1 1
+Command: EditGUI_OnOff
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 0
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.03
+SizePanel: 0.1 0.1
+IsToogleButon: 1
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI
+Model: ButtonModel
+Pos: 0.168062 -52.5607 2.47757
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+Command: SelectPosForObject
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.131606 0.0393803 0.02
+SizePanel: 1.43781 0.136658
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: TextBlockObject
+Model: TextBlockModel
+Pos: -0.683906 -51.6368 2.49777
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 1 1 1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -592,18 +664,19 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.534595 1.38063 0.011
+StartPos: 0.259069 0.0956973 0.04
 SizePanel: 1.5 1
 Message: привет мир, и доброе утро
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Pos: 0.481223 -53.366 2.50542
+Pos: 0.0558615 -53.0935 2.492
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 20
 Color: 0.2 0.5 0.1
+Command: None
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -616,7 +689,7 @@ IsFocusable: 0
 IsTransformable: 0
 IsUsable: 0
 Specific:
-StartPos: 1.48741 1.67929 0.03
+StartPos: 0.979095 1.53226 0.03
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 

@@ -28,6 +28,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::GUI, "GUI");
 	AddNextType(TypeObject::TextBlock, "TextBlock");
 	AddNextType(TypeObject::CursorGUI, "CursorGUI");
+	AddNextType(TypeObject::Button, "Button");
 
 	//Create map types action object
 	AddNextType(ActionObject::Moving, "Moving");
@@ -39,6 +40,13 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(ActionObject::Woking, "Woking");
 	AddNextType(ActionObject::Transforming, "Transforming");
 	//AddNextType(ActionObject::, "");
+
+	AddNextType(TypeCommand::None, "None");
+	AddNextType(TypeCommand::CreateObject, "CreateObject");
+	AddNextType(TypeCommand::DeleteObject, "DeleteObject");
+	AddNextType(TypeCommand::SelectPosForObject, "SelectPosForObject");
+	AddNextType(TypeCommand::EditGUI_OnOff, "EditGUI_OnOff");
+	//AddNextType(TypeCommand::, "");
 }
 
 SceneSerialize::~SceneSerialize() {
@@ -83,6 +91,8 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.IndexObjectOwner << " " << obj->IndexObjectOwner << "\n";
 	streamObjects << fileds.Color << " " << Vec3Str(obj->Color) << "\n";
 
+	streamObjects << fileds.Command << " " << GetNameType(obj->SceneCommand->CommandType) << "\n";
+	
 	//Options
 	streamObjects << fileds.Options.IsVisible << " " << obj->IsVisible << "\n";
 	streamObjects << fileds.Options.IsGravity << " " << obj->IsGravity << "\n";
@@ -225,8 +235,41 @@ TypeObject SceneSerialize::GetTypeObject(string name) {
 	}
 	return result;
 }
-//----------------------------------------
+//--------	SceneCommands	-------------------------------- 
 
+void SceneSerialize::AddNextType(TypeCommand typeObj, string Name) {
+	m_mapNamesTypesCommands.insert(std::pair<TypeCommand, string>(typeObj, Name));
+	m_mapTypesCommands.insert(std::pair<string, TypeCommand>(Name, typeObj));
+}
+
+string SceneSerialize::GetNameType(TypeCommand typeObj) {
+
+	string name = "Error";
+	map <TypeCommand, string> ::iterator it;
+	auto map = m_mapNamesTypesCommands;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+TypeCommand SceneSerialize::GetTypeCommands(string name) {
+
+	TypeCommand result;
+	map <string, TypeCommand> ::iterator it;
+	auto map = m_mapTypesCommands;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
+
+
+//----------------------------------------
 void SceneSerialize::Save() {
 
 	World WorldSetting;
@@ -344,6 +387,9 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.ColorValue.z;
 				}
 
+				if (in >> lineStr && lineStr == filedsObj.Command)
+					in >> filedsObj.Command;
+
 				if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
 					in >> filedsObj.Options.IsVisible;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsGravity)
@@ -368,6 +414,7 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.Options.IsUsable;
 		/*		if (in >> lineStr && lineStr == filedsObj.Options.)
 					in >> filedsObj.Options.;*/
+							
 			}
 
 			if (in >> lineStr && lineStr == m_stringSeparator) {

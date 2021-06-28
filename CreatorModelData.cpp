@@ -14,6 +14,7 @@
 #include "ObjectsTypes/ObjectGUI.h"
 #include "ObjectsTypes/ObjectTextBlock.h"
 #include "ObjectsTypes/ObjectCursorGUI.h"
+#include "ObjectsTypes/ObjectButton.h"
 #include "GeomertyShapes//ShapeBase.h" //###
 
 #include "Serialize/SceneSerialize.h"
@@ -225,6 +226,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
+		case Button: {
+			ObjectButton obj = ObjectButton(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectButton>(obj));
+			object = GetObjectPrt(obj.Index);
+			break;
+		}
 		case CursorGUI: {
 			ObjectCursorGUI obj = ObjectCursorGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
@@ -387,6 +394,10 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 		newObj->Color = objFields->ColorValue;
 
+		TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
+		if (typeCommand != TypeCommand::None)
+			newObj->SceneCommand->CommandType = typeCommand;
+
 		OptionsObject opt = objFields->Options;
 		newObj->IsVisible = StrToBool(opt.IsVisible);
 		newObj->IsGravity = StrToBool(opt.IsGravity);
@@ -399,8 +410,13 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->IsFocusable = StrToBool(opt.IsFocusable);
 		newObj->IsTransformable = StrToBool(opt.IsTransformable);
 		newObj->IsUsable = StrToBool(opt.IsUsable);
-		//newObj-> = StrToBool(opt.);
-		
+
+				
+		//--- test serialize
+		/*	if (newObj->TypeObj == Button) {
+			std::cout << "TEST";
+		}*/
+
 		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
 		newObj->SetSpecificFiels(specificFields);
@@ -546,6 +562,24 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->Init();
 	AddModel(nextModelPrt, "FrameModel");
 
+
+	//------ Button Model --------------------------
+	ModelFrame modelButton = ModelFrame();
+	Models.push_back(std::make_unique<ModelFrame>(modelButton));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
+	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
+	//nextModelPrt->PathTexture = "./Textures/testTexture3.bmp";
+	//nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->PathTexture = "./Textures/Button.bmp";
+	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->Init();
+	AddModel(nextModelPrt, "ButtonModel");
+
 	//---GUI -- control -- TextBlock
 	ModelTextBox textBlock = ModelTextBox();
 	Models.push_back(std::make_unique<ModelTextBox>(textBlock));
@@ -582,6 +616,9 @@ void CreatorModelData::LoadObjectsGUI() {
 	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
 	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+	//shared_ptr<ObjectButton> objButton = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
+	shared_ptr<ObjectButton> objCreateButton;// 
+	shared_ptr<ObjectData> objCreate;
 
 	// ---- Object frame
 	string caption;
@@ -613,17 +650,36 @@ void CreatorModelData::LoadObjectsGUI() {
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
 
+	// ---- Object Button edit obj GUI
+	objName = "ButtonEditOn";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "ButtonModel";
+	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.03), vec2(0.1, 0.1), Button, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+	objCreateButton->IsToogleButon = true;
+	objCreateButton->IsTransformable = false;
+	objCreateButton->SceneCommand->CommandType = EditGUI_OnOff;
+
+	// ---- Object Button create obj GUI
+	objName = "ButtonCreateObjGUI";
+	caption = objBackGUI->Name + "." + objName;
+	childModel = "ButtonModel";
+	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.1, .01, 0.02), vec2(0.3, 0.2), Button, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+	objCreateButton->IsToogleButon = false;
+	objCreateButton->SceneCommand->CommandType = SelectPosForObject;
+	
 	// ---- Object text block GUI
 	objName = "TextBlockObject";
 	caption = "привет мир, и доброе утро";
 	childModel = "TextBlockModel";
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.04), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 

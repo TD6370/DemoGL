@@ -99,7 +99,8 @@ public:
 
 	AspectFactoryObjects* factoryObjects;
 
-	CommandParams* CurrentSceneCommand;
+	//CommandPack* CurrentSceneCommand;
+	CommandPack CurrentSceneCommand;
 
 	SceneConstruction();
 
@@ -148,6 +149,9 @@ public:
 	void FactoryObjectsWork();
 
 	float GetParamCase();
+
+	bool ReadCommand(TypeCommand commandType);
+
 	//----------- TODO:
 	//CoreMVP* GetMVP();
 	//ControllerInput* GetInputs();

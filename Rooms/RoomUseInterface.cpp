@@ -1,6 +1,7 @@
 ﻿#include "RoomUseInterface.h"
 
 //#include "..\GeometryLib.h"
+#include "..\CoreSettings.h"
 #include "..\SceneConstruction.h"
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\ObjectsTypes\ObjectGUI.h"
@@ -22,12 +23,15 @@ void RoomUseInterface::Init() {
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
-	IsEditControls = false;
+	IsEditControls = true;
+	//IsEditControls = false;
 }
 
 //==================================== START MOVE
 void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	if (!IsEditControls)
+		return;
+	if (!obj->IsTransformable)
 		return;
 	if (!obj->IsFocusable)
 		return;
@@ -105,6 +109,8 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 //==================================== START RESIZE
 void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 	if (!IsEditControls)
+		return;
+	if (!obj->IsTransformable)
 		return;
 	if (!obj->IsFocusable)
 		return;
@@ -222,6 +228,10 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 			IsFocused = true;
 		}
 	}
+
+	if (!obj->IsTransformable)
+		return;
+
 	if (isCheckOrder) {
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
@@ -252,13 +262,17 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 			if (!isOrderParam)
 				SetCurrentEventParam(obj, m_startDefaultParamShaderID);
 		}
+		else {
+			obj->ParamCase = m_startDefaultParamShaderID;
+			//SetCurrentEventParam(obj, m_startDefaultParamShaderID);
+		}
 		obj->Color = color_default;
 	}
 }
 
 //==================================== START CLICK 
 void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
-	if (IsEditControls)
+	if (IsEditControls && obj->IsTransformable)
 		return;
 	if (!obj->IsFocusable)
 		return;
@@ -299,6 +313,9 @@ void RoomUseInterface::Work() {
 
 	if (Scene->IsBreakUpdate())
 		return;
+
+	
+	ModeEditControls();
 
 	IsFocused = false;
 
@@ -357,6 +374,14 @@ void RoomUseInterface::Work() {
 	//------------- Total orders
 	if (Scene->IsLastCurrentObject) {
 
+	}
+}
+
+void RoomUseInterface::ModeEditControls() 
+{
+	if (Scene->ReadCommand(EditGUI_OnOff))
+	{
+		IsEditControls = !IsEditControls;
 	}
 }
 

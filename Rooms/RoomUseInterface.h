@@ -2,6 +2,7 @@
 
 #include "SceneRoom.h"
 #include "../GeometryLib.h"
+//#include "..\CoreSettings.h"
 
 #include <sstream>
 
@@ -27,6 +28,7 @@ using std::shared_ptr;
 
 class ObjectGUI;
 class SceneConstruction;
+enum TypeCommand;
 
 class RoomUseInterface : public SceneRoom
 {
@@ -39,18 +41,20 @@ private:
 	vec3 color_none = vec3(0);
 	vec3 color_default = vec3(1);
 	vec3 color_selected = vec3(0, 0, 0);
-	//vec3 color_resize = vec3(0.38, 0.159, .235);
 	vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
+
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
+
 	float m_startDefaultParamShaderID = 0;
 	float m_startFocusParamShaderID = 1;
 	float m_startMoveParamShaderID = 2;
 	float m_startResizeParamShaderID = 3;
 	float m_startCheckBorderParamShaderID = 4;
 	float m_startClickParamShaderID = 5;
+
 	float m_CurrentStartedEventID = -1;
 		
 	bool m_isDebug = false;
@@ -62,6 +66,7 @@ private:
 	bool IsCursorClickEventConst = false;
 	bool IsCheckBorder = false;
 	bool IsEditControls = false;
+
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
 	float FocusedOrder = -1;
@@ -101,5 +106,9 @@ public:
 	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
 
 	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
+
+	void ModeEditControls();
+
+	//bool ReadCommand(TypeCommand commandType);
 };
 
