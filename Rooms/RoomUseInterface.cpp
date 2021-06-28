@@ -18,6 +18,7 @@ void RoomUseInterface::Config() {
 
 void RoomUseInterface::Init() {
 	
+	AnimationParams = new AnimationParamGUI();
 	//color_selected = color_yelow;
 	color_selected = color_yelow;
 	auto winHeight = Scene->m_heightWindow;
@@ -25,7 +26,8 @@ void RoomUseInterface::Init() {
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 	IsEditControls = true;
 	//IsEditControls = false;
-}
+	
+	}
 
 //==================================== START MOVE
 void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
@@ -51,7 +53,7 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 	IndexObjectSelected = obj->Index;
 	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
 
-	SetCurrentEventParam(obj, m_startMoveParamShaderID);
+	SetCurrentEventParam(obj, AnimationParams->StartMoveParamShaderID);
 
 	IsCursorClickEvent = false;//!!!
 }
@@ -99,7 +101,7 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	
 	//TODO:
 	IsCursorClickEvent = false; //---- VVVV
-	SetCurrentEventParam(obj, m_startDefaultParamShaderID);
+	SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 
 	return true;
 }
@@ -134,7 +136,7 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 	IndexObjectSelected = obj->Index;
 	m_startSizePanel = obj->SizePanel;
 	IsCursorClickEvent = false;//!!!
-	SetCurrentEventParam(obj, m_startResizeParamShaderID);
+	SetCurrentEventParam(obj, AnimationParams->StartResizeParamShaderID);
 }
 
 void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value)
@@ -200,14 +202,14 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 	obj->ActionObjectCurrent = ActionObject::Stay;
 
 	IsCursorClickEvent = false;
-	SetCurrentEventParam(obj, m_startDefaultParamShaderID);
+	SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 	return true;
 }
 
 //----------------------- FOCUS
 void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
 
-	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, m_startResizeParamShaderID);
+	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
 	bool isCheckOrder = true;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
@@ -243,16 +245,16 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		return;
 	if (!obj->IsFocusable)
 		return;
-	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, m_startResizeParamShaderID);
+	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
 
 	if (IsFocused) {
 		obj->Color = color_selected;
 		if (!isOrderParam)
 		{ 
 			if (IsCheckBorder && IsEditControls)
-				SetCurrentEventParam(obj, m_startCheckBorderParamShaderID);
+				SetCurrentEventParam(obj, AnimationParams->StartCheckBorderParamShaderID);
 			else
-				SetCurrentEventParam(obj, m_startFocusParamShaderID);
+				SetCurrentEventParam(obj, AnimationParams->StartFocusParamShaderID);
 		}
 	}
 	else {
@@ -260,11 +262,11 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 			FocusedOrder = -1;
 			IndexObjectFocused = -1;
 			if (!isOrderParam)
-				SetCurrentEventParam(obj, m_startDefaultParamShaderID);
+				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 		}
 		else {
-			obj->ParamCase = m_startDefaultParamShaderID;
-			//SetCurrentEventParam(obj, m_startDefaultParamShaderID);
+			obj->ParamCase = AnimationParams->StartDefaultParamShaderID;
+			//SetCurrentEventParam(obj, AnimationParams.StartDefaultParamShaderID);
 		}
 		obj->Color = color_default;
 	}
@@ -288,7 +290,7 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 
 	Scene->Debug("Start click");
 	obj->Click();
-	SetCurrentEventParam(obj, m_startClickParamShaderID);
+	SetCurrentEventParam(obj, AnimationParams->StartClickParamShaderID);
 	//obj->ActionObjectCurrent = ActionObject::Moving;
 	//IndexObjectSelected = obj->Index;
 	

@@ -34,6 +34,8 @@ public:
 	vec3 StartPos = vec3(0);
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
+	
+	//GLfloat ParamCaseDefault = -1;
 
 	//string CommandName;
 

@@ -71,7 +71,7 @@ void ObjectGUI::RunAction() {
 				break;
 		}
 	}
-	
+
 	ObjectData::ActionBase();
 }
 

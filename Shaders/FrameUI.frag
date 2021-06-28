@@ -14,6 +14,7 @@ in vec3 fragPosMove;
 	float m_startResizeParamShaderID = 3.;      //= 3
 	float m_startCheckBorderParamShaderID = 4.; //= 4
 	float m_startClickParamShaderID = 5.;       //= 5
+    float m_startPressedParamShaderID = 6.;       //= 6
 
     bool isDefaultParam = false; 
 	bool isFocusParam = false; 
@@ -21,6 +22,7 @@ in vec3 fragPosMove;
 	bool isResizeParam = false; 
 	bool isCheckBorderParam = false; 
 	bool isClickParam = false; 
+    bool isPressedParam = false; 
 
 out vec4 color;
 
@@ -430,7 +432,12 @@ float Ripples(vec2 uv)
 void main()
 {
      //-----------   PARAM  --------------------------------------
-    if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
+
+    if(CheckParam(fragParamCase, m_startPressedParamShaderID))   //= 3 Rsize
+    {
+        isPressedParam = true; 
+
+    } else if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
     {
         isResizeParam = true; 
 
@@ -521,8 +528,15 @@ void main()
     // float korrBordBox2 = 1.;
      
     //-----------   PARAM  --------------------------------------
-   
-    if(isResizeParam)   //= 3 Rsize
+     
+    if(isPressedParam)   //= 6 Pressed
+    {
+        float k = 1.1;
+        alpha = al * k; 
+        contrastColor = .6;
+        startColor = vec3(.60);
+    }
+    else if(isResizeParam)   //= 3 Rsize
     {
         alpha = ChessBoard(uv);
     }   

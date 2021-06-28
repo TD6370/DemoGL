@@ -24,15 +24,20 @@ using std::vector;
 using std::shared_ptr;
 using std::stringstream;
 
+struct AnimationParamGUI;
+
 class ObjectButton :
 	public ObjectGUI
 {
 private:
 
+
+
 protected:
 public:
 	bool IsToogleButon = false;
 	bool IsToogleButonOn = false;
+	AnimationParamGUI* AnimationParam;
 
 	ObjectButton(
 		int p_index,
@@ -63,8 +68,14 @@ public:
 
 	~ObjectButton();
 
+	void InitData();
+
 	void Work();
 
+	void RunAction();
+
+	void UpdateState();
+	//ParamCaseDefault = -1;
 	//-------------
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();

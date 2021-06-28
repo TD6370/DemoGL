@@ -29,6 +29,7 @@ using std::shared_ptr;
 class ObjectGUI;
 class SceneConstruction;
 enum TypeCommand;
+struct AnimationParamGUI;
 
 class RoomUseInterface : public SceneRoom
 {
@@ -48,12 +49,13 @@ private:
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
 
-	float m_startDefaultParamShaderID = 0;
+	/*float m_startDefaultParamShaderID = 0;
 	float m_startFocusParamShaderID = 1;
 	float m_startMoveParamShaderID = 2;
 	float m_startResizeParamShaderID = 3;
 	float m_startCheckBorderParamShaderID = 4;
-	float m_startClickParamShaderID = 5;
+	float m_startClickParamShaderID = 5;*/
+	AnimationParamGUI* AnimationParams;
 
 	float m_CurrentStartedEventID = -1;
 		

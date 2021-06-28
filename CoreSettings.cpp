@@ -114,7 +114,7 @@ struct WorldSectors{
 	map <string, vector<int>> SectorsBlocks;
 };
 
-struct GUIAnimation
+struct AnimationParamGUI
 {
 	int StartDefaultParamShaderID = 0;
 	int StartFocusParamShaderID = 1;
@@ -122,6 +122,7 @@ struct GUIAnimation
 	int StartResizeParamShaderID = 3;
 	int StartCheckBorderParamShaderID = 4;
 	int StartClickParamShaderID = 5;
+	int StartPressedParamShaderID = 6;
 }; // AnimationGUI;
 
 

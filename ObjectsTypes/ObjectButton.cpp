@@ -14,6 +14,32 @@ ObjectButton::~ObjectButton()
 
 }
 
+
+void  ObjectButton::InitData()
+{
+	ObjectGUI::InitData();
+
+	AnimationParam = new AnimationParamGUI();
+}
+
+void ObjectButton::RunAction() {
+	
+	ObjectGUI::RunAction();
+
+	UpdateState();
+}
+
+void ObjectButton::UpdateState() {
+
+	//Updtae animation
+	if (IsToogleButon)
+	{
+		if (IsToogleButonOn)
+			ParamCase = AnimationParam->StartPressedParamShaderID;
+	}
+}
+
+
 void ObjectButton::Work() {
 
 	ObjectGUI::Work();
