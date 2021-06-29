@@ -73,7 +73,7 @@ public:
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;
 	CommandPack* SceneCommand;
-
+	
 	int Index = 0;
 	//int RadiusCollider = 5;
 
@@ -174,7 +174,10 @@ public:
 
 	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();
 
+	//--- TODO: remove pop item from filedsSpecific
 	void virtual SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+
+	string GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, int index);
 
 };
 

@@ -625,6 +625,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	string childModel = "conextGUI_2";
 	//childModel = "conextGUI_T";
 	string objName;
+	vec3 color = vec3(0.3);
 
 	// ---- Object Cursor GUI
 	//objName = "CursorGUI";
@@ -652,28 +653,33 @@ void CreatorModelData::LoadObjectsGUI() {
 
 	// ---- Object Button edit obj GUI
 	objName = "ButtonEditOn";
-	caption = objBackGUI->Name + "." + objName;
+	//caption = objBackGUI->Name + "." + objName;
+	caption = "редакт";
 	childModel = "ButtonModel";
 	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.03), vec2(0.1, 0.1), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsTransformable = false;
 	objCreateButton->SceneCommand->CommandType = EditGUI_OnOff;
+	objBackGUI->ControlConstruct(objCreateButton, caption);
+
 
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
-	caption = objBackGUI->Name + "." + objName;
+	caption = "создать";//  objBackGUI->Name + "." + objName;
 	childModel = "ButtonModel";
 	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.1, .01, 0.02), vec2(0.3, 0.2), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
 	objCreateButton->SceneCommand->CommandType = SelectPosForObject;
+	objBackGUI->ControlConstruct(objCreateButton, caption);
 	
 	// ---- Object text block GUI
 	objName = "TextBlockObject";
 	caption = "привет мир, и доброе утро";
 	childModel = "TextBlockModel";
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.04), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+	color = vec3(0.117, 0.351, 0.950);
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.021), vec2(1.5, 1.), TextBlock, color);
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
 
 	// ---- Object Cursor GUI (Last is alpha background fix)

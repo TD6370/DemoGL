@@ -459,6 +459,7 @@ void main()
          //isCheckBorderParam = true; 
          //isMoveParamS = true; 
          // isClickParam = true; 
+         //isPressedParam = true;
     } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
     {
         isDefaultParam = true; 
@@ -531,8 +532,11 @@ void main()
      
     if(isPressedParam)   //= 6 Pressed
     {
-        float k = 1.1;
-        alpha = al * k; 
+        float point = length(abs(uv - .5));
+        point = pow(point,2.5);
+        point *=7;
+
+        alpha = al * point; 
         contrastColor = .6;
         startColor = vec3(.60);
     }

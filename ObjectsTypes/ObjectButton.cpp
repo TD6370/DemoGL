@@ -18,8 +18,7 @@ ObjectButton::~ObjectButton()
 void  ObjectButton::InitData()
 {
 	ObjectGUI::InitData();
-
-	AnimationParam = new AnimationParamGUI();
+		
 }
 
 void ObjectButton::RunAction() {
@@ -60,6 +59,7 @@ vector<ObjectFiledsSpecific> ObjectButton::GetSpecificFiels() {
 
 	vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
 	result.push_back({ "IsToogleButon:", BoolToStr(IsToogleButon) });
+	result.push_back({ "IsToogleButonOn:", BoolToStr(IsToogleButonOn) });
 	return result;
 }
 
@@ -68,10 +68,13 @@ void ObjectButton::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific)
 	if (IndexObjectOwner == -1) //Back GUI
 		return;
 
+	string valueStr;
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
 
-	string valueStr = filedsSpecific[filedsSpecific.size() - 1].Value;
+	valueStr = GetSpecifValue(filedsSpecific, 2);
 	IsToogleButon = StrToBool(valueStr);
+	valueStr = GetSpecifValue(filedsSpecific, 1);
+	IsToogleButonOn = StrToBool(valueStr);
 }
 
 //----------------------------------------------------------------

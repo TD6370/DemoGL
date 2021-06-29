@@ -14,6 +14,7 @@
 
 void ObjectGUI::InitData() {
 
+	AnimationParam = new AnimationParamGUI();
 	Shape = new ShapeSquare();
 	Shape->UpdateShapeInfo(this);
 	
@@ -21,7 +22,7 @@ void ObjectGUI::InitData() {
 
 	Size = vec3(0);
 
-	if (Storage->SceneData->IndexGUIObj == -1)
+	if (Storage->SceneData->IndexGUIObj == -1)//First create gui
 		Storage->SceneData->IndexGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
@@ -118,6 +119,10 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 	//objGUI->SetSizeControl(vec3(size.x, size.y, 1));
 	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
 
+	//auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
+	//if (objButton != nullptr) {
+	//}
+
 	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
 	if (objTextBlock != nullptr) {
 		objTextBlock->Message = caption;
@@ -125,6 +130,25 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 	}
 
 	return objGUI;
+}
+
+void ObjectGUI::ControlConstruct(shared_ptr<ObjectGUI> obj, string& caption)
+{
+	shared_ptr<ObjectData> objData;
+	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
+	if (objButton != nullptr) {
+		if (!objButton->IsToogleButon) {
+			vec2 offset = vec2(0.01);
+			//vec3 startPos = vec3(StartPos.x + offset.x, StartPos.y + offset.y, 0.021);
+			vec3 startPos = vec3(offset.x, offset.y, 0.021);
+			startPos = vec3(.01, .01, 0.021);
+			//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.021), vec2(1.5, 1.), TextBlock, color);
+			objData = objButton->ConfigInterface(caption, "TextBlockModel", "Button_TextBlock", vec3(startPos.x, startPos.y, startPos.z), vec2(1.5, 1.), TextBlock, vec3(-1));
+			auto objTextButton = std::dynamic_pointer_cast<ObjectTextBlock>(objData);
+			//objTextButton->InitData();
+			//objTextButton->GetShapeSquare()->UpdateState(true);
+		}
+	}
 }
 
 void ObjectGUI::SizeControlUpdate()

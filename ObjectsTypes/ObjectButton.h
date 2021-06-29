@@ -37,7 +37,7 @@ protected:
 public:
 	bool IsToogleButon = false;
 	bool IsToogleButonOn = false;
-	AnimationParamGUI* AnimationParam;
+	
 
 	ObjectButton(
 		int p_index,

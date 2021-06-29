@@ -46,7 +46,7 @@ public:
 
 	~ShapeSquare();
 
-	void UpdateState();
+	void UpdateState(bool isForce = false);
 
 	void SetSizeControl(vec3 vertOffset);
 

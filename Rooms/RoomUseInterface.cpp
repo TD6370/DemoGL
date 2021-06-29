@@ -35,8 +35,8 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 		return;
 	if (!obj->IsTransformable)
 		return;
-	if (!obj->IsFocusable)
-		return;
+	//if (!obj->IsFocusable)
+	//	return;
 	if (!IsCursorClickEvent)
 		return;
 	if (!IsFocused)
@@ -67,8 +67,8 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 		return;
 	if (IndexObjectSelected != obj->Index)
 		return;
-	if (!obj->IsFocusable)
-		return;
+	//if (!obj->IsFocusable)
+	//	return;
 	if(!obj->IsTransformable)
 		return;
 	if (obj->ActionObjectCurrent != ActionObject::Moving)
@@ -84,8 +84,8 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	if (!IsEditControls)
 		return false;
-	if (!obj->IsFocusable)
-		return false;
+	//if (!obj->IsFocusable)
+	//	return false;
 	if (!IsCursorClickEvent)
 		return false;
 
@@ -209,7 +209,13 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 //----------------------- FOCUS
 void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
 
-	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
+	//bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
+	bool isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
+	if(isOrderParam)
+		isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartMoveParamShaderID);
+	if (isOrderParam)
+		isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartClickParamShaderID);
+
 	bool isCheckOrder = true;
 	vec2 endPosRect, startPosRect;
 	float zOrder;
@@ -238,16 +244,21 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
 	}
+
+	/*if (Scene->IsLastCurrentObject) {
+		IndexObjectFocused = obj->Index;
+	}*/
 }
 
 void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 	if (obj->ActionObjectCurrent != Stay)
 		return;
-	if (!obj->IsFocusable)
-		return;
-	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
 
-	if (IsFocused) {
+
+	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
+	bool isUpdateView = obj->IsFocusable || IsEditControls;
+
+	if (IsFocused && isUpdateView) {
 		obj->Color = color_selected;
 		if (!isOrderParam)
 		{ 
@@ -258,17 +269,28 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		}
 	}
 	else {
+		/*if (IndexObjectFocused == obj->Index) {
+			FocusedOrder = -1;
+			IndexObjectFocused = -1;
+			if (!isOrderParam)
+				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
+		}*/
+
 		if (IndexObjectFocused == obj->Index) {
 			FocusedOrder = -1;
 			IndexObjectFocused = -1;
 			if (!isOrderParam)
 				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 		}
-		else {
-			obj->ParamCase = AnimationParams->StartDefaultParamShaderID;
-			//SetCurrentEventParam(obj, AnimationParams.StartDefaultParamShaderID);
-		}
-		obj->Color = color_default;
+
+		/*FocusedOrder = -1;
+		IndexObjectFocused = -1;
+		if (!isOrderParam && isUpdateView)
+			SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);*/
+		obj->ParamCase = AnimationParams->StartDefaultParamShaderID;
+
+		if(isUpdateView)
+			obj->Color = color_default;
 	}
 }
 

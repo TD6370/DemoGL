@@ -22,8 +22,8 @@ IsUsable: 1
 Type: NPC
 Name: Mon
 Model: mon
-Pos: -15.0568 -53.0403 17.2887
-Target: -10.0568 -53.0403 5.28866
+Pos: 38.6149 -53.0239 -41.6541
+Target: 23.6149 -53.0239 -48.6541
 Action: Look
 IndexObjectOwner: -1
 Color: 0 0 0
@@ -422,7 +422,7 @@ IsUsable: 1
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: -15.0568 -53.0403 17.2887
+Pos: 38.6149 -53.0239 -41.6541
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -443,7 +443,7 @@ IsUsable: 1
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: -14.7701 -55.0373 17.6983
+Pos: 38.173 -55.0282 -41.4201
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -464,7 +464,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: -15.3348 -55.0361 16.9405
+Pos: 39.5544 -55.0199 -43.8314
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -485,7 +485,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: -15.3652 -55.0427 20.1426
+Pos: 36.2839 -55.0207 -40.6745
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -506,7 +506,7 @@ IsUsable: 1
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: -12.1465 -55.0452 20.132
+Pos: 39.4845 -55.032 -40.6641
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -548,7 +548,7 @@ IsUsable: 1
 Type: GUI
 Name: BackContectGUI
 Model: ConextFrameModel
-Pos: 0.0358791 -52.5216 2.45673
+Pos: -0.481763 -50.8468 3.09582
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -572,7 +572,7 @@ SizePanel: 0 0
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Pos: 0.0970638 -52.7231 2.47892
+Pos: -0.351015 -51.408 2.61751
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
@@ -590,13 +590,13 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.0606012 0.201783 0.02
-SizePanel: 1.535 1.02407
+StartPos: 0.265117 0.700794 0.02
+SizePanel: 1.51413 1.21427
 ------------------------------------------------------------------
 Type: Button
 Name: ButtonEditOn
 Model: ButtonModel
-Pos: 0.0467493 -52.5312 2.48868
+Pos: -0.467231 -50.8738 3.11149
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
@@ -617,11 +617,12 @@ Specific:
 StartPos: 0.01 0.01 0.03
 SizePanel: 0.1 0.1
 IsToogleButon: 1
+IsToogleButonOn: 0
 ------------------------------------------------------------------
 Type: Button
 Name: ButtonCreateObjGUI
 Model: ButtonModel
-Pos: 0.168062 -52.5607 2.47757
+Pos: -0.365366 -50.8905 3.05229
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 20
@@ -639,18 +640,19 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.131606 0.0393803 0.02
-SizePanel: 1.43781 0.136658
+StartPos: 0.124482 0.039547 0.02
+SizePanel: 0.419671 0.0998076
 IsToogleButon: 0
+IsToogleButonOn: 0
 ------------------------------------------------------------------
 Type: TextBlock
-Name: TextBlockObject
+Name: Button_TextBlock
 Model: TextBlockModel
-Pos: -0.683906 -51.6368 2.49777
+Pos: -1.091 -50.1484 3.89243
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 20
-Color: 1 1 1
+IndexObjectOwner: 23
+Color: 0 0 0
 Command: None
 IsVisible: 1
 IsGravity: 0
@@ -660,18 +662,43 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.259069 0.0956973 0.04
+StartPos: 0.0407578 0.0308613 0.021
+SizePanel: 1.5 1
+Message: создать
+------------------------------------------------------------------
+Type: TextBlock
+Name: TextBlockObject
+Model: TextBlockModel
+Pos: -0.98158 -50.7388 3.36797
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 20
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.422984 0.82485 0.021
 SizePanel: 1.5 1
 Message: привет мир, и доброе утро
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Pos: 0.0558615 -53.0935 2.492
+Pos: -0.67052 -50.538 3.45279
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 20
@@ -689,7 +716,7 @@ IsFocusable: 0
 IsTransformable: 0
 IsUsable: 0
 Specific:
-StartPos: 0.979095 1.53226 0.03
+StartPos: 0.675726 0.532394 0.03
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 

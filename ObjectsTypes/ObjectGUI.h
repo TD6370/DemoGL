@@ -28,12 +28,14 @@ protected :
 	vec3 start_vertBottomLeft = vec3(0);
 	vec3 start_vertBottomRight = vec3(0);
 	vec3 start_vertTopLeft = vec3(0);
+	vec3 start_Color = vec3(0);
 
 public:
 	
 	vec3 StartPos = vec3(0);
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
+	AnimationParamGUI* AnimationParam;
 	
 	//GLfloat ParamCaseDefault = -1;
 
@@ -66,6 +68,8 @@ public:
 	bool GetVisible();
 
 	shared_ptr<ObjectData> ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
+
+	void ControlConstruct(shared_ptr<ObjectGUI> obj, string& caption);
 
 	void virtual Click();
 	

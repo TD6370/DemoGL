@@ -6,9 +6,9 @@ ShapeSquare::~ShapeSquare() {
 }
 
 
-void ShapeSquare::UpdateState() {
+void ShapeSquare::UpdateState(bool isForce) {
 	ObjectGUI* obj = m_objGUI;
-	if (!obj->Storage->SceneData->IsGUI)
+	if (!isForce && !obj->Storage->SceneData->IsGUI)
 		return;
 
 	//================================================== TEST
@@ -21,26 +21,38 @@ void ShapeSquare::UpdateState() {
 
 	vec3 directionOut = vec3(0);
 	obj->PanelDepth = 3.8;
+	int indexBackground = obj->Storage->SceneData->IndexGUIObj;
 
 	if (obj->IsAbsolutePosition)
 	{
-		float offsetOfCenter = 0;
+		vec2 offsetOfCenter = vec2(0);
 		//-----------------------------
 		int indOwner = obj->IndexObjectOwner;
 		if (indOwner == -1)
 			indOwner = obj->Storage->SceneData->IndexGUIObj;
 		if (obj->IndexObjectOwner != -1)
 		{
-			auto objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
+			//---- normalize position on center backgruong control
+			//auto objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
+			auto objOwn = obj->Storage->GetObjectPrt(indexBackground);
 			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(objOwn);
 			float lenghtLineOwner = objPh->Shape->GetLineLenght(0);
 			float lenghtLine = obj->Shape->GetLineLenght(0);
 			float offsetOwner = lenghtLineOwner / 2;
 			float offsetAbs = lenghtLine / 2;
-			offsetOfCenter = offsetOwner - offsetAbs;
+			offsetOfCenter = vec2(offsetOwner - offsetAbs);
+			
+			if (obj->IndexObjectOwner != indexBackground)
+			{
+				//---- normalize position on parent control
+				objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
+				auto  objGUI = std::dynamic_pointer_cast<ObjectGUI>(objOwn);
+				offsetOfCenter.x -= objGUI->StartPos.x;
+				offsetOfCenter.y -= objGUI->StartPos.y;
+			}
 		}
 
-		vec3 startPos = vec3(obj->StartPos.x - offsetOfCenter, obj->StartPos.y - offsetOfCenter, obj->StartPos.z); //when SetSizeControl - is disabled
+		vec3 startPos = vec3(obj->StartPos.x - offsetOfCenter.x, obj->StartPos.y - offsetOfCenter.y, obj->StartPos.z); //when SetSizeControl - is disabled
 		obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->Storage->ConfigMVP,
 			obj->PanelDepth - obj->StartPos.z,
 			obj->Storage->Oper, startPos);

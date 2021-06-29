@@ -44,6 +44,8 @@ ObjectData::ObjectData(int p_index,
 	/*Shape = new ShapeBase();
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/
+
+	
 }
 
 ObjectData::~ObjectData()
@@ -66,6 +68,7 @@ void ObjectData::InitData()
 			break;
 	}
 	//TextureUV = ModelPtr->UV;
+	
 }
 
 void ObjectData::SetDataToShader() {
@@ -251,4 +254,9 @@ vector<ObjectFiledsSpecific> ObjectData::GetSpecificFiels() {
 void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 
 
+}
+
+//Get Last By Specific Field Value
+string ObjectData::GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, int index) {
+	return filedsSpecific[filedsSpecific.size() - index].Value;
 }

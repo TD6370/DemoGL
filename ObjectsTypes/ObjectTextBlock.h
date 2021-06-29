@@ -44,14 +44,20 @@ public:
 			p_pos) {
 		
 		IsAbsolutePosition = true;
-		//IsFocused = false;
+		IsFocusable = false;
 
 		//--- TEST
-		IsFocusable = true;
+		//IsFocusable = true;
 	};
 
 
 	~ObjectTextBlock();
+
+	void InitData();
+
+	void RunAction();
+
+	void UpdateState();
 
 	void CreateMessage();
 
