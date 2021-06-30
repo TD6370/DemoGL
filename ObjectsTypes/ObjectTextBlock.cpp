@@ -48,6 +48,19 @@ void ObjectTextBlock::UpdateState() {
 		Color = start_Color;
 	}
 }
+
+void ObjectTextBlock::SetDataToShader(bool isUpdate) {
+
+	ObjectGUI::SetDataToShader(isUpdate);
+
+	if (!isUpdate)
+	{
+		ModelPtr->SetBuffer(Buffer);
+		auto normals = GetNormals();
+		ModelPtr->SetModelInBuffer(TextureUV, normals, false);
+	}
+}
+
 void ObjectTextBlock::CreateMessage() {
 
 	mapAlphabet = map<string, int>{

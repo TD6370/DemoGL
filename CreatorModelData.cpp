@@ -656,7 +656,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//caption = objBackGUI->Name + "." + objName;
 	caption = "редакт";
 	childModel = "ButtonModel";
-	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.03), vec2(0.1, 0.1), Button, vec3(1));
+	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsTransformable = false;
@@ -667,8 +667,9 @@ void CreatorModelData::LoadObjectsGUI() {
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
 	caption = "создать";//  objBackGUI->Name + "." + objName;
+	//caption = "абвгдежз";
 	childModel = "ButtonModel";
-	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.1, .01, 0.02), vec2(0.3, 0.2), Button, vec3(1));
+	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
 	objCreateButton->SceneCommand->CommandType = SelectPosForObject;
@@ -677,16 +678,17 @@ void CreatorModelData::LoadObjectsGUI() {
 	// ---- Object text block GUI
 	objName = "TextBlockObject";
 	caption = "привет мир, и доброе утро";
+	//caption = "абвгдежзиклмн";
 	childModel = "TextBlockModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.021), vec2(1.5, 1.), TextBlock, color);
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBlock, color);
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .04), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 
 
@@ -708,7 +710,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 100; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

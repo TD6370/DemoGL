@@ -122,7 +122,7 @@ public:
 
 	void virtual InitData();
 
-	void virtual SetDataToShader();
+	void virtual SetDataToShader(bool isUpdate = false);
 
 	void virtual UpdateState(); //after fill options
 

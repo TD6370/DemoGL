@@ -15,15 +15,57 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: NPC
 Name: Mon
 Model: mon
-Pos: 38.6149 -53.0239 -41.6541
-Target: 23.6149 -53.0239 -48.6541
+Pos: 37.5139 -53.0598 7.63123
+Target: 37.8579 -53.055 14.0442
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_2
+Model: mon
+Pos: -22.536 -52.7448 -22.5869
+Target: -9.72181 -51.7127 -5.19633
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_3
+Model: mon
+Pos: -33.3594 -52.9857 -4.34346
+Target: -46.3594 -52.9857 -9.34346
 Action: Look
 IndexObjectOwner: -1
 Color: 0 0 0
@@ -36,9 +78,2046 @@ IsNPC: 1
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_4
+Model: mon
+Pos: -35.3592 -53.0064 43.4404
+Target: -20.3592 -53.0064 32.4404
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_5
+Model: mon
+Pos: 20.7837 -51.8908 46.2778
+Target: 21.8179 -50.3573 43.1409
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_6
+Model: mon
+Pos: -9.14389 -53.0507 30.9968
+Target: -0.143888 -53.0507 44.9968
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_7
+Model: mon
+Pos: -42.6775 -52.965 -3.19038
+Target: -26.4945 -52.9641 8.23294
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_8
+Model: mon
+Pos: 10.9147 -46.7132 29.4064
+Target: 15.5294 -50.8922 35.4055
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_9
+Model: mon
+Pos: 41.3796 -53.0567 -4.10461
+Target: 45.4093 -53.0354 -12.0548
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_10
+Model: mon
+Pos: 47.365 -53.0593 2.46106
+Target: 32.365 -53.0593 -16.5389
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_11
+Model: mon
+Pos: 18.0294 -51.6381 15.9778
+Target: 34.0294 -51.6381 8.97782
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_12
+Model: mon
+Pos: -14.2424 -53.0255 12.5068
+Target: -8.43476 -53.0285 18.3144
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_13
+Model: mon
+Pos: -27.8431 -52.8375 -37.1281
+Target: -37.1432 -52.9797 -49.5283
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_14
+Model: mon
+Pos: 12.9912 -53.0083 -40.6965
+Target: -5.10503 -53.0067 -49.2684
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_15
+Model: mon
+Pos: 0.000885636 -53.0114 -45.2587
+Target: -8.08249 -52.9962 -47.683
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_16
+Model: mon
+Pos: -6.53296 -53.0316 15.0689
+Target: -5.8261 -53.0316 32.5475
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_17
+Model: mon
+Pos: 31.804 -50.6992 33.7375
+Target: 15.3404 -50.7647 47.4572
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_18
+Model: mon
+Pos: -11.444 -53.0174 -44.0896
+Target: -3.44401 -53.0174 -24.0896
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_19
+Model: mon
+Pos: 24.3191 -53.0175 -5.84951
+Target: 31.0623 -52.9989 -0.332316
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_20
+Model: mon
+Pos: -43.3268 -48.9634 -16.0602
+Target: -50.9115 -51.7146 -15.3079
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_21
+Model: mon
+Pos: -9 -51.4945 -20
+Target: 8.41915 -51.4945 -26.5248
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_22
+Model: mon
+Pos: 10.3524 -52.9899 -6.80799
+Target: 13.5209 -52.988 6.74888
+Action: Moving
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_23
+Model: mon
+Pos: -37.1155 -48.2335 -30.4139
+Target: -37.5421 -52.9286 -33.3662
+Action: Search
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_24
+Model: mon
+Pos: -34.26 -52.9245 -15.7467
+Target: -33.5153 -52.9846 -20.9133
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_25
+Model: mon
+Pos: -4.53865 -52.9513 16.3723
+Target: -9.22144 -50.2714 1.8744
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_26
+Model: mon
+Pos: -10.4811 -53.0359 -12.893
+Target: -21.4811 -53.0359 -7.89297
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_27
+Model: mon
+Pos: -36.1945 -53.0063 27.0186
+Target: -48.8773 -53.0196 30.7488
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_28
+Model: mon
+Pos: -34.3834 -52.9782 34.4897
+Target: -18.3834 -52.9782 28.4897
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_29
+Model: mon
+Pos: 46.8368 -53.091 24.5595
+Target: 39.8368 -53.091 5.55952
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_30
+Model: mon
+Pos: 19.7377 -53.0146 -4.59248
+Target: 25.0669 -53.0233 -15.2508
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_31
+Model: mon
+Pos: -2.41942 -52.9912 -33.4914
+Target: 8.58058 -52.9912 -45.4914
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_32
+Model: mon
+Pos: 16.3218 -53.0193 -48.7525
+Target: 32.3218 -53.0193 -35.7525
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_33
+Model: mon
+Pos: 5.19686 -52.9922 6.40051
+Target: 16.1969 -52.9922 0.400515
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_34
+Model: mon
+Pos: -15.1919 -53.0607 -0.703889
+Target: -10.1999 -53.0536 18.5926
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_35
+Model: mon
+Pos: 41.1242 -53.0543 -34.4174
+Target: 48.8337 -53.057 -40.4748
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_36
+Model: mon
+Pos: -38.2841 -52.6004 -36.4538
+Target: -19.2841 -52.6004 -16.4538
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_37
+Model: mon
+Pos: 2.75858 -51.5179 45.7991
+Target: 16.7586 -51.5179 30.7991
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_38
+Model: mon
+Pos: 19.0529 -53.0138 -34.1062
+Target: 14.4474 -53.0168 -24.5318
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_39
+Model: mon
+Pos: 9.49601 -52.9913 -9.862
+Target: 22.2641 -52.978 1.48745
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_40
+Model: mon
+Pos: -27.6751 -53.0265 -0.489318
+Target: -40.8149 -53.0236 -19.2605
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_41
+Model: mon
+Pos: -17.9524 -52.973 -19.8349
+Target: -16.3634 -52.6176 -28.3837
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_42
+Model: mon
+Pos: 24.955 -53.0245 -29.1641
+Target: 20.3858 -53.0604 -34.3357
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_43
+Model: mon
+Pos: 43.9354 -53.0938 -25.2104
+Target: 45.4978 -53.0799 -27.554
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_44
+Model: mon
+Pos: 32.3019 -51.6946 40.7566
+Target: 34.9974 -52.3609 27.2595
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_45
+Model: mon
+Pos: -29.8867 -53.0117 14.4702
+Target: -26.1168 -52.9711 17.2994
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_46
+Model: mon
+Pos: -12.9718 -53.0471 -0.217254
+Target: -25.5847 -53.0259 1.3068
+Action: Moving
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_47
+Model: mon
+Pos: -34.0172 -52.9794 -13.0148
+Target: -37.526 -53.0227 -22.906
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_48
+Model: mon
+Pos: -1.99296 -52.8101 8.85359
+Target: -1.6419 -50.558 5.17356
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_49
+Model: mon
+Pos: -16.7992 -53.0064 -32.7876
+Target: -8.79924 -53.008 -26.7876
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_50
+Model: mon
+Pos: 4.95232 -51.7949 45.3892
+Target: -0.336532 -52.898 29.3028
+Action: Moving
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_51
+Model: mon
+Pos: -49.8428 -53.0168 -34.9787
+Target: -33.8428 -53.0168 -29.9787
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_52
+Model: mon
+Pos: 37.0999 -53.0484 2.95596
+Target: 45.0819 -52.9336 2.15468
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_53
+Model: mon
+Pos: 34.5955 -53.0836 16.4633
+Target: 26.0097 -53.0873 25.049
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_54
+Model: mon
+Pos: 42.4379 -53.0168 30.2454
+Target: 45.6701 -52.7717 20.6609
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_55
+Model: mon
+Pos: 3.5604 -52.9588 7.70199
+Target: 8.63559 -52.5691 12.8382
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_56
+Model: mon
+Pos: 29.7348 -52.0468 44.7011
+Target: 36.7348 -52.0468 26.7011
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_57
+Model: mon
+Pos: 38.0691 -53.0375 23.9299
+Target: 47.0691 -53.0375 6.92991
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_58
+Model: mon
+Pos: 9.16236 -52.983 -32.7889
+Target: -2.83764 -52.983 -46.7889
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_59
+Model: mon
+Pos: -42.2792 -52.9562 31.5502
+Target: -51.3125 -52.9712 35.5175
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_60
+Model: mon
+Pos: 12.6754 -53.0071 -49.8938
+Target: 12.7255 -53.0178 -59.1421
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_61
+Model: mon
+Pos: 27.2636 -53.0388 -29.5586
+Target: 21.5433 -53.0291 -29.3771
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_62
+Model: mon
+Pos: 18.8661 -51.8631 45.5866
+Target: 24.5987 -51.8631 69.1054
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_63
+Model: mon
+Pos: -43.876 -52.9746 11.2236
+Target: -29.876 -52.9746 1.22359
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_64
+Model: mon
+Pos: 6.58463 -52.9866 3.9844
+Target: 8.98008 -53.0074 7.06427
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_65
+Model: mon
+Pos: 22.144 -53.0122 -35.7187
+Target: 27.4352 -53.0307 -46.1798
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_66
+Model: mon
+Pos: -7.8065 -53.0013 -11.8143
+Target: -13.102 -52.9787 -11.7768
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_67
+Model: mon
+Pos: -32.6813 -45.3009 -21.857
+Target: -19.5453 -47.0609 -28.0793
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_68
+Model: mon
+Pos: -38.6586 -52.9785 22.3241
+Target: -45.1231 -52.9951 15.8596
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_69
+Model: mon
+Pos: 30.7592 -53.0225 -7.43363
+Target: 35.7592 -53.0225 11.5664
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_70
+Model: mon
+Pos: 1.97841 -53.0053 -4.05727
+Target: -7.1142 -52.9896 1.81762
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_71
+Model: mon
+Pos: 14.9158 -52.2118 7.77055
+Target: 9.91584 -52.2118 -4.22945
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_72
+Model: mon
+Pos: -18.8153 -53.0358 40.1312
+Target: -9.04521 -53.0372 54.1952
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_73
+Model: mon
+Pos: -37.5391 -52.9486 -14.5695
+Target: -35.7503 -52.5327 -30.8566
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_74
+Model: mon
+Pos: -11.3161 -53.0342 14.4272
+Target: 4.05411 -53.0353 -0.134035
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_75
+Model: mon
+Pos: 10.188 -52.9956 -14.3509
+Target: 5.47248 -52.9931 -25.8028
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_76
+Model: mon
+Pos: -16.6485 -53.0487 35.5776
+Target: -4.64849 -53.0487 25.5776
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_77
+Model: mon
+Pos: -35.5146 -52.989 11.7737
+Target: -19.8793 -52.9879 -2.88431
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_78
+Model: mon
+Pos: -21.9421 -52.7202 -28.7989
+Target: -5.28789 -52.3073 -34.9347
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_79
+Model: mon
+Pos: -43.5649 -52.4652 -22.3056
+Target: -36.5649 -52.4652 -33.3056
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_80
+Model: mon
+Pos: -23.9588 -51.3189 -16.4174
+Target: -35.9588 -51.3189 1.58258
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_81
+Model: mon
+Pos: -31.3536 -53.0035 12.5748
+Target: -33.6782 -52.9947 28.1627
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_82
+Model: mon
+Pos: -1.04156 -53.0306 6.91504
+Target: 12.5977 -53.0258 7.57977
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_83
+Model: mon
+Pos: 20.3731 -53.0031 -18.2811
+Target: 25.262 -52.9849 -14.0906
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_84
+Model: mon
+Pos: 20.078 -53.0097 -23.4794
+Target: 23.4213 -52.9959 -15.539
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_85
+Model: mon
+Pos: 12.3989 -52.9916 -6.12597
+Target: 7.96873 -52.9882 -13.9874
+Action: Moving
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_86
+Model: mon
+Pos: 8.32304 -52.9918 -35.0154
+Target: 12.3539 -52.9945 -27.9613
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_87
+Model: mon
+Pos: 15.8413 -53.0057 2.98504
+Target: 11.3467 -52.6282 -11.2479
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_88
+Model: mon
+Pos: 22.4468 -52.9625 -10.7796
+Target: 10.7505 -52.1067 2.58752
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_89
+Model: mon
+Pos: 25.2412 -53.0464 4.42203
+Target: 7.24118 -53.0464 -12.578
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_90
+Model: mon
+Pos: 18.5545 -53.0183 -49.5595
+Target: 20.3956 -53.0236 -55.3128
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_91
+Model: mon
+Pos: -20.6792 -53.0513 32.8907
+Target: -7.27248 -53.0319 32.4767
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_92
+Model: mon
+Pos: -8.5202 -52.9945 -33.5392
+Target: -16.4491 -53.0139 -25.6102
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_93
+Model: mon
+Pos: -28.3732 -53.0128 12.9301
+Target: -44.1447 -53.0212 5.41398
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_94
+Model: mon
+Pos: 24.5038 -53.0148 -26.5137
+Target: 17.5038 -53.0148 -17.5137
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_95
+Model: mon
+Pos: -44.2374 -52.9574 13.4201
+Target: -36.1442 -52.956 3.8553
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_96
+Model: mon
+Pos: 16.6749 -51.6825 45.254
+Target: 14.6559 -46.9442 50.8844
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_97
+Model: mon
+Pos: -21.6134 -53.0466 30.8977
+Target: -19.1514 -53.0466 49.3351
+Action: Look
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_98
+Model: mon
+Pos: 30.7014 -53.0553 -29.3992
+Target: 29.064 -53.0993 -34.2457
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_99
+Model: mon
+Pos: -32.622 -52.992 -2.14766
+Target: -46.622 -52.992 -15.1477
+Action: Look
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_100
+Model: mon
+Pos: -19.3854 -53.0255 42.0639
+Target: -4.39009 -53.0127 37.6642
+Action: Moving
+IndexObjectOwner: -1
+Color: 1 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: Box
@@ -57,9 +2136,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: Box2
@@ -78,9 +2157,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: Box3
@@ -99,9 +2178,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox
@@ -120,9 +2199,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 204
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 204
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -168,7 +2247,7 @@ Pos: -20 -54.0329 -10
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
-Color: 1 1 1
+Color: 1 0 0
 Command: None
 IsVisible: 1
 IsGravity: 1
@@ -178,9 +2257,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 204
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 204
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -226,7 +2305,7 @@ Pos: -10 -53.9908 -20
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
-Color: 1 1 1
+Color: 1 0 0
 Command: None
 IsVisible: 1
 IsGravity: 1
@@ -236,9 +2315,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 204
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 204
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -294,9 +2373,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 204
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 204
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
@@ -352,9 +2431,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_P_2
@@ -373,9 +2452,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Bullet
 Name: Bullet
@@ -394,9 +2473,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: BulletHero
 Name: BulletHero
@@ -415,14 +2494,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Pos: 38.6149 -53.0239 -41.6541
+Pos: 37.5139 -53.0598 7.63123
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -436,14 +2515,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Pos: 38.173 -55.0282 -41.4201
+Pos: 37.4872 -55.0605 7.13194
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -457,14 +2536,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Pos: 39.5544 -55.0199 -43.8314
+Pos: 36.1433 -55.0555 4.11776
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -478,14 +2557,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Pos: 36.2839 -55.0207 -40.6745
+Pos: 36.1193 -55.0599 7.31865
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -499,14 +2578,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Pos: 39.4845 -55.032 -40.6641
+Pos: 39.3433 -55.0655 7.3079
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -520,9 +2599,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: Hero
 Name: Hero
@@ -541,14 +2620,14 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 204
+IsTransformable: 204
+IsUsable: 204
 ------------------------------------------------------------------
 Type: GUI
 Name: BackContectGUI
 Model: ConextFrameModel
-Pos: -0.481763 -50.8468 3.09582
+Pos: -1.74039 -52.7056 3.14993
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -572,10 +2651,10 @@ SizePanel: 0 0
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Pos: -0.351015 -51.408 2.61751
+Pos: -1.6579 -53.1164 3.14155
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 20
+IndexObjectOwner: 119
 Color: 1 1 1
 Command: None
 IsVisible: 1
@@ -590,16 +2669,16 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.265117 0.700794 0.02
-SizePanel: 1.51413 1.21427
+StartPos: 0.0638722 0.413658 0.02
+SizePanel: 1.36838 0.223078
 ------------------------------------------------------------------
 Type: Button
 Name: ButtonEditOn
 Model: ButtonModel
-Pos: -0.467231 -50.8738 3.11149
+Pos: -1.67927 -52.7529 3.13932
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 20
+IndexObjectOwner: 119
 Color: 1 1 1
 Command: EditGUI_OnOff
 IsVisible: 1
@@ -614,18 +2693,18 @@ IsFocusable: 1
 IsTransformable: 0
 IsUsable: 1
 Specific:
-StartPos: 0.01 0.01 0.03
+StartPos: 0.05 0.05 0.03
 SizePanel: 0.1 0.1
 IsToogleButon: 1
-IsToogleButonOn: 0
+IsToogleButonOn: 1
 ------------------------------------------------------------------
 Type: Button
 Name: ButtonCreateObjGUI
 Model: ButtonModel
-Pos: -0.365366 -50.8905 3.05229
+Pos: -1.61601 -52.7538 3.06151
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 20
+IndexObjectOwner: 119
 Color: 1 1 1
 Command: SelectPosForObject
 IsVisible: 1
@@ -640,19 +2719,19 @@ IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.124482 0.039547 0.02
-SizePanel: 0.419671 0.0998076
+StartPos: 0.15 0.05 0.02
+SizePanel: 0.360892 0.0628178
 IsToogleButon: 0
 IsToogleButonOn: 0
 ------------------------------------------------------------------
 Type: TextBlock
 Name: Button_TextBlock
 Model: TextBlockModel
-Pos: -1.091 -50.1484 3.89243
+Pos: -2.35455 -51.7864 3.69438
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
-Color: 0 0 0
+IndexObjectOwner: 122
+Color: 0.117 0.351 0.95
 Command: None
 IsVisible: 1
 IsGravity: 0
@@ -666,18 +2745,18 @@ IsFocusable: 0
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.0407578 0.0308613 0.021
+StartPos: 0.01 0.01 0.021
 SizePanel: 1.5 1
 Message: создать
 ------------------------------------------------------------------
 Type: TextBlock
 Name: TextBlockObject
 Model: TextBlockModel
-Pos: -0.98158 -50.7388 3.36797
+Pos: -2.32046 -52.213 3.72074
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 20
-Color: 0 0 0
+IndexObjectOwner: 119
+Color: 0.117 0.351 0.95
 Command: None
 IsVisible: 1
 IsGravity: 0
@@ -691,17 +2770,17 @@ IsFocusable: 0
 IsTransformable: 1
 IsUsable: 1
 Specific:
-StartPos: 0.422984 0.82485 0.021
+StartPos: 0.165319 0.48867 0.031
 SizePanel: 1.5 1
 Message: привет мир, и доброе утро
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Pos: -0.67052 -50.538 3.45279
+Pos: -1.95296 -52.5692 3.40686
 Target: 0 0 0
 Action: Moving
-IndexObjectOwner: 20
+IndexObjectOwner: 119
 Color: 0.2 0.5 0.1
 Command: None
 IsVisible: 1
@@ -716,7 +2795,7 @@ IsFocusable: 0
 IsTransformable: 0
 IsUsable: 0
 Specific:
-StartPos: 0.675726 0.532394 0.03
+StartPos: 0.617993 0.808629 0.04
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 

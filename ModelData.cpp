@@ -149,16 +149,16 @@ void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 		VAO, VBO);
 }
 
-void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals)
+void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture)
 {
-	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-	//SetBufferUV(UV, BufferUV_ID);
+	if(isUpdateTexture)
+		SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+
 	if (&uv == nullptr || uv.size() == 0)
 		SetBufferUV(UV, BufferUV_ID);
 	else
 		SetBufferUV(uv, BufferUV_ID);
 
-	//SetNormals(normals, BufferNormal_ID);
 	if (normals.size() == 0)
 		SetNormals(Normals, BufferNormal_ID);
 	else
@@ -219,16 +219,6 @@ void  ModelFrame::Init() {
 	TypeName = FormatTypeName(typeid(this).name());
 	
 	InitBase();
-
-	/*ConstructShaderProgramm();
-
-	LoadingTexture();
-
-	LoadModelData();
-
-	SetModelInBuffer();
-
-	InitUniform();*/
 }
 
 void ModelFrame::InitUniform() {

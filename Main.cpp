@@ -151,38 +151,89 @@ int main()
 	Scene = new SceneConstruction(window);
 
 	//double currentTime = 0, m_deltaTime = 0, m_lastFrame = 0;
-	float FPS = 60;
-	int32_t tickInteval = 1000 / FPS; // frequency in Hz to period in ms
-	double currentTime = 0, lastFrame = 0;
+	//float FPS = 60;
+	//int32_t tickInteval = 1000 / FPS; // frequency in Hz to period in ms
+	//double currentTime = 0, lastFrame = 0;
 
 	///DWORD thisTick = GetTickCount();
 	//float dt = float(thisTick - lastTick) * 0.001f;
-
-	while (!glfwWindowShouldClose(window))
+	
+	//---------------------
+	//=========================
+	/*while (!glfwWindowShouldClose(window))
 	{
-		//====	DT
-		currentTime = glfwGetTime();
-		Scene->DeltaTime = float(currentTime - lastFrame);
-		Scene->DeltaTime *= 10;
-		std::cout << "Scene->m_deltaTime==" << Scene->DeltaTime << "\n";
-		lastFrame = currentTime;
-		int32_t timeToSleep = tickInteval - Scene->DeltaTime;
-		//if (timeToSleep > 0)
-		//{
-		//	SDL_Delay(timeToSleep); // energy saving
-		//}
-		Scene->IsDeltaUpdateLogic = timeToSleep > 0;
-		std::cout << "Scene->IsDeltaUpdateLogic==" << Scene->IsDeltaUpdateLogic << "\n";
-		//==========================
+		glfwPollEvents();
 
-		//update input events
-		glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
-		//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
-		//glfwWaitEventsTimeout(1); /1
-				
 		Scene->Update();
 
 		glfwSwapBuffers(window);
+	}
+	glfwTerminate();
+	return 0;*/
+	//====================
+	//----------------------
+	static double limitFPS = 1.0 / 60.0;
+	double lastTime = glfwGetTime(), timer = lastTime;
+	double deltaTime = 0, nowTime = 0;
+	int frames = 0, updates = 0;
+
+	while (!glfwWindowShouldClose(window))
+	{
+		if (Scene->VersionUpdate == 1)
+		{
+			//====	DT
+			  // - Measure time
+			nowTime = glfwGetTime();
+			deltaTime += (nowTime - lastTime) / limitFPS;
+			Scene->DeltaTime = deltaTime;
+			lastTime = nowTime;
+
+			// ******
+			//update input events
+			glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
+			//glfwWaitEventsTimeout(1); /1
+
+			while (deltaTime >= 1.0) {
+
+				//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+
+				Scene->IsDeltaUpdateLogic = true;
+
+				Scene->Update();
+
+				updates++;
+				deltaTime--;
+			}
+
+			// - Render at maximum possible frames
+			Scene->IsDeltaUpdateLogic = false;
+			Scene->Update();
+			
+			frames++;
+
+			// - Reset after one second
+			if (glfwGetTime() - timer > 1.0) {
+				timer++;
+				std::cout << "FPS: " << frames << " Updates:" << updates << std::endl;
+				updates = 0, frames = 0;
+			}
+
+			glfwSwapBuffers(window);
+		}
+		//==========================
+		if (Scene->VersionUpdate == 0)
+		{
+			////update input events
+			glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
+			////glfwWaitEventsTimeout(1); /1
+
+			Scene->Update();
+
+			glfwSwapBuffers(window);
+		}
+			//==========================
 	}
 
 	glfwTerminate();

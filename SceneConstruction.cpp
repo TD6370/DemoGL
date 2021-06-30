@@ -136,6 +136,7 @@ void SceneConstruction::ResetRooms() {
 //*** Pointcut
 void SceneConstruction::WorkingRooms() {
 
+
 	for(auto room : Rooms){
 		//*** Advice
 		room->Work();
@@ -145,7 +146,7 @@ void SceneConstruction::WorkingRooms() {
 void SceneConstruction::PreparationDataFromShader() {
 	
 	//TEST
-	auto bname = ObjectCurrent->Name;
+	//auto bname = ObjectCurrent->Name;
 
 	if (!m_isUpdate)
 	{
@@ -172,10 +173,10 @@ void SceneConstruction::PreparationDataFromShader() {
 void SceneConstruction::SetDataToShader() {
 	
 	//TEST
-	//std::cout << ObjectCurrent->Name << "\n";
 	auto nameTest =  ObjectCurrent->Name;
+	auto nameTest2 = ObjectCurrent->ModelPtr->Name;
 
-	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel;
+	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel || ObjectCurrent->IsSquareModel;
 	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
 	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
 	
@@ -186,15 +187,19 @@ void SceneConstruction::SetDataToShader() {
 		m_isEnableGUI = ObjectCurrent->IsGUI;
 		m_isUpdate = true;
 	}
-	
+
+	//TEST
+	if (IsSquareModel && ObjectCurrent->TypeObj == TextBlock)
+	{
+		std::cout << "test \n";
+	}
+
 	if (IsSquareModel || m_isUpdate)
 		ObjectCurrent->SetMesh();
 
 	glBindVertexArray(ModelCurrent->VAO);
 
-	if (m_isUpdate) {
-		ObjectCurrent->SetDataToShader();
-	}
+	ObjectCurrent->SetDataToShader(m_isUpdate);
 
 	//-------------------- Set color
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
@@ -211,7 +216,7 @@ void SceneConstruction::SetDataToShader() {
 	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
 
 	//------ Set Mouse position
-	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+	//ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
 
 
 	//--- Set Width & height
@@ -228,10 +233,13 @@ bool SceneConstruction::SetObject(int indObj) {
 
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isVisible = ObjectCurrent->GetVisible();
+	if(!isVisible)
+		return isVisible;
 
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	IsFirstCurrentObject = indObj == 0;
 	IsLastCurrentObject = countObjects == indObj;
+	m_isUpdate = false;
 
 	if (prevModelTexture != ModelCurrent->PathTexture) {
 		prevModelTexture = ModelCurrent->PathTexture;
@@ -241,6 +249,7 @@ bool SceneConstruction::SetObject(int indObj) {
 		prevModel3D = ModelCurrent->PathModel3D;
 		m_isUpdate = true;
 	}
+
 	if (prevShaderVert != ModelCurrent->PathShaderVertex) {
 		m_isUpdateShaderProgramm = true;
 		prevShaderVert = ModelCurrent->PathShaderVertex;
@@ -252,6 +261,138 @@ bool SceneConstruction::SetObject(int indObj) {
 	return isVisible;
 }
 
+
+void SceneConstruction::ObjectUpdate(int i) {
+
+	bool isBase = VersionUpdate == 0;
+	bool isDraw = !IsDeltaUpdateLogic;
+
+	bool isVisible = SetObject(i);
+	if (!isVisible)
+		return;
+
+	if (isDraw || isBase) 
+	{
+		PreparationDataFromShader();
+
+		ObjectCurrent->Action();
+
+		SetDataToShader();
+	}
+}
+
+void SceneConstruction::Update()
+{
+	bool IsDraw = !IsDeltaUpdateLogic;
+	bool isBase = VersionUpdate == 0;
+	
+	if (!IsDraw || isBase)
+		ResetRooms();
+
+	if(IsDraw || isBase)
+		ClearScene();
+
+	SetMouseEvents();
+
+	if (IsDraw || isBase)
+		GenMVP();
+
+	countObjects = Storage->SceneObjectsLastIndex;
+	if (IsBreakUpdate()) {
+		if (IsDraw || isBase)
+			DrawGraph();
+		if (!IsDraw || isBase)
+			WorkingRooms();
+		return;
+	}
+
+	if (!IsDraw || isBase)
+		FactoryObjectsWork();
+
+	for (int i = 0; i < countObjects + 1; i++)
+	{
+		ObjectUpdate(i);
+
+		if (!IsDraw || isBase)
+			WorkingRooms();
+
+		if (IsBreakUpdate())
+			break;
+
+		if (IsDraw || isBase)
+			DrawGraph();
+	}
+	
+	if (!IsDraw || isBase) {
+		Storage->Inputs->MBT = -1;
+		Storage->Inputs->Key = -1;
+		Storage->Inputs->Action = -1;
+		Storage->Inputs->ActionMouse = -1;
+	}
+}
+
+/*
+void UpdateDraw() {
+	bool isBase = VersionUpdate == 0;
+
+	ClearScene();
+
+	SetMouseEvents();
+
+	GenMVP();
+
+	countObjects = Storage->SceneObjectsLastIndex;
+	if (IsBreakUpdate()) {
+		DrawGraph();
+		return;
+	}
+
+	for (int i = 0; i < countObjects + 1; i++)
+	{
+		//if (!IsDraw || isBase)
+		ObjectUpdate(i);
+
+		if (IsBreakUpdate())
+			break;
+
+		DrawGraph();
+	}
+
+	
+	Storage->Inputs->MBT = -1;
+	Storage->Inputs->Key = -1;
+	Storage->Inputs->Action = -1;
+	Storage->Inputs->ActionMouse = -1;
+}
+
+void UpdateLogac()
+{
+	ResetRooms();
+
+	SetMouseEvents();
+
+	countObjects = Storage->SceneObjectsLastIndex;
+	if (IsBreakUpdate()) {
+		WorkingRooms();
+		return;
+	}
+
+	FactoryObjectsWork();
+
+	for (int i = 0; i < countObjects + 1; i++)
+	{
+		ObjectUpdate(i);
+
+		WorkingRooms();
+
+		if (IsBreakUpdate())
+			break;
+
+	}
+}
+*/
+
+/*
 void SceneConstruction::ObjectUpdate(int i) {
 
 	bool isVisible = SetObject(i);
@@ -265,50 +406,37 @@ void SceneConstruction::ObjectUpdate(int i) {
 	SetDataToShader();
 }
 
-void SceneConstruction::Update()
+void SceneConstruction::Update(bool IsDraw)
 {
+
 	ResetRooms();
 
 	ClearScene();
 
 	SetMouseEvents();
-
+	
 	GenMVP();
 
-	countObjects = Storage->SceneObjectsLastIndex;
-	if (IsBreakUpdate()) {
-		DrawGraph();
-		WorkingRooms();
-		return;
-	}
-
 	FactoryObjectsWork();
-
-	/*if (IsBreakUpdate()) {
-		DrawGraph();
-		WorkingRooms();
-		return;
-	}*/
+	countObjects = Storage->SceneObjectsLastIndex;
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
 		ObjectUpdate(i);
 
 		WorkingRooms();
-
-		if (IsBreakUpdate())
-			break;
-
+	
 		DrawGraph();
 	}
 
-	Debug("Clear Inputs");
+	//Debug("Clear Inputs");
 
 	Storage->Inputs->MBT = -1;
 	Storage->Inputs->Key = -1;
 	Storage->Inputs->Action = -1;
 	Storage->Inputs->ActionMouse = -1;
 }
+*/
 
 void SceneConstruction::Debug(string msg) {
 	if (DebugMessage != msg)
@@ -331,16 +459,12 @@ bool SceneConstruction::IsBreakUpdate()
 void SceneConstruction::SetMouseEvents() {
 
 	Contrl->MouseEvents(Window, m_widthWindow, m_heightWindow, this);
-	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 }
 
 void SceneConstruction::SetMouseButtonEvents() {
 
 	Contrl->MouseButtonEvents(Window, this);
-	//bool isCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 }
-
-
 
 void SceneConstruction::GenMVP() {
 

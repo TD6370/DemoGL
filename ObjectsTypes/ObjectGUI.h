@@ -61,7 +61,7 @@ public:
 
 	void InitData();
 
-	void SetDataToShader();
+	void SetDataToShader(bool isUpdate = false);
 
 	void RunAction();
 
@@ -69,7 +69,7 @@ public:
 
 	shared_ptr<ObjectData> ConfigInterface(string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 
-	void ControlConstruct(shared_ptr<ObjectGUI> obj, string& caption);
+	void ControlConstruct(shared_ptr<ObjectGUI> obj, string caption);
 
 	void virtual Click();
 	

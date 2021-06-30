@@ -28,9 +28,12 @@ void ObjectGUI::InitData() {
 	ActionObjectCurrent = Stay;
 }
 
-void ObjectGUI::SetDataToShader() {
+void ObjectGUI::SetDataToShader(bool isUpdate) {
 
-	ObjectData::SetDataToShader();
+	ObjectData::SetDataToShader(isUpdate);
+
+	if (!isUpdate)
+		return;
 
 	auto modelFrame =std::dynamic_pointer_cast<ModelFrame>(ModelPtr);
 	if (modelFrame == nullptr) {
@@ -47,6 +50,7 @@ void ObjectGUI::SetDataToShader() {
 	modelFrame->SetHeight(height);
 	modelFrame->SetPosMove(posMove);
 	modelFrame->SetPosMoveSize(posMoveSize);
+		
 }
 
 
@@ -125,6 +129,8 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 
 	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
 	if (objTextBlock != nullptr) {
+		//TEST
+		//std::cout << objTextBlock->Index << "\n";
 		objTextBlock->Message = caption;
 		objTextBlock->CreateMessage();
 	}
@@ -132,7 +138,7 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 	return objGUI;
 }
 
-void ObjectGUI::ControlConstruct(shared_ptr<ObjectGUI> obj, string& caption)
+void ObjectGUI::ControlConstruct(shared_ptr<ObjectGUI> obj, string caption)
 {
 	shared_ptr<ObjectData> objData;
 	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);

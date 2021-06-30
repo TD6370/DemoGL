@@ -43,6 +43,7 @@ public:
 			p_typeObj,
 			p_pos) {
 		
+		IsSquareModel = true;
 		IsAbsolutePosition = true;
 		IsFocusable = false;
 
@@ -62,6 +63,8 @@ public:
 	void CreateMessage();
 
 	void MeshTransform();
+
+	void SetDataToShader(bool isUpdate = false);
 
 
 	//void RunAction();

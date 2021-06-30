@@ -89,7 +89,8 @@ public:
 	void SetVAO(vector<vec3> vertices);
 
 	void virtual SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
-									vector<vec3>& normals = DEFAULT_VECTOR_V3);
+									vector<vec3>& normals = DEFAULT_VECTOR_V3, 
+										bool isUpdateTexture = true);
 
 	void virtual SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 

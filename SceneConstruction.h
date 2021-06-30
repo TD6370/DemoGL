@@ -56,10 +56,6 @@ private:
 	bool m_isUpdate = false;
 	bool m_isEnableGUI = false;
 
-	const GLchar* pathShaderVertex = "basic.vert";
-	const GLchar* pathShaderFrag = "basic.frag";
-	const char* pathTextureTest = "./Textures/testTexture.bmp";
-	const char* pathModel3D = "./Models3D/monkey.obj";
 	GLint indicesSize;
 
 protected:
@@ -77,6 +73,8 @@ public:
 	float m_lastFrame = 0.0f;
 	bool IsDeltaUpdateLogic = false;
 	float DeltaTime = 0;
+	int VersionUpdate = 0;
+	//versionUpdate = 1;
 
 	bool IsFirstCurrentObject;
 	bool IsLastCurrentObject;
@@ -130,7 +128,6 @@ public:
 	void SetDataToShader();
 
 	void PreparationDataFromShader();
-
 
 	void Update();
 
