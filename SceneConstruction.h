@@ -73,7 +73,7 @@ public:
 	float m_lastFrame = 0.0f;
 	bool IsDeltaUpdateLogic = false;
 	float DeltaTime = 0;
-	int VersionUpdate = 0;
+	int VersionUpdate = 1;
 	//versionUpdate = 1;
 
 	bool IsFirstCurrentObject;

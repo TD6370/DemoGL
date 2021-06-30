@@ -120,17 +120,10 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 	objGUI->Color = color;
 	//objGUI->IsTextureRepeat = true;
 
-	//objGUI->SetSizeControl(vec3(size.x, size.y, 1));
 	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
-
-	//auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
-	//if (objButton != nullptr) {
-	//}
 
 	auto objTextBlock = std::dynamic_pointer_cast<ObjectTextBlock>(obj);
 	if (objTextBlock != nullptr) {
-		//TEST
-		//std::cout << objTextBlock->Index << "\n";
 		objTextBlock->Message = caption;
 		objTextBlock->CreateMessage();
 	}

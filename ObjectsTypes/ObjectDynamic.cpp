@@ -23,7 +23,9 @@ void ObjectDynamic::InitData()
 
 void ObjectDynamic::RunAction() {
 
-	if (ActionObjectCurrent != Lock)
+	bool isPause = Storage->SceneData->IsGUI;
+
+	if (ActionObjectCurrent != Lock && !isPause)
 	{
 		switch (ActionObjectCurrent)
 		{

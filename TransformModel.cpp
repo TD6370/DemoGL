@@ -22,15 +22,11 @@ using glm::vec3;
 using glm::vec4;
 using glm::mat4;
 
-//glm::mat4 Transform(GLuint shaderProgram, unsigned int index, int paramCase, ConfigUniform confUniform, bool IsNoTranf, 
-//glm::mat4 TransformModel::Transform(unsigned int index, int paramCase, bool IsNoTranf,
 glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 	glm::mat4 p_trans, 
 	glm::vec3 p_postranslate,
 	glm::vec3 p_angle,
 	glm::vec3 p_size)
-	//GLfloat p_angle)
-	//, std::vector<int> tramsformTypes)
 {
 	glm::mat4 trans = glm::mat4(1.0f);
 	//trans = p_trans;
@@ -49,9 +45,7 @@ glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 
 	return trans;
 	//-----------------------------------------------------
-
-	float speed = (paramCase + 1) * 2;
-		
+			
 	/*spirale = glm::translate(trans, glm::vec3(
 		index * 2 * sin(glfwGetTime() * speed / index),
 		0,
@@ -61,9 +55,9 @@ glm::mat4 Transform(unsigned int index, int paramCase, bool IsNoTranf,
 		//trans = glm::translate(trans, glm::vec3((float)index*2* sin(glfwGetTime()), (float)index *2 * cos(glfwGetTime()), 0.0f));
 
 	//index = .1f;
-	float power = 1.f;
+	/*float power = 1.f;
 	float randomSignal = sin(cos(index) * power) + cos(index * power) * power;
-	float signal = sin(index) + cos(index);
+	float signal = sin(index) + cos(index);*/
 
 	/*
 	//spirale

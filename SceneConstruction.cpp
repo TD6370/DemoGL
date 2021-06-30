@@ -144,10 +144,19 @@ void SceneConstruction::WorkingRooms() {
 }
 
 void SceneConstruction::PreparationDataFromShader() {
-	
-	//TEST
-	//auto bname = ObjectCurrent->Name;
 
+	//~~~~~ Update speed ~~~~~~~~~
+	if (ObjectCurrent->IsTransformable ||
+		ObjectCurrent->IsNPC)
+	{
+		//float f = glm::max((float)0.3, DeltaTime);
+		//f = glm::min((float)2., DeltaTime);
+		float f = glm::clamp((float)0.3,(float)2., DeltaTime);
+
+		//ObjectCurrent->Speed = 0.5f * glm::max((float)1., DeltaTime);
+		ObjectCurrent->Speed = 0.5f * f;
+	}
+	
 	if (!m_isUpdate)
 	{
 		bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
@@ -177,21 +186,15 @@ void SceneConstruction::SetDataToShader() {
 	auto nameTest2 = ObjectCurrent->ModelPtr->Name;
 
 	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel || ObjectCurrent->IsSquareModel;
-	bool isDisabledGUI = Storage->SceneData->IsGUI != true && ObjectCurrent->IsGUI;
-	bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
+	bool isSkipGUI = Storage->SceneData->IsGUI == false && ObjectCurrent->IsGUI;
+	//bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
 	
-	if (isDisabledGUI)
+	if (isSkipGUI)
 		return;
 
 	if (m_isEnableGUI != ObjectCurrent->IsGUI) {
 		m_isEnableGUI = ObjectCurrent->IsGUI;
 		m_isUpdate = true;
-	}
-
-	//TEST
-	if (IsSquareModel && ObjectCurrent->TypeObj == TextBlock)
-	{
-		std::cout << "test \n";
 	}
 
 	if (IsSquareModel || m_isUpdate)
@@ -231,6 +234,8 @@ float SceneConstruction::GetParamCase() {
 
 bool SceneConstruction::SetObject(int indObj) {
 
+	bool isShowGUI = Storage->SceneData->IsGUI;
+
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isVisible = ObjectCurrent->GetVisible();
 	if(!isVisible)
@@ -264,18 +269,25 @@ bool SceneConstruction::SetObject(int indObj) {
 
 void SceneConstruction::ObjectUpdate(int i) {
 
+	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool isBase = VersionUpdate == 0;
 	bool isDraw = !IsDeltaUpdateLogic;
+	bool isPause = false; 
 
 	bool isVisible = SetObject(i);
 	if (!isVisible)
 		return;
 
+	//-------------- Start next ObjectCurrent ---------------------
+	if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50)
+		isPause = true;
+
 	if (isDraw || isBase) 
 	{
 		PreparationDataFromShader();
-
-		ObjectCurrent->Action();
+		
+		if(!isPause)
+			ObjectCurrent->Action();
 
 		SetDataToShader();
 	}
@@ -283,6 +295,7 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 void SceneConstruction::Update()
 {
+	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool IsDraw = !IsDeltaUpdateLogic;
 	bool isBase = VersionUpdate == 0;
 	
@@ -311,7 +324,8 @@ void SceneConstruction::Update()
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
-		ObjectUpdate(i);
+		if (IsDraw || isBase || isShowGUI)
+			ObjectUpdate(i);
 
 		if (!IsDraw || isBase)
 			WorkingRooms();
@@ -323,7 +337,14 @@ void SceneConstruction::Update()
 			DrawGraph();
 	}
 	
-	if (!IsDraw || isBase) {
+	
+	bool checkClearInputs;
+	if (isShowGUI)
+		checkClearInputs = !IsDraw;
+	else
+		checkClearInputs = IsDraw;
+
+	if (checkClearInputs || isBase) {
 		Storage->Inputs->MBT = -1;
 		Storage->Inputs->Key = -1;
 		Storage->Inputs->Action = -1;

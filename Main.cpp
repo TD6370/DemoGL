@@ -172,7 +172,8 @@ int main()
 	return 0;*/
 	//====================
 	//----------------------
-	static double limitFPS = 1.0 / 60.0;
+	static double FPS = 30.0;// 60.0;
+	static double limitFPS = 1.0 / FPS;
 	double lastTime = glfwGetTime(), timer = lastTime;
 	double deltaTime = 0, nowTime = 0;
 	int frames = 0, updates = 0;
@@ -190,13 +191,13 @@ int main()
 
 			// ******
 			//update input events
-			glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+			//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
 			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
 			//glfwWaitEventsTimeout(1); /1
 
 			while (deltaTime >= 1.0) {
 
-				//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+				glfwPollEvents();
 
 				Scene->IsDeltaUpdateLogic = true;
 
@@ -215,7 +216,7 @@ int main()
 			// - Reset after one second
 			if (glfwGetTime() - timer > 1.0) {
 				timer++;
-				std::cout << "FPS: " << frames << " Updates:" << updates << std::endl;
+				std::cout << "FPS: " << frames << " Updates:" << updates << " DeltaTime:" << Scene->DeltaTime << std::endl;
 				updates = 0, frames = 0;
 			}
 
@@ -224,16 +225,21 @@ int main()
 		//==========================
 		if (Scene->VersionUpdate == 0)
 		{
-			////update input events
-			glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
-			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
-			////glfwWaitEventsTimeout(1); /1
+			nowTime = glfwGetTime();
+			deltaTime += (nowTime - lastTime) / limitFPS;
+			Scene->DeltaTime = deltaTime;
+			lastTime = nowTime;
+
+			Scene->DeltaTime = 1.;
+
+			//update input events
+			glfwPollEvents();
 
 			Scene->Update();
 
 			glfwSwapBuffers(window);
 		}
-			//==========================
+		//==========================
 	}
 
 	glfwTerminate();

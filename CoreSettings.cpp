@@ -47,7 +47,6 @@ struct Camera {
 
 struct Operator {
 
-	GLfloat Far = 1000.f;// 1000.f;;
 	glm::vec3 m_direction;
 	float VerticalAngle = 0;
 	float HorizontalAngle = 0;

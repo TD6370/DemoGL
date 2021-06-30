@@ -710,7 +710,6 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 100; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -727,6 +726,16 @@ void CreatorModelData::LoadObjects() {
 		AddObject("Box", modelBox, Solid, vec3(0, -35, 0));
 		AddObject("Box2", modelBox, Solid, vec3(0, -25, 0));
 		AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
+
+		//TEST gen Box
+		{
+			int step = 10;
+			int z = floor(i / step) * step;
+			int x = (i * step) - (z * step);
+
+			if(glm::mod((float)i, (float)step)<0.00001)
+				AddObject("BoxN", modelBox, Solid, vec3(30 - x, -45, 50 + z));
+			AddObject("BoxN", modelBox, Block, vec3(0 - x, -5, 50 + z));
 
 		AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
 		AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
@@ -754,12 +763,8 @@ void CreatorModelData::LoadObjects() {
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
 	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
 
-
 	LoadObjectsGUI();
 
-	//AddObject(this, "Hero", modelM_V, Hero, vec3(0, 0, 0));
-
-	
 	/* for (int x = 0; x < 5; x++)
 	{
 		for (int z = 0; z < 5; z++)
