@@ -335,6 +335,7 @@ void SceneConstruction::Update()
 			ObjectUpdate(i);
 
 		//if (!IsDraw || isBase)
+		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
 			WorkingRooms();
 
 		if (IsBreakUpdate())

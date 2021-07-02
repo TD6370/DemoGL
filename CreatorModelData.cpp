@@ -167,33 +167,6 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 
 		i++;
 	}
-
-	//-------------------------------
-
-	//for (auto fieldsModel : filedsModels) {
-
-	//	ModelData nextModel;
-
-	//	string typeModel = fieldsModel->TypeName;
-	//	if (typeModel == "ModelFrame") {
-	//		nextModel = ModelFrame();
-	//	}
-	//	if (typeModel == "ModelTextBox") {
-	//		nextModel = ModelTextBox();
-	//	}
-
-	//	//ModelData nextModel = ModelData();
-	//	nextModel.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
-	//	nextModel.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
-	//	nextModel.PathTexture = fieldsModel->PathTexture.c_str();
-	//	nextModel.PathModel3D = fieldsModel->PathModel3D.c_str();
-	//	nextModel.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
-	//	nextModel.IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
-	//	nextModel.Init();
-	//	AddModel(&nextModel, fieldsModel->Name);
-
-	//	i++;
-	//}
 }
 
 std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
@@ -698,13 +671,6 @@ void CreatorModelData::LoadObjectsGUI() {
 	shared_ptr<ObjectData> objCreate;
 
 	// ---- Object Context frame GUI
-	/*shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
-	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
-	objBackGUI->IsSelected = false;
-	objBackGUI->IsTransformable = false;*/
-
-	// ---- Object Context frame GUI
 	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
 	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1));
 	//shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
@@ -714,42 +680,10 @@ void CreatorModelData::LoadObjectsGUI() {
 	objBackGUI->IsSelected = false;
 	objBackGUI->IsTransformable = false;
 
-	/*objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
-	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-	objCreateButton->IsToogleButon = true;
-	objCreateButton->IsTransformable = false;
-	objCreateButton->SceneCommand->CommandType = EditGUI_OnOff;
-	objBackGUI->ControlConstruct(objCreateButton, caption);*/
-
-	
-	//shared_ptr<ObjectButton> objButton = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
-	
-
-
-	
-
-	// ---- Object Cursor GUI
-	//objName = "CursorGUI";
-	//caption = objBackGUI->Name + "." + objName;
-	//childModel = "CursorModel";
-	////objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .15, .03), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
-
-	/*objName = "TEST1";
-	caption = objBackGUI->Name + "." + objName;
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.01), vec2(0.1, 0.1));
-
-
-	objName = "TEST2";
-	caption = objBackGUI->Name + "." + objName;
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.3, .05, 0.01), vec2(0.1, 0.1), vec3(0,1,1));*/
-
 	// ---- Object frame
 	objName = "TEST3";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.01), vec2(1.1, 0.2), GUI, vec3(1));
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
 
 	// ---- Object Button edit obj GUI
@@ -811,7 +745,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 250; i++)
+    for (int i = 0; i < 2; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
