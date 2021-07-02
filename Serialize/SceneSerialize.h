@@ -38,6 +38,7 @@ struct ObjectFileds {
 	string Name = "Name:";
 	string Type = "Type:";
 	string Model = "Model:";
+	string Index = "Index:";
 	string Postranslate = "Pos:";
 	vec3 PostranslateValue;
 	string Target = "Target:";

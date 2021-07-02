@@ -97,7 +97,7 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
-enum TypeCommand { None, CreateObject, DeleteObject, SelectPosForObject, EditGUI_OnOff };
+enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosForObject, SelectedPosForObject, EditGUI_OnOff };
 
 struct CommandPack {
 	bool Enable;

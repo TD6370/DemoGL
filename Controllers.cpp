@@ -52,7 +52,7 @@ void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene
 	{
 		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
 		Scene->Storage->Inputs->ActionMouse = state;
-		Scene->Debug("MouseEvents Set MBT");
+		//Scene->Debug("MouseEvents Set MBT");
 	}
 }
 
@@ -170,7 +170,7 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 {
 	float m_speed = Scene->m_speed;
 	float m_deltaTime = Scene->m_deltaTime;
-	//TEST
+	//TEST***
 	m_speed = Scene->DeltaTime;
 
 	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 

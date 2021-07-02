@@ -133,6 +133,9 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 
 void ObjectGUI::ControlConstruct(shared_ptr<ObjectGUI> obj, string caption)
 {
+	//TEST&&1
+	//return;
+
 	shared_ptr<ObjectData> objData;
 	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
 	if (objButton != nullptr) {

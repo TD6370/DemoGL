@@ -47,6 +47,7 @@ bool RoomSerializeScene::IsValidSave(shared_ptr<ObjectData> object)
 	return true;
 }
 
+/*
 void RoomSerializeScene::Save() {
 
 	if (Scene->IsBreakUpdate())
@@ -77,7 +78,36 @@ void RoomSerializeScene::Save() {
 		_serializer->Save();
 	}
 }
+*/
 
+void RoomSerializeScene::Save() {
+
+	if (Scene->IsBreakUpdate())
+		return;
+
+	if (Scene->IsLastCurrentObject) {
+
+		for (auto obj : Scene->Storage->SceneObjects)
+		{
+			if (IsValidSave(obj)) {
+				
+				vector<ObjectFiledsSpecific> specificFiels = obj->GetSpecificFiels();
+				bool isSpecificExist = specificFiels.size() != 0;
+
+				_serializer->Save(obj, isSpecificExist);
+				
+				_serializer->SaveSpecific(specificFiels);
+			}
+		}
+
+		for (auto model : Scene->Storage->Models)
+		{
+			_serializer->Save(model);
+		}
+		_serializer->Save();
+
+	}
+}
 
 void RoomSerializeScene::Work() {
 
@@ -86,8 +116,17 @@ void RoomSerializeScene::Work() {
 	if (Scene->Storage->Inputs->Key == m_saveKey &&
 		Scene->Storage->Inputs->Action == GLFW_PRESS) {
 		
+		/*if (!m_startSave) 
+		{
+			m_startSave = true;
+			m_calculateSave = true;
+		}*/
 		Save();
 	}
+
+	/*if (m_startSave) {
+		Save();
+	}*/
 
 	//------ Deserialization
 

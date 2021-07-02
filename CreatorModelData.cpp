@@ -52,6 +52,11 @@ CreatorModelData::CreatorModelData() {
 	Oper = new Operator();
 	Inputs = new ControllerInput;
 	SceneData = new SceneParam;
+	MapSceneObjectsTypeOffset = map<TypeObject, int>();
+	SortObjectIndex = vector<int>();
+	SortTypeObjects = vector<TypeObject>();
+
+	FillSortTypesObjects();
 }
 
 CreatorModelData::~CreatorModelData() {
@@ -63,6 +68,32 @@ void CreatorModelData::ClearObjects() {
 		SceneObjects.clear();
 	if (MapSceneObjects.size() != 0)
 		MapSceneObjects.clear();
+	if(MapSceneObjectsTypeOffset.size() != 0)
+		MapSceneObjectsTypeOffset.clear();
+	if (SortObjectIndex.size() != 0)
+		SortObjectIndex.clear();
+	
+}
+
+void CreatorModelData::FillSortTypesObjects() {
+
+	//enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI, Button
+	SortTypeObjects.push_back(Polygon);
+	SortTypeObjects.push_back(Hero);
+	SortTypeObjects.push_back(CursorRay);
+	SortTypeObjects.push_back(BulletHero);
+	SortTypeObjects.push_back(Solid);
+	SortTypeObjects.push_back(Block);
+	SortTypeObjects.push_back(Terra);
+	SortTypeObjects.push_back(NPC);
+	SortTypeObjects.push_back(Bullet);
+	SortTypeObjects.push_back(Tree);
+	SortTypeObjects.push_back(Terra);
+	SortTypeObjects.push_back(GUI);
+	SortTypeObjects.push_back(Button);
+	SortTypeObjects.push_back(TextBlock);
+	SortTypeObjects.push_back(CursorGUI);
+	//SortTypeObjects.push_back();
 }
 
 void CreatorModelData::AddModel(shared_ptr<ModelData> newModel, std::string name) {
@@ -188,12 +219,14 @@ bool CreatorModelData::IsExistObject(TypeObject typeObj)
 }
 
 //std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
-std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
+std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index) {
 
 	if (IsExistObject(p_typeObj))
 		return NULL;
 
 	SceneObjectsLastIndex = SceneObjects.size();
+	//if (p_index == -1)
+		p_index = SceneObjectsLastIndex;
 
 	bool isGenName = name.length() == 0;
 	if (!isGenName) {
@@ -201,46 +234,51 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		it = MapSceneObjects.find(name);
 		if (it != MapSceneObjects.end()) {
 			//isGenName = true;
-			name += "_" + std::to_string(SceneObjectsLastIndex);
+			name += "_" + std::to_string(p_index);
 		}
 	}
 
 	if (isGenName) {
 		string fileModel = GetFile(modelPtr->PathModel3D);
 		string fileTexture = GetFile(modelPtr->PathTexture);
-		name += fileModel + "_" + std::to_string(SceneObjectsLastIndex);
+		name += fileModel + "_" + std::to_string(p_index);
 	}
 
 	std::shared_ptr<ObjectData> object;
 	switch (p_typeObj)
 	{
 		case GUI: {
-			ObjectGUI obj = ObjectGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectGUI>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case TextBlock: {
-			ObjectTextBlock obj = ObjectTextBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectTextBlock obj = ObjectTextBlock(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectTextBlock>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectTextBlock>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Button: {
-			ObjectButton obj = ObjectButton(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectButton obj = ObjectButton(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectButton>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectButton>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case CursorGUI: {
-			ObjectCursorGUI obj = ObjectCursorGUI(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectCursorGUI obj = ObjectCursorGUI(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectCursorGUI>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Polygon: {
-			ObjectPolygon obj = ObjectPolygon(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectPolygon obj = ObjectPolygon(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectPolygon>(obj));
 			object = GetObjectPrt(obj.Index);
 			if(!CurrentPolygonObject)
 				CurrentPolygonObject = object;
@@ -248,48 +286,55 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		}
 		case Solid:
 		case Terra: {
-			ObjectPhysic obj = ObjectPhysic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Block: {
-			ObjectBlock obj = ObjectBlock(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectBlock obj = ObjectBlock(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBlock>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectBlock>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case NPC:
 		{
-			ObjectNPC obj = ObjectNPC(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectNPC obj = ObjectNPC(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectNPC>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectNPC>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Bullet:
 		{
-			ObjectDynamic obj = ObjectDynamic(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectDynamic obj = ObjectDynamic(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectDynamic>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case CursorRay:
 		{
-			ObjectCursorRay obj = ObjectCursorRay(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectCursorRay obj = ObjectCursorRay(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorRay>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectCursorRay>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case BulletHero:
 		{
-			ObjectBullet obj = ObjectBullet(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectBullet obj = ObjectBullet(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBullet>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectBullet>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Hero: {
-			ObjectHero obj = ObjectHero(SceneObjectsLastIndex, modelPtr, p_typeObj, p_pos);
+			ObjectHero obj = ObjectHero(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectHero>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectHero>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -305,7 +350,42 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		object->InitData();
 	}
 
-	MapSceneObjects.insert(std::pair<string, int>(name, SceneObjectsLastIndex));
+	MapSceneObjects.insert(std::pair<string, int>(name, p_index));
+
+
+	//--------------------------------- Save Order Index 
+	int IndexInsert = 0;
+	map <TypeObject, int> ::iterator it;
+
+	for (TypeObject typeObj : SortTypeObjects)
+	{
+		it = MapSceneObjectsTypeOffset.find(typeObj);
+		if (it != MapSceneObjectsTypeOffset.end()) 
+			IndexInsert += MapSceneObjectsTypeOffset[typeObj];
+		if (typeObj == p_typeObj)
+			break;
+	}
+
+	it = MapSceneObjectsTypeOffset.find(p_typeObj);
+	if (it != MapSceneObjectsTypeOffset.end()) {
+		MapSceneObjectsTypeOffset[p_typeObj]++;
+	}
+	else {
+		MapSceneObjectsTypeOffset.insert(std::pair<TypeObject, int>(p_typeObj, 1));
+	}
+
+	SortObjectIndex.insert(SortObjectIndex.begin() + IndexInsert, p_index);
+
+	//==========  TEST Sort
+	/*for (auto indNext : SortObjectIndex) {
+
+		auto currType =  SceneObjects[indNext]->TypeObj;
+		SceneSerialize* serializer = new SceneSerialize();
+		std::cout << "next Index Type: " << serializer->GetNameType(currType) << "\n";
+	}
+	std::cout << "================================\n";*/
+	//---------------------------------
+
 	return object;
 }
 
@@ -380,7 +460,9 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
 		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
 	
-		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue);
+		int indexObj = std::stoi(objFields->Index);
+
+		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue,vec3(0), indexObj);
 	
 		if (newObj == NULL)
 			continue;
@@ -410,12 +492,6 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->IsFocusable = StrToBool(opt.IsFocusable);
 		newObj->IsTransformable = StrToBool(opt.IsTransformable);
 		newObj->IsUsable = StrToBool(opt.IsUsable);
-
-				
-		//--- test serialize
-		/*	if (newObj->TypeObj == Button) {
-			std::cout << "TEST";
-		}*/
 
 		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
@@ -612,20 +688,45 @@ void CreatorModelData::LoadModels() {
 
 void CreatorModelData::LoadObjectsGUI() {
 
-	// ---- Object Context frame GUI
-	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
-	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
-	//shared_ptr<ObjectButton> objButton = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
-	shared_ptr<ObjectButton> objCreateButton;// 
-	shared_ptr<ObjectData> objCreate;
-
 	// ---- Object frame
 	string caption;
 	string childModel = "conextGUI_2";
 	//childModel = "conextGUI_T";
 	string objName;
 	vec3 color = vec3(0.3);
+	shared_ptr<ObjectButton> objCreateButton;// 
+	shared_ptr<ObjectData> objCreate;
+
+	// ---- Object Context frame GUI
+	/*shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
+	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, GUI, vec3(0, -50, 0), vec3(1));
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+	objBackGUI->IsSelected = false;
+	objBackGUI->IsTransformable = false;*/
+
+	// ---- Object Context frame GUI
+	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
+	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1));
+	//shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+	shared_ptr<ObjectButton> objBackGUI = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
+	objBackGUI->IsToogleButon = false;
+	objBackGUI->SceneCommand->CommandType = TypeCommand::None;
+	objBackGUI->IsSelected = false;
+	objBackGUI->IsTransformable = false;
+
+	/*objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+	objCreateButton->IsToogleButon = true;
+	objCreateButton->IsTransformable = false;
+	objCreateButton->SceneCommand->CommandType = EditGUI_OnOff;
+	objBackGUI->ControlConstruct(objCreateButton, caption);*/
+
+	
+	//shared_ptr<ObjectButton> objButton = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
+	
+
+
+	
 
 	// ---- Object Cursor GUI
 	//objName = "CursorGUI";
@@ -710,7 +811,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 250; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -764,7 +865,9 @@ void CreatorModelData::LoadObjects() {
 	AddObject("M_V_3", modelM_V, Solid, vec3(0, 0, 50), color_yelow);
 
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
-	AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
+	shared_ptr<ObjectData> objHeroData = AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
+	shared_ptr<ObjectHero> objHero = std::dynamic_pointer_cast<ObjectHero>(objHeroData);
+	objHero->LoadCursorRay();
 
 	LoadObjectsGUI();
 

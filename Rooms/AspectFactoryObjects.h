@@ -17,6 +17,8 @@ public:
 	void Init();
 	void Config();
 	void Work();
+
+	void CreateButton();
 };
 
 

@@ -112,20 +112,7 @@ void ObjectCursorGUI::SaveNewPosition() {
 		notY = true;
 	}
 
-	//-------- Debug
-	stringstream ssDebug;
-	ssDebug << "Mouse View " << mouseView.x << " x " << mouseView.x << "\n"
-		<< "Mouse World: " << mouse.x << " x " << mouse.y << "  z:" << mouse.z << "\n"
-		<< "Obj Abs: " << startPosRect.x << " x " << startPosRect.y << "\n"
-		<< "Obj Move: " << StartPos.x << " x " << StartPos.y << "\n"
-		<< "----------------------------------------" << "\n";
-	string strTemp = ssDebug.str();
-	if (m_stringDebug != strTemp) {
-		m_stringDebug = strTemp;
-		std::cout << m_stringDebug;
-	}
-	//---------------------
-
+	
 	if (mouse.z > 0)
 	{
 		return;

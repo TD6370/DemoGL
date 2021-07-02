@@ -43,6 +43,9 @@ public:
 	vector<shared_ptr<ModelData>> Models;
 	map<string, int> MapModels;
 	map<string, int> MapSceneObjects;
+	map<TypeObject, int> MapSceneObjectsTypeOffset;
+	vector<TypeObject> SortTypeObjects;
+	vector<int> SortObjectIndex;
 	WorldCluster* Clusters;
 		
 	CoreMVP* ConfigMVP;
@@ -56,7 +59,7 @@ public:
 
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
-	std::shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0));
+	std::shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1);
 
 	void GenerateObjects();
 
@@ -84,6 +87,8 @@ public:
 
 	void Load();
 
+	void FillSortTypesObjects();
+
 	void ClearObjects();
 
 	void ClearModels();
@@ -93,6 +98,7 @@ public:
 	bool IsExistObjectByType(TypeObject type);
 
 	bool IsExistObject(TypeObject typeObj);
+
 };
 
 

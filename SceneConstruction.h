@@ -151,6 +151,8 @@ public:
 
 	bool ReadCommand(TypeCommand commandType);
 
+	bool IsCurrentObjectBackgroundFrameGUI();
+
 	//----------- TODO:
 	//CoreMVP* GetMVP();
 	//ControllerInput* GetInputs();

@@ -83,6 +83,7 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.Type << " " << GetNameType(obj->TypeObj) << "\n";
 	streamObjects << fileds.Name << " " << obj->Name << "\n";
 	streamObjects << fileds.Model << " " << obj->ModelPtr->Name << "\n";
+	streamObjects << fileds.Index << " " << obj->Index << "\n";
 
 	streamObjects << fileds.Postranslate << " " << Vec3Str(obj->Postranslate) << "\n";
 	streamObjects << fileds.Target << " " << Vec3Str(obj->Target) << "\n";
@@ -362,6 +363,8 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.Name;
 				if (in >> lineStr && lineStr == filedsObj.Model)
 					in >> filedsObj.Model;
+				if (in >> lineStr && lineStr == filedsObj.Index)
+					in >> filedsObj.Index;
 
 				if (in >> lineStr && lineStr == filedsObj.Postranslate) {
 					in >> filedsObj.PostranslateValue.x;

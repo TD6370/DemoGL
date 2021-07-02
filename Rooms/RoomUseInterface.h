@@ -68,6 +68,7 @@ private:
 	bool IsCursorClickEventConst = false;
 	bool IsCheckBorder = false;
 	bool IsEditControls = false;
+	bool IsBackgroundFrame = false;
 
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
@@ -106,6 +107,9 @@ public:
 
 	//-------- Click control
 	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
+
+	//------- CreateObject
+	void EventCreateObject(shared_ptr<ObjectGUI> objGUI);
 
 	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
 

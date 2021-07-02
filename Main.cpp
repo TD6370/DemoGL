@@ -197,6 +197,7 @@ int main()
 
 			while (deltaTime >= 1.0) {
 
+				//TEST&&1
 				glfwPollEvents();
 
 				Scene->IsDeltaUpdateLogic = true;
@@ -216,7 +217,7 @@ int main()
 			// - Reset after one second
 			if (glfwGetTime() - timer > 1.0) {
 				timer++;
-				std::cout << "FPS: " << frames << " Updates:" << updates << " DeltaTime:" << Scene->DeltaTime << std::endl;
+				//std::cout << "FPS: " << frames << " Updates:" << updates << " DeltaTime:" << Scene->DeltaTime << std::endl;
 				updates = 0, frames = 0;
 			}
 

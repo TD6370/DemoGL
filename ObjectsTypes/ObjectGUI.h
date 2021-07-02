@@ -28,7 +28,7 @@ protected :
 	vec3 start_vertBottomLeft = vec3(0);
 	vec3 start_vertBottomRight = vec3(0);
 	vec3 start_vertTopLeft = vec3(0);
-	vec3 start_Color = vec3(0);
+	vec3 start_Color = vec3(-1);
 
 public:
 	

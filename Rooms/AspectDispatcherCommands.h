@@ -11,6 +11,7 @@ using std::string;
 //using glm::vec3;
 
 class SceneConstruction;
+enum TypeCommand;
 //struct CommandPack;
 
 class AspectDispatcherCommands : public SceneRoom
@@ -18,6 +19,7 @@ class AspectDispatcherCommands : public SceneRoom
 private:
 	const int m_commandPassLimit = 2;
 	int m_commandPassCount = 0;
+	TypeCommand m_commandLast = TypeCommand::None;
 
 public:
 	vector<CommandPack> ActiveCommands;

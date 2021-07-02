@@ -8,7 +8,7 @@ void ObjectHero::InitData()
 	IsGravity = true;
 	Storage->SceneData->IndexHeroObj = Index;
 
-	LoadCursorRay();
+	//LoadCursorRay();
 }
 
 void ObjectHero::LoadCursorRay()

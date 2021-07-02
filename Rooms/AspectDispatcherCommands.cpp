@@ -22,11 +22,12 @@ void AspectDispatcherCommands::Work() {
 	if (Scene->IsBreakUpdate())
 		return;
 
-	CommandPack* command = Scene->ObjectCurrent->SceneCommand;
-	if (command->Enable) {
-		CommandPack commandSet = *command;
+	CommandPack* commandCurrObj = Scene->ObjectCurrent->SceneCommand;
+	if (commandCurrObj->Enable) {
+		CommandPack commandSet = *commandCurrObj;
 		ActiveCommands.push_back(commandSet);
-		command->Enable = false;
+		commandCurrObj->Enable = false;
+		//Scene->Debug("");
 	}
 
 	if (Scene->IsLastCurrentObject)
@@ -41,10 +42,22 @@ void AspectDispatcherCommands::Work() {
 		}
 		else
 		{
+			if (Scene->CurrentSceneCommand.CommandType == TypeCommand::None) {
+				Scene->CurrentSceneCommand.Enable = false;
+				return;
+			}
+
+			if (m_commandLast != Scene->CurrentSceneCommand.CommandType) {
+				m_commandLast = Scene->CurrentSceneCommand.CommandType;
+				m_commandPassCount = 0;
+				return;
+			}
+
 			//----- Clear not working command -----
 			if (m_commandPassCount > m_commandPassLimit)
 			{
 				m_commandPassCount = 0;
+				//return;
 				SceneSerialize* serializer = new SceneSerialize();
 				std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n";
 				Scene->CurrentSceneCommand.Enable = false;

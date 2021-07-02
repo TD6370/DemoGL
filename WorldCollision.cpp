@@ -47,7 +47,7 @@ void WorldCluster::PlaneClusterization()
 	std::vector<shared_ptr<Plane>> planes = object->Shape->Planes;
 
 	//TEST
-	auto info = object->GetInfo();
+	//auto info = object->GetInfo();
 
 	//for (const auto& vec : planes) {
 	//for (int indVert = 0; indVert < vertices.size(); indVert++)

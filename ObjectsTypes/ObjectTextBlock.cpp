@@ -45,7 +45,10 @@ void ObjectTextBlock::UpdateState() {
 
 	//Updtae view
 	if (ParamCase == AnimationParam->StartDefaultParamShaderID) {
-		Color = start_Color;
+		if (start_Color == vec3(-1))
+			start_Color = Color;
+		else
+			Color = start_Color;
 	}
 }
 
@@ -55,6 +58,8 @@ void ObjectTextBlock::SetDataToShader(bool isUpdate) {
 
 	if (!isUpdate)
 	{
+		//TEST&&1
+		//return;
 		ModelPtr->SetBuffer(Buffer);
 		auto normals = GetNormals();
 		ModelPtr->SetModelInBuffer(TextureUV, normals, false);
@@ -184,21 +189,6 @@ void ObjectTextBlock::MeshTransform() {
 		}
 		firstStep++;
 	}
-
-	//std::stringstream ss1;
-
-	//for (int i = 0; i < Vertices.size(); i+=6) {
-	//	ss1 << " " << Vertices[i].z 
-	//		<< " " << Vertices[i+1].z 
-	//		<< " " << Vertices[i+2].z 
-	//		<< " " << Vertices[i+3].z 
-	//		<< " " << Vertices[i+4].z 
-	//		<< " " << Vertices[i+5].z << "\n";
-	//}
-
-		//IsTextureRepeat = true;
-	//std::cout << ss1.str();
-	//std::cout << std::endl;
 
 	Shape->FillVertextBox();
 }

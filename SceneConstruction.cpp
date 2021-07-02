@@ -119,6 +119,7 @@ void SceneConstruction::ConfigRoom() {
 
 	factoryObjects = new AspectFactoryObjects("FactoryObjects", this);
 	factoryObjects->Init();
+	Rooms.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
 	
 }
 
@@ -232,9 +233,11 @@ float SceneConstruction::GetParamCase() {
 	return paramCase;
 }
 
-bool SceneConstruction::SetObject(int indObj) {
+bool SceneConstruction::SetObject(int indNN) {
 
 	bool isShowGUI = Storage->SceneData->IsGUI;
+
+	int indObj = Storage->SortObjectIndex[indNN];
 
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	bool isVisible = ObjectCurrent->GetVisible();
@@ -242,8 +245,8 @@ bool SceneConstruction::SetObject(int indObj) {
 		return isVisible;
 
 	ModelCurrent = ObjectCurrent->ModelPtr;
-	IsFirstCurrentObject = indObj == 0;
-	IsLastCurrentObject = countObjects == indObj;
+	IsFirstCurrentObject = indNN == 0;
+	IsLastCurrentObject = countObjects == indNN;
 	m_isUpdate = false;
 
 	if (prevModelTexture != ModelCurrent->PathTexture) {
@@ -276,6 +279,10 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 	bool isVisible = SetObject(i);
 	if (!isVisible)
+		return;
+	
+	bool isUpdate = (isDraw || isBase || isShowGUI);
+	if (!isUpdate)
 		return;
 
 	//-------------- Start next ObjectCurrent ---------------------
@@ -324,10 +331,10 @@ void SceneConstruction::Update()
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
-		if (IsDraw || isBase || isShowGUI)
+		//if (IsDraw || isBase || isShowGUI) //TEST&&1
 			ObjectUpdate(i);
 
-		if (!IsDraw || isBase)
+		//if (!IsDraw || isBase)
 			WorkingRooms();
 
 		if (IsBreakUpdate())
@@ -550,4 +557,10 @@ bool SceneConstruction::ReadCommand(TypeCommand commandType)
 	}
 
 	return false;
+}
+
+
+bool SceneConstruction::IsCurrentObjectBackgroundFrameGUI() {
+
+	return ObjectCurrent->Index == Storage->SceneData->IndexGUIObj;
 }

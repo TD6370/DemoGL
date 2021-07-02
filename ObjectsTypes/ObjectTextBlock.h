@@ -43,7 +43,7 @@ public:
 			p_typeObj,
 			p_pos) {
 		
-		IsSquareModel = true;
+		IsSquareModel = true; //TEST&&1
 		IsAbsolutePosition = true;
 		IsFocusable = false;
 
