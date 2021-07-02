@@ -113,7 +113,7 @@ public:
 
 	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
 
-	void ModeEditControls();
+	void ModeEditControls(shared_ptr<ObjectGUI> objGUI);
 
 	//bool ReadCommand(TypeCommand commandType);
 };

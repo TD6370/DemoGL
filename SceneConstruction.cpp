@@ -44,6 +44,8 @@ using glm::vec3;
 using glm::vec4;
 using glm::mat4;
 using std::make_unique;
+using std::shared_ptr;
+using std::dynamic_pointer_cast;
 
 SceneConstruction::SceneConstruction() {
 }
@@ -112,14 +114,18 @@ void SceneConstruction::ConfigRoom() {
 	roomInterface->Init();
 	Rooms.push_back(make_unique<RoomUseInterface>(*roomInterface));
 
-	AspectDispatcherCommands* dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
+	//AspectDispatcherCommands* 
+	dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
 	dispatcherCommands->Init();
+	//Rooms.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
 	Rooms.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
+	//shared_ptr<ObjectButton> objBackGUI = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
+	dispatcherCommands = dynamic_pointer_cast<AspectDispatcherCommands>(Rooms[Rooms.size()-1]).get();
 	
-
 	factoryObjects = new AspectFactoryObjects("FactoryObjects", this);
 	factoryObjects->Init();
 	Rooms.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
+	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Rooms[Rooms.size() - 1]).get();
 	
 }
 
@@ -564,4 +570,13 @@ bool SceneConstruction::ReadCommand(TypeCommand commandType)
 bool SceneConstruction::IsCurrentObjectBackgroundFrameGUI() {
 
 	return ObjectCurrent->Index == Storage->SceneData->IndexGUIObj;
+}
+
+void SceneConstruction::AddCommand(CommandPack command) {
+	dispatcherCommands->AddCommand(command);
+}
+
+void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+
+	dispatcherCommands->AddCommand(commandType, targetIndex, sourceIndex, keyOptions, valueOptions);
 }

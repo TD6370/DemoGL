@@ -66,3 +66,25 @@ void AspectDispatcherCommands::Work() {
 		}
 	}
 }
+
+
+void AspectDispatcherCommands::AddCommand(CommandPack command) {
+
+	if (command.Enable) {
+		ActiveCommands.push_back(command);
+	}
+}
+
+void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+
+	CommandPack command = CommandPack();
+	command.Enable = true;
+	command.CommandType = commandType;
+	command.TargetIndex = targetIndex;
+	command.SourceIndex = sourceIndex;
+	if (keyOptions.size() != 0) {
+		command.Options.clear();
+		command.Options.insert(std::pair<string, int>(keyOptions, valueOptions));
+	}
+	ActiveCommands.push_back(command);
+}

@@ -24,8 +24,8 @@ void RoomUseInterface::Init() {
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
-	IsEditControls = true;
-	//IsEditControls = false;
+	//IsEditControls = true;
+	IsEditControls = false;
 	
 	}
 
@@ -35,8 +35,6 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 		return;
 	if (!obj->IsTransformable)
 		return;
-	//if (!obj->IsFocusable)
-	//	return;
 	if (!IsCursorClickEvent)
 		return;
 	if (!IsFocused)
@@ -64,12 +62,8 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 
 	//---- TEST
-	//if (!IsEditControls)
-	//	return;
 	if (IndexObjectSelected != obj->Index)
 		return;
-	//if (!obj->IsFocusable)
-	//	return;
 	if(!obj->IsTransformable)
 		return;
 	if (obj->ActionObjectCurrent != ActionObject::Moving)
@@ -84,12 +78,6 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 //----------------------- END MOVE
 bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	
-	//---- TEST
-	//if (!IsEditControls)
-	//	return false;
-
-	//if (!obj->IsFocusable)
-	//	return false;
 	if (!IsCursorClickEvent)
 		return false;
 
@@ -134,7 +122,6 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
 
 	//Scene->Debug("Start resize");
-	//obj->Click();
 	obj->ActionObjectCurrent = ActionObject::Transforming;
 	obj->Color = color_resize;
 	IndexObjectSelected = obj->Index;
@@ -163,25 +150,14 @@ void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
 		return;
 
 	//Scene->Debug("GUI resize");
-
-	
 	float sizePanelX = CursorMovePos.x - obj->StartPos.x;
 	float sizePanelY = CursorMovePos.y - obj->StartPos.y;
-	/*vec3 stepMouse = CursorMovePos - SelectObjectOffsetPos;
-	sizePanelX -= stepMouse.x;
-	sizePanelY -= stepMouse.y;*/
-	//sizePanelX -= SelectObjectOffsetPos.x;
-	//sizePanelY -= SelectObjectOffsetPos.y;
 	float kBord = 0.15;
 	sizePanelX += m_sizeBorder * kBord;
 	sizePanelY += m_sizeBorder * kBord;
-	//sizePanelX += glm::pow(m_sizeBorder, 2);
-	//sizePanelY += glm::pow(m_sizeBorder, 2);
 
 	if (sizePanelX < 0.01 || sizePanelY < 0.01)
 		return;
-
-	//obj->ParamCase = m_startResizeParamShaderID; //!!!
 
 	obj->SizePanel.x = sizePanelX;
 	obj->SizePanel.y = sizePanelY;
@@ -213,12 +189,8 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 //----------------------- FOCUS
 void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
 
-	//bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
-	bool isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
-	if(isOrderParam)
-		isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartMoveParamShaderID);
-	if (isOrderParam)
-		isOrderParam = !IsCompareF(m_CurrentStartedEventID, AnimationParams->StartClickParamShaderID);
+	if (IsBackgroundFrame && Scene->ObjectCurrent->SceneCommand->CommandType == TypeCommand::None)
+		return;
 
 	bool isCheckOrder = true;
 	vec2 endPosRect, startPosRect;
@@ -248,10 +220,6 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 		//--- Check Focused border
 		IsCheckBorder = CheckPointInRectangleBorder(m_tempMousePosWorld, startPosRect, endPosRect, m_sizeBorder);
 	}
-
-	/*if (Scene->IsLastCurrentObject) {
-		IndexObjectFocused = obj->Index;
-	}*/
 }
 
 void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
@@ -275,12 +243,6 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		}
 	}
 	else {
-		/*if (IndexObjectFocused == obj->Index) {
-			FocusedOrder = -1;
-			IndexObjectFocused = -1;
-			if (!isOrderParam)
-				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
-		}*/
 
 		if (IndexObjectFocused == obj->Index) {
 			FocusedOrder = -1;
@@ -289,14 +251,10 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 		}
 
-		/*FocusedOrder = -1;
-		IndexObjectFocused = -1;
-		if (!isOrderParam && isUpdateView)
-			SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);*/
 		obj->ParamCase = AnimationParams->StartDefaultParamShaderID;
 
 		if(isUpdateView)
-			obj->Color = color_default;
+			obj->DefaultColor();
 	}
 }
 
@@ -325,9 +283,6 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 
 void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
-	/*if (!IsBackgroundFrame)
-		return;*/
-
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
 		return;
@@ -344,11 +299,7 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(SelectedPosForObject))
 		{
-			//Set current command -- Create control
-			command->Enable = true;
-			command->CommandType = TypeCommand::CreateObject;
-			command->Options.clear();
-			command->Options.insert(std::pair<string, int>("TypeObject", (int)TypeObject::Button));
+			Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", (int)TypeObject::Button);
 			Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::None;
 		}
 	}
@@ -357,11 +308,24 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(ObjectCreated))
 		{
-			//IsCursorClickEvent = true;
 			IndexObjectSelected = command->TargetIndex;
 			Scene->ObjectCurrent->ActionObjectCurrent = ActionObject::Moving;
-			//======================
 		}
+	}
+}
+
+//===================== Event Edit controls ===========================
+
+void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
+{
+	CommandPack* command = &Scene->CurrentSceneCommand;
+	if (!command->Enable)
+		return;
+
+	if (Scene->ReadCommand(EditGUI_OnOff))
+	{
+		if (command->Options.size() != 0)
+			IsEditControls = command->Options["ButtonEditOn"];
 	}
 }
 
@@ -376,16 +340,12 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 //====================================
 
 void RoomUseInterface::Work() {
-
-	
 	
 	if (Scene->Storage->SceneData->IsGUI == false)
 		return;
 
 	if (Scene->IsBreakUpdate())
 		return;
-
-	ModeEditControls();
 
 	IsFocused = false;
 
@@ -398,17 +358,15 @@ void RoomUseInterface::Work() {
 	if(objGUI == nullptr)
 		return;
 
+	ModeEditControls(objGUI);
+
 	IsBackgroundFrame = Scene->ObjectCurrent->IndexObjectOwner == -1;
-	//if (IsBackgroundFrame)
-	//	return;
 
 	//--- Focused
 	CalculateMousePosWorld();
 
 	//TEST&&1
 	//return;
-
-	//IsCursorClickEvent = IsCursorClickEventConst = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 
 	if (objGUI->TypeObj == TypeObject::CursorGUI) {
 		CursorMovePos = objGUI->StartPos;
@@ -455,13 +413,6 @@ void RoomUseInterface::Work() {
 	}
 }
 
-void RoomUseInterface::ModeEditControls() 
-{
-	if (Scene->ReadCommand(EditGUI_OnOff))
-	{
-		IsEditControls = !IsEditControls;
-	}
-}
 
 void RoomUseInterface::CalculateMousePosWorld() {
 

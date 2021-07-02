@@ -75,6 +75,11 @@ public:
 	void RunAction();
 
 	void UpdateState();
+
+	void DefaultColor();
+
+	void Click();
+
 	//ParamCaseDefault = -1;
 	//-------------
 

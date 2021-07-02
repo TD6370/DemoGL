@@ -17,7 +17,7 @@ enum TypeCommand;
 class AspectDispatcherCommands : public SceneRoom
 {
 private:
-	const int m_commandPassLimit = 2;
+	const int m_commandPassLimit = 1000;
 	int m_commandPassCount = 0;
 	TypeCommand m_commandLast = TypeCommand::None;
 
@@ -30,6 +30,11 @@ public:
 	void Init();
 	void Config();
 	void Work();
+
+	void AddCommand(CommandPack command);
+
+	void AddCommand(TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
 };
+
 
 

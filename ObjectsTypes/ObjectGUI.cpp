@@ -118,6 +118,7 @@ shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameMod
 	objGUI->StartPos = startPosChild;
 	objGUI->SizePanel = size;
 	objGUI->Color = color;
+	objGUI->UpdateState();
 	//objGUI->IsTextureRepeat = true;
 
 	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));

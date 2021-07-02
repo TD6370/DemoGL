@@ -46,31 +46,16 @@ public:
 		IsSquareModel = true; //TEST&&1
 		IsAbsolutePosition = true;
 		IsFocusable = false;
-
-		//--- TEST
-		//IsFocusable = true;
 	};
 
 
 	~ObjectTextBlock();
-
-	void InitData();
-
-	void RunAction();
-
-	void UpdateState();
 
 	void CreateMessage();
 
 	void MeshTransform();
 
 	void SetDataToShader(bool isUpdate = false);
-
-
-	//void RunAction();
-	//void virtual DefaultSate();
-	//void virtual Click();
-	//void virtual Work();
 
 	//-------------
 

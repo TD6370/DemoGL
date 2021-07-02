@@ -44,6 +44,8 @@ protected:
 	GLfloat m_stepMove = 0;
 	GLfloat m_angleModel = 0.0;
 	std::string m_keyPosSectorStr;
+protected:
+	vec3 StartColor = vec3(-1);
 public:
 	string Name;
 	TypeObject TypeObj;
@@ -165,6 +167,8 @@ public:
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
 	string GetInfo();
+
+	void DefaultColor();
 
 	//-----------------------------
 	

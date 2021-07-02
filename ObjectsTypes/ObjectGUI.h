@@ -28,7 +28,6 @@ protected :
 	vec3 start_vertBottomLeft = vec3(0);
 	vec3 start_vertBottomRight = vec3(0);
 	vec3 start_vertTopLeft = vec3(0);
-	vec3 start_Color = vec3(-1);
 
 public:
 	
@@ -36,10 +35,6 @@ public:
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
 	AnimationParamGUI* AnimationParam;
-	
-	//GLfloat ParamCaseDefault = -1;
-
-	//string CommandName;
 
 	ObjectGUI(
 		int p_index,

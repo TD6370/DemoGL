@@ -44,7 +44,7 @@ ObjectData::ObjectData(int p_index,
 	/*Shape = new ShapeBase();
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/
-
+	StartColor = Color;
 	
 }
 
@@ -82,7 +82,10 @@ void ObjectData::SetDataToShader(bool isUpdate) {
 }
 
 void ObjectData::UpdateState() {
-
+	
+	if (Color == vec3(-1))
+		Color = vec3(0.117, 0.351, 0.950);
+	StartColor = Color;
 }
 
 void ObjectData::ActionBase() {
@@ -234,6 +237,11 @@ std::shared_ptr<ObjectData> ObjectData::GetChild(string key)
 
 void ObjectData::InitChildObjects() {
 
+}
+
+void ObjectData::DefaultColor()
+{
+	Color = StartColor;
 }
 
 string ObjectData::GetInfo() {

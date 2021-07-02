@@ -85,13 +85,5 @@ void AspectFactoryObjects::CreateButton() {
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
 	objBackGUI->ControlConstruct(objCreateButton, caption);
 
-
-	//----------------------- 	MOVE
-	//objCreateButton->ActionObjectCurrent = ActionObject::Moving;
-	
-	CommandPack* command = &Scene->CurrentSceneCommand;
-	command->Enable = true;
-	command->CommandType = ObjectCreated;
-	command->TargetIndex = objCreateButton->Index;
-
+	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
 }

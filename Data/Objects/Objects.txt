@@ -1,0 +1,1679 @@
+Type: Polygon
+Name: Plane
+Model: plane
+Index: 0
+Pos: -20 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: NPC
+Name: Mon
+Model: mon
+Index: 1
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_2
+Model: mon
+Index: 2
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box
+Model: box
+Index: 3
+Pos: 0 -35 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box2
+Model: box
+Index: 4
+Pos: 0 -25 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: Box3
+Model: box
+Index: 5
+Pos: -50 -55 70
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox
+Model: box
+Index: 6
+Pos: -10 -54.019 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 1 -1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox1
+Model: box
+Index: 7
+Pos: -20 -54.0329 -10
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox2
+Model: box
+Index: 8
+Pos: -10 -53.9908 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: BlockBox3
+Model: box
+Index: 9
+Pos: -20 -53.9883 -20
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 1 1 1
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_1
+Model: marker_Point
+Index: 10
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_P_2
+Model: marker_Point
+Index: 11
+Pos: -50 0 0
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Bullet
+Name: Bullet
+Model: marker_Point
+Index: 12
+Pos: 0 0 0
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: BulletHero
+Name: BulletHero
+Model: marker_Point
+Index: 13
+Action: Moving
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_1
+Model: marker_Cross
+Index: 14
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_C_2
+Model: marker_Cross
+Index: 15
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_1
+Model: marker_Vector
+Index: 16
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_2
+Model: marker_Vector
+Index: 17
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 0 1
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Solid
+Name: M_V_3
+Model: marker_Vector
+Index: 18
+Target: 0 0 0
+Action: Lock
+IndexObjectOwner: -1
+Color: 0 1 1
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Hero
+Name: Hero
+Model: homo
+Index: 19
+Action: Search
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: CursorRay
+Name: CursorRay
+Model: cursorRay
+Index: 20
+Action: Stay
+IndexObjectOwner: 19
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+------------------------------------------------------------------
+Type: Button
+Name: BackContectGUI
+Model: ConextFrameModel
+Index: 21
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: -1
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 0
+IsUsable: 1
+Specific:
+StartPos: 0 0 0
+SizePanel: 0 0
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: GUI
+Name: TEST3
+Model: FrameModel
+Index: 22
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 1 1 1
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.56643 0.0138501 0.02
+SizePanel: 1.27376 0.209381
+------------------------------------------------------------------
+Type: Button
+Name: ButtonEditOn
+Model: ButtonModel
+Index: 23
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: EditGUI_OnOff
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 0
+IsUsable: 1
+Specific:
+StartPos: 0.05 0.05 0.03
+SizePanel: 0.1 0.1
+IsToogleButon: 1
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI
+Model: ButtonModel
+Index: 24
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: SelectPosForObject
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.182558 0.0437559 0.02
+SizePanel: 0.36205 0.0757118
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock
+Model: TextBlockModel
+Index: 25
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 24
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.0253412 0.019575 0.021
+SizePanel: 1.5 1
+Message: �������
+------------------------------------------------------------------
+Type: TextBlock
+Name: TextBlockObject
+Model: TextBlockModel
+Index: 26
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.630797 0.0870199 0.031
+SizePanel: 1.5 1
+Message: ������ ���, � ������ ����
+------------------------------------------------------------------
+Type: CursorGUI
+Name: CursorGUI
+Model: CursorModel
+Index: 27
+Target: 0 0 0
+Action: Moving
+IndexObjectOwner: 21
+Color: 0.2 0.5 0.1
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+Specific:
+StartPos: 0.292314 0.245817 0.04
+SizePanel: 0.05 0.05
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_28
+Model: ButtonModel
+Index: 28
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.103086 0.336721 0.02
+SizePanel: 0.287085 0.0608212
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_29
+Model: TextBlockModel
+Index: 29
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 28
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_30
+Model: ButtonModel
+Index: 30
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.519888 0.325843 0.02
+SizePanel: 0.30214 0.0657656
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_31
+Model: TextBlockModel
+Index: 31
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 30
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.0396763 0.0133815 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_32
+Model: ButtonModel
+Index: 32
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.922285 0.332317 0.02
+SizePanel: 0.284882 0.0647856
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_33
+Model: TextBlockModel
+Index: 33
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 32
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_34
+Model: ButtonModel
+Index: 34
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.34103 0.331129 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_35
+Model: TextBlockModel
+Index: 35
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 34
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_36
+Model: ButtonModel
+Index: 36
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.0822657 0.56898 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_37
+Model: TextBlockModel
+Index: 37
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 36
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_38
+Model: ButtonModel
+Index: 38
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.511011 0.573725 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_39
+Model: TextBlockModel
+Index: 39
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 38
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_40
+Model: ButtonModel
+Index: 40
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.932965 0.580622 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_41
+Model: TextBlockModel
+Index: 41
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 40
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_42
+Model: ButtonModel
+Index: 42
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.3443 0.600764 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_43
+Model: TextBlockModel
+Index: 43
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 42
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_44
+Model: ButtonModel
+Index: 44
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.145857 0.789449 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_45
+Model: TextBlockModel
+Index: 45
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 44
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_46
+Model: ButtonModel
+Index: 46
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.581141 0.844808 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_47
+Model: TextBlockModel
+Index: 47
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 46
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_48
+Model: ButtonModel
+Index: 48
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.00243 0.856396 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_49
+Model: TextBlockModel
+Index: 49
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 48
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_50
+Model: ButtonModel
+Index: 50
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.44343 0.862416 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_51
+Model: TextBlockModel
+Index: 51
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 50
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_52
+Model: ButtonModel
+Index: 52
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.602699 1.05664 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_53
+Model: TextBlockModel
+Index: 53
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 52
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_54
+Model: ButtonModel
+Index: 54
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.126781 1.15831 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_55
+Model: TextBlockModel
+Index: 55
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 54
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_56
+Model: ButtonModel
+Index: 56
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.03188 1.10464 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_57
+Model: TextBlockModel
+Index: 57
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 56
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.0857449 0.0701742 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_58
+Model: ButtonModel
+Index: 58
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.652862 1.31091 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_59
+Model: TextBlockModel
+Index: 59
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 58
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_60
+Model: ButtonModel
+Index: 60
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 1.1321 1.37017 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_61
+Model: TextBlockModel
+Index: 61
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 60
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+Type: Button
+Name: ButtonCreateObjGUI_62
+Model: ButtonModel
+Index: 62
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+Color: 0 0 0
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.116073 1.41122 0.02
+SizePanel: 0.4 0.2
+IsToogleButon: 0
+IsToogleButonOn: 0
+------------------------------------------------------------------
+Type: TextBlock
+Name: Button_TextBlock_63
+Model: TextBlockModel
+Index: 63
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 62
+Color: 0.117 0.351 0.95
+Command: None
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+Specific:
+StartPos: 0.01 0.01 0.021
+SizePanel: 1.5 1
+Message: �����
+------------------------------------------------------------------
+

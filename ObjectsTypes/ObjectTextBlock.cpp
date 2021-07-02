@@ -25,33 +25,6 @@ ObjectTextBlock::~ObjectTextBlock()
 
 }
 
-void ObjectTextBlock::InitData() {
-	
-	ObjectGUI::InitData();
-
-	if (Color == vec3(-1))
-		Color = vec3(0.117, 0.351, 0.950);
-	start_Color = Color;
-}
-
-void ObjectTextBlock::RunAction() {
-
-	ObjectGUI::RunAction();
-
-	UpdateState();
-}
-
-void ObjectTextBlock::UpdateState() {
-
-	//Updtae view
-	if (ParamCase == AnimationParam->StartDefaultParamShaderID) {
-		if (start_Color == vec3(-1))
-			start_Color = Color;
-		else
-			Color = start_Color;
-	}
-}
-
 void ObjectTextBlock::SetDataToShader(bool isUpdate) {
 
 	ObjectGUI::SetDataToShader(isUpdate);

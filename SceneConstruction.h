@@ -29,6 +29,7 @@ class ControllerInput;
 class TransformModel;
 class Controllers;
 class AspectFactoryObjects;
+class AspectDispatcherCommands;
 //class GLFWwindow;
 
 using std::vector;
@@ -99,6 +100,8 @@ public:
 
 	AspectFactoryObjects* factoryObjects;
 
+	AspectDispatcherCommands* dispatcherCommands;
+
 	//CommandPack* CurrentSceneCommand;
 	CommandPack CurrentSceneCommand;
 
@@ -152,6 +155,10 @@ public:
 	bool ReadCommand(TypeCommand commandType);
 
 	bool IsCurrentObjectBackgroundFrameGUI();
+
+	void AddCommand(CommandPack command);
+
+	void AddCommand(TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
 
 	//----------- TODO:
 	//CoreMVP* GetMVP();
