@@ -156,35 +156,28 @@ void SceneConstruction::PreparationDataFromShader() {
 	if (ObjectCurrent->IsTransformable ||
 		ObjectCurrent->IsNPC)
 	{
-		//float f = glm::max((float)0.3, DeltaTime);
-		//f = glm::min((float)2., DeltaTime);
 		float f = glm::clamp((float)0.3,(float)2., DeltaTime);
-
-		//ObjectCurrent->Speed = 0.5f * glm::max((float)1., DeltaTime);
 		ObjectCurrent->Speed = 0.5f * f;
 	}
 	
-	if (!m_isUpdate)
-	{
-		bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
-		if (isTextureRepeat && !isTextRepeat)
-		{
-			ObjectCurrent->ModelPtr->UpdateBufferUV();
-			isTextureRepeat = false;
-		}
-		if (isTextRepeat) {
-			isTextureRepeat = isTextRepeat;
-			ObjectCurrent->UpdateTextureUV();
-		}
-	}
-
-	if (m_isUpdate) {
+	if (m_isUpdateShaderProgramm) {
 		ShaderProgram = ModelCurrent->ShaderProgram;
 		glUseProgram(ShaderProgram);
-		last_VAO = ModelCurrent->VAO;
+		//last_VAO = ModelCurrent->VAO;
+	}
+
+	bool isTextRepeat = ObjectCurrent->IsTextureRepeat;
+	if (isTextureRepeat && !isTextRepeat)
+	{
+		isTextureRepeat = false;
+		m_isUpdateUV = true;
+
+	}
+	if (isTextRepeat) {
+		isTextureRepeat = isTextRepeat;
+		m_isUpdateUV = true;
 	}
 }
-
 
 void SceneConstruction::SetDataToShader() {
 	
@@ -193,23 +186,72 @@ void SceneConstruction::SetDataToShader() {
 	auto nameTest2 = ObjectCurrent->ModelPtr->Name;
 
 	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel || ObjectCurrent->IsSquareModel;
+	bool IsHexagonModel = ObjectCurrent->IsHexagonModel;
 	bool isSkipGUI = Storage->SceneData->IsGUI == false && ObjectCurrent->IsGUI;
-	//bool isEnableGUI = Storage->SceneData->IsGUI == true && ObjectCurrent->IsGUI;
-	
-	if (isSkipGUI)
+	bool isSkipDynamic = Storage->SceneData->IsGUI && !ObjectCurrent->IsGUI;
+	//if (isSkipGUI || isSkipNotGUI) //Lite mode
+	if (isSkipGUI) //Hard mode
 		return;
 
-	if (m_isEnableGUI != ObjectCurrent->IsGUI) {
+	//---- TEST---
+	if (isSkipDynamic) {
+		
+	}
+	//--------------
+
+	if (ObjectCurrent->IsGUI != m_isEnableGUI ||
+		ObjectCurrent->IsGUI != Storage->SceneData->IsGUI) 
+	{
 		m_isEnableGUI = ObjectCurrent->IsGUI;
-		m_isUpdate = true;
+		m_isUpdateShaderProgramm = true;
 	}
 
-	if (IsSquareModel || m_isUpdate)
-		ObjectCurrent->SetMesh();
+	if (m_isUpdateShaderProgramm) {
+		m_isUpdateTexture = true;
+		m_isUpdateMesh = true;
+		m_isUpdateUV = true;
+	}
 
-	glBindVertexArray(ModelCurrent->VAO);
+	bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
 
-	ObjectCurrent->SetDataToShader(m_isUpdate);
+	//if (!isSkipDynamic && (m_isUpdateMesh || isTransformMesh))  //Lite mode
+	if (!isSkipDynamic && (m_isUpdateMesh || IsSquareModel))  //Lite mode
+	//if (m_isUpdateMesh || IsSquareModel)
+	{
+
+		if (isTransformMesh || isTransformMesh != m_isLastTransformMesh) {
+			m_isLastTransformMesh = isTransformMesh;
+			ObjectCurrent->SetMesh();
+		}
+
+		glBindVertexArray(ModelCurrent->VAO);
+
+		if (!isSkipDynamic) 
+		{
+			ObjectCurrent->UpdateTextureUV();
+
+			if (IsSquareModel)
+				ObjectCurrent->SetDataToShader();
+
+			ObjectCurrent->UpdateNormalsToShader();
+
+			ObjectCurrent->UpdateDataBufferToShader();
+		}
+		//-----------
+	
+	}
+	else {
+		glBindVertexArray(ModelCurrent->VAO);
+	}
+
+	if (m_isUpdateTexture)
+	{
+		ObjectCurrent->ModelPtr->SetTextureModel();
+	}
+	if (m_isUpdateUV)
+	{
+		ObjectCurrent->UpdateTextureUV();
+	}
 
 	//-------------------- Set color
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
@@ -228,7 +270,6 @@ void SceneConstruction::SetDataToShader() {
 	//------ Set Mouse position
 	//ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
 
-
 	//--- Set Width & height
 }
 
@@ -241,37 +282,43 @@ float SceneConstruction::GetParamCase() {
 
 bool SceneConstruction::SetObject(int indNN) {
 
+	IsFirstCurrentObject = indNN == 0;
+	IsLastCurrentObject = countObjects == indNN;
 	bool isShowGUI = Storage->SceneData->IsGUI;
-
 	int indObj = Storage->SortObjectIndex[indNN];
-
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
+	ModelCurrent = ObjectCurrent->ModelPtr;
+
 	bool isVisible = ObjectCurrent->GetVisible();
 	if(!isVisible)
 		return isVisible;
 
-	ModelCurrent = ObjectCurrent->ModelPtr;
-	IsFirstCurrentObject = indNN == 0;
-	IsLastCurrentObject = countObjects == indNN;
-	m_isUpdate = false;
+	m_isUpdateShaderProgramm = false;
+	m_isUpdateTexture = false;
+	m_isUpdateMesh = false;
+	m_isUpdateUV = false;
 
 	if (prevModelTexture != ModelCurrent->PathTexture) {
 		prevModelTexture = ModelCurrent->PathTexture;
-		m_isUpdate = true;
+		m_isUpdateTexture = true;
 	}
 	if (prevModel3D != ModelCurrent->PathModel3D) {
 		prevModel3D = ModelCurrent->PathModel3D;
-		m_isUpdate = true;
+		m_isUpdateMesh = true;
 	}
 
-	if (prevShaderVert != ModelCurrent->PathShaderVertex) {
+	if (ShaderProgram != ModelCurrent->ShaderProgram)
+	{
+		m_isUpdateShaderProgramm = true;
+	}
+	/*if (prevShaderVert != ModelCurrent->PathShaderVertex) {
 		m_isUpdateShaderProgramm = true;
 		prevShaderVert = ModelCurrent->PathShaderVertex;
 	}
 	if (prevShaderFrag != ModelCurrent->PathShaderFrag) {
 		m_isUpdateShaderProgramm = true;
 		prevShaderFrag = ModelCurrent->PathShaderFrag;
-	}
+	}*/
 	return isVisible;
 }
 
@@ -292,8 +339,16 @@ void SceneConstruction::ObjectUpdate(int i) {
 		return;
 
 	//-------------- Start next ObjectCurrent ---------------------
-	if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50)
+	if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
 		isPause = true;
+	if (!isShowGUI && ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
+		isPause = true;
+
+	//Hard mode
+	//isPause = false;
+	if (isPause) //Lite mode
+		return;
+
 
 	if (isDraw || isBase) 
 	{
@@ -339,10 +394,14 @@ void SceneConstruction::Update()
 	{
 		//if (IsDraw || isBase || isShowGUI) //TEST&&1
 			ObjectUpdate(i);
+		//===========================================
 
 		//if (!IsDraw || isBase)
 		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
 			WorkingRooms();
+
+		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
+			continue;
 
 		if (IsBreakUpdate())
 			break;
@@ -366,112 +425,6 @@ void SceneConstruction::Update()
 	}
 }
 
-/*
-void UpdateDraw() {
-	bool isBase = VersionUpdate == 0;
-
-	ClearScene();
-
-	SetMouseEvents();
-
-	GenMVP();
-
-	countObjects = Storage->SceneObjectsLastIndex;
-	if (IsBreakUpdate()) {
-		DrawGraph();
-		return;
-	}
-
-	for (int i = 0; i < countObjects + 1; i++)
-	{
-		//if (!IsDraw || isBase)
-		ObjectUpdate(i);
-
-		if (IsBreakUpdate())
-			break;
-
-		DrawGraph();
-	}
-
-	
-	Storage->Inputs->MBT = -1;
-	Storage->Inputs->Key = -1;
-	Storage->Inputs->Action = -1;
-	Storage->Inputs->ActionMouse = -1;
-}
-
-void UpdateLogac()
-{
-	ResetRooms();
-
-	SetMouseEvents();
-
-	countObjects = Storage->SceneObjectsLastIndex;
-	if (IsBreakUpdate()) {
-		WorkingRooms();
-		return;
-	}
-
-	FactoryObjectsWork();
-
-	for (int i = 0; i < countObjects + 1; i++)
-	{
-		ObjectUpdate(i);
-
-		WorkingRooms();
-
-		if (IsBreakUpdate())
-			break;
-
-	}
-}
-*/
-
-/*
-void SceneConstruction::ObjectUpdate(int i) {
-
-	bool isVisible = SetObject(i);
-	if (!isVisible)
-		return;
-
-	PreparationDataFromShader();
-
-	ObjectCurrent->Action();
-
-	SetDataToShader();
-}
-
-void SceneConstruction::Update(bool IsDraw)
-{
-
-	ResetRooms();
-
-	ClearScene();
-
-	SetMouseEvents();
-	
-	GenMVP();
-
-	FactoryObjectsWork();
-	countObjects = Storage->SceneObjectsLastIndex;
-
-	for (int i = 0; i < countObjects + 1; i++)
-	{
-		ObjectUpdate(i);
-
-		WorkingRooms();
-	
-		DrawGraph();
-	}
-
-	//Debug("Clear Inputs");
-
-	Storage->Inputs->MBT = -1;
-	Storage->Inputs->Key = -1;
-	Storage->Inputs->Action = -1;
-	Storage->Inputs->ActionMouse = -1;
-}
-*/
 
 void SceneConstruction::Debug(string msg) {
 	if (DebugMessage != msg)

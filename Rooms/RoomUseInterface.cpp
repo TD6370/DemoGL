@@ -88,8 +88,9 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 		return false;
 
 	//Scene->Debug("End moving");
-	IndexObjectSelected = -1;	//???
+	IndexObjectSelected = -1;	
 	obj->ActionObjectCurrent = ActionObject::Stay;
+	SelectObjectOffsetPos = vec3(0);
 	
 	//TODO:
 	IsCursorClickEvent = false; //---- VVVV
@@ -180,6 +181,7 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 	//Scene->Debug("End resize");
 	IndexObjectSelected = -1;
 	obj->ActionObjectCurrent = ActionObject::Stay;
+	SelectObjectOffsetPos = vec3(0);
 
 	IsCursorClickEvent = false;
 	SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
@@ -190,6 +192,9 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
 
 	if (IsBackgroundFrame && Scene->ObjectCurrent->SceneCommand->CommandType == TypeCommand::None)
+		return;
+	if (Scene->ObjectCurrent->ActionObjectCurrent == Moving || 
+		Scene->ObjectCurrent->ActionObjectCurrent == Transforming)
 		return;
 
 	bool isCheckOrder = true;
@@ -308,6 +313,7 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(ObjectCreated))
 		{
+			//SelectObjectOffsetPos = vec3(0);
 			IndexObjectSelected = command->TargetIndex;
 			Scene->ObjectCurrent->ActionObjectCurrent = ActionObject::Moving;
 		}

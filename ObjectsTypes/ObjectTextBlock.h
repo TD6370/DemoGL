@@ -55,7 +55,7 @@ public:
 
 	void MeshTransform();
 
-	void SetDataToShader(bool isUpdate = false);
+	void SetDataToShader();
 
 	//-------------
 

@@ -71,14 +71,29 @@ void ObjectData::InitData()
 	
 }
 
-void ObjectData::SetDataToShader(bool isUpdate) {
+void ObjectData::SetDataToShader() {
 
-	if (!isUpdate)
-		return;
+}
+
+//void ObjectData::SetDataToShader(bool isUpdate) {
+//
+//	if (!isUpdate)
+//		return;
+//
+//	auto normals = GetNormals();
+//	ModelPtr->SetModelInBuffer(TextureUV, normals);
+//	ModelPtr->SetBuffer(Buffer);
+//}
+
+void ObjectData::UpdateDataBufferToShader() {
+	
+	ModelPtr->SetBuffer(Buffer);
+}
+
+void ObjectData::UpdateNormalsToShader() {
 
 	auto normals = GetNormals();
-	ModelPtr->SetModelInBuffer(TextureUV, normals);
-	ModelPtr->SetBuffer(Buffer);
+	ModelPtr->SetNormalsModel(normals);
 }
 
 void ObjectData::UpdateState() {
@@ -207,8 +222,11 @@ void ObjectData::UnselectedEvent() {
 }
 
 void ObjectData::UpdateTextureUV() {
-	if (TextureUV.size() == 0)
+	if (TextureUV.size() == 0) {
+		//NEW::1
+		ModelPtr->UpdateBufferUV();
 		return;
+	}
 	ModelPtr->SetUV(TextureUV);
 }
 

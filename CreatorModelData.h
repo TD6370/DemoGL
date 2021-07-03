@@ -47,7 +47,8 @@ public:
 	vector<TypeObject> SortTypeObjects;
 	vector<int> SortObjectIndex;
 	WorldCluster* Clusters;
-		
+	map<string, GLuint> ShaderPrograms;
+
 	CoreMVP* ConfigMVP;
 	ControllerInput* Inputs;
 	Operator* Oper;

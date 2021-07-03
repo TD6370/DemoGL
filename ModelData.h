@@ -24,6 +24,7 @@ using glm::vec2;
 using glm::vec3;
 using std::string;
 using std::shared_ptr;
+using std::map;
 
 static vector<vec3> DEFAULT_VECTOR_V3;
 static vector<vec2> DEFAULT_VECTOR_V2;
@@ -40,6 +41,7 @@ public:
 	string PathShaderFrag = "basic.frag";
 	const char* PathTexture = "./Textures/testTexture.bmp";
 	const char* PathModel3D = "./Models3D/monkey.obj";
+	//map<string, GLuint> ShaderPrograms;
 	string TypeName;
 
 	ConfigUniform ConfUniform;
@@ -48,7 +50,7 @@ public:
 	GLint IndicesSize = 0;
 	GLuint VAO = 0;
 	GLuint VBO = 0;
-	GLuint ShaderProgram = 0;
+	GLuint ShaderProgram = -1;// 0;
 	bool IsIndex = false;
 	bool IsDebug = false;
 	//-------------------
@@ -73,11 +75,11 @@ public:
 
 	ModelData();
 
-	void virtual InitBase();
+	void virtual InitBase(map<string, GLuint>& shaderPrograms);
 
-	void virtual Init();
+	void virtual Init(map<string, GLuint>& shaderPrograms);
 
-	void ConstructShaderProgramm();
+	void ConstructShaderProgramm(map<string, GLuint>& shaderPrograms);
 
 	void virtual LoadingTexture();
 
@@ -92,7 +94,13 @@ public:
 									vector<vec3>& normals = DEFAULT_VECTOR_V3, 
 										bool isUpdateTexture = true);
 
+
 	void virtual SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
+
+	void SetTextureModel();
+
+	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3);
+		
 
 	void SetUV(vector< vec2 > uv);
 	void UpdateBufferUV();
@@ -100,7 +108,7 @@ public:
 	void DebugUV(vector<vec2> list_uv);
 	void DebugVec3(vector<vec3> list_v, string name);
 	
-	ModelData Clone();
+	//ModelData Clone();
 };
 
 class ModelFrame : public ModelData {
@@ -110,7 +118,7 @@ public:
 	ModelFrame() :ModelData() {
 	};
 
-	void Init();
+	void Init(map<string, GLuint>& shaderPrograms);
 
 	void InitUniform();
 
@@ -130,6 +138,6 @@ public:
 	ModelTextBox():ModelFrame() {
 	};
 
-	void Init();
+	void Init(map<string, GLuint>& shaderPrograms);
 };
 

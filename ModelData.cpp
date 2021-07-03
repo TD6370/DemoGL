@@ -20,6 +20,7 @@
 #include <glm/glm.hpp>
 
 using std::vector;
+using std::map;
 using glm::vec3;
 using glm::vec2;
 
@@ -32,24 +33,44 @@ ModelData::ModelData() {
 
 }
 
-void ModelData::ConstructShaderProgramm() {
+void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 
-	string pathShaderVertStr = std::string();
-	pathShaderVertStr.append(PathShaderFolder);
-	pathShaderVertStr.append(PathShaderVertex);
-	const GLchar* pathShaderVert = pathShaderVertStr.c_str();
-	//Load vertex shader
-	GLuint vertShader = GenShader(pathShaderVert, true);
+	bool isNew = true;
+	string keyShaderPrograms = PathShaderVertex + "|" + PathShaderFrag;
 
-	string pathShaderFragStr = std::string();
-	pathShaderFragStr.append(PathShaderFolder);
-	pathShaderFragStr.append(PathShaderFrag);
-	const GLchar* pathShaderFrag = pathShaderFragStr.c_str();
+	if (shaderPrograms.size() != 0) {
+		map <string, GLuint> ::iterator it;
+		it = shaderPrograms.find(keyShaderPrograms);
+		isNew = it == shaderPrograms.end();
+	}
+	//TEST
+	//isNew = true;
+	if (isNew)
+	{
+		string pathShaderVertStr = std::string();
+		pathShaderVertStr.append(PathShaderFolder);
+		pathShaderVertStr.append(PathShaderVertex);
+		const GLchar* pathShaderVert = pathShaderVertStr.c_str();
+		//Load vertex shader
+		GLuint vertShader = GenShader(pathShaderVert, true);
 
-	//Load fragment shader
-	GLuint fragShader = GenShader(pathShaderFrag, false);
+		string pathShaderFragStr = std::string();
+		pathShaderFragStr.append(PathShaderFolder);
+		pathShaderFragStr.append(PathShaderFrag);
+		const GLchar* pathShaderFrag = pathShaderFragStr.c_str();
 
-	ShaderProgram = ProgramConfig(vertShader, fragShader);
+		//Load fragment shader
+		GLuint fragShader = GenShader(pathShaderFrag, false);
+
+		ShaderProgram = ProgramConfig(vertShader, fragShader);
+
+		shaderPrograms.insert(std::pair< string, GLuint >(keyShaderPrograms, ShaderProgram));
+	}
+	else {
+		ShaderProgram = shaderPrograms[keyShaderPrograms];
+	}
+
+	//ShaderProgram = ProgramConfig(vertShader, fragShader);
 }
 
 void ModelData::LoadingTexture() {
@@ -165,6 +186,17 @@ void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool i
 		SetNormals(normals, BufferNormal_ID);
 }
 
+void ModelData::SetTextureModel() {
+	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+}
+
+void ModelData::SetNormalsModel(vector<vec3>& normals) {
+	if (normals.size() == 0)
+		SetNormals(Normals, BufferNormal_ID);
+	else
+		SetNormals(normals, BufferNormal_ID);
+}
+
 void ModelData::SetBuffer(std::vector< glm::vec3>& buffer)
 {
 	
@@ -178,9 +210,9 @@ void ModelData::UpdateBufferUV() {
 	SetBufferUV(UV, BufferUV_ID);
 }
 
-void ModelData::InitBase() {
+void ModelData::InitBase(map<string, GLuint>& shaderPrograms) {
 
-	ConstructShaderProgramm();
+	ConstructShaderProgramm(shaderPrograms);
 
 	LoadingTexture();
 
@@ -194,31 +226,33 @@ void ModelData::InitBase() {
 }
 
 
-void ModelData::Init() {
+void ModelData::Init(map<string, GLuint>& shaderPrograms) {
 
 	TypeName = FormatTypeName(typeid(this).name());
 
-	InitBase();
+	//ConstructShaderProgramm(shaderPrograms);
+
+	InitBase(shaderPrograms);
 }
 
-ModelData ModelData::Clone() {
-	ModelData newModel = ModelData();
-	newModel.PathShaderVertex = PathShaderVertex;
-	newModel.PathShaderFrag = PathShaderFrag;
-	newModel.PathModel3D = PathModel3D;
-	newModel.PathTexture = PathTexture;
-	newModel.RadiusCollider = RadiusCollider;
-	newModel.Init();
-	return newModel;
-}
+//ModelData ModelData::Clone() {
+//	ModelData newModel = ModelData();
+//	newModel.PathShaderVertex = PathShaderVertex;
+//	newModel.PathShaderFrag = PathShaderFrag;
+//	newModel.PathModel3D = PathModel3D;
+//	newModel.PathTexture = PathTexture;
+//	newModel.RadiusCollider = RadiusCollider;
+//	newModel.Init(ShaderPrograms);
+//	return newModel;
+//}
 
 //---------------- Model Frame
 
-void  ModelFrame::Init() {
+void  ModelFrame::Init(map<string, GLuint>& shaderPrograms) {
 
 	TypeName = FormatTypeName(typeid(this).name());
 	
-	InitBase();
+	InitBase(shaderPrograms);
 }
 
 void ModelFrame::InitUniform() {
@@ -255,11 +289,11 @@ void ModelFrame::SetPosMoveSize(vec3 posMoveS)
 
 //---------------------------- ModelTextBox
 
-void  ModelTextBox::Init() {
+void  ModelTextBox::Init(map<string, GLuint>& shaderPrograms) {
 
 	TypeName = FormatTypeName(typeid(this).name());
 
-	InitBase();
+	InitBase(shaderPrograms);
 }
 //----------------------------------
 

@@ -55,6 +55,7 @@ CreatorModelData::CreatorModelData() {
 	MapSceneObjectsTypeOffset = map<TypeObject, int>();
 	SortObjectIndex = vector<int>();
 	SortTypeObjects = vector<TypeObject>();
+	ShaderPrograms = map<string, GLuint>();
 
 	FillSortTypesObjects();
 }
@@ -161,7 +162,7 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 		nextModelPrt->PathModel3D = fieldsModel->PathModel3D.c_str();
 		nextModelPrt->RadiusCollider = std::stof(fieldsModel->RadiusCollider);
 		nextModelPrt->IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
-		nextModelPrt->Init();
+		nextModelPrt->Init(ShaderPrograms);
 
 		AddModel(nextModelPrt, fieldsModel->Name);
 
@@ -496,7 +497,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->PathModel3D = "./Models3D/monkey.obj";
 	nextModelPrt->RadiusCollider = 1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "mon");
 
 	ModelData nextModel2 = ModelData();
@@ -507,7 +508,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/planet.bmp";
 	nextModelPrt->PathModel3D = "./Models3D/polygonPlane.obj";
 	nextModelPrt->RadiusCollider = 0.2;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "plane");
 
 	ModelData nextModel3 = ModelData();
@@ -520,7 +521,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->RadiusCollider = 1;
 	nextModelPrt->IsDebug = true;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "box");
 
 	ModelData nextModel4 = ModelData();
@@ -531,7 +532,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Marker_Vector.obj";
 	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->RadiusCollider = 0.1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Vector");
 
 	ModelData nextModel5 = ModelData();
@@ -542,7 +543,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
 	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->RadiusCollider = 0.1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Cross");
 
 	ModelData nextModel6 = ModelData();
@@ -553,7 +554,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
 	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
 	nextModelPrt->RadiusCollider = 0.1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Point");
 
 	ModelData nextModelHomo = ModelData();
@@ -564,7 +565,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
 	nextModelPrt->PathTexture = "./Textures/future.bmp";
 	nextModelPrt->RadiusCollider = 1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "homo");
 
 	ModelData nextModelCursorRay = ModelData();
@@ -575,7 +576,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
 	nextModelPrt->PathTexture = "./Textures/future.bmp";
 	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "cursorRay");
 
 	//---GUI -- control -- Background frame
@@ -591,7 +592,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ConextFrameModel");
 
 	//---GUI -- control -- Frame
@@ -608,7 +609,7 @@ void CreatorModelData::LoadModels() {
 	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "FrameModel");
 
 
@@ -626,7 +627,7 @@ void CreatorModelData::LoadModels() {
 	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ButtonModel");
 
 	//---GUI -- control -- TextBlock
@@ -639,7 +640,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "TextBlockModel");
 
 	//---GUI -- control -- Cursor
@@ -655,7 +656,7 @@ void CreatorModelData::LoadModels() {
 	//nextModelPrt->PathTexture = "./Textures/CursorSDF.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
-	nextModelPrt->Init();
+	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "CursorModel");
 }
 
@@ -745,7 +746,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 250; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

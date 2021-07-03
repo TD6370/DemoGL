@@ -25,18 +25,13 @@ ObjectTextBlock::~ObjectTextBlock()
 
 }
 
-void ObjectTextBlock::SetDataToShader(bool isUpdate) {
+void ObjectTextBlock::SetDataToShader() {
 
-	ObjectGUI::SetDataToShader(isUpdate);
+	ObjectGUI::SetDataToShader();
 
-	if (!isUpdate)
-	{
-		//TEST&&1
-		//return;
-		ModelPtr->SetBuffer(Buffer);
-		auto normals = GetNormals();
-		ModelPtr->SetModelInBuffer(TextureUV, normals, false);
-	}
+	ModelPtr->SetBuffer(Buffer);
+	auto normals = GetNormals();
+	ModelPtr->SetModelInBuffer(TextureUV, normals, false);
 }
 
 void ObjectTextBlock::CreateMessage() {

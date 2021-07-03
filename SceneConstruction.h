@@ -54,8 +54,13 @@ private:
 
 	bool isTextureRepeat = false;
 	bool m_isUpdateShaderProgramm = false;
-	bool m_isUpdate = false;
+	bool m_isUpdateTexture = false;
+	bool m_isUpdateUV = false;
+	bool m_isUpdateMesh = false;
+	//bool m_isUpdate = false;
 	bool m_isEnableGUI = false;
+
+	bool m_isLastTransformMesh = false;
 
 	GLint indicesSize;
 

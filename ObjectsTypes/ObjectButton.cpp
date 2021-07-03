@@ -15,22 +15,38 @@ ObjectButton::~ObjectButton()
 }
 
 
-void  ObjectButton::InitData()
+void ObjectButton::InitData()
 {
 	ObjectGUI::InitData();
-		
 }
 
 void ObjectButton::RunAction() {
 	
 	ObjectGUI::RunAction();
 
-	UpdateState();
+	DefaultColor();
 }
+
 
 void ObjectButton::UpdateState() {
 
-	//Updtae animation
+	if (SceneCommand->CommandType != TypeCommand::None) {
+		SceneCommand->SourceIndex = Index;
+		if (IsToogleButon)
+		{
+			SceneCommand->Enable = true;
+			SceneCommand->Options.clear();
+			SceneCommand->Options.insert(std::pair<string, int>(Name, (int)IsToogleButonOn));
+		}
+	}
+}
+
+void ObjectButton::Click() {
+
+	ObjectGUI::Click();
+}
+
+void ObjectButton::DefaultColor() {
 	if (IsToogleButon)
 	{
 		if (IsToogleButonOn)
@@ -41,15 +57,19 @@ void ObjectButton::UpdateState() {
 
 void ObjectButton::Work() {
 
-	ObjectGUI::Work();
-
+	//ObjectGUI::Work();
+	
 	Color = m_color_work;
 
-	if (IsToogleButon)
+	if (IsToogleButon) {
 		IsToogleButonOn = !IsToogleButonOn;
+	}
 
-	SceneCommand->Enable = true;
-	SceneCommand->SourceIndex = Index;
+	if (SceneCommand->CommandType != TypeCommand::None) {
+		SceneCommand->Enable = true;
+		SceneCommand->SourceIndex = Index;
+		UpdateState();
+	}
 
 	ActionObjectCurrent = Stay; //Off
 }

@@ -56,7 +56,7 @@ public:
 
 	void InitData();
 
-	void SetDataToShader(bool isUpdate = false);
+	void SetDataToShader();
 
 	void RunAction();
 

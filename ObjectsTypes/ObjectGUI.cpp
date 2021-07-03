@@ -28,12 +28,12 @@ void ObjectGUI::InitData() {
 	ActionObjectCurrent = Stay;
 }
 
-void ObjectGUI::SetDataToShader(bool isUpdate) {
+void ObjectGUI::SetDataToShader() {
 
-	ObjectData::SetDataToShader(isUpdate);
+	ObjectData::SetDataToShader();
 
-	if (!isUpdate)
-		return;
+	/*if (!isUpdate)
+		return;*/
 
 	auto modelFrame =std::dynamic_pointer_cast<ModelFrame>(ModelPtr);
 	if (modelFrame == nullptr) {
