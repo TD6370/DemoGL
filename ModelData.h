@@ -1,10 +1,7 @@
 #pragma once
 
-//#include "BindHeader.h"
-//--------------
 #include "ConfigBuffers.h"
 #include "Shaders.h"
-#include "ConfigUniformArg.h"
 #include "LoaderModelObj.h"
 #include "LoadBmp.h"
 #include "CoreSettings.h"
@@ -31,6 +28,7 @@ static vector<vec2> DEFAULT_VECTOR_V2;
 
 class Plane;
 class ModelFrame; //!!!
+class ConfigUniform;
 
 class ModelData {
 
@@ -44,7 +42,7 @@ public:
 	//map<string, GLuint> ShaderPrograms;
 	string TypeName;
 
-	ConfigUniform ConfUniform;
+	ConfigUniform* ConfUniform;
 
 	GLint TrianglesCount = 0;
 	GLint IndicesSize = 0;

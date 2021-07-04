@@ -1,11 +1,7 @@
 #pragma once
 
-#include "../ModelData.h"
-#include "./ObjectData.h"
 #include "./ObjectGUI.h"
-#include "./ObjectPhysic.h"
 #include "../CoreSettings.h"
-#include "../CreatorModelData.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -23,6 +19,8 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 using std::stringstream;
+
+class ModelData;
 
 class ObjectCursorGUI :
 	public ObjectGUI

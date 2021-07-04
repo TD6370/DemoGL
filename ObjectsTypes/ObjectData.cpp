@@ -166,7 +166,7 @@ void ObjectData::RunTransform()
 
 	TransformResult = trans;
 	//---------------------------------------------------
-	ModelPtr->ConfUniform.SetTransform(&trans);
+	ModelPtr->ConfUniform->SetTransform(&trans);
 }
 
 void ObjectData::Action()

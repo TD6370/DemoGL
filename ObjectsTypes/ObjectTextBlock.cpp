@@ -1,13 +1,12 @@
 #include "ObjectTextBlock.h"
 
 #include "./ObjectData.h"
-//#include "./ObjectGUI.h"
-//#include "./ObjectPhysic.h"
 #include "../CoreSettings.h"
-#include "..\WorldCollision.h"
-#include "..\ModelData.h"
-#include "..\OperationString.h"
-#include "../GeomertyShapes//ShapeBase.h" //#####
+#include "../WorldCollision.h"
+#include "../ModelData.h"
+#include "../OperationString.h"
+#include "../GeomertyShapes/ShapeBase.h"
+#include "../Serialize/SceneSerialize.h"
 
 #include <sstream>
 

@@ -1,11 +1,7 @@
 #pragma once
 
-#include "../ModelData.h"
-#include "./ObjectData.h"
 #include "./ObjectGUI.h"
 #include "../CoreSettings.h"
-#include "../CreatorModelData.h"
-
 
 using glm::vec4;
 using glm::vec3;
@@ -17,14 +13,13 @@ using std::shared_ptr;
 using std::stringstream;
 
 struct AnimationParamGUI;
+class ModelData;
+struct ObjectFiledsSpecific;
 
 class ObjectButton :
 	public ObjectGUI
 {
 private:
-
-
-
 protected:
 public:
 	bool IsToogleButon = false;

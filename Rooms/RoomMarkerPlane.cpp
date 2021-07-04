@@ -24,7 +24,7 @@ void RoomMarkerPlane::Work() {
 	if (name == "Plane") {
 		vec3 vectorsParams[10];
 
-		Scene->ModelCurrent->ConfUniform.SetParamCase(55);
+		Scene->ModelCurrent->ConfUniform->SetParamCase(55);
 
 		std::shared_ptr <ObjectData> objectObserver = Scene->Storage->GetObjectPrt("Mon");
 		vector<string> checkedZona;
@@ -35,7 +35,7 @@ void RoomMarkerPlane::Work() {
 			vectorsParams[0] = planeV->V0;
 			vectorsParams[1] = planeV->V1;
 			vectorsParams[1] = planeV->V2;
-			Scene->ModelCurrent->ConfUniform.SetVectorsParams(vectorsParams);
+			Scene->ModelCurrent->ConfUniform->SetVectorsParams(vectorsParams);
 		}
 	}
 

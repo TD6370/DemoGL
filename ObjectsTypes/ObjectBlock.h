@@ -2,17 +2,7 @@
 #pragma once
 
 #include "ObjectPhysic.h"
-//#include "../GeomertyShapes/ShapeHexagon.h"
-//
-//#include <glm/glm.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-//#include <glm/gtc/random.hpp>
-//
-//#include <fstream>
-//
-//using glm::vec4;
-//using glm::vec3;
-//using glm::vec2;
+
 using std::string;
 
 struct BlockFileds {

@@ -1,7 +1,5 @@
 #pragma once
-#include "ObjectData.h"
 #include "ObjectPhysic.h"
-//#include "ObjectTextBlock.h"
 #include "../CoreSettings.h"
 
 #include <glm/glm.hpp>
@@ -16,6 +14,10 @@ using glm::vec2;
 using std::map;
 using std::string;
 using std::shared_ptr;
+
+
+struct ObjectFiledsSpecific;
+class ObjectData;
 
 class ObjectGUI :
 	public ObjectPhysic

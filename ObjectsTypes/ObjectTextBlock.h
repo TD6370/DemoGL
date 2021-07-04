@@ -1,12 +1,7 @@
 #pragma once
 
-#include "ObjectData.h"
 #include "ObjectGUI.h"
-#include "ObjectPhysic.h"
 #include "../CoreSettings.h"
-#include "../CreatorModelData.h"
-#include "../Serialize/SceneSerialize.h"
-//#include "../GeomertyShapes/ShapeHexagon.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -22,6 +17,8 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 
+class ModelData;
+struct ObjectFiledsSpecific;
 
 class ObjectTextBlock :
 	public ObjectGUI

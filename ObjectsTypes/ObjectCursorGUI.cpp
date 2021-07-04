@@ -1,5 +1,6 @@
 ﻿#include "ObjectCursorGUI.h"
 #include "../GeomertyShapes//ShapeBase.h"
+#include "..\CreatorModelData.h"
 
 ObjectCursorGUI::~ObjectCursorGUI()
 {

@@ -1,9 +1,5 @@
 #pragma once
 
-//#include "ModelData.h"
-//#include "Controllers.h"
-//#include "SceneConstruction.h"
-
 #include <fstream>
 
 using std::string;

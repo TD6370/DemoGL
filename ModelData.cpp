@@ -130,8 +130,9 @@ void ModelData::LoadModelData() {
 
 void ModelData::InitUniform() {
 
-	ConfUniform = ConfigUniform(ShaderProgram);
-	ConfUniform.Init();
+	//ConfUniform = ConfigUniform(ShaderProgram);
+	ConfUniform = new ConfigUniform(ShaderProgram);
+	ConfUniform->Init();
 }
 //---------------------------------------------------
 
@@ -258,7 +259,7 @@ void  ModelFrame::Init(map<string, GLuint>& shaderPrograms) {
 void ModelFrame::InitUniform() {
 
 	ModelData::InitUniform();
-	ConfUniform.InitBox();
+	ConfUniform->InitBox();
 }
 
 void ModelFrame::SetBuffer(std::vector< glm::vec3>& buffer)
@@ -269,22 +270,22 @@ void ModelFrame::SetBuffer(std::vector< glm::vec3>& buffer)
 
 void ModelFrame::SetWidth(GLfloat width) 
 {
-	ConfUniform.SetWidth(width);
+	ConfUniform->SetWidth(width);
 }
 
 void ModelFrame::SetHeight(GLfloat height) 
 {
-	ConfUniform.SetHeight(height);
+	ConfUniform->SetHeight(height);
 }
 
 void ModelFrame::SetPosMove(vec3 posMove)
 {
-	ConfUniform.SetPosMove(posMove);
+	ConfUniform->SetPosMove(posMove);
 }
 
 void ModelFrame::SetPosMoveSize(vec3 posMoveS)
 {
-	ConfUniform.SetPosMoveSize(posMoveS);
+	ConfUniform->SetPosMoveSize(posMoveS);
 }
 
 //---------------------------- ModelTextBox

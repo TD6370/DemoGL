@@ -249,22 +249,22 @@ void SceneConstruction::SetDataToShader() {
 	}
 
 	//-------------------- Set color
-	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
+	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->Color);
 	//---------------------- Set param Case
-	ModelCurrent->ConfUniform.SetParamCase(GetParamCase());
+	ModelCurrent->ConfUniform->SetParamCase(GetParamCase());
 
-	ModelCurrent->ConfUniform.SetParamValue(ObjectCurrent->ParamValue);
+	ModelCurrent->ConfUniform->SetParamValue(ObjectCurrent->ParamValue);
 
-	ModelCurrent->ConfUniform.SetStartTime(ObjectCurrent->StartTimer);
+	ModelCurrent->ConfUniform->SetStartTime(ObjectCurrent->StartTimer);
 
 	//---------------------- Set MVP
-	ModelCurrent->ConfUniform.SetMVP(Storage->ConfigMVP->MVP);//(---)
+	ModelCurrent->ConfUniform->SetMVP(Storage->ConfigMVP->MVP);//(---)
 
 	//VIEW param
-	ModelCurrent->ConfUniform.SetView(Storage->ConfigMVP->View);
+	ModelCurrent->ConfUniform->SetView(Storage->ConfigMVP->View);
 
 	//MODEL param
-	ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
+	ModelCurrent->ConfUniform->SetModel(Storage->ConfigMVP->Model);
 
 	//------ Set Mouse position
 	//ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
