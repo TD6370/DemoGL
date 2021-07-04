@@ -177,6 +177,9 @@
     <ClCompile Include="ObjectsTypes\ObjectTextBox.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectEditBox.cpp">
+      <Filter>Objects\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -300,6 +303,9 @@
       <Filter>Objects\GUI</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectTextBox.h">
+      <Filter>Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectEditBox.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>

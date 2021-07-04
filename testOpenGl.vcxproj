@@ -169,6 +169,7 @@
     <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectData.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectEditBox.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectGUI.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectHero.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="ObjectsTypes\ObjectCursorRay.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />
     <ClInclude Include="ObjectsTypes\ObjectData.h" />
+    <ClInclude Include="ObjectsTypes\ObjectEditBox.h" />
     <ClInclude Include="ObjectsTypes\ObjectGUI.h" />
     <ClInclude Include="ObjectsTypes\ObjectHero.h" />
     <ClInclude Include="ObjectsTypes\ObjectNPC.h" />

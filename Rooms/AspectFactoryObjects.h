@@ -19,6 +19,8 @@ public:
 	void Work();
 
 	void CreateButton();
+
+	void CreateEditBox();
 };
 
 

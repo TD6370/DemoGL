@@ -15,6 +15,7 @@
 #include "ObjectsTypes/ObjectTextBox.h"
 #include "ObjectsTypes/ObjectCursorGUI.h"
 #include "ObjectsTypes/ObjectButton.h"
+#include "ObjectsTypes/ObjectEditBox.h"
 #include "GeomertyShapes//ShapeBase.h" //###
 
 #include "Serialize/SceneSerialize.h"
@@ -93,6 +94,7 @@ void CreatorModelData::FillSortTypesObjects() {
 	SortTypeObjects.push_back(GUI);
 	SortTypeObjects.push_back(Button);
 	SortTypeObjects.push_back(TextBox);
+	SortTypeObjects.push_back(EditBox);
 	SortTypeObjects.push_back(CursorGUI);
 	//SortTypeObjects.push_back();
 }
@@ -147,6 +149,11 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 		if (typeModel == "ModelTextBox") {
 			auto modelTextBox = ModelTextBox();
 			Models.push_back(std::make_unique<ModelTextBox>(modelTextBox));
+			nextModelPrt = GetModelPrt(Models.size() - 1);
+		}
+		if (typeModel == "ModelEditBox") {
+			auto modelEditBox = ModelEditBox();
+			Models.push_back(std::make_unique<ModelEditBox>(modelEditBox));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 		
@@ -224,35 +231,36 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		case GUI: {
 			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectGUI>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case TextBox: {
 			ObjectTextBox obj = ObjectTextBox(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectTextBox>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectTextBox>(obj));
+			object = GetObjectPrt(obj.Index);
+			break;
+		}
+		case EditBox: {
+			ObjectEditBox obj = ObjectEditBox(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectEditBox>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Button: {
 			ObjectButton obj = ObjectButton(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectButton>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectButton>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case CursorGUI: {
 			ObjectCursorGUI obj = ObjectCursorGUI(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectCursorGUI>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Polygon: {
 			ObjectPolygon obj = ObjectPolygon(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPolygon>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectPolygon>(obj));
 			object = GetObjectPrt(obj.Index);
 			if(!CurrentPolygonObject)
 				CurrentPolygonObject = object;
@@ -262,14 +270,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		case Terra: {
 			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Block: {
 			ObjectBlock obj = ObjectBlock(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBlock>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectBlock>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -277,7 +283,6 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		{
 			ObjectNPC obj = ObjectNPC(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectNPC>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectNPC>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -285,7 +290,6 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		{
 			ObjectDynamic obj = ObjectDynamic(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectDynamic>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectDynamic>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -293,7 +297,6 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		{
 			ObjectCursorRay obj = ObjectCursorRay(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorRay>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectCursorRay>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -301,14 +304,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		{
 			ObjectBullet obj = ObjectBullet(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectBullet>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectBullet>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
 		case Hero: {
 			ObjectHero obj = ObjectHero(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectHero>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectHero>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -658,6 +659,20 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "CursorModel");
+
+	//---GUI -- control -- EditBox
+	ModelEditBox edittBox = ModelEditBox();
+	Models.push_back(std::make_unique<ModelEditBox>(edittBox));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "TextBoxUI.vert";
+	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
+	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->Init(ShaderPrograms);
+	AddModel(nextModelPrt, "EditBoxModel");
+
 }
 
 void CreatorModelData::LoadObjectsGUI() {
@@ -718,7 +733,13 @@ void CreatorModelData::LoadObjectsGUI() {
 	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBox, vec3(0.2, 0.5, 0.1));
+
+	// ---- Object text block GUI
+	objName = "EditBoxNameNewObject";
+	caption = "введите имя";
+	childModel = "EditBoxModel";
+	color = vec3(0.117, 0.351, 0.950);
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.2, .4, 0.031), vec2(1.5, .5), EditBox, color);
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";

@@ -29,6 +29,8 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::TextBox, "TextBox");
 	AddNextType(TypeObject::CursorGUI, "CursorGUI");
 	AddNextType(TypeObject::Button, "Button");
+	AddNextType(TypeObject::EditBox, "EditBox");
+	
 
 	//Create map types action object
 	AddNextType(ActionObject::Moving, "Moving");

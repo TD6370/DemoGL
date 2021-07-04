@@ -139,3 +139,12 @@ public:
 	void Init(map<string, GLuint>& shaderPrograms);
 };
 
+class ModelEditBox : public ModelTextBox {
+
+public:
+
+	ModelEditBox() :ModelTextBox() {
+	};
+	
+};
+

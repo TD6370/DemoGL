@@ -23,6 +23,7 @@
 //#include "ObjectsTypes/ObjectTextBox.h"
 //#include "ObjectsTypes/ObjectCursorGUI.h"
 #include "../ObjectsTypes/ObjectButton.h"
+#include "../ObjectsTypes/ObjectEditBox.h"
 //#include "GeomertyShapes//ShapeBase.h" //###
 
 void AspectFactoryObjects::Config() {
@@ -61,8 +62,40 @@ void AspectFactoryObjects::Work() {
 
 		CreateButton();
 	}
+	if (typeObj == TypeObject::EditBox)
+	{
+		if (!isBackgroundFrame)
+			return;
+
+		Scene->ReadCommand(CreateObject);
+
+		CreateEditBox();
+	}
+	
 }
 
+void AspectFactoryObjects::CreateEditBox() {
+	string caption;
+	string childModel;
+	string objName;
+	vec3 color = vec3(0.3);
+	shared_ptr<ObjectEditBox> objCreateButton;
+	shared_ptr<ObjectData> objCreate;
+	vec2 pos = vec2(1.);
+
+	// ---- Object Edit box create
+	objName = "EditBoxCreateObjGUI";
+	caption = "ввод";
+	childModel = "EditBoxModel";
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), EditBox, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
+	//objCreateButton->IsToogleButon = false;
+	//objCreateButton->SceneCommand->CommandType = TypeCommand::None;
+	objBackGUI->ControlConstruct(objCreateButton, caption);
+
+	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
+}
 
 void AspectFactoryObjects::CreateButton() {
 
