@@ -9,6 +9,7 @@
 #include "..\Serialize\SceneSerialize.h"
 #include "../GeomertyShapes/ShapeHexagon.h"
 #include "../GeomertyShapes/ShapeBase.h"
+#include "../CreatorModelData.h"
 
 void ObjectBlock::InitData()
 {

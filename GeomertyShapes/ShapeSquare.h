@@ -1,18 +1,13 @@
 
 #pragma once
-
 #include "ShapeBase.h"
-#include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"
-
 
 using glm::vec4;
 using glm::vec3;
 using glm::vec2;
-//using glm::mat4;
 using std::string;
-//using std::shared_ptr;
-//using std::map;
+
+//class ShapeBase;
 
 
 class ShapeSquare : public ShapeBase

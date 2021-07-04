@@ -1,5 +1,15 @@
 
+//#include "ShapeBase.h"
 #include "ShapeSquare.h"
+
+#include "../CoreSettings.h"
+#include "../ModelData.h"
+#include "../GeometryLib.h"
+#include "../ObjectsTypes/ObjectData.h"
+#include "../CreatorModelData.h"
+#include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
+#include "../ObjectsTypes/ObjectPhysic.h"
+#include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
 
 ShapeSquare::~ShapeSquare() {
 

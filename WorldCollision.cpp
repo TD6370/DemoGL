@@ -5,6 +5,9 @@
 #include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectData.h"
 #include "GeometryLib.h"
+#include "CreatorModelData.h"  //------<<<		//##$$ 4.
+#include "./GeomertyShapes/ShapeBase.h"			//##$$ 4.
+
 //----------------------
 
 #include <iostream>

@@ -3,7 +3,7 @@
 #ifndef CreatorModelData_H
 #define CreatorModelData_H
 
-#include "ConfigUniformArg.h"
+//#include "ConfigUniformArg.h"
 #include "CoreSettings.h"
 #include "OperationString.h"
 //#include "SceneSerialize.h"

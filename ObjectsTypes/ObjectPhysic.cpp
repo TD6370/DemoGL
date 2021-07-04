@@ -1,8 +1,10 @@
 //---------------------
 #include "..\WorldCollision.h"
 #include "..\ModelData.h"
+#include "../GeomertyShapes/ShapeBase.h"
 #include "../GeomertyShapes/ShapeHexagon.h"  //!!!!!!!!!!!!!!!!!!
 #include "../GeomertyShapes/ShapeSquare.h"  //!!!!!!!!!!!!!!!!!!
+#include "../CreatorModelData.h"
 //#include "..\GeometryLib.h"
 //------------------------
 

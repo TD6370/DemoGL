@@ -1,18 +1,5 @@
 #pragma once
 
-#include "../CoreSettings.h"
-#include "../ModelData.h"
-#include "../GeometryLib.h"
-#include "../ObjectsTypes/ObjectData.h"
-#include "../CreatorModelData.h"
-//#include "../WorldCluster.h"
-//----
-#include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
-//#include "../TransformModel.h"
-//#include "..\ConfigUniformArg.h"
-#include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"
-
 //#define GLEW_STATIC
 #include <GL/glew.h>
 
@@ -22,6 +9,7 @@
 
 #include <fstream>
 #include <map>
+#include <vector>
 
 using glm::vec4;
 using glm::vec3;
@@ -31,7 +19,7 @@ using glm::mat4;
 using std::string;
 using std::shared_ptr;
 using std::map;
-
+//using std::vector;
 
 class Plane;
 //class ModelData;

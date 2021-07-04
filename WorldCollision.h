@@ -4,8 +4,6 @@
 #define WorldCollision_H
 
 #include "CoreSettings.h"
-#include "CreatorModelData.h"  //------<<<
-#include "./GeomertyShapes/ShapeBase.h"
 
 //OpenGL Mathematics
 #include <glm/glm.hpp>
@@ -19,6 +17,7 @@
 
 class Plane;
 class ShapeBase;
+class CreatorModelData;
 
 using std::string;
 using std::vector;

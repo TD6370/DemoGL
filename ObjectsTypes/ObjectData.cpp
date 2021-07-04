@@ -9,6 +9,9 @@
 #include "ObjectData.h"
 #include "../Serialize/SceneSerialize.h"
 //#include "../GeomertyShapes/ShapeBase.h"
+//#include "CreatorModelData.h"  //------<<<		//##$$ 4.
+#include "../GeomertyShapes/ShapeBase.h"			//##$$ 4.
+#include "../CreatorModelData.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>

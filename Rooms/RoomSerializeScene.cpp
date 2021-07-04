@@ -7,7 +7,10 @@
 #include "../ModelData.h"
 
 #include "../Serialize/SceneSerialize.h"
+#include "../Controllers.h"
 //#include "SceneSerialize.h"
+
+#include "../SceneConstruction.h"//##$$
 
 //#define GLEW_STATIC
 #include <GL/glew.h>

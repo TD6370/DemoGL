@@ -1,20 +1,7 @@
 #pragma once
 #include "ShapeBase.h"
-#include "../ObjectsTypes/ObjectPhysic.h"
 
-//#include "../CoreSettings.h"
-//#include "../ModelData.h"
-//#include "../GeometryLib.h"
-//#include "../ObjectsTypes/ObjectData.h"
-//#include "../CreatorModelData.h"
-////#include "../WorldCluster.h"
-////----
-//#include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
-////#include "../TransformModel.h"
-////#include "..\ConfigUniformArg.h"
-//#include "../ObjectsTypes/ObjectPhysic.h"
-//
-//class ObjectPhysic;
+class ShapeBase;
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>

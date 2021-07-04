@@ -3,17 +3,9 @@
 #include "../ModelData.h"
 #include "./ObjectData.h"
 #include "./ObjectGUI.h"
-//#include "./ObjectPhysic.h"
 #include "../CoreSettings.h"
 #include "../CreatorModelData.h"
 
-//#include <glm/glm.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-//#include <glm/gtc/random.hpp>
-
-//#include <fstream>
-//#include <sstream>
-//#include <ostream>
 
 using glm::vec4;
 using glm::vec3;

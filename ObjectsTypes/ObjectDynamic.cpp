@@ -2,6 +2,7 @@
 #include "..\WorldCollision.h"
 //-------------------
 #include "ObjectDynamic.h"
+#include "../CreatorModelData.h"
 
 void ObjectDynamic::InitData()
 {

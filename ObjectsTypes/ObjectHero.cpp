@@ -1,4 +1,7 @@
 #include "..\WorldCollision.h"
+#include "../CreatorModelData.h"  //------<<<		//##$$ 4.
+//#include "./GeomertyShapes/ShapeBase.h"			//##$$ 4.
+
 
 #include "ObjectHero.h"
 
