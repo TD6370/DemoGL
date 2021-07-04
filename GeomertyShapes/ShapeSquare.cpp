@@ -69,7 +69,7 @@ void ShapeSquare::UpdateState(bool isForce) {
 
 		//================================================== TEST
 		//TEST -- hystory move pos TextBox
-		/*if (Postranslate != tmp_posit && TypeObj == TextBlock)
+		/*if (Postranslate != tmp_posit && TypeObj == TextBox)
 		{
 			std::stringstream ssEnd;
 			ssEnd << "END PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";

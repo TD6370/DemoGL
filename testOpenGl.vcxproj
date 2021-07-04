@@ -174,7 +174,7 @@
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
-    <ClCompile Include="ObjectsTypes\ObjectTextBlock.cpp" />
+    <ClCompile Include="ObjectsTypes\ObjectTextBox.cpp" />
     <ClCompile Include="OperationString.cpp" />
     <ClCompile Include="Rooms\AspectDispatcherCommands.cpp" />
     <ClCompile Include="Rooms\AspectFactoryObjects.cpp" />
@@ -216,7 +216,7 @@
     <ClInclude Include="ObjectsTypes\ObjectNPC.h" />
     <ClInclude Include="ObjectsTypes\ObjectPhysic.h" />
     <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
-    <ClInclude Include="ObjectsTypes\ObjectTextBlock.h" />
+    <ClInclude Include="ObjectsTypes\ObjectTextBox.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rooms\AspectDispatcherCommands.h" />

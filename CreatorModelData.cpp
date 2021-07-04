@@ -12,7 +12,7 @@
 #include "ObjectsTypes/ObjectCursorRay.h"
 #include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectGUI.h"
-#include "ObjectsTypes/ObjectTextBlock.h"
+#include "ObjectsTypes/ObjectTextBox.h"
 #include "ObjectsTypes/ObjectCursorGUI.h"
 #include "ObjectsTypes/ObjectButton.h"
 #include "GeomertyShapes//ShapeBase.h" //###
@@ -78,7 +78,7 @@ void CreatorModelData::ClearObjects() {
 
 void CreatorModelData::FillSortTypesObjects() {
 
-	//enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI, Button
+	//enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button
 	SortTypeObjects.push_back(Polygon);
 	SortTypeObjects.push_back(Hero);
 	SortTypeObjects.push_back(CursorRay);
@@ -92,7 +92,7 @@ void CreatorModelData::FillSortTypesObjects() {
 	SortTypeObjects.push_back(Terra);
 	SortTypeObjects.push_back(GUI);
 	SortTypeObjects.push_back(Button);
-	SortTypeObjects.push_back(TextBlock);
+	SortTypeObjects.push_back(TextBox);
 	SortTypeObjects.push_back(CursorGUI);
 	//SortTypeObjects.push_back();
 }
@@ -228,10 +228,10 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
-		case TextBlock: {
-			ObjectTextBlock obj = ObjectTextBlock(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectTextBlock>(obj));
-			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectTextBlock>(obj));
+		case TextBox: {
+			ObjectTextBox obj = ObjectTextBox(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectTextBox>(obj));
+			//SceneObjects.insert(SceneObjects.end() + p_index, std::make_unique<ObjectTextBox>(obj));
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
@@ -630,18 +630,18 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ButtonModel");
 
-	//---GUI -- control -- TextBlock
-	ModelTextBox textBlock = ModelTextBox();
-	Models.push_back(std::make_unique<ModelTextBox>(textBlock));
+	//---GUI -- control -- TextBox
+	ModelTextBox TextBox = ModelTextBox();
+	Models.push_back(std::make_unique<ModelTextBox>(TextBox));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "TextBlockUI.vert";
-	nextModelPrt->PathShaderFrag = "TextBlockUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/TextBlock.obj";
+	nextModelPrt->PathShaderVertex = "TextBoxUI.vert";
+	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
 	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
-	AddModel(nextModelPrt, "TextBlockModel");
+	AddModel(nextModelPrt, "TextBoxModel");
 
 	//---GUI -- control -- Cursor
 	ModelFrame curcorModel = ModelFrame();
@@ -712,13 +712,13 @@ void CreatorModelData::LoadObjectsGUI() {
 	objBackGUI->ControlConstruct(objCreateButton, caption);
 	
 	// ---- Object text block GUI
-	objName = "TextBlockObject";
+	objName = "TextBoxObject";
 	caption = "привет мир, и доброе утро";
 	//caption = "абвгдежзиклмн";
-	childModel = "TextBlockModel";
+	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBlock, color);
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBlock, vec3(0.2, 0.5, 0.1));
+	objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
+	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.01, .01, 0.011), vec2(1.5, 1.), TextBox, vec3(0.2, 0.5, 0.1));
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";

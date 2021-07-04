@@ -20,7 +20,7 @@
 //#include "ObjectsTypes/ObjectCursorRay.h"
 //#include "ObjectsTypes/ObjectBlock.h"
 #include "../ObjectsTypes/ObjectGUI.h"
-//#include "ObjectsTypes/ObjectTextBlock.h"
+//#include "ObjectsTypes/ObjectTextBox.h"
 //#include "ObjectsTypes/ObjectCursorGUI.h"
 #include "../ObjectsTypes/ObjectButton.h"
 //#include "GeomertyShapes//ShapeBase.h" //###

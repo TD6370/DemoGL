@@ -1,4 +1,4 @@
-#include "ObjectTextBlock.h"
+#include "ObjectTextBox.h"
 
 #include "./ObjectData.h"
 #include "../CoreSettings.h"
@@ -19,12 +19,12 @@ using std::shared_ptr;
 glm::mat4;
 
 
-ObjectTextBlock::~ObjectTextBlock()
+ObjectTextBox::~ObjectTextBox()
 {
 
 }
 
-void ObjectTextBlock::SetDataToShader() {
+void ObjectTextBox::SetDataToShader() {
 
 	ObjectGUI::SetDataToShader();
 
@@ -33,7 +33,7 @@ void ObjectTextBlock::SetDataToShader() {
 	ModelPtr->SetModelInBuffer(TextureUV, normals, false);
 }
 
-void ObjectTextBlock::CreateMessage() {
+void ObjectTextBox::CreateMessage() {
 
 	mapAlphabet = map<string, int>{
 		{"à",0},
@@ -103,7 +103,7 @@ void ObjectTextBlock::CreateMessage() {
 	MeshTransform();
 }
 
-void ObjectTextBlock::MeshTransform() {
+void ObjectTextBox::MeshTransform() {
 	
 	if(Vertices.size() == 0)
 		Vertices = ModelPtr->Vertices;
@@ -160,7 +160,7 @@ void ObjectTextBlock::MeshTransform() {
 	Shape->FillVertextBox();
 }
 
-vector<ObjectFiledsSpecific> ObjectTextBlock::GetSpecificFiels() {
+vector<ObjectFiledsSpecific> ObjectTextBox::GetSpecificFiels() {
 
 	vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
 
@@ -170,7 +170,7 @@ vector<ObjectFiledsSpecific> ObjectTextBlock::GetSpecificFiels() {
 	return result;
 }
 
-void ObjectTextBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
+void ObjectTextBox::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 
 	if (IndexObjectOwner == -1) //Back GUI
 		return;

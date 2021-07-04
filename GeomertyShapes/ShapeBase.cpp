@@ -267,7 +267,7 @@ void ShapeBase::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 	vec3 vertTopRight;
 
 	//if (IsAbsolutePosition)
-	if (obj->TypeObj == TextBlock)
+	if (obj->TypeObj == TextBox)
 	{
 		vertBottomLeft = GetBottomFirst();
 		vertBottomRight = GetBottomLast();
@@ -302,7 +302,7 @@ vec2 ShapeBase::GetStartPositWorld() {
 	vec3 vertBottomLeft;
 	vec3 vertTopLeft;
 
-	if (obj->TypeObj == TextBlock)
+	if (obj->TypeObj == TextBox)
 	{
 		vertBottomLeft = GetBottomFirst();
 		vertTopLeft = GetTopFirst();

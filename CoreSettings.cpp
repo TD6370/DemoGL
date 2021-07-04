@@ -91,7 +91,7 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming }; // , EventControl };
 
-enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBlock, CursorGUI, Button
+enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button
 };
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};

@@ -20,7 +20,7 @@ using std::shared_ptr;
 class ModelData;
 struct ObjectFiledsSpecific;
 
-class ObjectTextBlock :
+class ObjectTextBox :
 	public ObjectGUI
 {
 protected:
@@ -30,10 +30,10 @@ protected:
 public:
 	string Message = std::string();
 
-	ObjectTextBlock(
+	ObjectTextBox(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::TextBlock,
+		TypeObject p_typeObj = TypeObject::TextBox,
 		vec3 p_pos = vec3(0))
 		: ObjectGUI(p_index,
 			p_model,
@@ -46,7 +46,7 @@ public:
 	};
 
 
-	~ObjectTextBlock();
+	~ObjectTextBox();
 
 	void CreateMessage();
 

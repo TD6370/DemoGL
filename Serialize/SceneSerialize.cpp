@@ -26,7 +26,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::BulletHero, "BulletHero");
 	AddNextType(TypeObject::CursorRay, "CursorRay");
 	AddNextType(TypeObject::GUI, "GUI");
-	AddNextType(TypeObject::TextBlock, "TextBlock");
+	AddNextType(TypeObject::TextBox, "TextBox");
 	AddNextType(TypeObject::CursorGUI, "CursorGUI");
 	AddNextType(TypeObject::Button, "Button");
 

@@ -153,9 +153,6 @@
     <ClCompile Include="OperationString.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectTextBlock.cpp">
-      <Filter>Objects\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectCursorGUI.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
@@ -175,6 +172,9 @@
       <Filter>Rooms</Filter>
     </ClCompile>
     <ClCompile Include="ObjectsTypes\ObjectButton.cpp">
+      <Filter>Objects\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectTextBox.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
   </ItemGroup>
@@ -278,9 +278,6 @@
     <ClInclude Include="OperationString.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectTextBlock.h">
-      <Filter>Objects\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectCursorGUI.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
@@ -300,6 +297,9 @@
       <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectButton.h">
+      <Filter>Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectTextBox.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>
