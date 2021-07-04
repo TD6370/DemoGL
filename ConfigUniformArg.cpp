@@ -113,6 +113,20 @@ void ConfigUniform::SetParamCase(GLfloat paramCase) {
 	}
 }
 
+void ConfigUniform::SetParamValue(GLint paramValue) {
+	if (m_paramValueID != 0){
+		glUniform1i(m_paramValueID, paramValue);
+	}
+}
+
+void ConfigUniform::SetStartTime(GLfloat timeValue) {
+
+	if (m_startTimeID != 0) {
+		glUniform1f(m_startTimeID, timeValue);
+	}
+}
+
+
 void ConfigUniform::SetTransform(mat4* trans)
 {
 	if (m_transformLocID == 0)
@@ -187,6 +201,7 @@ void ConfigUniform::Init()
 	m_vertexTimeID = glGetUniformLocation(m_shaderProgram, "fTime");
 	m_lightPosID = glGetUniformLocation(m_shaderProgram, "lightPos");
 	m_filterVectorsID = glGetUniformLocation(m_shaderProgram, "filterVectors");
+
 }
 
 void ConfigUniform::InitBox()
@@ -195,4 +210,6 @@ void ConfigUniform::InitBox()
 	m_heightID = glGetUniformLocation(m_shaderProgram, "height");
 	m_posMoveID = glGetUniformLocation(m_shaderProgram, "posMove");
 	m_posMoveSizeID = glGetUniformLocation(m_shaderProgram, "posMoveSize");
+	m_paramValueID = glGetUniformLocation(m_shaderProgram, "paramValue");
+	m_startTimeID = glGetUniformLocation(m_shaderProgram, "startTimer");
 }

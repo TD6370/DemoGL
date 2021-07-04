@@ -7,14 +7,16 @@ in float fragTime;
 in float fragWidth;
 in float fragHeight;
 in vec3 fragPosMove;
-	
-    float m_startDefaultParamShaderID = 0.;     //= 0
-	float m_startFocusParamShaderID = 1.;       //= 1
-	float m_startMoveParamShaderID = 2.;        //= 2
-	float m_startResizeParamShaderID = 3.;      //= 3
-	float m_startCheckBorderParamShaderID = 4.; //= 4
-	float m_startClickParamShaderID = 5.;       //= 5
-    float m_startPressedParamShaderID = 6.;       //= 6
+flat in int fragParamValue;
+in float fragStartTimer;
+
+    int m_startDefaultParamShaderID = 0;     //= 0
+	int m_startFocusParamShaderID = 1;       //= 1
+	int m_startMoveParamShaderID = 2;        //= 2
+	int m_startResizeParamShaderID = 3;      //= 3
+	int m_startCheckBorderParamShaderID = 4; //= 4
+	int m_startClickParamShaderID = 5;       //= 5
+    int m_startPressedParamShaderID = 6;       //= 6
 
     bool isDefaultParam = false; 
 	bool isFocusParam = false; 
@@ -388,7 +390,11 @@ vec3 BloomZoom(in vec2 uv) {
 //vec3 Ripples(vec2 uv)
 float Ripples(vec2 uv)
 {
-    float iTime = fragTime;
+    //fragStartTimer
+
+    float iTime = fragTime - fragStartTimer + 0.4;
+    iTime = fragTime - fragStartTimer;
+    iTime*=3.5;
     vec2 center = vec2(0.5,0.5);
     float speed =.6;
     vec3 color;
@@ -426,6 +432,14 @@ float Ripples(vec2 uv)
     return 1. - result;
 }
 
+float Pressed(float al, vec2 uv)
+{
+    float point = length(abs(uv - .5));
+    point = pow(point,2.5);
+    point *=7;
+    return al * point; 
+}
+
 //======================
 
 // ---------------- FRAME
@@ -433,25 +447,30 @@ void main()
 {
      //-----------   PARAM  --------------------------------------
 
-    if(CheckParam(fragParamCase, m_startPressedParamShaderID))   //= 3 Rsize
+    if(fragParamValue == m_startPressedParamShaderID)
     {
         isPressedParam = true; 
 
-    } else if(CheckParam(fragParamCase, m_startResizeParamShaderID))   //= 3 Rsize
+    } 
+    else if(fragParamValue ==  m_startResizeParamShaderID)   //= 3 Rsize
     {
         isResizeParam = true; 
 
-    } else if(CheckParam(fragParamCase,m_startMoveParamShaderID))   //= 2    Move
+    } 
+    else if(fragParamValue ==m_startMoveParamShaderID)   //= 2    Move
     {
         isMoveParamS = true; 
         
-    } else if(CheckParam(fragParamCase,m_startClickParamShaderID))   //= 5   Click (Work)
+    } 
+    else if(fragParamValue == m_startClickParamShaderID)   //= 5   Click (Work)
     {
         isClickParam = true; 
-    } else if(CheckParam(fragParamCase,m_startCheckBorderParamShaderID))   //= 4 Border
+    } 
+    else if(fragParamValue == m_startCheckBorderParamShaderID)   //= 4 Border
     {
         isCheckBorderParam = true; 
-    } else if(CheckParam(fragParamCase,m_startFocusParamShaderID))   //= 1   Focus
+    } 
+    else if(fragParamValue ==  m_startFocusParamShaderID)   //= 1   Focus
     {
         isFocusParam = true; 
         //TEST
@@ -460,18 +479,12 @@ void main()
          //isMoveParamS = true; 
          // isClickParam = true; 
          //isPressedParam = true;
-    } else if(CheckParam(fragParamCase,m_startDefaultParamShaderID))   //= 0     Default
+    } 
+    else if(fragParamValue == m_startDefaultParamShaderID)   //= 0     Default
     {
         isDefaultParam = true; 
     }   
-    //-----------------------------
-    //     isResizeParam = true; 
-    //     isMoveParamS = true; 
-    //   isClickParam = true; 
-    //   isCheckBorderParam = true; 
-    //   isFocusParam = true; 
-    //   isDefaultParam = true; 
-    //-----------------------------
+
     vec3 startColor = fragmentColor;
     float alpha = 1.0f;
     float bord = 0.01;
@@ -521,22 +534,11 @@ void main()
     float hor = (x * x1) * korrUV;
     float ver = (y * y1) * korrUV;
     al = ver * hor;
-    // float vh = ver * hor;
-    // float kvad = ( fract(ver * .7)  * fract(hor * .7) ) + .5;
-    // float romb = 1.5 - fract(sin(ver * 2.) * cos(hor * 1.));
-    // float circle = ((ver * hor)-0.5);
-    // float korrBordBox = 1.;
-    // float korrBordBox2 = 1.;
-     
     //-----------   PARAM  --------------------------------------
      
     if(isPressedParam)   //= 6 Pressed
     {
-        float point = length(abs(uv - .5));
-        point = pow(point,2.5);
-        point *=7;
-
-        alpha = al * point; 
+        alpha = Pressed(al, uv);
         contrastColor = .6;
         startColor = vec3(.60);
     }

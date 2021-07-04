@@ -77,6 +77,9 @@ private:
 	vec3 SelectObjectOffsetPos = vec3(0);
 	vec2 m_startSizePanel = vec2(0);
 
+	float StartTimer = 0;
+	float EndTimer = 0;
+
 public:
 		
 	RoomUseInterface(string Name, SceneConstruction* sceneConstructor)
@@ -111,9 +114,11 @@ public:
 	//------- CreateObject
 	void EventCreateObject(shared_ptr<ObjectGUI> objGUI);
 
-	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value);
+	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value);
 
 	void ModeEditControls(shared_ptr<ObjectGUI> objGUI);
+
+	void SetTimeAnimate(shared_ptr<ObjectGUI> obj, float time);
 
 	//bool ReadCommand(TypeCommand commandType);
 };

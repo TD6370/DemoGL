@@ -5,15 +5,6 @@ layout (location = 1) in vec3 vertexColor;
 layout (location = 2) in vec2 vertexUV;
 layout (location = 3) in vec3 posNormal;
 
-out vec3 fragmentColor;
-out vec2 UV;
-out float fragParamCase;
-out float fragTime;
-out float fragWidth;
-out float fragHeight;
-
-out vec3 fragPosMove;
-
 uniform mat4 MVP;
 uniform mat4 VIEW;
 uniform mat4 MODEL;
@@ -25,6 +16,20 @@ uniform float fTime;
 uniform float width;
 uniform float height;
 uniform vec3 posMove;
+uniform int paramValue;
+uniform float startTimer;
+
+//--
+out vec3 fragmentColor;
+out vec2 UV;
+out float fragParamCase;
+out float fragTime;
+out float fragWidth;
+out float fragHeight;
+flat out int fragParamValue;
+out float fragStartTimer;
+out vec3 fragPosMove;
+
 
 void main()
 {
@@ -38,4 +43,6 @@ void main()
 	fragWidth = width;
 	fragHeight = height;
 	fragPosMove = posMove;
+	fragParamValue = paramValue;
+	fragStartTimer = startTimer;
 }

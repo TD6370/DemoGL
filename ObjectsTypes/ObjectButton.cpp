@@ -50,7 +50,8 @@ void ObjectButton::DefaultColor() {
 	if (IsToogleButon)
 	{
 		if (IsToogleButonOn)
-			ParamCase = AnimationParam->StartPressedParamShaderID;
+			ParamValue = AnimationParam->StartPressedParamShaderID;
+			//ParamCase = AnimationParam->StartPressedParamShaderID;
 	}
 }
 

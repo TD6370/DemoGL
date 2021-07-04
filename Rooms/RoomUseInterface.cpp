@@ -26,8 +26,29 @@ void RoomUseInterface::Init() {
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 	//IsEditControls = true;
 	IsEditControls = false;
-	
+
+
+}
+
+void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value)
+{
+	if (EndTimer > 0) {
+		auto currTimer = glfwGetTime();
+		if (currTimer < EndTimer)
+			return;
+		EndTimer = -1;
 	}
+
+	obj->ParamValue = value;
+	m_CurrentStartedEventID = value;
+}
+
+void RoomUseInterface::SetTimeAnimate(shared_ptr<ObjectGUI> obj, float timeAnim)
+{
+	obj->SetStartTimer();
+	StartTimer = glfwGetTime();
+	EndTimer = StartTimer + (timeAnim * 1);
+}
 
 //==================================== START MOVE
 void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
@@ -129,12 +150,6 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 	m_startSizePanel = obj->SizePanel;
 	IsCursorClickEvent = false;//!!!
 	SetCurrentEventParam(obj, AnimationParams->StartResizeParamShaderID);
-}
-
-void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, float value)
-{
-	obj->ParamCase = value;
-	m_CurrentStartedEventID = value;
 }
 
 //----------------------- RESIZE
@@ -256,7 +271,7 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 		}
 
-		obj->ParamCase = AnimationParams->StartDefaultParamShaderID;
+		SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 
 		if(isUpdateView)
 			obj->DefaultColor();
@@ -279,8 +294,10 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 	//Scene->Debug("Start click");
 	obj->Click();
 	SetCurrentEventParam(obj, AnimationParams->StartClickParamShaderID);
+
+	SetTimeAnimate(obj, 0.3);
 	
-	IsCursorClickEvent = false;//!!!
+	IsCursorClickEvent = false;
 }
 
 
@@ -371,9 +388,6 @@ void RoomUseInterface::Work() {
 	//--- Focused
 	CalculateMousePosWorld();
 
-	//TEST&&1
-	//return;
-
 	if (objGUI->TypeObj == TypeObject::CursorGUI) {
 		CursorMovePos = objGUI->StartPos;
 	}
@@ -398,15 +412,13 @@ void RoomUseInterface::Work() {
 		//-- End event resize control
 		//bool isEndRsizeControl = 
 		EventEndResizeControl(objGUI);
-		//////-- Start event resize colntrol
-		//if (!isEndRsizeControl)
+		//-- Start event resize colntrol
 		EventStartResizeControl(objGUI);
 
 		//-- End event on control
 		//bool isEndMovingControl = 
 		EventEndMovingControl(objGUI);
 		//----Start event Moving Control
-		//if (!isEndMovingControl)
 		EventStartMovingControl(objGUI);
 	}
 

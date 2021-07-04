@@ -89,6 +89,8 @@ public:
 	GLint TrianglesCount = 0;
 	vec3 Color = vec3(0);
 	GLfloat ParamCase = -1;
+	GLint ParamValue = -1;
+	GLfloat StartTimer = -1;
 
 	//GLfloat TranslateAngle = 0;
 	vec3 TranslateAngle = vec3(0);
@@ -174,6 +176,7 @@ public:
 
 	void DefaultColor();
 
+	void SetStartTimer();
 	//-----------------------------
 	
 	void virtual MeshTransform(); //------- geometric ???

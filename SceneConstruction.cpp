@@ -193,11 +193,6 @@ void SceneConstruction::SetDataToShader() {
 	if (isSkipGUI) //Hard mode
 		return;
 
-	//---- TEST---
-	if (isSkipDynamic) {
-		
-	}
-	//--------------
 
 	if (ObjectCurrent->IsGUI != m_isEnableGUI ||
 		ObjectCurrent->IsGUI != Storage->SceneData->IsGUI) 
@@ -256,8 +251,12 @@ void SceneConstruction::SetDataToShader() {
 	//-------------------- Set color
 	ModelCurrent->ConfUniform.SetColor(ObjectCurrent->Color);
 	//---------------------- Set param Case
-	//ModelCurrent->ConfUniform.SetParamCase(Storage->Inputs->ParamCase);
 	ModelCurrent->ConfUniform.SetParamCase(GetParamCase());
+
+	ModelCurrent->ConfUniform.SetParamValue(ObjectCurrent->ParamValue);
+
+	ModelCurrent->ConfUniform.SetStartTime(ObjectCurrent->StartTimer);
+
 	//---------------------- Set MVP
 	ModelCurrent->ConfUniform.SetMVP(Storage->ConfigMVP->MVP);//(---)
 
@@ -311,14 +310,6 @@ bool SceneConstruction::SetObject(int indNN) {
 	{
 		m_isUpdateShaderProgramm = true;
 	}
-	/*if (prevShaderVert != ModelCurrent->PathShaderVertex) {
-		m_isUpdateShaderProgramm = true;
-		prevShaderVert = ModelCurrent->PathShaderVertex;
-	}
-	if (prevShaderFrag != ModelCurrent->PathShaderFrag) {
-		m_isUpdateShaderProgramm = true;
-		prevShaderFrag = ModelCurrent->PathShaderFrag;
-	}*/
 	return isVisible;
 }
 

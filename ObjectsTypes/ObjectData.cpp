@@ -230,6 +230,10 @@ void ObjectData::UpdateTextureUV() {
 	ModelPtr->SetUV(TextureUV);
 }
 
+void ObjectData::SetStartTimer() {
+	StartTimer = glfwGetTime();
+}
+
 void ObjectData::ControlsEvents() {
 }
 

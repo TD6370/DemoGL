@@ -44,8 +44,6 @@ private:
 	int prevIndexModel = -1;
 	const char* prevModelTexture;
 	const char* prevModel3D;
-	string prevShaderVert;
-	string prevShaderFrag;
 	GLuint last_VAO;
 
 	bool test_isFerst = true;

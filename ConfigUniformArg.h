@@ -26,7 +26,9 @@ protected:
 	int m_transformLocID = 0; //unsigned int
 
 	int m_paramCaseID = 0;
+	int m_paramValueID = -1;
 	int m_vertexTimeID = 0;
+	int m_startTimeID = 0;
 	int m_widthID = 0;
 	int m_heightID = 0;
 	int m_posMoveID = 0;
@@ -70,6 +72,10 @@ public:
 	void SetPositionMouse(vec3 m_positionCursorModel);
 
 	void SetParamCase(GLfloat paramCase);
+
+	void SetParamValue(GLint paramValue);
+
+	void SetStartTime(GLfloat time);
 
 	void SetTransform(mat4* trans);
 
