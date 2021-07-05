@@ -264,7 +264,7 @@ void ObjectData::InitChildObjects() {
 
 }
 
-void ObjectData::DefaultColor()
+void ObjectData::DefaultView()
 {
 	Color = StartColor;
 }

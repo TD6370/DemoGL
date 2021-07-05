@@ -79,21 +79,33 @@ void AspectFactoryObjects::CreateEditBox() {
 	string childModel;
 	string objName;
 	vec3 color = vec3(0.3);
-	shared_ptr<ObjectEditBox> objCreateButton;
+	shared_ptr<ObjectButton> objCreateButton;
+	shared_ptr<ObjectEditBox> objCreateEditBox;
 	shared_ptr<ObjectData> objCreate;
 	vec2 pos = vec2(1.);
-
-	// ---- Object Edit box create
-	objName = "EditBoxCreateObjGUI";
-	caption = "ввод";
-	childModel = "EditBoxModel";
+		
+	// ---- Object Button create obj GUI
+	objName = "ButtonCreateObjGUI";
+	caption = "введите имя";
+	childModel = "ButtonModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-	objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), EditBox, vec3(1));
-	objCreateButton = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
-	//objCreateButton->IsToogleButon = false;
-	//objCreateButton->SceneCommand->CommandType = TypeCommand::None;
-	objBackGUI->ControlConstruct(objCreateButton, caption);
 
+	objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), Button, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+	objCreateButton->IsToogleButon = false;
+	objCreateButton->SceneCommand->CommandType = TypeCommand::None;
+
+		//// ---- Object Edit box create	
+		objCreate = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
+
+		//vec2 offset = vec2(0.01);
+		//vec3 startPos = vec3(offset.x, offset.y, 0.021);
+		//startPos = vec3(.01, .01, 0.021);
+		//caption = "введите имя";
+		//objCreate = Scene->Storage->AddChildObject(objCreateButton, caption, "EditBoxModel", "Button_EditBox", vec3(startPos.x, startPos.y, startPos.z), vec2(1.5, 1.), EditBox, vec3(-1));
+		//objCreateEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
+
+	
 	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
 }
 
@@ -112,11 +124,16 @@ void AspectFactoryObjects::CreateButton() {
 	caption = "новая";
 	childModel = "ButtonModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-		objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), Button, vec3(1));
+
+		//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), Button, vec3(1));
+		objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, vec3(pos.x, pos.y, 0.02), vec2(0.4, 0.2), Button, vec3(1));
 		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 		objCreateButton->IsToogleButon = false;
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
-	objBackGUI->ControlConstruct(objCreateButton, caption);
+	
+			Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
 
 	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
 }
+
+

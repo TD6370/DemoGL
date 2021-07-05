@@ -25,11 +25,8 @@ class ObjectEditBox :
 	public ObjectTextBox
 {
 protected:
-	//map<string, int> mapAlphabet;
-	//vector<int> MessageCode;
 
 public:
-	//string Message = std::string();
 
 	ObjectEditBox(
 		int p_index,
@@ -41,19 +38,14 @@ public:
 			p_typeObj,
 			p_pos) {
 
-		//IsSquareModel = true; //TEST&&1
-		//IsAbsolutePosition = true;
-		//IsFocusable = false;
+		ParamValue = 1;
+		IsAbsolutePosition = true;
+		IsFocusable = false;
 	};
-
 
 	~ObjectEditBox();
 
-	//void CreateMessage();
-
-	//void MeshTransform();
-
-	//void SetDataToShader();
+	void DefaultView();
 
 	//-------------
 

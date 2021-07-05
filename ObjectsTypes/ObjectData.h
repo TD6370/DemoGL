@@ -174,7 +174,7 @@ public:
 	
 	string GetInfo();
 
-	void DefaultColor();
+	void DefaultView();
 
 	void SetStartTimer();
 	//-----------------------------

@@ -207,10 +207,34 @@ void SceneConstruction::SetDataToShader() {
 		m_isUpdateUV = true;
 	}
 
+	//-------------------- Set color
+	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->Color);
+	//---------------------- Set param Case
+	ModelCurrent->ConfUniform->SetParamCase(GetParamCase());
+
+	//TEST
+	/*if (ObjectCurrent->TypeObj == EditBox)
+		ObjectCurrent->ParamValue = 1;*/
+
+	ModelCurrent->ConfUniform->SetParamValue(ObjectCurrent->ParamValue);
+
+	ModelCurrent->ConfUniform->SetStartTime(ObjectCurrent->StartTimer);
+
+	//---------------------- Set MVP
+	ModelCurrent->ConfUniform->SetMVP(Storage->ConfigMVP->MVP);
+
+	//VIEW param
+	ModelCurrent->ConfUniform->SetView(Storage->ConfigMVP->View);
+
+	//MODEL param
+	ModelCurrent->ConfUniform->SetModel(Storage->ConfigMVP->Model);
+
+
 	bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
 
 	//if (!isSkipDynamic && (m_isUpdateMesh || isTransformMesh))  //Lite mode
-	if (!isSkipDynamic && (m_isUpdateMesh || IsSquareModel))  //Lite mode
+	bool liteMode = !isSkipDynamic && (m_isUpdateMesh || IsSquareModel);
+	if (liteMode)  //Lite mode
 	//if (m_isUpdateMesh || IsSquareModel)
 	{
 
@@ -225,7 +249,7 @@ void SceneConstruction::SetDataToShader() {
 		{
 			ObjectCurrent->UpdateTextureUV();
 
-			if (IsSquareModel)
+			//if (IsSquareModel)
 				ObjectCurrent->SetDataToShader();
 
 			ObjectCurrent->UpdateNormalsToShader();
@@ -248,26 +272,6 @@ void SceneConstruction::SetDataToShader() {
 		ObjectCurrent->UpdateTextureUV();
 	}
 
-	//-------------------- Set color
-	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->Color);
-	//---------------------- Set param Case
-	ModelCurrent->ConfUniform->SetParamCase(GetParamCase());
-
-	ModelCurrent->ConfUniform->SetParamValue(ObjectCurrent->ParamValue);
-
-	ModelCurrent->ConfUniform->SetStartTime(ObjectCurrent->StartTimer);
-
-	//---------------------- Set MVP
-	ModelCurrent->ConfUniform->SetMVP(Storage->ConfigMVP->MVP);//(---)
-
-	//VIEW param
-	ModelCurrent->ConfUniform->SetView(Storage->ConfigMVP->View);
-
-	//MODEL param
-	ModelCurrent->ConfUniform->SetModel(Storage->ConfigMVP->Model);
-
-	//------ Set Mouse position
-	//ModelCurrent->ConfUniform.SetModel(Storage->ConfigMVP->Model);
 
 	//--- Set Width & height
 }

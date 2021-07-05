@@ -96,56 +96,6 @@ bool ObjectGUI::GetVisible() {
 	return Storage->SceneData->IsGUI;
 }
 
-shared_ptr<ObjectData> ObjectGUI::ConfigInterface(string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
-{
-	if(color == vec3(0))
-		color = vec3(1);
-
-	std::shared_ptr<ModelData> model = Storage->GetModelPrt(nameModel);
-	auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
-	if (modelTextBox != nullptr) {
-		model = modelTextBox;
-	}
-	auto modelFrame = std::dynamic_pointer_cast<ModelFrame>(model);
-	if (modelFrame != nullptr) {
-		model = modelFrame;
-	}
-
-	shared_ptr<ObjectData> obj = Storage->AddObject(nameObject, model, p_typeObj, StartPos, color);
-
-	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
-	objGUI->IndexObjectOwner = Index;
-	objGUI->StartPos = startPosChild;
-	objGUI->SizePanel = size;
-	objGUI->Color = color;
-	objGUI->UpdateState();
-	//objGUI->IsTextureRepeat = true;
-
-	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
-
-	auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(obj);
-	if (objTextBox != nullptr) {
-		objTextBox->Message = caption;
-		objTextBox->CreateMessage();
-	}
-
-	return objGUI;
-}
-
-void ObjectGUI::ControlConstruct(shared_ptr<ObjectGUI> obj, string caption)
-{
-	shared_ptr<ObjectData> objData;
-	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
-	if (objButton != nullptr) {
-		if (!objButton->IsToogleButon) {
-			vec2 offset = vec2(0.01);
-			vec3 startPos = vec3(offset.x, offset.y, 0.021);
-			startPos = vec3(.01, .01, 0.021);
-			objData = objButton->ConfigInterface(caption, "TextBoxModel", "Button_TextBox", vec3(startPos.x, startPos.y, startPos.z), vec2(1.5, 1.), TextBox, vec3(-1));
-			auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
-		}
-	}
-}
 
 void ObjectGUI::SizeControlUpdate()
 {
@@ -197,4 +147,11 @@ void ObjectGUI::DefaultSate() {
 	{
 		Color = vec3(0); //default color
 	}
+}
+
+void ObjectGUI::DefaultView() {
+
+	ObjectData::DefaultView();
+
+	ParamValue = 0;
 }

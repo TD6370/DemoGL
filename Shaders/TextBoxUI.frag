@@ -5,6 +5,7 @@ in vec2 UV;
 in float fragParamCase;
 in float fragTime;
 flat in int numSymbol;
+flat in int fragParamValue;
 
 out vec4 color;
 
@@ -98,8 +99,8 @@ void main()
     //result.x += cos(result.y*cos(fragTime));
     //result.y +=sin(result.x*sin(fragTime)*.01);
     
-    vec4 text1 = texture( textureSampler, result );	
-
+    vec4 text = texture( textureSampler, result );	
+    vec4 text1 = text;
     //--------- SDF
 	//text1 =SDF1(text1);
     //-----------
@@ -111,13 +112,26 @@ void main()
     //----------- outline
     //text1 =Outline(text1);
     //---------------------
+    
 
     vec4 colorText = vec4(0.984,0.773,0.196,1.);
 
     float limitAlpha = 0.1;
     float sumColor = text1.r * text1.g * text1.b;
     alpha = smoothstep(0.0, 0.5, sumColor);
-    //alpha = step(0.001, sumColor);
     
-    color =  text1 * vec4(fragmentColor, alpha );
+    // EditBox
+    if(fragParamValue == 1)
+    {
+        //alpha = .7;
+
+        //color =  text * colorText;
+        //alpha = smoothstep(0.0, 0.9, sumColor);
+        color =  text1 * vec4(colorText.rgb, alpha );
+        //color =  text1 * colorText;
+    }
+    else
+    {
+        color =  text1 * vec4(fragmentColor, alpha );
+    }
 }

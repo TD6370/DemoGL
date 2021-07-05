@@ -24,7 +24,7 @@ void ObjectButton::RunAction() {
 	
 	ObjectGUI::RunAction();
 
-	DefaultColor();
+	DefaultView();
 }
 
 
@@ -46,7 +46,7 @@ void ObjectButton::Click() {
 	ObjectGUI::Click();
 }
 
-void ObjectButton::DefaultColor() {
+void ObjectButton::DefaultView() {
 	if (IsToogleButon)
 	{
 		if (IsToogleButonOn)

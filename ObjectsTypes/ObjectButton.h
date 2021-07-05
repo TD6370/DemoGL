@@ -63,7 +63,7 @@ public:
 
 	void UpdateState();
 
-	void DefaultColor();
+	void DefaultView();
 
 	void Click();
 

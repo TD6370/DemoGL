@@ -39,7 +39,16 @@ void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value
 		EndTimer = -1;
 	}
 
-	obj->ParamValue = value;
+	if (obj->IsFocusable) {
+		if (AnimationParams->StartDefaultParamShaderID == value)
+			obj->DefaultView();
+		else
+			obj->ParamValue = value;
+	}
+	/*else {
+		obj->DefaultView();
+	}*/
+
 	m_CurrentStartedEventID = value;
 }
 
@@ -267,14 +276,8 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		if (IndexObjectFocused == obj->Index) {
 			FocusedOrder = -1;
 			IndexObjectFocused = -1;
-			if (!isOrderParam)
-				SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
 		}
-
 		SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
-
-		if(isUpdateView)
-			obj->DefaultColor();
 	}
 }
 
@@ -305,6 +308,9 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 
 void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
+	int typeCreate = (int)TypeObject::Button;
+	typeCreate = (int)TypeObject::EditBox;
+
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
 		return;
@@ -321,7 +327,7 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(SelectedPosForObject))
 		{
-			Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", (int)TypeObject::Button);
+			Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", typeCreate);
 			Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::None;
 		}
 	}
