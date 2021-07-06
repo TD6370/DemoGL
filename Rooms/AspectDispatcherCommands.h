@@ -11,6 +11,7 @@ using std::string;
 //using glm::vec3;
 
 class SceneConstruction;
+class ObjectData;
 enum TypeCommand;
 //struct CommandPack;
 
@@ -27,6 +28,8 @@ public:
 	AspectDispatcherCommands(string Name, SceneConstruction* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
+	~AspectDispatcherCommands();
+
 	void Init();
 	void Config();
 	void Work();
@@ -35,6 +38,14 @@ public:
 
 	void AddCommand(TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
 };
+
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
+
+void AddCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions);
+
+void UpdateCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions);
+
+void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
 
 

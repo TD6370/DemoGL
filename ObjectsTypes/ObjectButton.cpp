@@ -8,6 +8,8 @@
 //#include "../CreatorModelData.h"
 #include "../Serialize/SceneSerialize.h"
 #include "../OperationString.h"
+#include "../Rooms/AspectDispatcherCommands.h"
+#include "../CreatorModelData.h"
 
 ObjectButton::~ObjectButton()
 {
@@ -18,6 +20,7 @@ ObjectButton::~ObjectButton()
 void ObjectButton::InitData()
 {
 	ObjectGUI::InitData();
+
 }
 
 void ObjectButton::RunAction() {
@@ -28,19 +31,6 @@ void ObjectButton::RunAction() {
 }
 
 
-void ObjectButton::UpdateState() {
-
-	if (SceneCommand->CommandType != TypeCommand::None) {
-		SceneCommand->SourceIndex = Index;
-		if (IsToogleButon)
-		{
-			SceneCommand->Enable = true;
-			SceneCommand->Options.clear();
-			SceneCommand->Options.insert(std::pair<string, int>(Name, (int)IsToogleButonOn));
-		}
-	}
-}
-
 void ObjectButton::Click() {
 
 	ObjectGUI::Click();
@@ -49,9 +39,26 @@ void ObjectButton::Click() {
 void ObjectButton::DefaultView() {
 	if (IsToogleButon)
 	{
-		if (IsToogleButonOn)
+		if (IsChecked)
 			ParamValue = AnimationParam->StartPressedParamShaderID;
-			//ParamCase = AnimationParam->StartPressedParamShaderID;
+	}
+}
+
+void ObjectButton::Refresh()
+{
+	ObjectData::Refresh();
+
+	if (IsToogleButon && IndexObjectOwner != -1)
+	{
+		if (IndexObjectOwner == Storage->SceneData->IndexGUIObj)
+			return;
+
+		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		if (objOwner->TypeObj != Button)
+			return;
+		auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
+		if (objButton != nullptr && IsChecked != objButton->IsChecked)
+			IsChecked = objButton->IsChecked;
 	}
 }
 
@@ -62,14 +69,18 @@ void ObjectButton::Work() {
 	
 	Color = m_color_work;
 
+	bool isValidStartCommand = SceneCommand->CommandType != TypeCommand::None;
 	if (IsToogleButon) {
-		IsToogleButonOn = !IsToogleButonOn;
+		IsChecked = !IsChecked;
+		//isValidStartCommand = IsChecked; //@???
 	}
 
-	if (SceneCommand->CommandType != TypeCommand::None) {
+	if (isValidStartCommand) {
 		SceneCommand->Enable = true;
-		SceneCommand->SourceIndex = Index;
-		UpdateState();
+		if (IsToogleButon)
+		{
+			UpdateCommandOptions(this, Name, (int)IsChecked);
+		}
 	}
 
 	ActionObjectCurrent = Stay; //Off
@@ -80,7 +91,8 @@ vector<ObjectFiledsSpecific> ObjectButton::GetSpecificFiels() {
 
 	vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
 	result.push_back({ "IsToogleButon:", BoolToStr(IsToogleButon) });
-	result.push_back({ "IsToogleButonOn:", BoolToStr(IsToogleButonOn) });
+	result.push_back({ "IsChecked:", BoolToStr(IsChecked) });
+	result.push_back({ "Command:", std::to_string(SceneCommand->CommandType) });
 	return result;
 }
 
@@ -92,10 +104,12 @@ void ObjectButton::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific)
 	string valueStr;
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
 
-	valueStr = GetSpecifValue(filedsSpecific, 2);
+	valueStr = GetSpecifValue(filedsSpecific, 3);
 	IsToogleButon = StrToBool(valueStr);
-	valueStr = GetSpecifValue(filedsSpecific, 1);
-	IsToogleButonOn = StrToBool(valueStr);
+	valueStr = GetSpecifValue(filedsSpecific, 2);
+	IsChecked = StrToBool(valueStr);
+	int valueInt = std::stoi(GetSpecifValue(filedsSpecific, 1));
+	SceneCommand->CommandType = (TypeCommand)valueInt;
 }
 
 //----------------------------------------------------------------

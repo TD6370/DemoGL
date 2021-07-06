@@ -16,7 +16,7 @@ ShapeSquare::~ShapeSquare() {
 }
 
 
-void ShapeSquare::UpdateState(bool isForce) {
+void ShapeSquare::FormUpdate(bool isForce) {
 	ObjectGUI* obj = m_objGUI;
 	if (!isForce && !obj->Storage->SceneData->IsGUI)
 		return;

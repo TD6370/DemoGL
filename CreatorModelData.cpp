@@ -18,7 +18,7 @@
 #include "ObjectsTypes/ObjectEditBox.h"
 #include "GeomertyShapes/ShapeBase.h"
 #include "GeomertyShapes/ShapeSquare.h"
-
+#include "Rooms/AspectDispatcherCommands.h"
 
 
 #include "Serialize/SceneSerialize.h"
@@ -410,7 +410,6 @@ void CreatorModelData::GenerateObjects()
 
 void CreatorModelData::ObjectAction(int index)
 {
-
 	std::shared_ptr<ObjectData> prt_objData = SceneObjects[index];
 	prt_objData->Action();
 }
@@ -455,8 +454,9 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->Color = objFields->ColorValue;
 
 		TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
-		if (typeCommand != TypeCommand::None)
-			newObj->SceneCommand->CommandType = typeCommand;
+		if (typeCommand != TypeCommand::None) {
+			SetCommand(newObj, typeCommand);
+		}
 
 		OptionsObject opt = objFields->Options;
 		newObj->IsVisible = StrToBool(opt.IsVisible);
@@ -600,6 +600,7 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "ConextFrameModel");
 
 	//---GUI -- control -- Frame
+	//ModelFrame modelFrame = ModelFrame();
 	ModelFrame modelFrame = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
@@ -617,9 +618,23 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "FrameModel");
 
 
+	//------ Button EditBox Model --------------------------
+	modelFrame = ModelFrame();
+	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+	nextModelPrt = GetModelPrt(Models.size() - 1);
+	nextModelPrt->PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
+	nextModelPrt->PathTexture = "./Textures/EditBox2.bmp";
+	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->Init(ShaderPrograms);
+	AddModel(nextModelPrt, "ButtonEditBoxModel");
+	
+
 	//------ Button Model --------------------------
-	ModelFrame modelButton = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(modelButton));
+	modelFrame = ModelFrame();
+	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->PathShaderFrag = "FrameUI.frag";
@@ -695,7 +710,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
 	shared_ptr<ObjectButton> objBackGUI = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
 	objBackGUI->IsToogleButon = false;
-	objBackGUI->SceneCommand->CommandType = TypeCommand::None;
+	SetCommand(objBackGUI, TypeCommand::None);
 	objBackGUI->IsSelected = false;
 	objBackGUI->IsTransformable = false;
 
@@ -716,7 +731,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsTransformable = false;
-	objCreateButton->SceneCommand->CommandType = EditGUI_OnOff;
+	SetCommand(objCreateButton, EditGUI_OnOff);
 	ControlConstruct(objCreateButton, caption, Button);
 
 
@@ -729,7 +744,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
-	objCreateButton->SceneCommand->CommandType = SelectPosForObject;
+	SetCommand(objCreateButton, SelectPosForObject);
 	ControlConstruct(objCreateButton, caption, Button);
 	
 	// ---- Object text box GUI
@@ -741,13 +756,17 @@ void CreatorModelData::LoadObjectsGUI() {
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
 
 	// ---- Object Edit Box
-	objName = "EditBoxNameNewObject";
+	objName = "FrameEditBox_NameObject";
 	caption = "введите имя";
-	childModel = "ButtonModel";
+	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.02), vec2(.7, .1), Button, color);
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	ControlConstruct(objCreateButton, caption, EditBox);
+	objCreateButton->IsToogleButon = true;
+	objCreateButton->IsFocusable = false;
+	objCreateButton->IsTransformable = false;
+	//objCreateButton->IsVisible = false;
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";
@@ -905,11 +924,13 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj)
 {
 	
+	
 	shared_ptr<ObjectData> objData;
 	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
 	if (p_typeObj == TypeObject::Button) {
 		if (objButton != nullptr) {
 			if (!objButton->IsToogleButon) {
+				//--- Add textbox
 				vec2 offset = vec2(0.01);
 				vec3 startPos = vec3(offset.x, offset.y, 0.021);
 				startPos = vec3(.01, .01, 0.021);
@@ -922,16 +943,18 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 
 	if (p_typeObj == TypeObject::EditBox) {
 		if (objButton != nullptr) {
-			objButton->IsToogleButon = true;
-			objButton->IsFocusable = false;
-			objButton->IsTransformable = false;
+		
 			// ---- Object Edit box create	
 			vec2 offset = vec2(0.01);
 			vec3 startPos = vec3(offset.x, offset.y, 0.021);
 			startPos = vec3(.03, .03, 0.021);
 			startPos.z = objButton->StartPos.z + 0.01;
 			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", "Button_EditBox", startPos, vec2(1.5, 1.), EditBox, vec3(-1));
-			return std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
+			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
+
+			SetCommand(objButton, TypeCommand::EditObjectCommand, editBoxObj->Index, objButton->Index);
+
+			return editBoxObj;
 		}
 	}
 	return nullptr;

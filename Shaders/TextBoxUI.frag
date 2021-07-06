@@ -127,7 +127,8 @@ void main()
 
         //color =  text * colorText;
         //alpha = smoothstep(0.0, 0.9, sumColor);
-        color =  text1 * vec4(colorText.rgb, alpha );
+        //text1 = Outline(text);
+        color =  text * vec4(colorText.rgb, alpha );
         //color =  text1 * colorText;
     }
     else

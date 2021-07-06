@@ -45,6 +45,8 @@ public:
 
 	~ObjectEditBox();
 
+	void Work();
+
 	void DefaultView();
 
 	//-------------

@@ -103,13 +103,30 @@ void ObjectData::UpdateState() {
 	
 	if (Color == vec3(-1))
 		Color = vec3(0.117, 0.351, 0.950);
+
 	StartColor = Color;
 }
 
+void ObjectData::Refresh() {
+	
+	if (IndexObjectOwner != -1)
+	{
+		if (IndexObjectOwner == Storage->SceneData->IndexGUIObj)
+			return;
+
+		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		if (IsVisible != objOwner->IsVisible)
+			IsVisible = objOwner->IsVisible;
+	}
+}
+
 void ObjectData::ActionBase() {
+
 	ControlsEvents();
 	RunTransform();
+	//CheckParentState();
 }
+
 
 void ObjectData::RunAction() {
 

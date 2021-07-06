@@ -134,6 +134,8 @@ public:
 
 	void virtual UpdateState(); //after fill options
 
+	void virtual Refresh(); //after fill options
+
 	void GenStartPosition();
 
 	void virtual CheckStartPosition();
@@ -141,7 +143,7 @@ public:
 	void virtual RunAction();
 
 	void ActionBase();
-
+	
 	void RunTransform();
 
 	void Action();
@@ -174,7 +176,7 @@ public:
 	
 	string GetInfo();
 
-	void DefaultView();
+	void virtual DefaultView();
 
 	void SetStartTimer();
 	//-----------------------------

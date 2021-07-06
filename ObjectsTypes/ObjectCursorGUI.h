@@ -52,14 +52,7 @@ public:
 
 	~ObjectCursorGUI();
 
-	/*void CreateMessage();
-	void MeshTransform();*/
-
 	void InitData();
-	
-	//void RunAction();
-	//void virtual DefaultSate();
-	//void virtual Click();
 
 	void ActionMoving();
 	void SaveNewPosition();

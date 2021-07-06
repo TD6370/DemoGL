@@ -32,9 +32,6 @@ void ObjectGUI::SetDataToShader() {
 
 	ObjectData::SetDataToShader();
 
-	/*if (!isUpdate)
-		return;*/
-
 	auto modelFrame =std::dynamic_pointer_cast<ModelFrame>(ModelPtr);
 	if (modelFrame == nullptr) {
 		return;
@@ -56,7 +53,7 @@ void ObjectGUI::SetDataToShader() {
 
 void ObjectGUI::RunAction() {
 
-	GetShapeSquare()->UpdateState();
+	GetShapeSquare()->FormUpdate();
 
 	if (ActionObjectCurrent != Lock)
 	{
@@ -72,7 +69,6 @@ void ObjectGUI::RunAction() {
 				ActionTransforming();
 				break;
 			default:
-				DefaultSate();
 				break;
 		}
 	}
@@ -91,9 +87,7 @@ void ObjectGUI::ActionMoving()
 
 bool ObjectGUI::GetVisible() {
 
-	//TODO:: IndexObjectOwner 
-
-	return Storage->SceneData->IsGUI;
+	return Storage->SceneData->IsGUI && IsVisible;
 }
 
 
@@ -141,17 +135,11 @@ void ObjectGUI::Work() {
 	ActionObjectCurrent = Stay; //Off
 }
 
-void ObjectGUI::DefaultSate() {
-
-	if (Color == m_color_work)
-	{
-		Color = vec3(0); //default color
-	}
-}
 
 void ObjectGUI::DefaultView() {
 
 	ObjectData::DefaultView();
 
 	ParamValue = 0;
+
 }

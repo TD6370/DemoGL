@@ -8,6 +8,7 @@
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 #include "../GeomertyShapes//ShapeBase.h"
+#include "AspectDispatcherCommands.h"
 
 RoomUseInterface::~RoomUseInterface() {
 }
@@ -39,15 +40,11 @@ void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value
 		EndTimer = -1;
 	}
 
-	if (obj->IsFocusable) {
-		if (AnimationParams->StartDefaultParamShaderID == value)
-			obj->DefaultView();
-		else
-			obj->ParamValue = value;
-	}
-	/*else {
+	if (obj->IsFocusable) 
+		obj->ParamValue = value;
+	else if (AnimationParams->StartDefaultParamShaderID == value) {
 		obj->DefaultView();
-	}*/
+	}
 
 	m_CurrentStartedEventID = value;
 }
@@ -76,7 +73,6 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 		return;
 
 	Scene->Debug("Start moving");
-	//obj->Click();
 	obj->ActionObjectCurrent = ActionObject::Moving;
 	IndexObjectSelected = obj->Index;
 	SelectObjectOffsetPos = CursorMovePos - obj->StartPos;
@@ -278,6 +274,9 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 			IndexObjectFocused = -1;
 		}
 		SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
+
+		if(obj->ActionObjectCurrent == ActionObject::Stay)
+			obj->DefaultView(); //default color
 	}
 }
 
@@ -320,7 +319,8 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		if (Scene->ReadCommand(SelectPosForObject))
 		{
 			//--- Set background command - select pos for Create control ---
-			Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::SelectedPosForObject;
+			//Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::SelectedPosForObject;
+			SetCommand(Scene->ObjectCurrent, TypeCommand::SelectedPosForObject);
 			//Scene->ObjectCurrent->SceneCommand->Enable = true;	--- after click
 		}
 
@@ -328,7 +328,10 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		if (Scene->ReadCommand(SelectedPosForObject))
 		{
 			Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", typeCreate);
-			Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::None;
+			//Scene->ObjectCurrent->SceneCommand->CommandType = TypeCommand::None;
+			SetCommand(Scene->ObjectCurrent, TypeCommand::None);
+			//##FIX.3
+			IndexObjectSelected = -1;
 		}
 	}
 	
@@ -347,6 +350,7 @@ void RoomUseInterface::EventCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
 void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
 {
+	
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
 		return;
@@ -355,6 +359,95 @@ void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
 	{
 		if (command->Options.size() != 0)
 			IsEditControls = command->Options["ButtonEditOn"];
+	}
+}
+
+//===================== Check state controls =========================== TODO: aspect ??
+
+void RoomUseInterface::CheckStateObjects() {
+
+
+	if (Scene->ObjectCurrent->Name == "Button_EditBox")
+	{
+		auto t = Scene->ObjectCurrent->IsVisible;
+		//Scene->ObjectCurrent->IsVisible = false;
+	}
+
+	if (Scene->ReadCommand(CheckStateObjectCommand))
+	{
+		IsUpdatingStateObjects = true;
+	}
+	if (!IsUpdatingStateObjects)
+		return;
+
+	if (IsUpdatingStateObjects) {
+		
+		Scene->ObjectCurrent->Refresh();
+
+	}
+
+	if (Scene->IsLastCurrentObject) {
+		
+		IsUpdatingStateObjects = false;
+	}
+}
+
+//===================== Event Edit Name controls ===========================
+
+void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
+
+	//---------- Complete edit
+	if (objGUI->TypeObj == EditBox && objGUI->ActionObjectCurrent == ActionObject::Woking) {
+		if (Scene->Storage->Inputs->Key == m_endEditKey &&
+			Scene->Storage->Inputs->Action == GLFW_PRESS) {
+			objGUI->ActionObjectCurrent == ActionObject::Stay;
+			objGUI->DefaultView();
+			objGUI->Refresh();
+			int ownerButton =  objGUI->IndexObjectOwner;
+			Scene->AddCommand(StopWorking, objGUI->IndexObjectOwner, objGUI->Index);
+		}
+	}
+
+	//----------- Start edit
+	CommandPack* command = &Scene->CurrentSceneCommand;
+	if (!command->Enable)
+		return;
+	if (command->TargetIndex != objGUI->Index)
+		return;
+
+	if (Scene->ReadCommand(StopWorking))
+	{
+		//Stop button frame 
+		objGUI->Click();
+		IndexObjectSelected = -1;
+		if (objGUI->Name == name_EditBoxControl)
+		{
+			objGUI->IsVisible = false;
+			Scene->AddCommand(CheckStateObjectCommand);
+		}
+	}
+
+	//if (Scene->ReadCommand(EditObjectCommand))
+	if (command->CommandType ==  EditObjectCommand)
+	{
+		string key = command->Description;
+		int isChecked =  command->Options[key];
+		
+		Scene->ReadCommand(EditObjectCommand);
+
+		if (isChecked)
+		{
+			//Start edit box
+			IndexObjectSelected = objGUI->Index;
+			objGUI->Click();
+		}
+		else {
+			//Cancel edit box - unClick
+			objGUI->ActionObjectCurrent = ActionObject::Stay;
+			objGUI->DefaultView();
+			objGUI->Refresh();
+			IndexObjectSelected = -1;
+		}
 	}
 }
 
@@ -389,6 +482,8 @@ void RoomUseInterface::Work() {
 
 	ModeEditControls(objGUI);
 
+	CheckStateObjects();
+
 	IsBackgroundFrame = Scene->ObjectCurrent->IndexObjectOwner == -1;
 
 	//--- Focused
@@ -403,7 +498,7 @@ void RoomUseInterface::Work() {
 		//--- Moving to Cusror position
 		EventMovingControl(objGUI);
 
-		//--- click Create new control
+		//--- Create new control
 		EventCreateObject(objGUI);
 		
 		//--- Resize control to Cusror position
@@ -426,6 +521,8 @@ void RoomUseInterface::Work() {
 		EventEndMovingControl(objGUI);
 		//----Start event Moving Control
 		EventStartMovingControl(objGUI);
+
+		EventEditTextControl(objGUI);
 	}
 
 	//===== Event Focus Control
@@ -433,7 +530,7 @@ void RoomUseInterface::Work() {
 
 	//------------- Total orders
 	if (Scene->IsLastCurrentObject) {
-
+		
 	}
 }
 
@@ -453,7 +550,7 @@ void RoomUseInterface::CalculateMousePosWorld() {
 		auto model = Scene->Storage->ConfigMVP->Model;
 
 		//================================= Mouse pos calculate
-		//float depthMouse = 0.978;	//  (for ObjectGUI.zOrder == 3.79)	ObjectGUI::UpdateState()
+		//float depthMouse = 0.978;	//  (for ObjectGUI.zOrder == 3.79)	
 		//float depthMouse = 0.9845;//  (for ObjectGUI.zOrder == 4.79)
 		//float depthMouse = 0.988;	//  (for ObjectGUI.zOrder == 5.79)
 

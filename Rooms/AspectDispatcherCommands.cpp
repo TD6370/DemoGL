@@ -5,9 +5,14 @@
 //#include "..\GeometryLib.h"
 //#include "..\SceneConstruction.h"
 #include "..\ObjectsTypes\ObjectData.h"
+#include "..\ObjectsTypes\ObjectButton.h"
+#include "..\ObjectsTypes\ObjectEditBox.h"
+#include "..\ObjectsTypes\ObjectTextBox.h"
+#include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 
+AspectDispatcherCommands::~AspectDispatcherCommands(){}
 
 void AspectDispatcherCommands::Config() {
 
@@ -87,4 +92,61 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int targetInd
 		command.Options.insert(std::pair<string, int>(keyOptions, valueOptions));
 	}
 	ActiveCommands.push_back(command);
+}
+
+//void AspectDispatcherCommands::SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+
+	obj->SceneCommand->CommandType = commandType;
+	obj->SceneCommand->TargetIndex = targetIndex;
+	obj->SceneCommand->SourceIndex = sourceIndex;
+	if(sourceIndex == -1)
+		obj->SceneCommand->SourceIndex = obj->Index;
+		
+	if (keyOptions.size() != 0) {
+		obj->SceneCommand->Options.clear();
+		obj->SceneCommand->Options.insert(std::pair<string, int>(keyOptions, valueOptions));
+	}
+	
+	TypeObject typeObj = obj->TypeObj;
+	if (typeObj == TypeObject::Button) {
+		auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
+		if (objButton != nullptr) {
+			if(objButton->IsToogleButon)
+			{
+				//-- command tooble button
+				objButton->SceneCommand->Options.clear();
+				objButton->SceneCommand->Options.insert(std::pair<string, int>(objButton->Name, (int)objButton->IsChecked));
+				objButton->SceneCommand->Description = objButton->Name;
+			}
+		}
+	}
+}
+
+//void AspectDispatcherCommands::AddCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions) {
+void AddCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions) {
+
+	TypeObject typeObj = obj->TypeObj;
+
+	if (keyOptions.size() != 0) {
+		obj->SceneCommand->Options.insert(std::pair<string, int>(keyOptions, valueOptions));
+	}
+}
+
+void UpdateCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions) {
+
+	TypeObject typeObj = obj->TypeObj;
+
+	if (keyOptions.size() != 0) {
+		obj->SceneCommand->Options[keyOptions] = valueOptions;
+	}
+}
+
+void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions) {
+
+	TypeObject typeObj = obj->TypeObj;
+
+	if (keyOptions.size() != 0) {
+		obj->SceneCommand->Options[keyOptions] = valueOptions;
+	}
 }

@@ -45,6 +45,8 @@ private:
 	vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
+	const int m_endEditKey = GLFW_KEY_ENTER;
+	string name_EditBoxControl = "FrameEditBox_NameObject";
 
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
@@ -69,6 +71,7 @@ private:
 	bool IsCheckBorder = false;
 	bool IsEditControls = false;
 	bool IsBackgroundFrame = false;
+	bool IsUpdatingStateObjects = true;
 
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
@@ -79,6 +82,7 @@ private:
 
 	float StartTimer = 0;
 	float EndTimer = 0;
+		
 
 public:
 		
@@ -121,5 +125,13 @@ public:
 	void SetTimeAnimate(shared_ptr<ObjectGUI> obj, float time);
 
 	//bool ReadCommand(TypeCommand commandType);
+
+	//-------------------
+
+	void CheckStateObjects();
+
+	void EventEditTextControl(shared_ptr<ObjectGUI> obj);
+
+	
 };
 

@@ -23,7 +23,7 @@ private:
 protected:
 public:
 	bool IsToogleButon = false;
-	bool IsToogleButonOn = false;
+	bool IsChecked = false;
 	
 
 	ObjectButton(
@@ -61,11 +61,13 @@ public:
 
 	void RunAction();
 
-	void UpdateState();
+	//void UpdateState();
 
 	void DefaultView();
 
 	void Click();
+
+	void Refresh();
 
 	//ParamCaseDefault = -1;
 	//-------------

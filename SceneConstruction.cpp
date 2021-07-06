@@ -401,6 +401,10 @@ void SceneConstruction::Update()
 		if (IsBreakUpdate())
 			break;
 
+		bool isVisible = ObjectCurrent->GetVisible();
+		if (!isVisible)
+			continue;
+
 		if (IsDraw || isBase)
 			DrawGraph();
 	}

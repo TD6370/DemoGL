@@ -68,7 +68,6 @@ public:
 	
 	void virtual Work();
 
-	void virtual DefaultSate();
 
 	void ActionMoving();
 
