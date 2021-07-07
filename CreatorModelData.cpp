@@ -398,16 +398,6 @@ bool CreatorModelData::IsExistObjectByType(TypeObject type)
 }
 
 
-void CreatorModelData::GenerateObjects()
-{
-	for (int i = 0; i < LimitSceneObjects; i++)
-	{
-		ObjectData objectModel = ObjectData(i, GetModelPrt(0));
-		SceneObjectsLastIndex++;
-		SceneObjects.push_back(std::make_unique<ObjectData>(objectModel));
-	}
-}
-
 void CreatorModelData::ObjectAction(int index)
 {
 	std::shared_ptr<ObjectData> prt_objData = SceneObjects[index];
@@ -704,7 +694,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	shared_ptr<ObjectButton> objCreateButton;// 
 	shared_ptr<ObjectData> objCreate;
 
-	// ---- Object Context frame GUI
+	// ---- Object Context frame GUI	(SYSTEM CONTROL)
 	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
 	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1));
 	//shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
@@ -714,14 +704,14 @@ void CreatorModelData::LoadObjectsGUI() {
 	objBackGUI->IsSelected = false;
 	objBackGUI->IsTransformable = false;
 
-	// ---- Object frame
+	// ---- Object frame	
 	objName = "TEST3";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
 
-	// ---- Object Button edit obj GUI
+	// ---- Object Button edit obj GUI (BASE CONTROL)
 	objName = "ButtonEditOn";
 	//caption = objBackGUI->Name + "." + objName;
 	caption = "редакт";
@@ -749,24 +739,25 @@ void CreatorModelData::LoadObjectsGUI() {
 	
 	// ---- Object text box GUI
 	objName = "TextBoxObject";
-	caption = "привет мир, и доброе утро";
+	caption = "привет мир и доброе утро";
 	//caption = "абвгдежзиклмн";
 	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
 
-	// ---- Object Edit Box
-	objName = "FrameEditBox_NameObject";
-	caption = "введите имя";
+	// ---- Object Edit Box	(SYSTEM CONTROL)
+	objName = "Base_EditBox_NameObject";
+	caption = "ох";
 	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.02), vec2(.7, .1), Button, color);
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.04), vec2(.7, .1), Button, color);
+	SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-	ControlConstruct(objCreateButton, caption, EditBox);
+	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox");
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsFocusable = false;
 	objCreateButton->IsTransformable = false;
-	//objCreateButton->IsVisible = false;
+	objCreateButton->IsVisible = false;
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";
@@ -921,10 +912,8 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	return objGUI;
 }
 
-shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj)
+shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string name)
 {
-	
-	
 	shared_ptr<ObjectData> objData;
 	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
 	if (p_typeObj == TypeObject::Button) {
@@ -935,7 +924,9 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 				vec3 startPos = vec3(offset.x, offset.y, 0.021);
 				startPos = vec3(.01, .01, 0.021);
 				startPos.z = objButton->StartPos.z + 0.01;
-				objData = AddChildObject(objButton, caption, "TextBoxModel", "Button_TextBox", startPos, vec2(1.5, 1.), TextBox, vec3(-1));
+				if (name.size() == 0)
+					name = "Button_TextBox";
+				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1));
 				auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
 			}
 		}
@@ -949,10 +940,15 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			vec3 startPos = vec3(offset.x, offset.y, 0.021);
 			startPos = vec3(.03, .03, 0.021);
 			startPos.z = objButton->StartPos.z + 0.01;
-			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", "Button_EditBox", startPos, vec2(1.5, 1.), EditBox, vec3(-1));
+			if (name.size() == 0)
+				name = "Button_EditBox";
+			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1));
 			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
 
 			SetCommand(objButton, TypeCommand::EditObjectCommand, editBoxObj->Index, objButton->Index);
+
+			//test
+			auto tt = editBoxObj->TypeObj;
 
 			return editBoxObj;
 		}

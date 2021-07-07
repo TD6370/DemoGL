@@ -46,7 +46,6 @@ private:
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
 	const int m_endEditKey = GLFW_KEY_ENTER;
-	string name_EditBoxControl = "FrameEditBox_NameObject";
 
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
@@ -72,9 +71,11 @@ private:
 	bool IsEditControls = false;
 	bool IsBackgroundFrame = false;
 	bool IsUpdatingStateObjects = true;
-
+	bool IsCreatingObject = false ;
+	
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
+	int IndexObjectCreating = -1;
 	float FocusedOrder = -1;
 	vec3 CursorMovePos = vec3(0);
 	vec3 SelectObjectOffsetPos = vec3(0);
@@ -116,7 +117,11 @@ public:
 	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
 
 	//------- CreateObject
-	void EventCreateObject(shared_ptr<ObjectGUI> objGUI);
+	void EventStartCreateObject(shared_ptr<ObjectGUI> objGUI);
+	void EventEndCreateObject(shared_ptr<ObjectGUI> objGUI);
+
+	//------- Rename Object
+	void EventStartRenameObject(shared_ptr<ObjectGUI> objGUI);
 
 	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value);
 

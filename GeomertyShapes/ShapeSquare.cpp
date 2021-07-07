@@ -31,7 +31,7 @@ void ShapeSquare::FormUpdate(bool isForce) {
 
 	vec3 directionOut = vec3(0);
 	obj->PanelDepth = 3.8;
-	int indexBackground = obj->Storage->SceneData->IndexGUIObj;
+	int indexBackground = obj->Storage->SceneData->IndexBackgroundGUIObj;
 
 	if (obj->IsAbsolutePosition)
 	{
@@ -39,7 +39,7 @@ void ShapeSquare::FormUpdate(bool isForce) {
 		//-----------------------------
 		int indOwner = obj->IndexObjectOwner;
 		if (indOwner == -1)
-			indOwner = obj->Storage->SceneData->IndexGUIObj;
+			indOwner = obj->Storage->SceneData->IndexBackgroundGUIObj;
 		if (obj->IndexObjectOwner != -1)
 		{
 			//---- normalize position on center backgruong control

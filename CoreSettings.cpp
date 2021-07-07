@@ -29,8 +29,9 @@ struct World {
 struct SceneParam {
 	int IndexCursorRayObj = -1;
 	int IndexHeroObj = -1;
-	int IndexGUIObj = -1;
+	int IndexBackgroundGUIObj = -1;
 	int IndexCursorGUI = -1;
+	int IndexBaseEditBox = -1;
 	bool IsGUI = false;
 };
 
@@ -97,7 +98,7 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
 enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosForObject, SelectedPosForObject, EditGUI_OnOff, EditObjectCommand,
-	CheckStateObjectCommand, StopWorking
+	CheckStateObjectCommand, StopWorking, KeyInputCommand
 };
 
 struct CommandPack {
@@ -105,8 +106,12 @@ struct CommandPack {
 	TypeCommand CommandType;
 	int SourceIndex;
 	int TargetIndex;
-	map <string, int> Options = map <string, int>{};
 	string Description;
+	string ValueS;
+	int ValueI;
+	float ValueF;
+	vec4 ValueV3;
+	map <string, int> Options = map <string, int>{};
 };
 
 struct WorldSectors{

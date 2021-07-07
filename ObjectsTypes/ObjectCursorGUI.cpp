@@ -14,9 +14,9 @@ void ObjectCursorGUI::InitData() {
 	ActionObjectCurrent = Moving;
 }
 
-void ObjectCursorGUI::Work() {
+void ObjectCursorGUI::ActionWork() {
 
-	ObjectGUI::Work();
+	ObjectGUI::ActionWork();
 }
 
 void ObjectCursorGUI::ActionMoving()

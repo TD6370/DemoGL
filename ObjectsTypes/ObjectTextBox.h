@@ -26,6 +26,8 @@ class ObjectTextBox :
 protected:
 	map<string, int> mapAlphabet;
 	vector<int> MessageCode;
+	int MessageSlots = 50;
+	bool isInitSlotsMessage = false;
 
 public:
 	string Message = std::string();
@@ -33,7 +35,8 @@ public:
 	ObjectTextBox(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::TextBox,
+		//TypeObject p_typeObj = TypeObject::TextBox,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectGUI(p_index,
 			p_model,
@@ -50,7 +53,11 @@ public:
 
 	void CreateMessage();
 
+	void UpdateMessage();
+
 	void MeshTransform();
+
+	string GetCashStateUpdateDataToShader();
 
 	void SetDataToShader();
 

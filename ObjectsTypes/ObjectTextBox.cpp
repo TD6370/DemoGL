@@ -24,13 +24,22 @@ ObjectTextBox::~ObjectTextBox()
 
 }
 
+string ObjectTextBox::GetCashStateUpdateDataToShader() {
+	return Message;
+}
+
+
 void ObjectTextBox::SetDataToShader() {
 
 	ObjectGUI::SetDataToShader();
 
 	ModelPtr->SetBuffer(Buffer);
-	auto normals = GetNormals();
-	ModelPtr->SetModelInBuffer(TextureUV, normals, false);
+
+	if (!isInitSlotsMessage) {
+		isInitSlotsMessage = true;
+		auto normals = GetNormals();
+		ModelPtr->SetModelInBuffer(TextureUV, normals, false);
+	}
 }
 
 void ObjectTextBox::CreateMessage() {
@@ -132,8 +141,17 @@ void ObjectTextBox::MeshTransform() {
 	int indVert = 0;
 	float offsetX = 0.0477;
 	int vertexSize = 6;
+	int codeSymb;
+	int sizeMessage = MessageCode.size();
+	int spaceSymb = mapAlphabet[" "];
 
-	for (int codeSymb : MessageCode) {
+	//for (int codeSymb : MessageCode) {
+	for (int indSymb = 0; indSymb < MessageSlots; indSymb++) {
+
+		if(indSymb > sizeMessage - 1)
+			codeSymb = spaceSymb;
+		else
+			codeSymb = MessageCode[indSymb];
 		isFirstStep = firstStep == 0;
 
 		for (int i = 0 ;  i < vertexSize; i++)
@@ -159,6 +177,72 @@ void ObjectTextBox::MeshTransform() {
 
 	Shape->FillVertextBox();
 }
+
+
+void ObjectTextBox::UpdateMessage()
+{
+	//TEST
+	if (Message.size() == 3 && Message[2] == ' ')
+	{
+		Message.clear();
+	}
+
+	MessageCode = vector<int>();
+	for (char symbC : Message) {
+		char symbLow = std::tolower(symbC);
+		string symb(1, symbLow);
+		if (!IsMapContains_StrInt(mapAlphabet, symb))
+			continue;
+
+		int code = mapAlphabet[symb];
+		MessageCode.push_back(code);
+	}
+
+	int vertexSize = 6;
+	int indSymb = 0;
+	int codeSymb = 0;
+	int ind = 0;
+	int sizeMessage = MessageCode.size();
+	int spaceSymb = mapAlphabet[" "];
+
+	for (vec3 dataSymb : Buffer) {
+		
+		if (++ind == vertexSize) {
+			ind = 0;
+			if (indSymb > sizeMessage - 1)
+				codeSymb = spaceSymb;
+			else
+				codeSymb = MessageCode[indSymb++];
+		}
+
+		dataSymb.x = codeSymb;
+		dataSymb.y = codeSymb;
+		dataSymb.z = codeSymb;
+	}
+
+	//----------------------
+	/*Buffer.clear();
+
+	vector<vec3> bufferLats = vector<vec3>();
+	bufferLats.push_back(vec3(0));
+	bufferLats.push_back(vec3(0));
+	bufferLats.push_back(vec3(0));
+	bufferLats.push_back(vec3(0));
+	bufferLats.push_back(vec3(0));
+	bufferLats.push_back(vec3(0));
+	int vertexSize = 6;
+
+	for (int codeSymb : MessageCode) {
+		for (int i = 0; i < vertexSize; i++)
+		{
+			bufferLats[i].x = codeSymb;
+			bufferLats[i].y = codeSymb;
+			bufferLats[i].z = codeSymb;
+		}
+		Buffer.insert(Buffer.end(), bufferLats.begin(), bufferLats.end());
+	}*/
+}
+
 
 vector<ObjectFiledsSpecific> ObjectTextBox::GetSpecificFiels() {
 

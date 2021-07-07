@@ -28,7 +28,7 @@ public:
 	ObjectCursorRay(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = NPC,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectDynamic(p_index,
 			p_model,

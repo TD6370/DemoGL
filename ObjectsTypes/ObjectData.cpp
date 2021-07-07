@@ -78,6 +78,11 @@ void ObjectData::SetDataToShader() {
 
 }
 
+string ObjectData::GetCashStateUpdateDataToShader() {
+	string cash(1, Index);
+	return cash;
+}
+
 //void ObjectData::SetDataToShader(bool isUpdate) {
 //
 //	if (!isUpdate)
@@ -111,14 +116,46 @@ void ObjectData::Refresh() {
 	
 	if (IndexObjectOwner != -1)
 	{
-		if (IndexObjectOwner == Storage->SceneData->IndexGUIObj)
+		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
 			return;
 
 		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
 		if (IsVisible != objOwner->IsVisible)
 			IsVisible = objOwner->IsVisible;
 	}
+
+	CheckedRefresh();
 }
+
+
+void ObjectData::CheckedRefresh()
+{
+
+	//if (IsToogleButon && IndexObjectOwner != -1)
+	if (IndexObjectOwner != -1)
+	{
+		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
+			return;
+
+		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		if (objOwner->TypeObj != Button)
+			return;
+		//auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
+		if (IsChecked != objOwner->IsChecked) {
+			Click();
+		}
+	}
+}
+
+void ObjectData::Click() {
+
+}
+
+
+void ObjectData::ActionWork() {
+
+}
+
 
 void ObjectData::ActionBase() {
 

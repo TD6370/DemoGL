@@ -65,6 +65,7 @@ public:
 	bool IsFocusable;
 	bool IsTransformable;
 	bool IsUsable;
+	bool IsChecked = false;
 
 	bool IsAbsolutePosition = true;
 	bool IsTextureRepeat = false;
@@ -119,7 +120,7 @@ public:
 
 	ObjectData(int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = NPC,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0));
 
 	~ObjectData();
@@ -128,6 +129,8 @@ public:
 
 	void virtual SetDataToShader();
 
+	string virtual GetCashStateUpdateDataToShader();
+
 	void UpdateDataBufferToShader();
 
 	void UpdateNormalsToShader();
@@ -135,6 +138,8 @@ public:
 	void virtual UpdateState(); //after fill options
 
 	void virtual Refresh(); //after fill options
+
+	void CheckedRefresh();
 
 	void GenStartPosition();
 
@@ -178,6 +183,11 @@ public:
 
 	void virtual DefaultView();
 
+	void virtual Click();
+	
+	//void virtual Work();
+	void virtual ActionWork();
+	
 	void SetStartTimer();
 	//-----------------------------
 	

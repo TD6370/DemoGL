@@ -41,7 +41,7 @@ public:
 	ObjectGUI(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::GUI,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectPhysic(p_index,
 			p_model,
@@ -64,9 +64,11 @@ public:
 
 	bool GetVisible();
 
-	void virtual Click();
+	//void virtual Click();
+	void Click();
 	
-	void virtual Work();
+	//void virtual Work();
+	void ActionWork();
 
 
 	void ActionMoving();

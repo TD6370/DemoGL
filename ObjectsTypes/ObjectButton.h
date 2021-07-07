@@ -23,13 +23,14 @@ private:
 protected:
 public:
 	bool IsToogleButon = false;
-	bool IsChecked = false;
+	//bool IsChecked = false;
 	
 
 	ObjectButton(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::Button,
+		//TypeObject p_typeObj = TypeObject::Button,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectGUI(p_index,
 			p_model,
@@ -57,7 +58,7 @@ public:
 
 	void InitData();
 
-	void Work();
+	void ActionWork();
 
 	void RunAction();
 
@@ -69,6 +70,9 @@ public:
 
 	void Refresh();
 
+	
+
+	
 	//ParamCaseDefault = -1;
 	//-------------
 

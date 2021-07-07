@@ -59,6 +59,8 @@ private:
 	bool m_isEnableGUI = false;
 
 	bool m_isLastTransformMesh = false;
+	string m_currCashShader = "-1";
+	string m_lastCashShader = "-2";
 
 	GLint indicesSize;
 

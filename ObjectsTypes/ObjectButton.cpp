@@ -46,26 +46,27 @@ void ObjectButton::DefaultView() {
 
 void ObjectButton::Refresh()
 {
-	ObjectData::Refresh();
+	/*ObjectData::Refresh();
 
 	if (IsToogleButon && IndexObjectOwner != -1)
 	{
-		if (IndexObjectOwner == Storage->SceneData->IndexGUIObj)
+		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
 			return;
 
 		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
 		if (objOwner->TypeObj != Button)
 			return;
 		auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
-		if (objButton != nullptr && IsChecked != objButton->IsChecked)
-			IsChecked = objButton->IsChecked;
-	}
+		if (objButton != nullptr && IsChecked != objButton->IsChecked) {
+			Click();
+		}
+	}*/
 }
 
 
-void ObjectButton::Work() {
+void ObjectButton::ActionWork() {
 
-	//ObjectGUI::Work();
+	//ObjectGUI::ActionWork();
 	
 	Color = m_color_work;
 

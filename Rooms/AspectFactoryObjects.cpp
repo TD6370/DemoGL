@@ -83,7 +83,7 @@ void AspectFactoryObjects::CreateEditBox() {
 		
 	// ---- Object Button create obj GUI
 	objName = "FrameEditBox";
-	caption = "введите имя";
+	caption = "ах";
 	childModel = "ButtonEditBoxModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 
@@ -109,7 +109,7 @@ void AspectFactoryObjects::CreateButton() {
 
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
-	caption = "новая";
+	caption = "эх";
 	childModel = "ButtonModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 
@@ -118,7 +118,7 @@ void AspectFactoryObjects::CreateButton() {
 		objCreateButton->IsToogleButon = false;
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
 	
-			Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
+		Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
 
 	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
 }

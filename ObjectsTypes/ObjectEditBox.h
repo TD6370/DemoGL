@@ -24,14 +24,17 @@ struct ObjectFiledsSpecific;
 class ObjectEditBox :
 	public ObjectTextBox
 {
-protected:
+private:
+	string GetSymbol(int keyIndex);
+	map<int, string> mapAlphabetKeys;
 
 public:
 
 	ObjectEditBox(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::TextBox,
+		//TypeObject p_typeObj = TypeObject::TextBox,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectTextBox(p_index,
 			p_model,
@@ -45,10 +48,15 @@ public:
 
 	~ObjectEditBox();
 
-	void Work();
+	void InitData();
+
+	void ActionWork();
 
 	void DefaultView();
 
+	void AddSymbolMessage(int keyIndex);
+
+	void InitAlphabetKeys();
 	//-------------
 
 	/*vector<ObjectFiledsSpecific> GetSpecificFiels();

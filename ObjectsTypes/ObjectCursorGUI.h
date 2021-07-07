@@ -33,7 +33,7 @@ public:
 	ObjectCursorGUI(
 		int p_index,
 		std::shared_ptr<ModelData> p_model,
-		TypeObject p_typeObj = TypeObject::TextBox,
+		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0))
 		: ObjectGUI(p_index,
 			p_model,
@@ -56,7 +56,7 @@ public:
 
 	void ActionMoving();
 	void SaveNewPosition();
-	void Work();
+	void ActionWork();
 	//-------------
 
 	//vector<ObjectFiledsSpecific> GetSpecificFiels();

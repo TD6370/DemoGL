@@ -22,8 +22,8 @@ void ObjectGUI::InitData() {
 
 	Size = vec3(0);
 
-	if (Storage->SceneData->IndexGUIObj == -1)//First create gui
-		Storage->SceneData->IndexGUIObj = Index;
+	if (Storage->SceneData->IndexBackgroundGUIObj == -1)//First create gui
+		Storage->SceneData->IndexBackgroundGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
 }
@@ -60,7 +60,7 @@ void ObjectGUI::RunAction() {
 		switch (ActionObjectCurrent)
 		{
 			case Woking:
-				Work();
+				ActionWork();
 				break;
 			case Moving:
 				ActionMoving();
@@ -129,7 +129,7 @@ void ObjectGUI::Click() {
 	ActionObjectCurrent = Woking;
 }
 
-void ObjectGUI::Work() {
+void ObjectGUI::ActionWork() {
 
 	Color = m_color_work;
 	ActionObjectCurrent = Stay; //Off
