@@ -222,11 +222,6 @@ void SceneConstruction::SetDataToShader() {
 
 	bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
 
-	///TEST
-	if (ObjectCurrent->TypeObj == EditBox) {
-		auto t = ObjectCurrent->Name;
-	}
-
 	//if (!isSkipDynamic && (m_isUpdateMesh || isTransformMesh))  //Lite mode
 	bool liteMode = !isSkipDynamic && (m_isUpdateMesh || IsSquareModel);
 	if (liteMode)  //Lite mode
@@ -244,20 +239,11 @@ void SceneConstruction::SetDataToShader() {
 		{
 			ObjectCurrent->UpdateTextureUV();
 
-			///TEST
-			if (ObjectCurrent->TypeObj == EditBox) {
-				auto t = ObjectCurrent->Name;
-			}
-			
 			m_currCashShader = ObjectCurrent->GetCashStateUpdateDataToShader();
 			if (m_currCashShader != m_lastCashShader) {
 				m_lastCashShader = m_currCashShader;
 
 				ObjectCurrent->SetDataToShader();
-			}
-			else {
-				//TEST
-				auto testScip = ObjectCurrent->Name;
 			}
 
 			ObjectCurrent->UpdateNormalsToShader();
@@ -342,12 +328,7 @@ void SceneConstruction::ObjectUpdate(int i) {
 		return;
 
 	//-------------- Start next ObjectCurrent ---------------------
-	
-	///TEST
-	if (ObjectCurrent->TypeObj == EditBox) {
-		auto t = ObjectCurrent->Name;
-	}
-		
+				
 	if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
 		isPause = true;
 	if (!isShowGUI && ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
@@ -360,6 +341,7 @@ void SceneConstruction::ObjectUpdate(int i) {
 
 	if (isDraw || isBase) 
 	{
+		
 		PreparationDataFromShader();
 		
 		if(!isPause)

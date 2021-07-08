@@ -709,7 +709,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.002), vec2(1.1, 0.2), GUI, vec3(1));
 
 	// ---- Object Button edit obj GUI (BASE CONTROL)
 	objName = "ButtonEditOn";
@@ -717,7 +717,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "נוהאךע";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, 0.003), vec2(0.1, 0.1), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsTransformable = false;
@@ -731,7 +731,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//caption = "אבגדהוזח";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, 0.002), vec2(0.3, 0.2), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
 	SetCommand(objCreateButton, SelectPosForObject);
@@ -743,14 +743,15 @@ void CreatorModelData::LoadObjectsGUI() {
 	//caption = "אבגדהוזחטךכלם";
 	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
+	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.001), vec2(1.5, 1.), TextBox, color);
 
 	// ---- Object Edit Box	(SYSTEM CONTROL)
 	objName = "Base_EditBox_NameObject";
 	caption = "מץ";
 	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.07), vec2(.7, .1), Button, color);
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.007), vec2(.7, .1), Button, color);
 	SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox");
@@ -763,7 +764,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .15), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 
 
@@ -922,8 +923,8 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 				//--- Add textbox
 				vec2 offset = vec2(0.01);
 				vec3 startPos = vec3(offset.x, offset.y, 0.021);
-				startPos = vec3(.01, .01, 0.021);
-				startPos.z = objButton->StartPos.z + 0.01;
+				startPos = vec3(.01, .01, 0.002);
+				startPos.z = objButton->StartPos.z + 0.0005;
 				if (name.size() == 0)
 					name = "Button_TextBox";
 				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1));
@@ -937,9 +938,9 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 		
 			// ---- Object Edit box create	
 			vec2 offset = vec2(0.01);
-			vec3 startPos = vec3(offset.x, offset.y, 0.021);
+			vec3 startPos = vec3(offset.x, offset.y, 0.002);
 			startPos = vec3(.03, .03, 0.021);
-			startPos.z = objButton->StartPos.z + 0.02;
+			startPos.z = objButton->StartPos.z + 0.0005;
 			if (name.size() == 0)
 				name = "Button_EditBox";
 			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1));

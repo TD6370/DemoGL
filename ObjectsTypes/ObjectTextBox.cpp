@@ -201,13 +201,13 @@ void ObjectTextBox::UpdateMessage()
 	int vertexSize = 6;
 	int indSymb = 0;
 	int codeSymb = 0;
-	int ind = 0;
+	int ind = -1;
 	int sizeMessage = MessageCode.size();
 	int spaceSymb = mapAlphabet[" "];
 
-	for (vec3 dataSymb : Buffer) {
+	for (vec3& dataSymb : Buffer) {
 		
-		if (++ind == vertexSize) {
+		if (ind == vertexSize || ind == -1) {
 			ind = 0;
 			if (indSymb > sizeMessage - 1)
 				codeSymb = spaceSymb;
@@ -218,6 +218,7 @@ void ObjectTextBox::UpdateMessage()
 		dataSymb.x = codeSymb;
 		dataSymb.y = codeSymb;
 		dataSymb.z = codeSymb;
+		ind++;
 	}
 
 }
