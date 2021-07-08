@@ -750,7 +750,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "ох";
 	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.04), vec2(.7, .1), Button, color);
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.07), vec2(.7, .1), Button, color);
 	SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox");
@@ -763,7 +763,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .04), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .15), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 
 
@@ -939,7 +939,7 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			vec2 offset = vec2(0.01);
 			vec3 startPos = vec3(offset.x, offset.y, 0.021);
 			startPos = vec3(.03, .03, 0.021);
-			startPos.z = objButton->StartPos.z + 0.01;
+			startPos.z = objButton->StartPos.z + 0.02;
 			if (name.size() == 0)
 				name = "Button_EditBox";
 			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1));

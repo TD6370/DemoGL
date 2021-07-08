@@ -92,7 +92,7 @@ void AspectFactoryObjects::CreateEditBox() {
 	objCreateButton->IsToogleButon = true;
 
 		// ---- Object Edit box create	
-		objCreate = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
+		auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
 	
 	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
 }

@@ -220,27 +220,6 @@ void ObjectTextBox::UpdateMessage()
 		dataSymb.z = codeSymb;
 	}
 
-	//----------------------
-	/*Buffer.clear();
-
-	vector<vec3> bufferLats = vector<vec3>();
-	bufferLats.push_back(vec3(0));
-	bufferLats.push_back(vec3(0));
-	bufferLats.push_back(vec3(0));
-	bufferLats.push_back(vec3(0));
-	bufferLats.push_back(vec3(0));
-	bufferLats.push_back(vec3(0));
-	int vertexSize = 6;
-
-	for (int codeSymb : MessageCode) {
-		for (int i = 0; i < vertexSize; i++)
-		{
-			bufferLats[i].x = codeSymb;
-			bufferLats[i].y = codeSymb;
-			bufferLats[i].z = codeSymb;
-		}
-		Buffer.insert(Buffer.end(), bufferLats.begin(), bufferLats.end());
-	}*/
 }
 
 

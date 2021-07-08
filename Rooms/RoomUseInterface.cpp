@@ -350,79 +350,81 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	}
 }
 
+
 void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
-	
+
 	if (!IsCreatingObject)
 		return;
-	//if (IndexObjectCreating == -1)
-	//	return;
-	/*if (IndexObjectSelected != -1)
-		return;*/
 
-	bool isValidObj = objGUI->Index == Scene->Storage->SceneData->IndexBaseEditBox || objGUI->Index == IndexObjectCreating;
+	bool isValidObj = objGUI->Index == IndexObjectCreating;
 	if (!isValidObj)
 		return;
 	if (objGUI->ActionObjectCurrent == Moving)
 		return;
-	/*if (Scene->CurrentSceneCommand.Enable == true)
-		return;*/
 
-	if (objGUI->Index == IndexObjectCreating &&
-		objGUI->TypeObj != Button &&
-		objGUI->TypeObj != EditBox)
-	{
-		IsCreatingObject = false;
-		//IndexObjectSelected = -1;
-		return;
-	}
-	
-	EventStartRenameObject(objGUI);
+	//--- obj created Control position
+	SelectObjectOffsetPos = objGUI->StartPos;
+	IsCreatingObject = false;
+	IndexObjectCreating = -1;
+
+	Scene->AddCommand(TypeCommand::RenameObject, objGUI->Index, Scene->Storage->SceneData->IndexBaseEditBox);
 }
 
 //===================== Event Rename controls ===========================
 
+
 void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
 
+	CommandPack* command = &Scene->CurrentSceneCommand;
 	//--- obj base Edit box
-	bool isBaseEditBox = objGUI->Index == Scene->Storage->SceneData->IndexBaseEditBox;
+	bool isSystemButtonEditBox = objGUI->Index == Scene->Storage->SceneData->IndexBaseEditBox;
 
-	//-- set position base Edit box on created Button
-	if (SelectObjectOffsetPos != vec3(0))
+	//------- set position System Edit box 
+	if(command->CommandType == RenameObject)
 	{
-		if (isBaseEditBox)
-		{
-			objGUI->StartPos = SelectObjectOffsetPos;
-			objGUI->IsVisible = true;
-
-			//--- select Edit box from Button 
-			if (IndexObjectCreating != objGUI->SceneCommand->TargetIndex) {
-				IndexObjectCreating = objGUI->SceneCommand->TargetIndex;
-			}
-		}
-	}
-	else
-	{
-		//--- obj created Control
-		if (objGUI->Index != IndexObjectCreating)
+		if (!command->Enable)
 			return;
-		SelectObjectOffsetPos = objGUI->StartPos;
-		return;
-	}
+		if (!isSystemButtonEditBox)
+			return;
+		if (IndexObjectCreating != -1)
+			return;
 
-	if (objGUI->Index != IndexObjectCreating)
+		Scene->ReadCommand(RenameObject);
+
+		objGUI->StartPos = SelectObjectOffsetPos;
+		objGUI->IsVisible = true;
+		SelectObjectOffsetPos = vec3(0);
+
+		//TODO: FROM CASE
+		//--- select System Edit box from SystemButtonEditBox	
+		//IndexObjectCreating = objGUI->SceneCommand->TargetIndex;
+		IndexObjectSelected = objGUI->SceneCommand->TargetIndex;
+		
+		Scene->AddCommand(TypeCommand::CheckStateObjectCommand);
+	}
+	
+	//--- Event inputs in text box
+	//if (objGUI->Index != IndexObjectCreating && !IsCreatingObject)
+	if (objGUI->Index != IndexObjectSelected && !IsCreatingObject)
 		return;
-	if (SelectObjectOffsetPos == vec3(0))
+	if(objGUI->TypeObj != EditBox)
+		return;
+	if (!objGUI->IsVisible)
 		return;
 	if (Scene->Storage->Inputs->Action != GLFW_PRESS)
 		return;
+	if (Scene->Storage->Inputs->Key == GLFW_KEY_ESCAPE)
+		return;
+
+	//TODO:  objGUI->Click();
 
 	int keyIndex = Scene->Storage->Inputs->Key;
-	
+
 	auto objEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objGUI);
 	if (objEditBox != nullptr) {
 		objEditBox->AddSymbolMessage(keyIndex);
 	}
-	
+
 }
 
 //===================== Event Edit controls ===========================
@@ -575,6 +577,8 @@ void RoomUseInterface::Work() {
 	}
 
 	EventEndCreateObject(objGUI);
+
+	EventStartRenameObject(objGUI);
 
 	if (objGUI->IsUsable)
 	{
