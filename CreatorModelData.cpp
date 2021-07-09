@@ -19,7 +19,7 @@
 #include "GeomertyShapes/ShapeBase.h"
 #include "GeomertyShapes/ShapeSquare.h"
 #include "Rooms/AspectDispatcherCommands.h"
-
+#include "ShellObjects/BaseShell.h"
 
 #include "Serialize/SceneSerialize.h"
 #include "Rooms/RoomSerializeScene.h"
@@ -60,7 +60,7 @@ CreatorModelData::CreatorModelData() {
 	SortObjectIndex = vector<int>();
 	SortTypeObjects = vector<TypeObject>();
 	ShaderPrograms = map<string, GLuint>();
-
+	
 	FillSortTypesObjects();
 }
 
@@ -380,6 +380,67 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
+shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex) {
+
+	int nextIndex = ObjectsShells.size();
+
+	BaseShell objShell(name, rootIndex);
+	shared_ptr<BaseShell> prt_objShell = std::make_unique <BaseShell>(objShell);
+
+	//prt_objShell->Name = name;
+	//prt_objShell->RootObjIndex = rootIndex;
+	prt_objShell->CaptionObjIndex = captionIndex;
+	prt_objShell->Index = nextIndex;
+	GetObjectPrt(rootIndex)->ShellIndex = nextIndex;
+	if (captionIndex != -1)
+		GetObjectPrt(captionIndex)->ShellIndex = nextIndex;
+
+	ObjectsShells.push_back(prt_objShell);
+
+	return prt_objShell;
+}
+
+void CreatorModelData::FillShellComponents(){
+	int indNext = 0;
+	while (indNext <= SceneObjectsLastIndex)
+	{
+		FillShellComponents(indNext++);
+	}
+}
+
+void CreatorModelData::FillShellComponents(int indexObj) {
+
+	int indShell, indComp;
+	bool isEndList = false;
+	shared_ptr<BaseShell> shell;
+	shared_ptr<ObjectData> itemNextObj;
+
+	itemNextObj = GetObjectPrt(indexObj);
+	indShell = itemNextObj->ShellIndex;
+	if (indShell == -1)
+		return;
+	shell = GetObjectShellPrt(indShell);
+	if (shell->HeadIndexList == -1)
+		return;
+	indComp = shell->HeadIndexList;
+	shell->Components.clear();
+	while (!isEndList)
+	{
+		itemNextObj = GetObjectPrt(indComp);
+		shell->AddComponent(itemNextObj->Name, itemNextObj->Index);
+		indComp = itemNextObj->NextItemShellIndex;
+		isEndList = indComp == -1;
+	}
+}
+
+
+shared_ptr<BaseShell> CreatorModelData::GetObjectShellPrt(int index)
+{
+	shared_ptr<BaseShell> prt_objShell = ObjectsShells[index];
+	return prt_objShell;
+}
+
+//ObjectsShells = new vector<shared_ptr<BaseShell>>();
 
 bool CreatorModelData::IsExistObjectByName(string key)
 {
@@ -929,6 +990,10 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 					name = "Button_TextBox";
 				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1));
 				auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
+
+				AddShell("ButtonShell_" + objButton->Name,
+					objButton->Index,
+					objTextButton->Index);
 			}
 		}
 	}
@@ -947,6 +1012,10 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
 
 			SetCommand(objButton, TypeCommand::EditObjectCommand, editBoxObj->Index, objButton->Index);
+
+			AddShell("EditBoxShell_" + objButton->Name,
+				objButton->Index, 
+				editBoxObj->Index);
 
 			//test
 			auto tt = editBoxObj->TypeObj;

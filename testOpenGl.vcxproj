@@ -186,6 +186,7 @@
     <ClCompile Include="SceneConstruction.cpp" />
     <ClCompile Include="Serialize\SceneSerialize.cpp" />
     <ClCompile Include="Shaders.cpp" />
+    <ClCompile Include="ShellObjects\BaseShell.cpp" />
     <ClCompile Include="TransformModel.cpp" />
     <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
@@ -230,6 +231,7 @@
     <ClInclude Include="SceneConstruction.h" />
     <ClInclude Include="Serialize\SceneSerialize.h" />
     <ClInclude Include="Shaders.h" />
+    <ClInclude Include="ShellObjects\BaseShell.h" />
     <ClInclude Include="TransformModel.h" />
     <ClInclude Include="WorldCollision.h" />
   </ItemGroup>

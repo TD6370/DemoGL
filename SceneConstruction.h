@@ -30,6 +30,7 @@ class TransformModel;
 class Controllers;
 class AspectFactoryObjects;
 class AspectDispatcherCommands;
+class BaseShell;
 //class GLFWwindow;
 
 using std::vector;
@@ -70,6 +71,7 @@ protected:
 public:
 	shared_ptr<ObjectData> ObjectCurrent;
 	shared_ptr<ModelData> ModelCurrent;
+	shared_ptr<BaseShell> ShellCurrent;
 
 	int m_widthWindow = 1024;
 	int m_heightWindow = 768;
@@ -84,6 +86,7 @@ public:
 
 	bool IsFirstCurrentObject;
 	bool IsLastCurrentObject;
+	bool IsHaveShell = false;
 
 	string DebugMessage = "";
 	string DebugMessageAppend = "";

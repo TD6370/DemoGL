@@ -24,6 +24,7 @@ using std::string;
 class ModelData;
 class ObjectData;
 class WorldCluster;
+class BaseShell;
 struct ControllerInput;
 struct ObjectFileds;
 struct ModelFileds; //#Error 3
@@ -41,6 +42,8 @@ public:
 	int SceneObjectsLastIndex = -1;
 	vector<shared_ptr<ObjectData>> SceneObjects;
 	vector<shared_ptr<ModelData>> Models;
+	vector<shared_ptr<BaseShell>> ObjectsShells;
+
 	map<string, int> MapModels;
 	map<string, int> MapSceneObjects;
 	map<TypeObject, int> MapSceneObjectsTypeOffset;
@@ -60,13 +63,18 @@ public:
 
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
-	std::shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1);
+	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1);
 
-	std::shared_ptr<ObjectData> GetObjectPrt(int index);
-	std::shared_ptr<ObjectData> GetObjectPrt(string key);
+	shared_ptr<ObjectData> GetObjectPrt(int index);
+	shared_ptr<ObjectData> GetObjectPrt(string key);
 
-	std::shared_ptr<ModelData> GetModelPrt(int index);
-	std::shared_ptr<ModelData> GetModelPrt(string key);
+	shared_ptr<ModelData> GetModelPrt(int index);
+	shared_ptr<ModelData> GetModelPrt(string key);
+
+	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1);
+	shared_ptr<BaseShell> GetObjectShellPrt(int index);
+	void FillShellComponents();
+	void FillShellComponents(int indObj);
 
 	void ObjectAction(int index);
 

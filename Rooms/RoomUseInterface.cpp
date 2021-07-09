@@ -12,6 +12,7 @@
 #include "..\ModelData.h"
 #include "../GeomertyShapes//ShapeBase.h"
 #include "AspectDispatcherCommands.h"
+#include "../ShellObjects/BaseShell.h"
 
 RoomUseInterface::~RoomUseInterface() {
 }
@@ -395,17 +396,15 @@ void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
 		objGUI->IsVisible = true;
 		SelectObjectOffsetPos = vec3(0);
 
-		//TODO: FROM CASE
-		//--- select System Edit box from SystemButtonEditBox	
-		//IndexObjectCreating = objGUI->SceneCommand->TargetIndex;
-		IndexObjectSelected = objGUI->SceneCommand->TargetIndex;
-		
 		Scene->AddCommand(TypeCommand::CheckStateObjectCommand);
 	}
 	
+	int indexEditBox = -1;
+	if(Scene->IsHaveShell)
+		indexEditBox = Scene->ShellCurrent->CaptionObjIndex;
+
 	//--- Event inputs in text box
-	//if (objGUI->Index != IndexObjectCreating && !IsCreatingObject)
-	if (objGUI->Index != IndexObjectSelected && !IsCreatingObject)
+	if (objGUI->Index != indexEditBox && !IsCreatingObject)
 		return;
 	if(objGUI->TypeObj != EditBox)
 		return;

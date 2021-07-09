@@ -21,7 +21,7 @@
 #include "ConfigUniformArg.h"
 
 #include "./ObjectsTypes/ObjectGUI.h"
-
+#include "ShellObjects/BaseShell.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -228,6 +228,7 @@ void SceneConstruction::SetDataToShader() {
 	//if (m_isUpdateMesh || IsSquareModel)
 	{
 
+		//m_currCashShader !!!
 		if (isTransformMesh || isTransformMesh != m_isLastTransformMesh) {
 			m_isLastTransformMesh = isTransformMesh;
 			ObjectCurrent->SetMesh();
@@ -285,6 +286,15 @@ bool SceneConstruction::SetObject(int indNN) {
 	int indObj = Storage->SortObjectIndex[indNN];
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	ModelCurrent = ObjectCurrent->ModelPtr;
+	
+	if (ObjectCurrent->ShellIndex != -1) {
+		ShellCurrent = Storage->GetObjectShellPrt(ObjectCurrent->ShellIndex);
+		IsHaveShell = true;
+	}
+	else {
+		ShellCurrent = nullptr;
+		IsHaveShell = false;
+	}
 
 	bool isVisible = ObjectCurrent->GetVisible();
 	if(!isVisible)

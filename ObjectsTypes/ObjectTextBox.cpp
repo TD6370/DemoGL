@@ -7,6 +7,7 @@
 #include "../OperationString.h"
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../Serialize/SceneSerialize.h"
+#include "../CreatorModelData.h"
 
 #include <sstream>
 
@@ -181,8 +182,8 @@ void ObjectTextBox::MeshTransform() {
 
 void ObjectTextBox::UpdateMessage()
 {
-	//TEST
-	if (Message.size() == 3 && Message[2] == ' ')
+	if (Storage->Inputs->Action == GLFW_PRESS
+		&& Storage->Inputs->Key == GLFW_KEY_BACKSPACE)
 	{
 		Message.clear();
 	}

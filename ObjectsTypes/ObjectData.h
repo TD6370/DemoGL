@@ -37,14 +37,13 @@ struct ObjectFiledsSpecific;
 
 class ObjectData
 {
-protected:
-	
-	GLfloat m_speedRotate = 0.1f;
+private:
 	GLfloat m_nextWayTime = 0;
 	GLfloat m_stepMove = 0;
-	GLfloat m_angleModel = 0.0;
 	std::string m_keyPosSectorStr;
 protected:
+	GLfloat m_speedRotate = 0.1f;
+	GLfloat m_angleModel = 0.0;
 	vec3 StartColor = vec3(-1);
 public:
 	string Name;
@@ -52,7 +51,10 @@ public:
 	ActionObject ActionObjectCurrent;
 	
 	GLfloat Speed = 0.5f;
+
 	int IndexObjectOwner = -1;
+	int ShellIndex = -1;
+	int NextItemShellIndex = -1;
 	bool IsSelected = false;
 
 	// -----------  Options ---------------------
