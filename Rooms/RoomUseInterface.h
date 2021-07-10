@@ -137,6 +137,8 @@ public:
 
 	void EventEditTextControl(shared_ptr<ObjectGUI> obj);
 
+	void EventReadKeyInput(shared_ptr<ObjectGUI> obj);
+
 	
 };
 

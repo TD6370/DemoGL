@@ -229,3 +229,67 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	Scene->Storage->Inputs->Action = action;
 }
 
+void Controllers::FillAlphabet() {
+
+	mapAlphabetKeys = map<int, string>{
+		{GLFW_KEY_Q ,"й"},
+		{GLFW_KEY_W ,"ц"},
+		{GLFW_KEY_E ,"у"},
+		{GLFW_KEY_R ,"к"},
+		{GLFW_KEY_T ,"е"},
+		{GLFW_KEY_Y ,"н"},
+		{GLFW_KEY_U ,"г"},
+		{GLFW_KEY_I ,"ш"},
+		{GLFW_KEY_P ,"з"},
+		{GLFW_KEY_LEFT_BRACKET ,"х"},
+		{GLFW_KEY_A ,"ф"},
+		{GLFW_KEY_S ,"ы"},
+		{GLFW_KEY_D ,"в"},
+		{GLFW_KEY_F ,"а"},
+		{GLFW_KEY_G ,"п"},
+		{GLFW_KEY_H ,"р"},
+		{GLFW_KEY_J ,"о"},
+		{GLFW_KEY_K ,"л"},
+		{GLFW_KEY_L ,"д"},
+		{GLFW_KEY_SEMICOLON ,"ж"},	//GLFW_KEY_APOSTROPHE   39 /* ' */	GLFW_KEY_SEMICOLON   59 /* ; */
+		{GLFW_KEY_APOSTROPHE ,"э"},
+		{GLFW_KEY_Z ,"я"},
+		{GLFW_KEY_X ,"ч"},
+		{GLFW_KEY_C ,"с"},
+		{GLFW_KEY_V ,"м"},
+		{GLFW_KEY_B ,"и"},
+		{GLFW_KEY_N ,"т"},
+		{GLFW_KEY_M ,"ь"},
+		{GLFW_KEY_COMMA ,"б"},	//GLFW_KEY_COMMA   44 /* , */	GLFW_KEY_PERIOD   46 /* . */
+		{GLFW_KEY_PERIOD ,"ю"},
+		{GLFW_KEY_SPACE ," "},
+		/*{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},
+		{GLFW_KEY_ ,""},*/
+
+	};
+}
+
+string Controllers::GetSymbol(int keyIndex) {
+
+	map <int, string> ::iterator it;
+	it = mapAlphabetKeys.find(keyIndex);
+	if (it != mapAlphabetKeys.end())
+	{
+		return mapAlphabetKeys[keyIndex];
+	}
+	return "";
+}

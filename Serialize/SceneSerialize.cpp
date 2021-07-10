@@ -41,6 +41,8 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(ActionObject::Starting, "Starting");
 	AddNextType(ActionObject::Woking, "Woking");
 	AddNextType(ActionObject::Transforming, "Transforming");
+	//AddNextType(ActionObject::ReadingEvents, "ReadingEvents");
+	
 	//AddNextType(ActionObject::, "");
 
 	AddNextType(TypeCommand::None, "None");
@@ -48,7 +50,13 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeCommand::DeleteObject, "DeleteObject");
 	AddNextType(TypeCommand::SelectPosForObject, "SelectPosForObject");
 	AddNextType(TypeCommand::EditGUI_OnOff, "EditGUI_OnOff");
-	//AddNextType(TypeCommand::, "");
+	AddNextType(TypeCommand::EditObjectCommand, "EditObjectCommand");
+	AddNextType(TypeCommand::CheckStateObjectCommand, "CheckStateObjectCommand");
+	AddNextType(TypeCommand::StopWorking, "StopWorking");
+	AddNextType(TypeCommand::KeyInputCommand, "KeyInputCommand");
+	AddNextType(TypeCommand::RenameObject, "RenameObject");
+	AddNextType(TypeCommand::ObjectReading, "ObjectReading");
+
 }
 
 SceneSerialize::~SceneSerialize() {

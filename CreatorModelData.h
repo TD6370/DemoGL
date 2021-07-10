@@ -32,8 +32,9 @@ struct ObjectFiledsSpecific;
 //enum TypeObject;
 
 class CreatorModelData {
+
 protected:
-	
+
 
 public:
 	std::shared_ptr<ObjectData> CurrentPolygonObject;
@@ -111,8 +112,7 @@ public:
 
 	//void ControlConstruct(shared_ptr<ObjectGUI> obj, string caption);
 	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string());
-
-
+		
 };
 
 

@@ -34,6 +34,10 @@ void ObjectButton::RunAction() {
 void ObjectButton::Click() {
 
 	ObjectGUI::Click();
+
+	if (IsToogleButon) {
+		IsChecked = !IsChecked;
+	}
 }
 
 void ObjectButton::DefaultView() {
@@ -46,36 +50,15 @@ void ObjectButton::DefaultView() {
 
 void ObjectButton::Refresh()
 {
-	/*ObjectData::Refresh();
-
-	if (IsToogleButon && IndexObjectOwner != -1)
-	{
-		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
-			return;
-
-		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
-		if (objOwner->TypeObj != Button)
-			return;
-		auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
-		if (objButton != nullptr && IsChecked != objButton->IsChecked) {
-			Click();
-		}
-	}*/
+	
 }
 
 
 void ObjectButton::ActionWork() {
 
-	//ObjectGUI::ActionWork();
-	
 	Color = m_color_work;
 
 	bool isValidStartCommand = SceneCommand->CommandType != TypeCommand::None;
-	if (IsToogleButon) {
-		IsChecked = !IsChecked;
-		//isValidStartCommand = IsChecked; //@???
-	}
-
 	if (isValidStartCommand) {
 		SceneCommand->Enable = true;
 		if (IsToogleButon)

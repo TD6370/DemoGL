@@ -19,8 +19,15 @@ class SceneConstruction;
 glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4 p_model, GLdouble mouseX, GLdouble mouseY, int m_widthWindow, int m_heightWindow);
 
 class Controllers {
+private:
+		map<int, string> mapAlphabetKeys;
 
 public:
+
+	Controllers() {
+		FillAlphabet();
+	}
+
 	//glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4 p_model, GLdouble mouseX, GLdouble mouseY, int m_widthWindow, int m_heightWindow);
 
 	//void MouseEvents(GLFWwindow* window,
@@ -43,6 +50,8 @@ public:
 	void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 		SceneConstruction* Scene);
 
+	void FillAlphabet();
 
+	string GetSymbol(int keyIndex);
 };
 

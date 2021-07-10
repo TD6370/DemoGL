@@ -7,6 +7,8 @@
 #include "../GeometryLib.h"
 //------------------------
 #include "ObjectData.h"
+//#include "ObjectButton.h"
+
 #include "../Serialize/SceneSerialize.h"
 //#include "../GeomertyShapes/ShapeBase.h"
 //#include "CreatorModelData.h"  //------<<<		//##$$ 4.
@@ -141,9 +143,10 @@ void ObjectData::CheckedRefresh()
 		if (objOwner->TypeObj != Button)
 			return;
 		//auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
-		if (IsChecked != objOwner->IsChecked) {
+		//if (IsChecked != objOwner->IsChecked) {
+		/*if (IsChecked != objOwner->IsChecked) {
 			Click();
-		}
+		}*/
 	}
 }
 

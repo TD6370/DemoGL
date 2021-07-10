@@ -8,6 +8,7 @@
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../Serialize/SceneSerialize.h"
 #include "../CreatorModelData.h"
+#include "../SceneConstruction.h"
 
 #include <sstream>
 
@@ -19,10 +20,24 @@ using std::string;
 using std::shared_ptr;
 glm::mat4;
 
+extern map<string, int> MapAlphabet;
 
 ObjectTextBox::~ObjectTextBox()
 {
 
+}
+
+void ObjectTextBox::Click() {
+	IsChecked = !IsChecked;
+	if (IsChecked)
+		ActionObjectCurrent = Woking;
+	else
+		ActionObjectCurrent = Stay;
+}
+
+void ObjectTextBox::ActionWork() {
+
+	Color = m_color_work;
 }
 
 string ObjectTextBox::GetCashStateUpdateDataToShader() {
@@ -45,68 +60,14 @@ void ObjectTextBox::SetDataToShader() {
 
 void ObjectTextBox::CreateMessage() {
 
-	mapAlphabet = map<string, int>{
-		{"à",0},
-		{"á",1},
-		{"â",2},
-		{"ã",3},
-		{"ä",4},
-		{"å",5},
-		{"æ",6},
-		{"ç",7},
-		{"è",8},
-		{"ê",9},
-		{"ë",10},
-		{"ì",11},
-		{"í",12},
-		{"î",13},
-		{"ï",14},
-		{"ð",15},
-		{"ñ",16},
-		{"ò",17},
-		{"ó",18},
-		{"ô",19},
-		{"õ",20},
-		{"ö",21},
-		{"÷",22},
-		{"ø",23},
-		{"ø",24},
-		{"ü",25},
-		{"û",26},
-		{"ý",27},
-		{"þ",28},
-		{"ÿ",29},
-		{" ",30},
-
-		{"1",31},
-		{"2",32},
-		{"3",33},
-		{"4",34},
-		{"5",35},
-		{"6",36},
-		{"7",37},
-		{"8",38},
-		{"9",39},
-		{"0",40},
-		{".",41},
-		{",",42},
-		{"!",43},
-		{"?",44},
-		{":",45},
-		{"-",46},
-		{"=",47},
-		{"<",48},
-		{">",49},
-	};
-
 	MessageCode = vector<int>();
 	for (char symbC : Message) {
 		char symbLow = std::tolower(symbC);
 		string symb(1, symbLow);
-		if (!IsMapContains_StrInt(mapAlphabet, symb))
+		if (!IsMapContains_StrInt(MapAlphabet, symb))
 			continue;
 
-		int code = mapAlphabet[symb];
+		int code = MapAlphabet[symb];
 		MessageCode.push_back(code);
 	}
 
@@ -144,7 +105,7 @@ void ObjectTextBox::MeshTransform() {
 	int vertexSize = 6;
 	int codeSymb;
 	int sizeMessage = MessageCode.size();
-	int spaceSymb = mapAlphabet[" "];
+	int spaceSymb = MapAlphabet[" "];
 
 	//for (int codeSymb : MessageCode) {
 	for (int indSymb = 0; indSymb < MessageSlots; indSymb++) {
@@ -192,10 +153,10 @@ void ObjectTextBox::UpdateMessage()
 	for (char symbC : Message) {
 		char symbLow = std::tolower(symbC);
 		string symb(1, symbLow);
-		if (!IsMapContains_StrInt(mapAlphabet, symb))
+		if (!IsMapContains_StrInt(MapAlphabet, symb))
 			continue;
 
-		int code = mapAlphabet[symb];
+		int code = MapAlphabet[symb];
 		MessageCode.push_back(code);
 	}
 
@@ -204,7 +165,7 @@ void ObjectTextBox::UpdateMessage()
 	int codeSymb = 0;
 	int ind = -1;
 	int sizeMessage = MessageCode.size();
-	int spaceSymb = mapAlphabet[" "];
+	int spaceSymb = MapAlphabet[" "];
 
 	for (vec3& dataSymb : Buffer) {
 		

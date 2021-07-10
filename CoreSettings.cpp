@@ -90,7 +90,7 @@ struct CoreMVP {
 	glm::mat4 Projection;
 };
 
-enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming }; // , EventControl };
+enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming };// , ReadingEvents }; // , EventControl };
 
 enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button, EditBox
 };
@@ -98,7 +98,7 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
 enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosForObject, SelectedPosForObject, EditGUI_OnOff, EditObjectCommand,
-	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject
+	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading
 };
 
 struct CommandPack {
@@ -110,7 +110,7 @@ struct CommandPack {
 	string ValueS;
 	int ValueI;
 	float ValueF;
-	vec4 ValueV3;
+	vec4 ValueV4;
 	map <string, int> Options = map <string, int>{};
 	bool IsLongCommand = false;
 };
@@ -133,4 +133,59 @@ struct AnimationParamGUI
 	int StartPressedParamShaderID = 6;
 }; // AnimationGUI;
 
+//map<string, int> MapAlphabet;
+
+//map<string, int> MapAlphabet = map<string, int>{
+//		{"à",0},
+//		{"á",1},
+//		{"â",2},
+//		{"ã",3},
+//		{"ä",4},
+//		{"å",5},
+//		{"æ",6},
+//		{"ç",7},
+//		{"è",8},
+//		{"ê",9},
+//		{"ë",10},
+//		{"ì",11},
+//		{"í",12},
+//		{"î",13},
+//		{"ï",14},
+//		{"ð",15},
+//		{"ñ",16},
+//		{"ò",17},
+//		{"ó",18},
+//		{"ô",19},
+//		{"õ",20},
+//		{"ö",21},
+//		{"÷",22},
+//		{"ø",23},
+//		{"ø",24},
+//		{"ü",25},
+//		{"û",26},
+//		{"ý",27},
+//		{"þ",28},
+//		{"ÿ",29},
+//		{" ",30},
+//
+//		{"1",31},
+//		{"2",32},
+//		{"3",33},
+//		{"4",34},
+//		{"5",35},
+//		{"6",36},
+//		{"7",37},
+//		{"8",38},
+//		{"9",39},
+//		{"0",40},
+//		{".",41},
+//		{",",42},
+//		{"!",43},
+//		{"?",44},
+//		{":",45},
+//		{"-",46},
+//		{"=",47},
+//		{"<",48},
+//		{">",49},
+//};
 

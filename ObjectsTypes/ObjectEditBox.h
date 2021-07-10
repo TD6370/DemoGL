@@ -24,10 +24,6 @@ struct ObjectFiledsSpecific;
 class ObjectEditBox :
 	public ObjectTextBox
 {
-private:
-	string GetSymbol(int keyIndex);
-	map<int, string> mapAlphabetKeys;
-
 public:
 
 	ObjectEditBox(
@@ -54,9 +50,9 @@ public:
 
 	void DefaultView();
 
-	void AddSymbolMessage(int keyIndex);
+	//void AddSymbolMessage(int keyIndex);
+	void AddSymbolMessage(string symbol);
 
-	void InitAlphabetKeys();
 	//-------------
 
 	/*vector<ObjectFiledsSpecific> GetSpecificFiels();

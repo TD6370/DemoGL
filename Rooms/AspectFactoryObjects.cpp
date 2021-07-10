@@ -94,7 +94,7 @@ void AspectFactoryObjects::CreateEditBox() {
 		// ---- Object Edit box create	
 		auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
 
-	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
+	Scene->AddCommand(ObjectCreated, -1, objCreateButton->Index);
 }
 
 void AspectFactoryObjects::CreateButton() {
@@ -121,7 +121,7 @@ void AspectFactoryObjects::CreateButton() {
 		Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
 			
 
-	Scene->AddCommand(ObjectCreated, objCreateButton->Index);
+	Scene->AddCommand(ObjectCreated, - 1, objCreateButton->Index);
 }
 
 

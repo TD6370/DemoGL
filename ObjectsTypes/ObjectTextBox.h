@@ -24,7 +24,6 @@ class ObjectTextBox :
 	public ObjectGUI
 {
 protected:
-	map<string, int> mapAlphabet;
 	vector<int> MessageCode;
 	int MessageSlots = 50;
 	bool isInitSlotsMessage = false;
@@ -50,6 +49,10 @@ public:
 
 
 	~ObjectTextBox();
+
+	void Click();
+
+	void ActionWork();
 
 	void CreateMessage();
 

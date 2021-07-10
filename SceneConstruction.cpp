@@ -47,6 +47,8 @@ using std::make_unique;
 using std::shared_ptr;
 using std::dynamic_pointer_cast;
 
+map<string, int> MapAlphabet;
+
 SceneConstruction::SceneConstruction() {
 }
 
@@ -117,6 +119,63 @@ void SceneConstruction::ConfigRoom() {
 	Rooms.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
 	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Rooms[Rooms.size() - 1]).get();
 	
+}
+
+void SceneConstruction::FillAlphabet() {
+	MapAlphabet = map<string, int>{
+		{"�",0},
+		{"�",1},
+		{"�",2},
+		{"�",3},
+		{"�",4},
+		{"�",5},
+		{"�",6},
+		{"�",7},
+		{"�",8},
+		{"�",9},
+		{"�",10},
+		{"�",11},
+		{"�",12},
+		{"�",13},
+		{"�",14},
+		{"�",15},
+		{"�",16},
+		{"�",17},
+		{"�",18},
+		{"�",19},
+		{"�",20},
+		{"�",21},
+		{"�",22},
+		{"�",23},
+		{"�",24},
+		{"�",25},
+		{"�",26},
+		{"�",27},
+		{"�",28},
+		{"�",29},
+		{" ",30},
+
+		{"1",31},
+		{"2",32},
+		{"3",33},
+		{"4",34},
+		{"5",35},
+		{"6",36},
+		{"7",37},
+		{"8",38},
+		{"9",39},
+		{"0",40},
+		{".",41},
+		{",",42},
+		{"!",43},
+		{"?",44},
+		{":",45},
+		{"-",46},
+		{"=",47},
+		{"<",48},
+		{">",49},
+	};
+
 }
 
 void SceneConstruction::AddRoom(SceneRoom* room) {
@@ -375,6 +434,8 @@ void SceneConstruction::Update()
 
 	SetMouseEvents();
 
+	SetInputTextEvents();
+
 	if (IsDraw || isBase)
 		GenMVP();
 
@@ -453,6 +514,14 @@ void SceneConstruction::SetMouseEvents() {
 	Contrl->MouseEvents(Window, m_widthWindow, m_heightWindow, this);
 }
 
+void SceneConstruction::SetInputTextEvents() {
+	SymbolInput = "";
+	int keyIndex = Storage->Inputs->Key;
+	if (keyIndex == -1)
+		return;
+	SymbolInput = Contrl->GetSymbol(keyIndex);
+}
+
 void SceneConstruction::SetMouseButtonEvents() {
 
 	Contrl->MouseButtonEvents(Window, this);
@@ -515,6 +584,9 @@ bool SceneConstruction::ReadCommand(TypeCommand commandType)
 {
 	CommandPack* command = &CurrentSceneCommand;
 	if (command->Enable && command->CommandType == commandType) {
+
+		dispatcherCommands->DebugReadCommand(command, "ReadCommand");
+
 		command->Enable = false;
 		command->CommandType = None;
 		return true;
@@ -523,9 +595,7 @@ bool SceneConstruction::ReadCommand(TypeCommand commandType)
 	return false;
 }
 
-
 bool SceneConstruction::IsCurrentObjectBackgroundFrameGUI() {
-
 	return ObjectCurrent->Index == Storage->SceneData->IndexBackgroundGUIObj;
 }
 
@@ -533,7 +603,16 @@ void SceneConstruction::AddCommand(CommandPack command) {
 	dispatcherCommands->AddCommand(command);
 }
 
-void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+//void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions) {
 
-	dispatcherCommands->AddCommand(commandType, targetIndex, sourceIndex, keyOptions, valueOptions);
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions);
+}
+
+//void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex,
+void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
+	int valueI, float valueF, vec4 valueV4, string valueS) {
+
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS);
+
 }
