@@ -58,6 +58,12 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeCommand::RenameObject, "RenameObject");
 	AddNextType(TypeCommand::ObjectReading, "ObjectReading");
 
+	AddNextType(TypeLayer::LayerNone, "LayerNone"); 
+	AddNextType(TypeLayer::LayerGUI, "LayerGUI");
+	AddNextType(TypeLayer::LayerBack, "LayerBack");
+	AddNextType(TypeLayer::LayerFront, "LayerFront");
+	AddNextType(TypeLayer::LayerBase, "LayerBase");
+	AddNextType(TypeLayer::LayerSystem, "LayerSystem");
 }
 
 SceneSerialize::~SceneSerialize() {
@@ -95,6 +101,7 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.Name << " " << obj->Name << "\n";
 	streamObjects << fileds.Model << " " << obj->ModelPtr->Name << "\n";
 	streamObjects << fileds.Index << " " << obj->Index << "\n";
+	streamObjects << fileds.Layer << " " << GetNameType(obj->Layer) << "\n";
 
 	streamObjects << fileds.Postranslate << " " << Vec3Str(obj->Postranslate) << "\n";
 	streamObjects << fileds.Target << " " << Vec3Str(obj->Target) << "\n";
@@ -310,7 +317,37 @@ TypeCommand SceneSerialize::GetTypeCommands(string name) {
 	}
 	return result;
 }
+//--------------------------------------- Type Layer
+void SceneSerialize::AddNextType(TypeLayer type, string Name) {
+	m_mapNamesTypesLayers.insert(std::pair<TypeLayer, string>(type, Name));
+	m_mapTypesLayers.insert(std::pair<string, TypeLayer>(Name, type));
+}
 
+string SceneSerialize::GetNameType(TypeLayer typeObj) {
+
+	string name = "Error";
+	map <TypeLayer, string> ::iterator it;
+	auto map = m_mapNamesTypesLayers;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+TypeLayer SceneSerialize::GetTypeLayer(string name) {
+
+	TypeLayer result;
+	map <string, TypeLayer> ::iterator it;
+	auto map = m_mapTypesLayers;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
 
 //----------------------------------------
 void SceneSerialize::Save() {
@@ -419,6 +456,8 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.Model;
 				if (in >> lineStr && lineStr == filedsObj.Index)
 					in >> filedsObj.Index;
+				if (in >> lineStr && lineStr == filedsObj.Layer)
+					in >> filedsObj.Layer;
 
 				if (in >> lineStr && lineStr == filedsObj.Postranslate) {
 					in >> filedsObj.PostranslateValue.x;

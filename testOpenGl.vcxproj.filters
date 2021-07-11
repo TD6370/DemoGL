@@ -186,6 +186,9 @@
     <ClCompile Include="ShellObjects\BaseShell.cpp">
       <Filter>ShellObjects</Filter>
     </ClCompile>
+    <ClCompile Include="SceneLayer.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="ShellObjects\BaseShell.h">
       <Filter>ShellObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLayer.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

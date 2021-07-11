@@ -41,6 +41,7 @@ struct ObjectFileds {
 	string Type = "Type:";
 	string Model = "Model:";
 	string Index = "Index:";
+	string Layer = "Layer:";
 	string Postranslate = "Pos:";
 	vec3 PostranslateValue;
 	string Target = "Target:";
@@ -106,8 +107,10 @@ private:
 
 	map<TypeCommand, string> m_mapNamesTypesCommands;
 	map<string, TypeCommand> m_mapTypesCommands;
-	
 
+	map<TypeLayer, string> m_mapNamesTypesLayers;
+	map<string, TypeLayer> m_mapTypesLayers;
+	
 public:
 	vector<shared_ptr<ObjectFileds>> FiledsObjects;
 	vector<vector<ObjectFiledsSpecific>> FiledsObjectsSpecific; //#SaveFieldSpecific
@@ -153,5 +156,9 @@ public:
 	string GetNameType(TypeCommand typeObj);
 	TypeCommand GetTypeCommands(string name);
 	void AddNextType(TypeCommand typeObj, string Name);
+
+	string GetNameType(TypeLayer typeObj);
+	TypeLayer GetTypeLayer(string name);
+	void AddNextType(TypeLayer typeObj, string Name);
 };
 

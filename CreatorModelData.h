@@ -6,6 +6,8 @@
 //#include "ConfigUniformArg.h"
 #include "CoreSettings.h"
 #include "OperationString.h"
+//#include "SceneLayer.h"
+
 //#include "SceneSerialize.h"
 
 #include <string>
@@ -25,6 +27,7 @@ class ModelData;
 class ObjectData;
 class WorldCluster;
 class BaseShell;
+class SceneLayer;
 struct ControllerInput;
 struct ObjectFileds;
 struct ModelFileds; //#Error 3
@@ -34,24 +37,24 @@ struct ObjectFiledsSpecific;
 
 class CreatorModelData {
 
-protected:
-
+private:
+	vector<shared_ptr<ObjectData>> SceneObjects;
+	//vector<ObjectData> SceneObjectsV;
 
 public:
 	std::shared_ptr<ObjectData> CurrentPolygonObject;
 
 	int LimitSceneObjects = 100;
 	int SceneObjectsLastIndex = -1;
-	vector<shared_ptr<ObjectData>> SceneObjects;
+
 	vector<shared_ptr<ModelData>> Models;
 	vector<shared_ptr<BaseShell>> ObjectsShells;
 
 	map<string, int> MapModels;
 	map<string, int> MapSceneObjects;
-	map<TypeObject, int> MapSceneObjectsTypeOffset;
-	vector<TypeObject> SortTypeObjects;
-	vector<int> SortObjectIndex;
+
 	WorldCluster* Clusters;
+	SceneLayer* LayerScene;
 	map<string, GLuint> ShaderPrograms;
 
 	CoreMVP* ConfigMVP;
@@ -98,8 +101,6 @@ public:
 
 	void Load();
 
-	void FillSortTypesObjects();
-
 	void ClearObjects();
 
 	void ClearModels();
@@ -111,6 +112,10 @@ public:
 	bool IsExistObjectByType(TypeObject type);
 
 	bool IsExistObject(TypeObject typeObj);
+
+	int GetIndexObjBySortInd(int indObj);
+
+	int SceneObjectsSize();
 
 	//shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectGUI> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));

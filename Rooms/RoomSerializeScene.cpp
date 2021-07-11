@@ -57,8 +57,10 @@ void RoomSerializeScene::Save() {
 
 	if (Scene->IsLastCurrentObject) {
 
-		for (auto obj : Scene->Storage->SceneObjects)
+		int indO = 0;
+		while (indO <= Scene->Storage->SceneObjectsLastIndex)
 		{
+			auto obj = Scene->Storage->GetObjectPrt(indO++);
 			if (IsValidSave(obj)) {
 				
 				vector<ObjectFiledsSpecific> specificFiels = obj->GetSpecificFiels();

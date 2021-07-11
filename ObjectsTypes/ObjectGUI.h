@@ -54,6 +54,7 @@ public:
 		IsAbsolutePosition = false;
 		IsSquareModel = true;
 		ActionObjectCurrent = ActionObject::Stay;
+		TypeLayer Layer = TypeLayer::LayerGUI;
 	};
 
 	void InitData();

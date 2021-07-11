@@ -184,6 +184,7 @@
     <ClCompile Include="Rooms\RoomUseInterface.cpp" />
     <ClCompile Include="Rooms\SceneRoom.cpp" />
     <ClCompile Include="SceneConstruction.cpp" />
+    <ClCompile Include="SceneLayer.cpp" />
     <ClCompile Include="Serialize\SceneSerialize.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="ShellObjects\BaseShell.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="Rooms\RoomUseInterface.h" />
     <ClInclude Include="Rooms\SceneRoom.h" />
     <ClInclude Include="SceneConstruction.h" />
+    <ClInclude Include="SceneLayer.h" />
     <ClInclude Include="Serialize\SceneSerialize.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="ShellObjects\BaseShell.h" />

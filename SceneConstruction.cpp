@@ -345,7 +345,7 @@ bool SceneConstruction::SetObject(int indNN) {
 	IsFirstCurrentObject = indNN == 0;
 	IsLastCurrentObject = countObjects == indNN;
 	bool isShowGUI = Storage->SceneData->IsGUI;
-	int indObj = Storage->SortObjectIndex[indNN];
+	int indObj = Storage->GetIndexObjBySortInd(indNN);
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	
@@ -505,7 +505,7 @@ void SceneConstruction::Debug(string msg) {
 
 bool SceneConstruction::IsBreakUpdate()
 {
-	if (Storage->SceneObjects.size() == 0)
+	if (Storage->SceneObjectsSize() == 0)
 		return true;
 	if(countObjects != Storage->SceneObjectsLastIndex)
 		return true;

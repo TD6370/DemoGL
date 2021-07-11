@@ -121,7 +121,8 @@ void ObjectData::Refresh() {
 		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
 			return;
 
-		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
 		if (IsVisible != objOwner->IsVisible)
 			IsVisible = objOwner->IsVisible;
 	}
@@ -139,7 +140,8 @@ void ObjectData::CheckedRefresh()
 		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
 			return;
 
-		auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
+		auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
 		if (objOwner->TypeObj != Button)
 			return;
 		//auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);

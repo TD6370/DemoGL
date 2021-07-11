@@ -103,6 +103,10 @@ enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosFor
 	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading
 };
 
+enum TypeLayer {
+	LayerNone, LayerGUI, LayerBack, LayerFront, LayerBase, LayerSystem
+};
+
 struct CommandPack {
 	bool Enable;
 	TypeCommand CommandType;

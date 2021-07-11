@@ -49,7 +49,8 @@ public:
 	string Name;
 	TypeObject TypeObj;
 	ActionObject ActionObjectCurrent;
-	
+	TypeLayer Layer = TypeLayer::LayerNone;
+
 	GLfloat Speed = 0.5f;
 
 	int IndexObjectOwner = -1;
