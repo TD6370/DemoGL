@@ -22,8 +22,9 @@ using std::map;
 
 struct World {
 	GLfloat Radius = 50; // 10;
-	std::string PathObjects = "./Data/Objects/Objects.txt";
-	std::string PathModels = "./Data/Models/Models.txt";
+	std::string PathObjects = "./Data/Objects.txt";
+	std::string PathModels = "./Data/Models.txt";
+	std::string PathShells = "./Data/Shells.txt";
 };
 
 struct SceneParam {
@@ -32,6 +33,7 @@ struct SceneParam {
 	int IndexBackgroundGUIObj = -1;
 	int IndexCursorGUI = -1;
 	int IndexBaseEditBox = -1;
+	string NameSystemEditBox = "SystemRootEditBox";
 	bool IsGUI = false;
 };
 

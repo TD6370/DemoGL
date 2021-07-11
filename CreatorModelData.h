@@ -28,6 +28,7 @@ class BaseShell;
 struct ControllerInput;
 struct ObjectFileds;
 struct ModelFileds; //#Error 3
+struct ShellFileds;
 struct ObjectFiledsSpecific;
 //enum TypeObject;
 
@@ -89,6 +90,8 @@ public:
 
 	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects, vector<vector<ObjectFiledsSpecific>> objectsDataOthers);
 
+	void LoadShells(vector<shared_ptr<ShellFileds>> filedsShells);
+
 	void LoadObjectsGUI();
 
 	void LoadClusters();
@@ -100,6 +103,8 @@ public:
 	void ClearObjects();
 
 	void ClearModels();
+
+	void LoadShells();
 
 	bool IsExistObjectByName(string key);
 

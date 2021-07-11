@@ -21,6 +21,10 @@ void ObjectButton::InitData()
 {
 	ObjectGUI::InitData();
 
+	if (Name == Storage->SceneData->NameSystemEditBox)
+	{
+		Storage->SceneData->IndexBaseEditBox = Index;
+	}
 }
 
 void ObjectButton::RunAction() {
@@ -75,8 +79,8 @@ vector<ObjectFiledsSpecific> ObjectButton::GetSpecificFiels() {
 
 	vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
 	result.push_back({ "IsToogleButon:", BoolToStr(IsToogleButon) });
-	result.push_back({ "IsChecked:", BoolToStr(IsChecked) });
-	result.push_back({ "Command:", std::to_string(SceneCommand->CommandType) });
+	//result.push_back({ "IsChecked:", BoolToStr(IsChecked) });
+	//result.push_back({ "Command:", std::to_string(SceneCommand->CommandType) });
 	return result;
 }
 
@@ -88,12 +92,15 @@ void ObjectButton::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific)
 	string valueStr;
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
 
-	valueStr = GetSpecifValue(filedsSpecific, 3);
+	valueStr = GetSpecifValue(filedsSpecific, 1);
 	IsToogleButon = StrToBool(valueStr);
-	valueStr = GetSpecifValue(filedsSpecific, 2);
-	IsChecked = StrToBool(valueStr);
-	int valueInt = std::stoi(GetSpecifValue(filedsSpecific, 1));
-	SceneCommand->CommandType = (TypeCommand)valueInt;
+
+	//valueStr = GetSpecifValue(filedsSpecific, 3);
+	//IsToogleButon = StrToBool(valueStr);
+	//valueStr = GetSpecifValue(filedsSpecific, 2);
+	//IsChecked = StrToBool(valueStr);
+	//int valueInt = std::stoi(GetSpecifValue(filedsSpec//ific, 1));
+	//SceneCommand->CommandType = (TypeCommand)valueInt;
 }
 
 //----------------------------------------------------------------

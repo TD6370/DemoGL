@@ -77,7 +77,8 @@ void CreatorModelData::ClearObjects() {
 		MapSceneObjectsTypeOffset.clear();
 	if (SortObjectIndex.size() != 0)
 		SortObjectIndex.clear();
-	
+	if (ObjectsShells.size() != 0)
+		ObjectsShells.clear();
 }
 
 void CreatorModelData::FillSortTypesObjects() {
@@ -387,8 +388,6 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 	BaseShell objShell(name, rootIndex);
 	shared_ptr<BaseShell> prt_objShell = std::make_unique <BaseShell>(objShell);
 
-	//prt_objShell->Name = name;
-	//prt_objShell->RootObjIndex = rootIndex;
 	prt_objShell->CaptionObjIndex = captionIndex;
 	prt_objShell->Index = nextIndex;
 	GetObjectPrt(rootIndex)->ShellIndex = nextIndex;
@@ -439,8 +438,6 @@ shared_ptr<BaseShell> CreatorModelData::GetObjectShellPrt(int index)
 	shared_ptr<BaseShell> prt_objShell = ObjectsShells[index];
 	return prt_objShell;
 }
-
-//ObjectsShells = new vector<shared_ptr<BaseShell>>();
 
 bool CreatorModelData::IsExistObjectByName(string key)
 {
@@ -500,13 +497,28 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
 		newObj->ActionObjectCurrent = typeAction;
 
-		newObj->IndexObjectOwner = std::stoi(objFields->IndexObjectOwner);
+		newObj->IndexObjectOwner = stoi(objFields->IndexObjectOwner);
+		newObj->ShellIndex = stoi(objFields->ShellIndex);
+		newObj->NextItemShellIndex = stoi(objFields->NextItemShellIndex);
 
 		newObj->Color = objFields->ColorValue;
 
 		TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
+		int sourceIndex = stoi(objFields->CommandSourceIndex);
+		int targetIndex = stoi(objFields->CommandTargetIndex);
+		int valueI = stoi(objFields->CommandValueI);
+		float valueF = stof(objFields->CommandValueF);
+		vec4 valueV4 = vec4();
+		string valueS = objFields->CommandValueS;
+		string description = objFields->CommandDescription;
+		
 		if (typeCommand != TypeCommand::None) {
-			SetCommand(newObj, typeCommand);
+			//SetCommand(newObj, typeCommand);
+			SetCommand(newObj, typeCommand, 
+				sourceIndex, targetIndex, 
+				description, valueI,  
+				valueI, valueF, valueV4, valueS, 
+				description);
 		}
 
 		OptionsObject opt = objFields->Options;
@@ -521,6 +533,7 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->IsFocusable = StrToBool(opt.IsFocusable);
 		newObj->IsTransformable = StrToBool(opt.IsTransformable);
 		newObj->IsUsable = StrToBool(opt.IsUsable);
+		newObj->IsChecked = StrToBool(opt.IsChecked);
 
 		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
@@ -808,12 +821,13 @@ void CreatorModelData::LoadObjectsGUI() {
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.001), vec2(1.5, 1.), TextBox, color);
 
 	// ---- Object Edit Box	(SYSTEM CONTROL)
-	objName = "Base_EditBox_NameObject";
+	//objName = "Base_EditBox_NameObject";
+	objName = SceneData->NameSystemEditBox;
 	caption = "ох";
 	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.007), vec2(.7, .1), Button, color);
-	SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
+	//SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox");
 	objCreateButton->IsToogleButon = true;
@@ -828,6 +842,20 @@ void CreatorModelData::LoadObjectsGUI() {
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
 }
 
+
+void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells)  {
+
+	if (filedsShells.size() == 0)
+		return;
+
+	ObjectsShells.clear();
+
+	for (auto shellFiled : filedsShells)
+	{
+		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex));
+	}
+
+}
 
 void CreatorModelData::LoadObjects() {
 
@@ -923,8 +951,17 @@ void CreatorModelData::Load() {
 
 	LoadModels();
 	LoadObjects();
+	LoadShells();
 	LoadClusters();
 }
+
+void CreatorModelData::LoadShells() {
+
+	SceneSerialize* serializer = new SceneSerialize();
+	serializer->Load();
+	LoadShells(serializer->FiledsShells);
+}
+
 
 void CreatorModelData::LoadClusters() {
 

@@ -16,6 +16,7 @@ using glm::vec2;
 
 class ModelData;
 class ObjectData;
+class BaseShell;
 
 enum TypeValue { String, Int, Float, Vec2, Vec3, Vec4 };
 
@@ -31,6 +32,7 @@ struct OptionsObject {
 	string IsFocusable = "IsFocusable:";
 	string IsTransformable = "IsTransformable:";
 	string IsUsable = "IsUsable:";
+	string IsChecked = "IsChecked:";
 	bool Value;
 };
 
@@ -45,10 +47,18 @@ struct ObjectFileds {
 	vec3 TargetValue;
 	string ActionObjectCurrent = "Action:";
 	string IndexObjectOwner = "IndexObjectOwner:";
+		string ShellIndex = "ShellIndex:";
+		string NextItemShellIndex = "NextItemShellIndex:";
 	string Color = "Color:";
 	vec3 ColorValue;
 	OptionsObject Options;
 	string Command = "Command:";
+	string CommandSourceIndex = "CommandSourceIndex:";
+	string CommandTargetIndex = "CommandTargetIndex:";
+	string CommandValueI = "CommandValueI:";
+	string CommandValueF = "CommandValueF:";
+	string CommandValueS = "CommandValueS:";
+	string CommandDescription = "CommandDescription:";
 
 	map<string, string> OtherFields;
 };
@@ -65,6 +75,14 @@ struct ModelFileds {
 	string TypeName = "TypeName:";
 };
 
+struct ShellFileds {
+	string Name = "Name:";
+	string Index = "Index:";
+	string RootObjIndex = "RootObjIndex:";
+	string CaptionObjIndex = "CaptionObjIndex:";
+	string HeadIndexList = "HeadIndexList:";
+};
+
 struct ObjectFiledsSpecific {
 	string FieldName;
 	string Value;
@@ -76,6 +94,7 @@ private:
 
 	string m_dataObjects;
 	string m_dataModels;
+	string m_dataShells;
 	string m_stringSeparator;
 	string m_specificFields;
 
@@ -93,7 +112,7 @@ public:
 	vector<shared_ptr<ObjectFileds>> FiledsObjects;
 	vector<vector<ObjectFiledsSpecific>> FiledsObjectsSpecific; //#SaveFieldSpecific
 	vector<shared_ptr<ModelFileds>> FiledsModels;
-	
+	vector<shared_ptr<ShellFileds>> FiledsShells;
 
 	SceneSerialize();
 	
@@ -102,6 +121,8 @@ public:
 	void Save(shared_ptr<ObjectData> obj, bool isSpecificExist);
 
 	void Save(shared_ptr<ModelData> model);
+
+	void Save(shared_ptr<BaseShell> shell);
 	
 	//#SaveFieldSpecific
 	void  SaveSpecific(vector<ObjectFiledsSpecific>& otherFields);

@@ -113,11 +113,19 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 	ActiveCommands.push_back(command);
 }
 //void AspectDispatcherCommands::SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
-void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions) {
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions, 
+	int valueI, float valueF, vec4 valueV4, string valueS, string description) {
 
 	obj->SceneCommand->CommandType = commandType;
 	obj->SceneCommand->SourceIndex = sourceIndex;
 	obj->SceneCommand->TargetIndex = targetIndex;
+
+	obj->SceneCommand->ValueI = valueI;
+	obj->SceneCommand->ValueF = valueF;
+	obj->SceneCommand->ValueV4 = valueV4;
+	obj->SceneCommand->ValueS = valueS;
+	obj->SceneCommand->Description;
+
 	if(sourceIndex == -1)
 		obj->SceneCommand->SourceIndex = obj->Index;
 		

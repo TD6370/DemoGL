@@ -3,6 +3,7 @@
 #include "../CreatorModelData.h"  
 #include "../ModelData.h"
 #include "../ObjectsTypes/ObjectData.h"
+#include "../ShellObjects/BaseShell.h"
 
 #include "../OperationString.h"
 
@@ -100,9 +101,18 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.ActionObjectCurrent << " " << GetNameType(obj->ActionObjectCurrent) << "\n";
 
 	streamObjects << fileds.IndexObjectOwner << " " << obj->IndexObjectOwner << "\n";
+	streamObjects << fileds.ShellIndex << " " << obj->ShellIndex << "\n";
+	streamObjects << fileds.NextItemShellIndex << " " << obj->NextItemShellIndex << "\n";
+
 	streamObjects << fileds.Color << " " << Vec3Str(obj->Color) << "\n";
 
 	streamObjects << fileds.Command << " " << GetNameType(obj->SceneCommand->CommandType) << "\n";
+	streamObjects << fileds.CommandSourceIndex << " " << obj->SceneCommand->SourceIndex << "\n";
+	streamObjects << fileds.CommandTargetIndex << " " << obj->SceneCommand->TargetIndex << "\n";
+	streamObjects << fileds.CommandValueI << " " << obj->SceneCommand->ValueI << "\n";
+	streamObjects << fileds.CommandValueF << " " << obj->SceneCommand->ValueF << "\n";
+	streamObjects << fileds.CommandValueS << " " << obj->SceneCommand->ValueS << "\n";
+	streamObjects << fileds.CommandDescription << " " << obj->SceneCommand->Description << "\n";
 	
 	//Options
 	streamObjects << fileds.Options.IsVisible << " " << obj->IsVisible << "\n";
@@ -116,6 +126,11 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.Options.IsFocusable << " " << obj->IsFocusable << "\n";
 	streamObjects << fileds.Options.IsTransformable << " " << obj->IsTransformable << "\n";
 	streamObjects << fileds.Options.IsUsable << " " << obj->IsUsable << "\n";
+
+	streamObjects << fileds.Options.IsChecked << " " << obj->IsChecked << "\n";
+
+	//int valueInt = std::stoi(GetSpecifValue(filedsSpec//ific, 1));
+	//SceneCommand->CommandType = (TypeCommand)valueInt;
 	
 
 	if(!isSpecificExist)
@@ -145,6 +160,23 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 
 	m_dataModels.append(streamModels.str());
 }
+
+void  SceneSerialize::Save(shared_ptr<BaseShell> shell) {
+
+	std::stringstream streamModels;
+	ShellFileds fileds;
+
+	streamModels << fileds.Name << " " << shell->Name << "\n";
+	streamModels << fileds.Index << " " << shell->Index << "\n";
+	streamModels << fileds.RootObjIndex << " " << shell->RootObjIndex << "\n";
+	streamModels << fileds.CaptionObjIndex << " " << shell->CaptionObjIndex << "\n";
+	streamModels << fileds.HeadIndexList << " " << shell->HeadIndexList << "\n";
+	
+	streamModels << m_stringSeparator << " " << "\n";
+
+	m_dataShells.append(streamModels.str());
+}
+//BaseShell
 
 std::string SceneSerialize::Vec3Str(glm::vec3 vec) {
 	std::ostringstream os;
@@ -312,6 +344,18 @@ void SceneSerialize::Save() {
 		out.close();
 		m_dataModels = std::string();
 	}
+
+	if (!m_dataShells.empty())
+	{
+		filePath = WorldSetting.PathShells;
+		out.open(filePath);
+		if (out.is_open())
+		{
+			out << m_dataShells << std::endl;
+		}
+		out.close();
+		m_dataShells = std::string();
+	}
 }
 
 void SceneSerialize::Load(bool isOnlyObjects) {
@@ -393,6 +437,10 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 
 				if (in >> lineStr && lineStr == filedsObj.IndexObjectOwner)
 					in >> filedsObj.IndexObjectOwner;
+				if (in >> lineStr && lineStr == filedsObj.ShellIndex)
+					in >> filedsObj.ShellIndex;
+				if (in >> lineStr && lineStr == filedsObj.NextItemShellIndex)
+					in >> filedsObj.NextItemShellIndex;
 
 				if (in >> lineStr && lineStr == filedsObj.Color) {
 					in >> filedsObj.ColorValue.x;
@@ -402,6 +450,19 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 
 				if (in >> lineStr && lineStr == filedsObj.Command)
 					in >> filedsObj.Command;
+
+				if (in >> lineStr && lineStr == filedsObj.CommandSourceIndex)
+					in >> filedsObj.CommandSourceIndex;
+				if (in >> lineStr && lineStr == filedsObj.CommandTargetIndex)
+					in >> filedsObj.CommandTargetIndex;
+				if (in >> lineStr && lineStr == filedsObj.CommandValueI)
+					in >> filedsObj.CommandValueI;
+				if (in >> lineStr && lineStr == filedsObj.CommandValueF)
+					in >> filedsObj.CommandValueF;
+				if (in >> lineStr && lineStr == filedsObj.CommandValueS)
+					in >> filedsObj.CommandValueS;
+				if (in >> lineStr && lineStr == filedsObj.CommandDescription)
+					in >> filedsObj.CommandDescription;
 
 				if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
 					in >> filedsObj.Options.IsVisible;
@@ -425,6 +486,9 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					in >> filedsObj.Options.IsTransformable;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsUsable)
 					in >> filedsObj.Options.IsUsable;
+				if (in >> lineStr && lineStr == filedsObj.Options.IsChecked)
+					in >> filedsObj.Options.IsChecked;
+
 		/*		if (in >> lineStr && lineStr == filedsObj.Options.)
 					in >> filedsObj.Options.;*/
 							
@@ -502,6 +566,40 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			in >> stringSeparator;
 
 			FiledsModels.push_back(std::make_unique<ModelFileds>(*filedsModel));
+		}
+	}
+	in.close();
+
+	//----- Shells
+
+	filePath = WorldSetting.PathShells;
+
+	in.open(filePath);
+
+	if (in.is_open())
+	{
+		FiledsShells.clear();
+		while (!in.eof()) {
+
+			ShellFileds* filedsShell = new ShellFileds;
+
+			if (in >> lineStr && lineStr == filedsShell->Name)
+				in >> filedsShell->Name;
+			else
+				break;
+
+			if (in >> lineStr && lineStr == filedsShell->Index)
+				in >> filedsShell->Index;
+			if (in >> lineStr && lineStr == filedsShell->RootObjIndex)
+				in >> filedsShell->RootObjIndex;
+			if (in >> lineStr && lineStr == filedsShell->CaptionObjIndex)
+				in >> filedsShell->CaptionObjIndex;
+			if (in >> lineStr && lineStr == filedsShell->HeadIndexList)
+				in >> filedsShell->HeadIndexList;
+
+			in >> stringSeparator;
+
+			FiledsShells.push_back(std::make_unique<ShellFileds>(*filedsShell));
 		}
 	}
 	in.close();

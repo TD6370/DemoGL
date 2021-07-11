@@ -1,0 +1,136 @@
+Name: mon
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/monkey.obj
+RadiusCollider: 1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: plane
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/planet.bmp
+PathModel3D: ./Models3D/polygonPlane.obj
+RadiusCollider: 0.2
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: box
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/kub.obj
+RadiusCollider: 1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: marker_Vector
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Vector.obj
+RadiusCollider: 0.1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: marker_Cross
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Cross.obj
+RadiusCollider: 0.1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: marker_Point
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/testTexture.bmp
+PathModel3D: ./Models3D/Marker_Point.obj
+RadiusCollider: 0.1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: homo
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/future.bmp
+PathModel3D: ./Models3D/Marker_Point.obj
+RadiusCollider: 1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: cursorRay
+TypeName: ModelData
+PathShaderVertex: basic.vert
+PathShaderFrag: basic.frag
+PathTexture: ./Textures/future.bmp
+PathModel3D: ./Models3D/Marker_Cross.obj
+RadiusCollider: 0.1
+IsSquareModel: 0
+------------------------------------------------------------------ 
+Name: ConextFrameModel
+TypeName: ModelFrame
+PathShaderVertex: FrameUI.vert
+PathShaderFrag: ContextUI.frag
+PathTexture: ./Textures/testTexture2.bmp
+PathModel3D: ./Models3D/Frame.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: FrameModel
+TypeName: ModelFrame
+PathShaderVertex: FrameUI.vert
+PathShaderFrag: FrameUI.frag
+PathTexture: ./Textures/InventCase2.bmp
+PathModel3D: ./Models3D/Frame.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: ButtonEditBoxModel
+TypeName: ModelFrame
+PathShaderVertex: FrameUI.vert
+PathShaderFrag: FrameUI.frag
+PathTexture: ./Textures/EditBox2.bmp
+PathModel3D: ./Models3D/Frame.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: ButtonModel
+TypeName: ModelFrame
+PathShaderVertex: FrameUI.vert
+PathShaderFrag: FrameUI.frag
+PathTexture: ./Textures/Button.bmp
+PathModel3D: ./Models3D/Frame.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: TextBoxModel
+TypeName: ModelTextBox
+PathShaderVertex: TextBoxUI.vert
+PathShaderFrag: TextBoxUI.frag
+PathTexture: ./Textures/Alphabet.bmp
+PathModel3D: ./Models3D/TextBox.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: CursorModel
+TypeName: ModelFrame
+PathShaderVertex: FrameUI.vert
+PathShaderFrag: CursorUI.frag
+PathTexture: ./Textures/CursorB.bmp
+PathModel3D: ./Models3D/Cursor.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+Name: EditBoxModel
+TypeName: ModelTextBox
+PathShaderVertex: TextBoxUI.vert
+PathShaderFrag: TextBoxUI.frag
+PathTexture: ./Textures/Alphabet.bmp
+PathModel3D: ./Models3D/TextBox.obj
+RadiusCollider: 0.1
+IsSquareModel: 1
+------------------------------------------------------------------ 
+

@@ -31,7 +31,7 @@ void RoomSerializeScene::Load() {
 	_serializer->Load();
 	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
 	Scene->Storage->LoadModels(_serializer->FiledsModels);
-
+	Scene->Storage->LoadShells(_serializer->FiledsShells);
 	IsOnceComplete = true;
 }
 
@@ -49,39 +49,6 @@ bool RoomSerializeScene::IsValidSave(shared_ptr<ObjectData> object)
 		return false;
 	return true;
 }
-
-/*
-void RoomSerializeScene::Save() {
-
-	if (Scene->IsBreakUpdate())
-		return;
-
-	if (IsValidSave(Scene->ObjectCurrent)) {
-		
-		//TEST
-		//auto str = Scene->ObjectCurrent->Name;
-		//auto str2 = Scene->ObjectCurrent->TypeObj;
-
-		//#SaveFieldSpecific
-		vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
-		bool isSpecificExist = specificFiels.size() != 0;
-		
-		_serializer->Save(Scene->ObjectCurrent, isSpecificExist);
-
-		
-		//vector<ObjectFiledsSpecific> specificFiels = Scene->ObjectCurrent->GetSpecificFiels();
-		_serializer->SaveSpecific(specificFiels);
-	}
-
-	if (Scene->IsLastCurrentObject) {
-		for (auto model : Scene->Storage->Models)
-		{
-			_serializer->Save(model);
-		}
-		_serializer->Save();
-	}
-}
-*/
 
 void RoomSerializeScene::Save() {
 
@@ -107,6 +74,12 @@ void RoomSerializeScene::Save() {
 		{
 			_serializer->Save(model);
 		}
+
+		for (auto shell : Scene->Storage->ObjectsShells)
+		{
+			_serializer->Save(shell);
+		}
+
 		_serializer->Save();
 
 	}
