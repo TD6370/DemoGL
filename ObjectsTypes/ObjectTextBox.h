@@ -64,6 +64,7 @@ public:
 
 	void SetDataToShader();
 
+	/*string GetInfo();*/
 	//-------------
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();

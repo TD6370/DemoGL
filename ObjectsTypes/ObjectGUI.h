@@ -54,7 +54,7 @@ public:
 		IsAbsolutePosition = false;
 		IsSquareModel = true;
 		ActionObjectCurrent = ActionObject::Stay;
-		TypeLayer Layer = TypeLayer::LayerGUI;
+		Layer = TypeLayer::LayerGUI;
 	};
 
 	void InitData();
@@ -76,6 +76,9 @@ public:
 
 	void DefaultView();
 
+	float GetTopLayer();
+
+	string GetInfo();
 	//-------------
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();

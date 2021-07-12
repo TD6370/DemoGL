@@ -50,7 +50,7 @@ ObjectData::ObjectData(int p_index,
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/
 	StartColor = Color;
-	
+	Layer = TypeLayer::LayerNone;
 }
 
 ObjectData::~ObjectData()
@@ -121,7 +121,6 @@ void ObjectData::Refresh() {
 		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
 			return;
 
-		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
 		auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
 		if (IsVisible != objOwner->IsVisible)
 			IsVisible = objOwner->IsVisible;
@@ -332,12 +331,18 @@ string ObjectData::GetInfo() {
 
 	SceneSerialize* sceneSerialize = new SceneSerialize();
 	string typeName = sceneSerialize->GetNameType(TypeObj);
+	string layerName = sceneSerialize->GetNameType(Layer);
 
 	std::stringstream ss;
-	ss << "Name: " << Name << " T:" + typeName;
+	//ss << "N: " << Name << "  T: " + typeName << "  L: " << layerName;
+	//ss << "T: " + typeName << "  L: " << layerName << "  N: " << Name;
+	ss << "L: " << layerName << "  T: " + typeName << "  N: " << Name;
 	return ss.str();
 }
 
+float ObjectData::GetTopLayer() {
+	return Postranslate.y;
+}
 
 //------ #SaveFieldSpecific
 

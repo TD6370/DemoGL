@@ -1,6 +1,8 @@
 #include "SceneLayer.h"
 #include "ObjectsTypes/ObjectData.h"
-
+#include "CreatorModelData.h"
+#include "Serialize/SceneSerialize.h"
+#include "ObjectsTypes\ObjectGUI.h"
 
 void SceneLayer::FillSortTypesObjects() {
 
@@ -28,18 +30,133 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 
 	//--------------------------------- Save Order Index 
 	TypeObject p_typeObj = obj->TypeObj;
-	int IndexInsert = 0;
+	int indexInsert = 0;
+	int conutItemsCurrType = 0;
 	int index = obj->Index;
 	map <TypeObject, int> ::iterator it;
+	
 
-	for (TypeObject typeObj : SortTypeObjects)
+	//----------------------
+	/*for (TypeObject typeObj : SortTypeObjects)
 	{
 		it = MapSceneObjectsTypeOffset.find(typeObj);
 		if (it != MapSceneObjectsTypeOffset.end())
-			IndexInsert += MapSceneObjectsTypeOffset[typeObj];
+			indexInsert += MapSceneObjectsTypeOffset[typeObj];
 		if (typeObj == p_typeObj)
 			break;
+	}*/
+
+	//----------------------
+	//if (obj->IsGUI)
+	//	p_typeObj = TypeObject::GUI;
+	
+	for (TypeObject typeObj : SortTypeObjects)
+	{
+		it = MapSceneObjectsTypeOffset.find(typeObj);
+		conutItemsCurrType = 0;
+		if (it != MapSceneObjectsTypeOffset.end())
+			conutItemsCurrType = MapSceneObjectsTypeOffset[typeObj];
+		if (typeObj == p_typeObj)
+			break;
+		else
+			indexInsert += conutItemsCurrType;
 	}
+
+	int countStack = indexInsert + conutItemsCurrType;
+	
+	if (obj->IsGUI)
+	{
+		auto tttttttttttttttt = obj->GetInfo();
+		//countStack = SortObjectIndex.size();
+
+		int indNN;
+		for (indNN = indexInsert; indNN < countStack; indNN++) {
+			int indNext = SortObjectIndex[indNN];
+			auto nextObj = obj->Storage->GetObjectPrt(indNext);
+
+			auto testT = nextObj->GetInfo();
+
+			if (nextObj->Layer > obj->Layer) 
+				break;
+			if (nextObj->Layer < obj->Layer)
+				continue;
+
+			if (obj->ShellIndex != -1 && nextObj->ShellIndex == obj->ShellIndex)
+			{
+				int sortIndObj = GetSortIndexByType(obj->TypeObj);
+				int sortIndNextObj = GetSortIndexByType(nextObj->TypeObj);
+				if(sortIndNextObj > sortIndObj)
+					break;
+				if (sortIndNextObj < sortIndObj)
+					continue;
+			}
+			else {
+				//if (nextObj->GetTopLayer() < obj->GetTopLayer())
+				if (nextObj->GetTopLayer() > obj->GetTopLayer())
+				{
+					break;
+				}
+			}
+		}
+		indexInsert = indNN;
+	}
+	//------------------------
+	
+	//----------------------
+	//if (obj->IsGUI)
+	//	p_typeObj = TypeObject::GUI;
+	//
+	//for (TypeObject typeObj : SortTypeObjects)
+	//{
+	//	it = MapSceneObjectsTypeOffset.find(typeObj);
+	//	conutItemsCurrType = 0;
+	//	if (it != MapSceneObjectsTypeOffset.end())
+	//		conutItemsCurrType = MapSceneObjectsTypeOffset[typeObj];
+	//	if (typeObj == p_typeObj)
+	//		break;
+	//	else
+	//		indexInsert += conutItemsCurrType;
+	//}
+
+	//int countStack = indexInsert + conutItemsCurrType;
+	//
+	//if (obj->IsGUI)
+	//{
+	//	auto tttttttttttttttt = obj->GetInfo();
+	//	countStack = SortObjectIndex.size();
+
+	//	int indNN;
+	//	for (indNN = indexInsert; indNN < countStack; indNN++) {
+	//		int indNext = SortObjectIndex[indNN];
+	//		auto nextObj = obj->Storage->GetObjectPrt(indNext);
+
+	//		auto testT = nextObj->GetInfo();
+
+	//		if (nextObj->Layer > obj->Layer) 
+	//			break;
+	//		if (nextObj->Layer < obj->Layer)
+	//			continue;
+
+	//		if (obj->ShellIndex != -1 && nextObj->ShellIndex == obj->ShellIndex)
+	//		{
+	//			int sortIndObj = GetSortIndexByType(obj->TypeObj);
+	//			int sortIndNextObj = GetSortIndexByType(nextObj->TypeObj);
+	//			if(sortIndNextObj > sortIndObj)
+	//				break;
+	//			if (sortIndNextObj < sortIndObj)
+	//				continue;
+	//		}
+	//		else {
+	//			//if (nextObj->GetTopLayer() < obj->GetTopLayer())
+	//			if (nextObj->GetTopLayer() > obj->GetTopLayer())
+	//			{
+	//				break;
+	//			}
+	//		}
+	//	}
+	//	indexInsert = indNN;
+	//}
+	//------------------------
 
 	it = MapSceneObjectsTypeOffset.find(p_typeObj);
 	if (it != MapSceneObjectsTypeOffset.end()) {
@@ -49,16 +166,21 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 		MapSceneObjectsTypeOffset.insert(std::pair<TypeObject, int>(p_typeObj, 1));
 	}
 
+	SortObjectIndex.insert(SortObjectIndex.begin() + indexInsert, index);
+
 	//==========  TEST Sort
-	/*for (auto indNext : SortObjectIndex) {
-
-		auto currType =  SceneObjects[indNext]->TypeObj;
-		SceneSerialize* serializer = new SceneSerialize();
-		std::cout << "next Index Type: " << serializer->GetNameType(currType) << "\n";
+	if (obj->IsGUI)
+	{
+		int pp = 0;
+		std::cout << "Sort:\n";
+		for (auto indNext : SortObjectIndex) {
+			auto objDebug = obj->Storage->GetObjectPrt(indNext);
+			std::cout << objDebug->GetInfo() << " #:" << pp++ << "\n";
+		}
+		std::cout << "================================\n";
+		auto v = "";
 	}
-	std::cout << "================================\n";*/
-
-	SortObjectIndex.insert(SortObjectIndex.begin() + IndexInsert, index);
+	//========================
 }
 
 void SceneLayer::Clear() {
@@ -66,4 +188,30 @@ void SceneLayer::Clear() {
 		MapSceneObjectsTypeOffset.clear();
 	if (SortObjectIndex.size() != 0)
 		SortObjectIndex.clear();
+}
+
+int SceneLayer::GetSortIndexByType(TypeObject value)
+{
+	vector<TypeObject> list = SortTypeObjects;
+	auto it = find(list.begin(), list.end(), value);
+	if (it != list.end())
+	{
+		int index = it - list.begin();
+		return index;
+	}
+	return -1;
+}
+
+bool SceneLayer::IsNeedSort(int index)
+{
+	auto list = SortObjectIndex;
+	auto it = find(list.begin(), list.end(), index);
+
+	return it == list.end();
+	/*if (it != list.end())
+	{
+		int index = it - list.begin();
+		return index;
+	}
+	return -1;*/
 }

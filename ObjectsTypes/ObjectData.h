@@ -49,7 +49,7 @@ public:
 	string Name;
 	TypeObject TypeObj;
 	ActionObject ActionObjectCurrent;
-	TypeLayer Layer = TypeLayer::LayerNone;
+	TypeLayer Layer;
 
 	GLfloat Speed = 0.5f;
 
@@ -182,7 +182,7 @@ public:
 		
 	std::shared_ptr<ObjectData> GetChild(string key);
 	
-	string GetInfo();
+	string virtual GetInfo();
 
 	void virtual DefaultView();
 
@@ -195,6 +195,8 @@ public:
 	//-----------------------------
 	
 	void virtual MeshTransform(); //------- geometric ???
+
+	float virtual  GetTopLayer();
 
 	//-------- SaveFieldSpecific
 

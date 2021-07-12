@@ -104,7 +104,13 @@ enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosFor
 };
 
 enum TypeLayer {
-	LayerNone, LayerGUI, LayerBack, LayerFront, LayerBase, LayerSystem
+	LayerBackground,
+	LayerBack, 
+	LayerNone, 
+	LayerGUI, 
+	LayerFront, 
+	LayerBase, 
+	LayerSystem
 };
 
 struct CommandPack {

@@ -10,7 +10,7 @@
 
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../GeomertyShapes/ShapeSquare.h"
-
+#include "../ShellObjects/BaseShell.h"
 
 void ObjectGUI::InitData() {
 
@@ -142,4 +142,27 @@ void ObjectGUI::DefaultView() {
 
 	ParamValue = 0;
 
+}
+
+float ObjectGUI::GetTopLayer() {
+	
+	if (ShellIndex != -1)
+	{
+		auto shell = Storage->GetObjectShellPrt(ShellIndex);
+		auto objRootShell = Storage->GetObjectPrt(shell->RootObjIndex);
+		shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(objRootShell);
+		return objGUI->StartPos.y;
+	}
+	return StartPos.y;
+}
+
+string ObjectGUI::GetInfo() {
+
+	//std::cout << "<<GET info>> " << Name << "\n";
+	string info = ObjectData::GetInfo();
+
+	std::stringstream ss;
+	//ss << info << "	TOP: " << StartPos.y;
+	ss << info << "\nZ: " << StartPos.z << "  T: " << StartPos.y;
+	return ss.str();
 }

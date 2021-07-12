@@ -74,8 +74,8 @@ void CreatorModelData::ClearObjects() {
 	
 	if (MapSceneObjects.size() != 0)
 		MapSceneObjects.clear();
-	if (ObjectsShells.size() != 0)
-		ObjectsShells.clear();
+	//if (ObjectsShells.size() != 0)
+	//	ObjectsShells.clear();
 
 	LayerScene->Clear();
 }
@@ -180,8 +180,9 @@ bool CreatorModelData::IsExistObject(TypeObject typeObj)
 	return false;
 }
 
-//std::shared_ptr<ObjectData> CreatorModelData::AddObject(CreatorModelData* storage, string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color) {
-std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index) {
+std::shared_ptr<ObjectData> CreatorModelData::AddObject(
+	string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index, 
+	TypeLayer p_layer, bool isLoading) {
 
 	if (IsExistObject(p_typeObj))
 		return NULL;
@@ -319,13 +320,16 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(string name, std::shared
 		object->Storage = this;
 		object->Color = p_color;
 		object->Name = name;
+		if(p_layer != LayerNone)
+			object->Layer = p_layer;
 		object->InitData();
 	}
 
 	MapSceneObjects.insert(std::pair<string, int>(name, p_index));
 
 	//--------------------------------- Save Order Index 
-	LayerScene->SaveOrderIndex(object);
+	if(isLoading)
+		LayerScene->SaveOrderIndex(object);
 
 	return object;
 }
@@ -360,7 +364,7 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
-shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex) {
+shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, bool isLoading) {
 
 	int nextIndex = ObjectsShells.size();
 
@@ -369,10 +373,12 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 
 	prt_objShell->CaptionObjIndex = captionIndex;
 	prt_objShell->Index = nextIndex;
-	GetObjectPrt(rootIndex)->ShellIndex = nextIndex;
-	if (captionIndex != -1)
-		GetObjectPrt(captionIndex)->ShellIndex = nextIndex;
-
+	if(!isLoading)
+	{
+		GetObjectPrt(rootIndex)->ShellIndex = nextIndex;
+		if (captionIndex != -1)
+			GetObjectPrt(captionIndex)->ShellIndex = nextIndex;
+	}
 	ObjectsShells.push_back(prt_objShell);
 
 	return prt_objShell;
@@ -474,16 +480,17 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
 		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
-	
+		TypeLayer layer = serializer->GetTypeLayer(objFields->Layer);
+
 		int indexObj = std::stoi(objFields->Index);
 
-		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue,vec3(0), indexObj);
+		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue,vec3(0), indexObj, layer, true);
 	
 		if (newObj == NULL)
 			continue;
 
 		newObj->Target = objFields->TargetValue;
-		newObj->Layer = serializer->GetTypeLayer(objFields->Layer);
+		newObj->Layer = layer;
 
 		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
 		newObj->ActionObjectCurrent = typeAction;
@@ -761,7 +768,8 @@ void CreatorModelData::LoadObjectsGUI() {
 
 	// ---- Object Context frame GUI	(SYSTEM CONTROL)
 	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
-	shared_ptr<ObjectData> objBackGUI_Data = AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1));
+	shared_ptr<ObjectData> objBackGUI_Data = 
+		AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1), -1 , LayerBackground);
 	//shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
 	shared_ptr<ObjectButton> objBackGUI = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
 	objBackGUI->IsToogleButon = false;
@@ -774,7 +782,9 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
 	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.002), vec2(1.1, 0.2), GUI, vec3(1));
+	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.002), vec2(1.1, 0.2), GUI, vec3(1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, StartPosGUI_Z), vec2(1.1, 0.2), GUI, vec3(1));
+	
 
 	// ---- Object Button edit obj GUI (BASE CONTROL)
 	objName = "ButtonEditOn";
@@ -782,7 +792,8 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "редакт";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, 0.003), vec2(0.1, 0.1), Button, vec3(1));
+	objCreate = 
+		AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, StartPosGUI_Z), vec2(0.1, 0.1), Button, vec3(1), LayerBase);
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsTransformable = false;
@@ -796,7 +807,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//caption = "абвгдежз";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, 0.002), vec2(0.3, 0.2), Button, vec3(1));
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, StartPosGUI_Z), vec2(0.3, 0.2), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
 	SetCommand(objCreateButton, SelectPosForObject);
@@ -809,7 +820,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.001), vec2(1.5, 1.), TextBox, color);
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, StartPosGUI_Z), vec2(1.5, 1.), TextBox, color);
 
 	// ---- Object Edit Box	(SYSTEM CONTROL)
 	//objName = "Base_EditBox_NameObject";
@@ -817,10 +828,10 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "ох";
 	childModel = "ButtonEditBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, 0.007), vec2(.7, .1), Button, color);
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .1), Button, color, LayerBase);
 	//SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox");
+	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox", LayerBase);
 	objCreateButton->IsToogleButon = true;
 	objCreateButton->IsFocusable = false;
 	objCreateButton->IsTransformable = false;
@@ -830,7 +841,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	objName = "CursorGUI";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "CursorModel";
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .15, .01), vec2(.05, .05), CursorGUI, vec3(0.2, 0.5, 0.1), LayerSystem);
 }
 
 
@@ -843,7 +854,7 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 	for (auto shellFiled : filedsShells)
 	{
-		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex));
+		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), true);
 	}
 
 }
@@ -936,13 +947,26 @@ void CreatorModelData::LoadObjects() {
 			AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
 		}
 	}*/
+
+	UpdateObjectsOrders();
+}
+
+void CreatorModelData::UpdateObjectsOrders() {
+	//Sort ordering
+	for (auto obj : SceneObjects) {
+
+		if (!LayerScene->IsNeedSort(obj->Index))
+			continue;
+
+		LayerScene->SaveOrderIndex(obj);
+	}
 }
 
 void CreatorModelData::Load() {
 
 	LoadModels();
-	LoadObjects();
 	LoadShells();
+	LoadObjects();
 	LoadClusters();
 }
 
@@ -962,7 +986,7 @@ void CreatorModelData::LoadClusters() {
 }
 
 
-shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> ownerObjData, string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color)
+shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> ownerObjData, string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color, TypeLayer p_layer)
 {
 	shared_ptr<ObjectGUI> ownerObj = std::dynamic_pointer_cast<ObjectGUI>(ownerObjData);
 
@@ -979,13 +1003,35 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 		model = modelFrame;
 	}
 
-	vec3 startPos = ownerObj->StartPos;
-	startPos.z += 0.01;
-	shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, ownerObj->StartPos, color);
+
+	//-------------- Z Order Controls ---------------
+	//vec3 startPos = ownerObj->StartPos;
+	vec3 startPos = startPosChild;
+
+	//startPos.z += 0.01;
+	startPos.z = StartPosGUI_Z;
+	if (ownerObj->Index != SceneData->IndexBackgroundGUIObj)
+		startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
+
+	if (p_layer == LayerBase) {
+		if (ownerObj->Index != SceneData->IndexBackgroundGUIObj)
+			startPos.z = StartPosSystemGUI_Z + StartPosSubGUI_ADD_Z;
+		else
+			startPos.z = StartPosSystemGUI_Z;
+	}
+	if (p_layer == LayerSystem) {
+		startPos.z = .01;
+	}
+
+	//-------------------------------------------------
+
+	//shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, ownerObj->StartPos, color, -1, p_layer);
+	shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, startPos, color, -1, p_layer);
 
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
 	objGUI->IndexObjectOwner = ownerObj->Index;
-	objGUI->StartPos = startPosChild;
+	//objGUI->StartPos = startPosChild;
+	objGUI->StartPos = startPos;
 	objGUI->SizePanel = size;
 	objGUI->Color = color;
 	objGUI->UpdateState();
@@ -1002,7 +1048,7 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	return objGUI;
 }
 
-shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string name)
+shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string name, TypeLayer p_layer)
 {
 	shared_ptr<ObjectData> objData;
 	auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
@@ -1013,15 +1059,23 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 				vec2 offset = vec2(0.01);
 				vec3 startPos = vec3(offset.x, offset.y, 0.021);
 				startPos = vec3(.01, .01, 0.002);
-				startPos.z = objButton->StartPos.z + 0.0005;
+				
+				//startPos.z = objButton->StartPos.z + 0.0005;
+				/*startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;*/
+				/*if(p_layer == LayerSystem)
+					startPos.z = StartPosSystemGUI_Z + StartPosSubGUI_ADD_Z;*/
+
 				if (name.size() == 0)
 					name = "Button_TextBox";
-				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1));
+				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1), p_layer);
 				auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
 
 				AddShell("ButtonShell_" + objButton->Name,
 					objButton->Index,
 					objTextButton->Index);
+
+				//LayerScene->SaveOrderIndex(objTextButton);
+				return objTextButton;
 			}
 		}
 	}
@@ -1033,10 +1087,15 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			vec2 offset = vec2(0.01);
 			vec3 startPos = vec3(offset.x, offset.y, 0.002);
 			startPos = vec3(.03, .03, 0.021);
-			startPos.z = objButton->StartPos.z + 0.0005;
+
+			//startPos.z = objButton->StartPos.z + 0.0005;
+			/*startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
+			if (p_layer == LayerSystem)
+				startPos.z = StartPosSystemGUI_Z + StartPosSubGUI_ADD_Z;*/
+
 			if (name.size() == 0)
 				name = "Button_EditBox";
-			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1));
+			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1), p_layer);
 			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
 
 			SetCommand(objButton, TypeCommand::EditObjectCommand, objButton->Index, editBoxObj->Index);
@@ -1044,6 +1103,8 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			AddShell("EditBoxShell_" + objButton->Name,
 				objButton->Index, 
 				editBoxObj->Index);
+
+			//LayerScene->SaveOrderIndex(editBoxObj);
 
 			return editBoxObj;
 		}

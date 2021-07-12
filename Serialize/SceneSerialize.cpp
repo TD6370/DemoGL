@@ -58,9 +58,10 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeCommand::RenameObject, "RenameObject");
 	AddNextType(TypeCommand::ObjectReading, "ObjectReading");
 
+	AddNextType(TypeLayer::LayerBackground, "LayerBackground");
+	AddNextType(TypeLayer::LayerBack, "LayerBack");
 	AddNextType(TypeLayer::LayerNone, "LayerNone"); 
 	AddNextType(TypeLayer::LayerGUI, "LayerGUI");
-	AddNextType(TypeLayer::LayerBack, "LayerBack");
 	AddNextType(TypeLayer::LayerFront, "LayerFront");
 	AddNextType(TypeLayer::LayerBase, "LayerBase");
 	AddNextType(TypeLayer::LayerSystem, "LayerSystem");

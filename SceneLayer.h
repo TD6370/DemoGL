@@ -20,6 +20,33 @@ using std::string;
 
 class ObjectData;
 
+class A
+{
+	A() {};
+
+	void virtual CallTest() {
+		std::cout << "CallTest A ";
+	};
+};
+
+class B : A
+{
+	B();
+
+	void CallTest() {
+		std::cout << "CallTest B ";
+	};
+};
+
+class C : B
+{
+	C();
+
+	void CallTest() {
+		std::cout << "CallTest C ";
+	};
+};
+
 class SceneLayer
 {
 public:
@@ -44,5 +71,9 @@ public:
 	void FillSortTypesObjects();
 
 	void Clear();
+
+	int GetSortIndexByType(TypeObject value);
+
+	bool IsNeedSort(int indObj);
 };
 

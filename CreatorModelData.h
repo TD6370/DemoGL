@@ -46,6 +46,9 @@ public:
 
 	int LimitSceneObjects = 100;
 	int SceneObjectsLastIndex = -1;
+	float StartPosGUI_Z = 0.002;
+	float StartPosSubGUI_ADD_Z = 0.001;
+	float StartPosSystemGUI_Z = 0.005;
 
 	vector<shared_ptr<ModelData>> Models;
 	vector<shared_ptr<BaseShell>> ObjectsShells;
@@ -68,7 +71,8 @@ public:
 
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
-	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1);
+	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, 
+		vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1, TypeLayer Layer = TypeLayer::LayerNone, bool isLoading = false);
 
 	shared_ptr<ObjectData> GetObjectPrt(int index);
 	shared_ptr<ObjectData> GetObjectPrt(string key);
@@ -76,7 +80,7 @@ public:
 	shared_ptr<ModelData> GetModelPrt(int index);
 	shared_ptr<ModelData> GetModelPrt(string key);
 
-	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1);
+	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, bool isLoading = false);
 	shared_ptr<BaseShell> GetObjectShellPrt(int index);
 	void FillShellComponents();
 	void FillShellComponents(int indObj);
@@ -117,11 +121,13 @@ public:
 
 	int SceneObjectsSize();
 
+	void UpdateObjectsOrders();
+
 	//shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectGUI> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
-	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
+	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0), TypeLayer p_layer = LayerNone);
 
 	//void ControlConstruct(shared_ptr<ObjectGUI> obj, string caption);
-	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string());
+	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string(), TypeLayer p_layer = LayerNone);
 		
 };
 

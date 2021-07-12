@@ -185,6 +185,17 @@ void ObjectTextBox::UpdateMessage()
 
 }
 
+//string ObjectTextBox::GetInfo() {
+//
+//	return ObjectGUI::GetInfo();
+//
+//	string info = ObjectData::GetInfo();
+//
+//	std::stringstream ss;
+//	ss << info << "	 M: " << Message;
+//	return ss.str();
+//}
+
 
 vector<ObjectFiledsSpecific> ObjectTextBox::GetSpecificFiels() {
 
