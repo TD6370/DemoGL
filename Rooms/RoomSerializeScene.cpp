@@ -30,8 +30,11 @@ void RoomSerializeScene::Init() {
 void RoomSerializeScene::Load() {
 	_serializer->Load();
 	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
-	Scene->Storage->LoadModels(_serializer->FiledsModels);
+	//Scene->Storage->LoadModels(_serializer->FiledsModels);
 	Scene->Storage->LoadShells(_serializer->FiledsShells);
+
+	Scene->RefreshGUI();
+
 	IsOnceComplete = true;
 }
 
@@ -40,6 +43,7 @@ void RoomSerializeScene::LoadObjects() {
 	//#SaveFieldSpecific
 	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
 
+	Scene->RefreshGUI();
 	IsOnceComplete = true;
 }
 
@@ -113,8 +117,8 @@ void RoomSerializeScene::Work() {
 
 		if (!IsOnceComplete)
 		{
-			//Load();
-			LoadObjects();
+			Load();
+			//LoadObjects();
 		}
 	}
 

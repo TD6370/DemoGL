@@ -36,7 +36,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 	map <TypeObject, int> ::iterator it;
 	
 
-	//----------------------
+	//---------------------- ver 0.
 	/*for (TypeObject typeObj : SortTypeObjects)
 	{
 		it = MapSceneObjectsTypeOffset.find(typeObj);
@@ -46,10 +46,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 			break;
 	}*/
 
-	//----------------------
-	//if (obj->IsGUI)
-	//	p_typeObj = TypeObject::GUI;
-	
+	//---------------------- ver 1.
 	for (TypeObject typeObj : SortTypeObjects)
 	{
 		it = MapSceneObjectsTypeOffset.find(typeObj);
@@ -66,15 +63,13 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 	
 	if (obj->IsGUI)
 	{
-		auto tttttttttttttttt = obj->GetInfo();
-		//countStack = SortObjectIndex.size();
-
+		//auto tttttttttttttttt = obj->GetInfo();
 		int indNN;
 		for (indNN = indexInsert; indNN < countStack; indNN++) {
 			int indNext = SortObjectIndex[indNN];
 			auto nextObj = obj->Storage->GetObjectPrt(indNext);
 
-			auto testT = nextObj->GetInfo();
+			//auto testT = nextObj->GetInfo();
 
 			if (nextObj->Layer > obj->Layer) 
 				break;
@@ -91,7 +86,6 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 					continue;
 			}
 			else {
-				//if (nextObj->GetTopLayer() < obj->GetTopLayer())
 				if (nextObj->GetTopLayer() > obj->GetTopLayer())
 				{
 					break;
@@ -100,62 +94,6 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 		}
 		indexInsert = indNN;
 	}
-	//------------------------
-	
-	//----------------------
-	//if (obj->IsGUI)
-	//	p_typeObj = TypeObject::GUI;
-	//
-	//for (TypeObject typeObj : SortTypeObjects)
-	//{
-	//	it = MapSceneObjectsTypeOffset.find(typeObj);
-	//	conutItemsCurrType = 0;
-	//	if (it != MapSceneObjectsTypeOffset.end())
-	//		conutItemsCurrType = MapSceneObjectsTypeOffset[typeObj];
-	//	if (typeObj == p_typeObj)
-	//		break;
-	//	else
-	//		indexInsert += conutItemsCurrType;
-	//}
-
-	//int countStack = indexInsert + conutItemsCurrType;
-	//
-	//if (obj->IsGUI)
-	//{
-	//	auto tttttttttttttttt = obj->GetInfo();
-	//	countStack = SortObjectIndex.size();
-
-	//	int indNN;
-	//	for (indNN = indexInsert; indNN < countStack; indNN++) {
-	//		int indNext = SortObjectIndex[indNN];
-	//		auto nextObj = obj->Storage->GetObjectPrt(indNext);
-
-	//		auto testT = nextObj->GetInfo();
-
-	//		if (nextObj->Layer > obj->Layer) 
-	//			break;
-	//		if (nextObj->Layer < obj->Layer)
-	//			continue;
-
-	//		if (obj->ShellIndex != -1 && nextObj->ShellIndex == obj->ShellIndex)
-	//		{
-	//			int sortIndObj = GetSortIndexByType(obj->TypeObj);
-	//			int sortIndNextObj = GetSortIndexByType(nextObj->TypeObj);
-	//			if(sortIndNextObj > sortIndObj)
-	//				break;
-	//			if (sortIndNextObj < sortIndObj)
-	//				continue;
-	//		}
-	//		else {
-	//			//if (nextObj->GetTopLayer() < obj->GetTopLayer())
-	//			if (nextObj->GetTopLayer() > obj->GetTopLayer())
-	//			{
-	//				break;
-	//			}
-	//		}
-	//	}
-	//	indexInsert = indNN;
-	//}
 	//------------------------
 
 	it = MapSceneObjectsTypeOffset.find(p_typeObj);
@@ -169,7 +107,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 	SortObjectIndex.insert(SortObjectIndex.begin() + indexInsert, index);
 
 	//==========  TEST Sort
-	if (obj->IsGUI)
+	/*if (obj->IsGUI)
 	{
 		int pp = 0;
 		std::cout << "Sort:\n";
@@ -179,7 +117,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 		}
 		std::cout << "================================\n";
 		auto v = "";
-	}
+	}*/
 	//========================
 }
 
@@ -208,10 +146,4 @@ bool SceneLayer::IsNeedSort(int index)
 	auto it = find(list.begin(), list.end(), index);
 
 	return it == list.end();
-	/*if (it != list.end())
-	{
-		int index = it - list.begin();
-		return index;
-	}
-	return -1;*/
 }

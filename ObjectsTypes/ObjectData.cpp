@@ -126,13 +126,13 @@ void ObjectData::Refresh() {
 			IsVisible = objOwner->IsVisible;
 	}
 
-	CheckedRefresh();
+	//CheckedRefresh();
 }
 
 
 void ObjectData::CheckedRefresh()
 {
-
+	return;
 	//if (IsToogleButon && IndexObjectOwner != -1)
 	if (IndexObjectOwner != -1)
 	{
@@ -140,9 +140,9 @@ void ObjectData::CheckedRefresh()
 			return;
 
 		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
-		auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
+	/*	auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
 		if (objOwner->TypeObj != Button)
-			return;
+			return;*/
 		//auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
 		//if (IsChecked != objOwner->IsChecked) {
 		/*if (IsChecked != objOwner->IsChecked) {
@@ -342,6 +342,11 @@ string ObjectData::GetInfo() {
 
 float ObjectData::GetTopLayer() {
 	return Postranslate.y;
+}
+
+int ObjectData::GetRightBorderVertexIndex() {
+
+	return -1;
 }
 
 //------ #SaveFieldSpecific

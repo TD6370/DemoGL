@@ -74,6 +74,7 @@ public:
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
 	//----------------------------------------
+	//##ED
 	//TODO: EngineData{
 	/*	CoreMVP* ConfigMVP;
 		ControllerInput* Inputs;
@@ -204,6 +205,8 @@ public:
 	void virtual MeshTransform(); //------- geometric ???
 
 	float virtual  GetTopLayer();
+
+	int virtual GetRightBorderVertexIndex();
 
 	//-------- SaveFieldSpecific
 

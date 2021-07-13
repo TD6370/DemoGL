@@ -472,7 +472,7 @@ void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
 		objGUI->StartPos = vec3(command->ValueV4.x, command->ValueV4.y, objGUI->StartPos.z);
 		objGUI->IsVisible = true;
 
-		Scene->AddCommand(TypeCommand::CheckStateObjectCommand);
+		Scene->RefreshGUI();
 
 		//-- Start - click Button edit box system
 		objGUI->SceneCommand->ValueS = command->ValueS;
@@ -616,7 +616,7 @@ void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
 
 			objGUI->IsVisible = false;
 			objGUI->ActionObjectCurrent = ActionObject::Stay;
-			Scene->AddCommand(CheckStateObjectCommand);
+			Scene->RefreshGUI();
 		}
 	}
 }

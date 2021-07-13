@@ -23,19 +23,18 @@ public:
 	int CaptionObjIndex = -1;
 	int HeadIndexList = -1;
 
-	map <string, int> Components = map <string, int>{};
+	//TODO: pointer data obj
 
+	map <string, int> Components = map <string, int>{};
 	void AddComponent(string name, int value);
 	int ComponentIndex(string name);
 
 	BaseShell(string name, int rootObjIndex) : RootObjIndex(rootObjIndex), Name(name) {};
 
 	~BaseShell();
-
-
-	//void FillComponents();
 };
-//
+
+
 //class ShellButtonGUI : BaseShell
 //{
 //	ShellButtonGUI();

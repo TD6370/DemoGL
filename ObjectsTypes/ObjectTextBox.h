@@ -64,6 +64,8 @@ public:
 
 	void SetDataToShader();
 
+	int GetRightBorderVertexIndex();
+
 	/*string GetInfo();*/
 	//-------------
 

@@ -78,6 +78,8 @@ void SceneConstruction::Init() {
 	LoadDataModel();
 	
 	ConfigRoom();
+
+	RefreshGUI();
 }
 
 void SceneConstruction::LoadDataModel()
@@ -630,4 +632,14 @@ void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int
 
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, isLong);
 
+}
+
+void SceneConstruction::AddCommand(TypeCommand commandType, bool isLong) {
+
+	dispatcherCommands->AddCommand(commandType, -1, -1, -1, -0.1, vec4(), "", isLong);
+
+}
+
+void SceneConstruction::RefreshGUI() {
+	AddCommand(TypeCommand::CheckStateObjectCommand, true);
 }

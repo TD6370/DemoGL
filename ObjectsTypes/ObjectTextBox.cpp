@@ -185,6 +185,11 @@ void ObjectTextBox::UpdateMessage()
 
 }
 
+int ObjectTextBox::GetRightBorderVertexIndex() {
+
+	return (Message.size() * 2) - 1;
+}
+
 //string ObjectTextBox::GetInfo() {
 //
 //	return ObjectGUI::GetInfo();

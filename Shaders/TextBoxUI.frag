@@ -71,7 +71,13 @@ void main()
     vec2 result = vec2(0);
     int index =0;
 
-    int numSyb = numSymbol;
+    int numSymb = numSymbol;
+    
+    if(numSymb == -1)
+    {
+        color = vec4(0.);
+        return;
+    }
 
     vec2 uv = UV;
     vec2 sempS = UV;
@@ -81,11 +87,11 @@ void main()
     
     //--- offset X Y
     float sizeofNextSymb = .1427;
-    float stepX = (sizeofNextSymb * float(numSyb)) - 0.00;
+    float stepX = (sizeofNextSymb * float(numSymb)) - 0.00;
     sempS.x += stepX;
 
     //------------------------- Y
-        float nextY =  -.145 * (floor(float(numSyb)/float(colSymbRow)));
+        float nextY =  -.145 * (floor(float(numSymb)/float(colSymbRow)));
     float stepY = -.15 + nextY;
     sempS.y += stepY;
     
