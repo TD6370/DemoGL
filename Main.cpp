@@ -146,6 +146,7 @@ int main()
 	// Включаем блендинг
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glDisable(GL_BLEND);
 	//----------------------------------------------------
 
 	Scene = new SceneConstruction(window);

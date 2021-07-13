@@ -73,7 +73,7 @@ string ShapeBase::GetKeySectorPolygon(bool isNewPosition) {
 	else
 		pos = obj->Postranslate;
 
-	int x_sector = pos.x / obj->Storage->Clusters->SectorSizePlane;
+	int x_sector = pos.x / obj->Storage->Clusters->SectorSizePlane; 
 	int z_sector = pos.z / obj->Storage->Clusters->SectorSizePlane;
 	return std::to_string(x_sector) + "_" + std::to_string(z_sector);
 }

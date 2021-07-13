@@ -344,11 +344,23 @@ bool SceneConstruction::SetObject(int indNN) {
 
 	IsFirstCurrentObject = indNN == 0;
 	IsLastCurrentObject = countObjects == indNN;
+	CurrentIndexOrder = indNN;
 	bool isShowGUI = Storage->SceneData->IsGUI;
 	int indObj = Storage->GetIndexObjBySortInd(indNN);
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	
+
+	//TEST -----------------
+	/*glDisable(GL_BLEND);
+	if (ObjectCurrent->TypeObj == TypeObject::CursorGUI ||
+		ObjectCurrent->TypeObj == TypeObject::EditBox ||
+		ObjectCurrent->TypeObj == TypeObject::TextBox) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}*/
+	//----------------------
+
 	if (ObjectCurrent->ShellIndex != -1) {
 		ShellCurrent = Storage->GetObjectShellPrt(ObjectCurrent->ShellIndex);
 		IsHaveShell = true;
@@ -614,8 +626,8 @@ void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int
 
 //void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex,
 void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI, float valueF, vec4 valueV4, string valueS) {
+	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong) {
 
-	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS);
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, isLong);
 
 }

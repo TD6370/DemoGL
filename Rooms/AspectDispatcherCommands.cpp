@@ -35,7 +35,8 @@ void AspectDispatcherCommands::Work() {
 		//Scene->Debug("");
 	}
 
-	if (Scene->IsLastCurrentObject)
+	if (Scene->IsLastCurrentObject || 
+		Scene->IsFirstCurrentObject)
 	{
 		if (Scene->CurrentSceneCommand.Enable == false) {
 			if (ActiveCommands.size() > 0) {
@@ -60,11 +61,13 @@ void AspectDispatcherCommands::Work() {
 				return;
 			}
 
+			if (Scene->CurrentSceneCommand.IsLongCommand)
+				return;
+
 			//----- Clear not working command -----
 			if (m_commandPassCount > m_commandPassLimit)
 			{
 				m_commandPassCount = 0;
-				//return;
 				SceneSerialize* serializer = new SceneSerialize();
 				std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n";
 				Scene->CurrentSceneCommand.Enable = false;
@@ -97,7 +100,7 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 }
 
 void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI , float valueF, vec4 valueV4, string valueS)
+	int valueI , float valueF, vec4 valueV4, string valueS, bool isLong)
 {
 
 	CommandPack command = CommandPack();
@@ -109,6 +112,7 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 	command.ValueI = valueI;
 	command.ValueF = valueF;
 	command.ValueV4 = valueV4;
+	command.IsLongCommand = isLong;
 	
 	ActiveCommands.push_back(command);
 }

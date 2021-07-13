@@ -60,6 +60,7 @@ public:
 	SceneLayer* LayerScene;
 	map<string, GLuint> ShaderPrograms;
 
+	//TODO: EngineData
 	CoreMVP* ConfigMVP;
 	ControllerInput* Inputs;
 	Operator* Oper;

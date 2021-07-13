@@ -826,7 +826,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//objName = "Base_EditBox_NameObject";
 	objName = SceneData->NameSystemEditBox;
 	caption = "ох";
-	childModel = "ButtonEditBoxModel";
+	childModel = "ButtonEditBoxModel";	///!!!!!
 	color = vec3(0.117, 0.351, 0.950);
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .1), Button, color, LayerBase);
 	//SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)

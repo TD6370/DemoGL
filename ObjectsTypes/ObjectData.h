@@ -74,7 +74,14 @@ public:
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
 	//----------------------------------------
-	
+	//TODO: EngineData{
+	/*	CoreMVP* ConfigMVP;
+		ControllerInput* Inputs;
+		Operator* Oper;
+		Camera* Cam;
+		SceneParam* SceneData;
+	}*/
+	//----
 	CreatorModelData* Storage;
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;

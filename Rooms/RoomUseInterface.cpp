@@ -233,11 +233,11 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 	//--- Check Focused
 	if (CheckPointInRectangle(m_tempMousePosWorld, startPosRect, endPosRect))
 	{
-		if (IndexObjectFocused != -1 && obj->Index < FocusedOrder)
+		if (IndexObjectFocused != -1 && Scene->CurrentIndexOrder < FocusedOrder)
 			isCheckOrder = false;
 
 		if (isCheckOrder) {
-			FocusedOrder = obj->Index;
+			FocusedOrder = Scene->CurrentIndexOrder;
 			IndexObjectFocused = obj->Index;
 			IsFocused = true;
 		}
@@ -393,11 +393,42 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	if (!IsCreatingObject)
 		return;
 
+	CommandPack* command = &Scene->CurrentSceneCommand;
+
+	//--------------------------- Translate Caption to Button root
+	if (Scene->IsHaveShell && !command->Enable)
+	{
+		if (Scene->ShellCurrent->RootObjIndex == IndexObjectCreating &&
+			Scene->ShellCurrent->CaptionObjIndex == objGUI->Index)
+		{
+			auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objGUI);
+			if (objTextBox != nullptr && objTextBox->TypeObj == TextBox)
+			{
+				Scene->AddCommand(TypeCommand::ObjectReading,
+					objGUI->Index,
+					IndexObjectCreating, -1, -1, vec4(-1),
+					objTextBox->Message,
+					true);
+			}
+		}
+	}
+	//---------------------------
+
 	bool isValidObj = objGUI->Index == IndexObjectCreating;
 	if (!isValidObj)
 		return;
+	
 	if (objGUI->ActionObjectCurrent == Moving)
 		return;
+
+	string textButton = "";
+
+	//--- position selected
+	if (Scene->ReadCommand(ObjectReading))
+	{
+		textButton = command->ValueS;
+	}
+		//string textButton;
 
 	//--- obj created Control position
 	//IsCreatingObject = false;	//-- after renamed
@@ -406,8 +437,9 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	//--- Start Renaming created control
 	Scene->AddCommand(TypeCommand::RenameObject, 
 		objGUI->Index, 
-		Scene->Storage->SceneData->IndexBaseEditBox, 
-		-1,	0, vec4(objGUI->StartPos,1));
+		Scene->Storage->SceneData->IndexBaseEditBox,
+		-1, 0, vec4(objGUI->StartPos, 1),
+		textButton);
 
 	//--- Start read name TextBox creating control
 	Scene->AddCommand(TypeCommand::ObjectReading, objGUI->Index,
@@ -437,28 +469,32 @@ void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
 			return;
 
 		Scene->ReadCommand(RenameObject);
-
-		objGUI->StartPos = command->ValueV4;
+		objGUI->StartPos = vec3(command->ValueV4.x, command->ValueV4.y, objGUI->StartPos.z);
 		objGUI->IsVisible = true;
 
 		Scene->AddCommand(TypeCommand::CheckStateObjectCommand);
 
 		//-- Start - click Button edit box system
+		objGUI->SceneCommand->ValueS = command->ValueS;
 		objGUI->Click();
 	}
 
+	auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objGUI);
+
 	if (command->TargetIndex == objGUI->Index)
 	{
-		if (Scene->ReadCommand(ObjectReading))
-		{
-			//TextBox renaming control - START
-			objGUI->Click();
+		if (objGUI->TypeObj == TextBox || objGUI->TypeObj == EditBox) {
+			if (Scene->ReadCommand(ObjectReading))
+			{
+				//TextBox renaming control - START
+				objGUI->Click();
+			}
 		}
 	}
 
 	if (objGUI->ActionObjectCurrent == ActionObject::Woking)
 	{
-		auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objGUI);
+		
 		if (objTextBox != nullptr && objTextBox->TypeObj == TextBox)
 		{
 			if (Scene->ReadCommand(KeyInputCommand))
@@ -545,6 +581,12 @@ void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
 	{
 		if (isChecked)
 		{
+			auto objEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objGUI);
+			if (objGUI->TypeObj == EditBox && command->ValueS.size() != 0) {
+				objEditBox->Message = command->ValueS;
+				objEditBox->UpdateMessage();
+			}
+
 			//Start edit box
 			IndexObjectSelected = objGUI->Index;
 			objGUI->Click(); //--1.*

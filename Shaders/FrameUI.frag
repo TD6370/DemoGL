@@ -541,6 +541,9 @@ void main()
         alpha = Pressed(al, uv);
         contrastColor = .6;
         startColor = vec3(.60);
+        //TEST
+        //color = vec4(vec3(0.5), 1.0 );	
+        //return;
     }
     else if(isResizeParam)   //= 3 Rsize
     {
