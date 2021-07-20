@@ -10,7 +10,7 @@ void ObjectCursorRay::InitData()
 	ActionObjectCurrent = Stay;
 	Speed = 0.5f;
 	IsGravity = false;
-	Storage->SceneData->IndexCursorRayObj = Index;
+	EngineData->SceneData->IndexCursorRayObj = Index;
 }
 
 void ObjectCursorRay::RunAction() {
@@ -90,16 +90,19 @@ void ObjectCursorRay::CusrsorAction() {
 void ObjectCursorRay::SelectPositionOnPolygon()
 {
 	if (SelectedObjIndex != -1) {
-		std::shared_ptr<ObjectData> selObject = Storage->GetObjectPrt(SelectedObjIndex);
-
-		selObject->MeshTransform();
-
-		/*A* pa = ...;
-		B* pb1 = dynamic_cast<B*>(pa);
-		B* pb2 = static_cast<B*>(pa);
-		B* pb3 = (B*)pa;
-		B* pb4 = reinterpret_cast<B*>(pa);*/
+		m_preSelectedObjectAction = ActionObjectCurrent;
+		
+		SceneCommand->CommandType = EditObjectCommand;
+		SceneCommand->SourceIndex = Index;
+		SceneCommand->TargetIndex = SelectedObjIndex;
+		SceneCommand->ValueI = (int)Transforming;
+		SceneCommand->Enable = true;
 	}
+}
+
+void ObjectCursorRay::SelectedCompleted() {
+
+	
 }
 
 void ObjectCursorRay::TargetCompleted()
@@ -109,20 +112,20 @@ void ObjectCursorRay::TargetCompleted()
 
 void ObjectCursorRay::Push() {
 
-	if (Storage->SceneData->IsGUI)
+	if (EngineData->SceneData->IsGUI)
 		return;
 
-	if (Storage->Inputs->MBT == KeyPush) {
+	if (EngineData->Inputs->MBT == KeyPush) {
 		
-		Storage->Inputs->MBT = -1;
-		vec3 posCursorObject = GetVectorForwardFace(Storage->ConfigMVP, StartLenght, Storage->Oper);
+		EngineData->Inputs->MBT = -1;
+		vec3 posCursorObject = GetVectorForwardFace(EngineData->ConfigMVP, StartLenght, EngineData->Oper);
 		//vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
-		vec3 posTarget = GetVectorForward(Storage->ConfigMVP, EndLenght, Storage->Oper);
+		vec3 posTarget = GetVectorForward(EngineData->ConfigMVP, EndLenght, EngineData->Oper);
 		Postranslate = posCursorObject;
 		Target = posTarget;
 		ActionObjectCurrent = Moving;
 	}
-	if (Storage->Inputs->MBT == KeyClear) {
+	if (EngineData->Inputs->MBT == KeyClear) {
 		ClearSelected();
 	}
 }
@@ -130,27 +133,30 @@ void ObjectCursorRay::Push() {
 void ObjectCursorRay::ObjectSelected(int index) {
 	if (index == -1)
 		return;
+
+	PrevousSelectedObjIndex = SelectedObjIndex;
 	SelectedObjIndex = index;
 
-	auto objectSelected = Storage->GetObjectPrt(SelectedObjIndex);
-	objectSelected->Color = vec3(0, 1, 0);
-	objectSelected->IsSelected = true;
-	objectSelected->SelectedEvent();
-	ClearPrevousSelected();
-	PrevousSelectedObjIndex = index;
+	//-----------------
+	SceneCommand->CommandType = EditObjectCommand;
+	SceneCommand->SourceIndex = PrevousSelectedObjIndex; //unselected obj
+	SceneCommand->TargetIndex = SelectedObjIndex;
+	SceneCommand->ValueI = (int)Woking;
+	SceneCommand->Enable = true;
 }
 
 void ObjectCursorRay::ClearSelected() {
+	
+	SceneCommand->CommandType = EditObjectCommand;
+	SceneCommand->SourceIndex = Index;
+	SceneCommand->TargetIndex = SelectedObjIndex;
+	SceneCommand->ValueI = (int)Clearing;
+	SceneCommand->Enable = true;
+
 	SelectedObjIndex = -1;
-	ClearPrevousSelected();
 	UnselectedEvent();
 }
 
 void ObjectCursorRay::ClearPrevousSelected() {
-	if (PrevousSelectedObjIndex != -1 && PrevousSelectedObjIndex != SelectedObjIndex) {
-		auto preObject = Storage->GetObjectPrt(PrevousSelectedObjIndex);
-		preObject->IsSelected = false;
-		preObject->UnselectedEvent();
-		PrevousSelectedObjIndex = -1;
-	}
+	
 }

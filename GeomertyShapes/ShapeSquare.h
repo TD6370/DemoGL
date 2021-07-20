@@ -26,6 +26,9 @@ private:
 	vec3 m_lastPosGUI = vec3(0);
 	vec3 m_lastPosWorld = vec3(0);
 
+	float m_lenghtLineBackground = -1;
+	vec3 m_startPosParent = vec3();
+
 	void SaveSizeFactor(bool isInit = false);
 
 	void SavePosFactor(vec3 posGUI, vec3 posWorld);
@@ -36,12 +39,14 @@ public:
 	float HeightFactor = -1;
 	vec3 PosMoveFactor = vec3();
 	vec3 PosMoveSizeFactor = vec3();
-
+	
 	ShapeSquare() :ShapeBase() {};
 
 	~ShapeSquare();
 
 	void FormUpdate(bool isForce = false);
+
+	void SetOwnerPosition(float lenghtLineBackground, vec3 startPosParent);
 
 	void SetSizeControl(vec3 vertOffset);
 

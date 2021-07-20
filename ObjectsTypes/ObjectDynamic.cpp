@@ -24,7 +24,7 @@ void ObjectDynamic::InitData()
 
 void ObjectDynamic::RunAction() {
 
-	bool isPause = Storage->SceneData->IsGUI;
+	bool isPause = EngineData->SceneData->IsGUI;
 
 	if (ActionObjectCurrent != Lock && !isPause)
 	{

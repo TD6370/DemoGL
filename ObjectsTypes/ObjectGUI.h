@@ -78,6 +78,10 @@ public:
 
 	float GetTopLayer();
 
+	float GetZ();
+
+	void SetZ(float z);
+
 	string GetInfo();
 	//-------------
 

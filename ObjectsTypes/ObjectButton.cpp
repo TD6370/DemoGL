@@ -21,9 +21,9 @@ void ObjectButton::InitData()
 {
 	ObjectGUI::InitData();
 
-	if (Name == Storage->SceneData->NameSystemEditBox)
+	if (Name == EngineData->SceneData->NameSystemEditBox)
 	{
-		Storage->SceneData->IndexBaseEditBox = Index;
+		EngineData->SceneData->IndexBaseEditBox = Index;
 	}
 }
 

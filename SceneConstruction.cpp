@@ -7,6 +7,7 @@
 #include "Rooms/RoomUseInterface.h"
 #include "Rooms/AspectFactoryObjects.h"
 #include "Rooms/AspectDispatcherCommands.h"
+#include "Rooms/AspectFamilyBonds.h"
 
 #include "CreatorModelData.h"
 #include "TransformModel.h"
@@ -106,10 +107,15 @@ void SceneConstruction::ConfigRoom() {
 	roomSerializator->Init();
 	Rooms.push_back(make_unique<RoomSerializeScene>(*roomSerializator));
 
+	
+	AspectFamilyBonds* aspectFamilyBonds = new AspectFamilyBonds("FamilyBonds", this);
+	aspectFamilyBonds->Init();
+	Rooms.push_back(make_unique<AspectFamilyBonds>(*aspectFamilyBonds));
+
 	RoomUseInterface* roomInterface = new RoomUseInterface("Interface", this);
 	roomInterface->Init();
 	Rooms.push_back(make_unique<RoomUseInterface>(*roomInterface));
-
+		
 	//AspectDispatcherCommands* 
 	dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
 	dispatcherCommands->Init();
@@ -620,13 +626,11 @@ void SceneConstruction::AddCommand(CommandPack command) {
 	dispatcherCommands->AddCommand(command);
 }
 
-//void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
 void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions) {
 
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions);
 }
 
-//void SceneConstruction::AddCommand(TypeCommand commandType, int targetIndex, int sourceIndex,
 void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
 	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong) {
 

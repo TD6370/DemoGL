@@ -16,6 +16,9 @@ using glm::vec2;
 class ObjectCursorRay :
 	public ObjectDynamic
 {
+private:
+	ActionObject m_preSelectedObjectAction;
+
 public:
 	GLfloat StartLenght = 0.1f;
 	GLfloat EndLenght = 200.f;
@@ -58,4 +61,6 @@ public:
 	void SelectPositionOnPolygon();
 
 	void CusrsorAction();
+
+	void SelectedCompleted();
 };

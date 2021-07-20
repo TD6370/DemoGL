@@ -141,10 +141,15 @@ void ObjectTextBox::MeshTransform() {
 }
 
 
+void ObjectTextBox::Refresh() {
+	ObjectData::Refresh();
+	UpdateMessage();
+}
+
 void ObjectTextBox::UpdateMessage()
 {
-	if (Storage->Inputs->Action == GLFW_PRESS
-		&& Storage->Inputs->Key == GLFW_KEY_BACKSPACE)
+	if (EngineData->Inputs->Action == GLFW_PRESS
+		&& EngineData->Inputs->Key == GLFW_KEY_BACKSPACE)
 	{
 		Message.clear();
 	}

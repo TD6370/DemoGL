@@ -31,8 +31,7 @@ public:
 	int SectorSize = 10;// 100;
 	CreatorModelData* Storage;
 	WorldSectors* Sectors;
-	ShapeBase* Shape;
-	
+
 	WorldCluster();
 	
 	void PlaneClusterization();

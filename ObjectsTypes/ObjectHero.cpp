@@ -1,7 +1,5 @@
 #include "..\WorldCollision.h"
-#include "../CreatorModelData.h"  //------<<<		//##$$ 4.
-//#include "./GeomertyShapes/ShapeBase.h"			//##$$ 4.
-
+#include "../CreatorModelData.h" 
 
 #include "ObjectHero.h"
 
@@ -9,51 +7,37 @@ void ObjectHero::InitData()
 {
 	ActionObjectCurrent = Search;
 	IsGravity = true;
-	Storage->SceneData->IndexHeroObj = Index;
-
-	//LoadCursorRay();
-}
-
-void ObjectHero::LoadCursorRay()
-{
-	if (Storage->IsExistObjectByType(TypeObject::CursorRay))
-		return;
-
-	std::shared_ptr<ModelData> model = Storage->GetModelPrt("cursorRay");
-	auto obj = Storage->AddObject("CursorRay", model, CursorRay, vec3(-50, -55, 70));
-	obj->IndexObjectOwner = Index;
+	EngineData->SceneData->IndexHeroObj = Index;
 }
 
 void ObjectHero::SaveHeroOperator(bool onlyVertical) {
 	float heroHeight = 1.5;
 	float steps = 3;
 
-	//return;
-
 	//Object to Operator
 	if (onlyVertical) {
-		float opDown = Storage->Oper->m_position.y - heroHeight;
+		float opDown = EngineData->Oper->m_position.y - heroHeight;
 		float speed = (NewPostranslate.y - opDown) / steps;
 		float newPosOperatorY = opDown + speed;
 		
 		//Storage->Operator->m_position.y = NewPostranslate.y + heroHeight;
-		Storage->Oper->m_position.y = newPosOperatorY + heroHeight;
+		EngineData->Oper->m_position.y = newPosOperatorY + heroHeight;
 	}
 	else {
 		vec3 stepsV = vec3(steps);
-		vec3 opPos = Storage->Oper->m_position;
+		vec3 opPos = EngineData->Oper->m_position;
 		opPos.y -= heroHeight;
 		vec3 speed = (NewPostranslate - opPos) / stepsV;
 		vec3 newPosOperator = opPos + speed;
 
 		//Storage->Operator->m_position = vec3(NewPostranslate.x, NewPostranslate.y + heroHeight, NewPostranslate.z);
-		Storage->Oper->m_position = vec3(newPosOperator.x, newPosOperator.y + heroHeight, newPosOperator.z);
+		EngineData->Oper->m_position = vec3(newPosOperator.x, newPosOperator.y + heroHeight, newPosOperator.z);
 	}
 }
 
 vec3 ObjectHero::GetOperatorPosition()
 {
-	return Storage->Oper->m_position;
+	return EngineData->Oper->m_position;
 }
 
 void ObjectHero::LockObjectResult() {

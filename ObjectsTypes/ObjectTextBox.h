@@ -58,6 +58,8 @@ public:
 
 	void UpdateMessage();
 
+	void Refresh();
+
 	void MeshTransform();
 
 	string GetCashStateUpdateDataToShader();

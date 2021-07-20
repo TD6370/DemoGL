@@ -22,8 +22,8 @@ void ObjectGUI::InitData() {
 
 	Size = vec3(0);
 
-	if (Storage->SceneData->IndexBackgroundGUIObj == -1)//First create gui
-		Storage->SceneData->IndexBackgroundGUIObj = Index;
+	if (EngineData->SceneData->IndexBackgroundGUIObj == -1)//First create gui
+		EngineData->SceneData->IndexBackgroundGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
 }
@@ -87,7 +87,7 @@ void ObjectGUI::ActionMoving()
 
 bool ObjectGUI::GetVisible() {
 
-	return Storage->SceneData->IsGUI && IsVisible;
+	return EngineData->SceneData->IsGUI && IsVisible;
 }
 
 
@@ -148,12 +148,24 @@ float ObjectGUI::GetTopLayer() {
 	
 	if (ShellIndex != -1)
 	{
-		auto shell = Storage->GetObjectShellPrt(ShellIndex);
-		auto objRootShell = Storage->GetObjectPrt(shell->RootObjIndex);
-		shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(objRootShell);
-		return objGUI->StartPos.y;
+		if (Shell != nullptr && Shell->RootObjIndex != -1 && Shell->RootObj != nullptr) {
+			shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Shell->RootObj);
+			return objGUI->StartPos.y;
+		}
 	}
 	return StartPos.y;
+}
+
+float ObjectGUI::GetZ() {
+
+	return StartPos.z;
+}
+
+void ObjectGUI::SetZ(float z)
+{
+	if (IndexObjectOwner == -1)
+		return;
+	StartPos.z = z;
 }
 
 string ObjectGUI::GetInfo() {
@@ -163,6 +175,7 @@ string ObjectGUI::GetInfo() {
 
 	std::stringstream ss;
 	//ss << info << "	TOP: " << StartPos.y;
-	ss << info << "\nZ: " << StartPos.z << "  T: " << StartPos.y;
+	//ss << info << "\nZ: " << StartPos.z << "  T: " << StartPos.y;
+	ss << info << "\n							Z: " << StartPos.z << "  T: " << GetTopLayer();
 	return ss.str();
 }

@@ -326,7 +326,7 @@ void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
 	}
 }
 
-//===================== Check state controls =========================== TODO: aspect ??
+//===================== Check state controls =========================== 
 
 void RoomUseInterface::CheckStateObjects() {
 
@@ -352,7 +352,6 @@ void RoomUseInterface::CheckStateObjects() {
 void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
 	int typeCreate = (int)TypeObject::Button;
-	//typeCreate = (int)TypeObject::EditBox;
 
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
@@ -374,7 +373,6 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		}
 	}
 	
-	//if (command->TargetIndex == Scene->ObjectCurrent->Index) {
 	if (command->TargetIndex == objGUI->Index) {
 		
 		//--- position selected and Object created

@@ -33,7 +33,7 @@ void ObjectEditBox::AddSymbolMessage(string symbol) {
 		
 	string tempMessage = Message;
 
-	if (Storage->Inputs->Key == GLFW_KEY_BACKSPACE) {
+	if (EngineData->Inputs->Key == GLFW_KEY_BACKSPACE) {
 		Message.clear();
 	}
 

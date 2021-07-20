@@ -81,8 +81,10 @@ public:
 	shared_ptr<ModelData> GetModelPrt(int index);
 	shared_ptr<ModelData> GetModelPrt(string key);
 
-	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, bool isLoading = false);
+	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, int headIndex = -1, bool isLoading = false);
+
 	shared_ptr<BaseShell> GetObjectShellPrt(int index);
+
 	void FillShellComponents();
 	void FillShellComponents(int indObj);
 
@@ -111,6 +113,7 @@ public:
 	void ClearModels();
 
 	void LoadShells();
+	void LoadShellsLinks();
 
 	bool IsExistObjectByName(string key);
 
@@ -123,6 +126,8 @@ public:
 	int SceneObjectsSize();
 
 	void UpdateObjectsOrders();
+
+	void UpdateFamilBonds();
 
 	//shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectGUI> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0), TypeLayer p_layer = LayerNone);

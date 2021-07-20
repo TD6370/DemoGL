@@ -73,8 +73,8 @@ string ShapeBase::GetKeySectorPolygon(bool isNewPosition) {
 	else
 		pos = obj->Postranslate;
 
-	int x_sector = pos.x / obj->Storage->Clusters->SectorSizePlane; //##ED
-	int z_sector = pos.z / obj->Storage->Clusters->SectorSizePlane; //##ED
+	int x_sector = pos.x / obj->EngineData->Clusters->SectorSizePlane;
+	int z_sector = pos.z / obj->EngineData->Clusters->SectorSizePlane;
 	return std::to_string(x_sector) + "_" + std::to_string(z_sector);
 }
 
@@ -258,7 +258,7 @@ void ShapeBase::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 
 	ObjectPhysic* obj = m_objPhysic;
 
-	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP; //##ED
+	glm::mat4 MVP = obj->EngineData->ConfigMVP->MVP;
 	glm::mat4 transform = obj->TransformResult;
 
 	vec3 vertBottomLeft;
@@ -298,7 +298,7 @@ vec2 ShapeBase::GetStartPositWorld() {
 
 	ObjectPhysic* obj = m_objPhysic;
 
-	glm::mat4 MVP = obj->Storage->ConfigMVP->MVP;
+	glm::mat4 MVP = obj->EngineData->ConfigMVP->MVP;
 	glm::mat4 transform = obj->TransformResult;
 
 	vec3 vertBottomLeft;
@@ -326,6 +326,6 @@ vec2 ShapeBase::GetStartPositWorld() {
 void ShapeBase::Billboard() {
 
 	ObjectPhysic* obj = m_objPhysic;
-	obj->TranslateAngle.y = obj->Storage->Oper->HorizontalAngle + (0.5 * M_PI); //##ED
-	obj->TranslateAngle.z = -obj->Storage->Oper->VerticalAngle; //##ED
+	obj->TranslateAngle.y = obj->EngineData->Oper->HorizontalAngle + (0.5 * M_PI);
+	obj->TranslateAngle.z = -obj->EngineData->Oper->VerticalAngle;
 }

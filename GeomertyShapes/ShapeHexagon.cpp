@@ -20,13 +20,7 @@ void ShapeHexagon::SelectVertexBlock() {
 	ObjectPhysic* obj = m_objPhysic;
 	vec3 posCursor;
 
-	int indCursor = obj->Storage->SceneData->IndexCursorRayObj; //##ED
-	std::shared_ptr<ObjectData> CusrorObj = obj->Storage->GetObjectPrt(indCursor); //##ED
-	posCursor = CusrorObj->Postranslate;
-
-	/*int indHero = Storage->SceneParam->IndexHeroObj;
-	std::shared_ptr<ObjectData> HeroObj = Storage->GetObjectPrt(indHero);
-	posCursor = HeroObj->Postranslate;*/
+	posCursor = obj->Target;
 
 	int distMin = -1;
 	for (int indV = 0; indV < 4; indV++) {
@@ -60,9 +54,9 @@ void ShapeHexagon::ResizeVerticaleWall(int keyUpTopVertex, int keyDownTopVertex)
 		return;
 
 	float upSize = 1;
-	if (obj->Storage->Inputs->Key == keyUpTopVertex) //##ED
+	if (obj->EngineData->Inputs->Key == keyUpTopVertex)
 		upSize = 1;
-	if (obj->Storage->Inputs->Key == keyDownTopVertex) //##ED
+	if (obj->EngineData->Inputs->Key == keyDownTopVertex)
 		upSize = -1;
 
 	vec3 vertSelect = GetTop(obj->IndexVertexTransform);

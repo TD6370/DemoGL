@@ -22,9 +22,12 @@ public:
 	int RootObjIndex = -1;
 	int CaptionObjIndex = -1;
 	int HeadIndexList = -1;
+	
+	shared_ptr<ObjectData> RootObj;
+	shared_ptr<ObjectData> CaptionObj;
+	shared_ptr<ObjectData> HeadObj;
 
-	//TODO: pointer data obj
-
+	//Child shapes
 	map <string, int> Components = map <string, int>{};
 	void AddComponent(string name, int value);
 	int ComponentIndex(string name);

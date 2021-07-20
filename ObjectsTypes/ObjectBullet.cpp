@@ -44,12 +44,12 @@ void ObjectBullet::TargetCompleted()
 
 void ObjectBullet::Push() {
 
-	if (Storage->SceneData->IsGUI)
+	if (EngineData->SceneData->IsGUI)
 		return;
 
-	if (Storage->Inputs->MBT == KeyPush) {
-		vec3 posCursorObject = GetVectorForwardFace(Storage->ConfigMVP, StartLenght, Storage->Oper);
-		vec3 posTarget = GetVectorForward(Storage->ConfigMVP, EndLenght, Storage->Oper);
+	if (EngineData->Inputs->MBT == KeyPush) {
+		vec3 posCursorObject = GetVectorForwardFace(EngineData->ConfigMVP, StartLenght, EngineData->Oper);
+		vec3 posTarget = GetVectorForward(EngineData->ConfigMVP, EndLenght, EngineData->Oper);
 		Postranslate = posCursorObject;
 		Target = posTarget;
 		ActionObjectCurrent = Moving;

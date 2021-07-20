@@ -35,9 +35,9 @@ Name: Mon
 Model: mon
 Index: 1
 Layer: LayerNone
-Pos: 29.8317 -50.6613 38.0909
-Target: 34.1606 -50.6614 27.7016
-Action: Moving
+Pos: 12.9613 -52.1831 47.3406
+Target: 32.9613 -52.1831 28.3406
+Action: Look
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -67,744 +67,8 @@ Name: Mon_2
 Model: mon
 Index: 2
 Layer: LayerNone
-Pos: -12.7102 -53.0454 -8.56167
-Target: 2.28982 -53.0454 -13.5617
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_3
-Model: mon
-Index: 3
-Layer: LayerNone
-Pos: -9.1751 -53.0527 31.1581
-Target: -23.1751 -53.0527 40.1581
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_4
-Model: mon
-Index: 4
-Layer: LayerNone
-Pos: -34.6885 -52.9786 -4.33492
-Target: -43.2654 -52.9809 9.70011
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_5
-Model: mon
-Index: 5
-Layer: LayerNone
-Pos: -9 -50 -20
-Target: -2.45984 0 -40.9338
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 1 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_6
-Model: mon
-Index: 6
-Layer: LayerNone
-Pos: -34.993 -44.0798 -27.764
-Target: -45.5722 -50.0666 -33.4464
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_7
-Model: mon
-Index: 7
-Layer: LayerNone
-Pos: -27.361 -53.0471 36.4606
-Target: -36.7848 -53.0525 27.0271
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 1 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_8
-Model: mon
-Index: 8
-Layer: LayerNone
-Pos: -33.9172 -53.0109 24.8449
-Target: -17.2214 -53.0111 39.6857
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_9
-Model: mon
-Index: 9
-Layer: LayerNone
-Pos: 28.4292 -51.6501 41.6682
-Target: 30.9578 -52.9944 35.5039
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 1 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_10
-Model: mon
-Index: 10
-Layer: LayerNone
-Pos: -44.1403 -48.9666 -20.2291
-Target: -37.1403 -48.9666 -32.2291
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_11
-Model: mon
-Index: 11
-Layer: LayerNone
-Pos: 43.3146 -53.0779 43.5706
-Target: 48.3146 -53.0779 32.5706
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_12
-Model: mon
-Index: 12
-Layer: LayerNone
-Pos: 23.1133 -48.1844 34.0853
-Target: 26.3134 -50.9221 39.6127
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_13
-Model: mon
-Index: 13
-Layer: LayerNone
-Pos: -34.6227 -52.9929 36.7666
-Target: -27.6227 -52.9929 28.7666
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_14
-Model: mon
-Index: 14
-Layer: LayerNone
-Pos: 1.52843 -52.1919 23.4998
-Target: 18.5052 -52.9546 34.5347
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_15
-Model: mon
-Index: 15
-Layer: LayerNone
-Pos: -46.5734 -52.9571 21.3104
-Target: -32.5734 -52.9571 3.31039
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_16
-Model: mon
-Index: 16
-Layer: LayerNone
-Pos: -38.2333 -52.9838 6.2207
-Target: -30.2333 -52.9838 25.2207
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_17
-Model: mon
-Index: 17
-Layer: LayerNone
-Pos: 14.4548 -53.0052 -18.4858
-Target: 33.4548 -53.0052 -6.48576
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_18
-Model: mon
-Index: 18
-Layer: LayerNone
-Pos: -7.70115 -53.0364 17.6248
-Target: -22.7011 -53.0364 -2.37523
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_19
-Model: mon
-Index: 19
-Layer: LayerNone
-Pos: -21.3435 -52.9027 -15.4768
-Target: -9.42955 -47.6684 -4.30751
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_20
-Model: mon
-Index: 20
-Layer: LayerNone
-Pos: -8.99225 -53.0006 -17.8507
-Target: -3.06051 -52.9854 -30.0059
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 1 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_21
-Model: mon
-Index: 21
-Layer: LayerNone
-Pos: 13.7044 -52.2005 8.90513
-Target: 23.7432 -52.2319 -3.28481
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_22
-Model: mon
-Index: 22
-Layer: LayerNone
-Pos: -27.2864 -53.0413 39.3379
-Target: -17.1601 -53.0374 49.4642
-Action: Moving
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_23
-Model: mon
-Index: 23
-Layer: LayerNone
-Pos: -23.7883 -53.055 28.8367
-Target: -18.7883 -53.055 35.8367
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_24
-Model: mon
-Index: 24
-Layer: LayerNone
-Pos: -11.1277 -53.0436 -0.360675
-Target: 0.872322 -53.0436 -11.3607
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_25
-Model: mon
-Index: 25
-Layer: LayerNone
-Pos: -39.5645 -52.9478 38.0424
-Target: -21.9345 -52.9467 46.8574
+Pos: -23.2503 -53.0211 -37.043
+Target: -9.26608 -53.0192 -27.7201
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -833,7 +97,7 @@ IsChecked: 0
 Type: Solid
 Name: Box
 Model: box
-Index: 26
+Index: 3
 Layer: LayerNone
 Pos: 0 -35 0
 Target: 0 0 0
@@ -865,7 +129,7 @@ IsChecked: 0
 Type: Solid
 Name: Box2
 Model: box
-Index: 27
+Index: 4
 Layer: LayerNone
 Pos: 0 -25 0
 Target: 0 0 0
@@ -897,7 +161,7 @@ IsChecked: 0
 Type: Solid
 Name: Box3
 Model: box
-Index: 28
+Index: 5
 Layer: LayerNone
 Pos: -50 -55 70
 Target: 0 0 0
@@ -929,15 +193,15 @@ IsChecked: 0
 Type: Block
 Name: BlockBox
 Model: box
-Index: 29
+Index: 6
 Layer: LayerNone
 Pos: -10 -54.019 -10
-Target: 0 0 0
+Target: 6.75898 -44.8261 14.0126
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 1 1 1
+Color: 0 0 0
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
@@ -960,45 +224,45 @@ IsChecked: 0
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
-Vertex: -1 -1 -1
+Vertex: -3.26334 -1 29.2112
 Vertex: 1 1 -1
-Vertex: -1 -1 -1
-Vertex: -1 1 -1
-Vertex: -1 -1 1
-Vertex: -1 1 1
-Vertex: -1 1 -1
-Vertex: -1 -1 1
-Vertex: -1 1 -1
-Vertex: -1 -1 -1
-Vertex: 1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 1 1
-Vertex: -1 -1 1
+Vertex: -3.26334 -1 29.2112
+Vertex: -3.26334 1 29.2112
+Vertex: 22.0403 -1 22.1015
+Vertex: 22.0403 1 22.1015
+Vertex: -3.26334 1 29.2112
+Vertex: 22.0403 -1 22.1015
+Vertex: -3.26334 1 29.2112
+Vertex: -3.26334 -1 29.2112
+Vertex: 10.404 -1 7.64051
+Vertex: 10.404 1 7.64051
+Vertex: 22.0403 -1 22.1015
+Vertex: 10.404 1 7.64051
+Vertex: 22.0403 1 22.1015
+Vertex: 22.0403 -1 22.1015
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: 1 -1 1
+Vertex: 10.404 -1 7.64051
 Vertex: 1 1 -1
-Vertex: 0.999999 1 1
-Vertex: 1 -1 1
+Vertex: 10.404 1 7.64051
+Vertex: 10.404 -1 7.64051
 Vertex: 1 1 -1
-Vertex: -1 1 -1
-Vertex: 0.999999 1 1
-Vertex: -1 1 -1
-Vertex: -1 1 1
-Vertex: 0.999999 1 1
+Vertex: -3.26334 1 29.2112
+Vertex: 10.404 1 7.64051
+Vertex: -3.26334 1 29.2112
+Vertex: 22.0403 1 22.1015
+Vertex: 10.404 1 7.64051
 Vertex: 1 -1 -1
-Vertex: 1 -1 1
-Vertex: -1 -1 1
+Vertex: 10.404 -1 7.64051
+Vertex: 22.0403 -1 22.1015
 Vertex: 1 -1 -1
-Vertex: -1 -1 1
-Vertex: -1 -1 -1
+Vertex: 22.0403 -1 22.1015
+Vertex: -3.26334 -1 29.2112
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox1
 Model: box
-Index: 30
+Index: 7
 Layer: LayerNone
 Pos: -20 -54.0329 -10
 Target: 0 0 0
@@ -1067,15 +331,15 @@ Vertex: -1 -1 -1
 Type: Block
 Name: BlockBox2
 Model: box
-Index: 31
+Index: 8
 Layer: LayerNone
 Pos: -10 -53.9908 -20
-Target: 0 0 0
+Target: 15.2451 -54.7712 5.58869
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 1 1 1
+Color: 0 0 0
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
@@ -1096,47 +360,47 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-Vertex: 1 1 -1
-Vertex: 1 -1 -1
+Vertex: 18.7945 1 10.1547
+Vertex: 18.7945 -1 10.1547
 Vertex: -1 -1 -1
-Vertex: 1 1 -1
+Vertex: 18.7945 1 10.1547
 Vertex: -1 -1 -1
 Vertex: -1 1 -1
-Vertex: -1 -1 1
-Vertex: -1 1 1
+Vertex: 25.2451 -1 25.5887
+Vertex: 25.2451 1 25.5887
 Vertex: -1 1 -1
-Vertex: -1 -1 1
+Vertex: 25.2451 -1 25.5887
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
-Vertex: 1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 1 1
-Vertex: -1 -1 1
-Vertex: 1 -1 -1
-Vertex: 1 1 -1
-Vertex: 1 -1 1
-Vertex: 1 1 -1
-Vertex: 0.999999 1 1
-Vertex: 1 -1 1
-Vertex: 1 1 -1
+Vertex: 35.9943 -1 26.0156
+Vertex: 35.9943 1 26.0156
+Vertex: 25.2451 -1 25.5887
+Vertex: 35.9943 1 26.0156
+Vertex: 25.2451 1 25.5887
+Vertex: 25.2451 -1 25.5887
+Vertex: 18.7945 -1 10.1547
+Vertex: 18.7945 1 10.1547
+Vertex: 35.9943 -1 26.0156
+Vertex: 18.7945 1 10.1547
+Vertex: 35.9943 1 26.0156
+Vertex: 35.9943 -1 26.0156
+Vertex: 18.7945 1 10.1547
 Vertex: -1 1 -1
-Vertex: 0.999999 1 1
+Vertex: 35.9943 1 26.0156
 Vertex: -1 1 -1
-Vertex: -1 1 1
-Vertex: 0.999999 1 1
-Vertex: 1 -1 -1
-Vertex: 1 -1 1
-Vertex: -1 -1 1
-Vertex: 1 -1 -1
-Vertex: -1 -1 1
+Vertex: 25.2451 1 25.5887
+Vertex: 35.9943 1 26.0156
+Vertex: 18.7945 -1 10.1547
+Vertex: 35.9943 -1 26.0156
+Vertex: 25.2451 -1 25.5887
+Vertex: 18.7945 -1 10.1547
+Vertex: 25.2451 -1 25.5887
 Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox3
 Model: box
-Index: 32
+Index: 9
 Layer: LayerNone
 Pos: -20 -53.9883 -20
 Target: 0 0 0
@@ -1205,7 +469,7 @@ Vertex: -1 -1 -1
 Type: Solid
 Name: M_P_1
 Model: marker_Point
-Index: 33
+Index: 10
 Layer: LayerNone
 Pos: -50 0 0
 Target: 0 0 0
@@ -1237,7 +501,7 @@ IsChecked: 0
 Type: Solid
 Name: M_P_2
 Model: marker_Point
-Index: 34
+Index: 11
 Layer: LayerNone
 Pos: -50 0 0
 Target: 0 0 0
@@ -1269,7 +533,7 @@ IsChecked: 0
 Type: Bullet
 Name: Bullet
 Model: marker_Point
-Index: 35
+Index: 12
 Layer: LayerNone
 Pos: 0 0 0
 Target: 0 0 0
@@ -1301,10 +565,10 @@ IsChecked: 0
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Index: 36
+Index: 13
 Layer: LayerNone
-Pos: 83.5185 -45.4414 -43.608
-Target: 85.3441 -45.2862 -44.6699
+Pos: -31.6793 -76.0157 -51.0531
+Target: -33.3046 -76.7368 -53.0727
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -1333,9 +597,9 @@ IsChecked: 0
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Index: 37
+Index: 14
 Layer: LayerNone
-Pos: 29.8317 -50.6613 38.0909
+Pos: 12.9613 -52.1831 47.3406
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1365,9 +629,9 @@ IsChecked: 0
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Index: 38
+Index: 15
 Layer: LayerNone
-Pos: 0 0 0
+Pos: 13.0437 -54.1831 46.8363
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1397,9 +661,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Index: 39
+Index: 16
 Layer: LayerNone
-Pos: 32.143 -52.6617 36.7118
+Pos: 14.1064 -54.1447 46.6117
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1429,9 +693,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Index: 40
+Index: 17
 Layer: LayerNone
-Pos: 28.9316 -52.6547 36.7084
+Pos: 9.10329 -53.5945 45.3934
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1461,9 +725,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Index: 41
+Index: 18
 Layer: LayerNone
-Pos: 28.9073 -52.6623 39.9004
+Pos: 10.3907 -55.0597 48.8958
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1493,10 +757,10 @@ IsChecked: 0
 Type: Hero
 Name: Hero
 Model: homo
-Index: 42
+Index: 19
 Layer: LayerNone
-Pos: 0 -54.0171 5
-Target: 0 -54.0171 5
+Pos: 17.5708 -43.4095 32.3212
+Target: 17.5708 -43.4095 32.3212
 Action: Search
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -1525,22 +789,22 @@ IsChecked: 0
 Type: CursorRay
 Name: CursorRay
 Model: cursorRay
-Index: 43
+Index: 20
 Layer: LayerNone
-Pos: -50 -55 70
-Target: 0 0 0
+Pos: 15.2451 -54.7712 5.58869
+Target: -90.8086 -108.572 -128.539
 Action: Stay
-IndexObjectOwner: 42
+IndexObjectOwner: 19
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
+Command: EditObjectCommand
+CommandSourceIndex: 20
+CommandTargetIndex: 8
+CommandValueI: 8
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: CommandDescription:
+CommandDescription: CursorRay
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -1557,9 +821,9 @@ IsChecked: 0
 Type: Button
 Name: BackContectGUI
 Model: ConextFrameModel
-Index: 44
+Index: 21
 Layer: LayerBackground
-Pos: -0.0415184 -52.4256 2.4597
+Pos: 7.24259 -52.451 8.43871
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -1593,12 +857,12 @@ IsToogleButon: 0
 Type: GUI
 Name: TEST3
 Model: FrameModel
-Index: 45
+Index: 22
 Layer: LayerGUI
-Pos: 0.358375 -52.4356 2.44865
+Pos: 6.54332 -52.6715 8.30162
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 1 1 1
@@ -1622,23 +886,23 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.4 0.01 0.002
+StartPos: 0.71254 0.220468 0.002
 SizePanel: 1.1 0.2
 ------------------------------------------------------------------
 Type: Button
 Name: ButtonEditOn
 Model: ButtonModel
-Index: 46
+Index: 23
 Layer: LayerBase
-Pos: 0.00868249 -52.4757 2.46191
+Pos: 7.19435 -52.5011 8.4243
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 1 1 0
 Command: EditGUI_OnOff
-CommandSourceIndex: 46
+CommandSourceIndex: 23
 CommandTargetIndex: -1
 CommandValueI: 0
 CommandValueF: 0
@@ -1664,17 +928,17 @@ IsToogleButon: 1
 Type: Button
 Name: ButtonCreateObjGUI
 Model: ButtonModel
-Index: 47
+Index: 24
 Layer: LayerGUI
-Pos: 0.151453 -52.4542 2.45475
+Pos: 7.09567 -52.5011 8.40823
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 0
 NextItemShellIndex: -1
 Color: 1 1 0
 Command: SelectPosForObject
-CommandSourceIndex: 47
+CommandSourceIndex: 24
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: 0
@@ -1693,19 +957,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.192989 0.0286089 0.002
-SizePanel: 0.3 0.2
+StartPos: 0.15 0.05 0.002
+SizePanel: 0.385438 0.109133
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
 Name: Button_TextBox
 Model: TextBoxModel
-Index: 48
+Index: 25
 Layer: LayerGUI
-Pos: -0.817052 -51.4847 2.51613
+Pos: 8.04944 -51.5311 8.58503
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 47
+IndexObjectOwner: 24
 ShellIndex: 0
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1736,12 +1000,12 @@ Message: ñîçäàòü
 Type: TextBox
 Name: TextBoxObject
 Model: TextBoxModel
-Index: 49
+Index: 26
 Layer: LayerGUI
-Pos: -0.520695 -51.9458 2.49167
+Pos: 7.42658 -51.7987 8.46529
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1765,25 +1029,25 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.5 0.5 0.002
+StartPos: 0.794255 0.327639 0.0032
 SizePanel: 1.5 1
 Message: ïðèâåò ìèð è äîáðîå óòðî
 ------------------------------------------------------------------
 Type: Button
 Name: SystemRootEditBox
 Model: ButtonEditBoxModel
-Index: 50
+Index: 27
 Layer: LayerBase
-Pos: 0.27782 -53.7434 2.41517
+Pos: 0.358116 -53.501 2.531
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 1
 NextItemShellIndex: -1
 Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 50
-CommandTargetIndex: 51
+CommandSourceIndex: 27
+CommandTargetIndex: 28
 CommandValueI: 1
 CommandValueF: 0
 CommandValueS: ýõ
@@ -1801,19 +1065,19 @@ IsTransformable: 0
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.320503 1.31831 0.005
+StartPos: 0.456591 0.642748 0.005
 SizePanel: 0.7 0.1
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
 Name: SystemEditBox
 Model: EditBoxModel
-Index: 51
+Index: 28
 Layer: LayerBase
-Pos: -0.670715 -52.7938 2.47531
+Pos: -0.598803 -52.5595 2.47783
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 50
+IndexObjectOwner: 27
 ShellIndex: 1
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1839,17 +1103,17 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.03 0.006
 SizePanel: 1.5 1
-Message: ûâàâàâàûàûâ
+Message: àààà
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Index: 52
+Index: 29
 Layer: LayerSystem
-Pos: 0.131042 -52.5765 2.46027
+Pos: 7.7298 -52.2784 8.52169
 Target: 0 0 0
 Action: Moving
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0.2 0.5 0.1
@@ -1873,18 +1137,18 @@ IsTransformable: 0
 IsUsable: 0
 IsChecked: 0
 Specific:
-StartPos: 1.12832 1.10402 0.01
+StartPos: 0.45937 0.7938 0.01
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_53
+Name: ButtonCreateObjGUI_30
 Model: ButtonModel
-Index: 53
+Index: 30
 Layer: LayerGUI
-Pos: 0.858766 -53.335 2.40552
+Pos: 6.1422 -53.878 8.23392
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 2
 NextItemShellIndex: -1
 Color: 1 1 0
@@ -1908,19 +1172,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.90152 0.90982 0.002
-SizePanel: 0.393696 0.160381
+StartPos: 1.11919 1.42696 0.0022
+SizePanel: 0.4 0.2
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_54
+Name: Button_TextBox_31
 Model: TextBoxModel
-Index: 54
+Index: 31
 Layer: LayerGUI
-Pos: -0.0824921 -52.4234 2.46428
+Pos: 7.09601 -52.908 8.41051
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 53
+IndexObjectOwner: 30
 ShellIndex: 2
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1944,19 +1208,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.0373173 0.0678997 0.003
+StartPos: 0.01 0.01 0.0034
 SizePanel: 1.5 1
-Message: ûûôâûôâ
+Message: ïî
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_55
+Name: ButtonCreateObjGUI_32
 Model: ButtonModel
-Index: 55
+Index: 32
 Layer: LayerGUI
-Pos: 0.634974 -53.4289 2.40991
+Pos: 6.65054 -53.5403 8.33016
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 3
 NextItemShellIndex: -1
 Color: 1 1 0
@@ -1980,19 +1244,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.677703 1.00376 0.002
-SizePanel: 0.548816 0.156132
+StartPos: 0.60182 1.08925 0.0024
+SizePanel: 0.4 0.2
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_56
+Name: Button_TextBox_33
 Model: TextBoxModel
-Index: 56
+Index: 33
 Layer: LayerGUI
-Pos: -0.316205 -52.506 2.46933
+Pos: 7.60436 -52.5703 8.50675
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 55
+IndexObjectOwner: 32
 ShellIndex: 3
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -2016,19 +1280,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.0273795 0.0566337 0.003
+StartPos: 0.01 0.01 0.0036
 SizePanel: 1.5 1
-Message: ôâûâññññññ
+Message: óóó
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_57
+Name: ButtonCreateObjGUI_34
 Model: ButtonModel
-Index: 57
+Index: 34
 Layer: LayerGUI
-Pos: 0.863389 -53.628 2.39658
+Pos: 6.52508 -53.626 8.30615
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 4
 NextItemShellIndex: -1
 Color: 1 1 0
@@ -2052,19 +1316,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.906429 1.20291 0.002
-SizePanel: 0.4 0.2
+StartPos: 0.729557 1.17498 0.0026
+SizePanel: 0.640299 0.443634
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_58
+Name: Button_TextBox_35
 Model: TextBoxModel
-Index: 58
+Index: 35
 Layer: LayerGUI
-Pos: 0.0201563 -52.6638 2.45376
+Pos: 7.26784 -52.6785 8.44162
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 57
+IndexObjectOwner: 34
 ShellIndex: 4
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -2088,19 +1352,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.135342 0.0153466 0.003
+StartPos: 0.225017 0.0325127 0.0038
 SizePanel: 1.5 1
-Message: ûà
+Message: íåò
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_59
+Name: ButtonCreateObjGUI_36
 Model: ButtonModel
-Index: 59
+Index: 36
 Layer: LayerGUI
-Pos: 0.982209 -53.2238 2.40489
+Pos: 5.964 -53.0558 8.19105
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 44
+IndexObjectOwner: 21
 ShellIndex: 5
 NextItemShellIndex: -1
 Color: 1 1 0
@@ -2124,19 +1388,19 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 1.02492 0.798528 0.002
-SizePanel: 0.4 0.2
+StartPos: 1.30229 0.604796 0.0026
+SizePanel: 0.384026 0.0970773
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_60
+Name: Button_TextBox_37
 Model: TextBoxModel
-Index: 60
+Index: 37
 Layer: LayerGUI
-Pos: 0.0935875 -52.3374 2.46119
+Pos: 6.83372 -52.0917 8.35101
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 59
+IndexObjectOwner: 36
 ShellIndex: 5
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -2160,224 +1424,8 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.0900052 0.0932522 0.003
+StartPos: 0.0957259 0.0158098 0.004
 SizePanel: 1.5 1
-Message: öóóóó
-------------------------------------------------------------------
-Type: Button
-Name: ButtonCreateObjGUI_61
-Model: ButtonModel
-Index: 61
-Layer: LayerGUI
-Pos: 0.703359 -53.1625 2.41571
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 44
-ShellIndex: 6
-NextItemShellIndex: -1
-Color: 1 1 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 0
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.745866 0.737221 0.002
-SizePanel: 0.666873 0.113437
-IsToogleButon: 0
-------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_62
-Model: TextBoxModel
-Index: 62
-Layer: LayerGUI
-Pos: -0.226868 -52.2194 2.47506
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 61
-ShellIndex: 6
-NextItemShellIndex: -1
-Color: 0.117 0.351 0.95
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 1
-IsFocusable: 0
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.0483233 0.036507 0.003
-SizePanel: 1.5 1
-Message: ýõôôôôôôôôôô
-------------------------------------------------------------------
-Type: Button
-Name: ButtonCreateObjGUI_63
-Model: ButtonModel
-Index: 63
-Layer: LayerGUI
-Pos: 1.00357 -53.5324 2.39493
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 44
-ShellIndex: 7
-NextItemShellIndex: -1
-Color: 1 1 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 0
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 1.04659 1.10733 0.002
-SizePanel: 0.475129 0.243811
-IsToogleButon: 0
-------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_64
-Model: TextBoxModel
-Index: 64
-Layer: LayerGUI
-Pos: 0.0350647 -52.5629 2.45631
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 63
-ShellIndex: 7
-NextItemShellIndex: -1
-Color: 0.117 0.351 0.95
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 1
-IsFocusable: 0
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.01 0.01 0.003
-SizePanel: 1.5 1
-Message: ýõ
-------------------------------------------------------------------
-Type: Button
-Name: ButtonCreateObjGUI_65
-Model: ButtonModel
-Index: 65
-Layer: LayerGUI
-Pos: 0.277656 -53.7433 2.41198
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 44
-ShellIndex: 8
-NextItemShellIndex: -1
-Color: 1 1 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 0
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.320503 1.31831 0.002
-SizePanel: 1.51243 0.577337
-IsToogleButon: 0
-------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_66
-Model: TextBoxModel
-Index: 66
-Layer: LayerGUI
-Pos: -0.295123 -53.0467 2.45242
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 65
-ShellIndex: 8
-NextItemShellIndex: -1
-Color: 0.117 0.351 0.95
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 1
-IsFocusable: 0
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.406196 0.283014 0.003
-SizePanel: 1.5 1
-Message: ûâàâàâàûàûâ
+Message: àààà
 ------------------------------------------------------------------
 

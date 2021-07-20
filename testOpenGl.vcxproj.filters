@@ -189,6 +189,9 @@
     <ClCompile Include="SceneLayer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Rooms\AspectFamilyBonds.cpp">
+      <Filter>Rooms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="SceneLayer.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\AspectFamilyBonds.h">
+      <Filter>Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

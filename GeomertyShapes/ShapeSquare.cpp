@@ -15,10 +15,16 @@ ShapeSquare::~ShapeSquare() {
 
 }
 
+void ShapeSquare::SetOwnerPosition(float lenghtLineBackground, vec3 startPosParent) {
+
+	m_lenghtLineBackground = lenghtLineBackground;
+	m_startPosParent = startPosParent;
+}
+
 
 void ShapeSquare::FormUpdate(bool isForce) {
 	ObjectGUI* obj = m_objGUI;
-	if (!isForce && !obj->Storage->SceneData->IsGUI) //##ED
+	if (!isForce && !obj->EngineData->SceneData->IsGUI)
 		return;
 
 	//================================================== TEST
@@ -31,7 +37,7 @@ void ShapeSquare::FormUpdate(bool isForce) {
 
 	vec3 directionOut = vec3(0);
 	obj->PanelDepth = 3.8;
-	int indexBackground = obj->Storage->SceneData->IndexBackgroundGUIObj;
+	int indexBackground = obj->EngineData->SceneData->IndexBackgroundGUIObj;
 
 	if (obj->IsAbsolutePosition)
 	{
@@ -39,14 +45,17 @@ void ShapeSquare::FormUpdate(bool isForce) {
 		//-----------------------------
 		int indOwner = obj->IndexObjectOwner;
 		if (indOwner == -1)
-			indOwner = obj->Storage->SceneData->IndexBackgroundGUIObj;
+			indOwner = obj->EngineData->SceneData->IndexBackgroundGUIObj;
 		if (obj->IndexObjectOwner != -1)
 		{
 			//---- normalize position on center backgruong control
-			//auto objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
-			auto objOwn = obj->Storage->GetObjectPrt(indexBackground);
-			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(objOwn);
-			float lenghtLineOwner = objPh->Shape->GetLineLenght(0);
+			
+			//auto objOwn = obj->Storage->GetObjectPrt(indexBackground);
+			//auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(objOwn);
+			//float lenghtLineOwner = objPh->Shape->GetLineLenght(0);
+			//##!!!
+			float lenghtLineOwner = m_lenghtLineBackground;
+
 			float lenghtLine = obj->Shape->GetLineLenght(0);
 			float offsetOwner = lenghtLineOwner / 2;
 			float offsetAbs = lenghtLine / 2;
@@ -55,17 +64,20 @@ void ShapeSquare::FormUpdate(bool isForce) {
 			if (obj->IndexObjectOwner != indexBackground)
 			{
 				//---- normalize position on parent control
-				objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
+				/*objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
 				auto  objGUI = std::dynamic_pointer_cast<ObjectGUI>(objOwn);
 				offsetOfCenter.x -= objGUI->StartPos.x;
-				offsetOfCenter.y -= objGUI->StartPos.y;
+				offsetOfCenter.y -= objGUI->StartPos.y;*/
+				//##!!!
+				offsetOfCenter.x -= m_startPosParent.x;
+				offsetOfCenter.y -= m_startPosParent.y;
 			}
 		}
 
 		vec3 startPos = vec3(obj->StartPos.x - offsetOfCenter.x, obj->StartPos.y - offsetOfCenter.y, obj->StartPos.z); //when SetSizeControl - is disabled
-		obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->Storage->ConfigMVP,
+		obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP,
 			obj->PanelDepth - obj->StartPos.z,
-			obj->Storage->Oper, startPos);
+			obj->EngineData->Oper, startPos);
 
 		//================================================== TEST
 		//TEST -- hystory move pos TextBox
@@ -85,10 +97,10 @@ void ShapeSquare::FormUpdate(bool isForce) {
 	}
 	else {
 		if (obj->StartPos == vec3(0)) {
-			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFace(obj->Storage->ConfigMVP, obj->PanelDepth, obj->Storage->Oper);
+			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFace(obj->EngineData->ConfigMVP, obj->PanelDepth, obj->EngineData->Oper);
 		}
 		else {
-			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->Storage->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->Storage->Oper, obj->StartPos);
+			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->EngineData->Oper, obj->StartPos);
 		}
 	}
 

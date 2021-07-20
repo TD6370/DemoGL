@@ -35,25 +35,14 @@ vec3 color_yelow = vec3(0, 1, 1);
 
 WorldCluster::WorldCluster() {
 	Sectors = new WorldSectors();
-
-	Shape = new ShapeBase();
 }
 
 void WorldCluster::PlaneClusterization()
 {
-	
+	shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
+	shared_ptr<ModelData> model = object->ModelPtr;
+	vector<shared_ptr<Plane>> planes = object->Shape->Planes;
 
-	std::shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
-	std::shared_ptr<ModelData> model = object->ModelPtr;
-	//std::vector< glm::vec3 > vertices = model->Vertices;
-	//std::vector<Plane> planes = *object->Planes;
-	std::vector<shared_ptr<Plane>> planes = object->Shape->Planes;
-
-	//TEST
-	//auto info = object->GetInfo();
-
-	//for (const auto& vec : planes) {
-	//for (int indVert = 0; indVert < vertices.size(); indVert++)
 	for (shared_ptr<Plane> plane : planes)
 	{
 		vec3 posWorldA = object->Shape->ToWorldPosition(plane->V0);
@@ -140,13 +129,11 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 		planePrt->CalculatePlaneIntersectionPoint();
 		int type = planePrt->ClassifyPointType;
 
-
 		/*planePrt->CalculatePolygonIntersectionPoint();
 		nearestPolygonIntersectionPoint = planePrt->P_Point;*/
 
 		if (type == BEHIND)
 		{
-
 			//planePrt->CalculatePolygonIntersectionPoint();
 
 			indPlaneC = planePrt->Index;

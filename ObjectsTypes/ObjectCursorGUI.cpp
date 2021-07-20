@@ -30,7 +30,7 @@ void ObjectCursorGUI::ActionMoving()
 void ObjectCursorGUI::SaveNewPosition() {
 
 	//--- Set position Cursor
-	vec3 mouse = Storage->Oper->PositionCursorWorld;
+	vec3 mouse = EngineData->Oper->PositionCursorWorld;
 	vec2 startPosRect = Shape->GetStartPositWorld();
 
 	bool notX = false;

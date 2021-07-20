@@ -20,41 +20,20 @@ using std::string;
 
 class ObjectData;
 
-class A
-{
-	A() {};
-
-	void virtual CallTest() {
-		std::cout << "CallTest A ";
-	};
-};
-
-class B : A
-{
-	B();
-
-	void CallTest() {
-		std::cout << "CallTest B ";
-	};
-};
-
-class C : B
-{
-	C();
-
-	void CallTest() {
-		std::cout << "CallTest C ";
-	};
-};
+class CreatorModelData;
 
 class SceneLayer
 {
+private:
+	CreatorModelData* m_storage = nullptr;
+
 public:
 	map<TypeObject, int> MapSceneObjectsTypeOffset;
 	vector<TypeObject> SortTypeObjects;
 	vector<int> SortObjectIndex;
+	
 
-	SceneLayer() : MapSceneObjectsTypeOffset(), SortObjectIndex(), SortTypeObjects() {
+	SceneLayer(CreatorModelData* storage) : MapSceneObjectsTypeOffset(), SortObjectIndex(), SortTypeObjects(), m_storage(storage) {
 		FillSortTypesObjects();
 	};
 

@@ -1,55 +1,37 @@
 Name: ButtonShell_ButtonCreateObjGUI
 Index: 0
-RootObjIndex: 47
-CaptionObjIndex: 48
+RootObjIndex: 24
+CaptionObjIndex: 25
 HeadIndexList: -1
 ------------------------------------------------------------------ 
 Name: EditBoxShell_SystemRootEditBox
 Index: 1
-RootObjIndex: 50
-CaptionObjIndex: 51
+RootObjIndex: 27
+CaptionObjIndex: 28
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: ButtonShell_ButtonCreateObjGUI_53
+Name: ButtonShell_ButtonCreateObjGUI_30
 Index: 2
-RootObjIndex: 53
-CaptionObjIndex: 54
+RootObjIndex: 30
+CaptionObjIndex: 31
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: ButtonShell_ButtonCreateObjGUI_55
+Name: ButtonShell_ButtonCreateObjGUI_32
 Index: 3
-RootObjIndex: 55
-CaptionObjIndex: 56
+RootObjIndex: 32
+CaptionObjIndex: 33
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: ButtonShell_ButtonCreateObjGUI_57
+Name: ButtonShell_ButtonCreateObjGUI_34
 Index: 4
-RootObjIndex: 57
-CaptionObjIndex: 58
+RootObjIndex: 34
+CaptionObjIndex: 35
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: ButtonShell_ButtonCreateObjGUI_59
+Name: ButtonShell_ButtonCreateObjGUI_36
 Index: 5
-RootObjIndex: 59
-CaptionObjIndex: 60
-HeadIndexList: -1
------------------------------------------------------------------- 
-Name: ButtonShell_ButtonCreateObjGUI_61
-Index: 6
-RootObjIndex: 61
-CaptionObjIndex: 62
-HeadIndexList: -1
------------------------------------------------------------------- 
-Name: ButtonShell_ButtonCreateObjGUI_63
-Index: 7
-RootObjIndex: 63
-CaptionObjIndex: 64
-HeadIndexList: -1
------------------------------------------------------------------- 
-Name: ButtonShell_ButtonCreateObjGUI_65
-Index: 8
-RootObjIndex: 65
-CaptionObjIndex: 66
+RootObjIndex: 36
+CaptionObjIndex: 37
 HeadIndexList: -1
 ------------------------------------------------------------------ 
 

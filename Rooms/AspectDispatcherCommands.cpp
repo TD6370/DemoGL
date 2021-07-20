@@ -61,16 +61,28 @@ void AspectDispatcherCommands::Work() {
 				return;
 			}
 
-			if (Scene->CurrentSceneCommand.IsLongCommand)
-				return;
+			/*if (Scene->CurrentSceneCommand.IsLongCommand)
+				return;*/
 
 			//----- Clear not working command -----
 			if (m_commandPassCount > m_commandPassLimit)
 			{
 				m_commandPassCount = 0;
-				SceneSerialize* serializer = new SceneSerialize();
-				std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n";
-				Scene->CurrentSceneCommand.Enable = false;
+				
+				if (Scene->CurrentSceneCommand.IsLongCommand) {
+				
+					if (ActiveCommands.size() != -0)
+					{
+						AddCommand(Scene->CurrentSceneCommand);
+						Scene->CurrentSceneCommand.Enable = false;
+					}
+				}
+				else {
+
+					SceneSerialize* serializer = new SceneSerialize();
+					std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n";
+					Scene->CurrentSceneCommand.Enable = false;
+				}
 			}
 			m_commandPassCount++;
 		}

@@ -58,13 +58,20 @@ CreatorModelData::CreatorModelData() {
 	Inputs = new ControllerInput;
 	SceneData = new SceneParam;
 	ShaderPrograms = map<string, GLuint>();
-	LayerScene = new SceneLayer();
+	LayerScene = new SceneLayer(this);
+	Clusters = new WorldCluster();
 }
 
 CreatorModelData::~CreatorModelData() {
 }
 
 void CreatorModelData::ClearObjects() {
+
+	SceneData->IndexCursorRayObj = -1;
+	SceneData->IndexHeroObj = -1;
+	SceneData->IndexBackgroundGUIObj = -1;
+	SceneData->IndexCursorGUI = -1;
+	SceneData->IndexBaseEditBox = -1;
 
 	if(SceneObjects.size() != 0)
 		SceneObjects.clear();
@@ -316,8 +323,14 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 	}
 
 	if (object != NULL) {
-		//objectModel->Storage = storage;
-		object->Storage = this;
+		object->Clusters = Clusters;
+		
+		object->EngineData->Cam = Cam;
+		object->EngineData->ConfigMVP = ConfigMVP;
+		object->EngineData->Inputs = Inputs;
+		object->EngineData->Oper = Oper;
+		object->EngineData->SceneData = SceneData;
+
 		object->Color = p_color;
 		object->Name = name;
 		if(p_layer != LayerNone)
@@ -328,8 +341,8 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 	MapSceneObjects.insert(std::pair<string, int>(name, p_index));
 
 	//--------------------------------- Save Order Index 
-	if(isLoading)
-		LayerScene->SaveOrderIndex(object);
+	/*if(isLoading)
+		LayerScene->SaveOrderIndex(object);*/
 
 	return object;
 }
@@ -364,7 +377,7 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
-shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, bool isLoading) {
+shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, int headIndex, bool isLoading) {
 
 	int nextIndex = ObjectsShells.size();
 
@@ -373,11 +386,22 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 
 	prt_objShell->CaptionObjIndex = captionIndex;
 	prt_objShell->Index = nextIndex;
+	prt_objShell->HeadIndexList = headIndex;
+
+	if (!isLoading)
+	{
+		objShell.RootObj = GetObjectPrt(rootIndex);
+		if (captionIndex != -1)
+			objShell.CaptionObj = GetObjectPrt(captionIndex);
+		if (headIndex != -1)
+			objShell.HeadObj = GetObjectPrt(headIndex);
+	}
+
 	if(!isLoading)
 	{
-		GetObjectPrt(rootIndex)->ShellIndex = nextIndex;
+		GetObjectPrt(rootIndex)->SetShell(prt_objShell);
 		if (captionIndex != -1)
-			GetObjectPrt(captionIndex)->ShellIndex = nextIndex;
+			GetObjectPrt(captionIndex)->SetShell(prt_objShell);
 	}
 	ObjectsShells.push_back(prt_objShell);
 
@@ -542,6 +566,30 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		i++;
 	}
 
+	//TEST
+	UpdateObjectsOrders();
+
+	UpdateFamilBonds();
+}
+
+void CreatorModelData::UpdateFamilBonds() {
+
+	shared_ptr<ObjectData> objOther;
+
+	for (auto obj : SceneObjects) {
+		if (obj->IndexObjectOwner != -1) {
+			objOther = GetObjectPrt(obj->IndexObjectOwner);
+			obj->SetOwnerObject(objOther);
+		}
+		if (obj->NextItemShellIndex != -1) {
+			objOther = GetObjectPrt(obj->NextItemShellIndex);
+			obj->SetNextItemShellObject(objOther);
+		}
+		if (obj->ShellIndex != -1) {
+			auto shell = ObjectsShells[obj->ShellIndex];
+			obj->SetShell(shell);
+		}
+	}
 }
 
 void CreatorModelData::LoadModels() {
@@ -854,7 +902,7 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 	for (auto shellFiled : filedsShells)
 	{
-		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), true);
+		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), -1, true);
 	}
 
 }
@@ -877,7 +925,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 25; i++)
+    for (int i = 0; i < 2; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -933,7 +981,11 @@ void CreatorModelData::LoadObjects() {
 	std::shared_ptr<ModelData> modeHero = GetModelPrt("homo");
 	shared_ptr<ObjectData> objHeroData = AddObject("Hero", modeHero, Hero, vec3(0, 0, 0));
 	shared_ptr<ObjectHero> objHero = std::dynamic_pointer_cast<ObjectHero>(objHeroData);
-	objHero->LoadCursorRay();
+	//objHero->LoadCursorRay();
+	std::shared_ptr<ModelData> model = GetModelPrt("cursorRay");
+	auto obj = AddObject("CursorRay", model, CursorRay, vec3(-50, -55, 70));
+	obj->SetOwnerObject(objHero);
+
 
 	LoadObjectsGUI();
 
@@ -967,6 +1019,7 @@ void CreatorModelData::Load() {
 	LoadModels();
 	LoadShells();
 	LoadObjects();
+	LoadShellsLinks();
 	LoadClusters();
 }
 
@@ -977,10 +1030,26 @@ void CreatorModelData::LoadShells() {
 	LoadShells(serializer->FiledsShells);
 }
 
+void  CreatorModelData::LoadShellsLinks() {
+
+	for (auto shape : ObjectsShells) {
+		shape->RootObj = GetObjectPrt(shape->RootObjIndex);
+		if (shape->CaptionObjIndex != -1)
+			shape->CaptionObj = GetObjectPrt(shape->CaptionObjIndex);
+		if (shape->HeadIndexList != -1)
+			shape->HeadObj = GetObjectPrt(shape->HeadIndexList);
+	}
+	for (auto obj : SceneObjects) {
+
+		if (obj->ShellIndex != -1)
+			obj->Shell = GetObjectShellPrt(obj->ShellIndex);
+	}
+}
+
 
 void CreatorModelData::LoadClusters() {
 
-	Clusters = new WorldCluster();
+	Clusters->Sectors = new WorldSectors();
 	Clusters->Storage = this;
 	Clusters->PlaneClusterization();
 }
@@ -1029,7 +1098,7 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, startPos, color, -1, p_layer);
 
 	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
-	objGUI->IndexObjectOwner = ownerObj->Index;
+	objGUI->SetOwnerObject(ownerObj);
 	//objGUI->StartPos = startPosChild;
 	objGUI->StartPos = startPos;
 	objGUI->SizePanel = size;

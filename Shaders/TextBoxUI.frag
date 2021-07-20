@@ -73,9 +73,11 @@ void main()
 
     int numSymb = numSymbol;
     
-    if(numSymb == -1)
+    //if(numSymb == -1)
+    if(numSymb < 0 || numSymb > 29)
     {
         color = vec4(0.);
+        //color = vec4(.0,.7,.0,1.);
         return;
     }
 

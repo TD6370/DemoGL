@@ -33,7 +33,19 @@ class ShapeBase;
 class Plane;
 class ModelData;
 class CreatorModelData;
+class WorldCluster;
 struct ObjectFiledsSpecific;
+class BaseShell;
+
+//TODO: EngineData
+struct DataEngine {
+	CoreMVP* ConfigMVP;
+	ControllerInput* Inputs;
+	Operator* Oper;
+	Camera* Cam;
+	SceneParam* SceneData;
+	WorldCluster* Clusters;
+};
 
 class ObjectData
 {
@@ -41,6 +53,7 @@ private:
 	GLfloat m_nextWayTime = 0;
 	GLfloat m_stepMove = 0;
 	std::string m_keyPosSectorStr;
+	
 protected:
 	GLfloat m_speedRotate = 0.1f;
 	GLfloat m_angleModel = 0.0;
@@ -50,14 +63,17 @@ public:
 	TypeObject TypeObj;
 	ActionObject ActionObjectCurrent;
 	TypeLayer Layer;
-
 	GLfloat Speed = 0.5f;
 
-	int IndexObjectOwner = -1;
-	int ShellIndex = -1;
-	int NextItemShellIndex = -1;
-	bool IsSelected = false;
+	shared_ptr<ObjectData> OwnerObj;
+	shared_ptr<ObjectData> NextItemShellObj;
+	shared_ptr<BaseShell> Shell;
 
+	int IndexObjectOwner = -1;
+	int NextItemShellIndex = -1;
+	int ShellIndex = -1;
+	
+	bool IsSelected = false;
 	// -----------  Options ---------------------
 	bool IsGUI = false;
 	bool IsNPC = false;
@@ -73,17 +89,10 @@ public:
 	bool IsAbsolutePosition = true;
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
-	//----------------------------------------
-	//##ED
-	//TODO: EngineData{
-	/*	CoreMVP* ConfigMVP;
-		ControllerInput* Inputs;
-		Operator* Oper;
-		Camera* Cam;
-		SceneParam* SceneData;
-	}*/
-	//----
-	CreatorModelData* Storage;
+
+	WorldCluster* Clusters;
+	DataEngine* EngineData;
+
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;
 	CommandPack* SceneCommand;
@@ -92,6 +101,7 @@ public:
 	//int RadiusCollider = 5;
 
 	shared_ptr<ModelData> ModelPtr;
+	
 	vector <vec3> Vertices;
 	vector <vec3> Normals;
 	vector <vec2> TextureUV;
@@ -112,7 +122,7 @@ public:
 	vec3 NewPostranslate = vec3(0);
 	vec3 Move = vec3(0);
 	vec3 Target = vec3(0);
-	std::vector<int> tramsformTypes;
+	vector<int> tramsformTypes;
 	//ActionObject ActionObjectCurrent;
 	mat4 TransformResult;
 
@@ -123,14 +133,14 @@ public:
 	GLfloat PolygonPointY = 0;
 	int PlaneDownIndex = -1;
 	vec3 PlaneDownPosition = vec3(0);
-	std::vector<vec3> TempVectors;
+	vector<vec3> TempVectors;
 	//std::vector<shared_ptr<Plane>> Planes;		//-----(#3.))
-	std::vector<string>  ChildObjects;
+	vector<string>  ChildObjects;
 
 	ObjectData();
 
 	ObjectData(int p_index,
-		std::shared_ptr<ModelData> p_model,
+		shared_ptr<ModelData> p_model,
 		TypeObject p_typeObj,
 		vec3 p_pos = vec3(0));
 
@@ -148,7 +158,7 @@ public:
 
 	void virtual UpdateState(); //after fill options
 
-	void virtual Refresh(); //after fill options
+	void virtual Refresh(); //in actions
 
 	void CheckedRefresh();
 
@@ -165,6 +175,11 @@ public:
 	void Action();
 
 	//---------------
+	void SetOwnerObject(shared_ptr<ObjectData> p_ownerObj);
+	//void SetOwnerObject(ObjectData* p_ownerObj);
+	void SetNextItemShellObject(shared_ptr<ObjectData> p_nextItemShellObj);
+	void SetShell(shared_ptr<BaseShell> p_shell);
+
 	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
 
 	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
@@ -205,6 +220,10 @@ public:
 	void virtual MeshTransform(); //------- geometric ???
 
 	float virtual  GetTopLayer();
+
+	float virtual  GetZ();
+
+	void virtual SetZ(float z);
 
 	int virtual GetRightBorderVertexIndex();
 

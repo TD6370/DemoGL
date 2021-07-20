@@ -30,7 +30,6 @@ void RoomSerializeScene::Init() {
 void RoomSerializeScene::Load() {
 	_serializer->Load();
 	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
-	//Scene->Storage->LoadModels(_serializer->FiledsModels);
 	Scene->Storage->LoadShells(_serializer->FiledsShells);
 
 	Scene->RefreshGUI();
@@ -49,8 +48,8 @@ void RoomSerializeScene::LoadObjects() {
 
 bool RoomSerializeScene::IsValidSave(shared_ptr<ObjectData> object) 
 {
-	if ((Scene->ObjectCurrent->TypeObj == TypeObject::CursorRay))
-		return false;
+	/*if ((Scene->ObjectCurrent->TypeObj == TypeObject::CursorRay))
+		return false;*/
 	return true;
 }
 
@@ -97,18 +96,8 @@ void RoomSerializeScene::Work() {
 
 	if (Scene->Storage->Inputs->Key == m_saveKey &&
 		Scene->Storage->Inputs->Action == GLFW_PRESS) {
-		
-		/*if (!m_startSave) 
-		{
-			m_startSave = true;
-			m_calculateSave = true;
-		}*/
 		Save();
 	}
-
-	/*if (m_startSave) {
-		Save();
-	}*/
 
 	//------ Deserialization
 
@@ -118,7 +107,6 @@ void RoomSerializeScene::Work() {
 		if (!IsOnceComplete)
 		{
 			Load();
-			//LoadObjects();
 		}
 	}
 

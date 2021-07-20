@@ -10,9 +10,9 @@
 //#include "ObjectButton.h"
 
 #include "../Serialize/SceneSerialize.h"
-//#include "../GeomertyShapes/ShapeBase.h"
-//#include "CreatorModelData.h"  //------<<<		//##$$ 4.
-#include "../GeomertyShapes/ShapeBase.h"			//##$$ 4.
+#include "../GeomertyShapes/ShapeBase.h"
+#include "../ShellObjects/BaseShell.h"
+
 #include "../CreatorModelData.h"
 
 #include <glm/glm.hpp>
@@ -51,6 +51,7 @@ ObjectData::ObjectData(int p_index,
 	Shape->Obj = this;*/
 	StartColor = Color;
 	Layer = TypeLayer::LayerNone;
+	EngineData = new DataEngine();
 }
 
 ObjectData::~ObjectData()
@@ -118,12 +119,11 @@ void ObjectData::Refresh() {
 	
 	if (IndexObjectOwner != -1)
 	{
-		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
+		if (IndexObjectOwner == EngineData->SceneData->IndexBackgroundGUIObj)
 			return;
 
-		auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
-		if (IsVisible != objOwner->IsVisible)
-			IsVisible = objOwner->IsVisible;
+		if (IsVisible != OwnerObj->IsVisible)
+			IsVisible = OwnerObj->IsVisible;
 	}
 
 	//CheckedRefresh();
@@ -136,7 +136,7 @@ void ObjectData::CheckedRefresh()
 	//if (IsToogleButon && IndexObjectOwner != -1)
 	if (IndexObjectOwner != -1)
 	{
-		if (IndexObjectOwner == Storage->SceneData->IndexBackgroundGUIObj)
+		if (IndexObjectOwner == EngineData->SceneData->IndexBackgroundGUIObj)
 			return;
 
 		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
@@ -216,7 +216,7 @@ void ObjectData::CheckStartPosition() {
 
 void ObjectData::RunTransform()
 {
-	glm::mat4 trans = Transform(1, Storage->Inputs->ParamCase, false,
+	glm::mat4 trans = Transform(1, EngineData->Inputs->ParamCase, false,
 		glm::mat4(1.0f),
 		Postranslate,
 		TranslateAngle,
@@ -315,7 +315,8 @@ void ObjectData::AddChild(string key)
 
 std::shared_ptr<ObjectData> ObjectData::GetChild(string key)
 {
-	return Storage->GetObjectPrt(key);
+	//return Storage->GetObjectPrt(key);
+	return nullptr;
 }
 
 void ObjectData::InitChildObjects() {
@@ -344,9 +345,34 @@ float ObjectData::GetTopLayer() {
 	return Postranslate.y;
 }
 
+float ObjectData::GetZ() {
+	return Postranslate.z;
+}
+void ObjectData::SetZ(float z)
+{
+
+}
+
 int ObjectData::GetRightBorderVertexIndex() {
 
 	return -1;
+}
+
+void ObjectData::SetOwnerObject(shared_ptr<ObjectData> p_ownerObj)
+//void ObjectData::SetOwnerObject(ObjectData* p_ownerObj)
+{
+	OwnerObj = p_ownerObj;
+	IndexObjectOwner = p_ownerObj->Index;
+}
+void ObjectData::SetNextItemShellObject(shared_ptr<ObjectData> p_nextItemShellObj)
+{
+	NextItemShellObj = p_nextItemShellObj;
+	NextItemShellIndex = p_nextItemShellObj->Index;
+}
+void ObjectData::SetShell(shared_ptr<BaseShell> p_shell)
+{
+	Shell = p_shell;
+	ShellIndex = p_shell->Index;
 }
 
 //------ #SaveFieldSpecific
