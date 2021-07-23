@@ -20,9 +20,11 @@ void SceneLayer::FillSortTypesObjects() {
 	SortTypeObjects.push_back(Terra);
 	SortTypeObjects.push_back(GUI);
 	SortTypeObjects.push_back(Button);
+	SortTypeObjects.push_back(ListBox);
 	SortTypeObjects.push_back(TextBox);
 	SortTypeObjects.push_back(EditBox);
 	SortTypeObjects.push_back(CursorGUI);
+
 	//SortTypeObjects.push_back();
 }
 
@@ -61,6 +63,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 
 	int countStack = indexInsert + conutItemsCurrType;
 	float lastZ = -1;
+	string test111 = "";
 
 	if (obj->IsGUI)
 	{
@@ -72,7 +75,10 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 			if (nextObj->Layer > obj->Layer) 
 				break;
 
-			lastZ = nextObj->GetZ();
+			if (nextObj->Layer == TypeLayer::LayerBase) {
+				lastZ = nextObj->GetZ();
+				test111 = nextObj->Name;
+			}
 
 			if (nextObj->Layer < obj->Layer)
 				continue;
@@ -97,16 +103,18 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 	}
 	//------------------------
 
-	//============ Update Z  -- //TEST Z
-	if (obj->IsGUI && obj->Layer == TypeLayer::LayerGUI) {
+	//============ Update Z  -- //TEST Z			===== (//-------------- Z Order Controls ---------------)
+	/*if (obj->IsGUI && obj->Layer == TypeLayer::LayerBase) {
 		
 		float myZ = obj->GetZ();
 		if (lastZ >= myZ) {
-			float add = 0.0001;
-			add = 0.0002;
+
+			auto ttt1 = obj->Name + " " + test111;
+
+			float add = 0.0002;
 			obj->SetZ(lastZ + add);
 		}
-	}
+	}*/
 	//===============
 
 	it = MapSceneObjectsTypeOffset.find(p_typeObj);
@@ -120,7 +128,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 	SortObjectIndex.insert(SortObjectIndex.begin() + indexInsert, index);
 
 	//==========  TEST Sort
-	if (obj->IsGUI)
+	/*if (obj->IsGUI)
 	{
 		int pp = 0;
 		std::cout << "Sort:\n";
@@ -130,7 +138,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 		}
 		std::cout << "================================\n";
 		auto v = "";
-	}
+	}*/
 	//========================
 }
 

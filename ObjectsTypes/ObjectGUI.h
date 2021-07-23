@@ -36,7 +36,7 @@ public:
 	vec3 StartPos = vec3(0);
 	vec2 SizePanel = vec2(0);
 	float PanelDepth;
-	AnimationParamGUI* AnimationParam;
+	AnimationParamGUI* AnimationParam; //TODO: in static param
 
 	ObjectGUI(
 		int p_index,
@@ -54,7 +54,7 @@ public:
 		IsAbsolutePosition = false;
 		IsSquareModel = true;
 		ActionObjectCurrent = ActionObject::Stay;
-		Layer = TypeLayer::LayerGUI;
+		Layer = TypeLayer::LayerBase;
 	};
 
 	void InitData();

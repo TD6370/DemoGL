@@ -40,11 +40,9 @@ void AspectFactoryObjects::Work() {
 
 	if (Scene->IsBreakUpdate())
 		return;
-	
-	//TEST
-	//auto test = Scene->ObjectCurrent->Name;
 
 	bool isBackgroundFrame = Scene->IsCurrentObjectBackgroundFrameGUI();
+	bool isCompleted = false;
 
 	//--- Create object
 	CommandPack command = Scene->CurrentSceneCommand;
@@ -52,7 +50,7 @@ void AspectFactoryObjects::Work() {
 	if (!command.Enable || command.CommandType != TypeCommand::CreateObject)
 		return;
 	
-	int value = command.Options["TypeObject"];
+	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
 	if (typeObj == TypeObject::Button)
 	{
@@ -60,8 +58,8 @@ void AspectFactoryObjects::Work() {
 			return;
 
 		Scene->ReadCommand(CreateObject);
-
 		CreateButton();
+		isCompleted = true;
 	}
 	if (typeObj == TypeObject::EditBox)
 	{
@@ -69,11 +67,22 @@ void AspectFactoryObjects::Work() {
 			return;
 
 		Scene->ReadCommand(CreateObject);
-
 		CreateEditBox();
+		isCompleted = true;
+	}
+	if (typeObj == TypeObject::ListBox)
+	{
+		if (!isBackgroundFrame)
+			return;
+
+		Scene->ReadCommand(CreateObject);
+		CreateListBox(command.ValueS);
+		isCompleted = true;
 	}
 
-	Scene->Storage->UpdateObjectsOrders();
+	if (isCompleted) {
+		Scene->Storage->UpdateObjectsOrders();
+	}
 }
 
 void AspectFactoryObjects::CreateEditBox() {
@@ -98,9 +107,6 @@ void AspectFactoryObjects::CreateEditBox() {
 
 		// ---- Object Edit box create	
 		auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
-
-	//Scene->Storage->LayerScene->SaveOrderIndex(objCreateButton);
-	//Scene->Storage->LayerScene->SaveOrderIndex(objCreateEditBox_Data);
 
 	Scene->AddCommand(ObjectCreated, -1, objCreateButton->Index);
 }
@@ -129,10 +135,86 @@ void AspectFactoryObjects::CreateButton() {
 	
 		auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
 		
-	//Scene->Storage->LayerScene->SaveOrderIndex(objCreateButton);
-	//Scene->Storage->LayerScene->SaveOrderIndex(objCreateTextBox_Data);
-
 	Scene->AddCommand(ObjectCreated, - 1, objCreateButton->Index);
 }
 
+void AspectFactoryObjects::CreateListBox(string nameListCommand) {
+	string caption;
+	string childModel;
+	string objName;
+	vec3 color = vec3(0.3);
+	shared_ptr<ObjectButton> objCreateButton;
+	shared_ptr<ObjectButton> objCreateButton_Prev = nullptr;
+	shared_ptr<ObjectData> objBaseFrame;
+	
+	shared_ptr<ObjectData> objCreate;
+	vec2 pos = vec2(1.);
+	float posZ = Scene->Storage->StartPosGUI_Z;
+
+	// ---- background GUI
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+
+	vector<int> listItemsIndex = vector<int>();
+	vector<CommandPack> listCommand = Scene->GetListCommand(nameListCommand);
+
+	//-- Frame list box
+	objName = "BaseFrame_ListBox";
+	caption = "BaseFrame_ListBox";
+	childModel = "FrameModel"; 
+	float height = listCommand.size() * 0.08;
+	vec2 sizeFrame = vec2(0.6, height);
+	vec3 posFrame = vec3(pos.x, pos.y, posZ);
+	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
+	objBaseFrame->IsFocusable = false;
+	
+	vec2 sizeItem = vec2(sizeFrame.x - 0.02, 0.07);
+	vec3 posItem = vec3(posFrame.x + 0.01, posFrame.y + 0.01, posZ);
+
+	for (CommandPack commItem : listCommand)
+	{
+		//-- create Item 
+		objName = "ButtonItem_ListBox";
+		caption = commItem.Description;
+		childModel = "ButtonModel";
+		objCreate = Scene->Storage->AddChildObject(objBaseFrame, caption, childModel, objName, posItem, sizeItem, Button, vec3(1));
+		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+		objCreateButton->IsToogleButon = false;
+		
+		//list index items for shell
+		listItemsIndex.push_back(objCreateButton->Index);
+
+		// - join items links
+		if (objCreateButton_Prev != nullptr) {
+			objCreateButton_Prev->SetNextItemShellObject(objCreateButton);
+		}
+		objCreateButton_Prev = objCreateButton;
+
+		SetCommand(objCreateButton, commItem);
+
+		//-- create Text item 
+		auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
+
+		shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
+
+		posItem.y += sizeItem.y + 0.005;
+	}
+
+	//--- head Item
+	int headIndexItem = -1;
+	if (listItemsIndex.size() > 0) {
+		headIndexItem = listItemsIndex[0];
+		listItemsIndex.erase(listItemsIndex.begin());
+	}
+
+	//Create shell
+	Scene->Storage->AddShell("ListBoxShell_" + nameListCommand,
+		objBaseFrame->Index,
+		-1,
+		headIndexItem,
+		false,
+		listItemsIndex);
+
+	//- command complete
+	Scene->AddCommand(ObjectCreated, -1, objBaseFrame->Index);
+}
 

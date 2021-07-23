@@ -93,14 +93,11 @@ void AspectFamilyBonds::Work() {
 			m_lenghtLineBackground = objPh->Shape->GetLineLenght(0);
 		}
 
-		if (Scene->ObjectCurrent->IsAbsolutePosition)
+		if (Scene->ObjectCurrent->IndexObjectOwner != -1)
 		{
-			if (Scene->ObjectCurrent->IndexObjectOwner != -1)
-			{
-				auto  objOwnerGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent->OwnerObj);
-				auto  shapeSquare = (ShapeSquare*)Scene->ObjectCurrent->Shape;
-				shapeSquare->SetOwnerPosition(m_lenghtLineBackground, objOwnerGUI->StartPos);
-			}
+			auto  objOwnerGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent->OwnerObj);
+			auto  shapeSquare = (ShapeSquare*)Scene->ObjectCurrent->Shape;
+			shapeSquare->SetOwnerPosition(m_lenghtLineBackground, objOwnerGUI->StartPos);
 		}
 	}
 }

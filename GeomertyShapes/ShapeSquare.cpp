@@ -18,6 +18,15 @@ ShapeSquare::~ShapeSquare() {
 void ShapeSquare::SetOwnerPosition(float lenghtLineBackground, vec3 startPosParent) {
 
 	m_lenghtLineBackground = lenghtLineBackground;
+
+	if (!m_objGUI->IsAbsolutePosition) {
+		if (m_firstPosParent == vec3(-5000))
+			m_firstPosParent = startPosParent;
+		if (m_firstPos == vec3(-5000))
+			m_firstPos = m_objGUI->StartPos;
+		m_offsetPosParent = m_firstPosParent - startPosParent;
+	}
+
 	m_startPosParent = startPosParent;
 }
 
@@ -29,9 +38,9 @@ void ShapeSquare::FormUpdate(bool isForce) {
 
 	//================================================== TEST
 	/*std::stringstream ss;
-	ss << "Name: " << Name << "  Model:" << ModelPtr->Name << "\n";
-	ss << "SP: " << StartPos.x << " " << StartPos.y << "\n\n";
-	ss << "PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
+	ss << "Name: " << obj->Name << "  Model:" << obj->ModelPtr->Name << " Ind="  << obj->Index << "\n";
+	ss << "SP: " << obj->StartPos.x << " " << obj->StartPos.y << "\n\n";
+	ss << "PS: " << obj->Postranslate.x << " " << obj->Postranslate.y << " " << obj->Postranslate.z << "\n";
 	string spStart = ss.str();*/
 	//==================================================
 
@@ -39,6 +48,7 @@ void ShapeSquare::FormUpdate(bool isForce) {
 	obj->PanelDepth = 3.8;
 	int indexBackground = obj->EngineData->SceneData->IndexBackgroundGUIObj;
 
+	//---TEST
 	if (obj->IsAbsolutePosition)
 	{
 		vec2 offsetOfCenter = vec2(0);
@@ -49,11 +59,6 @@ void ShapeSquare::FormUpdate(bool isForce) {
 		if (obj->IndexObjectOwner != -1)
 		{
 			//---- normalize position on center backgruong control
-			
-			//auto objOwn = obj->Storage->GetObjectPrt(indexBackground);
-			//auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(objOwn);
-			//float lenghtLineOwner = objPh->Shape->GetLineLenght(0);
-			//##!!!
 			float lenghtLineOwner = m_lenghtLineBackground;
 
 			float lenghtLine = obj->Shape->GetLineLenght(0);
@@ -64,11 +69,6 @@ void ShapeSquare::FormUpdate(bool isForce) {
 			if (obj->IndexObjectOwner != indexBackground)
 			{
 				//---- normalize position on parent control
-				/*objOwn = obj->Storage->GetObjectPrt(obj->IndexObjectOwner);
-				auto  objGUI = std::dynamic_pointer_cast<ObjectGUI>(objOwn);
-				offsetOfCenter.x -= objGUI->StartPos.x;
-				offsetOfCenter.y -= objGUI->StartPos.y;*/
-				//##!!!
 				offsetOfCenter.x -= m_startPosParent.x;
 				offsetOfCenter.y -= m_startPosParent.y;
 			}
@@ -100,6 +100,11 @@ void ShapeSquare::FormUpdate(bool isForce) {
 			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFace(obj->EngineData->ConfigMVP, obj->PanelDepth, obj->EngineData->Oper);
 		}
 		else {
+			if (obj->IndexObjectOwner != -1 && obj->IndexObjectOwner != indexBackground && m_firstPos != vec3(-5000))
+			{
+				obj->StartPos.x = m_firstPos.x - m_offsetPosParent.x;
+				obj->StartPos.y = m_firstPos.y - m_offsetPosParent.y;
+			}
 			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->EngineData->Oper, obj->StartPos);
 		}
 	}
@@ -192,8 +197,6 @@ void ShapeSquare::SavePosFactor(vec3 posGUI, vec3 posWorld) {
 		return;
 	}
 
-	/*PosMoveFactor.x = m_lastPosGUI.x - posGUI.x;
-	PosMoveFactor.y = m_lastPosWorld.y - posWorld.y*/;
 	vec3 posMoveFactor = m_lastPosWorld - posWorld;
 	if(posMoveFactor != vec3(0))
 		PosMoveFactor = posMoveFactor;

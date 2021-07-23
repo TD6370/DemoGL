@@ -15,6 +15,7 @@ using std::string;
 using std::vector;
 using std::shared_ptr;
 using std::string;
+using std::map;
 using glm::vec4;
 //using glm::vec3;
 
@@ -31,6 +32,7 @@ private:
 	TypeCommand m_commandLast = TypeCommand::None;
 
 public:
+	map <string, vector<CommandPack>> StaticListCommand = map <string, vector<CommandPack>>{};
 	vector<CommandPack> ActiveCommands;
 
 	AspectDispatcherCommands(string Name, SceneConstruction* sceneConstructor)
@@ -42,9 +44,14 @@ public:
 	void Config();
 	void Work();
 
+	void LoadStaticCommandList();
+
 	void AddCommand(CommandPack command);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
+	
+	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, vector<string> keyOptions = vector<string>(), vector<int> valueOptions = vector<int>(), 
+		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
 
@@ -53,6 +60,8 @@ public:
 
 void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1,
 	int valueI = -1, float valueF = 0.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string());
+
+void SetCommand(shared_ptr<ObjectData> obj, CommandPack command);
 
 void AddCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int valueOptions);
 

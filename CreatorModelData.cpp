@@ -16,6 +16,7 @@
 #include "ObjectsTypes/ObjectCursorGUI.h"
 #include "ObjectsTypes/ObjectButton.h"
 #include "ObjectsTypes/ObjectEditBox.h"
+#include "ObjectsTypes/ObjectListBox.h"
 #include "GeomertyShapes/ShapeBase.h"
 #include "GeomertyShapes/ShapeSquare.h"
 #include "Rooms/AspectDispatcherCommands.h"
@@ -248,6 +249,12 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 			object = GetObjectPrt(obj.Index);
 			break;
 		}
+		case ListBox: {
+			ObjectListBox obj = ObjectListBox(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectListBox>(obj));
+			object = GetObjectPrt(obj.Index);
+			break;
+		}
 		case CursorGUI: {
 			ObjectCursorGUI obj = ObjectCursorGUI(p_index, modelPtr, p_typeObj, p_pos);
 			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
@@ -377,7 +384,8 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
-shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, int headIndex, bool isLoading) {
+shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, int headIndex, bool isLoading, 
+	vector<int> items) {
 
 	int nextIndex = ObjectsShells.size();
 
@@ -402,6 +410,12 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 		GetObjectPrt(rootIndex)->SetShell(prt_objShell);
 		if (captionIndex != -1)
 			GetObjectPrt(captionIndex)->SetShell(prt_objShell);
+		if (headIndex != -1)
+			GetObjectPrt(headIndex)->SetShell(prt_objShell);
+		for (auto item : items)
+		{
+			GetObjectPrt(item)->SetShell(prt_objShell);
+		}
 	}
 	ObjectsShells.push_back(prt_objShell);
 
@@ -531,8 +545,8 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		int valueI = stoi(objFields->CommandValueI);
 		float valueF = stof(objFields->CommandValueF);
 		vec4 valueV4 = vec4();
-		string valueS = objFields->CommandValueS;
-		string description = objFields->CommandDescription;
+		string valueS = serializer->GetStrValue(objFields->CommandValueS);
+		string description = serializer->GetStrValue(objFields->CommandDescription);
 		
 		if (typeCommand != TypeCommand::None) {
 			//SetCommand(newObj, typeCommand);
@@ -566,7 +580,6 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		i++;
 	}
 
-	//TEST
 	UpdateObjectsOrders();
 
 	UpdateFamilBonds();
@@ -1004,6 +1017,9 @@ void CreatorModelData::LoadObjects() {
 }
 
 void CreatorModelData::UpdateObjectsOrders() {
+
+	LayerScene->Clear();
+
 	//Sort ordering
 	for (auto obj : SceneObjects) {
 
@@ -1074,10 +1090,8 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 
 
 	//-------------- Z Order Controls ---------------
-	//vec3 startPos = ownerObj->StartPos;
 	vec3 startPos = startPosChild;
 
-	//startPos.z += 0.01;
 	startPos.z = StartPosGUI_Z;
 	if (ownerObj->Index != SceneData->IndexBackgroundGUIObj)
 		startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
@@ -1091,9 +1105,8 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	if (p_layer == LayerSystem) {
 		startPos.z = .01;
 	}
-
 	//-------------------------------------------------
-
+	
 	//shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, ownerObj->StartPos, color, -1, p_layer);
 	shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, startPos, color, -1, p_layer);
 

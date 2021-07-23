@@ -31,7 +31,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::CursorGUI, "CursorGUI");
 	AddNextType(TypeObject::Button, "Button");
 	AddNextType(TypeObject::EditBox, "EditBox");
-	AddNextType(TypeObject::EditBox, "EditBox");
+	AddNextType(TypeObject::ListBox, "ListBox");
 		
 
 	//Create map types action object
@@ -64,7 +64,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeLayer::LayerBackground, "LayerBackground");
 	AddNextType(TypeLayer::LayerBack, "LayerBack");
 	AddNextType(TypeLayer::LayerNone, "LayerNone"); 
-	AddNextType(TypeLayer::LayerGUI, "LayerGUI");
+	AddNextType(TypeLayer::LayerBase, "LayerBase");
 	AddNextType(TypeLayer::LayerFront, "LayerFront");
 	AddNextType(TypeLayer::LayerBase, "LayerBase");
 	AddNextType(TypeLayer::LayerSystem, "LayerSystem");
@@ -122,8 +122,8 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.CommandTargetIndex << " " << obj->SceneCommand->TargetIndex << "\n";
 	streamObjects << fileds.CommandValueI << " " << obj->SceneCommand->ValueI << "\n";
 	streamObjects << fileds.CommandValueF << " " << obj->SceneCommand->ValueF << "\n";
-	streamObjects << fileds.CommandValueS << " " << obj->SceneCommand->ValueS << "\n";
-	streamObjects << fileds.CommandDescription << " " << obj->SceneCommand->Description << "\n";
+	streamObjects << fileds.CommandValueS << " " << GetStrValue(obj->SceneCommand->ValueS) << "\n";
+	streamObjects << fileds.CommandDescription << " " << GetStrValue(obj->SceneCommand->Description) << "\n";
 	
 	//Options
 	streamObjects << fileds.Options.IsVisible << " " << obj->IsVisible << "\n";
@@ -399,6 +399,23 @@ void SceneSerialize::Save() {
 	}
 }
 
+string SceneSerialize::GetStrValue(string value) {
+	if (value.size() == 0)
+		value = "@?";
+	else if (value == "@?")
+		return std::string();
+	return value;
+}
+
+//--- fix space in text
+void SceneSerialize::SetStrValue(std::ifstream& in, string& value) {
+
+	std::getline(in, value);
+	if (value[0] == char(' ')) //remove split
+		value.erase(0, 1);
+}
+
+
 void SceneSerialize::Load(bool isOnlyObjects) {
 
 	World WorldSetting;
@@ -503,10 +520,11 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 				if (in >> lineStr && lineStr == filedsObj.CommandValueF)
 					in >> filedsObj.CommandValueF;
 				if (in >> lineStr && lineStr == filedsObj.CommandValueS)
-					in >> filedsObj.CommandValueS;
-				if (in >> lineStr && lineStr == filedsObj.CommandDescription)
-					in >> filedsObj.CommandDescription;
+					SetStrValue(in, filedsObj.CommandValueS);
+					//in >> filedsObj.CommandValueS;
 
+				if (in >> lineStr && lineStr == filedsObj.CommandDescription)
+					SetStrValue(in, filedsObj.CommandDescription);
 				if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
 					in >> filedsObj.Options.IsVisible;
 				if (in >> lineStr && lineStr == filedsObj.Options.IsGravity)

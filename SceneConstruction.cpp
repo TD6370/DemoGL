@@ -74,6 +74,8 @@ void SceneConstruction::Init() {
 
 	CurrentSceneCommand = CommandPack();
 
+	CommandsAttribute = AttributeCommands();
+
 	FillAlphabet();
 
 	LoadDataModel();
@@ -626,9 +628,11 @@ void SceneConstruction::AddCommand(CommandPack command) {
 	dispatcherCommands->AddCommand(command);
 }
 
-void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions) {
 
-	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions);
+void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions,
+	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong)
+{
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions, valueI, valueF, valueV4, valueS, isLong);
 }
 
 void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
@@ -641,9 +645,14 @@ void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int
 void SceneConstruction::AddCommand(TypeCommand commandType, bool isLong) {
 
 	dispatcherCommands->AddCommand(commandType, -1, -1, -1, -0.1, vec4(), "", isLong);
-
 }
 
 void SceneConstruction::RefreshGUI() {
+
 	AddCommand(TypeCommand::CheckStateObjectCommand, true);
+}
+
+vector<CommandPack> SceneConstruction::GetListCommand(string nameList) {
+
+	return dispatcherCommands->StaticListCommand[nameList];
 }

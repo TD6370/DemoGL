@@ -20,6 +20,31 @@ void AspectDispatcherCommands::Config() {
 
 void AspectDispatcherCommands::Init() {
 	ActiveCommands = vector<CommandPack>();
+
+	LoadStaticCommandList();
+}
+
+void AspectDispatcherCommands::LoadStaticCommandList() {
+
+	CommandPack commandCreateBlock = CommandPack();
+	commandCreateBlock.Description = "создать блок";
+	commandCreateBlock.CommandType = TypeCommand::CreateObject;
+	commandCreateBlock.Options.insert({ Scene->CommandsAttribute.TypeObjectAttr , (int)TypeObject::Block });
+
+	CommandPack commandT1 = CommandPack();
+	commandT1.Description = "тест";
+	commandT1.CommandType = TypeCommand::None;
+
+	CommandPack commandDeleteObject = CommandPack();
+	commandDeleteObject.Description = "удалить";
+	commandDeleteObject.CommandType = TypeCommand::DeleteObject;
+
+	vector<CommandPack> baseListCommand = vector<CommandPack>{
+		commandCreateBlock, commandT1, commandDeleteObject,
+		commandT1,commandT1,commandT1,commandT1
+	};
+		
+	StaticListCommand.insert({ Scene->CommandsAttribute.BaseListCommand, baseListCommand });
 }
 
 void AspectDispatcherCommands::Work() {
@@ -111,6 +136,25 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 	ActiveCommands.push_back(command);
 }
 
+void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions, 
+	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong)
+{
+	CommandPack command = CommandPack();
+	command.Enable = true;
+	command.CommandType = commandType;
+	command.SourceIndex = sourceIndex;
+	command.TargetIndex = targetIndex;
+	command.ValueI = valueI;
+	command.ValueF = valueF;
+	command.ValueV4 = valueV4;
+	command.ValueS = valueS;
+	for(int i=0; i< keyOptions.size();i++)
+	{
+		command.Options.insert(std::pair<string, int>(keyOptions[i], valueOptions[i]));
+	}
+	ActiveCommands.push_back(command);
+}
+
 void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
 	int valueI , float valueF, vec4 valueV4, string valueS, bool isLong)
 {
@@ -128,7 +172,28 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 	
 	ActiveCommands.push_back(command);
 }
-//void AspectDispatcherCommands::SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex, int sourceIndex, string keyOptions, int valueOptions) {
+
+void SetCommand(shared_ptr<ObjectData> obj, CommandPack command) {
+
+	obj->SceneCommand->CommandType = command.CommandType;
+	obj->SceneCommand->SourceIndex = command.SourceIndex;
+	obj->SceneCommand->TargetIndex = command.TargetIndex;
+	obj->SceneCommand->Description = command.Description;
+
+	obj->SceneCommand->ValueI = command.ValueI;
+	obj->SceneCommand->ValueF = command.ValueF;
+	obj->SceneCommand->ValueV4 = command.ValueV4;
+	obj->SceneCommand->ValueS = command.ValueS;
+	obj->SceneCommand->IsLongCommand = command.IsLongCommand;
+
+	obj->SceneCommand->Options.clear();
+
+	for (auto item : command.Options)
+	{
+		obj->SceneCommand->Options.insert(item);
+	}
+}
+
 void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex, string keyOptions, int valueOptions, 
 	int valueI, float valueF, vec4 valueV4, string valueS, string description) {
 

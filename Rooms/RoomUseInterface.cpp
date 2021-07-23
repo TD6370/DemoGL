@@ -352,6 +352,7 @@ void RoomUseInterface::CheckStateObjects() {
 void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
 	int typeCreate = (int)TypeObject::Button;
+	typeCreate = (int)TypeObject::ListBox;
 
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
@@ -368,7 +369,20 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(SelectedPosForObject))
 		{
-			Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", typeCreate);
+			
+			string typeObjectAttr = Scene->CommandsAttribute.TypeObjectAttr;
+			if (command->ValueI != -1)
+				typeCreate = command->ValueI;
+			if (typeCreate == TypeObject::ListBox)
+			{
+				string nameListCommands = Scene->CommandsAttribute.BaseListCommand;
+				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { ListBox },
+					-1, -1, vec4(), nameListCommands);
+			}
+			else {
+				//Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", typeCreate);
+				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate });
+			}
 			SetCommand(objGUI, TypeCommand::None);
 		}
 	}
@@ -432,20 +446,29 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	//IsCreatingObject = false;	//-- after renamed
 	IndexObjectCreating = -1;
 
-	//--- Start Renaming created control
-	Scene->AddCommand(TypeCommand::RenameObject, 
-		objGUI->Index, 
-		Scene->Storage->SceneData->IndexBaseEditBox,
-		-1, 0, vec4(objGUI->StartPos, 1),
-		textButton);
+	//if (objGUI->TypeObj == Button && Scene->ShellCurrent->CaptionObjIndex != -1)
+	if (Scene->IsHaveShell && Scene->ShellCurrent->CaptionObjIndex != -1)
+	{
+		//--- Start Renaming created control
+		Scene->AddCommand(TypeCommand::RenameObject,
+			objGUI->Index,
+			Scene->Storage->SceneData->IndexBaseEditBox,
+			-1, 0, vec4(objGUI->StartPos, 1),
+			textButton);
 
-	//--- Start read name TextBox creating control
-	Scene->AddCommand(TypeCommand::ObjectReading, objGUI->Index,
-		Scene->ShellCurrent->CaptionObjIndex);
+		//--- Start read name TextBox creating control
+		Scene->AddCommand(TypeCommand::ObjectReading, objGUI->Index,
+			Scene->ShellCurrent->CaptionObjIndex);
 
-	int i = Scene->ShellCurrent->CaptionObjIndex;
+	}
+	else {
+		IsCreatingObject = false;
+	}
+
+	//TEST ----------------- !!!!
+	/*int i = Scene->ShellCurrent->CaptionObjIndex;
 	auto obb = Scene->Storage->GetObjectPrt(i);
-	string ddd = obb->GetInfo();
+	string ddd = obb->GetInfo();*/
 }
 
 //===================== Event Rename controls ===========================

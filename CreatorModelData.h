@@ -81,7 +81,7 @@ public:
 	shared_ptr<ModelData> GetModelPrt(int index);
 	shared_ptr<ModelData> GetModelPrt(string key);
 
-	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, int headIndex = -1, bool isLoading = false);
+	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, int headIndex = -1, bool isLoading = false, vector<int> items = vector<int>());
 
 	shared_ptr<BaseShell> GetObjectShellPrt(int index);
 

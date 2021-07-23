@@ -15,8 +15,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -25,9 +25,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: NPC
@@ -35,40 +35,8 @@ Name: Mon
 Model: mon
 Index: 1
 Layer: LayerNone
-Pos: 12.9613 -52.1831 47.3406
-Target: 32.9613 -52.1831 28.3406
-Action: Look
-IndexObjectOwner: -1
-ShellIndex: -1
-NextItemShellIndex: -1
-Color: 0 0 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 1
-IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
-IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-------------------------------------------------------------------
-Type: NPC
-Name: Mon_2
-Model: mon
-Index: 2
-Layer: LayerNone
-Pos: -23.2503 -53.0211 -37.043
-Target: -9.26608 -53.0192 -27.7201
+Pos: -37.5279 -52.9834 3.05542
+Target: -49.6222 -52.9956 11.5926
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -79,8 +47,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -89,9 +57,41 @@ IsNPC: 1
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_2
+Model: mon
+Index: 2
+Layer: LayerNone
+Pos: -13.5637 -53.0561 34.0365
+Target: -31.8388 -53.0568 23.4561
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -111,8 +111,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -121,9 +121,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -143,8 +143,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -153,9 +153,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -175,8 +175,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -185,9 +185,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Block
@@ -196,19 +196,19 @@ Model: box
 Index: 6
 Layer: LayerNone
 Pos: -10 -54.019 -10
-Target: 6.75898 -44.8261 14.0126
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -217,47 +217,47 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 0
 IsChecked: 0
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
-Vertex: -3.26334 -1 29.2112
+Vertex: -1 -1 -1
 Vertex: 1 1 -1
-Vertex: -3.26334 -1 29.2112
-Vertex: -3.26334 1 29.2112
-Vertex: 22.0403 -1 22.1015
-Vertex: 22.0403 1 22.1015
-Vertex: -3.26334 1 29.2112
-Vertex: 22.0403 -1 22.1015
-Vertex: -3.26334 1 29.2112
-Vertex: -3.26334 -1 29.2112
-Vertex: 10.404 -1 7.64051
-Vertex: 10.404 1 7.64051
-Vertex: 22.0403 -1 22.1015
-Vertex: 10.404 1 7.64051
-Vertex: 22.0403 1 22.1015
-Vertex: 22.0403 -1 22.1015
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: 10.404 -1 7.64051
+Vertex: 1 -1 1
 Vertex: 1 1 -1
-Vertex: 10.404 1 7.64051
-Vertex: 10.404 -1 7.64051
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
 Vertex: 1 1 -1
-Vertex: -3.26334 1 29.2112
-Vertex: 10.404 1 7.64051
-Vertex: -3.26334 1 29.2112
-Vertex: 22.0403 1 22.1015
-Vertex: 10.404 1 7.64051
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
 Vertex: 1 -1 -1
-Vertex: 10.404 -1 7.64051
-Vertex: 22.0403 -1 22.1015
+Vertex: 1 -1 1
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
-Vertex: 22.0403 -1 22.1015
-Vertex: -3.26334 -1 29.2112
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox1
@@ -276,8 +276,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -286,9 +286,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 0
 IsChecked: 0
 Specific:
 Vertex: 1 1 -1
@@ -334,19 +334,19 @@ Model: box
 Index: 8
 Layer: LayerNone
 Pos: -10 -53.9908 -20
-Target: 15.2451 -54.7712 5.58869
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -355,46 +355,46 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 0
 IsChecked: 0
 Specific:
-Vertex: 18.7945 1 10.1547
-Vertex: 18.7945 -1 10.1547
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
 Vertex: -1 -1 -1
-Vertex: 18.7945 1 10.1547
+Vertex: 1 1 -1
 Vertex: -1 -1 -1
 Vertex: -1 1 -1
-Vertex: 25.2451 -1 25.5887
-Vertex: 25.2451 1 25.5887
+Vertex: -1 -1 1
+Vertex: -1 1 1
 Vertex: -1 1 -1
-Vertex: 25.2451 -1 25.5887
+Vertex: -1 -1 1
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
-Vertex: 35.9943 -1 26.0156
-Vertex: 35.9943 1 26.0156
-Vertex: 25.2451 -1 25.5887
-Vertex: 35.9943 1 26.0156
-Vertex: 25.2451 1 25.5887
-Vertex: 25.2451 -1 25.5887
-Vertex: 18.7945 -1 10.1547
-Vertex: 18.7945 1 10.1547
-Vertex: 35.9943 -1 26.0156
-Vertex: 18.7945 1 10.1547
-Vertex: 35.9943 1 26.0156
-Vertex: 35.9943 -1 26.0156
-Vertex: 18.7945 1 10.1547
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
 Vertex: -1 1 -1
-Vertex: 35.9943 1 26.0156
+Vertex: 0.999999 1 1
 Vertex: -1 1 -1
-Vertex: 25.2451 1 25.5887
-Vertex: 35.9943 1 26.0156
-Vertex: 18.7945 -1 10.1547
-Vertex: 35.9943 -1 26.0156
-Vertex: 25.2451 -1 25.5887
-Vertex: 18.7945 -1 10.1547
-Vertex: 25.2451 -1 25.5887
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
 Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
@@ -414,8 +414,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -424,9 +424,9 @@ IsNPC: 0
 IsHexagonModel: 1
 IsSquareModel: 1
 IsAbsolutePosition: 1
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
-IsUsable: 1
+IsUsable: 0
 IsChecked: 0
 Specific:
 Vertex: 1 1 -1
@@ -483,8 +483,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -493,9 +493,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -515,8 +515,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -525,9 +525,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Bullet
@@ -547,8 +547,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -557,9 +557,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: BulletHero
@@ -567,8 +567,8 @@ Name: BulletHero
 Model: marker_Point
 Index: 13
 Layer: LayerNone
-Pos: -31.6793 -76.0157 -51.0531
-Target: -33.3046 -76.7368 -53.0727
+Pos: 0 0 0
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -579,8 +579,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -589,9 +589,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -599,7 +599,7 @@ Name: M_C_1
 Model: marker_Cross
 Index: 14
 Layer: LayerNone
-Pos: 12.9613 -52.1831 47.3406
+Pos: -37.5279 -52.9834 3.05542
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -611,8 +611,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -621,9 +621,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -631,7 +631,7 @@ Name: M_C_2
 Model: marker_Cross
 Index: 15
 Layer: LayerNone
-Pos: 13.0437 -54.1831 46.8363
+Pos: 0 0 0
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -643,8 +643,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -653,9 +653,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -663,7 +663,7 @@ Name: M_V_1
 Model: marker_Vector
 Index: 16
 Layer: LayerNone
-Pos: 14.1064 -54.1447 46.6117
+Pos: -37.6545 -54.9796 0.965492
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -675,8 +675,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -685,9 +685,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -695,7 +695,7 @@ Name: M_V_2
 Model: marker_Vector
 Index: 17
 Layer: LayerNone
-Pos: 9.10329 -53.5945 45.3934
+Pos: -37.6719 -54.9817 4.1517
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -707,8 +707,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -717,9 +717,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Solid
@@ -727,7 +727,7 @@ Name: M_V_3
 Model: marker_Vector
 Index: 18
 Layer: LayerNone
-Pos: 10.3907 -55.0597 48.8958
+Pos: -34.5155 -54.9956 4.15711
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -739,8 +739,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -749,9 +749,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Hero
@@ -759,8 +759,8 @@ Name: Hero
 Model: homo
 Index: 19
 Layer: LayerNone
-Pos: 17.5708 -43.4095 32.3212
-Target: 17.5708 -43.4095 32.3212
+Pos: 0 -54.0171 5
+Target: 0 -54.0171 5
 Action: Search
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -771,8 +771,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
@@ -781,9 +781,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: CursorRay
@@ -791,20 +791,20 @@ Name: CursorRay
 Model: cursorRay
 Index: 20
 Layer: LayerNone
-Pos: 15.2451 -54.7712 5.58869
-Target: -90.8086 -108.572 -128.539
+Pos: -50 -55 70
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 19
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0 0 0
-Command: EditObjectCommand
-CommandSourceIndex: 20
-CommandTargetIndex: 8
-CommandValueI: 8
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
 CommandValueF: 0
-CommandValueS: CommandDescription:
-CommandDescription: CursorRay
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 0
@@ -813,9 +813,9 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 0
 IsAbsolutePosition: 1
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
 IsChecked: 0
 ------------------------------------------------------------------
 Type: Button
@@ -823,7 +823,7 @@ Name: BackContectGUI
 Model: ConextFrameModel
 Index: 21
 Layer: LayerBackground
-Pos: 7.24259 -52.451 8.43871
+Pos: 0.229159 -53.248 2.55647
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -835,8 +835,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -858,8 +858,8 @@ Type: GUI
 Name: TEST3
 Model: FrameModel
 Index: 22
-Layer: LayerGUI
-Pos: 6.54332 -52.6715 8.30162
+Layer: LayerBase
+Pos: 0.62895 -53.257 2.57248
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
@@ -871,8 +871,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -886,7 +886,7 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.71254 0.220468 0.002
+StartPos: 0.4 0.01 0.002
 SizePanel: 1.1 0.2
 ------------------------------------------------------------------
 Type: Button
@@ -894,7 +894,7 @@ Name: ButtonEditOn
 Model: ButtonModel
 Index: 23
 Layer: LayerBase
-Pos: 7.19435 -52.5011 8.4243
+Pos: 0.278802 -53.2944 2.57727
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
@@ -904,9 +904,9 @@ Color: 1 1 0
 Command: EditGUI_OnOff
 CommandSourceIndex: 23
 CommandTargetIndex: -1
-CommandValueI: 0
+CommandValueI: 1
 CommandValueF: 0
-CommandValueS: CommandDescription:
+CommandValueS: @?
 CommandDescription: ButtonEditOn
 IsVisible: 1
 IsGravity: 0
@@ -919,7 +919,7 @@ IsAbsolutePosition: 0
 IsFocusable: 1
 IsTransformable: 0
 IsUsable: 1
-IsChecked: 0
+IsChecked: 1
 Specific:
 StartPos: 0.05 0.05 0.005
 SizePanel: 0.1 0.1
@@ -929,8 +929,8 @@ Type: Button
 Name: ButtonCreateObjGUI
 Model: ButtonModel
 Index: 24
-Layer: LayerGUI
-Pos: 7.09567 -52.5011 8.40823
+Layer: LayerBase
+Pos: 0.378727 -53.2953 2.57701
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
@@ -942,8 +942,8 @@ CommandSourceIndex: 24
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: 0
-CommandValueS: CommandDescription:
-CommandDescription: ButtonCreateObjGUI
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -958,15 +958,15 @@ IsUsable: 1
 IsChecked: 0
 Specific:
 StartPos: 0.15 0.05 0.002
-SizePanel: 0.385438 0.109133
+SizePanel: 0.3 0.2
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
 Name: Button_TextBox
 Model: TextBoxModel
 Index: 25
-Layer: LayerGUI
-Pos: 8.04944 -51.5311 8.58503
+Layer: LayerBase
+Pos: -0.583151 -52.3658 2.27287
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 24
@@ -978,8 +978,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1001,8 +1001,8 @@ Type: TextBox
 Name: TextBoxObject
 Model: TextBoxModel
 Index: 26
-Layer: LayerGUI
-Pos: 7.42658 -51.7987 8.46529
+Layer: LayerBase
+Pos: -0.246803 -52.7876 2.40749
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
@@ -1014,8 +1014,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1029,7 +1029,7 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.794255 0.327639 0.0032
+StartPos: 0.5 0.5 0.002
 SizePanel: 1.5 1
 Message: привет мир и доброе утро
 ------------------------------------------------------------------
@@ -1038,20 +1038,20 @@ Name: SystemRootEditBox
 Model: ButtonEditBoxModel
 Index: 27
 Layer: LayerBase
-Pos: 0.358116 -53.501 2.531
+Pos: 0.1 0.3 0.005
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
 ShellIndex: 1
 NextItemShellIndex: -1
-Color: 1 1 0
+Color: 0.117 0.351 0.95
 Command: EditObjectCommand
 CommandSourceIndex: 27
 CommandTargetIndex: 28
-CommandValueI: 1
+CommandValueI: -1
 CommandValueF: 0
-CommandValueS: эх
-CommandDescription: SystemRootEditBox
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 0
 IsGravity: 0
 IsGUI: 1
@@ -1065,7 +1065,7 @@ IsTransformable: 0
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.456591 0.642748 0.005
+StartPos: 0.1 0.3 0.005
 SizePanel: 0.7 0.1
 IsToogleButon: 1
 ------------------------------------------------------------------
@@ -1074,7 +1074,7 @@ Name: SystemEditBox
 Model: EditBoxModel
 Index: 28
 Layer: LayerBase
-Pos: -0.598803 -52.5595 2.47783
+Pos: 0.03 0.03 0.006
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 27
@@ -1086,8 +1086,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 0
 IsGravity: 0
 IsGUI: 1
@@ -1103,14 +1103,14 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.03 0.006
 SizePanel: 1.5 1
-Message: аааа
+Message: ох
 ------------------------------------------------------------------
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
 Index: 29
 Layer: LayerSystem
-Pos: 7.7298 -52.2784 8.52169
+Pos: 0.410165 -52.9311 2.47761
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 21
@@ -1122,8 +1122,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1137,28 +1137,28 @@ IsTransformable: 0
 IsUsable: 0
 IsChecked: 0
 Specific:
-StartPos: 0.45937 0.7938 0.01
+StartPos: 1.13834 0.632408 0.01
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
-Type: Button
-Name: ButtonCreateObjGUI_30
-Model: ButtonModel
+Type: ListBox
+Name: BaseFrame_ListBox
+Model: FrameModel
 Index: 30
-Layer: LayerGUI
-Pos: 6.1422 -53.878 8.23392
+Layer: LayerBase
+Pos: 0.635816 -53.9741 2.78754
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 21
-ShellIndex: 2
+ShellIndex: 5
 NextItemShellIndex: -1
-Color: 1 1 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1167,24 +1167,59 @@ IsNPC: 0
 IsHexagonModel: 0
 IsSquareModel: 1
 IsAbsolutePosition: 0
-IsFocusable: 1
+IsFocusable: 0
 IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 1.11919 1.42696 0.0022
-SizePanel: 0.4 0.2
-IsToogleButon: 0
+StartPos: 0.412841 0.758588 0.002
+SizePanel: 0.6 0.24
 ------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_31
-Model: TextBoxModel
+Type: Button
+Name: ButtonItem_ListBox
+Model: ButtonModel
 Index: 31
-Layer: LayerGUI
-Pos: 7.09601 -52.908 8.41051
+Layer: LayerBase
+Pos: 0.645745 -53.9834 2.7917
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 30
+ShellIndex: 5
+NextItemShellIndex: 33
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.422841 0.768588 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_32
+Model: TextBoxModel
+Index: 32
+Layer: LayerBase
+Pos: -0.316146 -53.0541 2.48654
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 31
 ShellIndex: 2
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1193,8 +1228,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1208,55 +1243,55 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.01 0.01 0.0034
+StartPos: 0.01 0.01 0.003
 SizePanel: 1.5 1
-Message: по
+Message: создать блок
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_32
+Name: ButtonItem_ListBox_33
 Model: ButtonModel
-Index: 32
-Layer: LayerGUI
-Pos: 6.65054 -53.5403 8.33016
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 21
-ShellIndex: 3
-NextItemShellIndex: -1
-Color: 1 1 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 0
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.60182 1.08925 0.0024
-SizePanel: 0.4 0.2
-IsToogleButon: 0
-------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_33
-Model: TextBoxModel
 Index: 33
-Layer: LayerGUI
-Pos: 7.60436 -52.5703 8.50675
+Layer: LayerBase
+Pos: 0.645147 -54.0552 2.81321
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 32
+IndexObjectOwner: 30
+ShellIndex: 5
+NextItemShellIndex: 35
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.422841 0.843588 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_34
+Model: TextBoxModel
+Index: 34
+Layer: LayerBase
+Pos: -0.316744 -53.126 2.50805
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 33
 ShellIndex: 3
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1265,8 +1300,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1280,101 +1315,29 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.01 0.01 0.0036
+StartPos: 0.01 0.01 0.003
 SizePanel: 1.5 1
-Message: ууу
+Message: тест
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonCreateObjGUI_34
+Name: ButtonItem_ListBox_35
 Model: ButtonModel
-Index: 34
-Layer: LayerGUI
-Pos: 6.52508 -53.626 8.30615
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 21
-ShellIndex: 4
-NextItemShellIndex: -1
-Color: 1 1 0
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 0
-IsFocusable: 1
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.729557 1.17498 0.0026
-SizePanel: 0.640299 0.443634
-IsToogleButon: 0
-------------------------------------------------------------------
-Type: TextBox
-Name: Button_TextBox_35
-Model: TextBoxModel
 Index: 35
-Layer: LayerGUI
-Pos: 7.26784 -52.6785 8.44162
+Layer: LayerBase
+Pos: 0.644549 -54.127 2.83472
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 34
-ShellIndex: 4
-NextItemShellIndex: -1
-Color: 0.117 0.351 0.95
-Command: None
-CommandSourceIndex: 0
-CommandTargetIndex: 0
-CommandValueI: 0
-CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
-IsVisible: 1
-IsGravity: 0
-IsGUI: 1
-IsTextureRepeat: 0
-IsNPC: 0
-IsHexagonModel: 0
-IsSquareModel: 1
-IsAbsolutePosition: 1
-IsFocusable: 0
-IsTransformable: 1
-IsUsable: 1
-IsChecked: 0
-Specific:
-StartPos: 0.225017 0.0325127 0.0038
-SizePanel: 1.5 1
-Message: нет
-------------------------------------------------------------------
-Type: Button
-Name: ButtonCreateObjGUI_36
-Model: ButtonModel
-Index: 36
-Layer: LayerGUI
-Pos: 5.964 -53.0558 8.19105
-Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 21
+IndexObjectOwner: 30
 ShellIndex: 5
 NextItemShellIndex: -1
 Color: 1 1 0
-Command: None
+Command: DeleteObject
 CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_35
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1388,20 +1351,20 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 1.30229 0.604796 0.0026
-SizePanel: 0.384026 0.0970773
+StartPos: 0.422841 0.918588 0.003
+SizePanel: 0.58 0.07
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_37
+Name: Button_TextBox_36
 Model: TextBoxModel
-Index: 37
-Layer: LayerGUI
-Pos: 6.83372 -52.0917 8.35101
+Index: 36
+Layer: LayerBase
+Pos: -0.317342 -53.1978 2.52956
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 36
-ShellIndex: 5
+IndexObjectOwner: 35
+ShellIndex: 4
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1409,8 +1372,8 @@ CommandSourceIndex: 0
 CommandTargetIndex: 0
 CommandValueI: 0
 CommandValueF: 0
-CommandValueS: 
-CommandDescription: 
+CommandValueS: @?
+CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -1424,8 +1387,2304 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.0957259 0.0158098 0.004
+StartPos: 0.01 0.01 0.003
 SizePanel: 1.5 1
-Message: аааа
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_37
+Model: FrameModel
+Index: 37
+Layer: LayerBase
+Pos: 1.35168 -53.9375 2.79648
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 9
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.12868 0.72042 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_38
+Model: ButtonModel
+Index: 38
+Layer: LayerBase
+Pos: 1.36161 -53.9468 2.80064
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 37
+ShellIndex: 9
+NextItemShellIndex: 40
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_38
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.13868 0.73042 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_39
+Model: TextBoxModel
+Index: 39
+Layer: LayerBase
+Pos: 0.399721 -53.0176 2.49549
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 38
+ShellIndex: 6
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_40
+Model: ButtonModel
+Index: 40
+Layer: LayerBase
+Pos: 1.36101 -54.0186 2.82215
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 37
+ShellIndex: 9
+NextItemShellIndex: 42
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.13868 0.80542 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_41
+Model: TextBoxModel
+Index: 41
+Layer: LayerBase
+Pos: 0.399123 -53.0894 2.517
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 40
+ShellIndex: 7
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_42
+Model: ButtonModel
+Index: 42
+Layer: LayerBase
+Pos: 1.36042 -54.0905 2.84366
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 37
+ShellIndex: 9
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_42
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.13868 0.88042 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_43
+Model: TextBoxModel
+Index: 43
+Layer: LayerBase
+Pos: 0.398525 -53.1613 2.53851
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 42
+ShellIndex: 8
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_44
+Model: FrameModel
+Index: 44
+Layer: LayerBase
+Pos: 1.47405 -54.3054 2.91011
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 13
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.25416 1.10446 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_45
+Model: ButtonModel
+Index: 45
+Layer: LayerBase
+Pos: 1.48398 -54.3147 2.91427
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 44
+ShellIndex: 13
+NextItemShellIndex: 47
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_45
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.26416 1.11446 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_46
+Model: TextBoxModel
+Index: 46
+Layer: LayerBase
+Pos: 0.52209 -53.3855 2.60912
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 45
+ShellIndex: 10
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_47
+Model: ButtonModel
+Index: 47
+Layer: LayerBase
+Pos: 1.48338 -54.3865 2.93578
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 44
+ShellIndex: 13
+NextItemShellIndex: 49
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.26416 1.18946 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_48
+Model: TextBoxModel
+Index: 48
+Layer: LayerBase
+Pos: 0.521492 -53.4573 2.63063
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 47
+ShellIndex: 11
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_49
+Model: ButtonModel
+Index: 49
+Layer: LayerBase
+Pos: 1.48278 -54.4584 2.95729
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 44
+ShellIndex: 13
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_49
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 1.26416 1.26446 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_50
+Model: TextBoxModel
+Index: 50
+Layer: LayerBase
+Pos: 0.520894 -53.5292 2.65214
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 49
+ShellIndex: 12
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_51
+Model: FrameModel
+Index: 51
+Layer: LayerBase
+Pos: 0.758886 -54.3779 2.91194
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 17
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.53932 1.18009 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_52
+Model: ButtonModel
+Index: 52
+Layer: LayerBase
+Pos: 0.768814 -54.3871 2.9161
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 51
+ShellIndex: 17
+NextItemShellIndex: 54
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_52
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.54932 1.19009 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_53
+Model: TextBoxModel
+Index: 53
+Layer: LayerBase
+Pos: -0.193077 -53.4579 2.61094
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 52
+ShellIndex: 14
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_54
+Model: ButtonModel
+Index: 54
+Layer: LayerBase
+Pos: 0.768216 -54.459 2.93761
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 51
+ShellIndex: 17
+NextItemShellIndex: 56
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.54932 1.26509 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_55
+Model: TextBoxModel
+Index: 55
+Layer: LayerBase
+Pos: -0.193675 -53.5298 2.63245
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 54
+ShellIndex: 15
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_56
+Model: ButtonModel
+Index: 56
+Layer: LayerBase
+Pos: 0.767618 -54.5308 2.95912
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 51
+ShellIndex: 17
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_56
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.54932 1.34009 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_57
+Model: TextBoxModel
+Index: 57
+Layer: LayerBase
+Pos: -0.194273 -53.6016 2.65396
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 56
+ShellIndex: 16
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_58
+Model: FrameModel
+Index: 58
+Layer: LayerBase
+Pos: 0.505862 -54.2265 2.85954
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 21
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.284938 1.02206 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_59
+Model: ButtonModel
+Index: 59
+Layer: LayerBase
+Pos: 0.51579 -54.2358 2.8637
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 58
+ShellIndex: 21
+NextItemShellIndex: 61
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_59
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.294938 1.03206 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_60
+Model: TextBoxModel
+Index: 60
+Layer: LayerBase
+Pos: -0.4461 -53.3065 2.55855
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 59
+ShellIndex: 18
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_61
+Model: ButtonModel
+Index: 61
+Layer: LayerBase
+Pos: 0.515192 -54.3076 2.88521
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 58
+ShellIndex: 21
+NextItemShellIndex: 63
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.294938 1.10706 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_62
+Model: TextBoxModel
+Index: 62
+Layer: LayerBase
+Pos: -0.446698 -53.3784 2.58006
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 61
+ShellIndex: 19
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_63
+Model: ButtonModel
+Index: 63
+Layer: LayerBase
+Pos: 0.514594 -54.3794 2.90672
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 58
+ShellIndex: 21
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_63
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.294938 1.18206 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_64
+Model: TextBoxModel
+Index: 64
+Layer: LayerBase
+Pos: -0.447296 -53.4502 2.60157
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 63
+ShellIndex: 20
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_65
+Model: FrameModel
+Index: 65
+Layer: LayerBase
+Pos: 1.1875 -54.6636 3.00948
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 25
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.970484 1.47842 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_66
+Model: ButtonModel
+Index: 66
+Layer: LayerBase
+Pos: 1.19743 -54.6729 3.01364
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 65
+ShellIndex: 25
+NextItemShellIndex: 68
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_66
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.980484 1.48842 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_67
+Model: TextBoxModel
+Index: 67
+Layer: LayerBase
+Pos: 0.235542 -53.7437 2.70849
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 66
+ShellIndex: 22
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_68
+Model: ButtonModel
+Index: 68
+Layer: LayerBase
+Pos: 1.19683 -54.7448 3.03515
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 65
+ShellIndex: 25
+NextItemShellIndex: 70
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.980484 1.56342 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_69
+Model: TextBoxModel
+Index: 69
+Layer: LayerBase
+Pos: 0.234944 -53.8156 2.73
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 68
+ShellIndex: 23
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_70
+Model: ButtonModel
+Index: 70
+Layer: LayerBase
+Pos: 1.19624 -54.8166 3.05666
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 65
+ShellIndex: 25
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_70
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.980484 1.63842 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_71
+Model: TextBoxModel
+Index: 71
+Layer: LayerBase
+Pos: 0.234346 -53.8874 2.75151
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 70
+ShellIndex: 24
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_72
+Model: FrameModel
+Index: 72
+Layer: LayerBase
+Pos: 0.472426 -54.6389 2.98218
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 29
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.254924 1.45258 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_73
+Model: ButtonModel
+Index: 73
+Layer: LayerBase
+Pos: 0.482355 -54.6482 2.98634
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 72
+ShellIndex: 29
+NextItemShellIndex: 75
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_73
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.264924 1.46258 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_74
+Model: TextBoxModel
+Index: 74
+Layer: LayerBase
+Pos: -0.479536 -53.719 2.68119
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 73
+ShellIndex: 26
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_75
+Model: ButtonModel
+Index: 75
+Layer: LayerBase
+Pos: 0.481757 -54.72 3.00785
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 72
+ShellIndex: 29
+NextItemShellIndex: 77
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.264924 1.53758 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_76
+Model: TextBoxModel
+Index: 76
+Layer: LayerBase
+Pos: -0.480134 -53.7908 2.7027
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 75
+ShellIndex: 27
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_77
+Model: ButtonModel
+Index: 77
+Layer: LayerBase
+Pos: 0.481159 -54.7919 3.02936
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 72
+ShellIndex: 29
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_77
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.264924 1.61258 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_78
+Model: TextBoxModel
+Index: 78
+Layer: LayerBase
+Pos: -0.480732 -53.8626 2.72421
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 77
+ShellIndex: 28
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_79
+Model: FrameModel
+Index: 79
+Layer: LayerBase
+Pos: 0.339134 -53.57 2.65821
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 33
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.112679 0.336755 0.002
+SizePanel: 0.6 0.24
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_80
+Model: ButtonModel
+Index: 80
+Layer: LayerBase
+Pos: 0.349063 -53.5793 2.66237
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 79
+ShellIndex: 33
+NextItemShellIndex: 82
+Color: 1 1 0
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_80
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.122679 0.346755 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_81
+Model: TextBoxModel
+Index: 81
+Layer: LayerBase
+Pos: -0.612828 -52.65 2.35722
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 80
+ShellIndex: 30
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_82
+Model: ButtonModel
+Index: 82
+Layer: LayerBase
+Pos: 0.348464 -53.6511 2.68388
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 79
+ShellIndex: 33
+NextItemShellIndex: 84
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.122679 0.421755 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_83
+Model: TextBoxModel
+Index: 83
+Layer: LayerBase
+Pos: -0.613426 -52.7219 2.37873
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 82
+ShellIndex: 31
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_84
+Model: ButtonModel
+Index: 84
+Layer: LayerBase
+Pos: 0.347867 -53.7229 2.70539
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 79
+ShellIndex: 33
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_84
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.122679 0.496755 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_85
+Model: TextBoxModel
+Index: 85
+Layer: LayerBase
+Pos: -0.614024 -52.7937 2.40024
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 84
+ShellIndex: 32
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: ListBox
+Name: BaseFrame_ListBox_86
+Model: FrameModel
+Index: 86
+Layer: LayerBase
+Pos: 0.304177 -53.8182 2.7316
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 21
+ShellIndex: 41
+NextItemShellIndex: -1
+Color: 1 1 1
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0797749 0.595825 0.002
+SizePanel: 0.6 0.56
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_87
+Model: ButtonModel
+Index: 87
+Layer: LayerBase
+Pos: 0.314105 -53.8274 2.73576
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 89
+Color: 1 1 1
+Command: CreateObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_87
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.605825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_88
+Model: TextBoxModel
+Index: 88
+Layer: LayerBase
+Pos: -0.647785 -52.8982 2.4306
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 87
+ShellIndex: 34
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: создать блок
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_89
+Model: ButtonModel
+Index: 89
+Layer: LayerBase
+Pos: 0.313507 -53.8993 2.75727
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 91
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.680825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_90
+Model: TextBoxModel
+Index: 90
+Layer: LayerBase
+Pos: -0.648383 -52.9701 2.45211
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 89
+ShellIndex: 35
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_91
+Model: ButtonModel
+Index: 91
+Layer: LayerBase
+Pos: 0.312909 -53.9711 2.77878
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 93
+Color: 1 1 0
+Command: DeleteObject
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: ButtonItem_ListBox_91
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.755825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_92
+Model: TextBoxModel
+Index: 92
+Layer: LayerBase
+Pos: -0.648981 -53.0419 2.47362
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 91
+ShellIndex: 36
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: удалить
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_93
+Model: ButtonModel
+Index: 93
+Layer: LayerBase
+Pos: 0.312311 -54.043 2.80029
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 95
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.830825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_94
+Model: TextBoxModel
+Index: 94
+Layer: LayerBase
+Pos: -0.649579 -53.1138 2.49513
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 93
+ShellIndex: 37
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_95
+Model: ButtonModel
+Index: 95
+Layer: LayerBase
+Pos: 0.311713 -54.1148 2.8218
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 97
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.905825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_96
+Model: TextBoxModel
+Index: 96
+Layer: LayerBase
+Pos: -0.650177 -53.1856 2.51664
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 95
+ShellIndex: 38
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_97
+Model: ButtonModel
+Index: 97
+Layer: LayerBase
+Pos: 0.311115 -54.1867 2.84331
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: 99
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 0.980825 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_98
+Model: TextBoxModel
+Index: 98
+Layer: LayerBase
+Pos: -0.650775 -53.2575 2.53815
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 97
+ShellIndex: 39
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
+------------------------------------------------------------------
+Type: Button
+Name: ButtonItem_ListBox_99
+Model: ButtonModel
+Index: 99
+Layer: LayerBase
+Pos: 0.310517 -54.2585 2.86482
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 86
+ShellIndex: 41
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.0897748 1.05582 0.003
+SizePanel: 0.58 0.07
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_100
+Model: TextBoxModel
+Index: 100
+Layer: LayerBase
+Pos: -0.651374 -53.3293 2.55966
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 99
+ShellIndex: 40
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: 0
+CommandTargetIndex: 0
+CommandValueI: 0
+CommandValueF: 0
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: тест
 ------------------------------------------------------------------
 

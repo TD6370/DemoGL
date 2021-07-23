@@ -145,6 +145,10 @@ public:
 
 	vec2 StrToVec2(string& value);
 
+	string GetStrValue(string value);
+
+	void SetStrValue(std::ifstream& in, string& value);
+
 	string GetNameType(TypeObject typeObj);
 	TypeObject GetTypeObject(string name);
 	void AddNextType(TypeObject typeObj, string Name);

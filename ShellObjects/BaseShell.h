@@ -26,6 +26,7 @@ public:
 	shared_ptr<ObjectData> RootObj;
 	shared_ptr<ObjectData> CaptionObj;
 	shared_ptr<ObjectData> HeadObj;
+	shared_ptr<ObjectData> SelectItemObj;
 
 	//Child shapes
 	map <string, int> Components = map <string, int>{};

@@ -1,10 +1,5 @@
 #include "BaseShell.h"
 
-//BaseShell::BaseShell() {
-//
-//}
-
-
 BaseShell::~BaseShell() {
 
 }
@@ -30,15 +25,4 @@ int BaseShell::ComponentIndex(string name)
 //{
 //	nextItem->NextItem = HeadItem;
 //	HeadItem = nextItem;
-//}
-
-
-//ShellButtonGUI::~ShellButtonGUI() {
-//
-//}
-
-
-//ShellButtonGUI::ShellButtonGUI()
-//{
-//
 //}

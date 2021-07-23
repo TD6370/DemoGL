@@ -21,6 +21,8 @@ public:
 	void CreateButton();
 
 	void CreateEditBox();
+
+	void CreateListBox(string nameListCommand);
 };
 
 

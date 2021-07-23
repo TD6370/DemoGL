@@ -81,9 +81,9 @@ public:
 	bool IsSquareModel = false;
 
 	bool IsVisible = true;
-	bool IsFocusable;
-	bool IsTransformable;
-	bool IsUsable;
+	bool IsFocusable = false;
+	bool IsTransformable = false;
+	bool IsUsable = false;
 	bool IsChecked = false;
 
 	bool IsAbsolutePosition = true;
@@ -175,7 +175,7 @@ public:
 	void Action();
 
 	//---------------
-	void SetOwnerObject(shared_ptr<ObjectData> p_ownerObj);
+	void virtual SetOwnerObject(shared_ptr<ObjectData> p_ownerObj);
 	//void SetOwnerObject(ObjectData* p_ownerObj);
 	void SetNextItemShellObject(shared_ptr<ObjectData> p_nextItemShellObj);
 	void SetShell(shared_ptr<BaseShell> p_shell);

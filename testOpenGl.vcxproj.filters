@@ -192,6 +192,9 @@
     <ClCompile Include="Rooms\AspectFamilyBonds.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectsTypes\ObjectListBox.cpp">
+      <Filter>Objects\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="Rooms\AspectFamilyBonds.h">
       <Filter>Rooms</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsTypes\ObjectListBox.h">
+      <Filter>Objects\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

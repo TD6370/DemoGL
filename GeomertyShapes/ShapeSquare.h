@@ -29,6 +29,11 @@ private:
 	float m_lenghtLineBackground = -1;
 	vec3 m_startPosParent = vec3();
 
+	// -- move to parent for not Absolute
+	vec3 m_firstPosParent = vec3(-5000);
+	vec3 m_firstPos = vec3(-5000);
+	vec3 m_offsetPosParent = vec3();
+
 	void SaveSizeFactor(bool isInit = false);
 
 	void SavePosFactor(vec3 posGUI, vec3 posWorld);
