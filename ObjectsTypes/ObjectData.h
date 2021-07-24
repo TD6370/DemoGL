@@ -90,15 +90,13 @@ public:
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
 
-	WorldCluster* Clusters;
 	DataEngine* EngineData;
-
+	WorldCluster* Clusters;
 	ShapeBase* Shape;
 	ColliseState CollisionPolygonState;
 	CommandPack* SceneCommand;
 	
 	int Index = 0;
-	//int RadiusCollider = 5;
 
 	shared_ptr<ModelData> ModelPtr;
 	
@@ -114,7 +112,6 @@ public:
 	GLint ParamValue = -1;
 	GLfloat StartTimer = -1;
 
-	//GLfloat TranslateAngle = 0;
 	vec3 TranslateAngle = vec3(0);
 	vec3 TargetAngle = vec3(0);
 	vec3 Size = vec3(0);
@@ -123,7 +120,6 @@ public:
 	vec3 Move = vec3(0);
 	vec3 Target = vec3(0);
 	vector<int> tramsformTypes;
-	//ActionObject ActionObjectCurrent;
 	mat4 TransformResult;
 
 	int minDist = 5;
@@ -134,8 +130,6 @@ public:
 	int PlaneDownIndex = -1;
 	vec3 PlaneDownPosition = vec3(0);
 	vector<vec3> TempVectors;
-	//std::vector<shared_ptr<Plane>> Planes;		//-----(#3.))
-	vector<string>  ChildObjects;
 
 	ObjectData();
 
@@ -199,12 +193,6 @@ public:
 
 	bool virtual GetVisible();
 
-	void virtual InitChildObjects();
-
-	void AddChild(string key);
-		
-	std::shared_ptr<ObjectData> GetChild(string key);
-	
 	string virtual GetInfo();
 
 	void virtual DefaultView();

@@ -70,6 +70,7 @@ struct ModelFileds {
 	string PathShaderVertex = "PathShaderVertex:";
 	string PathShaderFrag = "PathShaderFrag:";
 	string PathTexture = "PathTexture:";
+	string PathTextureAtlas = "PathTextureAtlas:";
 	string PathModel3D = "PathModel3D:";
 	string RadiusCollider = "RadiusCollider:";
 	string IsSquareModel = "IsSquareModel:";
@@ -146,6 +147,8 @@ public:
 	vec2 StrToVec2(string& value);
 
 	string GetStrValue(string value);
+
+	const char* GetStrValueToChar(string value);
 
 	void SetStrValue(std::ifstream& in, string& value);
 

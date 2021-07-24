@@ -43,7 +43,7 @@ class SceneConstruction
 {
 private:
 	int prevIndexModel = -1;
-	const char* prevModelTexture;
+	string prevModelTexture;
 	const char* prevModel3D;
 	GLuint last_VAO;
 
@@ -65,9 +65,7 @@ private:
 
 	GLint indicesSize;
 
-protected:
-	//bool isUpdate = false;
-	
+
 public:
 	shared_ptr<ObjectData> ObjectCurrent;
 	shared_ptr<ModelData> ModelCurrent;

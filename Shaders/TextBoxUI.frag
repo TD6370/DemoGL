@@ -1,4 +1,5 @@
-#version 330 core
+//#version 330 core
+#version 420 core
 
 in vec3 fragmentColor;
 in vec2 UV;
@@ -9,7 +10,9 @@ flat in int fragParamValue;
 
 out vec4 color;
 
-uniform sampler2D textureSampler;
+//version 420 core
+layout(binding = 0) uniform sampler2D textureSampler;
+layout(binding = 1) uniform sampler2D textureSamplerEng;
 
 vec4 SDF1(in vec4 inColor )
 {
@@ -26,6 +29,15 @@ vec4 SDF2(in vec4 inColor )
     vec3 c = inColor.xxx;
 	//vec3 res = smoothstep(.5-threshold, .5+threshold, c);
     vec3 res = smoothstep(.3-threshold, .3+threshold, c);
+	return vec4(res,1.0);
+}
+
+vec4 SDF2_2(in vec4 inColor )
+{
+    vec3 c = inColor.xxx;
+    const float threshold = 0.75;
+    float cent = .35;
+	vec3 res = smoothstep(cent-threshold, cent+threshold, c);
 	return vec4(res,1.0);
 }
 
@@ -69,12 +81,19 @@ void main()
     float bordR = 0.1;
     int colSymbRow = 7;
     vec2 result = vec2(0);
-    int index =0;
+    int index = 0;
+    bool isEng = false;
+    int paramValue = fragParamValue;
 
     int numSymb = numSymbol;
     
-    //if(numSymb == -1)
-    if(numSymb < 0 || numSymb > 29)
+    if(numSymb > 100){
+        numSymb -= 100;
+        isEng = true;
+        //paramValue = 7; //TEST
+    }
+
+    if(numSymb < 0 || numSymb > 48)
     {
         color = vec4(0.);
         //color = vec4(.0,.7,.0,1.);
@@ -107,37 +126,45 @@ void main()
     //result.x += cos(result.y*cos(fragTime));
     //result.y +=sin(result.x*sin(fragTime)*.01);
     
-    vec4 text = texture( textureSampler, result );	
+    vec4 text;	
+    if(isEng)
+        text = texture( textureSamplerEng, result );	
+    else
+        text = texture( textureSampler, result );	
+
     vec4 text1 = text;
+ 
     //--------- SDF
-	//text1 =SDF1(text1);
+    // if(paramValue == 1) //1
+	//     text1 = SDF1(text1);
     //-----------
-    text1 =SDF2(text1);
+    if(paramValue == 0) //0     //6+
+        text1 = SDF2_2(text1);
+        //text1 = SDF2(text1);
     //-----------
-    //text1 =SDF4(text1);
-    //----------- GlowEffect
-    //text1 = GlowEffect(text1);
-    //----------- outline
-    //text1 =Outline(text1);
+    // if(paramValue == 3) //3     //6+
+    //     text1 = SDF4(text1);
+    // //----------- GlowEffect
+    // if(paramValue == 4) //4
+    //     text1 = GlowEffect(text1);
+    // //----------- outline
+    // if(paramValue == 6) //5
+    //     text1 = Outline(text1);
+    // //---------------------
+    // if(paramValue == 7) //5
+    //     text1 = SDF2_2(text1);
     //---------------------
     
-
     vec4 colorText = vec4(0.984,0.773,0.196,1.);
 
-    float limitAlpha = 0.1;
     float sumColor = text1.r * text1.g * text1.b;
     alpha = smoothstep(0.0, 0.5, sumColor);
     
     // EditBox
-    if(fragParamValue == 1)
+    if(paramValue == 1)
     {
-        //alpha = .7;
-
-        //color =  text * colorText;
-        //alpha = smoothstep(0.0, 0.9, sumColor);
         //text1 = Outline(text);
         color =  text * vec4(colorText.rgb, alpha );
-        //color =  text1 * colorText;
     }
     else
     {

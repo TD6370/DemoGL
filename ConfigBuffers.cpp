@@ -17,6 +17,8 @@ GLint VertexAttribNumer_UV = 2;
 GLint VertexAttribNumer_Normals = 3;
 
 GLint TYPE_DRAW = GL_STATIC_DRAW;
+
+GLint BindShaderTextureLinks[3] = { GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2 };
 //GLint TYPE_DRAW = GL_DYNAMIC_DRAW;
 //GLint TYPE_DRAW = GL_STREAM_DRAW;
 
@@ -48,8 +50,10 @@ GLuint InitImage()
 }
 
 
-void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID)
+void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID, int numLink)
 {
+	glActiveTexture(BindShaderTextureLinks[numLink]);
+
 	// Биндим текстуру, и теперь все функции по работе с текстурами будут работать с этой
 	glBindTexture(GL_TEXTURE_2D, textureID);
 

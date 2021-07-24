@@ -15,7 +15,7 @@ GLuint InitBuffer();
 
 void SetBufferUV(std::vector< glm::vec2 >& uv_data, GLuint uvBuffer);
 void SetNormals(std::vector< glm::vec3 >& normals, GLuint normalbuffer);
-void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID);
+void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID, int numLink = 0);
 void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbufferID);
 
 GLuint GenVertexArrayObject(bool isIndex, 

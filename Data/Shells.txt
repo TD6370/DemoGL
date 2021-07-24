@@ -110,6 +110,6 @@ Name: ListBoxShell_TypesObjectListCommand
 Index: 18
 RootObjIndex: 30
 CaptionObjIndex: -1
-HeadIndexList: 31
+HeadIndexList: -1
 ------------------------------------------------------------------ 
 

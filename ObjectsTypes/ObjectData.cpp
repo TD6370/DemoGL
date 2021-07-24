@@ -202,17 +202,6 @@ void ObjectData::CheckStartPosition() {
 
 }
 
-//string ObjectData::GetKeySectorPolygon(bool isNewPosition) {
-//	vec3 pos = vec3();
-//	if (isNewPosition)
-//		pos = NewPostranslate;
-//	else
-//		pos = Postranslate;
-//
-//	int x_sector = pos.x / Storage->Clusters->SectorSizePlane;
-//	int z_sector = pos.z / Storage->Clusters->SectorSizePlane;
-//	return std::to_string(x_sector) + "_" + std::to_string(z_sector);
-//}
 
 void ObjectData::RunTransform()
 {
@@ -298,29 +287,8 @@ void ObjectData::SetStartTimer() {
 void ObjectData::ControlsEvents() {
 }
 
-//void ObjectData::Billboard() {
-//
-//	TranslateAngle.y = Storage->Oper->HorizontalAngle + (0.5 * M_PI);
-//	TranslateAngle.z = -Storage->Oper->VerticalAngle;
-//}
-
 bool ObjectData::GetVisible() {
 	return IsVisible;
-}
-
-void ObjectData::AddChild(string key)
-{
-	ChildObjects.push_back(key);
-}
-
-std::shared_ptr<ObjectData> ObjectData::GetChild(string key)
-{
-	//return Storage->GetObjectPrt(key);
-	return nullptr;
-}
-
-void ObjectData::InitChildObjects() {
-
 }
 
 void ObjectData::DefaultView()

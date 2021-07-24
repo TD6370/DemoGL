@@ -1,8 +1,9 @@
 #include "LoadBMP.h"
 #include <iostream>
 
-unsigned char* LoadBmp(const char* filePath, unsigned int* width, unsigned int* height) {
+unsigned char* LoadBmp(std::string p_filePath, unsigned int* width, unsigned int* height) {
 
+	const char* filePath = p_filePath.c_str();
 	unsigned char header[54]; // каждый BMP файл начинается с 54байтного заголовка
 	unsigned int dataPos; // Позиция в файле где сами данные начинаются
 	//unsigned int width, height;

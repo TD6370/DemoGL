@@ -163,6 +163,7 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 	streamModels << fileds.PathShaderVertex << " " << model->PathShaderVertex << "\n";
 	streamModels << fileds.PathShaderFrag << " " << model->PathShaderFrag << "\n";
 	streamModels << fileds.PathTexture << " " << model->PathTexture << "\n";
+	streamModels << fileds.PathTextureAtlas << " " << GetStrValue(model->PathTextureAtlas) << "\n";
 	streamModels << fileds.PathModel3D << " " << model->PathModel3D << "\n";
 
 	streamModels << fileds.RadiusCollider << " " << model->RadiusCollider << "\n";
@@ -408,6 +409,11 @@ string SceneSerialize::GetStrValue(string value) {
 	return value;
 }
 
+const char* SceneSerialize::GetStrValueToChar(string value) {
+	string result = GetStrValue(value);
+	return result.c_str();
+}
+
 //--- fix space in text
 void SceneSerialize::SetStrValue(std::ifstream& in, string& value) {
 
@@ -618,6 +624,9 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			if (in >> lineStr && lineStr == filedsModel->PathTexture)
 				in >> filedsModel->PathTexture;
 
+			if (in >> lineStr && lineStr == filedsModel->PathTextureAtlas)
+				SetStrValue(in, filedsModel->PathTextureAtlas);
+			
 			if (in >> lineStr && lineStr == filedsModel->PathModel3D)
 				in >> filedsModel->PathModel3D;
 

@@ -69,14 +69,15 @@ void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 	else {
 		ShaderProgram = shaderPrograms[keyShaderPrograms];
 	}
-
-	//ShaderProgram = ProgramConfig(vertShader, fragShader);
 }
 
 void ModelData::LoadingTexture() {
 
 	//------------------------------- Load texture
-	DataImage = LoadBmp(PathTexture, &WidthImage, &HeightImage);
+	DataImage = LoadBmp(PathTexture, &SizeImage.x, &SizeImage.y);
+	if (PathTextureAtlas.size() != 0)
+		DataImageAtlas = LoadBmp(PathTextureAtlas, &SizeImageAtlas.x, &SizeImageAtlas.y);
+
 	if (DataImage == NULL)
 	{
 		std::cerr << "Could not read image file " << PathTexture << ". File does not exist." << std::endl;
@@ -121,6 +122,11 @@ void ModelData::LoadModelData() {
 	}
 
 	Texture_ID = InitImage();
+
+	//if (!(PathTextureAtlas && !PathTextureAtlas[0]))
+	if (PathTextureAtlas.size() != 0)
+		TextureAtlas_ID = InitImage();
+
 	BufferUV_ID = InitUV();
 	BufferNormal_ID = InitNormals();
 	BufferColor_ID = InitBuffer();
@@ -173,8 +179,13 @@ void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 
 void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture)
 {
-	if(isUpdateTexture)
-		SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+	if (isUpdateTexture) {
+		//SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+		SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID);
+		if(TextureAtlas_ID != 666)
+			SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1);
+	}
+		
 
 	if (&uv == nullptr || uv.size() == 0)
 		SetBufferUV(UV, BufferUV_ID);
@@ -188,7 +199,10 @@ void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool i
 }
 
 void ModelData::SetTextureModel() {
-	SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+	//SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
+	SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID);
+	if(TextureAtlas_ID != 666)
+		SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1);
 }
 
 void ModelData::SetNormalsModel(vector<vec3>& normals) {

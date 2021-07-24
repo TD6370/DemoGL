@@ -121,6 +121,8 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 	if (filedsModels.size() == 0)
 		return;
 
+	SceneSerialize* serializer = new SceneSerialize();
+
 	ClearModels();
 
 	int i = 0;
@@ -152,9 +154,19 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 
+		//TEST
+		/*if (fieldsModel->PathTextureAtlas.size() != 0 && fieldsModel->PathTextureAtlas != "@?") {
+			const char* pathTextureAtlasTEST = fieldsModel->PathTextureAtlas.c_str();
+		}*/
+
 		nextModelPrt->PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
 		nextModelPrt->PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
 		nextModelPrt->PathTexture = fieldsModel->PathTexture.c_str();
+		
+		//string convertStr = serializer->GetStrValue(fieldsModel->PathTextureAtlas);
+		//nextModelPrt->PathTextureAtlas = convertStr.c_str();
+		nextModelPrt->PathTextureAtlas = serializer->GetStrValue(fieldsModel->PathTextureAtlas);
+
 		nextModelPrt->PathModel3D = fieldsModel->PathModel3D.c_str();
 		nextModelPrt->RadiusCollider = std::stof(fieldsModel->RadiusCollider);
 		nextModelPrt->IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
@@ -214,7 +226,7 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 
 	if (isGenName) {
 		string fileModel = GetFile(modelPtr->PathModel3D);
-		string fileTexture = GetFile(modelPtr->PathTexture);
+		//string fileTexture = GetFile(modelPtr->PathTexture);
 		name += fileModel + "_" + std::to_string(p_index);
 	}
 
@@ -367,6 +379,8 @@ int  CreatorModelData::SceneObjectsSize() {
 
 std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(int index)
 {
+	assert(index < SceneObjects.size());
+
 	std::shared_ptr<ObjectData> prt_objData = SceneObjects[index];
 	//TEST^^
 	//std::shared_ptr<ObjectData> prt_objData(&SceneObjectsV[index]);
@@ -784,6 +798,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
 	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->PathTextureAtlas = "./Textures/AlphabetEng.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
@@ -813,6 +828,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
 	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
 	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->PathTextureAtlas = "./Textures/AlphabetEng.bmp";
 	nextModelPrt->RadiusCollider = .1;
 	nextModelPrt->IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);

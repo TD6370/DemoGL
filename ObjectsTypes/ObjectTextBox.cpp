@@ -71,7 +71,7 @@ vector<int>  ObjectTextBox::MessageCodeConvert(string message)
 			code = MapAlphabet[symb];
 		}
 		else if (IsMapContains_StrInt(MapAlphabetEng, symb)) {
-			code = MapAlphabetEng[symb];
+			code = MapAlphabetEng[symb] + 100;
 		}
 		else
 			continue;

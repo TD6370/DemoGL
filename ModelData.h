@@ -37,9 +37,11 @@ public:
 	string PathShaderFolder = "./Shaders/";
 	string PathShaderVertex = "basic.vert";
 	string PathShaderFrag = "basic.frag";
-	const char* PathTexture = "./Textures/testTexture.bmp";
+	
+	string PathTexture = "./Textures/testTexture.bmp";
+	string PathTextureAtlas = "";	//@**
+
 	const char* PathModel3D = "./Models3D/monkey.obj";
-	//map<string, GLuint> ShaderPrograms;
 	string TypeName;
 
 	ConfigUniform* ConfUniform;
@@ -57,12 +59,14 @@ public:
 	std::vector< glm::vec3 > Vertices;
 	std::vector<unsigned int> Indices;
 
-	unsigned int WidthImage;
-	unsigned int HeightImage;
+	glm::uvec2 SizeImage;	
+	glm::uvec2 SizeImageAtlas;	//@**
 
 	unsigned char* DataImage;
+	unsigned char* DataImageAtlas;	//@**
 	//------------------------
 	GLuint Texture_ID;
+	GLuint TextureAtlas_ID = 666;	//@**
 	GLuint BufferUV_ID;
 	GLuint BufferNormal_ID;
 	GLuint BufferColor_ID;
