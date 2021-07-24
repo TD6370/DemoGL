@@ -92,7 +92,7 @@ struct CoreMVP {
 	glm::mat4 Projection;
 };
 
-enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming, Clearing };// , ReadingEvents }; // , EventControl };
+enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming, Clearing };
 
 enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button, EditBox, ListBox
 };
@@ -100,7 +100,7 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
 enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosForObject, SelectedPosForObject, EditGUI_OnOff, EditObjectCommand,
-	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading
+	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading, SelectItemValue
 };
 
 enum TypeLayer {
@@ -147,6 +147,7 @@ struct AnimationParamGUI
 extern struct AttributeCommands
 {
 	string BaseListCommand = "BaseListCommand";
+	string TypesObjectListCommand = "TypesObjectListCommand";
 	string TypeObjectAttr = "TypeObject";
 };
 

@@ -376,11 +376,11 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 			if (typeCreate == TypeObject::ListBox)
 			{
 				string nameListCommands = Scene->CommandsAttribute.BaseListCommand;
+				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //TEST
 				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { ListBox },
 					-1, -1, vec4(), nameListCommands);
 			}
 			else {
-				//Scene->AddCommand(TypeCommand::CreateObject, -1, -1, "TypeObject", typeCreate);
 				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate });
 			}
 			SetCommand(objGUI, TypeCommand::None);

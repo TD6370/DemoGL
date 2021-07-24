@@ -60,7 +60,8 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeCommand::KeyInputCommand, "KeyInputCommand");
 	AddNextType(TypeCommand::RenameObject, "RenameObject");
 	AddNextType(TypeCommand::ObjectReading, "ObjectReading");
-
+	AddNextType(TypeCommand::SelectItemValue, "SelectItemValue");
+	
 	AddNextType(TypeLayer::LayerBackground, "LayerBackground");
 	AddNextType(TypeLayer::LayerBack, "LayerBack");
 	AddNextType(TypeLayer::LayerNone, "LayerNone"); 
@@ -413,6 +414,10 @@ void SceneSerialize::SetStrValue(std::ifstream& in, string& value) {
 	std::getline(in, value);
 	if (value[0] == char(' ')) //remove split
 		value.erase(0, 1);
+}
+
+map<TypeObject, string> SceneSerialize::GetNamesTypesObjects() {
+	return m_mapNamesTypesObjects;
 }
 
 

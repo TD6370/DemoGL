@@ -384,10 +384,15 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
-shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, int headIndex, bool isLoading, 
+shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, bool isLoading,
 	vector<int> items) {
 
 	int nextIndex = ObjectsShells.size();
+	
+	//--- head Item
+	int headIndex = -1;
+	if (items.size() > 0)
+		headIndex = items[0];
 
 	BaseShell objShell(name, rootIndex);
 	shared_ptr<BaseShell> prt_objShell = std::make_unique <BaseShell>(objShell);
@@ -395,6 +400,7 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 	prt_objShell->CaptionObjIndex = captionIndex;
 	prt_objShell->Index = nextIndex;
 	prt_objShell->HeadIndexList = headIndex;
+	
 
 	if (!isLoading)
 	{
@@ -410,8 +416,6 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 		GetObjectPrt(rootIndex)->SetShell(prt_objShell);
 		if (captionIndex != -1)
 			GetObjectPrt(captionIndex)->SetShell(prt_objShell);
-		if (headIndex != -1)
-			GetObjectPrt(headIndex)->SetShell(prt_objShell);
 		for (auto item : items)
 		{
 			GetObjectPrt(item)->SetShell(prt_objShell);
@@ -915,7 +919,7 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 	for (auto shellFiled : filedsShells)
 	{
-		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), -1, true);
+		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), true);
 	}
 
 }

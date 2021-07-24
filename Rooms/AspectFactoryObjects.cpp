@@ -161,7 +161,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 	objName = "BaseFrame_ListBox";
 	caption = "BaseFrame_ListBox";
 	childModel = "FrameModel"; 
-	float height = listCommand.size() * 0.08;
+	float height = listCommand.size() * 0.076;
 	vec2 sizeFrame = vec2(0.6, height);
 	vec3 posFrame = vec3(pos.x, pos.y, posZ);
 	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
@@ -178,7 +178,11 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 		childModel = "ButtonModel";
 		objCreate = Scene->Storage->AddChildObject(objBaseFrame, caption, childModel, objName, posItem, sizeItem, Button, vec3(1));
 		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-		objCreateButton->IsToogleButon = false;
+
+		/*if(commItem.CommandType == SelectItemValue)
+			objCreateButton->IsToogleButon = true;
+		else*/
+			objCreateButton->IsToogleButon = false;
 		
 		//list index items for shell
 		listItemsIndex.push_back(objCreateButton->Index);
@@ -199,18 +203,10 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 		posItem.y += sizeItem.y + 0.005;
 	}
 
-	//--- head Item
-	int headIndexItem = -1;
-	if (listItemsIndex.size() > 0) {
-		headIndexItem = listItemsIndex[0];
-		listItemsIndex.erase(listItemsIndex.begin());
-	}
-
 	//Create shell
 	Scene->Storage->AddShell("ListBoxShell_" + nameListCommand,
 		objBaseFrame->Index,
 		-1,
-		headIndexItem,
 		false,
 		listItemsIndex);
 

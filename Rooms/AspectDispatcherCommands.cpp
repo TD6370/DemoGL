@@ -31,20 +31,36 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 	commandCreateBlock.CommandType = TypeCommand::CreateObject;
 	commandCreateBlock.Options.insert({ Scene->CommandsAttribute.TypeObjectAttr , (int)TypeObject::Block });
 
-	CommandPack commandT1 = CommandPack();
-	commandT1.Description = "тест";
-	commandT1.CommandType = TypeCommand::None;
+	//CommandPack commandT1 = CommandPack();
+	//commandT1.Description = "тест";
+	//commandT1.CommandType = TypeCommand::None;
 
 	CommandPack commandDeleteObject = CommandPack();
 	commandDeleteObject.Description = "удалить";
 	commandDeleteObject.CommandType = TypeCommand::DeleteObject;
 
 	vector<CommandPack> baseListCommand = vector<CommandPack>{
-		commandCreateBlock, commandT1, commandDeleteObject,
-		commandT1,commandT1,commandT1,commandT1
+		commandCreateBlock, commandDeleteObject
 	};
 		
 	StaticListCommand.insert({ Scene->CommandsAttribute.BaseListCommand, baseListCommand });
+
+	//---- ListBox Types object
+	vector<CommandPack> listTypeObjects = vector<CommandPack>();
+	CommandPack commandNextType;
+	SceneSerialize* serializer = new SceneSerialize();
+
+	map<TypeObject, string> mapTypesNamesObj = serializer->GetNamesTypesObjects();
+
+	for (auto pairTypeName : mapTypesNamesObj) {
+		commandNextType = CommandPack();
+		commandNextType.Description = pairTypeName.second;
+		commandNextType.CommandType = TypeCommand::SelectItemValue;
+		commandNextType.ValueI = pairTypeName.first;
+		listTypeObjects.push_back(commandNextType);
+	}
+
+	StaticListCommand.insert({ Scene->CommandsAttribute.TypesObjectListCommand, listTypeObjects });
 }
 
 void AspectDispatcherCommands::Work() {

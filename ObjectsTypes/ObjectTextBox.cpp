@@ -21,6 +21,7 @@ using std::shared_ptr;
 glm::mat4;
 
 extern map<string, int> MapAlphabet;
+extern map<string, int> MapAlphabetEng;
 
 ObjectTextBox::~ObjectTextBox()
 {
@@ -58,18 +59,31 @@ void ObjectTextBox::SetDataToShader() {
 	}
 }
 
-void ObjectTextBox::CreateMessage() {
-
+vector<int>  ObjectTextBox::MessageCodeConvert(string message)
+{
 	MessageCode = vector<int>();
-	for (char symbC : Message) {
-		char symbLow = std::tolower(symbC);
+	int code;
+	char symbLow;
+	for (char symbC : message) {
+		symbLow = std::tolower(symbC);
 		string symb(1, symbLow);
-		if (!IsMapContains_StrInt(MapAlphabet, symb))
+		if (IsMapContains_StrInt(MapAlphabet, symb)) {
+			code = MapAlphabet[symb];
+		}
+		else if (IsMapContains_StrInt(MapAlphabetEng, symb)) {
+			code = MapAlphabetEng[symb];
+		}
+		else
 			continue;
-
-		int code = MapAlphabet[symb];
 		MessageCode.push_back(code);
 	}
+	return MessageCode;
+}
+
+
+void ObjectTextBox::CreateMessage() {
+
+	MessageCodeConvert(Message);
 
 	MeshTransform();
 }
@@ -154,16 +168,7 @@ void ObjectTextBox::UpdateMessage()
 		Message.clear();
 	}
 
-	MessageCode = vector<int>();
-	for (char symbC : Message) {
-		char symbLow = std::tolower(symbC);
-		string symb(1, symbLow);
-		if (!IsMapContains_StrInt(MapAlphabet, symb))
-			continue;
-
-		int code = MapAlphabet[symb];
-		MessageCode.push_back(code);
-	}
+	MessageCodeConvert(Message);
 
 	int vertexSize = 6;
 	int indSymb = 0;

@@ -54,6 +54,8 @@ public:
 
 	void ActionWork();
 
+	vector<int> MessageCodeConvert(string Message);
+
 	void CreateMessage();
 
 	void UpdateMessage();

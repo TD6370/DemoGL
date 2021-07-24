@@ -164,5 +164,7 @@ public:
 	string GetNameType(TypeLayer typeObj);
 	TypeLayer GetTypeLayer(string name);
 	void AddNextType(TypeLayer typeObj, string Name);
+
+	map<TypeObject, string> GetNamesTypesObjects();
 };
 
