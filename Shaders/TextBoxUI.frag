@@ -93,7 +93,7 @@ void main()
         //paramValue = 7; //TEST
     }
 
-    if(numSymb < 0 || numSymb > 48)
+    if(numSymb < 0)
     {
         color = vec4(0.);
         //color = vec4(.0,.7,.0,1.);

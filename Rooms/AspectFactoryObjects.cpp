@@ -161,14 +161,18 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 	objName = "BaseFrame_ListBox";
 	caption = "BaseFrame_ListBox";
 	childModel = "FrameModel"; 
-	float height = listCommand.size() * 0.076;
-	vec2 sizeFrame = vec2(0.6, height);
+	float border = 0.01;
+	float interligne = 0.005;
+	float heightItem = 0.07;
+	float widthFrame = 0.6;
+	float heightFrame = (listCommand.size() * heightItem) + ((listCommand.size() -1) * interligne) + (border*2);
+	vec2 sizeFrame = vec2(widthFrame, heightFrame);
 	vec3 posFrame = vec3(pos.x, pos.y, posZ);
 	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
 	objBaseFrame->IsFocusable = false;
 	
-	vec2 sizeItem = vec2(sizeFrame.x - 0.02, 0.07);
-	vec3 posItem = vec3(posFrame.x + 0.01, posFrame.y + 0.01, posZ);
+	vec2 sizeItem = vec2(sizeFrame.x - (border * 2), heightItem);
+	vec3 posItem = vec3(posFrame.x + border, posFrame.y + border, posZ);
 
 	for (CommandPack commItem : listCommand)
 	{
@@ -200,7 +204,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 
 		shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
 
-		posItem.y += sizeItem.y + 0.005;
+		posItem.y += sizeItem.y + interligne;
 	}
 
 	//Create shell

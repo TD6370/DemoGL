@@ -64,6 +64,12 @@ public:
 
 	unsigned char* DataImage;
 	unsigned char* DataImageAtlas;	//@**
+
+	bool IsLoadedIntoMem_Texture = false;
+	bool IsLoadedIntoMem_Normals = false;
+	bool IsLoadedIntoMem_UV = false;
+	bool IsLoadedIntoMem_Vertex = false;
+	bool IsLoadedIntoMem_Buffer = false;
 	//------------------------
 	GLuint Texture_ID;
 	GLuint TextureAtlas_ID = 666;	//@**

@@ -121,7 +121,8 @@ void AspectDispatcherCommands::Work() {
 				else {
 
 					SceneSerialize* serializer = new SceneSerialize();
-					std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n";
+					std::cout << "Command not work: " << serializer->GetNameType(Scene->CurrentSceneCommand.CommandType) << "\n" << 
+						"---------------------------------------------------\n";;
 					Scene->CurrentSceneCommand.Enable = false;
 				}
 			}

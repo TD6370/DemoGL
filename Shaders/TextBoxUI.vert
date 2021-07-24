@@ -24,13 +24,17 @@ flat out int fragParamValue;
 
 void main()
 {
+	numSymbol = int(vertexColor.x);
+	if(numSymbol < 0)
+    {
+		gl_Position = vec4(-1);
+        return;
+    }
 	gl_Position = MVP * transform *vec4(position, 1.0);
-
 	// ---- OUT 
 	fragmentColor = setColor; 
 	UV = vertexUV;
 	fragParamCase = paramCase;
 	fragTime = fTime;
-	numSymbol = int(vertexColor.x);
 	fragParamValue = paramValue;
 }

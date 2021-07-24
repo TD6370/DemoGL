@@ -112,7 +112,7 @@ void ModelData::LoadModelData() {
 	//-----------------------------
 
 	VAO = InitVAO();
-	VBO = InitVBO();
+	VBO = InitBuffer();
 
 	SetVAO();
 
@@ -127,8 +127,8 @@ void ModelData::LoadModelData() {
 	if (PathTextureAtlas.size() != 0)
 		TextureAtlas_ID = InitImage();
 
-	BufferUV_ID = InitUV();
-	BufferNormal_ID = InitNormals();
+	BufferUV_ID = InitBuffer();
+	BufferNormal_ID = InitBuffer();
 	BufferColor_ID = InitBuffer();
 }
 
@@ -167,49 +167,55 @@ void ModelData::SetVAO() {
 	GenVertexArrayObject(IsIndex,
 		Vertices,
 		Indices,
-		VAO, VBO);
+		VAO, VBO, 
+		IsLoadedIntoMem_Vertex);
+	IsLoadedIntoMem_Vertex = true;
 }
 
 void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
 	GenVertexArrayObject(IsIndex,
 		vertices,
 		Indices,
-		VAO, VBO);
+		VAO, VBO, false);
 }
 
 void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture)
 {
 	if (isUpdateTexture) {
 		//SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-		SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID);
+		SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID, 0, IsLoadedIntoMem_Texture);
 		if(TextureAtlas_ID != 666)
-			SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1);
+			SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1, IsLoadedIntoMem_Texture);
+		IsLoadedIntoMem_Texture = true;
 	}
 		
 
 	if (&uv == nullptr || uv.size() == 0)
-		SetBufferUV(UV, BufferUV_ID);
+		SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV);
 	else
-		SetBufferUV(uv, BufferUV_ID);
+		SetBufferUV(uv, BufferUV_ID, false);
+	IsLoadedIntoMem_UV = true;
 
 	if (normals.size() == 0)
-		SetNormals(Normals, BufferNormal_ID);
+		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals);
 	else
-		SetNormals(normals, BufferNormal_ID);
+		SetNormals(normals, BufferNormal_ID, false);
+	IsLoadedIntoMem_Normals = true;
 }
 
 void ModelData::SetTextureModel() {
-	//SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
-	SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID);
+	SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID, 0, IsLoadedIntoMem_Texture);
 	if(TextureAtlas_ID != 666)
-		SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1);
+		SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1, IsLoadedIntoMem_Texture);
+	IsLoadedIntoMem_Texture = true;
 }
 
 void ModelData::SetNormalsModel(vector<vec3>& normals) {
 	if (normals.size() == 0)
-		SetNormals(Normals, BufferNormal_ID);
+		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals);
 	else
-		SetNormals(normals, BufferNormal_ID);
+		SetNormals(normals, BufferNormal_ID, false);
+	IsLoadedIntoMem_Normals = true;
 }
 
 void ModelData::SetBuffer(std::vector< glm::vec3>& buffer)
@@ -222,7 +228,8 @@ void ModelData::SetUV(vector< vec2 > uv) {
 }
 
 void ModelData::UpdateBufferUV() {
-	SetBufferUV(UV, BufferUV_ID);
+	SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV);
+	IsLoadedIntoMem_UV = true;
 }
 
 void ModelData::InitBase(map<string, GLuint>& shaderPrograms) {

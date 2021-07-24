@@ -54,8 +54,9 @@ void ObjectTextBox::SetDataToShader() {
 
 	if (!isInitSlotsMessage) {
 		isInitSlotsMessage = true;
-		auto normals = GetNormals();
-		ModelPtr->SetModelInBuffer(TextureUV, normals, false);
+		//auto normals = GetNormals();
+		//ModelPtr->SetModelInBuffer(TextureUV, normals, false);
+		ModelPtr->SetModelInBuffer(TextureUV, Normals, false);
 	}
 }
 
@@ -121,11 +122,10 @@ void ObjectTextBox::MeshTransform() {
 	int sizeMessage = MessageCode.size();
 	int spaceSymb = MapAlphabet[" "];
 
-	//for (int codeSymb : MessageCode) {
 	for (int indSymb = 0; indSymb < MessageSlots; indSymb++) {
 
 		if(indSymb > sizeMessage - 1)
-			codeSymb = spaceSymb;
+			codeSymb = -1;
 		else
 			codeSymb = MessageCode[indSymb];
 		isFirstStep = firstStep == 0;
@@ -182,7 +182,7 @@ void ObjectTextBox::UpdateMessage()
 		if (ind == vertexSize || ind == -1) {
 			ind = 0;
 			if (indSymb > sizeMessage - 1)
-				codeSymb = spaceSymb;
+				codeSymb = -1;
 			else
 				codeSymb = MessageCode[indSymb++];
 		}

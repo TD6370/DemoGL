@@ -103,8 +103,10 @@ void ObjectData::UpdateDataBufferToShader() {
 
 void ObjectData::UpdateNormalsToShader() {
 
-	auto normals = GetNormals();
-	ModelPtr->SetNormalsModel(normals);
+	//auto normals = GetNormals();
+	//ModelPtr->SetNormalsModel(normals);
+
+	ModelPtr->SetNormalsModel(Normals);
 }
 
 void ObjectData::UpdateState() {

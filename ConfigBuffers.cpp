@@ -22,6 +22,8 @@ GLint BindShaderTextureLinks[3] = { GL_TEXTURE0, GL_TEXTURE1, GL_TEXTURE2 };
 //GLint TYPE_DRAW = GL_DYNAMIC_DRAW;
 //GLint TYPE_DRAW = GL_STREAM_DRAW;
 
+bool isUnbindBuffer = false;
+
 /*
 GLfloat* GenVertices(int* size)
 {
@@ -35,11 +37,19 @@ GLfloat* GenVertices(int* size)
 	return vertices;
 }
 */
+
+GLuint InitVAO() {
+	GLuint VAO;
+	glGenVertexArrays(1, &VAO);
+	return VAO;
+}
+
+
 GLuint InitBuffer()
 {
-	GLuint uvBuffer;
-	glGenBuffers(1, &uvBuffer);
-	return uvBuffer;
+	GLuint buffer;
+	glGenBuffers(1, &buffer);
+	return buffer;
 }
 
 GLuint InitImage()
@@ -50,12 +60,15 @@ GLuint InitImage()
 }
 
 
-void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID, int numLink)
+void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLuint textureID, int numLink, bool isLoadedIntoMem)
 {
 	glActiveTexture(BindShaderTextureLinks[numLink]);
 
 	// Ѕиндим текстуру, и теперь все функции по работе с текстурами будут работать с этой
 	glBindTexture(GL_TEXTURE_2D, textureID);
+
+	if (isLoadedIntoMem)
+		return;
 
 	int glParam_MAG_FILTER = GL_LINEAR; //GL_NEAREST
 	int glParam_MIN_FILTER = GL_LINEAR_MIPMAP_LINEAR; // GL_NEAREST
@@ -87,19 +100,14 @@ void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLui
 	//glBindTexture(GL_TEXTURE_2D, 0); // CLEAR
 }
 
-GLuint InitUV()
-{
-	GLuint uvBuffer;
-	glGenBuffers(1, &uvBuffer);
-	return uvBuffer;
-}
-
-
-void SetBufferUV(std::vector< glm::vec2 >& uv_data, GLuint uvBuffer) {
+void SetBufferUV(std::vector< glm::vec2 >& uv_data, GLuint uvBuffer, bool isLoadedIntoMem) {
 	//—оздайте буфер и заполните его точно так же, как и в предыдущих случа€х :
 	//GLuint uvBuffer;
 	//glGenBuffers(1, &uvBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
+
+	if (isLoadedIntoMem)
+		return;
 
 	//GL_STATIC_DRAW: данные либо никогда не будут измен€тьс€, либо будут измен€тьс€ очень редко;
 	//GL_DYNAMIC_DRAW: данные будут мен€тьс€ довольно часто;
@@ -128,24 +136,24 @@ void SetBufferUV(std::vector< glm::vec2 >& uv_data, GLuint uvBuffer) {
 	);
 	glEnableVertexAttribArray(VertexAttribNumer_UV);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+	if(isUnbindBuffer)
+		glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
 }
 
-GLuint InitNormals() {
-	GLuint normalbuffer;
-	glGenBuffers(1, &normalbuffer);
-	return normalbuffer;
-}
-
-void SetNormals(std::vector< glm::vec3 >& normals, GLuint normalbuffer)
+void SetNormals(std::vector< glm::vec3 >& normals, GLuint normalbuffer, bool isLoadedIntoMem)
 {
 	//GLuint normalbuffer;
 	//glGenBuffers(1, &normalbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+
+	if (isLoadedIntoMem)
+		return;
+
 	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], TYPE_DRAW);
 
 	// “ретий атрибутный буфер : нормали
-	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	//glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+
 	glVertexAttribPointer(
 		VertexAttribNumer_Normals,                                // атрибут
 		3,                                // размер
@@ -157,14 +165,18 @@ void SetNormals(std::vector< glm::vec3 >& normals, GLuint normalbuffer)
 
 	glEnableVertexAttribArray(VertexAttribNumer_Normals);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+	if (isUnbindBuffer)
+		glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
 }
 
-void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbuffer)
+void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbuffer, bool isLoadedIntoMem)
 {
 	//—оздайте буфер и заполните его точно так же, как и в предыдущих случа€х :
 	//glGenBuffers(1, &colorbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+
+	if (isLoadedIntoMem)
+		return;
 
 	//GL_STATIC_DRAW: данные либо никогда не будут измен€тьс€, либо будут измен€тьс€ очень редко;
 	//GL_DYNAMIC_DRAW: данные будут мен€тьс€ довольно часто;
@@ -173,7 +185,8 @@ void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbuffer)
 	glBufferData(GL_ARRAY_BUFFER, colors.size() * sizeof(glm::vec3), &colors[0], TYPE_DRAW);
 
 	// онфигурирование почти такое же :
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+
 	glVertexAttribPointer(
 		VertexAttribNumer_Color,                                // атрибут. Ќет особых причин писать 1, главное, чтобы совпадало со значением в шейдере.
 		3,                                // размер
@@ -186,7 +199,10 @@ void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbuffer)
 
 	//4. ќтв€зываем VAO
 	//glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+	
+	if (isUnbindBuffer)
+		glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+
 	//layout(location = 1) in vec3 vertexColor;
 }
 
@@ -243,7 +259,7 @@ void GenBufferColors()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
 
 	// онфигурирование почти такое же :
-	glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
+	//glBindBuffer(GL_ARRAY_BUFFER, colorbuffer);
 	glVertexAttribPointer(
 		VertexAttribNumer_Color,                                // атрибут. Ќет особых причин писать 1, главное, чтобы совпадало со значением в шейдере.
 		3,                                // размер
@@ -257,28 +273,20 @@ void GenBufferColors()
 	//layout(location = 1) in vec3 vertexColor;
 }
 
-GLuint InitVAO() {
-	GLuint VAO;
-	glGenVertexArrays(1, &VAO);
-	return VAO;
-}
-
-GLuint InitVBO() {
-	GLuint VBO;
-	glGenBuffers(1, &VBO);
-	return VBO;
-}
-
-GLuint GenVertexArrayObject(bool isIndex, 
+void GenVertexArrayObject(bool isIndex, 
 	std::vector< glm::vec3 > vertices,
 	std::vector<unsigned int> indices,
 	GLuint VAO,
-	GLuint VBO)
+	GLuint VBO, 
+	bool isLoadedIntoMem)
 {
 	// 1. ѕрив€зываем VAO
 	glBindVertexArray(VAO);
 	// 2.  опируем наш массив вершин в буфер дл€ OpenGL
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+	if (isLoadedIntoMem)
+		return;
 	
 	//glBufferData(GL_ARRAY_BUFFER, out_vertices.size() * sizeof(glm::vec3), &out_vertices[0], GL_STATIC_DRAW);
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], TYPE_DRAW);
@@ -298,8 +306,9 @@ GLuint GenVertexArrayObject(bool isIndex,
 	indices.clear();
 
 	//4. ќтв€зываем VAO
-	glBindVertexArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
+	if (isUnbindBuffer)
+		glBindVertexArray(0);
 
-	return VBO;
+	if (isUnbindBuffer)
+		glBindBuffer(GL_ARRAY_BUFFER, 0); // CLEAR
 }
