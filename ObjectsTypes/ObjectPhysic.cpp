@@ -196,6 +196,7 @@ void ObjectPhysic::SetMesh() {
 	}
 
 	if (Vertices.size() != 0) {
+		if (VAO == EmptyID) { //TODO: In Render component
 			VAO = InitVAO();
 			VBO = InitBuffer();
 		}

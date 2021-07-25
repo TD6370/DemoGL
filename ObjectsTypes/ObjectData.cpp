@@ -103,6 +103,8 @@ void ObjectData::UpdateDataBufferToShader() {
 
 void ObjectData::UpdateNormalsToShader() {
 
+	if ((Normals.size() != 0 || VAO != EmptyID) &&
+		BufferNormal_ID == EmptyID) 
 	{
 		BufferNormal_ID = InitBuffer(); //TODO: In Render component
 	}
@@ -281,6 +283,7 @@ void ObjectData::UpdateTextureUV() {
 		return;
 	}
 
+	if (BufferUV_ID == EmptyID) 
 		BufferUV_ID = InitBuffer(); //TODO: In Render component
 
 	ModelPtr->SetUV(TextureUV, BufferUV_ID, IsLoadedIntoMem_UV);
@@ -335,6 +338,7 @@ int ObjectData::GetRightBorderVertexIndex() {
 
 GLuint ObjectData::GetVAO() {
 
+	if (VAO != EmptyID)
 		return VAO;
 	return ModelPtr->VAO;
 }
