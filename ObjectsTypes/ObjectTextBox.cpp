@@ -54,9 +54,8 @@ void ObjectTextBox::SetDataToShader() {
 
 	if (!isInitSlotsMessage) {
 		isInitSlotsMessage = true;
-		//auto normals = GetNormals();
-		//ModelPtr->SetModelInBuffer(TextureUV, normals, false);
-		ModelPtr->SetModelInBuffer(TextureUV, Normals, false);
+		
+		ModelPtr->SetModelInBuffer(TextureUV, Normals, false); //TODO: delete
 	}
 }
 
@@ -152,6 +151,9 @@ void ObjectTextBox::MeshTransform() {
 	}
 
 	Shape->FillVertextBox();
+
+	IsLoadedIntoMem_Vertex = false;
+	IsLoadedIntoMem_UV = false;
 }
 
 
@@ -229,6 +231,9 @@ void ObjectTextBox::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific
 
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
 	//SceneSerialize* serializer = new SceneSerialize();
+
+	IsLoadedIntoMem_Vertex = false;
+	IsLoadedIntoMem_UV = false;
 
 	Message = filedsSpecific[filedsSpecific.size()-1].Value;
 

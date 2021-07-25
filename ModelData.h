@@ -33,6 +33,7 @@ class ConfigUniform;
 class ModelData {
 
 public:
+	
 	string Name;
 	string PathShaderFolder = "./Shaders/";
 	string PathShaderVertex = "basic.vert";
@@ -72,7 +73,7 @@ public:
 	bool IsLoadedIntoMem_Buffer = false;
 	//------------------------
 	GLuint Texture_ID;
-	GLuint TextureAtlas_ID = 666;	//@**
+	GLuint TextureAtlas_ID = EmptyID;	//@**
 	GLuint BufferUV_ID;
 	GLuint BufferNormal_ID;
 	GLuint BufferColor_ID;
@@ -96,21 +97,25 @@ public:
 	void virtual InitUniform();
 
 	void SetVAO();
-	void SetVAO(vector<vec3> vertices);
+
+	//void SetVAO(vector<vec3> vertices);
+	void SetVAO(vector<vec3> vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
 
 	void virtual SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
 									vector<vec3>& normals = DEFAULT_VECTOR_V3, 
-										bool isUpdateTexture = true);
-
+										bool isUpdateTexture = true,
+											GLuint bufferUV_ID = EmptyID,
+												GLuint bufferNormal_ID = EmptyID,
+													bool p_isLoadedIntoMem_UV = false, bool p_isLoadedIntoMem_Normals = false);
 
 	void virtual SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 
 	void SetTextureModel();
 
-	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3);
+	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3, GLuint bufferNormal_ID = 66666);
 		
 
-	void SetUV(vector< vec2 > uv);
+	void SetUV(vector< vec2 > uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem);
 	void UpdateBufferUV();
 
 	void DebugUV(vector<vec2> list_uv);

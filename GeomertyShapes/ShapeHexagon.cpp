@@ -44,6 +44,7 @@ void ShapeHexagon::ResizeTextureUV() {
 			uv.x *= obj->TextureRepeat;
 		}
 		obj->TextureUV = repeat_UV;
+		obj->IsLoadedIntoMem_UV = false;
 	}
 }
 
@@ -87,6 +88,7 @@ void ShapeHexagon::CalculateTextureUV(bool isInit) {
 		if (isInit) {
 			StartLenghtWall = maxLenght; //start len resize wall -> max len wal
 			obj->TextureUV = obj->ModelPtr->UV;
+			obj->IsLoadedIntoMem_UV = false;
 		}
 		else
 			factorRepeat = maxLenght / StartLenghtWall;

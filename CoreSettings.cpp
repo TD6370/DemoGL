@@ -19,6 +19,7 @@ using std::string;
 using std::map;
 
 #define M_PI 3.1415926535897932384626433832795
+#define EmptyID 66666
 
 struct World {
 	GLfloat Radius = 50; // 10;

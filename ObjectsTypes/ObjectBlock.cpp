@@ -96,6 +96,8 @@ void ObjectBlock::SelectedEvent() {
 
 void ObjectBlock::MeshTransform() {
 
+	IsLoadedIntoMem_Vertex = false;
+
 	//-- Param transform
 	int indexUpdate = IndexVertexTransform;
 
@@ -149,6 +151,7 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 	SceneSerialize* serializer = new SceneSerialize();
 	BlockFileds* filedsName = new BlockFileds;
 
+	IsLoadedIntoMem_Vertex = false;
 	Vertices.clear();
 	//TextureUV.clear();
 

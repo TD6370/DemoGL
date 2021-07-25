@@ -104,6 +104,15 @@ public:
 	vector <vec3> Normals;
 	vector <vec2> TextureUV;
 	vector <vec3> Buffer;
+	
+	//TODO: In Render component
+	GLuint VAO = EmptyID;
+	GLuint VBO = EmptyID;
+	GLuint BufferUV_ID = EmptyID;
+	GLuint BufferNormal_ID = EmptyID;
+	bool IsLoadedIntoMem_Vertex = false;
+	bool IsLoadedIntoMem_Normals = false;
+	bool IsLoadedIntoMem_UV = false;
 
 	float TextureRepeat = 1;
 	GLint TrianglesCount = 0;
@@ -215,6 +224,7 @@ public:
 
 	int virtual GetRightBorderVertexIndex();
 
+	GLuint GetVAO();
 	//-------- SaveFieldSpecific
 
 	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();

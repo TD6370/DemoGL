@@ -231,6 +231,7 @@ void ShapeBase::SetBottom(int index, vec3 value) {
 		if (oldValue == vertexNext)
 		{
 			obj->Vertices[indVert] = value;
+			obj->IsLoadedIntoMem_Vertex = false;
 		}
 		indVert++;
 	}
@@ -249,6 +250,7 @@ void ShapeBase::SetTop(int index, vec3 value) {
 		if (oldValue == vertexNext)
 		{
 			obj->Vertices[indVert] = value;
+			obj->IsLoadedIntoMem_Vertex = false;
 		}
 		indVert++;
 	}

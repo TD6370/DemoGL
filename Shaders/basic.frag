@@ -42,10 +42,11 @@ void main()
 
 	//--------
 	float borderCurs = 1.5f;
-	if(fragPos.x < fragPosMouse.x + borderCurs &&
-		fragPos.x > fragPosMouse.x - borderCurs &&
-		fragPos.y < fragPosMouse.y + borderCurs &&
-		fragPos.y > fragPosMouse.y - borderCurs 
+	vec3 posTarget = vec3(0.5);
+	if(fragPos.x < posTarget.x + borderCurs &&
+		fragPos.x > posTarget.x - borderCurs &&
+		fragPos.y < posTarget.y + borderCurs &&
+		fragPos.y > posTarget.y - borderCurs 
 	)
 	{		
 		
@@ -57,6 +58,9 @@ void main()
 	    float f2 = abs(cos(a*5.+ fragTime*5. ))*0.45;
 	    vec4 colorC = vec4(vec3(smoothstep(f2, f2 +0.02,r) - smoothstep(f, f+0.02,r)),1.0f);
      	    //vec4 colorC = vec4(vec3(plot(f,r)),1.0f);
+
+		colorC.rgb *= .3;
+
 	    color = color + colorC;
 	}	
 	

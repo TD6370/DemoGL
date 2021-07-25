@@ -360,17 +360,17 @@ void SceneConstruction::SetDataToShader() {
 			ObjectCurrent->SetMesh();
 		}
 
-		glBindVertexArray(ModelCurrent->VAO);
+		glBindVertexArray(ObjectCurrent->GetVAO());
 
 		if (!isSkipDynamic) 
 		{
-			ObjectCurrent->UpdateTextureUV();
+			ObjectCurrent->UpdateTextureUV(); ///--- ??? **1
 
 			m_currCashShader = ObjectCurrent->GetCashStateUpdateDataToShader();
 			if (m_currCashShader != m_lastCashShader) {
 				m_lastCashShader = m_currCashShader;
 
-				ObjectCurrent->SetDataToShader();
+				ObjectCurrent->SetDataToShader(); //TODO: delete
 			}
 
 			ObjectCurrent->UpdateNormalsToShader();
@@ -381,7 +381,7 @@ void SceneConstruction::SetDataToShader() {
 	
 	}
 	else {
-		glBindVertexArray(ModelCurrent->VAO);
+		glBindVertexArray(ObjectCurrent->GetVAO());
 	}
 
 	if (m_isUpdateTexture)
@@ -390,11 +390,8 @@ void SceneConstruction::SetDataToShader() {
 	}
 	if (m_isUpdateUV)
 	{
-		ObjectCurrent->UpdateTextureUV();
+		ObjectCurrent->UpdateTextureUV(); ///--- ??? **2
 	}
-
-
-	//--- Set Width & height
 }
 
 float SceneConstruction::GetParamCase() {

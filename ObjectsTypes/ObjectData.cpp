@@ -103,10 +103,11 @@ void ObjectData::UpdateDataBufferToShader() {
 
 void ObjectData::UpdateNormalsToShader() {
 
-	//auto normals = GetNormals();
-	//ModelPtr->SetNormalsModel(normals);
+	{
+		BufferNormal_ID = InitBuffer(); //TODO: In Render component
+	}
 
-	ModelPtr->SetNormalsModel(Normals);
+	ModelPtr->SetNormalsModel(Normals, BufferNormal_ID);
 }
 
 void ObjectData::UpdateState() {
@@ -279,7 +280,11 @@ void ObjectData::UpdateTextureUV() {
 		ModelPtr->UpdateBufferUV();
 		return;
 	}
-	ModelPtr->SetUV(TextureUV);
+
+		BufferUV_ID = InitBuffer(); //TODO: In Render component
+
+	ModelPtr->SetUV(TextureUV, BufferUV_ID, IsLoadedIntoMem_UV);
+	IsLoadedIntoMem_UV = true;
 }
 
 void ObjectData::SetStartTimer() {
@@ -326,6 +331,12 @@ void ObjectData::SetZ(float z)
 int ObjectData::GetRightBorderVertexIndex() {
 
 	return -1;
+}
+
+GLuint ObjectData::GetVAO() {
+
+		return VAO;
+	return ModelPtr->VAO;
 }
 
 void ObjectData::SetOwnerObject(shared_ptr<ObjectData> p_ownerObj)

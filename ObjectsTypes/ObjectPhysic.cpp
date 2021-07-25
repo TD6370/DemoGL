@@ -185,9 +185,23 @@ std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 }
 
 void ObjectPhysic::SetMesh() {
-	if (Vertices.size() != 0)
-	//if (TypeObj == Block)
-		ModelPtr->SetVAO(Vertices);
+
+	//FIX
+	if (IsGUI) {
+		if (Vertices.size() != 0)
+			ModelPtr->SetVAO(Vertices, ModelPtr->VAO, ModelPtr->VBO, false);
+		else
+			ObjectData::SetMesh();
+		return;
+	}
+
+	if (Vertices.size() != 0) {
+			VAO = InitVAO();
+			VBO = InitBuffer();
+		}
+		ModelPtr->SetVAO(Vertices, VAO, VBO, IsLoadedIntoMem_Vertex);
+		IsLoadedIntoMem_Vertex = true;
+	}
 	else
 		ObjectData::SetMesh();
 }

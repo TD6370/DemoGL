@@ -148,6 +148,8 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
 		//SetBottom(obj, 0, vertBottomRight);
 		SetBottom(0, vertBottomRight);
+
+		obj->IsLoadedIntoMem_Vertex = false;
 	}
 
 	SaveSizeFactor();
@@ -214,5 +216,6 @@ void ShapeSquare::ResizeTextureUV() {
 			uv.y *= obj->TextureRepeat;
 		}
 		obj->TextureUV = repeat_UV;
+		obj->IsLoadedIntoMem_UV = false;
 	}
 }

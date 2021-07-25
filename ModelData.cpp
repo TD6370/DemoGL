@@ -172,49 +172,66 @@ void ModelData::SetVAO() {
 	IsLoadedIntoMem_Vertex = true;
 }
 
-void ModelData::SetVAO(std::vector< glm::vec3 > vertices) {
+void ModelData::SetVAO(std::vector< glm::vec3 > vertices, GLuint p_VAO, GLuint p_VBO, bool isLoadedIntoMem) {
 	GenVertexArrayObject(IsIndex,
 		vertices,
 		Indices,
-		VAO, VBO, false);
+		p_VAO, p_VBO, isLoadedIntoMem);
 }
 
-void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture)
+//TODO: delete
+void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture, GLuint p_bufferUV_ID, GLuint p_bufferNormal_ID, 
+	bool p_isLoadedIntoMem_UV, bool p_isLoadedIntoMem_Normals)
 {
+	// -- Update texture
 	if (isUpdateTexture) {
-		//SetImage(DataImage, WidthImage, HeightImage, Texture_ID);
 		SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID, 0, IsLoadedIntoMem_Texture);
-		if(TextureAtlas_ID != 666)
+		if(TextureAtlas_ID != EmptyID)
 			SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1, IsLoadedIntoMem_Texture);
 		IsLoadedIntoMem_Texture = true;
 	}
-		
 
+	// -- Update UV
 	if (&uv == nullptr || uv.size() == 0)
-		SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV);
-	else
-		SetBufferUV(uv, BufferUV_ID, false);
-	IsLoadedIntoMem_UV = true;
+		SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV); // Default
+	else {
+		if (p_bufferUV_ID == EmptyID) 
+			p_bufferUV_ID = BufferUV_ID;
+		SetBufferUV(uv, p_bufferUV_ID, p_isLoadedIntoMem_UV);
+	}
 
+	// -- Update Normals
 	if (normals.size() == 0)
-		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals);
-	else
-		SetNormals(normals, BufferNormal_ID, false);
-	IsLoadedIntoMem_Normals = true;
+		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals); // Default
+	else {
+		if(p_bufferNormal_ID == EmptyID)
+			p_bufferNormal_ID = BufferNormal_ID;
+		SetNormals(normals, p_bufferNormal_ID, p_isLoadedIntoMem_Normals);
+	}
 }
 
 void ModelData::SetTextureModel() {
+
+	// -- Update texture - Default
 	SetImage(DataImage, SizeImage.x, SizeImage.y, Texture_ID, 0, IsLoadedIntoMem_Texture);
-	if(TextureAtlas_ID != 666)
+	if(TextureAtlas_ID != EmptyID)
 		SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, TextureAtlas_ID, 1, IsLoadedIntoMem_Texture);
 	IsLoadedIntoMem_Texture = true;
 }
 
-void ModelData::SetNormalsModel(vector<vec3>& normals) {
+void ModelData::SetNormalsModel(vector<vec3>& normals, GLuint p_bufferNormal_ID) {
+
+	bool _isLoadedIntoMem_Normals = IsLoadedIntoMem_Normals;
+	if (p_bufferNormal_ID == EmptyID) // Default
+		p_bufferNormal_ID = BufferNormal_ID;
+	else // Object
+		_isLoadedIntoMem_Normals = false;
+
 	if (normals.size() == 0)
-		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals);
+		SetNormals(Normals, p_bufferNormal_ID, _isLoadedIntoMem_Normals);
 	else
-		SetNormals(normals, BufferNormal_ID, false);
+		SetNormals(normals, p_bufferNormal_ID, false);
+
 	IsLoadedIntoMem_Normals = true;
 }
 
@@ -223,11 +240,13 @@ void ModelData::SetBuffer(std::vector< glm::vec3>& buffer)
 	
 }
 
-void ModelData::SetUV(vector< vec2 > uv) {
-	SetBufferUV(uv, BufferUV_ID);
+void ModelData::SetUV(vector< vec2 > uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem) {
+
+	SetBufferUV(uv, p_bufferUV_ID, isLoadedIntoMem);
 }
 
 void ModelData::UpdateBufferUV() {
+	// Default
 	SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV);
 	IsLoadedIntoMem_UV = true;
 }
