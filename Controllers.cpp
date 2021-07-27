@@ -171,6 +171,12 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	float m_speed = Scene->m_speed;
 	float m_deltaTime = Scene->m_deltaTime;
 	//TEST***
+	/*if (Scene->IsSpeedDeltaTime) {
+		if(Scene->VersionUpdate == 1)
+			m_speed = glm::min((float)(Scene->m_speed * 1.5),Scene->DeltaTime);
+		if (Scene->VersionUpdate == 2)
+			m_speed = Scene->m_speed / Scene->DeltaTime;
+	}*/
 
 	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 
 	// и приложение после этого закроется
