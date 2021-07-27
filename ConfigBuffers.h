@@ -18,9 +18,9 @@ void SetImage(unsigned char* data, unsigned int width, unsigned int height, GLui
 
 void GenBufferColors(std::vector< glm::vec3 >& colors, GLuint colorbufferID, bool isLoadedIntoMem = false);
 
-void GenVertexArrayObject(bool isIndex, 
-	std::vector< glm::vec3 > vertices,
-	std::vector<unsigned int> indices,
+void GenVertexArrayObject(bool isIndex,
+	std::vector< glm::vec3 >& vertices,
+	std::vector<unsigned int>& indices,
 	GLuint VAO,
-	GLuint VBO, 
+	GLuint VBO,
 	bool isLoadedIntoMem = false);

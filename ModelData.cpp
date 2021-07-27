@@ -172,7 +172,7 @@ void ModelData::SetVAO() {
 	IsLoadedIntoMem_Vertex = true;
 }
 
-void ModelData::SetVAO(std::vector< glm::vec3 > vertices, GLuint p_VAO, GLuint p_VBO, bool isLoadedIntoMem) {
+void ModelData::SetVAO(std::vector< glm::vec3 >& vertices, GLuint p_VAO, GLuint p_VBO, bool isLoadedIntoMem) {
 	GenVertexArrayObject(IsIndex,
 		vertices,
 		Indices,
@@ -240,7 +240,7 @@ void ModelData::SetBuffer(std::vector< glm::vec3>& buffer)
 	
 }
 
-void ModelData::SetUV(vector< vec2 > uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem) {
+void ModelData::SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem) {
 
 	SetBufferUV(uv, p_bufferUV_ID, isLoadedIntoMem);
 }

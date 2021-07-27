@@ -44,11 +44,9 @@ void main()
 		}
 	}
 
-	vec3 pos = position;
-	mat4 transf = transform;
 	//------------------ TEST deltaTime
-	//transform *= deltaTime;
-	//transf[0][0] *= deltaTime * .001;
+	position*=deltaTime;
+
 	//---------------------
 
 	fragNormal = posNormal;
@@ -56,19 +54,19 @@ void main()
 	// ��������� ������� � ������� ������������: M * ���������
 	//vec3 Position_worldspace = (MODEL * vec4(position,1)).xyz;
 	//------------------------
-	gl_Position = MVP * transf *vec4(pos, 1.0);
+	gl_Position = MVP * transform *vec4(position, 1.0);
 
 	//-- Light position
-	vec3 LightPosition_worldspace = (inverse(transf) * vec4(lightPos, 1.0)).xyz;
+	vec3 LightPosition_worldspace = (inverse(transform) * vec4(lightPos, 1.0)).xyz;
 
 	//------- dist light
-	float distLight = distance(lightPos.xyz, (transf *vec4(pos, 1.0)).xyz);
+	float distLight = distance(lightPos.xyz, (transform *vec4(position, 1.0)).xyz);
 	distLight *= 0.05f;
 
 
 	// ������ ������� ���� �� �������  ������ � ������������ ������
 	// � ������������ ������, ������ ��������� �� ��������� (0,0,0)
-	vec3 vertexPosition_cameraspace = (VIEW * MODEL * vec4(pos,1)).xyz;
+	vec3 vertexPosition_cameraspace = (VIEW * MODEL * vec4(position,1)).xyz;
 	vec3 EyeDirection_cameraspace = vec3(0,0,0) - vertexPosition_cameraspace;
 
 	// ������ ������� ���� �� ������� � ��������� ����� � ������������ ������.

@@ -126,6 +126,13 @@ void ConfigUniform::SetStartTime(GLfloat timeValue) {
 	}
 }
 
+void ConfigUniform::SetDeltaStartTime(GLfloat timeValue) {
+
+	if (m_deltaTimeID != 0) {
+		glUniform1f(m_deltaTimeID, timeValue);
+	}
+}
+
 
 void ConfigUniform::SetTransform(mat4* trans)
 {
@@ -201,6 +208,7 @@ void ConfigUniform::Init()
 	m_vertexTimeID = glGetUniformLocation(m_shaderProgram, "fTime");
 	m_lightPosID = glGetUniformLocation(m_shaderProgram, "lightPos");
 	m_filterVectorsID = glGetUniformLocation(m_shaderProgram, "filterVectors");
+	m_deltaTimeID = glGetUniformLocation(m_shaderProgram, "deltaTime");
 
 }
 

@@ -99,7 +99,8 @@ public:
 	void SetVAO();
 
 	//void SetVAO(vector<vec3> vertices);
-	void SetVAO(vector<vec3> vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
+	//void SetVAO(vector<vec3> vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
+	void SetVAO(vector<vec3>& vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
 
 	void virtual SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
 									vector<vec3>& normals = DEFAULT_VECTOR_V3, 
@@ -115,7 +116,7 @@ public:
 	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3, GLuint bufferNormal_ID = 66666);
 		
 
-	void SetUV(vector< vec2 > uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem);
+	void SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem);
 	void UpdateBufferUV();
 
 	void DebugUV(vector<vec2> list_uv);

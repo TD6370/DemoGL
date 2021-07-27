@@ -41,6 +41,19 @@ using std::shared_ptr;
 
 SceneConstruction* Scene;
 
+struct LoopGame {
+	double FPS = 30.0;// 60.0;
+	double LimitFPS = 1.0 / FPS;
+	double LastTime = glfwGetTime();
+	double Timer = LastTime;
+	double DeltaTime = 0;
+	double NowTime = 0;
+	int Frames = 0;
+	int Updates = 0;
+	double MS_PER_UPDATE = 0.05;// 0.1;
+	double Lag = 0.0;
+};
+
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
@@ -60,6 +73,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 	Scene->SetMouseButtonEvents();
 }
 
+void DebugLoopGame(LoopGame& loopGame);
+void SwitchLoopGameVersion(LoopGame& loopGame, float& lastParamCase);
 
 void GetVersionOpenGl()
 {
@@ -150,45 +165,68 @@ int main()
 	//----------------------------------------------------
 
 	Scene = new SceneConstruction(window);
-
-	//double currentTime = 0, m_deltaTime = 0, m_lastFrame = 0;
-	//float FPS = 60;
-	//int32_t tickInteval = 1000 / FPS; // frequency in Hz to period in ms
-	//double currentTime = 0, lastFrame = 0;
-
-	///DWORD thisTick = GetTickCount();
-	//float dt = float(thisTick - lastTick) * 0.001f;
 	
-	//---------------------
-	//=========================
-	/*while (!glfwWindowShouldClose(window))
-	{
-		glfwPollEvents();
+	LoopGame loopGame;
 
-		Scene->Update();
-
-		glfwSwapBuffers(window);
-	}
-	glfwTerminate();
-	return 0;*/
-	//====================
-	//----------------------
-	static double FPS = 30.0;// 60.0;
-	static double limitFPS = 1.0 / FPS;
-	double lastTime = glfwGetTime(), timer = lastTime;
-	double deltaTime = 0, nowTime = 0;
-	int frames = 0, updates = 0;
+	Scene->DeltaTime = 3.;
+	Scene->VersionUpdate == 1;
+	Scene->IsSpeedDeltaTime = true;
+	float lastParamCase = Scene->Storage->Inputs->ParamCase;
+	bool isDebugFPS = true;
 
 	while (!glfwWindowShouldClose(window))
 	{
+		if (isDebugFPS)
+		{
+			glfwPollEvents();
+			SwitchLoopGameVersion(loopGame, lastParamCase);
+		}
+
+		//==========================
+		if (Scene->VersionUpdate == 2)
+		{
+			loopGame.NowTime = glfwGetTime();
+			loopGame.DeltaTime = loopGame.NowTime - loopGame.LastTime;
+			loopGame.Lag += loopGame.DeltaTime;
+			loopGame.LastTime = loopGame.NowTime;
+			//Scene->DeltaTime = loopGame.DeltaTime;
+			//Scene->DeltaTime = (loopGame.Lag / loopGame.MS_PER_UPDATE);
+
+			//glfwPollEvents();
+
+			while (loopGame.Lag >= loopGame.MS_PER_UPDATE) {
+				
+				glfwPollEvents();
+
+				Scene->IsDeltaUpdateLogic = true;
+				Scene->Update();
+
+				if(isDebugFPS)
+					loopGame.Updates++;
+
+				loopGame.Lag -= loopGame.MS_PER_UPDATE;
+			}
+				
+			// - Render at maximum possible frames
+			Scene->DeltaTime = (loopGame.Lag / loopGame.MS_PER_UPDATE);
+			Scene->IsDeltaUpdateLogic = false;
+			Scene->Update();
+
+			if (isDebugFPS)
+				DebugLoopGame(loopGame);
+
+			glfwSwapBuffers(window);
+			continue;
+		}
+		//==========================
 		if (Scene->VersionUpdate == 1)
 		{
-			//====	DT
 			  // - Measure time
-			nowTime = glfwGetTime();
-			deltaTime += (nowTime - lastTime) / limitFPS;
-			Scene->DeltaTime = deltaTime;
-			lastTime = nowTime;
+			loopGame.NowTime = glfwGetTime();
+			loopGame.DeltaTime = (loopGame.NowTime - loopGame.LastTime) / loopGame.LimitFPS;
+			loopGame.Lag += loopGame.DeltaTime;
+			loopGame.LastTime = loopGame.NowTime;
+			Scene->DeltaTime = loopGame.DeltaTime;
 
 			// ******
 			//update input events
@@ -196,48 +234,39 @@ int main()
 			//glfwWaitEvents();	//-- (low) Если вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
 			//glfwWaitEventsTimeout(1); /1
 
-			while (deltaTime >= 1.0) {
+			while (loopGame.Lag >= 1.0) {
 
-				//TEST&&1
 				glfwPollEvents();
 
 				Scene->IsDeltaUpdateLogic = true;
-
 				Scene->Update();
 
-				updates++;
-				deltaTime--;
+				loopGame.Updates++;
+				loopGame.Lag--;
 			}
 
 			// - Render at maximum possible frames
 			Scene->IsDeltaUpdateLogic = false;
 			Scene->Update();
 			
-			frames++;
-
-			// - Reset after one second
-			if (glfwGetTime() - timer > 1.0) {
-				timer++;
-				//std::cout << "FPS: " << frames << " Updates:" << updates << " DeltaTime:" << Scene->DeltaTime << std::endl;
-				updates = 0, frames = 0;
-			}
+			if (isDebugFPS)
+				DebugLoopGame(loopGame);
 
 			glfwSwapBuffers(window);
+			continue;
 		}
 		//==========================
 		if (Scene->VersionUpdate == 0)
 		{
-			nowTime = glfwGetTime();
-			deltaTime += (nowTime - lastTime) / limitFPS;
-			Scene->DeltaTime = deltaTime;
-			lastTime = nowTime;
-
-			Scene->DeltaTime = 1.;
-
 			//update input events
 			glfwPollEvents();
 
 			Scene->Update();
+
+			if (isDebugFPS) {
+				loopGame.Updates++;
+				DebugLoopGame(loopGame);
+			}
 
 			glfwSwapBuffers(window);
 		}
@@ -247,4 +276,55 @@ int main()
 	glfwTerminate();
 
 	return 0;
+}
+
+
+void DebugLoopGame(LoopGame& loopGame) {
+
+	loopGame.Frames++;
+	// - Reset after one second
+	if (glfwGetTime() - loopGame.Timer > 1.0) {
+		loopGame.Timer++;
+		std::cout << Scene->VersionUpdate << 
+			"FPS: " << loopGame.Frames << 
+			" Updates:" << loopGame.Updates << 
+			" DeltaTime:" << Scene->DeltaTime << 
+			" MPU: " << loopGame.MS_PER_UPDATE << 
+			std::endl;
+		loopGame.Updates = 0;
+		loopGame.Frames = 0;
+	}
+}
+
+void SwitchLoopGameVersion(LoopGame& loopGame, float& lastParamCase) {
+
+	int KeyUpTopVertex = GLFW_KEY_KP_ADD;
+	int KeyDownTopVertex = GLFW_KEY_KP_SUBTRACT;
+	if (Scene->Storage->Inputs->Action == GLFW_PRESS) {
+		//double MS_PER_UPDATE = 0.1;
+		if (Scene->Storage->Inputs->Key == KeyUpTopVertex)
+			loopGame.MS_PER_UPDATE += 0.01;
+		if (Scene->Storage->Inputs->Key == KeyDownTopVertex)
+			loopGame.MS_PER_UPDATE -= 0.01;
+	}
+
+	if (lastParamCase == Scene->Storage->Inputs->ParamCase)
+		return;
+	lastParamCase = Scene->Storage->Inputs->ParamCase;
+
+	if (Scene->Storage->Inputs->ParamCase == 1) {
+		Scene->VersionUpdate = 0;
+	}
+	if (Scene->Storage->Inputs->ParamCase == 2) {
+		Scene->VersionUpdate = 1;
+		loopGame.Lag = 0.0;
+	}
+	if (Scene->Storage->Inputs->ParamCase == 3)
+		Scene->VersionUpdate = 2;
+
+	loopGame.Updates = 0;
+	loopGame.Frames = 0;
+	loopGame.Timer = loopGame.LastTime = glfwGetTime();
+	loopGame.DeltaTime = 1;
+	std::cout << "Scene->VersionUpdate = " << Scene->VersionUpdate << "\n----------------------\n";
 }

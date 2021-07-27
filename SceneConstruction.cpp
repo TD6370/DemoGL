@@ -269,11 +269,14 @@ void SceneConstruction::WorkingRooms() {
 void SceneConstruction::PreparationDataFromShader() {
 
 	//~~~~~ Update speed ~~~~~~~~~
-	if (ObjectCurrent->IsTransformable ||
-		ObjectCurrent->IsNPC)
+	if ((ObjectCurrent->IsTransformable ||
+		ObjectCurrent->IsNPC) && IsSpeedDeltaTime)
 	{
-		float f = glm::clamp((float)0.3,(float)2., DeltaTime);
-		ObjectCurrent->Speed = 0.5f * f;
+		if (VersionUpdate == 1)
+		{
+			float f = glm::clamp((float)0.3, (float)1.2, DeltaTime);
+			ObjectCurrent->Speed = 0.5f * f;
+		}
 	}
 	
 	if (m_isUpdateShaderProgramm) {
@@ -335,6 +338,11 @@ void SceneConstruction::SetDataToShader() {
 	ModelCurrent->ConfUniform->SetParamValue(ObjectCurrent->ParamValue);
 
 	ModelCurrent->ConfUniform->SetStartTime(ObjectCurrent->StartTimer);
+
+	if (VersionUpdate == 2)
+		ModelCurrent->ConfUniform->SetDeltaStartTime(DeltaTime);
+	else
+		ModelCurrent->ConfUniform->SetDeltaStartTime(1.);
 
 	//---------------------- Set MVP
 	ModelCurrent->ConfUniform->SetMVP(Storage->ConfigMVP->MVP);

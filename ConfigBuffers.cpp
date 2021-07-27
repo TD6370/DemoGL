@@ -274,8 +274,8 @@ void GenBufferColors()
 }
 
 void GenVertexArrayObject(bool isIndex, 
-	std::vector< glm::vec3 > vertices,
-	std::vector<unsigned int> indices,
+	std::vector< glm::vec3 >& vertices,
+	std::vector<unsigned int>& indices,
 	GLuint VAO,
 	GLuint VBO, 
 	bool isLoadedIntoMem)
@@ -302,11 +302,11 @@ void GenVertexArrayObject(bool isIndex,
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], TYPE_DRAW);
 	}
 
-	vertices.clear();
-	indices.clear();
+	/*vertices.clear();
+	indices.clear();*/
 
 	//4. Отвязываем VAO
-	if (isUnbindBuffer)
+	//if (isUnbindBuffer)
 		glBindVertexArray(0);
 
 	if (isUnbindBuffer)

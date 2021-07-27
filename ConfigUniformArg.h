@@ -36,6 +36,7 @@ protected:
 
 	int m_lightPosID = 0;
 	int m_filterVectorsID = 0;
+	int m_deltaTimeID = 0;
 
 	int m_viewID = 0;
 	int m_modelID = 0;
@@ -76,6 +77,8 @@ public:
 	void SetParamValue(GLint paramValue);
 
 	void SetStartTime(GLfloat time);
+
+	void SetDeltaStartTime(GLfloat time);
 
 	void SetTransform(mat4* trans);
 

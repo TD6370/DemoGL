@@ -74,12 +74,13 @@ public:
 	int m_widthWindow = 1024;
 	int m_heightWindow = 768;
 
-	float m_speed = 1.0f; //3.0f = 3  в секунду
+	float m_speed = 3.0f; //3.0f = 3  в секунду
 	float m_deltaTime = 0.3f;//0.3f
 	float m_lastFrame = 0.0f;
 	bool IsDeltaUpdateLogic = false;
 	float DeltaTime = 0;
-	int VersionUpdate = 1;
+	bool IsSpeedDeltaTime = false;
+	int VersionUpdate = 2;
 	//versionUpdate = 1;
 	int CurrentIndexOrder = -1;
 	
