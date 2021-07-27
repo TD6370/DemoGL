@@ -1,9 +1,9 @@
 #include "AspectDispatcherCommands.h"
-#include "..\SceneConstruction.h"
+#include "..\SceneConstructor.h"
 #include "../Serialize/SceneSerialize.h"
 
 //#include "..\GeometryLib.h"
-//#include "..\SceneConstruction.h"
+//#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\ObjectsTypes\ObjectButton.h"
 #include "..\ObjectsTypes\ObjectEditBox.h"

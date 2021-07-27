@@ -1,6 +1,6 @@
 #pragma once
 #include "CoreSettings.h"
-#include "SceneConstruction.h"
+#include "SceneConstructor.h"
 
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -14,7 +14,7 @@
 
 struct ControllerInput;
 
-class SceneConstruction;
+class SceneConstructor;
 
 glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4 p_model, GLdouble mouseX, GLdouble mouseY, int m_widthWindow, int m_heightWindow);
 
@@ -37,9 +37,9 @@ public:
 	//	ControllerInput* p_inputs);
 	void MouseEvents(GLFWwindow* window,
 		int m_widthWindow, int m_heightWindow,
-		SceneConstruction* Scene);
+		SceneConstructor* Scene);
 
-	void MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene);
+	void MouseButtonEvents(GLFWwindow* window, SceneConstructor* Scene);
 
 	//void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 	//	Operator* m_operator,
@@ -48,7 +48,7 @@ public:
 	//	float m_deltaTime,
 	//	ControllerInput* inputs);
 	void KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
-		SceneConstruction* Scene);
+		SceneConstructor* Scene);
 
 	void FillAlphabet();
 

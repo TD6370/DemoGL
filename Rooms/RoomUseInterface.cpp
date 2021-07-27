@@ -2,7 +2,7 @@
 
 //#include "..\GeometryLib.h"
 #include "..\CoreSettings.h"
-#include "..\SceneConstruction.h"
+#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\ObjectsTypes\ObjectEditBox.h"

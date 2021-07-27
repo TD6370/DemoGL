@@ -39,7 +39,7 @@ using std::string;
 using glm::vec3;
 
 //*** Data Pipeline Aspects (DPA)
-class SceneConstruction
+class SceneConstructor
 {
 private:
 	int prevIndexModel = -1;
@@ -105,6 +105,7 @@ public:
 
 	Controllers* Contrl;
 
+	//--- TODO:	--- vector<SceneRoom> Rooms; 
 	vector<shared_ptr<SceneRoom>> Rooms;
 
 	AspectFactoryObjects* factoryObjects;
@@ -116,9 +117,9 @@ public:
 
 	AttributeCommands CommandsAttribute;
 
-	SceneConstruction();
+	SceneConstructor();
 
-	SceneConstruction(GLFWwindow* Window);
+	SceneConstructor(GLFWwindow* Window);
 
 	void Init();
 

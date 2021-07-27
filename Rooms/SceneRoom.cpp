@@ -1,5 +1,5 @@
 #include "SceneRoom.h"
-#include "..\SceneConstruction.h"
+#include "..\SceneConstructor.h"
 
 #include "..\GeometryLib.h"
 #include "..\ObjectsTypes\ObjectData.h"
@@ -9,7 +9,7 @@
 //#include "..\SceneSerialize.h"
 
 
-SceneRoom::SceneRoom(std::string name, SceneConstruction* sceneConstructor) {
+SceneRoom::SceneRoom(std::string name, SceneConstructor* sceneConstructor) {
 	Name = name;
 	Scene = sceneConstructor;
 }

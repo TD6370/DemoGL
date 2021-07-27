@@ -27,7 +27,7 @@ using std::string;
 using std::shared_ptr;
 
 class ObjectGUI;
-class SceneConstruction;
+class SceneConstructor;
 enum TypeCommand;
 struct AnimationParamGUI;
 
@@ -87,7 +87,7 @@ private:
 
 public:
 		
-	RoomUseInterface(string Name, SceneConstruction* sceneConstructor)
+	RoomUseInterface(string Name, SceneConstructor* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
 	~RoomUseInterface();

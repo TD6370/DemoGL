@@ -3,7 +3,7 @@
 //
 //#include "RoomMarkerPlane.h"
 //#include "..\GeometryLib.h"
-#include "../SceneConstruction.h"
+#include "../SceneConstructor.h"
 #include "../ObjectsTypes/ObjectData.h"
 #include "../ObjectsTypes/ObjectPhysic.h"
 #include "../ObjectsTypes/ObjectGUI.h"

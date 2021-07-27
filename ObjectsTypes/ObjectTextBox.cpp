@@ -8,7 +8,7 @@
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../Serialize/SceneSerialize.h"
 #include "../CreatorModelData.h"
-#include "../SceneConstruction.h"
+#include "../SceneConstructor.h"
 
 #include <sstream>
 

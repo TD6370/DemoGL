@@ -19,7 +19,7 @@ using std::map;
 using glm::vec4;
 //using glm::vec3;
 
-class SceneConstruction;
+class SceneConstructor;
 class ObjectData;
 enum TypeCommand;
 //struct CommandPack;
@@ -35,7 +35,7 @@ public:
 	map <string, vector<CommandPack>> StaticListCommand = map <string, vector<CommandPack>>{};
 	vector<CommandPack> ActiveCommands;
 
-	AspectDispatcherCommands(string Name, SceneConstruction* sceneConstructor)
+	AspectDispatcherCommands(string Name, SceneConstructor* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
 	~AspectDispatcherCommands();

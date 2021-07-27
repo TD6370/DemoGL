@@ -1,6 +1,6 @@
 #include "RoomSerializeScene.h"
 
-//#include "../SceneConstruction.h"
+//#include "../SceneConstructor.h"
 //#include "../GeometryLib.h"
 #include "../ObjectsTypes/ObjectData.h"
 #include "../CreatorModelData.h"
@@ -10,7 +10,7 @@
 #include "../Controllers.h"
 //#include "SceneSerialize.h"
 
-#include "../SceneConstruction.h"//##$$
+#include "../SceneConstructor.h"//##$$
 
 //#define GLEW_STATIC
 #include <GL/glew.h>

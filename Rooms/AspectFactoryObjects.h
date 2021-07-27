@@ -6,12 +6,12 @@
 
 using std::string;
 
-class SceneConstruction;
+class SceneConstructor;
 
 class AspectFactoryObjects : public SceneRoom
 {
 public:
-	AspectFactoryObjects(string Name, SceneConstruction* sceneConstructor)
+	AspectFactoryObjects(string Name, SceneConstructor* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
 	void Init();

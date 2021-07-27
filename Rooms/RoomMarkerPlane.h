@@ -6,12 +6,12 @@
 
 using std::string;
 
-class SceneConstruction;
+class SceneConstructor;
 
 class RoomMarkerPlane: public SceneRoom
 {
 public:
-	RoomMarkerPlane(string Name, SceneConstruction* sceneConstructor)
+	RoomMarkerPlane(string Name, SceneConstructor* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
 	void Init();

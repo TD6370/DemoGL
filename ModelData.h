@@ -35,52 +35,69 @@ class ModelData {
 public:
 	
 	string Name;
+	string TypeName;
 	string PathShaderFolder = "./Shaders/";
+	
+	//================== OBJECT INFO:
+	////-----  Material data	//TODO: ????
+	//vector <vec2> TextureUV;
+	//vector <vec3> Buffer;
+	//vec3 Color = vec3(0);
+
+	//// ---- Mesh data	//TODO: ????
+	//vector <vec3> Vertices;
+	//vector <vec3> Normals;
+	//GLint TrianglesCount = 0;
+	//==================
+
+	//---- Material Data
 	string PathShaderVertex = "basic.vert";
 	string PathShaderFrag = "basic.frag";
-	
 	string PathTexture = "./Textures/testTexture.bmp";
 	string PathTextureAtlas = "";	//@**
 
+	//---- Mesh data
 	const char* PathModel3D = "./Models3D/monkey.obj";
-	string TypeName;
-
-	ConfigUniform* ConfUniform;
-
 	GLint TrianglesCount = 0;
 	GLint IndicesSize = 0;
+	std::vector< glm::vec2 > UV;
+	std::vector< glm::vec3 > Normals;
+	std::vector< glm::vec3 > Vertices;
+	std::vector<unsigned int> Indices;
+	float RadiusCollider = 5; // TODO: ????
+	bool IsSquareModel = false; // TODO: ????
+
+	//==================== In Render component ------ OBJECT INFO:
+	/*GLuint VAO = EmptyID;
+	GLuint VBO = EmptyID;
+	GLuint BufferUV_ID = EmptyID;
+	GLuint BufferNormal_ID = EmptyID;
+	bool IsLoadedIntoMem_Vertex = false;
+	bool IsLoadedIntoMem_Normals = false;
+	bool IsLoadedIntoMem_UV = false;*/
+
+	//---- Render component TODO:!!!
+	ConfigUniform* ConfUniform;
 	GLuint VAO = 0;
 	GLuint VBO = 0;
 	GLuint ShaderProgram = -1;// 0;
 	bool IsIndex = false;
 	bool IsDebug = false;
-	//-------------------
-	std::vector< glm::vec2 > UV;
-	std::vector< glm::vec3 > Normals;
-	std::vector< glm::vec3 > Vertices;
-	std::vector<unsigned int> Indices;
-
 	glm::uvec2 SizeImage;	
 	glm::uvec2 SizeImageAtlas;	//@**
-
 	unsigned char* DataImage;
 	unsigned char* DataImageAtlas;	//@**
-
 	bool IsLoadedIntoMem_Texture = false;
 	bool IsLoadedIntoMem_Normals = false;
 	bool IsLoadedIntoMem_UV = false;
 	bool IsLoadedIntoMem_Vertex = false;
 	bool IsLoadedIntoMem_Buffer = false;
-	//------------------------
 	GLuint Texture_ID;
 	GLuint TextureAtlas_ID = EmptyID;	//@**
 	GLuint BufferUV_ID;
 	GLuint BufferNormal_ID;
 	GLuint BufferColor_ID;
-
-	float RadiusCollider = 5;
-
-	bool IsSquareModel = false;
+	//------------------------
 
 	ModelData();
 

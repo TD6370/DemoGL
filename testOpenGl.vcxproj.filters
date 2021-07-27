@@ -75,9 +75,6 @@
     <ClCompile Include="TransformModel.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneConstruction.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="CreatorModelData.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -195,6 +192,9 @@
     <ClCompile Include="ObjectsTypes\ObjectListBox.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="SceneConstructor.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -208,9 +208,6 @@
     </ClInclude>
     <ClInclude Include="ModelData.h">
       <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneConstruction.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="CreatorModelData.h">
       <Filter>Engine</Filter>
@@ -334,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="ObjectsTypes\ObjectListBox.h">
       <Filter>Objects\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneConstructor.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

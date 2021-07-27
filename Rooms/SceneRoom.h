@@ -4,20 +4,20 @@
 
 using std::string;
 
-class SceneConstruction;
+class SceneConstructor;
 
 //*** Acpect
 class SceneRoom
 {
 
 public:
-	SceneConstruction* Scene;
+	SceneConstructor* Scene;
 
 	string Name;
 	//*** Advice option
 	bool IsOnceComplete;
 	
-	SceneRoom(string Name, SceneConstruction* sceneConstructor);
+	SceneRoom(string Name, SceneConstructor* sceneConstructor);
 
 	void virtual Init();
 	void virtual Config();

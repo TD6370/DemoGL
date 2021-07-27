@@ -27,7 +27,9 @@ using glm::vec4;
 class WorldCluster
 {
 public:
+	//TODO: static !!!!
 	int SectorSizePlane = 5; // 5;// 10;// 100;
+
 	int SectorSize = 10;// 100;
 	CreatorModelData* Storage;
 	WorldSectors* Sectors;

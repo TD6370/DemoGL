@@ -1,6 +1,6 @@
 ﻿#include "Controllers.h"
 #include "CoreSettings.h"
-#include "SceneConstruction.h"
+#include "SceneConstructor.h"
 
 #include "CreatorModelData.h"
 
@@ -36,7 +36,7 @@ vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4
 	return posnear;
 }
 
-void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene)
+void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstructor* Scene)
 {
 	int state = -1;
 	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
@@ -59,7 +59,7 @@ void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstruction* Scene
 void Controllers::MouseEvents(
 	GLFWwindow* window,
 	int m_widthWindow, int m_heightWindow,
-	SceneConstruction* Scene)
+	SceneConstructor* Scene)
 {
 
 	// горизонтальный угол : по -Z
@@ -166,7 +166,7 @@ void Controllers::MouseEvents(
 
 
 void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
-	SceneConstruction* Scene)
+	SceneConstructor* Scene)
 {
 	float m_speed = Scene->m_speed;
 	float m_deltaTime = Scene->m_deltaTime;

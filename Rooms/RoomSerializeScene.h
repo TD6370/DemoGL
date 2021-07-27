@@ -12,7 +12,7 @@
 using std::string;
 using std::shared_ptr;
 
-class SceneConstruction;
+class SceneConstructor;
 class SceneSerialize;
 struct ObjectFiledsSpecific;
 class ObjectData;
@@ -26,7 +26,7 @@ private:
 	const int m_loadKey = GLFW_KEY_F4;
 
 public:
-	RoomSerializeScene(string Name, SceneConstruction* sceneConstructor)
+	RoomSerializeScene(string Name, SceneConstructor* sceneConstructor)
 		: SceneRoom(Name, sceneConstructor) {};
 
 	void Init();

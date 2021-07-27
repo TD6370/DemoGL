@@ -1,6 +1,6 @@
 #include "RoomMarkerPlane.h"
 #include "..\GeometryLib.h"
-#include "..\SceneConstruction.h"
+#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"

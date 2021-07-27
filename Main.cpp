@@ -13,7 +13,7 @@
 #include "CoreSettings.h"
 #include "WorldCollision.h"
 #include "GeometryLib.h"
-#include "SceneConstruction.h"
+#include "SceneConstructor.h"
 
 #include <iostream>
 #include <fstream>
@@ -39,7 +39,7 @@ using glm::vec3;
 using glm::mat4;
 using std::shared_ptr;
 
-SceneConstruction* Scene;
+SceneConstructor* Scene;
 
 struct LoopGame {
 	double FPS = 30.0;// 60.0;
@@ -95,7 +95,7 @@ void GetVersionOpenGl()
 
 int main()
 {
-	Scene = new SceneConstruction();
+	Scene = new SceneConstructor();
 
 	//Инициализация GLFW
 	glfwInit();
@@ -164,7 +164,7 @@ int main()
 	//glDisable(GL_BLEND);
 	//----------------------------------------------------
 
-	Scene = new SceneConstruction(window);
+	Scene = new SceneConstructor(window);
 	
 	LoopGame loopGame;
 

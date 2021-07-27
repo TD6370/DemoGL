@@ -1,4 +1,4 @@
-#include "SceneConstruction.h"
+#include "SceneConstructor.h"
 //#include "SceneRoom.h"
 //#include "CreatorModelData.h"
 #include "Rooms/SceneRoom.h"
@@ -27,7 +27,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-//#include "..\SceneConstruction.h"
+//#include "..\SceneConstructor.h"
 //#include "..\ObjectsTypes\ObjectData.h"
 
 //#include "..\CreatorModelData.h"
@@ -51,16 +51,16 @@ using std::dynamic_pointer_cast;
 map<string, int> MapAlphabet;
 map<string, int> MapAlphabetEng;
 
-SceneConstruction::SceneConstruction() {
+SceneConstructor::SceneConstructor() {
 }
 
-SceneConstruction::SceneConstruction(GLFWwindow* window) {
+SceneConstructor::SceneConstructor(GLFWwindow* window) {
 	
 	Window = window;
 	Init();
 }
 
-void SceneConstruction::Init() {
+void SceneConstructor::Init() {
 
 	Rooms = vector<shared_ptr<SceneRoom>>();
 	
@@ -86,14 +86,14 @@ void SceneConstruction::Init() {
 	RefreshGUI();
 }
 
-void SceneConstruction::LoadDataModel()
+void SceneConstructor::LoadDataModel()
 {
 	Storage = new CreatorModelData();
 	Storage->Load();
 }
 
 //*** introduction
-void SceneConstruction::ConfigRoom() {
+void SceneConstructor::ConfigRoom() {
 
 	//*** create Aspect
 	SceneRoom* room = new SceneRoom("Base", this);
@@ -134,7 +134,7 @@ void SceneConstruction::ConfigRoom() {
 	
 }
 
-void SceneConstruction::FillAlphabet() {
+void SceneConstructor::FillAlphabet() {
 	
 	MapAlphabet = map<string, int>{
 		{"à",0},
@@ -245,11 +245,11 @@ void SceneConstruction::FillAlphabet() {
 
 }
 
-void SceneConstruction::AddRoom(SceneRoom* room) {
+void SceneConstructor::AddRoom(SceneRoom* room) {
 	Rooms.push_back(make_unique<SceneRoom>(*room));
 }
 
-void SceneConstruction::ResetRooms() {
+void SceneConstructor::ResetRooms() {
 
 	for (auto room : Rooms) {
 		room->IsOnceComplete = false;
@@ -257,7 +257,7 @@ void SceneConstruction::ResetRooms() {
 }
 
 //*** Pointcut
-void SceneConstruction::WorkingRooms() {
+void SceneConstructor::WorkingRooms() {
 
 
 	for(auto room : Rooms){
@@ -266,7 +266,7 @@ void SceneConstruction::WorkingRooms() {
 	}
 }
 
-void SceneConstruction::PreparationDataFromShader() {
+void SceneConstructor::PreparationDataFromShader() {
 
 	//~~~~~ Update speed ~~~~~~~~~
 	if ((ObjectCurrent->IsTransformable ||
@@ -298,7 +298,7 @@ void SceneConstruction::PreparationDataFromShader() {
 	}
 }
 
-void SceneConstruction::SetDataToShader() {
+void SceneConstructor::SetDataToShader() {
 	
 	//TEST
 	auto nameTest =  ObjectCurrent->Name;
@@ -402,14 +402,14 @@ void SceneConstruction::SetDataToShader() {
 	}
 }
 
-float SceneConstruction::GetParamCase() {
+float SceneConstructor::GetParamCase() {
 	float paramCase = ObjectCurrent->ParamCase;
 	if(paramCase == -1)
 		paramCase = Storage->Inputs->ParamCase;
 	return paramCase;
 }
 
-bool SceneConstruction::SetObject(int indNN) {
+bool SceneConstructor::SetObject(int indNN) {
 
 	IsFirstCurrentObject = indNN == 0;
 	IsLastCurrentObject = countObjects == indNN;
@@ -465,7 +465,7 @@ bool SceneConstruction::SetObject(int indNN) {
 }
 
 
-void SceneConstruction::ObjectUpdate(int i) {
+void SceneConstructor::ObjectUpdate(int i) {
 
 	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool isBase = VersionUpdate == 0;
@@ -504,7 +504,7 @@ void SceneConstruction::ObjectUpdate(int i) {
 	}
 }
 
-void SceneConstruction::Update()
+void SceneConstructor::Update()
 {
 	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool IsDraw = !IsDeltaUpdateLogic;
@@ -575,7 +575,7 @@ void SceneConstruction::Update()
 }
 
 
-void SceneConstruction::Debug(string msg) {
+void SceneConstructor::Debug(string msg) {
 	if (DebugMessage != msg)
 	{
 		DebugMessage = msg;
@@ -584,7 +584,7 @@ void SceneConstruction::Debug(string msg) {
 	}
 }
 
-bool SceneConstruction::IsBreakUpdate()
+bool SceneConstructor::IsBreakUpdate()
 {
 	if (Storage->SceneObjectsSize() == 0)
 		return true;
@@ -593,12 +593,12 @@ bool SceneConstruction::IsBreakUpdate()
 	return false;
 }
 
-void SceneConstruction::SetMouseEvents() {
+void SceneConstructor::SetMouseEvents() {
 
 	Contrl->MouseEvents(Window, m_widthWindow, m_heightWindow, this);
 }
 
-void SceneConstruction::SetInputTextEvents() {
+void SceneConstructor::SetInputTextEvents() {
 	SymbolInput = "";
 	int keyIndex = Storage->Inputs->Key;
 	if (keyIndex == -1)
@@ -606,12 +606,12 @@ void SceneConstruction::SetInputTextEvents() {
 	SymbolInput = Contrl->GetSymbol(keyIndex);
 }
 
-void SceneConstruction::SetMouseButtonEvents() {
+void SceneConstructor::SetMouseButtonEvents() {
 
 	Contrl->MouseButtonEvents(Window, this);
 }
 
-void SceneConstruction::GenMVP() {
+void SceneConstructor::GenMVP() {
 
 	TransModel->GenMVP(m_widthWindow,
 		m_heightWindow,
@@ -620,7 +620,7 @@ void SceneConstruction::GenMVP() {
 		Storage->ConfigMVP);
 }
 
-void SceneConstruction::ClearScene() {
+void SceneConstructor::ClearScene() {
 	GLfloat red = 0.1f;
 	GLfloat blue = 0.2f;
 	GLfloat green = 0.3f;
@@ -630,7 +630,7 @@ void SceneConstruction::ClearScene() {
 	glClearColor(red, blue, green, 1.0f);
 }
 
-void SceneConstruction::DrawGraph()
+void SceneConstructor::DrawGraph()
 {
 	//Mode fill 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -659,12 +659,12 @@ void SceneConstruction::DrawGraph()
 	glBindVertexArray(0);
 }
 
-void SceneConstruction::FactoryObjectsWork() {
+void SceneConstructor::FactoryObjectsWork() {
 
 	factoryObjects->Work();
 }
 
-bool SceneConstruction::ReadCommand(TypeCommand commandType)
+bool SceneConstructor::ReadCommand(TypeCommand commandType)
 {
 	CommandPack* command = &CurrentSceneCommand;
 	if (command->Enable && command->CommandType == commandType) {
@@ -679,39 +679,39 @@ bool SceneConstruction::ReadCommand(TypeCommand commandType)
 	return false;
 }
 
-bool SceneConstruction::IsCurrentObjectBackgroundFrameGUI() {
+bool SceneConstructor::IsCurrentObjectBackgroundFrameGUI() {
 	return ObjectCurrent->Index == Storage->SceneData->IndexBackgroundGUIObj;
 }
 
-void SceneConstruction::AddCommand(CommandPack command) {
+void SceneConstructor::AddCommand(CommandPack command) {
 	dispatcherCommands->AddCommand(command);
 }
 
 
-void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions,
+void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions,
 	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong)
 {
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions, valueI, valueF, valueV4, valueS, isLong);
 }
 
-void SceneConstruction::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
+void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
 	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong) {
 
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, isLong);
 
 }
 
-void SceneConstruction::AddCommand(TypeCommand commandType, bool isLong) {
+void SceneConstructor::AddCommand(TypeCommand commandType, bool isLong) {
 
 	dispatcherCommands->AddCommand(commandType, -1, -1, -1, -0.1, vec4(), "", isLong);
 }
 
-void SceneConstruction::RefreshGUI() {
+void SceneConstructor::RefreshGUI() {
 
 	AddCommand(TypeCommand::CheckStateObjectCommand, true);
 }
 
-vector<CommandPack> SceneConstruction::GetListCommand(string nameList) {
+vector<CommandPack> SceneConstructor::GetListCommand(string nameList) {
 
 	return dispatcherCommands->StaticListCommand[nameList];
 }

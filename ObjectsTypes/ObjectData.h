@@ -59,22 +59,34 @@ protected:
 	GLfloat m_angleModel = 0.0;
 	vec3 StartColor = vec3(-1);
 public:
+	int Index = 0;
+	//-------- Info
 	string Name;
 	TypeObject TypeObj;
 	ActionObject ActionObjectCurrent;
 	TypeLayer Layer;
+	ColliseState CollisionPolygonState; //????
 	GLfloat Speed = 0.5f;
-
-	shared_ptr<ObjectData> OwnerObj;
-	shared_ptr<ObjectData> NextItemShellObj;
-	shared_ptr<BaseShell> Shell;
-
-	int IndexObjectOwner = -1;
-	int NextItemShellIndex = -1;
-	int ShellIndex = -1;
+	GLfloat ParamCase = -1; //???
+	//--- Command:
+	CommandPack* SceneCommand;
 	
-	bool IsSelected = false;
+	//============== -----  Material data	//TODO: ????
+	vector <vec3> Buffer;
+	vec3 Color = vec3(0);
+	
+	//==============  ---- Mesh data	//TODO: ????
+	vector <vec3> Vertices;
+	vector <vec3> Normals;
+	vector <vec2> TextureUV; //UV : Model
+	GLint TrianglesCount = 0;
+
+	//----- Shape -- Components proxy (Geometry)
+	ShapeBase* Shape;
+
 	// -----------  Options ---------------------
+	bool IsSelected = false;
+
 	bool IsGUI = false;
 	bool IsNPC = false;
 	bool IsHexagonModel = false;
@@ -85,27 +97,29 @@ public:
 	bool IsTransformable = false;
 	bool IsUsable = false;
 	bool IsChecked = false;
-
 	bool IsAbsolutePosition = true;
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
+	
+	//-------- Links
+	shared_ptr<ModelData> ModelPtr; 	//TODO: ????
+	shared_ptr<ObjectData> OwnerObj;
+	shared_ptr<ObjectData> NextItemShellObj;
+	shared_ptr<BaseShell> Shell;
+	int IndexObjectOwner = -1;
+	int NextItemShellIndex = -1;
+	int ShellIndex = -1;
 
-	DataEngine* EngineData;
-	WorldCluster* Clusters;
-	ShapeBase* Shape;
-	ColliseState CollisionPolygonState;
-	CommandPack* SceneCommand;
+	//-------- ENGINE:
+	DataEngine* EngineData;	//TODO: private static 
 	
-	int Index = 0;
-
-	shared_ptr<ModelData> ModelPtr;
+	//============== proxy manager --- TODO: Aspect
+	WorldCluster* Clusters; //TODO: private static 
 	
-	vector <vec3> Vertices;
-	vector <vec3> Normals;
-	vector <vec2> TextureUV;
-	vector <vec3> Buffer;
-	
-	//TODO: In Render component
+	//-- animation component ???
+	GLfloat StartTimer = -1;
+					
+	//============== TODO: In Render component
 	GLuint VAO = EmptyID;
 	GLuint VBO = EmptyID;
 	GLuint BufferUV_ID = EmptyID;
@@ -113,14 +127,11 @@ public:
 	bool IsLoadedIntoMem_Vertex = false;
 	bool IsLoadedIntoMem_Normals = false;
 	bool IsLoadedIntoMem_UV = false;
-
+	//-- Render ??
 	float TextureRepeat = 1;
-	GLint TrianglesCount = 0;
-	vec3 Color = vec3(0);
-	GLfloat ParamCase = -1;
 	GLint ParamValue = -1;
-	GLfloat StartTimer = -1;
-
+		
+	//==============  Phisic component (Rigidbody / Solid)
 	vec3 TranslateAngle = vec3(0);
 	vec3 TargetAngle = vec3(0);
 	vec3 Size = vec3(0);
@@ -130,16 +141,15 @@ public:
 	vec3 Target = vec3(0);
 	vector<int> tramsformTypes;
 	mat4 TransformResult;
-
 	int minDist = 5;
 	int DistanceTarget = 20;
-
+	// Phisic collision
 	string ZonaPolygon;
 	GLfloat PolygonPointY = 0;
 	int PlaneDownIndex = -1;
 	vec3 PlaneDownPosition = vec3(0);
 	vector<vec3> TempVectors;
-
+	
 	ObjectData();
 
 	ObjectData(int p_index,
