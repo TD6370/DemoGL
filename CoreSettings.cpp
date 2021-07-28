@@ -26,7 +26,7 @@ struct Material {
 	string PathShaderVertex = "basic.vert";
 	string PathShaderFrag = "basic.frag";
 	string PathTexture = "./Textures/testTexture.bmp";
-	string PathTextureAtlas = "";	//@**
+	string PathTextureAtlas = "";
 	vec3 Color = vec3(0);
 };
 

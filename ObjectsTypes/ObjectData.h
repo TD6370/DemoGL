@@ -75,19 +75,11 @@ public:
 	//--- Command:
 	CommandPack* SceneCommand;
 	
-	//============== -----  Material data	//TODO: ????
+	//-----  Material data
 	Material MaterialData;
-
-	//vec3 Color = vec3(0);
 	
-	//==============  ---- Mesh data	//TODO: ????
+	//---- Mesh data
 	Mesh MeshData;
-
-	//vector <vec3> Vertices;
-	//vector <vec3> Normals;
-	//vector <vec2> TextureUV; //UV : Model
-	//vector <vec3> Buffer;
-	//GLint TrianglesCount = 0;
 
 	//----- Shape -- Components proxy (Geometry)
 	ShapeBase* Shape;

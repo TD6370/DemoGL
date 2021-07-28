@@ -53,20 +53,20 @@ public:
 
 	GLuint VAO = 0;
 	GLuint VBO = 0;
-	GLuint ShaderProgram = -1;// 0;
+	GLuint ShaderProgram = -1;
 	bool IsIndex = false;
 	bool IsDebug = false;
 	glm::uvec2 SizeImage;	
-	glm::uvec2 SizeImageAtlas;	//@**
+	glm::uvec2 SizeImageAtlas;
 	unsigned char* DataImage;
-	unsigned char* DataImageAtlas;	//@**
+	unsigned char* DataImageAtlas;
 	bool IsLoadedIntoMem_Texture = false;
 	bool IsLoadedIntoMem_Normals = false;
 	bool IsLoadedIntoMem_UV = false;
 	bool IsLoadedIntoMem_Vertex = false;
 	bool IsLoadedIntoMem_Buffer = false;
 	GLuint Texture_ID;
-	GLuint TextureAtlas_ID = EmptyID;	//@**
+	GLuint TextureAtlas_ID = EmptyID;
 	GLuint BufferUV_ID;
 	GLuint BufferNormal_ID;
 	GLuint BufferColor_ID;
