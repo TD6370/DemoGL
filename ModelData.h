@@ -29,6 +29,7 @@ static vector<vec2> DEFAULT_VECTOR_V2;
 class Plane;
 class ModelFrame; //!!!
 class ConfigUniform;
+class RenderComponent;
 
 class ModelData {
 
@@ -50,12 +51,14 @@ public:
 	//GLint TrianglesCount = 0;
 	//==================
 
+	Material MaterialData;
 	//---- Material Data
 	string PathShaderVertex = "basic.vert";
 	string PathShaderFrag = "basic.frag";
 	string PathTexture = "./Textures/testTexture.bmp";
 	string PathTextureAtlas = "";	//@**
 
+	Mesh MeshData;
 	//---- Mesh data
 	const char* PathModel3D = "./Models3D/monkey.obj";
 	GLint TrianglesCount = 0;
@@ -76,8 +79,12 @@ public:
 	bool IsLoadedIntoMem_Normals = false;
 	bool IsLoadedIntoMem_UV = false;*/
 
+	//RenderComponent Render;
+	RenderComponent* Render;
+
 	//---- Render component TODO:!!!
 	ConfigUniform* ConfUniform;
+
 	GLuint VAO = 0;
 	GLuint VBO = 0;
 	GLuint ShaderProgram = -1;// 0;
@@ -99,26 +106,28 @@ public:
 	GLuint BufferColor_ID;
 	//------------------------
 
-	ModelData();
+	ModelData() {};
+	//ModelData() : Render(MaterialData, MeshData) {};
 
 	void virtual InitBase(map<string, GLuint>& shaderPrograms);
 
 	void virtual Init(map<string, GLuint>& shaderPrograms);
 
-	void ConstructShaderProgramm(map<string, GLuint>& shaderPrograms);
+	void ConstructShaderProgramm(map<string, GLuint>& shaderPrograms); //---  RENDER
 
-	void virtual LoadingTexture();
+	void virtual LoadingTexture(); //---  RENDER
 
-	void LoadModelData();
+	void LoadModelData(); //---  RENDER
 
-	void virtual InitUniform();
+	void virtual InitUniform(); //---  RENDER
 
-	void SetVAO();
+	void SetVAO(); //---  RENDER
 
 	//void SetVAO(vector<vec3> vertices);
 	//void SetVAO(vector<vec3> vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
-	void SetVAO(vector<vec3>& vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
+	void SetVAO(vector<vec3>& vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem); //---  RENDER
 
+	//---  RENDER
 	void virtual SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
 									vector<vec3>& normals = DEFAULT_VECTOR_V3, 
 										bool isUpdateTexture = true,
@@ -126,13 +135,16 @@ public:
 												GLuint bufferNormal_ID = EmptyID,
 													bool p_isLoadedIntoMem_UV = false, bool p_isLoadedIntoMem_Normals = false);
 
+	//---  RENDER
 	void virtual SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
 
+	//---  RENDER
 	void SetTextureModel();
 
+	//---  RENDER
 	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3, GLuint bufferNormal_ID = 66666);
 		
-
+	//---  RENDER
 	void SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem);
 	void UpdateBufferUV();
 

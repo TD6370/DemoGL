@@ -58,6 +58,9 @@
     <Filter Include="ShellObjects">
       <UniqueIdentifier>{e1e8ab31-3704-4933-9c42-69d8009c41ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Components">
+      <UniqueIdentifier>{4a5c0f4f-3356-4717-8783-d3869fd2cead}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gl_coreCpp_4_3.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="SceneConstructor.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RenderComponent.cpp">
+      <Filter>Engine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="SceneConstructor.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponent.h">
+      <Filter>Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

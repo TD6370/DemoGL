@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\RenderComponent.cpp" />
     <ClCompile Include="ConfigBuffers.cpp" />
     <ClCompile Include="ConfigUniformArg.cpp">
       <FileType>CppCode</FileType>
@@ -194,6 +195,7 @@
     <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="ConfigBuffers.h" />
     <ClInclude Include="ConfigUniformArg.h" />
     <ClInclude Include="Controllers.h" />

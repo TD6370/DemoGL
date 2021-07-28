@@ -21,11 +21,33 @@ using std::map;
 #define M_PI 3.1415926535897932384626433832795
 #define EmptyID 66666
 
+struct Material {
+	//---- Material Data
+	string PathShaderVertex = "basic.vert";
+	string PathShaderFrag = "basic.frag";
+	string PathTexture = "./Textures/testTexture.bmp";
+	string PathTextureAtlas = "";	//@**
+};
+
+struct Mesh {
+	//---- Mesh data
+	const char* PathModel3D = "./Models3D/monkey.obj";
+	GLint TrianglesCount = 0;
+	GLint IndicesSize = 0;
+	std::vector< glm::vec2 > UV;
+	std::vector< glm::vec3 > Normals;
+	std::vector< glm::vec3 > Vertices;
+	std::vector<unsigned int> Indices;
+	float RadiusCollider = 1;
+	bool IsSquareModel = false;
+};
+
 struct World {
 	GLfloat Radius = 50; // 10;
 	std::string PathObjects = "./Data/Objects.txt";
 	std::string PathModels = "./Data/Models.txt";
 	std::string PathShells = "./Data/Shells.txt";
+
 };
 
 struct SceneParam {

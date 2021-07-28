@@ -29,9 +29,9 @@ using glm::vec2;
 //using namespace System::Diagnostics;
 
 
-ModelData::ModelData() {
-
-}
+//ModelData::ModelData() {
+//
+//}
 
 void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 
