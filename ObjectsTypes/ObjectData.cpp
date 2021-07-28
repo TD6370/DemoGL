@@ -11,6 +11,9 @@
 
 #include "../Serialize/SceneSerialize.h"
 #include "../GeomertyShapes/ShapeBase.h"
+#include "../GeomertyShapes/ShapeHexagon.h"
+#include "../GeomertyShapes/ShapeSquare.h"
+
 #include "../ShellObjects/BaseShell.h"
 
 #include "../CreatorModelData.h"
@@ -49,7 +52,7 @@ ObjectData::ObjectData(int p_index,
 	/*Shape = new ShapeBase();
 	Shape->Obj = std::shared_ptr<ObjectData>(this);
 	Shape->Obj = this;*/
-	StartColor = Color;
+	StartColor = MaterialData.Color;
 	Layer = TypeLayer::LayerNone;
 	EngineData = new DataEngine();
 }
@@ -98,26 +101,26 @@ string ObjectData::GetCashStateUpdateDataToShader() {
 
 void ObjectData::UpdateDataBufferToShader() {
 	
-	ModelPtr->SetBuffer(Buffer);
+	ModelPtr->SetBuffer(MeshData.Buffer);
 }
 
 void ObjectData::UpdateNormalsToShader() {
 
-	if ((Normals.size() != 0 || VAO != EmptyID) &&
+	if ((MeshData.Normals.size() != 0 || VAO != EmptyID) &&
 		BufferNormal_ID == EmptyID) 
 	{
 		BufferNormal_ID = InitBuffer(); //TODO: In Render component
 	}
 
-	ModelPtr->SetNormalsModel(Normals, BufferNormal_ID);
+	ModelPtr->SetNormalsModel(MeshData.Normals, BufferNormal_ID);
 }
 
 void ObjectData::UpdateState() {
 	
-	if (Color == vec3(-1))
-		Color = vec3(0.117, 0.351, 0.950);
+	if (MaterialData.Color == vec3(-1))
+		MaterialData.Color = vec3(0.117, 0.351, 0.950);
 
-	StartColor = Color;
+	StartColor = MaterialData.Color;
 }
 
 void ObjectData::Refresh() {
@@ -247,19 +250,19 @@ shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
 
 
 std::vector<glm::vec3> ObjectData::GetVertices() {
-	return ModelPtr->Vertices;
+	return ModelPtr->MeshData.Vertices;
 }
 
 std::vector<glm::vec2> ObjectData::GetUV() {
-	return ModelPtr->UV;
+	return ModelPtr->MeshData.UV;
 }
 
 std::vector<glm::vec3> ObjectData::GetNormals() {
 
-	if (Normals.size() != 0) 
-		return Normals;
+	if (MeshData.Normals.size() != 0)
+		return MeshData.Normals;
 	else
-		return ModelPtr->Normals;
+		return ModelPtr->MeshData.Normals;
 }
 
 
@@ -277,7 +280,7 @@ void ObjectData::UnselectedEvent() {
 }
 
 void ObjectData::UpdateTextureUV() {
-	if (TextureUV.size() == 0) {
+	if (MeshData.UV.size() == 0) {
 		//NEW::1
 		ModelPtr->UpdateBufferUV();
 		return;
@@ -286,9 +289,25 @@ void ObjectData::UpdateTextureUV() {
 	if (BufferUV_ID == EmptyID) 
 		BufferUV_ID = InitBuffer(); //TODO: In Render component
 
-	ModelPtr->SetUV(TextureUV, BufferUV_ID, IsLoadedIntoMem_UV);
+	ModelPtr->SetUV(MeshData.UV, BufferUV_ID, IsLoadedIntoMem_UV);
 	IsLoadedIntoMem_UV = true;
 }
+
+//===============================
+
+ShapeHexagon* ObjectData::GetShapeHexagon() {
+
+	ShapeHexagon* shapeCast = static_cast<ShapeHexagon*>(Shape);
+	return shapeCast;
+}
+
+ShapeSquare* ObjectData::GetShapeSquare() {
+
+	ShapeSquare* shapeCast = static_cast<ShapeSquare*>(Shape);
+	return shapeCast;
+}
+
+//============================
 
 void ObjectData::SetStartTimer() {
 	StartTimer = glfwGetTime();
@@ -303,7 +322,7 @@ bool ObjectData::GetVisible() {
 
 void ObjectData::DefaultView()
 {
-	Color = StartColor;
+	MaterialData.Color = StartColor;
 }
 
 string ObjectData::GetInfo() {

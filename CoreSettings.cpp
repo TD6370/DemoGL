@@ -27,6 +27,7 @@ struct Material {
 	string PathShaderFrag = "basic.frag";
 	string PathTexture = "./Textures/testTexture.bmp";
 	string PathTextureAtlas = "";	//@**
+	vec3 Color = vec3(0);
 };
 
 struct Mesh {
@@ -34,19 +35,21 @@ struct Mesh {
 	const char* PathModel3D = "./Models3D/monkey.obj";
 	GLint TrianglesCount = 0;
 	GLint IndicesSize = 0;
-	std::vector< glm::vec2 > UV;
-	std::vector< glm::vec3 > Normals;
-	std::vector< glm::vec3 > Vertices;
-	std::vector<unsigned int> Indices;
+	vector< vec2 > UV;
+	vector< vec3 > Normals;
+	vector< vec3 > Vertices;
+	vector <vec3> Buffer;
+	vec3 Color = vec3(0);
+	vector<unsigned int> Indices;
 	float RadiusCollider = 1;
 	bool IsSquareModel = false;
 };
 
 struct World {
 	GLfloat Radius = 50; // 10;
-	std::string PathObjects = "./Data/Objects.txt";
-	std::string PathModels = "./Data/Models.txt";
-	std::string PathShells = "./Data/Shells.txt";
+	string PathObjects = "./Data/Objects.txt";
+	string PathModels = "./Data/Models.txt";
+	string PathShells = "./Data/Shells.txt";
 
 };
 

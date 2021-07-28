@@ -65,7 +65,7 @@ void ObjectCursorRay::LockResult() {
 	ActionObjectCurrent = Stay;
 
 	/*ActionObjectCurrent = Stay;
-	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
+	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->MeshData.RadiusCollider;
 
 	SelectPositionOnPolygon();
 	SelectedObjIndex = -1;
@@ -75,7 +75,7 @@ void ObjectCursorRay::LockResult() {
 void ObjectCursorRay::LockPolygonResult() {
 
 	ActionObjectCurrent = Stay;
-	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
+	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->MeshData.RadiusCollider;
 	
 	CusrsorAction();
 }

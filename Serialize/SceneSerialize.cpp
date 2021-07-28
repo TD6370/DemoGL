@@ -116,7 +116,7 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.ShellIndex << " " << obj->ShellIndex << "\n";
 	streamObjects << fileds.NextItemShellIndex << " " << obj->NextItemShellIndex << "\n";
 
-	streamObjects << fileds.Color << " " << Vec3Str(obj->Color) << "\n";
+	streamObjects << fileds.Color << " " << Vec3Str(obj->MaterialData.Color) << "\n";
 
 	streamObjects << fileds.Command << " " << GetNameType(obj->SceneCommand->CommandType) << "\n";
 	streamObjects << fileds.CommandSourceIndex << " " << obj->SceneCommand->SourceIndex << "\n";
@@ -160,14 +160,14 @@ void  SceneSerialize::Save(shared_ptr<ModelData> model) {
 
 	streamModels << fileds.Name << " " << model->Name << "\n";
 	streamModels << fileds.TypeName << " " << model->TypeName << "\n";
-	streamModels << fileds.PathShaderVertex << " " << model->PathShaderVertex << "\n";
-	streamModels << fileds.PathShaderFrag << " " << model->PathShaderFrag << "\n";
-	streamModels << fileds.PathTexture << " " << model->PathTexture << "\n";
-	streamModels << fileds.PathTextureAtlas << " " << GetStrValue(model->PathTextureAtlas) << "\n";
-	streamModels << fileds.PathModel3D << " " << model->PathModel3D << "\n";
+	streamModels << fileds.PathShaderVertex << " " << model->MaterialData.PathShaderVertex << "\n";
+	streamModels << fileds.PathShaderFrag << " " << model->MaterialData.PathShaderFrag << "\n";
+	streamModels << fileds.PathTexture << " " << model->MaterialData.PathTexture << "\n";
+	streamModels << fileds.PathTextureAtlas << " " << GetStrValue(model->MaterialData.PathTextureAtlas) << "\n";
+	streamModels << fileds.PathModel3D << " " << model->MeshData.PathModel3D << "\n";
 
-	streamModels << fileds.RadiusCollider << " " << model->RadiusCollider << "\n";
-	streamModels << fileds.IsSquareModel << " " << model->IsSquareModel << "\n";
+	streamModels << fileds.RadiusCollider << " " << model->MeshData.RadiusCollider << "\n";
+	streamModels << fileds.IsSquareModel << " " << model->MeshData.IsSquareModel << "\n";	///?????
 	
 	streamModels << m_stringSeparator << " " << "\n";
 

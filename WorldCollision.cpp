@@ -94,7 +94,7 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 
 	shared_ptr<Plane> planePrt;
 
-	float radius = object->ModelPtr->RadiusCollider;
+	float radius = object->ModelPtr->MeshData.RadiusCollider;
 	vec3 pos = object->Postranslate;
 	pos = vec3(pos.x, pos.y - radius, pos.z);
 	//vec3 posDown = vec3(pos.x, pos.y - radius, pos.z);
@@ -114,7 +114,7 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 	vec3 color_violet = vec3(1, 0, 1);
 	vec3 color_yelow = vec3(0, 1, 1);
 
-	object->Color = vec3(1, 1, 1);
+	object->MaterialData.Color = vec3(1, 1, 1);
 
 	object->TempVectors = vector<vec3>();
 
@@ -188,12 +188,12 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 
 	shared_ptr<Plane> planePrt;
 
-	float radius = object->ModelPtr->RadiusCollider;
+	float radius = object->ModelPtr->MeshData.RadiusCollider;
 	vec3 pos = object->Postranslate;
 	pos = vec3(pos.x, pos.y - radius, pos.z);
 
 	object->PlaneDownIndex = -1;
-	object->Color = vec3(1, 1, 1);
+	object->MaterialData.Color = vec3(1, 1, 1);
 	object->TempVectors = vector<vec3>();
 	object->PlaneDownPosition = vec3(0);
 
@@ -308,7 +308,7 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 vector<int> WorldCluster::GetIndexPlanePolygonFromObject(int indexObj, vector<string>& checkedZona)
 {
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
-	int radius = object->ModelPtr->RadiusCollider;
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
 	vector<int> resultPlaneIndexes = vector<int>();
 
 	glm::vec3 pos;
@@ -365,7 +365,7 @@ vector<int> WorldCluster::GetIndexPlanePolygonFromObject(int indexObj, vector<st
 vector<int> WorldCluster::GetVertexPolygonFromObject(int indexObj, vector<string>& checkedZona)
 {
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
-	int radius = object->ModelPtr->RadiusCollider;
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
 	vector<int> resultVertex = vector<int>();
 	//vector<string> checkedZona = vector<string>();
 
@@ -420,7 +420,7 @@ vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition, Typ
 {
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
 	int indObjOwner = object->IndexObjectOwner;
-	int radius = object->ModelPtr->RadiusCollider;
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
 	vector<string> checkedZona = vector<string>();
 	vector<int> resultIndexObjects = vector<int>();
 
@@ -575,7 +575,7 @@ void WorldCluster::SaveClusterBlockObject(int indexObj) {
 void WorldCluster::SaveClusterDynamicColiderObject(int indexObj) {
 	
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
-	int radius = object->ModelPtr->RadiusCollider;
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
 	vector<string> checkedZona = vector<string>();
 	glm::vec3 pos;
 	//clear old  position in zona
@@ -721,7 +721,7 @@ bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isN
 		xC = objectMe->Postranslate.x;
 		yC = objectMe->Postranslate.z;
 	}
-	r = objectMe->ModelPtr->RadiusCollider;
+	r = objectMe->ModelPtr->MeshData.RadiusCollider;
 
 	shared_ptr <ObjectBlock> objBlock = std::dynamic_pointer_cast<ObjectBlock>(objectBlock);
 	for (int indLine = 0; indLine < 4; indLine++) {
@@ -753,11 +753,11 @@ bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPositi
 		x1 = objectMe->Postranslate.x;
 		y1 = objectMe->Postranslate.z;
 	}
-	r1 = objectMe->ModelPtr->RadiusCollider;
+	r1 = objectMe->ModelPtr->MeshData.RadiusCollider;
 
 	x2 = object2->Postranslate.x;
 	y2 = object2->Postranslate.z;
-	r2 = object2->ModelPtr->RadiusCollider;
+	r2 = object2->ModelPtr->MeshData.RadiusCollider;
 
 	double r = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)); //расстояние между центрами
 	// проверка на совпадение 2-ух окружностей

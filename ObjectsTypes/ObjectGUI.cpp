@@ -81,7 +81,7 @@ void ObjectGUI::ActionMoving()
 	if (ActionObjectCurrent != Moving)
 		return;
 
-	Color = m_color_transforming;
+	MaterialData.Color = m_color_transforming;
 }
 
 
@@ -131,7 +131,7 @@ void ObjectGUI::Click() {
 
 void ObjectGUI::ActionWork() {
 
-	Color = m_color_work;
+	MaterialData.Color = m_color_work;
 	ActionObjectCurrent = Stay; //Off
 }
 

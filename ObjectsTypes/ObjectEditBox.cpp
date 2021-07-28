@@ -24,7 +24,7 @@ void ObjectEditBox::ActionWork()
 {
 	AnimationParamGUI animParam;
 
-	Color = m_color_work;
+	MaterialData.Color = m_color_work;
 	
 	ParamValue = animParam.StartPressedParamShaderID;
 }

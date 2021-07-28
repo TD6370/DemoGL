@@ -38,7 +38,7 @@ void ObjectTextBox::Click() {
 
 void ObjectTextBox::ActionWork() {
 
-	Color = m_color_work;
+	MaterialData.Color = m_color_work;
 }
 
 string ObjectTextBox::GetCashStateUpdateDataToShader() {
@@ -50,12 +50,12 @@ void ObjectTextBox::SetDataToShader() {
 
 	ObjectGUI::SetDataToShader();
 
-	ModelPtr->SetBuffer(Buffer);
+	ModelPtr->SetBuffer(MeshData.Buffer);
 
 	if (!isInitSlotsMessage) {
 		isInitSlotsMessage = true;
 		
-		ModelPtr->SetModelInBuffer(TextureUV, Normals, false); //TODO: delete
+		ModelPtr->SetModelInBuffer(MeshData.UV, MeshData.Normals, false); //TODO: delete
 	}
 }
 
@@ -90,16 +90,16 @@ void ObjectTextBox::CreateMessage() {
 
 void ObjectTextBox::MeshTransform() {
 	
-	if(Vertices.size() == 0)
-		Vertices = ModelPtr->Vertices;
-	if(Normals.size() == 0)
-		Normals = ModelPtr->Normals;
-	if (TextureUV.size() == 0)
-		TextureUV = ModelPtr->UV;
+	if(MeshData.Vertices.size() == 0)
+		MeshData.Vertices = ModelPtr->MeshData.Vertices;
+	if(MeshData.Normals.size() == 0)
+		MeshData.Normals = ModelPtr->MeshData.Normals;
+	if (MeshData.UV.size() == 0)
+		MeshData.UV = ModelPtr->MeshData.UV;
 
-	vector<vec3> vertexFrame = Vertices;
-	vector<vec2> textureUV = TextureUV;
-	vector<vec3> normals = Normals;
+	vector<vec3> vertexFrame = MeshData.Vertices;
+	vector<vec2> textureUV = MeshData.UV;
+	vector<vec3> normals = MeshData.Normals;
 	vector<vec3> bufferLats = vector<vec3>();
 	bufferLats.push_back(vec3(0));
 	bufferLats.push_back(vec3(0));
@@ -108,9 +108,9 @@ void ObjectTextBox::MeshTransform() {
 	bufferLats.push_back(vec3(0));
 	bufferLats.push_back(vec3(0));
 
-	TrianglesCount = ModelPtr->TrianglesCount;
+	MeshData.TrianglesCount = ModelPtr->MeshData.TrianglesCount;
 
-	Buffer.clear();
+	MeshData.Buffer.clear();
 
 	int firstStep = 0;
 	bool isFirstStep = false;
@@ -138,14 +138,14 @@ void ObjectTextBox::MeshTransform() {
 			bufferLats[i].z = codeSymb;
 		}
 
-		Buffer.insert(Buffer.end(), bufferLats.begin(), bufferLats.end());
+		MeshData.Buffer.insert(MeshData.Buffer.end(), bufferLats.begin(), bufferLats.end());
 		if (!isFirstStep)
 		{
 			//Vertices.push_back(vertexFrame);
-			Vertices.insert(Vertices.end(), vertexFrame.begin(), vertexFrame.end());
-			TextureUV.insert(TextureUV.end(), textureUV.begin(), textureUV.end());
+			MeshData.Vertices.insert(MeshData.Vertices.end(), vertexFrame.begin(), vertexFrame.end());
+			MeshData.UV.insert(MeshData.UV.end(), textureUV.begin(), textureUV.end());
 			//Normals.insert(Normals.end(), normals.begin(), normals.end());
-			TrianglesCount += vertexSize;
+			MeshData.TrianglesCount += vertexSize;
 		}
 		firstStep++;
 	}
@@ -179,7 +179,7 @@ void ObjectTextBox::UpdateMessage()
 	int sizeMessage = MessageCode.size();
 	int spaceSymb = MapAlphabet[" "];
 
-	for (vec3& dataSymb : Buffer) {
+	for (vec3& dataSymb : MeshData.Buffer) {
 		
 		if (ind == vertexSize || ind == -1) {
 			ind = 0;
@@ -238,10 +238,10 @@ void ObjectTextBox::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific
 	Message = filedsSpecific[filedsSpecific.size()-1].Value;
 
 	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
-	Vertices.clear();
-	Normals.clear();
-	TextureUV.clear();
-	Buffer.clear();
+	MeshData.Vertices.clear();
+	MeshData.Normals.clear();
+	MeshData.UV.clear();
+	MeshData.Buffer.clear();
 
 	CreateMessage();
 }

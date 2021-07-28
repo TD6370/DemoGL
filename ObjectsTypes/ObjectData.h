@@ -29,13 +29,17 @@ using std::string;
 using std::shared_ptr;
 using std::map;
 
-class ShapeBase;
 class Plane;
 class ModelData;
 class CreatorModelData;
 class WorldCluster;
 struct ObjectFiledsSpecific;
 class BaseShell;
+class RenderComponent;
+
+class ShapeBase;
+class ShapeHexagon;
+class ShapeSquare;
 
 //TODO: EngineData
 struct DataEngine {
@@ -72,14 +76,18 @@ public:
 	CommandPack* SceneCommand;
 	
 	//============== -----  Material data	//TODO: ????
-	vector <vec3> Buffer;
-	vec3 Color = vec3(0);
+	Material MaterialData;
+
+	//vec3 Color = vec3(0);
 	
 	//==============  ---- Mesh data	//TODO: ????
-	vector <vec3> Vertices;
-	vector <vec3> Normals;
-	vector <vec2> TextureUV; //UV : Model
-	GLint TrianglesCount = 0;
+	Mesh MeshData;
+
+	//vector <vec3> Vertices;
+	//vector <vec3> Normals;
+	//vector <vec2> TextureUV; //UV : Model
+	//vector <vec3> Buffer;
+	//GLint TrianglesCount = 0;
 
 	//----- Shape -- Components proxy (Geometry)
 	ShapeBase* Shape;
@@ -119,6 +127,9 @@ public:
 	//-- animation component ???
 	GLfloat StartTimer = -1;
 					
+	//---- Render component
+	RenderComponent* Render;
+
 	//============== TODO: In Render component
 	GLuint VAO = EmptyID;
 	GLuint VBO = EmptyID;
@@ -222,6 +233,13 @@ public:
 	void virtual ActionWork();
 	
 	void SetStartTimer();
+	
+	//-----------------------------
+
+	ShapeHexagon* GetShapeHexagon();
+
+	ShapeSquare* GetShapeSquare();
+
 	//-----------------------------
 	
 	void virtual MeshTransform(); //------- geometric ???

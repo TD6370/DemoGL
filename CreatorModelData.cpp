@@ -105,7 +105,7 @@ void CreatorModelData::AddModel(shared_ptr<ModelData> newModel, std::string name
 	}
 
 	if (isGenName) {
-		string file = GetFile(newModel->PathModel3D);
+		string file = GetFile(newModel->MeshData.PathModel3D);
 		name += file + "_" + std::to_string(index);
 	}
 
@@ -159,17 +159,17 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 			const char* pathTextureAtlasTEST = fieldsModel->PathTextureAtlas.c_str();
 		}*/
 
-		nextModelPrt->PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
-		nextModelPrt->PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
-		nextModelPrt->PathTexture = fieldsModel->PathTexture.c_str();
+		nextModelPrt->MaterialData.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
+		nextModelPrt->MaterialData.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
+		nextModelPrt->MaterialData.PathTexture = fieldsModel->PathTexture.c_str();
 		
 		//string convertStr = serializer->GetStrValue(fieldsModel->PathTextureAtlas);
 		//nextModelPrt->PathTextureAtlas = convertStr.c_str();
-		nextModelPrt->PathTextureAtlas = serializer->GetStrValue(fieldsModel->PathTextureAtlas);
+		nextModelPrt->MaterialData.PathTextureAtlas = serializer->GetStrValue(fieldsModel->PathTextureAtlas);
 
-		nextModelPrt->PathModel3D = fieldsModel->PathModel3D.c_str();
-		nextModelPrt->RadiusCollider = std::stof(fieldsModel->RadiusCollider);
-		nextModelPrt->IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
+		nextModelPrt->MeshData.PathModel3D = fieldsModel->PathModel3D.c_str();
+		nextModelPrt->MeshData.RadiusCollider = std::stof(fieldsModel->RadiusCollider);
+		nextModelPrt->MeshData.IsSquareModel = StrToBool(fieldsModel->IsSquareModel);
 		nextModelPrt->Init(ShaderPrograms);
 
 		AddModel(nextModelPrt, fieldsModel->Name);
@@ -225,7 +225,7 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 	}
 
 	if (isGenName) {
-		string fileModel = GetFile(modelPtr->PathModel3D);
+		string fileModel = GetFile(modelPtr->MeshData.PathModel3D);
 		//string fileTexture = GetFile(modelPtr->PathTexture);
 		name += fileModel + "_" + std::to_string(p_index);
 	}
@@ -350,7 +350,7 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 		object->EngineData->Oper = Oper;
 		object->EngineData->SceneData = SceneData;
 
-		object->Color = p_color;
+		object->MaterialData.Color = p_color;
 		object->Name = name;
 		if(p_layer != LayerNone)
 			object->Layer = p_layer;
@@ -555,7 +555,7 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 		newObj->ShellIndex = stoi(objFields->ShellIndex);
 		newObj->NextItemShellIndex = stoi(objFields->NextItemShellIndex);
 
-		newObj->Color = objFields->ColorValue;
+		newObj->MaterialData.Color = objFields->ColorValue;
 
 		TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
 		int sourceIndex = stoi(objFields->CommandSourceIndex);
@@ -637,90 +637,90 @@ void CreatorModelData::LoadModels() {
 	ModelData nextModel = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->PathModel3D = "./Models3D/monkey.obj";
-	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/monkey.obj";
+	nextModelPrt->MeshData.RadiusCollider = 1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "mon");
 
 	ModelData nextModel2 = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel2));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathTexture = "./Textures/planet.bmp";
-	nextModelPrt->PathModel3D = "./Models3D/polygonPlane.obj";
-	nextModelPrt->RadiusCollider = 0.2;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/planet.bmp";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/polygonPlane.obj";
+	nextModelPrt->MeshData.RadiusCollider = 0.2;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "plane");
 
 	ModelData nextModel3 = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel3));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/kub.obj";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/kub.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MeshData.RadiusCollider = 1;
 	nextModelPrt->IsDebug = true;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "box");
 
 	ModelData nextModel4 = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel4));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Marker_Vector.obj";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Marker_Vector.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MeshData.RadiusCollider = 0.1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Vector");
 
 	ModelData nextModel5 = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel5));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MeshData.RadiusCollider = 0.1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Cross");
 
 	ModelData nextModel6 = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel6));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->RadiusCollider = 0.1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MeshData.RadiusCollider = 0.1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "marker_Point");
 
 	ModelData nextModelHomo = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModelHomo));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Marker_Point.obj";
-	nextModelPrt->PathTexture = "./Textures/future.bmp";
-	nextModelPrt->RadiusCollider = 1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Marker_Point.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/future.bmp";
+	nextModelPrt->MeshData.RadiusCollider = 1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "homo");
 
 	ModelData nextModelCursorRay = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModelCursorRay));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "basic.vert";
-	nextModelPrt->PathShaderFrag = "basic.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Marker_Cross.obj";
-	nextModelPrt->PathTexture = "./Textures/future.bmp";
-	nextModelPrt->RadiusCollider = .1;
+	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "basic.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Marker_Cross.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/future.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "cursorRay");
 
@@ -728,15 +728,15 @@ void CreatorModelData::LoadModels() {
 	ModelFrame contextFrame = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(contextFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	//nextModelPrt->PathShaderFrag = "FrameUI.frag";
-	nextModelPrt->PathShaderFrag = "ContextUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	//nextModelPrt->PathTexture = "./Textures/future.bmp";
-	//nextModelPrt->PathTexture = "./Textures/Frame.bmp";
-	nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
+	//nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->MaterialData.PathShaderFrag = "ContextUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/future.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/Frame.bmp";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture2.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ConextFrameModel");
 
@@ -745,16 +745,16 @@ void CreatorModelData::LoadModels() {
 	ModelFrame modelFrame = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	nextModelPrt->PathShaderFrag = "FrameUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture3.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->PathTexture = "./Textures/InventCase2.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/syzanna.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture3.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/InventCase2.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture2.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "FrameModel");
 
@@ -763,12 +763,12 @@ void CreatorModelData::LoadModels() {
 	modelFrame = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	nextModelPrt->PathShaderFrag = "FrameUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	nextModelPrt->PathTexture = "./Textures/EditBox2.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/EditBox2.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ButtonEditBoxModel");
 	
@@ -777,16 +777,16 @@ void CreatorModelData::LoadModels() {
 	modelFrame = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	nextModelPrt->PathShaderFrag = "FrameUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Frame.obj";
-	//nextModelPrt->PathTexture = "./Textures/syzanna.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture3.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture.bmp";
-	nextModelPrt->PathTexture = "./Textures/Button.bmp";
-	//nextModelPrt->PathTexture = "./Textures/testTexture2.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/syzanna.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture3.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture.bmp";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/Button.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture2.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "ButtonModel");
 
@@ -794,13 +794,13 @@ void CreatorModelData::LoadModels() {
 	ModelTextBox TextBox = ModelTextBox();
 	Models.push_back(std::make_unique<ModelTextBox>(TextBox));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "TextBoxUI.vert";
-	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
-	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
-	nextModelPrt->PathTextureAtlas = "./Textures/AlphabetEng.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "TextBoxUI.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "TextBoxUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/TextBox.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->MaterialData.PathTextureAtlas = "./Textures/AlphabetEng.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "TextBoxModel");
 
@@ -808,15 +808,15 @@ void CreatorModelData::LoadModels() {
 	ModelFrame curcorModel = ModelFrame();
 	Models.push_back(std::make_unique<ModelFrame>(curcorModel));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "FrameUI.vert";
-	//nextModelPrt->PathShaderFrag = "FrameUI.frag";
-	nextModelPrt->PathShaderFrag = "CursorUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/Cursor.obj";
-	//nextModelPrt->PathTexture = "./Textures/Cursor.bmp";
-	nextModelPrt->PathTexture = "./Textures/CursorB.bmp";
-	//nextModelPrt->PathTexture = "./Textures/CursorSDF.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
+	//nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
+	nextModelPrt->MaterialData.PathShaderFrag = "CursorUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/Cursor.obj";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/Cursor.bmp";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/CursorB.bmp";
+	//nextModelPrt->MaterialData.PathTexture = "./Textures/CursorSDF.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "CursorModel");
 
@@ -824,13 +824,13 @@ void CreatorModelData::LoadModels() {
 	ModelEditBox edittBox = ModelEditBox();
 	Models.push_back(std::make_unique<ModelEditBox>(edittBox));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
-	nextModelPrt->PathShaderVertex = "TextBoxUI.vert";
-	nextModelPrt->PathShaderFrag = "TextBoxUI.frag";
-	nextModelPrt->PathModel3D = "./Models3D/TextBox.obj";
-	nextModelPrt->PathTexture = "./Textures/Alphabet.bmp";
-	nextModelPrt->PathTextureAtlas = "./Textures/AlphabetEng.bmp";
-	nextModelPrt->RadiusCollider = .1;
-	nextModelPrt->IsSquareModel = true;
+	nextModelPrt->MaterialData.PathShaderVertex = "TextBoxUI.vert";
+	nextModelPrt->MaterialData.PathShaderFrag = "TextBoxUI.frag";
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/TextBox.obj";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/Alphabet.bmp";
+	nextModelPrt->MaterialData.PathTextureAtlas = "./Textures/AlphabetEng.bmp";
+	nextModelPrt->MeshData.RadiusCollider = .1;
+	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
 	AddModel(nextModelPrt, "EditBoxModel");
 
@@ -1135,7 +1135,7 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	//objGUI->StartPos = startPosChild;
 	objGUI->StartPos = startPos;
 	objGUI->SizePanel = size;
-	objGUI->Color = color;
+	objGUI->MaterialData.Color = color;
 	objGUI->UpdateState();
 	//objGUI->IsTextureRepeat = true;
 

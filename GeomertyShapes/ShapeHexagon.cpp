@@ -39,11 +39,11 @@ void ShapeHexagon::SelectVertexBlock() {
 void ShapeHexagon::ResizeTextureUV() {
 	ObjectPhysic* obj = m_objPhysic;
 	if (obj->IsTextureRepeat) {
-		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->UV;
+		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->MeshData.UV;
 		for (auto& uv : repeat_UV) {
 			uv.x *= obj->TextureRepeat;
 		}
-		obj->TextureUV = repeat_UV;
+		obj->MeshData.UV = repeat_UV;
 		obj->IsLoadedIntoMem_UV = false;
 	}
 }
@@ -87,7 +87,7 @@ void ShapeHexagon::CalculateTextureUV(bool isInit) {
 
 		if (isInit) {
 			StartLenghtWall = maxLenght; //start len resize wall -> max len wal
-			obj->TextureUV = obj->ModelPtr->UV;
+			obj->MeshData.UV = obj->ModelPtr->MeshData.UV;
 			obj->IsLoadedIntoMem_UV = false;
 		}
 		else

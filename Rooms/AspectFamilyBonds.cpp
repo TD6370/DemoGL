@@ -49,7 +49,7 @@ void AspectFamilyBonds::Work() {
 				Scene->ReadCommand(EditObjectCommand);
 
 				//Select object cursor ray
-				Scene->ObjectCurrent->Color = vec3(0, 1, 0);
+				Scene->ObjectCurrent->MaterialData.Color = vec3(0, 1, 0);
 				Scene->ObjectCurrent->IsSelected = true;
 				Scene->ObjectCurrent->Target = m_posCursor;
 				Scene->ObjectCurrent->SelectedEvent();

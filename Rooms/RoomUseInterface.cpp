@@ -155,7 +155,7 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 
 	//Scene->Debug("Start resize");
 	obj->ActionObjectCurrent = ActionObject::Transforming;
-	obj->Color = color_resize;
+	obj->MaterialData.Color = color_resize;
 	IndexObjectSelected = obj->Index;
 	m_startSizePanel = obj->SizePanel;
 	IsCursorClickEvent = false;//!!!
@@ -263,7 +263,7 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 		isUpdateView = false;
 
 	if (IsFocused && isUpdateView) {
-		obj->Color = color_selected;
+		obj->MaterialData.Color = color_selected;
 		if (!isOrderParam)
 		{ 
 			if (IsCheckBorder && IsEditControls)

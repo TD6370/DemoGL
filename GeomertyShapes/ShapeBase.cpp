@@ -225,12 +225,12 @@ void ShapeBase::SetBottom(int index, vec3 value) {
 	vec3 oldValue = BottomVectors[index];
 	BottomVectors[index] = value;
 	int indVert = 0;
-	while (indVert < obj->Vertices.size())
+	while (indVert < obj->MeshData.Vertices.size())
 	{
 		vec3 vertexNext = obj->GetVertices()[indVert];
 		if (oldValue == vertexNext)
 		{
-			obj->Vertices[indVert] = value;
+			obj->MeshData.Vertices[indVert] = value;
 			obj->IsLoadedIntoMem_Vertex = false;
 		}
 		indVert++;
@@ -244,12 +244,12 @@ void ShapeBase::SetTop(int index, vec3 value) {
 	vec3 oldValue = TopVectors[index];
 	TopVectors[index] = value;
 	int indVert = 0;
-	while (indVert < obj->Vertices.size())
+	while (indVert < obj->MeshData.Vertices.size())
 	{
 		vec3 vertexNext = obj->GetVertices()[indVert];
 		if (oldValue == vertexNext)
 		{
-			obj->Vertices[indVert] = value;
+			obj->MeshData.Vertices[indVert] = value;
 			obj->IsLoadedIntoMem_Vertex = false;
 		}
 		indVert++;

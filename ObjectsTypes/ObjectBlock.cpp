@@ -42,7 +42,7 @@ void ObjectBlock::SaveNewPosition()
 	ActionObjectCurrent = Stay;
 	Move = Postranslate;
 	//Set position polygon
-	Move.y = PlaneDownPosition.y + ModelPtr->RadiusCollider;
+	Move.y = PlaneDownPosition.y + ModelPtr->MeshData.RadiusCollider;
 	NewPostranslate = Move;
 
 	//Storage->Clusters->SaveClusterObject(Index);
@@ -108,7 +108,7 @@ void ObjectBlock::MeshTransform() {
 	vec3 vertOffset = vec3(offsetPosScene.x, 0, offsetPosScene.z);
 
 	//-- set transform
-	if (Vertices.size() != 0) {
+	if (MeshData.Vertices.size() != 0) {
 
 		vec3 vertA = Shape->GetBottom(indexUpdate);
 
@@ -131,7 +131,7 @@ vector<ObjectFiledsSpecific> ObjectBlock::GetSpecificFiels() {
 	BlockFileds* filedsName = new BlockFileds;
 	vector<ObjectFiledsSpecific> result;
 
-	for(auto vertex : Vertices)
+	for(auto vertex : MeshData.Vertices)
 	{
 		result.push_back({ filedsName->Vertex ,serializer->Vec3Str(vertex) });
 	}
@@ -152,13 +152,13 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 	BlockFileds* filedsName = new BlockFileds;
 
 	IsLoadedIntoMem_Vertex = false;
-	Vertices.clear();
+	MeshData.Vertices.clear();
 	//TextureUV.clear();
 
 	for (auto fieldValue : filedsSpecific)
 	{
 		if(fieldValue.FieldName == filedsName->Vertex)
-			Vertices.push_back(serializer->StrToVec3(fieldValue.Value));
+			MeshData.Vertices.push_back(serializer->StrToVec3(fieldValue.Value));
 
 		// --- ver1.UV
 		//if (fieldValue.FieldName == filedsName->UV)

@@ -36,7 +36,7 @@ using glm::vec2;
 void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 
 	bool isNew = true;
-	string keyShaderPrograms = PathShaderVertex + "|" + PathShaderFrag;
+	string keyShaderPrograms = MaterialData.PathShaderVertex + "|" + MaterialData.PathShaderFrag;
 
 	if (shaderPrograms.size() != 0) {
 		map <string, GLuint> ::iterator it;
@@ -49,14 +49,14 @@ void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 	{
 		string pathShaderVertStr = std::string();
 		pathShaderVertStr.append(PathShaderFolder);
-		pathShaderVertStr.append(PathShaderVertex);
+		pathShaderVertStr.append(MaterialData.PathShaderVertex);
 		const GLchar* pathShaderVert = pathShaderVertStr.c_str();
 		//Load vertex shader
 		GLuint vertShader = GenShader(pathShaderVert, true);
 
 		string pathShaderFragStr = std::string();
 		pathShaderFragStr.append(PathShaderFolder);
-		pathShaderFragStr.append(PathShaderFrag);
+		pathShaderFragStr.append(MaterialData.PathShaderFrag);
 		const GLchar* pathShaderFrag = pathShaderFragStr.c_str();
 
 		//Load fragment shader
@@ -74,13 +74,13 @@ void ModelData::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 void ModelData::LoadingTexture() {
 
 	//------------------------------- Load texture
-	DataImage = LoadBmp(PathTexture, &SizeImage.x, &SizeImage.y);
-	if (PathTextureAtlas.size() != 0)
-		DataImageAtlas = LoadBmp(PathTextureAtlas, &SizeImageAtlas.x, &SizeImageAtlas.y);
+	DataImage = LoadBmp(MaterialData.PathTexture, &SizeImage.x, &SizeImage.y);
+	if (MaterialData.PathTextureAtlas.size() != 0)
+		DataImageAtlas = LoadBmp(MaterialData.PathTextureAtlas, &SizeImageAtlas.x, &SizeImageAtlas.y);
 
 	if (DataImage == NULL)
 	{
-		std::cerr << "Could not read image file " << PathTexture << ". File does not exist." << std::endl;
+		std::cerr << "Could not read image file " << MaterialData.PathTexture << ". File does not exist." << std::endl;
 		return;
 	}
 	//---------------------------------------- Load mesh
@@ -90,25 +90,25 @@ void ModelData::LoadModelData() {
 
 	bool isGetIndices = false;
 	bool result = false;
-	result = LoadModelObj(PathModel3D,
-		Vertices,
-		UV,
-		Normals,
-		Indices,
+	result = LoadModelObj(MeshData.PathModel3D,
+		MeshData.Vertices,
+		MeshData.UV,
+		MeshData.Normals,
+		MeshData.Indices,
 		isGetIndices);
 
 	if (IsDebug) {
-		DebugVec3(Normals, "Normals");
-		DebugVec3(Vertices, "Vertices");
-		DebugUV(UV);
+		DebugVec3(MeshData.Normals, "Normals");
+		DebugVec3(MeshData.Vertices, "Vertices");
+		DebugUV(MeshData.UV);
 	}
 
 	if (!result)
 	{
 		fprintf(stderr, "Error load Model.obj");
 	}
-	TrianglesCount = Vertices.size();
-	IndicesSize = Indices.size();
+	MeshData.TrianglesCount = MeshData.Vertices.size();
+	MeshData.IndicesSize = MeshData.Indices.size();
 	//-----------------------------
 
 	VAO = InitVAO();
@@ -124,7 +124,7 @@ void ModelData::LoadModelData() {
 	Texture_ID = InitImage();
 
 	//if (!(PathTextureAtlas && !PathTextureAtlas[0]))
-	if (PathTextureAtlas.size() != 0)
+	if (MaterialData.PathTextureAtlas.size() != 0)
 		TextureAtlas_ID = InitImage();
 
 	BufferUV_ID = InitBuffer();
@@ -165,8 +165,8 @@ void ModelData::DebugVec3(vector<vec3> list_v, std::string name) {
 
 void ModelData::SetVAO() {
 	GenVertexArrayObject(IsIndex,
-		Vertices,
-		Indices,
+		MeshData.Vertices,
+		MeshData.Indices,
 		VAO, VBO, 
 		IsLoadedIntoMem_Vertex);
 	IsLoadedIntoMem_Vertex = true;
@@ -175,7 +175,7 @@ void ModelData::SetVAO() {
 void ModelData::SetVAO(std::vector< glm::vec3 >& vertices, GLuint p_VAO, GLuint p_VBO, bool isLoadedIntoMem) {
 	GenVertexArrayObject(IsIndex,
 		vertices,
-		Indices,
+		MeshData.Indices,
 		p_VAO, p_VBO, isLoadedIntoMem);
 }
 
@@ -193,7 +193,7 @@ void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool i
 
 	// -- Update UV
 	if (&uv == nullptr || uv.size() == 0)
-		SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV); // Default
+		SetBufferUV(MeshData.UV, BufferUV_ID, IsLoadedIntoMem_UV); // Default
 	else {
 		if (p_bufferUV_ID == EmptyID) 
 			p_bufferUV_ID = BufferUV_ID;
@@ -202,7 +202,7 @@ void ModelData::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool i
 
 	// -- Update Normals
 	if (normals.size() == 0)
-		SetNormals(Normals, BufferNormal_ID, IsLoadedIntoMem_Normals); // Default
+		SetNormals(MeshData.Normals, BufferNormal_ID, IsLoadedIntoMem_Normals); // Default
 	else {
 		if(p_bufferNormal_ID == EmptyID)
 			p_bufferNormal_ID = BufferNormal_ID;
@@ -228,7 +228,7 @@ void ModelData::SetNormalsModel(vector<vec3>& normals, GLuint p_bufferNormal_ID)
 		_isLoadedIntoMem_Normals = false;
 
 	if (normals.size() == 0)
-		SetNormals(Normals, p_bufferNormal_ID, _isLoadedIntoMem_Normals);
+		SetNormals(MeshData.Normals, p_bufferNormal_ID, _isLoadedIntoMem_Normals);
 	else
 		SetNormals(normals, p_bufferNormal_ID, false);
 
@@ -247,7 +247,7 @@ void ModelData::SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedInt
 
 void ModelData::UpdateBufferUV() {
 	// Default
-	SetBufferUV(UV, BufferUV_ID, IsLoadedIntoMem_UV);
+	SetBufferUV(MeshData.UV, BufferUV_ID, IsLoadedIntoMem_UV);
 	IsLoadedIntoMem_UV = true;
 }
 
@@ -265,7 +265,6 @@ void ModelData::InitBase(map<string, GLuint>& shaderPrograms) {
 
 	//FillPlanes();
 }
-
 
 void ModelData::Init(map<string, GLuint>& shaderPrograms) {
 

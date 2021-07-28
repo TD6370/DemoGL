@@ -8,6 +8,13 @@
 #include "../OperationString.h"
 #include "../GeometryLib.h"
 #include "../FileReader.h"
+#include "../ObjectsTypes/ObjectData.h"
+
+#include "../GeomertyShapes/ShapeBase.h"
+#include "../GeomertyShapes/ShapeHexagon.h"
+#include "../GeomertyShapes/ShapeSquare.h"
+
+
 
 void RenderComponent::InitBase(map<string, GLuint>& shaderPrograms) {
 
@@ -271,4 +278,38 @@ void RenderComponent::SetPosMove(vec3 posMove)
 void RenderComponent::SetPosMoveSize(vec3 posMoveS)
 {
 	ConfUniform->SetPosMoveSize(posMoveS);
+}
+
+
+
+
+void RenderComponent::SetDataToShader(ObjectData& obj) {
+
+	if(obj.IsGUI)
+	{
+		float width = obj.GetShapeSquare()->WidthFactor;
+		float height = obj.GetShapeSquare()->HeightFactor;
+		vec3 posMove = obj.GetShapeSquare()->PosMoveFactor;
+		vec3 posMoveSize = obj.GetShapeSquare()->PosMoveSizeFactor;
+		if (width < 0)
+			return;
+		SetWidth(width);
+		SetHeight(height);
+		SetPosMove(posMove);
+		SetPosMoveSize(posMoveSize);
+	}
+
+	bool isTextBox;
+	if (obj.TypeObj == TextBox)
+	{
+		SetBuffer(m_mesh.Buffer);
+
+		//if (!isInitSlotsMessage) {
+		//	isInitSlotsMessage = true;
+		if (!IsLoadedIntoMem_UV) {
+			IsLoadedIntoMem_UV = true;
+
+			SetModelInBuffer(m_mesh.UV, m_mesh.Normals, false); //TODO: delete
+		}
+	}
 }

@@ -39,47 +39,13 @@ public:
 	string TypeName;
 	string PathShaderFolder = "./Shaders/";
 	
-	//================== OBJECT INFO:
-	////-----  Material data	//TODO: ????
-	//vector <vec2> TextureUV;
-	//vector <vec3> Buffer;
-	//vec3 Color = vec3(0);
-
-	//// ---- Mesh data	//TODO: ????
-	//vector <vec3> Vertices;
-	//vector <vec3> Normals;
-	//GLint TrianglesCount = 0;
-	//==================
-
-	Material MaterialData;
 	//---- Material Data
-	string PathShaderVertex = "basic.vert";
-	string PathShaderFrag = "basic.frag";
-	string PathTexture = "./Textures/testTexture.bmp";
-	string PathTextureAtlas = "";	//@**
+	Material MaterialData;
 
-	Mesh MeshData;
 	//---- Mesh data
-	const char* PathModel3D = "./Models3D/monkey.obj";
-	GLint TrianglesCount = 0;
-	GLint IndicesSize = 0;
-	std::vector< glm::vec2 > UV;
-	std::vector< glm::vec3 > Normals;
-	std::vector< glm::vec3 > Vertices;
-	std::vector<unsigned int> Indices;
-	float RadiusCollider = 5; // TODO: ????
-	bool IsSquareModel = false; // TODO: ????
+	Mesh MeshData;
 
-	//==================== In Render component ------ OBJECT INFO:
-	/*GLuint VAO = EmptyID;
-	GLuint VBO = EmptyID;
-	GLuint BufferUV_ID = EmptyID;
-	GLuint BufferNormal_ID = EmptyID;
-	bool IsLoadedIntoMem_Vertex = false;
-	bool IsLoadedIntoMem_Normals = false;
-	bool IsLoadedIntoMem_UV = false;*/
-
-	//RenderComponent Render;
+	//---- Render component
 	RenderComponent* Render;
 
 	//---- Render component TODO:!!!
@@ -107,7 +73,8 @@ public:
 	//------------------------
 
 	ModelData() {};
-	//ModelData() : Render(MaterialData, MeshData) {};
+
+	//------------
 
 	void virtual InitBase(map<string, GLuint>& shaderPrograms);
 
@@ -123,8 +90,6 @@ public:
 
 	void SetVAO(); //---  RENDER
 
-	//void SetVAO(vector<vec3> vertices);
-	//void SetVAO(vector<vec3> vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
 	void SetVAO(vector<vec3>& vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem); //---  RENDER
 
 	//---  RENDER

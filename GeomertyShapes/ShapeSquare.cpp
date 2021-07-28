@@ -122,7 +122,7 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 	SaveSizeFactor(true);
 
 	//-- set transform
-	if (obj->Vertices.size() != 0) {
+	if (obj->MeshData.Vertices.size() != 0) {
 
 		if (start_vertBottomLeft == vec3(0)) {
 			start_vertBottomLeft = GetBottom(1);
@@ -211,11 +211,11 @@ void ShapeSquare::SavePosFactor(vec3 posGUI, vec3 posWorld) {
 void ShapeSquare::ResizeTextureUV() {
 	ObjectGUI* obj = m_objGUI;
 	if (obj->IsTextureRepeat) {
-		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->UV;
+		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->MeshData.UV;
 		for (auto& uv : repeat_UV) {
 			uv.y *= obj->TextureRepeat;
 		}
-		obj->TextureUV = repeat_UV;
+		obj->MeshData.UV = repeat_UV;
 		obj->IsLoadedIntoMem_UV = false;
 	}
 }

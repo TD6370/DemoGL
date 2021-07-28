@@ -304,7 +304,7 @@ void SceneConstructor::SetDataToShader() {
 	auto nameTest =  ObjectCurrent->Name;
 	auto nameTest2 = ObjectCurrent->ModelPtr->Name;
 
-	bool IsSquareModel = ObjectCurrent->ModelPtr->IsSquareModel || ObjectCurrent->IsSquareModel;
+	bool IsSquareModel = ObjectCurrent->ModelPtr->MeshData.IsSquareModel || ObjectCurrent->IsSquareModel;
 	bool IsHexagonModel = ObjectCurrent->IsHexagonModel;
 	bool isSkipGUI = Storage->SceneData->IsGUI == false && ObjectCurrent->IsGUI;
 	bool isSkipDynamic = Storage->SceneData->IsGUI && !ObjectCurrent->IsGUI;
@@ -327,7 +327,7 @@ void SceneConstructor::SetDataToShader() {
 	}
 
 	//-------------------- Set color
-	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->Color);
+	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->MaterialData.Color);
 	//---------------------- Set param Case
 	ModelCurrent->ConfUniform->SetParamCase(GetParamCase());
 
@@ -448,12 +448,12 @@ bool SceneConstructor::SetObject(int indNN) {
 	m_isUpdateMesh = false;
 	m_isUpdateUV = false;
 
-	if (prevModelTexture != ModelCurrent->PathTexture) {
-		prevModelTexture = ModelCurrent->PathTexture;
+	if (prevModelTexture != ModelCurrent->MaterialData.PathTexture) {
+		prevModelTexture = ModelCurrent->MaterialData.PathTexture;
 		m_isUpdateTexture = true;
 	}
-	if (prevModel3D != ModelCurrent->PathModel3D) {
-		prevModel3D = ModelCurrent->PathModel3D;
+	if (prevModel3D != ModelCurrent->MeshData.PathModel3D) {
+		prevModel3D = ModelCurrent->MeshData.PathModel3D;
 		m_isUpdateMesh = true;
 	}
 
@@ -639,9 +639,9 @@ void SceneConstructor::DrawGraph()
 	bool isIndex = ModelCurrent->IsIndex;
 
 	
-	GLint trianglesCount = ModelCurrent->TrianglesCount;
-	if(ObjectCurrent->TrianglesCount > 0)
-		trianglesCount = ObjectCurrent->TrianglesCount;
+	GLint trianglesCount = ModelCurrent->MeshData.TrianglesCount;
+	if(ObjectCurrent->MeshData.TrianglesCount > 0)
+		trianglesCount = ObjectCurrent->MeshData.TrianglesCount;
 
 	if (isIndex) {
 		glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);

@@ -70,9 +70,9 @@ public:
 	bool GetVisible();
 
 	//-----------
-	ShapeHexagon* GetShapeHexagon();
+	/*ShapeHexagon* GetShapeHexagon();
 
-	ShapeSquare* GetShapeSquare();
+	ShapeSquare* GetShapeSquare();*/
 
 	std::vector< glm::vec3 > GetVertices();
 

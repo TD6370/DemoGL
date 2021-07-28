@@ -20,6 +20,7 @@
 using glm::uvec2;
 
 class ConfigUniform;
+class ObjectData;
 
 static vector<vec3> DEFAULT_VECTOR_V3;
 static vector<vec2> DEFAULT_VECTOR_V2;
@@ -119,6 +120,8 @@ public:
 		}
 	}
 	*/
+
+	void SetDataToShader(ObjectData& m_obj);
 
 	void SetTextureModel();
 

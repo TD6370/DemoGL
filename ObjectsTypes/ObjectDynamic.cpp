@@ -149,7 +149,7 @@ void ObjectDynamic::LockResult() {
 
 void ObjectDynamic::SaveNewPosition()
 {
-	Color = vec3(0);
+	MaterialData.Color = vec3(0);
 	SaveToCluster();
 	Postranslate = NewPostranslate;
 }

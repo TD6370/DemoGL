@@ -43,17 +43,17 @@ void ObjectPhysic::InitData() {
 	FillPlanes();
 }
 
-ShapeHexagon* ObjectPhysic::GetShapeHexagon() {
-
-	ShapeHexagon* shapeCast = static_cast<ShapeHexagon*>(Shape);
-	return shapeCast;
-}
-
-ShapeSquare* ObjectPhysic::GetShapeSquare() {
-
-	ShapeSquare* shapeCast = static_cast<ShapeSquare*>(Shape);
-	return shapeCast;
-}
+//ShapeHexagon* ObjectPhysic::GetShapeHexagon() {
+//
+//	ShapeHexagon* shapeCast = static_cast<ShapeHexagon*>(Shape);
+//	return shapeCast;
+//}
+//
+//ShapeSquare* ObjectPhysic::GetShapeSquare() {
+//
+//	ShapeSquare* shapeCast = static_cast<ShapeSquare*>(Shape);
+//	return shapeCast;
+//}
 //ShapeSquare* GetShapeSquare();
 
 bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
@@ -121,7 +121,7 @@ bool ObjectPhysic::CheckIsLock() {
 		isHit = IsCollisionObject(Index, indObjHit, true);
 	if (isHit)
 	{
-		Color = vec3(1, 0, 0);
+		MaterialData.Color = vec3(1, 0, 0);
 		LockResult();
 		return true;
 	}
@@ -141,7 +141,7 @@ void ObjectPhysic::FillPlanes()
 {
 	if (IsSquareModel) {
 
-		Vertices = ModelPtr->Vertices;
+		MeshData.Vertices = ModelPtr->MeshData.Vertices;
 		ObjectPhysic* objPhysic = static_cast<ObjectPhysic*>(this);
 		Shape->FillVertextBox();
 	}
@@ -161,11 +161,11 @@ bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosi
 }
 
 void ObjectPhysic::SelectedEvent() {
-	Color = vec3(0, 1, 0);
+	MaterialData.Color = vec3(0, 1, 0);
 }
 
 void ObjectPhysic::UnselectedEvent() {
-	Color = vec3(0, 0, 0);
+	MaterialData.Color = vec3(0, 0, 0);
 }
 
 void ObjectPhysic::SaveToCluster()
@@ -178,8 +178,8 @@ bool ObjectPhysic::GetVisible() {
 }
 
 std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
-	if (Vertices.size() != 0)
-		return Vertices;
+	if (MeshData.Vertices.size() != 0)
+		return MeshData.Vertices;
 	else	
 		return ObjectData::GetVertices();
 }
@@ -188,19 +188,19 @@ void ObjectPhysic::SetMesh() {
 
 	//FIX
 	if (IsGUI) {
-		if (Vertices.size() != 0)
-			ModelPtr->SetVAO(Vertices, ModelPtr->VAO, ModelPtr->VBO, false);
+		if (MeshData.Vertices.size() != 0)
+			ModelPtr->SetVAO(MeshData.Vertices, ModelPtr->VAO, ModelPtr->VBO, false);
 		else
 			ObjectData::SetMesh();
 		return;
 	}
 
-	if (Vertices.size() != 0) {
+	if (MeshData.Vertices.size() != 0) {
 		if (VAO == EmptyID) { //TODO: In Render component
 			VAO = InitVAO();
 			VBO = InitBuffer();
 		}
-		ModelPtr->SetVAO(Vertices, VAO, VBO, IsLoadedIntoMem_Vertex);
+		ModelPtr->SetVAO(MeshData.Vertices, VAO, VBO, IsLoadedIntoMem_Vertex);
 		IsLoadedIntoMem_Vertex = true;
 	}
 	else

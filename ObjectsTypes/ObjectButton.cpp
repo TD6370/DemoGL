@@ -60,7 +60,7 @@ void ObjectButton::Refresh()
 
 void ObjectButton::ActionWork() {
 
-	Color = m_color_work;
+	MaterialData.Color = m_color_work;
 
 	bool isValidStartCommand = SceneCommand->CommandType != TypeCommand::None;
 	if (isValidStartCommand) {
