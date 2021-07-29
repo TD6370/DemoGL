@@ -31,7 +31,6 @@ class Controllers;
 class AspectFactoryObjects;
 class AspectDispatcherCommands;
 class BaseShell;
-//class GLFWwindow;
 
 using std::vector;
 using std::shared_ptr;
@@ -64,7 +63,6 @@ private:
 	string m_lastCashShader = "-2";
 
 	GLint indicesSize;
-
 
 public:
 	shared_ptr<ObjectData> ObjectCurrent;
@@ -107,13 +105,12 @@ public:
 
 	//--- TODO:	--- vector<AspectBase> Rooms; 
 	//vector<AspectBase> Aspects;
-	vector<shared_ptr<AspectBase>> Rooms;
+	vector<shared_ptr<AspectBase>> Aspects;
 
 	AspectFactoryObjects* factoryObjects;
 
 	AspectDispatcherCommands* dispatcherCommands;
 
-	//CommandPack* CurrentSceneCommand;
 	CommandPack CurrentSceneCommand;
 
 	AttributeCommands CommandsAttribute;
@@ -132,14 +129,14 @@ public:
 	void ConfigRoom();
 
 	//*** add Aspect
-	void AddRoom(AspectBase* room);
+	void AddAspect(AspectBase* aspect);
 
 	bool IsBreakUpdate();
 
-	void ResetRooms();
+	void ResetAspects();
 
 	//*** Pointcut
-	void WorkingRooms();
+	void WorkingAspects();
 
 	bool SetObject(int i);
 	

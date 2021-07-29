@@ -53,6 +53,8 @@ map<string, int> MapAlphabet;
 map<string, int> MapAlphabetEng;
 
 SceneConstructor::SceneConstructor() {
+
+	
 }
 
 SceneConstructor::SceneConstructor(GLFWwindow* window) {
@@ -63,9 +65,8 @@ SceneConstructor::SceneConstructor(GLFWwindow* window) {
 
 void SceneConstructor::Init() {
 
-	Rooms = vector<shared_ptr<AspectBase>>();
+	Aspects = vector<shared_ptr<AspectBase>>();
 	
-
 	Light = new Lighting();
 	Light->positionLight = vec3(0, 0, 0);
 
@@ -94,45 +95,42 @@ void SceneConstructor::LoadDataModel()
 }
 
 //*** introduction
+
 void SceneConstructor::ConfigRoom() {
 
 	//*** create Aspect
-	AspectBase* room = new AspectBase("Base", this);
-	room->Init();
+	AspectBase* aspect = new AspectBase("Base", this);
+	aspect->Init();
 	//*** join point
-	AddRoom(room);
+	AddAspect(aspect);
 
-	RoomMarkerPlane* roomMarkers = new RoomMarkerPlane("Markers", this);
-	roomMarkers->Init();
-	//*** join point
-	Rooms.push_back(make_unique<RoomMarkerPlane>(*roomMarkers));
+	RoomMarkerPlane* aspectMarkers = new RoomMarkerPlane("Markers", this);
+	aspectMarkers->Init();
+	Aspects.push_back(make_unique<RoomMarkerPlane>(*aspectMarkers));
+		
+	RoomSerializeScene* aspectSerializator = new RoomSerializeScene("Serialize", this);
+	aspectSerializator->Init();
+	Aspects.push_back(make_unique<RoomSerializeScene>(*aspectSerializator));
 
-	RoomSerializeScene* roomSerializator = new RoomSerializeScene("Serialize", this);
-	roomSerializator->Init();
-	Rooms.push_back(make_unique<RoomSerializeScene>(*roomSerializator));
-
-	
+		
 	AspectFamilyBonds* aspectFamilyBonds = new AspectFamilyBonds("FamilyBonds", this);
 	aspectFamilyBonds->Init();
-	Rooms.push_back(make_unique<AspectFamilyBonds>(*aspectFamilyBonds));
+	Aspects.push_back(make_unique<AspectFamilyBonds>(*aspectFamilyBonds));
 
-	RoomUseInterface* roomInterface = new RoomUseInterface("Interface", this);
-	roomInterface->Init();
-	Rooms.push_back(make_unique<RoomUseInterface>(*roomInterface));
+	RoomUseInterface* aspectInterface = new RoomUseInterface("Interface", this);
+	aspectInterface->Init();
+	Aspects.push_back(make_unique<RoomUseInterface>(*aspectInterface));
 		
-	//AspectDispatcherCommands* 
 	dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
 	dispatcherCommands->Init();
-	//Rooms.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
-	Rooms.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
-	//shared_ptr<ObjectButton> objBackGUI = std::dynamic_pointer_cast<ObjectButton>(objBackGUI_Data);
-	dispatcherCommands = dynamic_pointer_cast<AspectDispatcherCommands>(Rooms[Rooms.size()-1]).get();
+	Aspects.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
+	dispatcherCommands = dynamic_pointer_cast<AspectDispatcherCommands>(Aspects[Aspects.size()-1]).get();
 	
+		
 	factoryObjects = new AspectFactoryObjects("FactoryObjects", this);
 	factoryObjects->Init();
-	Rooms.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
-	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Rooms[Rooms.size() - 1]).get();
-	
+	Aspects.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
+	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Aspects[Aspects.size() - 1]).get();
 }
 
 void SceneConstructor::FillAlphabet() {
@@ -246,24 +244,21 @@ void SceneConstructor::FillAlphabet() {
 
 }
 
-void SceneConstructor::AddRoom(AspectBase* room) {
-	Rooms.push_back(make_unique<AspectBase>(*room));
+void SceneConstructor::AddAspect(AspectBase* aspect) {
+	Aspects.push_back(make_unique<AspectBase>(*aspect));
 }
 
-void SceneConstructor::ResetRooms() {
+void SceneConstructor::ResetAspects() {
 
-	for (auto room : Rooms) {
-		room->IsOnceComplete = false;
+	for (auto aspect : Aspects) {
+		aspect->IsOnceComplete = false;
 	}
 }
 
 //*** Pointcut
-void SceneConstructor::WorkingRooms() {
-
-
-	for(auto room : Rooms){
-		//*** Advice
-		room->Work();
+void SceneConstructor::WorkingAspects() {
+	for (auto spect : Aspects) {
+		spect->Work();
 	}
 }
 
@@ -495,7 +490,8 @@ void SceneConstructor::Update()
 	bool isBase = VersionUpdate == 0;
 	
 	if (!IsDraw || isBase)
-		ResetRooms();
+		//ResetRooms();
+		ResetAspects();
 
 	if(IsDraw || isBase)
 		ClearScene();
@@ -512,7 +508,8 @@ void SceneConstructor::Update()
 		if (IsDraw || isBase)
 			DrawGraph();
 		if (!IsDraw || isBase)
-			WorkingRooms();
+			WorkingAspects();
+			//WorkingRooms();
 		return;
 	}
 
@@ -526,8 +523,9 @@ void SceneConstructor::Update()
 		//===========================================
 
 		//if (!IsDraw || isBase)
-		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
-			WorkingRooms();
+			if (!IsDraw || isBase || (IsDraw && !isShowGUI))
+			WorkingAspects();
+			//WorkingRooms();
 
 		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
 			continue;
