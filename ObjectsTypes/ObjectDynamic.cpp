@@ -6,6 +6,8 @@
 
 void ObjectDynamic::InitData()
 {
+	ObjectData::InitData();
+
 	switch (TypeObj)
 	{
 		case Block:

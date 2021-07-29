@@ -5,6 +5,8 @@
 
 void ObjectHero::InitData()
 {
+	ObjectData::InitData();
+
 	ActionObjectCurrent = Search;
 	IsGravity = true;
 	EngineData->SceneData->IndexHeroObj = Index;

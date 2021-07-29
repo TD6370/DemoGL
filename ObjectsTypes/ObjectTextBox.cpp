@@ -9,6 +9,7 @@
 #include "../Serialize/SceneSerialize.h"
 #include "../CreatorModelData.h"
 #include "../SceneConstructor.h"
+#include "../Components/RenderComponent.h"
 
 #include <sstream>
 
@@ -43,20 +44,6 @@ void ObjectTextBox::ActionWork() {
 
 string ObjectTextBox::GetCashStateUpdateDataToShader() {
 	return Message;
-}
-
-
-void ObjectTextBox::SetDataToShader() {
-
-	ObjectGUI::SetDataToShader();
-
-	ModelPtr->SetBuffer(MeshData.Buffer);
-
-	if (!isInitSlotsMessage) {
-		isInitSlotsMessage = true;
-		
-		ModelPtr->SetModelInBuffer(MeshData.UV, MeshData.Normals, false); //TODO: delete
-	}
 }
 
 vector<int>  ObjectTextBox::MessageCodeConvert(string message)
@@ -141,10 +128,8 @@ void ObjectTextBox::MeshTransform() {
 		MeshData.Buffer.insert(MeshData.Buffer.end(), bufferLats.begin(), bufferLats.end());
 		if (!isFirstStep)
 		{
-			//Vertices.push_back(vertexFrame);
 			MeshData.Vertices.insert(MeshData.Vertices.end(), vertexFrame.begin(), vertexFrame.end());
 			MeshData.UV.insert(MeshData.UV.end(), textureUV.begin(), textureUV.end());
-			//Normals.insert(Normals.end(), normals.begin(), normals.end());
 			MeshData.TrianglesCount += vertexSize;
 		}
 		firstStep++;
@@ -152,8 +137,8 @@ void ObjectTextBox::MeshTransform() {
 
 	Shape->FillVertextBox();
 
-	IsLoadedIntoMem_Vertex = false;
-	IsLoadedIntoMem_UV = false;
+	Render->ResetMem_Vertex();
+	Render->ResetMem_UV();
 }
 
 
@@ -232,12 +217,11 @@ void ObjectTextBox::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific
 	ObjectGUI::SetSpecificFiels(filedsSpecific);
 	//SceneSerialize* serializer = new SceneSerialize();
 
-	IsLoadedIntoMem_Vertex = false;
-	IsLoadedIntoMem_UV = false;
+	Render->ResetMem_Vertex();
+	Render->ResetMem_UV();
 
 	Message = filedsSpecific[filedsSpecific.size()-1].Value;
 
-	//SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 	MeshData.Vertices.clear();
 	MeshData.Normals.clear();
 	MeshData.UV.clear();

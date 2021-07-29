@@ -66,7 +66,6 @@ public:
 
 	string GetCashStateUpdateDataToShader();
 
-	void SetDataToShader();
 
 	int GetRightBorderVertexIndex();
 

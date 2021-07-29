@@ -11,6 +11,7 @@
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../GeomertyShapes/ShapeSquare.h"
 #include "../ShellObjects/BaseShell.h"
+#include "../Components/RenderComponent.h"
 
 void ObjectGUI::InitData() {
 
@@ -27,29 +28,6 @@ void ObjectGUI::InitData() {
 
 	ActionObjectCurrent = Stay;
 }
-
-void ObjectGUI::SetDataToShader() {
-
-	ObjectData::SetDataToShader();
-
-	auto modelFrame =std::dynamic_pointer_cast<ModelFrame>(ModelPtr);
-	if (modelFrame == nullptr) {
-		return;
-	}
-
-	float width = GetShapeSquare()->WidthFactor;
-	float height = GetShapeSquare()->HeightFactor;
-	vec3 posMove = GetShapeSquare()->PosMoveFactor;
-	vec3 posMoveSize = GetShapeSquare()->PosMoveSizeFactor;
-	if (width < 0)
-		return;
-	modelFrame->SetWidth(width);
-	modelFrame->SetHeight(height);
-	modelFrame->SetPosMove(posMove);
-	modelFrame->SetPosMoveSize(posMoveSize);
-		
-}
-
 
 void ObjectGUI::RunAction() {
 

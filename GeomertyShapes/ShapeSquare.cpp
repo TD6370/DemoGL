@@ -1,5 +1,4 @@
 
-//#include "ShapeBase.h"
 #include "ShapeSquare.h"
 
 #include "../CoreSettings.h"
@@ -10,6 +9,7 @@
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
 #include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
+#include "../Components/RenderComponent.h"
 
 ShapeSquare::~ShapeSquare() {
 
@@ -129,27 +129,19 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 			start_vertBottomRight = GetBottom(0);
 			start_vertTopLeft = GetTop(1);
 		}
-		//vec3 vertTopRight = GetTop(0);
-
 		float offsetY = 2 - vertOffset.y;
 		float offsetX = 2 - vertOffset.x;
 
-		//float factor = vertTopLeft.y - vertBottomLeft.y;
-
-
 		vec3 vertTopLeft = vec3(start_vertTopLeft.x, (start_vertTopLeft.y), start_vertTopLeft.z + offsetX);
-		//SetTop(obj, 1, vertTopLeft);
 		SetTop(1, vertTopLeft);
 
 		vec3 vertBottomLeft = vec3(start_vertBottomLeft.x, (start_vertBottomLeft.y + offsetY), start_vertBottomLeft.z);
-		//SetBottom(obj, 1, vertBottomLeft);
 		SetBottom(1, vertBottomLeft);
 
 		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
-		//SetBottom(obj, 0, vertBottomRight);
 		SetBottom(0, vertBottomRight);
 
-		obj->IsLoadedIntoMem_Vertex = false;
+		obj->Render->ResetMem_Vertex();
 	}
 
 	SaveSizeFactor();
@@ -216,6 +208,6 @@ void ShapeSquare::ResizeTextureUV() {
 			uv.y *= obj->TextureRepeat;
 		}
 		obj->MeshData.UV = repeat_UV;
-		obj->IsLoadedIntoMem_UV = false;
+		obj->Render->ResetMem_UV();
 	}
 }

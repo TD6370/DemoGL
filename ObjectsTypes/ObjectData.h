@@ -122,14 +122,6 @@ public:
 	//---- Render component
 	RenderComponent* Render;
 
-	//============== TODO: In Render component
-	GLuint VAO = EmptyID;
-	GLuint VBO = EmptyID;
-	GLuint BufferUV_ID = EmptyID;
-	GLuint BufferNormal_ID = EmptyID;
-	bool IsLoadedIntoMem_Vertex = false;
-	bool IsLoadedIntoMem_Normals = false;
-	bool IsLoadedIntoMem_UV = false;
 	//-- Render ??
 	float TextureRepeat = 1;
 	GLint ParamValue = -1;
@@ -164,13 +156,24 @@ public:
 
 	void virtual InitData();
 
-	void virtual SetDataToShader();
+	void InitRender();
 
+	//--------------------------- Update data to Shader from Render
 	string virtual GetCashStateUpdateDataToShader();
 
-	void UpdateDataBufferToShader();
+	void virtual ToShader_OtherData();
 
-	void UpdateNormalsToShader();
+	void ToShader_CustomBuffer();
+
+	void ToShader_Normals();
+
+	void ToShader_Mesh();
+
+	void ToShader_UV();
+
+	void ToShader_Texture();
+
+	//-----------------------------------------------
 
 	void virtual UpdateState(); //after fill options
 
@@ -207,9 +210,7 @@ public:
 	std::vector< glm::vec2 > virtual GetUV();
 	std::vector< glm::vec3 > virtual GetNormals();
 
-	void virtual SetMesh();
 
-	void UpdateTextureUV();
 	
 	void virtual ControlsEvents();
 
@@ -245,6 +246,13 @@ public:
 	int virtual GetRightBorderVertexIndex();
 
 	GLuint GetVAO();
+
+	void SetParamCase(float param);
+
+	void SetVectorsParams(vec3 vectorsParams[10]);
+
+	void SetLight(vec3 posLight);
+	
 	//-------- SaveFieldSpecific
 
 	vector<ObjectFiledsSpecific> virtual GetSpecificFiels();

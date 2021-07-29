@@ -40,14 +40,15 @@ class RenderComponent
 private:
 	string PathShaderFolder = "./Shaders/";
 
+	void SetModelInBuffer();
+
+public:
 	Material& m_material;
 
 	Mesh& m_mesh;
 
-public:
-
-	RenderComponent(Material& p_material, Mesh& p_mesh) 
-		: Buffers(), SizeImage(uvec2()), SizeImageAtlas(uvec2()), DataImage(), DataImageAtlas(), m_material(p_material), m_mesh(p_mesh)
+	RenderComponent(Material& p_material, Mesh& p_mesh)
+		: Buffers(), SizeImage(uvec2()), SizeImageAtlas(uvec2()), DataImage(), DataImageAtlas() , m_material(p_material), m_mesh(p_mesh)
 	{
 	};
 
@@ -57,11 +58,11 @@ public:
 
 	DataBuffers Buffers;
 
-	GLuint ShaderProgram = 0; // EmptyID; // -1;// 0;
+	GLuint ShaderProgram = 0; 
 
 	bool IsIndex = false;
 	bool IsDebug = false;
-	bool IsGUI = false;
+	bool IsSquareModel = false;
 
 	uvec2 SizeImage;
 	uvec2 SizeImageAtlas;	
@@ -73,9 +74,8 @@ public:
 	bool IsLoadedIntoMem_Vertex = false;
 	bool IsLoadedIntoMem_Buffer = false;
 
-
-	void InitBase(map<string, GLuint>& shaderPrograms);
-
+	void Clone(RenderComponent* renderModel);
+	
 	void Init(map<string, GLuint>& shaderPrograms);
 
 	void ConstructShaderProgramm(map<string, GLuint>& shaderPrograms);
@@ -86,52 +86,21 @@ public:
 
 	void InitUniform();
 
-	void SetVAO();
-
-	void SetVAO(vector<vec3>& vertices, GLuint VAO, GLuint VBO, bool isLoadedIntoMem);
-
-	void SetModelInBuffer(vector<vec2>& uv = DEFAULT_VECTOR_V2,
-		vector<vec3>& normals = DEFAULT_VECTOR_V3,
-		bool isUpdateTexture = true,
-		GLuint bufferUV_ID = EmptyID,
-		GLuint bufferNormal_ID = EmptyID,
-		bool p_isLoadedIntoMem_UV = false, bool p_isLoadedIntoMem_Normals = false);
-
-
+	void InitUniformBox();
 
 	//----------------------
-	void SetBuffer(vector<vec3>& buffer = DEFAULT_VECTOR_V3);
-	/*
-		if (buffer.size() != 0)
-			GenBufferColors(buffer, BufferColor_ID);
 
+	void UpdateVAO();
 
-	*/
-	/*void ObjectTextBox::SetDataToShader() {
+	void UpdateCustomBuffer();
 
-		ObjectGUI::SetDataToShader();
+	void UpdateTexture();
 
-		ModelPtr->SetBuffer(Buffer); //----<<<
+	void UpdateNormals();
 
-		if (!isInitSlotsMessage) {
-			isInitSlotsMessage = true;
-
-			ModelPtr->SetModelInBuffer(TextureUV, Normals, false); //TODO: delete
-		}
-	}
-	*/
+	void UpdateUV();
 
 	void SetDataToShader(ObjectData& m_obj);
-
-	void SetTextureModel();
-
-	void SetNormalsModel(vector<vec3>& normals = DEFAULT_VECTOR_V3, GLuint bufferNormal_ID = 66666);
-
-	void SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem);
-	void UpdateBufferUV();
-
-	void DebugUV(vector<vec2> list_uv);
-	void DebugVec3(vector<vec3> list_v, string name);
 
 	//------------------ Animation info
 
@@ -140,6 +109,17 @@ public:
 	void SetPosMove(vec3 posMove);
 	void SetPosMoveSize(vec3 posMoveS);
 
+	//-------------------
+
+	void ResetMem_UV();
+
+	void ResetMem_Vertex();
+
+	bool HasSquareModel();
+
+	//-------------------
+	void DebugUV(vector<vec2> list_uv);
+	void DebugVec3(vector<vec3> list_v, string name);
 
 };
 

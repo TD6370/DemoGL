@@ -5,6 +5,8 @@
 #include "../GeomertyShapes/ShapeHexagon.h"  //!!!!!!!!!!!!!!!!!!
 #include "../GeomertyShapes/ShapeSquare.h"  //!!!!!!!!!!!!!!!!!!
 #include "../CreatorModelData.h"
+
+#include "../Components/RenderComponent.h"
 //#include "..\GeometryLib.h"
 //------------------------
 
@@ -43,18 +45,6 @@ void ObjectPhysic::InitData() {
 	FillPlanes();
 }
 
-//ShapeHexagon* ObjectPhysic::GetShapeHexagon() {
-//
-//	ShapeHexagon* shapeCast = static_cast<ShapeHexagon*>(Shape);
-//	return shapeCast;
-//}
-//
-//ShapeSquare* ObjectPhysic::GetShapeSquare() {
-//
-//	ShapeSquare* shapeCast = static_cast<ShapeSquare*>(Shape);
-//	return shapeCast;
-//}
-//ShapeSquare* GetShapeSquare();
 
 bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
 
@@ -68,7 +58,6 @@ bool ObjectPhysic::IsContactWorldBorder(vec3 pos) {
 void ObjectPhysic::CheckStartPosition() {
 	if (!CheckIsLock())
 	{
-		//SaveClusterObject(Index);
 		SaveToCluster();
 		Postranslate = NewPostranslate;
 		ActionObjectCurrent = Search;
@@ -80,7 +69,6 @@ bool ObjectPhysic::CheckIsPolygon() {
 	//string keyPosSectorStr = GetKeySectorPolygon(true);
 	float step = 0.3;
 	Plane* plane = NULL;
-	//vec3 vertex = vec3(-5000);
 	vec4 vertex = vec4(-5000);
 
 	CollisionPolygonState = Clusters->IsCollisionPolygon(Index, plane, vertex);
@@ -130,13 +118,6 @@ bool ObjectPhysic::CheckIsLock() {
 	return true;
 }
 
-//void ObjectPhysic::TestGravity()
-//{
-//	if (Postranslate == Move)
-//		return;
-//	CheckIsLock();
-//}
-
 void ObjectPhysic::FillPlanes()
 {
 	if (IsSquareModel) {
@@ -182,29 +163,6 @@ std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 		return MeshData.Vertices;
 	else	
 		return ObjectData::GetVertices();
-}
-
-void ObjectPhysic::SetMesh() {
-
-	//FIX
-	if (IsGUI) {
-		if (MeshData.Vertices.size() != 0)
-			ModelPtr->SetVAO(MeshData.Vertices, ModelPtr->VAO, ModelPtr->VBO, false);
-		else
-			ObjectData::SetMesh();
-		return;
-	}
-
-	if (MeshData.Vertices.size() != 0) {
-		if (VAO == EmptyID) { //TODO: In Render component
-			VAO = InitVAO();
-			VBO = InitBuffer();
-		}
-		ModelPtr->SetVAO(MeshData.Vertices, VAO, VBO, IsLoadedIntoMem_Vertex);
-		IsLoadedIntoMem_Vertex = true;
-	}
-	else
-		ObjectData::SetMesh();
 }
 
 void ObjectPhysic::ActionMoving()

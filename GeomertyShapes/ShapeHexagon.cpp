@@ -10,6 +10,7 @@
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
 #include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
+#include "../Components/RenderComponent.h"
 
 ShapeHexagon::~ShapeHexagon() {
 
@@ -44,7 +45,7 @@ void ShapeHexagon::ResizeTextureUV() {
 			uv.x *= obj->TextureRepeat;
 		}
 		obj->MeshData.UV = repeat_UV;
-		obj->IsLoadedIntoMem_UV = false;
+		obj->Render->ResetMem_UV();
 	}
 }
 
@@ -88,7 +89,7 @@ void ShapeHexagon::CalculateTextureUV(bool isInit) {
 		if (isInit) {
 			StartLenghtWall = maxLenght; //start len resize wall -> max len wal
 			obj->MeshData.UV = obj->ModelPtr->MeshData.UV;
-			obj->IsLoadedIntoMem_UV = false;
+			obj->Render->ResetMem_UV();
 		}
 		else
 			factorRepeat = maxLenght / StartLenghtWall;

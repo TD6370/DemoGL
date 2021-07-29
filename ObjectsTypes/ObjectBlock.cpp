@@ -10,22 +10,19 @@
 #include "../GeomertyShapes/ShapeHexagon.h"
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../CreatorModelData.h"
+#include "../Components/RenderComponent.h"
 
 void ObjectBlock::InitData()
 {
-	/*if (IsSquareModel) {
-		Shape = new ShapeHexagon();
-	}*/
 	Shape = new ShapeHexagon();
 
 	ActionObjectCurrent = Stay;
 	IsGravity = true;
-	//Vertices = ModelPtr->Vertices;
 
 	ObjectPhysic::InitData();
 
 	IsTextureRepeat = true;
-	//CalculateTextureUV(true);
+
 	GetShapeHexagon()->CalculateTextureUV(true);
 }
 
@@ -45,7 +42,6 @@ void ObjectBlock::SaveNewPosition()
 	Move.y = PlaneDownPosition.y + ModelPtr->MeshData.RadiusCollider;
 	NewPostranslate = Move;
 
-	//Storage->Clusters->SaveClusterObject(Index);
 	SaveToCluster();
 
 	Postranslate = NewPostranslate;
@@ -96,7 +92,7 @@ void ObjectBlock::SelectedEvent() {
 
 void ObjectBlock::MeshTransform() {
 
-	IsLoadedIntoMem_Vertex = false;
+	Render->ResetMem_Vertex();
 
 	//-- Param transform
 	int indexUpdate = IndexVertexTransform;
@@ -151,7 +147,7 @@ void ObjectBlock::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) 
 	SceneSerialize* serializer = new SceneSerialize();
 	BlockFileds* filedsName = new BlockFileds;
 
-	IsLoadedIntoMem_Vertex = false;
+	Render->ResetMem_Vertex();
 	MeshData.Vertices.clear();
 	//TextureUV.clear();
 

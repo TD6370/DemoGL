@@ -23,16 +23,22 @@ using std::map;
 
 struct Material {
 	//---- Material Data
-	string PathShaderVertex = "basic.vert";
+	/*string PathShaderVertex = "basic.vert";
 	string PathShaderFrag = "basic.frag";
-	string PathTexture = "./Textures/testTexture.bmp";
+	string PathTexture = "./Textures/testTexture.bmp";*/
+
+	string PathShaderVertex = "***";
+	string PathShaderFrag = "***";
+	string PathTexture = "***";
+
 	string PathTextureAtlas = "";
 	vec3 Color = vec3(0);
 };
 
 struct Mesh {
 	//---- Mesh data
-	const char* PathModel3D = "./Models3D/monkey.obj";
+	//const char* PathModel3D = "./Models3D/monkey.obj";
+	const char* PathModel3D = "***";
 	GLint TrianglesCount = 0;
 	GLint IndicesSize = 0;
 	vector< vec2 > UV;

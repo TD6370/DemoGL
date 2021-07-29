@@ -133,18 +133,18 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 
 		string typeModel = fieldsModel->TypeName;
 		if (typeModel == "ModelFrame") {
-			auto modelFrame = ModelFrame();
-			Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+			auto modelFrame = ModelData(); // ModelFrame();
+			Models.push_back(std::make_unique<ModelData>(modelFrame));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 		if (typeModel == "ModelTextBox") {
-			auto modelTextBox = ModelTextBox();
-			Models.push_back(std::make_unique<ModelTextBox>(modelTextBox));
+			auto modelTextBox = ModelData(); // ModelTextBox();
+			Models.push_back(std::make_unique<ModelData>(modelTextBox));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 		if (typeModel == "ModelEditBox") {
-			auto modelEditBox = ModelEditBox();
-			Models.push_back(std::make_unique<ModelEditBox>(modelEditBox));
+			auto modelEditBox = ModelData();// ModelEditBox();
+			Models.push_back(std::make_unique<ModelData>(modelEditBox));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
 		
@@ -153,11 +153,6 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 			Models.push_back(std::make_unique<ModelData>(nextModel));
 			nextModelPrt = GetModelPrt(Models.size() - 1);
 		}
-
-		//TEST
-		/*if (fieldsModel->PathTextureAtlas.size() != 0 && fieldsModel->PathTextureAtlas != "@?") {
-			const char* pathTextureAtlasTEST = fieldsModel->PathTextureAtlas.c_str();
-		}*/
 
 		nextModelPrt->MaterialData.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
 		nextModelPrt->MaterialData.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
@@ -725,8 +720,8 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "cursorRay");
 
 	//---GUI -- control -- Background frame
-	ModelFrame contextFrame = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(contextFrame));
+	ModelData contextFrame = ModelData();
+	Models.push_back(std::make_unique<ModelData>(contextFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	//nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
@@ -742,8 +737,8 @@ void CreatorModelData::LoadModels() {
 
 	//---GUI -- control -- Frame
 	//ModelFrame modelFrame = ModelFrame();
-	ModelFrame modelFrame = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+	ModelData modelFrame = ModelData();
+	Models.push_back(std::make_unique<ModelData>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
@@ -760,8 +755,8 @@ void CreatorModelData::LoadModels() {
 
 
 	//------ Button EditBox Model --------------------------
-	modelFrame = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+	modelFrame = ModelData();
+	Models.push_back(std::make_unique<ModelData>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
@@ -774,8 +769,8 @@ void CreatorModelData::LoadModels() {
 	
 
 	//------ Button Model --------------------------
-	modelFrame = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(modelFrame));
+	modelFrame = ModelData();
+	Models.push_back(std::make_unique<ModelData>(modelFrame));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
@@ -791,8 +786,8 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "ButtonModel");
 
 	//---GUI -- control -- TextBox
-	ModelTextBox TextBox = ModelTextBox();
-	Models.push_back(std::make_unique<ModelTextBox>(TextBox));
+	ModelData TextBox = ModelData();
+	Models.push_back(std::make_unique<ModelData>(TextBox));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "TextBoxUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "TextBoxUI.frag";
@@ -805,8 +800,8 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "TextBoxModel");
 
 	//---GUI -- control -- Cursor
-	ModelFrame curcorModel = ModelFrame();
-	Models.push_back(std::make_unique<ModelFrame>(curcorModel));
+	ModelData curcorModel = ModelData();
+	Models.push_back(std::make_unique<ModelData>(curcorModel));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	//nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
@@ -821,8 +816,8 @@ void CreatorModelData::LoadModels() {
 	AddModel(nextModelPrt, "CursorModel");
 
 	//---GUI -- control -- EditBox
-	ModelEditBox edittBox = ModelEditBox();
-	Models.push_back(std::make_unique<ModelEditBox>(edittBox));
+	ModelData edittBox = ModelData(); //ModelEditBox();
+	Models.push_back(std::make_unique<ModelData>(edittBox));
 	nextModelPrt = GetModelPrt(Models.size() - 1);
 	nextModelPrt->MaterialData.PathShaderVertex = "TextBoxUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "TextBoxUI.frag";
@@ -894,6 +889,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	SetCommand(objCreateButton, SelectPosForObject);
 	ControlConstruct(objCreateButton, caption, Button);
 	
+	/*
 	// ---- Object text box GUI
 	objName = "TextBoxObject";
 	caption = "привет мир и доброе утро";
@@ -902,6 +898,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	color = vec3(0.117, 0.351, 0.950);
 	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
 	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, StartPosGUI_Z), vec2(1.5, 1.), TextBox, color);
+	*/
 
 	// ---- Object Edit Box	(SYSTEM CONTROL)
 	//objName = "Base_EditBox_NameObject";
@@ -958,7 +955,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 10; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -1099,14 +1096,15 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 		color = vec3(1);
 
 	std::shared_ptr<ModelData> model = GetModelPrt(nameModel);
-	auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
-	if (modelTextBox != nullptr) {
+	//auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
+	//auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
+	/*if (modelTextBox != nullptr) {
 		model = modelTextBox;
 	}
 	auto modelFrame = std::dynamic_pointer_cast<ModelFrame>(model);
 	if (modelFrame != nullptr) {
 		model = modelFrame;
-	}
+	}*/
 
 
 	//-------------- Z Order Controls ---------------

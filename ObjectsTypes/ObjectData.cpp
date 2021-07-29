@@ -13,6 +13,7 @@
 #include "../GeomertyShapes/ShapeBase.h"
 #include "../GeomertyShapes/ShapeHexagon.h"
 #include "../GeomertyShapes/ShapeSquare.h"
+#include "../Components/RenderComponent.h"
 
 #include "../ShellObjects/BaseShell.h"
 
@@ -40,6 +41,7 @@ ObjectData::ObjectData(int p_index,
 	TypeObj = p_typeObj;
 	Postranslate = p_pos;
 	ModelPtr = p_model;
+
 	m_keyPosSectorStr = "";
 	PlaneDownIndex = -1;
 
@@ -49,9 +51,6 @@ ObjectData::ObjectData(int p_index,
 	SceneCommand = new CommandPack();
 	SceneCommand->Enable = false;
 
-	/*Shape = new ShapeBase();
-	Shape->Obj = std::shared_ptr<ObjectData>(this);
-	Shape->Obj = this;*/
 	StartColor = MaterialData.Color;
 	Layer = TypeLayer::LayerNone;
 	EngineData = new DataEngine();
@@ -62,8 +61,21 @@ ObjectData::~ObjectData()
 
 }
 
+void ObjectData::InitRender() {
+
+	MeshData = Mesh();
+	MaterialData = Material();
+	//--- save name
+	MeshData.PathModel3D = ModelPtr->MeshData.PathModel3D;
+
+	Render = new RenderComponent(MaterialData, MeshData);
+	Render->Clone(ModelPtr->Render);
+}
+
 void ObjectData::InitData()
 {
+	InitRender();
+
 	switch (TypeObj)
 	{
 		case Block:
@@ -76,44 +88,154 @@ void ObjectData::InitData()
 			ActionObjectCurrent = Lock;
 			break;
 	}
-	//TextureUV = ModelPtr->UV;
-	
 }
 
-void ObjectData::SetDataToShader() {
-
+void ObjectData::Action()
+{
+	RunAction();
 }
+
+void ObjectData::RunAction() {
+
+	if (ActionObjectCurrent != Lock)
+	{
+		switch (ActionObjectCurrent)
+		{
+		case Starting:
+			GenStartPosition();
+			break;
+		case Stay:
+			break;
+		default:
+			break;
+		}
+	}
+	ActionBase();
+}
+
+//----------- Actions
+
+void ObjectData::ActionBase() {
+
+	ControlsEvents();
+	RunTransform();
+	//CheckParentState();
+}
+
+void ObjectData::GenStartPosition() {
+	World WorldSetting;
+	int distanceSpawnZone = WorldSetting.Radius - 5;
+	int x = linearRand(distanceSpawnZone * -1, distanceSpawnZone);
+	int z = linearRand(distanceSpawnZone * -1, distanceSpawnZone);
+	Postranslate = vec3(x, -50, z);
+	NewPostranslate = vec3(x, -50, z);
+
+	CheckStartPosition();
+}
+
+
+void ObjectData::RunTransform()
+{
+	glm::mat4 trans = Transform(1, EngineData->Inputs->ParamCase, false,
+		glm::mat4(1.0f),
+		Postranslate,
+		TranslateAngle,
+		Size);
+
+	TransformResult = trans;
+	//---------------------------------------------------
+	ModelPtr->Render->ConfUniform->SetTransform(&trans);
+}
+
+void ObjectData::CheckedRefresh() { }
+
+void ObjectData::Click() { }
+
+void ObjectData::ActionWork() { }
+
+void ObjectData::CheckStartPosition() {}
+
+//================================== To shader mem
 
 string ObjectData::GetCashStateUpdateDataToShader() {
 	string cash(1, Index);
 	return cash;
 }
 
-//void ObjectData::SetDataToShader(bool isUpdate) {
-//
-//	if (!isUpdate)
-//		return;
-//
-//	auto normals = GetNormals();
-//	ModelPtr->SetModelInBuffer(TextureUV, normals);
-//	ModelPtr->SetBuffer(Buffer);
-//}
+GLuint ObjectData::GetVAO() {
 
-void ObjectData::UpdateDataBufferToShader() {
-	
-	ModelPtr->SetBuffer(MeshData.Buffer);
+	if (Render->Buffers.VAO != EmptyID)
+		return Render->Buffers.VAO;
+	return ModelPtr->Render->Buffers.VAO;
 }
 
-void ObjectData::UpdateNormalsToShader() {
+void ObjectData::ToShader_OtherData() {
 
-	if ((MeshData.Normals.size() != 0 || VAO != EmptyID) &&
-		BufferNormal_ID == EmptyID) 
-	{
-		BufferNormal_ID = InitBuffer(); //TODO: In Render component
+	Render->SetDataToShader(*this);
+}
+
+void ObjectData::ToShader_CustomBuffer() {
+	Render->UpdateCustomBuffer();
+}
+
+void ObjectData::ToShader_Texture() {
+	
+	ModelPtr->Render->UpdateTexture();
+}
+
+void ObjectData::ToShader_Normals() {
+
+	if (MeshData.Normals.size() != 0)
+		Render->UpdateNormals();
+	else
+		ModelPtr->Render->UpdateNormals();
+}
+
+void ObjectData::ToShader_Mesh() {
+
+	//---- Object Physic
+	if (MeshData.Vertices.size() != 0) {
+		Render->UpdateVAO();
+	}
+	else
+		ModelPtr->Render->UpdateVAO();
+}
+
+void ObjectData::ToShader_UV() {
+
+
+	if (MeshData.UV.size() == 0) {
+
+		if (IsGUI) //FIX
+		{
+			if (!Render->IsLoadedIntoMem_Buffer) {
+				Render->IsLoadedIntoMem_Buffer = true;
+				ModelPtr->Render->IsLoadedIntoMem_UV = false;
+			}
+		}
+		ModelPtr->Render->UpdateUV();
+		return;
 	}
 
-	ModelPtr->SetNormalsModel(MeshData.Normals, BufferNormal_ID);
+	Render->UpdateUV();
 }
+
+void ObjectData::SetParamCase(float param) {
+
+	ModelPtr->Render->ConfUniform->SetParamCase(param);
+}
+
+void ObjectData::SetVectorsParams(vec3 vectorsParams[10]) {
+
+	ModelPtr->Render->ConfUniform->SetVectorsParams(vectorsParams);
+}
+
+void ObjectData::SetLight(vec3 posLight) {
+	ModelPtr->Render->ConfUniform->SetPositionLight(posLight);
+}
+
+
+//==================================
 
 void ObjectData::UpdateState() {
 	
@@ -136,105 +258,7 @@ void ObjectData::Refresh() {
 
 	//CheckedRefresh();
 }
-
-
-void ObjectData::CheckedRefresh()
-{
-	return;
-	//if (IsToogleButon && IndexObjectOwner != -1)
-	if (IndexObjectOwner != -1)
-	{
-		if (IndexObjectOwner == EngineData->SceneData->IndexBackgroundGUIObj)
-			return;
-
-		//auto objOwner = Storage->SceneObjects[IndexObjectOwner];
-	/*	auto objOwner = Storage->GetObjectPrt(IndexObjectOwner);
-		if (objOwner->TypeObj != Button)
-			return;*/
-		//auto objButton = std::dynamic_pointer_cast<ObjectButton>(objOwner);
-		//if (IsChecked != objOwner->IsChecked) {
-		/*if (IsChecked != objOwner->IsChecked) {
-			Click();
-		}*/
-	}
-}
-
-void ObjectData::Click() {
-
-}
-
-
-void ObjectData::ActionWork() {
-
-}
-
-
-void ObjectData::ActionBase() {
-
-	ControlsEvents();
-	RunTransform();
-	//CheckParentState();
-}
-
-
-void ObjectData::RunAction() {
-
-	if (ActionObjectCurrent != Lock)
-	{
-		switch (ActionObjectCurrent)
-		{
-			case Starting:
-				GenStartPosition();
-				break;
-			case Stay:
-				break;
-			default:
-				break;
-		}
-	}
-	ActionBase();
-}
-
-void ObjectData::GenStartPosition() {
-	World WorldSetting;
-	int distanceSpawnZone = WorldSetting.Radius - 5;
-	int x = linearRand(distanceSpawnZone * -1, distanceSpawnZone);
-	int z = linearRand(distanceSpawnZone * -1, distanceSpawnZone);
-	Postranslate = vec3(x, -50, z);
-	NewPostranslate = vec3(x, -50, z);
-
-	CheckStartPosition();
-}
-
-void ObjectData::CheckStartPosition() {
-
-}
-
-
-void ObjectData::RunTransform()
-{
-	glm::mat4 trans = Transform(1, EngineData->Inputs->ParamCase, false,
-		glm::mat4(1.0f),
-		Postranslate,
-		TranslateAngle,
-		Size);
-
-	TransformResult = trans;
-	//---------------------------------------------------
-	ModelPtr->ConfUniform->SetTransform(&trans);
-}
-
-void ObjectData::Action()
-{
-	RunAction();
-}
-
-/*
-glm::vec3 ObjectData::GetVertexPosition(int indVertex)
-{
-	return ShapeObj->GetVertexPosition(indVertex);
-}
-*/
+//=========================================
 
 shared_ptr<Plane> ObjectData::GetPlaneFromVertIndex(int indexVertPlane) {
 	
@@ -265,11 +289,6 @@ std::vector<glm::vec3> ObjectData::GetNormals() {
 		return ModelPtr->MeshData.Normals;
 }
 
-
-void ObjectData::SetMesh() {
-	ModelPtr->SetVAO();
-}
-
 void ObjectData::MeshTransform() {
 }
 
@@ -277,20 +296,6 @@ void ObjectData::SelectedEvent() {
 }
 
 void ObjectData::UnselectedEvent() {
-}
-
-void ObjectData::UpdateTextureUV() {
-	if (MeshData.UV.size() == 0) {
-		//NEW::1
-		ModelPtr->UpdateBufferUV();
-		return;
-	}
-
-	if (BufferUV_ID == EmptyID) 
-		BufferUV_ID = InitBuffer(); //TODO: In Render component
-
-	ModelPtr->SetUV(MeshData.UV, BufferUV_ID, IsLoadedIntoMem_UV);
-	IsLoadedIntoMem_UV = true;
 }
 
 //===============================
@@ -355,12 +360,6 @@ int ObjectData::GetRightBorderVertexIndex() {
 	return -1;
 }
 
-GLuint ObjectData::GetVAO() {
-
-	if (VAO != EmptyID)
-		return VAO;
-	return ModelPtr->VAO;
-}
 
 void ObjectData::SetOwnerObject(shared_ptr<ObjectData> p_ownerObj)
 //void ObjectData::SetOwnerObject(ObjectData* p_ownerObj)

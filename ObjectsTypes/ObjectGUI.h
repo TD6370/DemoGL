@@ -59,18 +59,13 @@ public:
 
 	void InitData();
 
-	void SetDataToShader();
-
 	void RunAction();
 
 	bool GetVisible();
 
-	//void virtual Click();
 	void Click();
 	
-	//void virtual Work();
 	void ActionWork();
-
 
 	void ActionMoving();
 

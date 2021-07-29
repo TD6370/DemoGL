@@ -6,6 +6,8 @@
 
 void ObjectBullet::InitData()
 {
+	ObjectData::InitData();
+
 	ActionObjectCurrent = Stay;
 	Speed = 0.4f;
 }

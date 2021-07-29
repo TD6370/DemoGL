@@ -76,7 +76,5 @@ public:
 
 	std::vector< glm::vec3 > GetVertices();
 
-	void SetMesh();
-	
 };
 

@@ -3,6 +3,8 @@
 
 void ObjectNPC::InitData()
 {
+	ObjectData::InitData();
+
 	ActionObjectCurrent = Starting;
 	IsGravity = true;
 }

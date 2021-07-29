@@ -15,8 +15,19 @@
 #include "../GeomertyShapes/ShapeSquare.h"
 
 
+void RenderComponent::Clone(RenderComponent* renderModel) {
 
-void RenderComponent::InitBase(map<string, GLuint>& shaderPrograms) {
+	ShaderProgram = renderModel->ShaderProgram;
+	ConfUniform = renderModel->ConfUniform;
+
+	if (renderModel->HasSquareModel())
+		InitUniformBox();
+}
+
+
+void RenderComponent::Init(map<string, GLuint>& shaderPrograms) {
+
+	//TypeName = FormatTypeName(typeid(this).name());
 
 	ConstructShaderProgramm(shaderPrograms);
 
@@ -29,12 +40,6 @@ void RenderComponent::InitBase(map<string, GLuint>& shaderPrograms) {
 	InitUniform();
 }
 
-void RenderComponent::Init(map<string, GLuint>& shaderPrograms) {
-
-	//TypeName = FormatTypeName(typeid(this).name());
-	InitBase(shaderPrograms);
-}
-
 void RenderComponent::ConstructShaderProgramm(map<string, GLuint>& shaderPrograms) {
 
 	bool isNew = true;
@@ -45,8 +50,7 @@ void RenderComponent::ConstructShaderProgramm(map<string, GLuint>& shaderProgram
 		it = shaderPrograms.find(keyShaderPrograms);
 		isNew = it == shaderPrograms.end();
 	}
-	//TEST
-	//isNew = true;
+
 	if (isNew)
 	{
 		string pathShaderVertStr = std::string();
@@ -112,10 +116,8 @@ void RenderComponent::LoadModelData() {
 	m_mesh.IndicesSize = m_mesh.Indices.size();
 	//-----------------------------
 
-	Buffers.VAO = InitVAO();
-	Buffers.VBO = InitBuffer();
-
-	SetVAO();
+	//SetVAO();
+	UpdateVAO();
 
 	if (Buffers.VAO == -1)
 	{
@@ -124,7 +126,6 @@ void RenderComponent::LoadModelData() {
 
 	Buffers.Texture_ID = InitImage();
 
-	//if (!(PathTextureAtlas && !PathTextureAtlas[0]))
 	if (m_material.PathTextureAtlas.size() != 0)
 		Buffers.TextureAtlas_ID = InitImage();
 
@@ -136,19 +137,34 @@ void RenderComponent::LoadModelData() {
 
 void RenderComponent::InitUniform() {
 
-	//ConfUniform = ConfigUniform(ShaderProgram);
-	//ConfUniform.Init();
-
 	ConfUniform = new ConfigUniform(ShaderProgram);
 	ConfUniform->Init();
-
-	//void ModelFrame::InitUniform() {
-	if(IsGUI)
-		ConfUniform->InitBox();
-	//}
 }
 
-void RenderComponent::SetVAO() {
+void RenderComponent::InitUniformBox() {
+
+	ConfUniform->InitBox();
+}
+
+void RenderComponent::SetModelInBuffer()
+{
+	UpdateTexture();
+
+	SetBufferUV(m_mesh.UV, Buffers.BufferUV_ID, false);
+	SetNormals(m_mesh.Normals, Buffers.BufferNormal_ID, false);
+
+	//UpdateNormals();
+	//UpdateUV();
+}
+
+
+void RenderComponent::UpdateVAO() {
+
+	if (Buffers.VAO == EmptyID) { //TODO: In Render component
+		Buffers.VAO = InitVAO();
+		Buffers.VBO = InitBuffer();
+	}
+
 	GenVertexArrayObject(IsIndex,
 		m_mesh.Vertices,
 		m_mesh.Indices,
@@ -157,52 +173,14 @@ void RenderComponent::SetVAO() {
 	IsLoadedIntoMem_Vertex = true;
 }
 
-void RenderComponent::SetVAO(std::vector< glm::vec3 >& vertices, GLuint p_VAO, GLuint p_VBO, bool isLoadedIntoMem) {
-	GenVertexArrayObject(IsIndex,
-		vertices,
-		m_mesh.Indices,
-		p_VAO, p_VBO, isLoadedIntoMem);
-}
-
-//TODO: delete
-void RenderComponent::SetModelInBuffer(vector<vec2>& uv, vector<vec3>& normals, bool isUpdateTexture, GLuint p_bufferUV_ID, GLuint p_bufferNormal_ID,
-	bool p_isLoadedIntoMem_UV, bool p_isLoadedIntoMem_Normals)
+void RenderComponent::UpdateCustomBuffer()
 {
-	// -- Update texture
-	if (isUpdateTexture) {
-		SetImage(DataImage, SizeImage.x, SizeImage.y, Buffers.Texture_ID, 0, IsLoadedIntoMem_Texture);
-		if (Buffers.TextureAtlas_ID != EmptyID)
-			SetImage(DataImageAtlas, SizeImageAtlas.x, SizeImageAtlas.y, Buffers.TextureAtlas_ID, 1, IsLoadedIntoMem_Texture);
-		IsLoadedIntoMem_Texture = true;
-	}
-
-	// -- Update UV
-	if (&uv == nullptr || uv.size() == 0)
-		SetBufferUV(m_mesh.UV, Buffers.BufferUV_ID, IsLoadedIntoMem_UV); // Default
-	else {
-		if (p_bufferUV_ID == EmptyID)
-			p_bufferUV_ID = Buffers.BufferUV_ID;
-		SetBufferUV(uv, p_bufferUV_ID, p_isLoadedIntoMem_UV);
-	}
-
-	// -- Update Normals
-	if (normals.size() == 0)
-		SetNormals(m_mesh.Normals, Buffers.BufferNormal_ID, IsLoadedIntoMem_Normals); // Default
-	else {
-		if (p_bufferNormal_ID == EmptyID)
-			p_bufferNormal_ID = Buffers.BufferNormal_ID;
-		SetNormals(normals, p_bufferNormal_ID, p_isLoadedIntoMem_Normals);
-	}
-}
-
-void RenderComponent::SetBuffer(std::vector< glm::vec3>& buffer)
-{
-	if (buffer.size() != 0)
-		GenBufferColors(buffer, Buffers.BufferColor_ID);
+	if (m_mesh.Buffer.size() != 0)
+		GenBufferColors(m_mesh.Buffer, Buffers.BufferColor_ID);
 }
 
 
-void RenderComponent::SetTextureModel() {
+void RenderComponent::UpdateTexture() {
 
 	// -- Update texture - Default
 	SetImage(DataImage, SizeImage.x, SizeImage.y, Buffers.Texture_ID, 0, IsLoadedIntoMem_Texture);
@@ -211,53 +189,48 @@ void RenderComponent::SetTextureModel() {
 	IsLoadedIntoMem_Texture = true;
 }
 
-void RenderComponent::SetNormalsModel(vector<vec3>& normals, GLuint p_bufferNormal_ID) {
+void RenderComponent::UpdateNormals() {
 
-	bool _isLoadedIntoMem_Normals = IsLoadedIntoMem_Normals;
-	if (p_bufferNormal_ID == EmptyID) // Default
-		p_bufferNormal_ID = Buffers.BufferNormal_ID;
-	else // Object
-		_isLoadedIntoMem_Normals = false;
+	if (m_mesh.Normals.size() != 0) {
 
-	if (normals.size() == 0)
-		SetNormals(m_mesh.Normals, p_bufferNormal_ID, _isLoadedIntoMem_Normals);
-	else
-		SetNormals(normals, p_bufferNormal_ID, false);
+		if (Buffers.BufferNormal_ID == EmptyID) {
+			Buffers.BufferNormal_ID = InitBuffer();
+			IsLoadedIntoMem_Normals = false;
+		}
 
-	IsLoadedIntoMem_Normals = true;
+		SetNormals(m_mesh.Normals, Buffers.BufferNormal_ID, IsLoadedIntoMem_Normals);
+		IsLoadedIntoMem_Normals = true;
+	}
 }
 
-void RenderComponent::SetUV(vector< vec2 >& uv, GLuint p_bufferUV_ID, bool isLoadedIntoMem) {
+void RenderComponent::UpdateUV() {
 
-	SetBufferUV(uv, p_bufferUV_ID, isLoadedIntoMem);
-}
+	if (Buffers.BufferUV_ID == EmptyID) {
+		Buffers.BufferUV_ID = InitBuffer();
+		IsLoadedIntoMem_UV = false;
+	}
 
-void RenderComponent::UpdateBufferUV() {
 	// Default
 	SetBufferUV(m_mesh.UV, Buffers.BufferUV_ID, IsLoadedIntoMem_UV);
 	IsLoadedIntoMem_UV = true;
 }
 
+void RenderComponent::SetDataToShader(ObjectData& obj) {
 
-void RenderComponent::DebugUV(vector<vec2> list_uv) {
-
-	std::string data = "";
-	for (const vec2 uv : list_uv)
+	if (obj.IsGUI)
 	{
-		//std::wcout << uv.x << "," << uv.y << std::endl;
-		data += std::to_string(uv.x) + "," + std::to_string(uv.y) + '\n';
-	}
-	WriteFile("", data, "UV");
-}
+		float width = obj.GetShapeSquare()->WidthFactor;
+		float height = obj.GetShapeSquare()->HeightFactor;
+		vec3 posMove = obj.GetShapeSquare()->PosMoveFactor;
+		vec3 posMoveSize = obj.GetShapeSquare()->PosMoveSizeFactor;
+		if (width < 0)
+			return;
 
-void RenderComponent::DebugVec3(vector<vec3> list_v, std::string name) {
-
-	std::string data = "";
-	for (const vec3 v : list_v)
-	{
-		data += std::to_string(v.x) + "," + std::to_string(v.y) + "," + std::to_string(v.z) + '\n';
+		SetWidth(width);
+		SetHeight(height);
+		SetPosMove(posMove);
+		SetPosMoveSize(posMoveSize);
 	}
-	WriteFile("", data, name);
 }
 
 void RenderComponent::SetWidth(GLfloat width)
@@ -281,35 +254,37 @@ void RenderComponent::SetPosMoveSize(vec3 posMoveS)
 }
 
 
+void RenderComponent::ResetMem_UV() {
+	IsLoadedIntoMem_UV = false;
+}
+
+void RenderComponent::ResetMem_Vertex() {
+	IsLoadedIntoMem_Vertex = false;
+}
+
+bool RenderComponent::HasSquareModel() {
+	return m_mesh.IsSquareModel;
+}
 
 
-void RenderComponent::SetDataToShader(ObjectData& obj) {
 
-	if(obj.IsGUI)
+void RenderComponent::DebugUV(vector<vec2> list_uv) {
+
+	std::string data = "";
+	for (const vec2 uv : list_uv)
 	{
-		float width = obj.GetShapeSquare()->WidthFactor;
-		float height = obj.GetShapeSquare()->HeightFactor;
-		vec3 posMove = obj.GetShapeSquare()->PosMoveFactor;
-		vec3 posMoveSize = obj.GetShapeSquare()->PosMoveSizeFactor;
-		if (width < 0)
-			return;
-		SetWidth(width);
-		SetHeight(height);
-		SetPosMove(posMove);
-		SetPosMoveSize(posMoveSize);
+		//std::wcout << uv.x << "," << uv.y << std::endl;
+		data += std::to_string(uv.x) + "," + std::to_string(uv.y) + '\n';
 	}
+	WriteFile("", data, "UV");
+}
 
-	bool isTextBox;
-	if (obj.TypeObj == TextBox)
+void RenderComponent::DebugVec3(vector<vec3> list_v, std::string name) {
+
+	std::string data = "";
+	for (const vec3 v : list_v)
 	{
-		SetBuffer(m_mesh.Buffer);
-
-		//if (!isInitSlotsMessage) {
-		//	isInitSlotsMessage = true;
-		if (!IsLoadedIntoMem_UV) {
-			IsLoadedIntoMem_UV = true;
-
-			SetModelInBuffer(m_mesh.UV, m_mesh.Normals, false); //TODO: delete
-		}
+		data += std::to_string(v.x) + "," + std::to_string(v.y) + "," + std::to_string(v.z) + '\n';
 	}
+	WriteFile("", data, name);
 }

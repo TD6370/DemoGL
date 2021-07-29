@@ -9,6 +9,7 @@
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
 #include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
+#include "../Components/RenderComponent.h"
 
 ShapeBase::ShapeBase() {
 
@@ -231,7 +232,8 @@ void ShapeBase::SetBottom(int index, vec3 value) {
 		if (oldValue == vertexNext)
 		{
 			obj->MeshData.Vertices[indVert] = value;
-			obj->IsLoadedIntoMem_Vertex = false;
+			//obj->IsLoadedIntoMem_Vertex = false;
+			obj->Render->ResetMem_Vertex();
 		}
 		indVert++;
 	}
@@ -250,7 +252,8 @@ void ShapeBase::SetTop(int index, vec3 value) {
 		if (oldValue == vertexNext)
 		{
 			obj->MeshData.Vertices[indVert] = value;
-			obj->IsLoadedIntoMem_Vertex = false;
+			//obj->IsLoadedIntoMem_Vertex = false;
+			obj->Render->ResetMem_Vertex();
 		}
 		indVert++;
 	}

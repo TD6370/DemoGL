@@ -23,6 +23,7 @@
 
 #include "./ObjectsTypes/ObjectGUI.h"
 #include "ShellObjects/BaseShell.h"
+#include "./Components/RenderComponent.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -280,7 +281,7 @@ void SceneConstructor::PreparationDataFromShader() {
 	}
 	
 	if (m_isUpdateShaderProgramm) {
-		ShaderProgram = ModelCurrent->ShaderProgram;
+		ShaderProgram = ModelCurrent->Render->ShaderProgram;
 		glUseProgram(ShaderProgram);
 		//last_VAO = ModelCurrent->VAO;
 	}
@@ -299,10 +300,6 @@ void SceneConstructor::PreparationDataFromShader() {
 }
 
 void SceneConstructor::SetDataToShader() {
-	
-	//TEST
-	auto nameTest =  ObjectCurrent->Name;
-	auto nameTest2 = ObjectCurrent->ModelPtr->Name;
 
 	bool IsSquareModel = ObjectCurrent->ModelPtr->MeshData.IsSquareModel || ObjectCurrent->IsSquareModel;
 	bool IsHexagonModel = ObjectCurrent->IsHexagonModel;
@@ -326,67 +323,56 @@ void SceneConstructor::SetDataToShader() {
 		m_isUpdateUV = true;
 	}
 
-	//-------------------- Set color
-	ModelCurrent->ConfUniform->SetColor(ObjectCurrent->MaterialData.Color);
-	//---------------------- Set param Case
-	ModelCurrent->ConfUniform->SetParamCase(GetParamCase());
+	ConfigUniform* uniform = ModelCurrent->Render->ConfUniform;
 
-	//TEST
-	/*if (ObjectCurrent->TypeObj == EditBox)
-		ObjectCurrent->ParamValue = 1;*/
-
-	ModelCurrent->ConfUniform->SetParamValue(ObjectCurrent->ParamValue);
-
-	ModelCurrent->ConfUniform->SetStartTime(ObjectCurrent->StartTimer);
+	//-------------------- Set Uniforms
+	uniform->SetColor(ObjectCurrent->MaterialData.Color);
+	uniform->SetParamCase(GetParamCase());
+	uniform->SetParamValue(ObjectCurrent->ParamValue);
+	uniform->SetStartTime(ObjectCurrent->StartTimer);
 
 	if (VersionUpdate == 2)
-		ModelCurrent->ConfUniform->SetDeltaStartTime(DeltaTime);
+		uniform->SetDeltaStartTime(DeltaTime);
 	else
-		ModelCurrent->ConfUniform->SetDeltaStartTime(1.);
+		uniform->SetDeltaStartTime(1.);
 
 	//---------------------- Set MVP
-	ModelCurrent->ConfUniform->SetMVP(Storage->ConfigMVP->MVP);
+	uniform->SetMVP(Storage->ConfigMVP->MVP);
 
 	//VIEW param
-	ModelCurrent->ConfUniform->SetView(Storage->ConfigMVP->View);
+	uniform->SetView(Storage->ConfigMVP->View);
 
 	//MODEL param
-	ModelCurrent->ConfUniform->SetModel(Storage->ConfigMVP->Model);
-
+	uniform->SetModel(Storage->ConfigMVP->Model);
 
 	bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
 
 	//if (!isSkipDynamic && (m_isUpdateMesh || isTransformMesh))  //Lite mode
 	bool liteMode = !isSkipDynamic && (m_isUpdateMesh || IsSquareModel);
 	if (liteMode)  //Lite mode
-	//if (m_isUpdateMesh || IsSquareModel)
 	{
-
-		//m_currCashShader !!!
 		if (isTransformMesh || isTransformMesh != m_isLastTransformMesh) {
 			m_isLastTransformMesh = isTransformMesh;
-			ObjectCurrent->SetMesh();
+			ObjectCurrent->ToShader_Mesh();
 		}
 
 		glBindVertexArray(ObjectCurrent->GetVAO());
 
 		if (!isSkipDynamic) 
 		{
-			ObjectCurrent->UpdateTextureUV(); ///--- ??? **1
+			m_isUpdateUV = true;
 
 			m_currCashShader = ObjectCurrent->GetCashStateUpdateDataToShader();
 			if (m_currCashShader != m_lastCashShader) {
 				m_lastCashShader = m_currCashShader;
 
-				ObjectCurrent->SetDataToShader(); //TODO: delete
+				ObjectCurrent->ToShader_OtherData();
 			}
 
-			ObjectCurrent->UpdateNormalsToShader();
+			ObjectCurrent->ToShader_Normals();
 
-			ObjectCurrent->UpdateDataBufferToShader();
+			ObjectCurrent->ToShader_CustomBuffer();
 		}
-		//-----------
-	
 	}
 	else {
 		glBindVertexArray(ObjectCurrent->GetVAO());
@@ -394,11 +380,11 @@ void SceneConstructor::SetDataToShader() {
 
 	if (m_isUpdateTexture)
 	{
-		ObjectCurrent->ModelPtr->SetTextureModel();
+		ObjectCurrent->ToShader_Texture();
 	}
 	if (m_isUpdateUV)
 	{
-		ObjectCurrent->UpdateTextureUV(); ///--- ??? **2
+		ObjectCurrent->ToShader_UV();
 	}
 }
 
@@ -457,7 +443,7 @@ bool SceneConstructor::SetObject(int indNN) {
 		m_isUpdateMesh = true;
 	}
 
-	if (ShaderProgram != ModelCurrent->ShaderProgram)
+	if (ShaderProgram != ModelCurrent->Render->ShaderProgram)
 	{
 		m_isUpdateShaderProgramm = true;
 	}
@@ -488,13 +474,11 @@ void SceneConstructor::ObjectUpdate(int i) {
 		isPause = true;
 
 	//Hard mode
-	//isPause = false;
 	if (isPause) //Lite mode
 		return;
 
 	if (isDraw || isBase) 
 	{
-		
 		PreparationDataFromShader();
 		
 		if(!isPause)
@@ -537,7 +521,7 @@ void SceneConstructor::Update()
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
-		//if (IsDraw || isBase || isShowGUI) //TEST&&1
+		//if (IsDraw || isBase || isShowGUI)
 			ObjectUpdate(i);
 		//===========================================
 
@@ -636,7 +620,7 @@ void SceneConstructor::DrawGraph()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-	bool isIndex = ModelCurrent->IsIndex;
+	bool isIndex = ModelCurrent->Render->IsIndex;
 
 	
 	GLint trianglesCount = ModelCurrent->MeshData.TrianglesCount;

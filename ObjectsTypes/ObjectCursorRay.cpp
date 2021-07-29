@@ -7,6 +7,8 @@
 
 void ObjectCursorRay::InitData()
 {
+	ObjectData::InitData();
+
 	ActionObjectCurrent = Stay;
 	Speed = 0.5f;
 	IsGravity = false;

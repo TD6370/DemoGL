@@ -114,7 +114,8 @@ void ConfigUniform::SetParamCase(GLfloat paramCase) {
 }
 
 void ConfigUniform::SetParamValue(GLint paramValue) {
-	if (m_paramValueID != 0){
+	//if (m_paramValueID != 0){ //******
+	if (m_paramValueID != -1) {
 		glUniform1i(m_paramValueID, paramValue);
 	}
 }
@@ -160,13 +161,6 @@ void ConfigUniform::SetMessage(string message)
 void ConfigUniform::SetWidth(GLfloat width) {
 	if (m_widthID == 0)
 		return;
-	
-	////TEST
-	//string w = std::to_string(width);
-	//if (m_debug1 != w) {
-	//	m_debug1 = w;
-	//	std::cout << " W: " << width << "\n";
-	//}
 
 	glUniform1f(m_widthID, width);
 }
@@ -174,13 +168,6 @@ void ConfigUniform::SetWidth(GLfloat width) {
 void ConfigUniform::SetHeight(GLfloat height) {
 	if (m_heightID == 0)
 		return;
-	
-	////TEST
-	//string h = std::to_string(height);
-	//if (m_debug2 != h) {
-	//	m_debug2 = h;
-	//	std::cout << " H: " << height << "\n";
-	//}
 
 	glUniform1f(m_heightID, height);
 }
