@@ -185,7 +185,7 @@
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
     <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
     <ClCompile Include="Rooms\RoomUseInterface.cpp" />
-    <ClCompile Include="Rooms\SceneRoom.cpp" />
+    <ClCompile Include="Rooms\AspectBase.cpp" />
     <ClCompile Include="SceneConstructor.cpp" />
     <ClCompile Include="SceneLayer.cpp" />
     <ClCompile Include="Serialize\SceneSerialize.cpp" />
@@ -234,7 +234,7 @@
     <ClInclude Include="Rooms\RoomMarkerPlane.h" />
     <ClInclude Include="Rooms\RoomSerializeScene.h" />
     <ClInclude Include="Rooms\RoomUseInterface.h" />
-    <ClInclude Include="Rooms\SceneRoom.h" />
+    <ClInclude Include="Rooms\AspectBase.h" />
     <ClInclude Include="SceneConstructor.h" />
     <ClInclude Include="SceneLayer.h" />
     <ClInclude Include="Serialize\SceneSerialize.h" />

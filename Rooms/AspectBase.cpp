@@ -1,4 +1,4 @@
-#include "SceneRoom.h"
+#include "AspectBase.h"
 #include "..\SceneConstructor.h"
 
 #include "..\GeometryLib.h"
@@ -9,34 +9,34 @@
 //#include "..\SceneSerialize.h"
 
 
-SceneRoom::SceneRoom(std::string name, SceneConstructor* sceneConstructor) {
+AspectBase::AspectBase(std::string name, SceneConstructor* sceneConstructor) {
 	Name = name;
 	Scene = sceneConstructor;
 }
 
 
-void SceneRoom::Config() {
+void AspectBase::Config() {
 
 }
 
-void SceneRoom::Init() {
+void AspectBase::Init() {
 	
 }
 
 //*** Advice before
-void SceneRoom::BeforeWork() {}
+void AspectBase::BeforeWork() {}
 
 //*** Advice after
-void SceneRoom::AfterWork() {}
+void AspectBase::AfterWork() {}
 
 //*** Advice first
-void SceneRoom::FirstWork() {}
+void AspectBase::FirstWork() {}
 
 //*** Advice last
-void SceneRoom::LastWork() {}
+void AspectBase::LastWork() {}
 
 //*** Advice (after default)
-void SceneRoom::Work() {
+void AspectBase::Work() {
 
 	//====================== WorkingRooms
 

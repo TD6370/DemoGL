@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../CoreSettings.h"
-#include "SceneRoom.h"
+#include "AspectBase.h"
 
 #include <fstream>
 
@@ -11,14 +11,14 @@ using std::shared_ptr;
 class SceneConstructor;
 class BaseShell;
 
-class AspectFactoryObjects : public SceneRoom
+class AspectFactoryObjects : public AspectBase
 {
 private:
 	shared_ptr<BaseShell> m_lastShellCreated;
 
 public:
 	AspectFactoryObjects(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	void Init();
 	void Config();

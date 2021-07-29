@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SceneRoom.h"
+#include "AspectBase.h"
 
 #include <fstream>
 
@@ -17,7 +17,7 @@ class SceneSerialize;
 struct ObjectFiledsSpecific;
 class ObjectData;
 
-class RoomSerializeScene : public SceneRoom
+class RoomSerializeScene : public AspectBase
 {
 private:
 
@@ -27,7 +27,7 @@ private:
 
 public:
 	RoomSerializeScene(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	void Init();
 	void Config();

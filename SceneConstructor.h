@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "SceneRoom.h"
+//#include "AspectBase.h"
 //#include "CreatorModelData.h"
 //#include "TransformModel.h"
 //#include "Controllers.h"
@@ -21,7 +21,7 @@
 #include <vector>
 #include <iostream>
 
-class SceneRoom;
+class AspectBase;
 class ObjectData;
 class ModelData;
 class CreatorModelData;
@@ -105,8 +105,9 @@ public:
 
 	Controllers* Contrl;
 
-	//--- TODO:	--- vector<SceneRoom> Rooms; 
-	vector<shared_ptr<SceneRoom>> Rooms;
+	//--- TODO:	--- vector<AspectBase> Rooms; 
+	//vector<AspectBase> Aspects;
+	vector<shared_ptr<AspectBase>> Rooms;
 
 	AspectFactoryObjects* factoryObjects;
 
@@ -131,7 +132,7 @@ public:
 	void ConfigRoom();
 
 	//*** add Aspect
-	void AddRoom(SceneRoom* room);
+	void AddRoom(AspectBase* room);
 
 	bool IsBreakUpdate();
 

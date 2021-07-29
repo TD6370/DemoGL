@@ -1,4 +1,4 @@
-#include "SceneRoom.h"
+#include "AspectBase.h"
 #include "../CoreSettings.h"
 
 #include <fstream>
@@ -24,7 +24,7 @@ class ObjectData;
 enum TypeCommand;
 //struct CommandPack;
 
-class AspectDispatcherCommands : public SceneRoom
+class AspectDispatcherCommands : public AspectBase
 {
 private:
 	const int m_commandPassLimit = 10;// 1000;
@@ -36,7 +36,7 @@ public:
 	vector<CommandPack> ActiveCommands;
 
 	AspectDispatcherCommands(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	~AspectDispatcherCommands();
 

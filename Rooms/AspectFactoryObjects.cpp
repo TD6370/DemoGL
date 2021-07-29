@@ -267,6 +267,4 @@ void AspectFactoryObjects::CreateObjectFieldsEdit() {
 	CreateListEditBox(Scene->CommandsAttribute.ObjectFieldsListCommand);
 
 	//m_lastShellCreated
-
-
 }

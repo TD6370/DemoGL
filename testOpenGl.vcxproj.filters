@@ -138,9 +138,6 @@
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
-    <ClCompile Include="Rooms\SceneRoom.cpp">
-      <Filter>Rooms</Filter>
-    </ClCompile>
     <ClCompile Include="Rooms\RoomSerializeScene.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
@@ -200,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Components\RenderComponent.cpp">
       <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\AspectBase.cpp">
+      <Filter>Rooms</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,9 +281,6 @@
     <ClInclude Include="Rooms\RoomMarkerPlane.h">
       <Filter>Rooms</Filter>
     </ClInclude>
-    <ClInclude Include="Rooms\SceneRoom.h">
-      <Filter>Rooms</Filter>
-    </ClInclude>
     <ClInclude Include="Rooms\RoomSerializeScene.h">
       <Filter>Rooms</Filter>
     </ClInclude>
@@ -343,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Components\RenderComponent.h">
       <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\AspectBase.h">
+      <Filter>Rooms</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

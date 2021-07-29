@@ -7,7 +7,7 @@ using std::string;
 class SceneConstructor;
 
 //*** Acpect
-class SceneRoom
+class AspectBase
 {
 
 public:
@@ -17,7 +17,7 @@ public:
 	//*** Advice option
 	bool IsOnceComplete;
 	
-	SceneRoom(string Name, SceneConstructor* sceneConstructor);
+	AspectBase(string Name, SceneConstructor* sceneConstructor);
 
 	void virtual Init();
 	void virtual Config();

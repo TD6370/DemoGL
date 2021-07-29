@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SceneRoom.h"
+#include "AspectBase.h"
 
 #include <fstream>
 
@@ -8,11 +8,11 @@ using std::string;
 
 class SceneConstructor;
 
-class RoomMarkerPlane: public SceneRoom
+class RoomMarkerPlane: public AspectBase
 {
 public:
 	RoomMarkerPlane(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	void Init();
 	void Config();

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "SceneRoom.h"
+#include "AspectBase.h"
 
 #include <fstream>
 #include <glm/glm.hpp>
@@ -16,7 +16,7 @@ using glm::vec3;
 
 class SceneConstructor;
 
-class AspectFamilyBonds : public SceneRoom
+class AspectFamilyBonds : public AspectBase
 {
 private:
 	vec3 m_posCursor = vec3();
@@ -24,7 +24,7 @@ private:
 
 public:
 	AspectFamilyBonds(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	void Init();
 	void Config();

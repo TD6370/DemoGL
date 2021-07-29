@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SceneRoom.h"
+#include "AspectBase.h"
 #include "../GeometryLib.h"
 //#include "..\CoreSettings.h"
 
@@ -31,7 +31,7 @@ class SceneConstructor;
 enum TypeCommand;
 struct AnimationParamGUI;
 
-class RoomUseInterface : public SceneRoom
+class RoomUseInterface : public AspectBase
 {
 private:
 	vec3 color_red = vec3(1, 0, 0);
@@ -88,7 +88,7 @@ private:
 public:
 		
 	RoomUseInterface(string Name, SceneConstructor* sceneConstructor)
-		: SceneRoom(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor) {};
 
 	~RoomUseInterface();
 

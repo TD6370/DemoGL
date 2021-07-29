@@ -1,7 +1,7 @@
 #include "SceneConstructor.h"
-//#include "SceneRoom.h"
+//#include "AspectBase.h"
 //#include "CreatorModelData.h"
-#include "Rooms/SceneRoom.h"
+#include "Rooms/AspectBase.h"
 #include "Rooms/RoomMarkerPlane.h"
 #include "Rooms/RoomSerializeScene.h"
 #include "Rooms/RoomUseInterface.h"
@@ -63,7 +63,7 @@ SceneConstructor::SceneConstructor(GLFWwindow* window) {
 
 void SceneConstructor::Init() {
 
-	Rooms = vector<shared_ptr<SceneRoom>>();
+	Rooms = vector<shared_ptr<AspectBase>>();
 	
 
 	Light = new Lighting();
@@ -97,7 +97,7 @@ void SceneConstructor::LoadDataModel()
 void SceneConstructor::ConfigRoom() {
 
 	//*** create Aspect
-	SceneRoom* room = new SceneRoom("Base", this);
+	AspectBase* room = new AspectBase("Base", this);
 	room->Init();
 	//*** join point
 	AddRoom(room);
@@ -246,8 +246,8 @@ void SceneConstructor::FillAlphabet() {
 
 }
 
-void SceneConstructor::AddRoom(SceneRoom* room) {
-	Rooms.push_back(make_unique<SceneRoom>(*room));
+void SceneConstructor::AddRoom(AspectBase* room) {
+	Rooms.push_back(make_unique<AspectBase>(*room));
 }
 
 void SceneConstructor::ResetRooms() {
