@@ -79,6 +79,21 @@ void AspectFactoryObjects::Work() {
 		CreateListBox(command.ValueS);
 		isCompleted = true;
 	}
+	if (typeObj == TypeObject::ObjectFieldsEdit)
+	{
+		if (!isBackgroundFrame)
+			return;
+
+		Scene->ReadCommand(CreateObject);
+		CreateObjectFieldsEdit();
+		isCompleted = true;
+	}
+
+	if (!isCompleted) {
+		//Create object
+	}
+
+	
 
 	if (isCompleted) {
 		Scene->Storage->UpdateObjectsOrders();
@@ -138,7 +153,13 @@ void AspectFactoryObjects::CreateButton() {
 	Scene->AddCommand(ObjectCreated, - 1, objCreateButton->Index);
 }
 
-void AspectFactoryObjects::CreateListBox(string nameListCommand) {
+
+void AspectFactoryObjects::CreateListEditBox(string nameListCommand) {
+	
+	CreateListBox(nameListCommand, ListEditBox);
+}
+
+void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject typeListBox) {
 	string caption;
 	string childModel;
 	string objName;
@@ -161,6 +182,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 	objName = "BaseFrame_ListBox";
 	caption = "BaseFrame_ListBox";
 	childModel = "FrameModel"; 
+	// -- Style
 	float border = 0.01;
 	float interligne = 0.005;
 	float heightItem = 0.07;
@@ -168,6 +190,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 	float heightFrame = (listCommand.size() * heightItem) + ((listCommand.size() -1) * interligne) + (border*2);
 	vec2 sizeFrame = vec2(widthFrame, heightFrame);
 	vec3 posFrame = vec3(pos.x, pos.y, posZ);
+
 	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
 	objBaseFrame->IsFocusable = false;
 	
@@ -176,39 +199,46 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 
 	for (CommandPack commItem : listCommand)
 	{
-		//-- create Item 
-		objName = "ButtonItem_ListBox";
-		caption = commItem.Description;
-		childModel = "ButtonModel";
-		objCreate = Scene->Storage->AddChildObject(objBaseFrame, caption, childModel, objName, posItem, sizeItem, Button, vec3(1));
-		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+		if (typeListBox == ListEditBox)
+		{
+			//-- create Item "EditBox"
 
-		/*if(commItem.CommandType == SelectItemValue)
-			objCreateButton->IsToogleButon = true;
-		else*/
-			objCreateButton->IsToogleButon = false;
-		
-		//list index items for shell
-		listItemsIndex.push_back(objCreateButton->Index);
-
-		// - join items links
-		if (objCreateButton_Prev != nullptr) {
-			objCreateButton_Prev->SetNextItemShellObject(objCreateButton);
 		}
-		objCreateButton_Prev = objCreateButton;
+		if (typeListBox == ListBox)
+		{
+			//-- create Item "BUTTON"
+			objName = "ButtonItem_ListBox";
+			caption = commItem.Description;
+			childModel = "ButtonModel";
+			objCreate = Scene->Storage->AddChildObject(objBaseFrame, caption, childModel, objName, posItem, sizeItem, Button, vec3(1));
+			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 
-		SetCommand(objCreateButton, commItem);
+			/*if(commItem.CommandType == SelectItemValue)
+				objCreateButton->IsToogleButon = true;
+			else*/
+			objCreateButton->IsToogleButon = false;
 
-		//-- create Text item 
-		auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
+			//list index items for shell
+			listItemsIndex.push_back(objCreateButton->Index);
 
-		shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
+			// - join items links
+			if (objCreateButton_Prev != nullptr) {
+				objCreateButton_Prev->SetNextItemShellObject(objCreateButton);
+			}
+			objCreateButton_Prev = objCreateButton;
 
+			SetCommand(objCreateButton, commItem);
+
+			//-- create Text item 
+			auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
+
+			shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
+		}
 		posItem.y += sizeItem.y + interligne;
 	}
 
 	//Create shell
-	Scene->Storage->AddShell("ListBoxShell_" + nameListCommand,
+	m_lastShellCreated = Scene->Storage->AddShell("ListBoxShell_" + nameListCommand,
 		objBaseFrame->Index,
 		-1,
 		false,
@@ -218,3 +248,25 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand) {
 	Scene->AddCommand(ObjectCreated, -1, objBaseFrame->Index);
 }
 
+
+void AspectFactoryObjects::CreateObjectFieldsEdit() {
+
+	//------------------------------------
+	// Shell Object fields Edit
+	//	List[0] = ListBox Text		[NAME]
+	//	List[1] = ListBox EditBox	[VALUE]
+	//	List[3] = Button Create
+	//	List[4] = Button Save
+	//	List[5] = Button Delete
+	//
+	// ControlFrame->Command->Target ==> selected Object
+	//------------------------------------
+
+	CreateListBox(Scene->CommandsAttribute.ObjectFieldsListCommand);
+
+	CreateListEditBox(Scene->CommandsAttribute.ObjectFieldsListCommand);
+
+	//m_lastShellCreated
+
+
+}

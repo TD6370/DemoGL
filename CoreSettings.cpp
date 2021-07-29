@@ -22,23 +22,15 @@ using std::map;
 #define EmptyID 66666
 
 struct Material {
-	//---- Material Data
-	/*string PathShaderVertex = "basic.vert";
-	string PathShaderFrag = "basic.frag";
-	string PathTexture = "./Textures/testTexture.bmp";*/
-
-	string PathShaderVertex = "***";
-	string PathShaderFrag = "***";
-	string PathTexture = "***";
-
+	string PathShaderVertex = "";
+	string PathShaderFrag = "";
+	string PathTexture = "";
 	string PathTextureAtlas = "";
 	vec3 Color = vec3(0);
 };
 
 struct Mesh {
-	//---- Mesh data
-	//const char* PathModel3D = "./Models3D/monkey.obj";
-	const char* PathModel3D = "***";
+	const char* PathModel3D = "";
 	GLint TrianglesCount = 0;
 	GLint IndicesSize = 0;
 	vector< vec2 > UV;
@@ -127,7 +119,7 @@ struct CoreMVP {
 
 enum ActionObject { Moving, Stay, Look, Search, Lock, Starting, Woking, Transforming, Clearing };
 
-enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button, EditBox, ListBox
+enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletHero, CursorRay, GUI, TextBox, CursorGUI, Button, EditBox, ListBox, ListEditBox, ObjectFieldsEdit
 };
 
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
@@ -181,6 +173,7 @@ extern struct AttributeCommands
 {
 	string BaseListCommand = "BaseListCommand";
 	string TypesObjectListCommand = "TypesObjectListCommand";
+	string ObjectFieldsListCommand = "ObjectFieldsListCommand";
 	string TypeObjectAttr = "TypeObject";
 };
 

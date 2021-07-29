@@ -69,5 +69,5 @@ void UpdateCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int val
 
 void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
-
+void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType);
 

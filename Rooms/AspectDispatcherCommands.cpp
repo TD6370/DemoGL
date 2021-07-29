@@ -61,6 +61,149 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 	}
 
 	StaticListCommand.insert({ Scene->CommandsAttribute.TypesObjectListCommand, listTypeObjects });
+
+	//--- ListBox Object Fields Edit
+
+	/*
+	shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
+	TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
+	TypeLayer layer = serializer->GetTypeLayer(objFields->Layer);
+
+	int indexObj = std::stoi(objFields->Index);
+
+	auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue, vec3(0), indexObj, layer, true);
+
+	if (newObj == NULL)
+		continue;
+
+	newObj->Target = objFields->TargetValue;
+	newObj->Layer = layer;
+
+	ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
+	newObj->ActionObjectCurrent = typeAction;
+
+	newObj->IndexObjectOwner = stoi(objFields->IndexObjectOwner);
+	newObj->ShellIndex = stoi(objFields->ShellIndex);
+	newObj->NextItemShellIndex = stoi(objFields->NextItemShellIndex);
+
+	newObj->MaterialData.Color = objFields->ColorValue;
+
+	TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
+	int sourceIndex = stoi(objFields->CommandSourceIndex);
+	int targetIndex = stoi(objFields->CommandTargetIndex);
+	int valueI = stoi(objFields->CommandValueI);
+	float valueF = stof(objFields->CommandValueF);
+	vec4 valueV4 = vec4();
+	string valueS = serializer->GetStrValue(objFields->CommandValueS);
+	string description = serializer->GetStrValue(objFields->CommandDescription);
+
+	if (typeCommand != TypeCommand::None) {
+		//SetCommand(newObj, typeCommand);
+		SetCommand(newObj, typeCommand,
+			sourceIndex, targetIndex,
+			description, valueI,
+			valueI, valueF, valueV4, valueS,
+			description);
+	}
+
+	OptionsObject opt = objFields->Options;
+	newObj->IsVisible = StrToBool(opt.IsVisible);
+	newObj->IsGravity = StrToBool(opt.IsGravity);
+	newObj->IsGUI = StrToBool(opt.IsGUI);
+	newObj->IsTextureRepeat = StrToBool(opt.IsTextureRepeat);
+	newObj->IsNPC = StrToBool(opt.IsNPC);
+	newObj->IsHexagonModel = StrToBool(opt.IsHexagonModel);
+	newObj->IsSquareModel = StrToBool(opt.IsSquareModel);
+	newObj->IsAbsolutePosition = StrToBool(opt.IsAbsolutePosition);
+	newObj->IsFocusable = StrToBool(opt.IsFocusable);
+	newObj->IsTransformable = StrToBool(opt.IsTransformable);
+	newObj->IsUsable = StrToBool(opt.IsUsable);
+	newObj->IsChecked = StrToBool(opt.IsChecked);
+
+	//#SaveFieldSpecific
+	specificFields = objectsDataSpecific[i];
+	newObj->SetSpecificFiels(specificFields);
+	*/
+
+	/*struct ObjectFileds {
+		string Name = "Name:";
+		string Type = "Type:";
+		string Model = "Model:";
+		string Index = "Index:";
+		string Layer = "Layer:";
+		string Postranslate = "Pos:";
+		vec3 PostranslateValue;
+		string Target = "Target:";
+		vec3 TargetValue;
+		string ActionObjectCurrent = "Action:";
+		string IndexObjectOwner = "IndexObjectOwner:";
+		string ShellIndex = "ShellIndex:";
+		string NextItemShellIndex = "NextItemShellIndex:";
+		string Color = "Color:";
+		vec3 ColorValue;
+		OptionsObject Options;
+		string Command = "Command:";
+		string CommandSourceIndex = "CommandSourceIndex:";
+		string CommandTargetIndex = "CommandTargetIndex:";
+		string CommandValueI = "CommandValueI:";
+		string CommandValueF = "CommandValueF:";
+		string CommandValueS = "CommandValueS:";
+		string CommandDescription = "CommandDescription:";
+
+		map<string, string> OtherFields;
+	};*/
+
+	//--- ListBox Object Fields Edit
+	vector<CommandPack> listObjectFiels = vector<CommandPack>();
+	ObjectFileds fielsInfo = ObjectFileds();
+	auto typeComm = TypeCommand::SelectItemValue;
+
+	AddCommandInList(listObjectFiels, fielsInfo.Index, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Name, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Type, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Model, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Layer, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Postranslate, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Target, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.ActionObjectCurrent, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.IndexObjectOwner, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.ShellIndex, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.NextItemShellIndex, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Color, typeComm);
+	
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsVisible, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGravity, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGUI, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTextureRepeat, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsNPC, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsHexagonModel, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsSquareModel, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsAbsolutePosition, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsFocusable, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTransformable, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsUsable, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsChecked, typeComm);
+
+	/*string Command = "Command:";
+	string CommandSourceIndex = "CommandSourceIndex:";
+	string CommandTargetIndex = "CommandTargetIndex:";
+	string CommandValueI = "CommandValueI:";
+	string CommandValueF = "CommandValueF:";
+	string CommandValueS = "CommandValueS:";
+	string CommandDescription = "CommandDescription:";*/
+	
+	//AddCommandInList(listObjectFiels, fielsInfo., typeComm);
+
+	StaticListCommand.insert({ Scene->CommandsAttribute.ObjectFieldsListCommand, listObjectFiels });
+}
+
+void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType)
+{
+	CommandPack commandNextType = CommandPack();
+	commandNextType.Description = description;
+	commandNextType.ValueS = description;
+	commandNextType.CommandType = TypeCommand::SelectItemValue;
+	listObjectFiels.push_back(commandNextType);
 }
 
 void AspectDispatcherCommands::Work() {

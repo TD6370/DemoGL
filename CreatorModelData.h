@@ -70,6 +70,8 @@ public:
 	CreatorModelData();
 	~CreatorModelData();
 
+	shared_ptr<ModelData> CreateNextModel();
+
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
 	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, 

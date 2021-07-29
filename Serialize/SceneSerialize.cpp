@@ -32,7 +32,8 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeObject::Button, "Button");
 	AddNextType(TypeObject::EditBox, "EditBox");
 	AddNextType(TypeObject::ListBox, "ListBox");
-		
+	AddNextType(TypeObject::ListEditBox, "ListEditBox");
+	AddNextType(TypeObject::ObjectFieldsEdit, "ObjectFieldsEdit");
 
 	//Create map types action object
 	AddNextType(ActionObject::Moving, "Moving");
