@@ -26,6 +26,9 @@ void AspectDispatcherCommands::Init() {
 
 void AspectDispatcherCommands::LoadStaticCommandList() {
 
+	int sargetIndex = -1;
+	int targetIndex = -1;
+
 	CommandPack commandCreateBlock = CommandPack();
 	commandCreateBlock.Description = "создать блок";
 	commandCreateBlock.CommandType = TypeCommand::CreateObject;
@@ -54,6 +57,7 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 
 	for (auto pairTypeName : mapTypesNamesObj) {
 		commandNextType = CommandPack();
+		commandNextType.SourceIndex = TypeCommand::CreateObject;
 		commandNextType.Description = pairTypeName.second;
 		commandNextType.CommandType = TypeCommand::SelectItemValue;
 		commandNextType.ValueI = pairTypeName.first;
@@ -157,32 +161,35 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 	vector<CommandPack> listObjectFiels = vector<CommandPack>();
 	ObjectFileds fielsInfo = ObjectFileds();
 	auto typeComm = TypeCommand::SelectItemValue;
+	sargetIndex = TypeCommand::EditObjectCommand;
+	targetIndex = -1;
+	int valueI = -1;
 
-	AddCommandInList(listObjectFiels, fielsInfo.Index, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Name, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Type, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Model, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Layer, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Postranslate, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Target, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.ActionObjectCurrent, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.IndexObjectOwner, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.ShellIndex, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.NextItemShellIndex, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Color, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Index, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Name, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Type, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Model, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Layer, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Postranslate, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Target, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.ActionObjectCurrent, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.IndexObjectOwner, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.ShellIndex, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.NextItemShellIndex, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Color, typeComm, sargetIndex, sargetIndex);
 	
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsVisible, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGravity, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGUI, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTextureRepeat, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsNPC, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsHexagonModel, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsSquareModel, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsAbsolutePosition, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsFocusable, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTransformable, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsUsable, typeComm);
-	AddCommandInList(listObjectFiels, fielsInfo.Options.IsChecked, typeComm);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsVisible, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGravity, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsGUI, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTextureRepeat, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsNPC, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsHexagonModel, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsSquareModel, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsAbsolutePosition, typeComm), sargetIndex;
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsFocusable, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsTransformable, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsUsable, typeComm, sargetIndex);
+	AddCommandInList(listObjectFiels, fielsInfo.Options.IsChecked, typeComm, sargetIndex);
 
 	/*string Command = "Command:";
 	string CommandSourceIndex = "CommandSourceIndex:";
@@ -197,7 +204,8 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 	StaticListCommand.insert({ Scene->CommandsAttribute.ObjectFieldsListCommand, listObjectFiels });
 }
 
-void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType)
+//void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType)
+void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex, int TargetIndex, int ValueI, float valueF, vec4 valueV4, string valueS)
 {
 	CommandPack commandNextType = CommandPack();
 	commandNextType.Description = description;
@@ -297,10 +305,11 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 }
 
 void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions, 
-	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong)
+	int valueI, float valueF, vec4 valueV4, string valueS, string description, bool isLong)
 {
 	CommandPack command = CommandPack();
 	command.Enable = true;
+	command.Description = description;
 	command.CommandType = commandType;
 	command.SourceIndex = sourceIndex;
 	command.TargetIndex = targetIndex;
@@ -316,11 +325,12 @@ void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceInd
 }
 
 void AspectDispatcherCommands::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI , float valueF, vec4 valueV4, string valueS, bool isLong)
+	int valueI , float valueF, vec4 valueV4, string valueS, string description, bool isLong)
 {
 
 	CommandPack command = CommandPack();
 	command.Enable = true;
+	command.Description = description;
 	command.CommandType = commandType;
 	command.SourceIndex = sourceIndex;
 	command.TargetIndex = targetIndex;
@@ -393,6 +403,17 @@ void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceI
 	}
 }
 
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex,
+	int valueI, float valueF, vec4 valueV4, string valueS, string description) {
+	SetCommand(obj, commandType, sourceIndex, targetIndex, "", -1,
+		valueI, valueF, valueV4, valueS, description);
+}
+
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType,
+	int valueI, string valueS, float valueF, vec4 valueV4, string description) {
+	SetCommand(obj, commandType, -1, -1, "", -1,
+		valueI, valueF, valueV4, valueS, description);
+}
 
 void AspectDispatcherCommands::DebugReadCommand(CommandPack* command, string name) {
 

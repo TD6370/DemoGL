@@ -50,15 +50,39 @@ void AspectFactoryObjects::Work() {
 	if (!command.Enable || command.CommandType != TypeCommand::CreateObject)
 		return;
 	
+	m_startContructing = false;
+	CreateInfo info;
+
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
+
+	if (typeObj == TypeObject::TextBox)
+	{
+		if (!isBackgroundFrame)
+			return;
+		Scene->ReadCommand(CreateObject);
+
+		info.Message = string();
+		info.Pos = vec3(1.);
+		info.Size = vec2(0.7, 0.1);
+
+		if (command.Description.size() != 0)
+			info.Message = command.Description;
+		if(info.Message.size() == 0 && command.ValueS.size() != 0)
+			info.Message = command.ValueS;
+		if (info.Message.size() != 0)
+			info.Init = true;
+
+		CreateTextBox(info);
+		isCompleted = true;
+	}
 	if (typeObj == TypeObject::Button)
 	{
 		if (!isBackgroundFrame)
 			return;
 
 		Scene->ReadCommand(CreateObject);
-		CreateButton();
+		CreateButton(info);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::EditBox)
@@ -67,7 +91,7 @@ void AspectFactoryObjects::Work() {
 			return;
 
 		Scene->ReadCommand(CreateObject);
-		CreateEditBox();
+		CreateEditBox(info);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::ListBox)
@@ -100,57 +124,101 @@ void AspectFactoryObjects::Work() {
 	}
 }
 
-void AspectFactoryObjects::CreateEditBox() {
-	string caption;
+void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
+	string caption = "?";
 	string childModel;
 	string objName;
 	shared_ptr<ObjectButton> objCreateButton;
 	shared_ptr<ObjectEditBox> objCreateEditBox;
 	shared_ptr<ObjectData> objCreate;
-	vec2 pos = vec2(1.);
-	float posZ = Scene->Storage->StartPosGUI_Z;
+	vec3 pos = vec3(1.);
+	vec2 size = vec2(0.7, 0.1);
+	if (info.Init) {
+		pos = info.Pos;
+		size = info.Size;
+		caption = info.Message;
+	}
+	pos.z = Scene->Storage->StartPosGUI_Z;
 		
 	// ---- Object Button create obj GUI
 	objName = "FrameEditBox";
-	caption = "ах";
 	childModel = "ButtonEditBoxModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-
-	objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, vec3(pos.x, pos.y, posZ), vec2(0.7, 0.1), Button, vec3(1));
+	
+	objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = true;
 
 		// ---- Object Edit box create	
 		auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
 
-	Scene->AddCommand(ObjectCreated, -1, objCreateButton->Index);
+	if(!m_startContructing)
+		Scene->AddCommand(ObjectCreated, -1, objCreateButton->Index);
+
+	if (m_startContructing)
+		m_lastObjectCreated = objBackGUI;
 }
 
-void AspectFactoryObjects::CreateButton() {
+void AspectFactoryObjects::CreateTextBox(CreateInfo info) {
 
-	string caption;
+	// ---- Object text box GUI
+	string objName = "TextBoxObject";
+	string childModel = "TextBoxModel";
+	vec3 color = vec3(0.117, 0.351, 0.950);
+	vec3 pos = vec3(1.);
+	vec2 size = vec2(0.7, 0.1);
+	string caption = "???";
+	if (info.Init) {
+		pos = info.Pos;
+		size = info.Size;
+		caption = info.Message;
+	}
+	pos.z = Scene->Storage->StartPosGUI_Z;
+
+	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	shared_ptr<ObjectData> objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, TextBox, color);
+
+	if (!m_startContructing)
+		Scene->AddCommand(ObjectCreated, -1, objCreate->Index);
+
+	if (m_startContructing)
+		m_lastObjectCreated = objCreate;
+}
+
+void AspectFactoryObjects::CreateButton(CreateInfo info) {
+
+	string caption = "??";
 	string childModel;
 	string objName;
 	vec3 color = vec3(0.3);
 	shared_ptr<ObjectButton> objCreateButton;
 	shared_ptr<ObjectData> objCreate;
-	vec2 pos = vec2(1.);
-	float posZ = Scene->Storage->StartPosGUI_Z;
+	vec3 pos = vec3(1.);
+	vec2 size = vec2(0.7, 0.1);
+	if (info.Init) {
+		pos = info.Pos;
+		size = info.Size;
+		caption = info.Message;
+	}
+	pos.z = Scene->Storage->StartPosGUI_Z;
 
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
-	caption = "эх";
 	childModel = "ButtonModel";
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-
-		objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, vec3(pos.x, pos.y, posZ), vec2(0.4, 0.2), Button, vec3(1));
+	
+		objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
 		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 		objCreateButton->IsToogleButon = false;
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
 	
 		auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
-		
-	Scene->AddCommand(ObjectCreated, - 1, objCreateButton->Index);
+	
+	if (!m_startContructing)
+		Scene->AddCommand(ObjectCreated, - 1, objCreateButton->Index);
+
+	if (m_startContructing)
+		m_lastObjectCreated = objBackGUI;
 }
 
 
@@ -165,7 +233,8 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	string objName;
 	vec3 color = vec3(0.3);
 	shared_ptr<ObjectButton> objCreateButton;
-	shared_ptr<ObjectButton> objCreateButton_Prev = nullptr;
+	//shared_ptr<ObjectButton> objCreateButton_Prev = nullptr;
+	shared_ptr<ObjectData> objCreateItem_Prev = nullptr;
 	shared_ptr<ObjectData> objBaseFrame;
 	
 	shared_ptr<ObjectData> objCreate;
@@ -174,6 +243,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 
 	// ---- background GUI
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	
 
 	vector<int> listItemsIndex = vector<int>();
 	vector<CommandPack> listCommand = Scene->GetListCommand(nameListCommand);
@@ -194,23 +264,55 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
 	objBaseFrame->IsFocusable = false;
 	
-	vec2 sizeItem = vec2(sizeFrame.x - (border * 2), heightItem);
-	vec3 posItem = vec3(posFrame.x + border, posFrame.y + border, posZ);
+	CreateInfo infoItem;
+	infoItem.Init = true;
+	infoItem.Pos = vec3(posFrame.x + border, posFrame.y + border, posZ);
+	infoItem.Size = vec2(sizeFrame.x - (border * 2), heightItem);
 
 	for (CommandPack commItem : listCommand)
 	{
+		infoItem.Message = commItem.Description;
+
+		if (typeListBox == ListTextBox)
+		{
+			//-- create Item "TextBox"
+			m_startContructing = true;
+			CreateTextBox(infoItem);
+			objCreate = m_lastObjectCreated;
+
+			//--- list index items for shell
+			listItemsIndex.push_back(objCreate->Index);
+			//---  join items links
+			if (objCreateItem_Prev != nullptr) {
+				objCreateItem_Prev->SetNextItemShellObject(objCreate);
+			}
+			objCreateItem_Prev = objCreate;
+			//--- set command
+			SetCommand(objCreate, commItem);
+		}
 		if (typeListBox == ListEditBox)
 		{
 			//-- create Item "EditBox"
+			m_startContructing = true;
+			CreateEditBox(infoItem);
+			objCreate = m_lastObjectCreated;
 
+			//--- list index items for shell
+			listItemsIndex.push_back(objCreate->Index);
+			//---  join items links
+			if (objCreateItem_Prev != nullptr) {
+				objCreateItem_Prev->SetNextItemShellObject(objCreate);
+			}
+			objCreateItem_Prev = objCreate;
+			//--- set command
+			SetCommand(objCreate, commItem);
 		}
 		if (typeListBox == ListBox)
 		{
 			//-- create Item "BUTTON"
 			objName = "ButtonItem_ListBox";
-			caption = commItem.Description;
 			childModel = "ButtonModel";
-			objCreate = Scene->Storage->AddChildObject(objBaseFrame, caption, childModel, objName, posItem, sizeItem, Button, vec3(1));
+			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
 			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 
 			/*if(commItem.CommandType == SelectItemValue)
@@ -222,19 +324,19 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			listItemsIndex.push_back(objCreateButton->Index);
 
 			// - join items links
-			if (objCreateButton_Prev != nullptr) {
-				objCreateButton_Prev->SetNextItemShellObject(objCreateButton);
+			if (objCreateItem_Prev != nullptr) {
+				objCreateItem_Prev->SetNextItemShellObject(objCreateButton);
 			}
-			objCreateButton_Prev = objCreateButton;
+			objCreateItem_Prev = objCreateButton;
 
 			SetCommand(objCreateButton, commItem);
 
 			//-- create Text item 
-			auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
+			auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);
 
 			shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
 		}
-		posItem.y += sizeItem.y + interligne;
+		infoItem.Pos.y += infoItem.Size.y + interligne;
 	}
 
 	//Create shell
@@ -245,7 +347,12 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 		listItemsIndex);
 
 	//- command complete
-	Scene->AddCommand(ObjectCreated, -1, objBaseFrame->Index);
+	if (!m_startContructing)
+		Scene->AddCommand(ObjectCreated, -1, objBaseFrame->Index);
+
+	//------------------------------
+	if (m_startContructing)
+		m_lastObjectCreated = objBackGUI;
 }
 
 

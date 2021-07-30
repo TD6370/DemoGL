@@ -1157,7 +1157,7 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1), p_layer);
 			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
 
-			SetCommand(objButton, TypeCommand::EditObjectCommand, objButton->Index, editBoxObj->Index);
+			SetCommand(objButton, TypeCommand::EditObjectCommand, objButton->Index, editBoxObj->Index, -1);
 
 			AddShell("EditBoxShell_" + objButton->Name,
 				objButton->Index, 

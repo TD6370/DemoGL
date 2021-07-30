@@ -671,21 +671,21 @@ void SceneConstructor::AddCommand(CommandPack command) {
 
 
 void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions,
-	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong)
+	int valueI, float valueF, vec4 valueV4, string valueS, string description, bool isLong)
 {
-	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions, valueI, valueF, valueV4, valueS, isLong);
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions, valueI, valueF, valueV4, valueS, description, isLong);
 }
 
 void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI, float valueF, vec4 valueV4, string valueS, bool isLong) {
+	int valueI, float valueF, vec4 valueV4, string valueS, string description, bool isLong) {
 
-	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, isLong);
+	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, description, isLong);
 
 }
 
 void SceneConstructor::AddCommand(TypeCommand commandType, bool isLong) {
 
-	dispatcherCommands->AddCommand(commandType, -1, -1, -1, -0.1, vec4(), "", isLong);
+	dispatcherCommands->AddCommand(commandType, -1, -1, -1, -0.1, vec4(), "", "", isLong);
 }
 
 void SceneConstructor::RefreshGUI() {

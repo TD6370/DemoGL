@@ -10,11 +10,21 @@ using std::shared_ptr;
 
 class SceneConstructor;
 class BaseShell;
+class ObjectData;
+
+struct CreateInfo {
+	bool Init = false;
+	string Message;
+	vec3 Pos = vec3();
+	vec2 Size = vec2();
+};
 
 class AspectFactoryObjects : public AspectBase
 {
 private:
 	shared_ptr<BaseShell> m_lastShellCreated;
+	shared_ptr<ObjectData> m_lastObjectCreated;
+	bool m_startContructing = false;
 
 public:
 	AspectFactoryObjects(string Name, SceneConstructor* sceneConstructor)
@@ -24,9 +34,11 @@ public:
 	void Config();
 	void Work();
 
-	void CreateButton();
+	void CreateTextBox(CreateInfo trans);
 
-	void CreateEditBox();
+	void CreateButton(CreateInfo trans);
+
+	void CreateEditBox(CreateInfo trans);
 
 	void CreateListBox(string nameListCommand, TypeObject typeListBox = ListBox);
 

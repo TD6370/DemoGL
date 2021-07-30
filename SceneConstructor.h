@@ -175,9 +175,10 @@ public:
 	void AddCommand(TypeCommand commandType, bool isLong = false);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, vector<string> keyOptions = vector<string>(), vector<int> valueOptions = vector<int>(),
-		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
+		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string(), bool isLong = false);
 
-	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
+	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, 
+		int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string(), bool isLong = false);
 
 	void RefreshGUI();
 	

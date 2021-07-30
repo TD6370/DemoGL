@@ -349,9 +349,27 @@ void RoomUseInterface::CheckStateObjects() {
 
 //===================== Event Create Object ===========================
 
+//--- Event selected info create object
+void  RoomUseInterface::EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objGUI) {
+
+	CommandPack* command = &Scene->CurrentSceneCommand;
+	if (!command->Enable || command->CommandType != SelectItemValue)
+		return;
+	if (command->SourceIndex != TypeCommand::CreateObject)
+		return;
+	if(Scene->ObjectCurrent->SceneCommand->CommandType != TypeCommand::SelectPosForObject)
+		return;
+
+	Scene->ReadCommand(SelectItemValue);
+
+	//--- set to Button "Create object" -> selected type Object
+	Scene->ObjectCurrent->SceneCommand->ValueS = command->Description;
+	Scene->ObjectCurrent->SceneCommand->ValueI = command->ValueI;
+}
+
 void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
-	int typeCreate = (int)TypeObject::Button;
+	int typeCreate = (int)TypeObject::Button; //--default
 	typeCreate = (int)TypeObject::ListBox;
 
 	CommandPack* command = &Scene->CurrentSceneCommand;
@@ -362,8 +380,10 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	{
 		if (Scene->ReadCommand(SelectPosForObject))
 		{
+			if(command->ValueI != -1)
+				typeCreate = command->ValueI;
 			//--- Set background command - select pos for Create control ---
-			SetCommand(objGUI, TypeCommand::SelectedPosForObject);
+			SetCommand(objGUI, TypeCommand::SelectedPosForObject, typeCreate, command->ValueS);
 		}
 
 		//--- position selected
@@ -371,17 +391,18 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		{
 			
 			string typeObjectAttr = Scene->CommandsAttribute.TypeObjectAttr;
+			string typeObjectText = command->ValueS;
 			if (command->ValueI != -1)
 				typeCreate = command->ValueI;
 			if (typeCreate == TypeObject::ListBox)
 			{
 				string nameListCommands = Scene->CommandsAttribute.BaseListCommand;
-				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //TEST
+				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //--default
 				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { ListBox },
 					-1, -1, vec4(), nameListCommands);
 			}
 			else {
-				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate });
+				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate }, typeCreate, 0.0, vec4(), typeObjectText, typeObjectText);
 			}
 			SetCommand(objGUI, TypeCommand::None);
 		}
@@ -420,6 +441,7 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 					objGUI->Index,
 					IndexObjectCreating, -1, -1, vec4(-1),
 					objTextBox->Message,
+					"",
 					true);
 			}
 		}
@@ -671,6 +693,8 @@ void RoomUseInterface::Work() {
 		return;
 
 	ModeEditControls(objGUI);
+
+	EventSelectedInfoCreateObject(objGUI);
 
 	CheckStateObjects();
 

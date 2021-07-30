@@ -83,7 +83,6 @@ private:
 
 	float StartTimer = 0;
 	float EndTimer = 0;
-		
 
 public:
 		
@@ -117,6 +116,7 @@ public:
 	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
 
 	//------- CreateObject
+	void EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objGUI); // Event selected info create object
 	void EventStartCreateObject(shared_ptr<ObjectGUI> objGUI);
 	void EventEndCreateObject(shared_ptr<ObjectGUI> objGUI);
 
@@ -130,9 +130,7 @@ public:
 	void SetTimeAnimate(shared_ptr<ObjectGUI> obj, float time);
 
 	//bool ReadCommand(TypeCommand commandType);
-
-	//-------------------
-
+			
 	void CheckStateObjects();
 
 	void EventEditTextControl(shared_ptr<ObjectGUI> obj);

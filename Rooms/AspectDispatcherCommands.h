@@ -51,15 +51,24 @@ public:
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
 	
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, vector<string> keyOptions = vector<string>(), vector<int> valueOptions = vector<int>(), 
-		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
+		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string(), bool isLong = false);
 
-	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), bool isLong = false);
+	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, 
+		int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), string descriptionbool = std::string(), bool isLong = false);
 
 	void DebugReadCommand(CommandPack* command, string name);
 };
 
-void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int targetIndex = -1, int sourceIndex = -1, string keyOptions = std::string(), int valueOptions = -1,
+
+
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, string keyOptions = std::string(), int valueOptions = -1,
 	int valueI = -1, float valueF = 0.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string());
+
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex,
+	int valueI = -1, float valueF = 0.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string());
+
+void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, 
+	int valueI, string valueS, float valueF = 0.0, vec4 valueV4 = vec4(), string description = std::string());
 
 void SetCommand(shared_ptr<ObjectData> obj, CommandPack command);
 
@@ -69,5 +78,5 @@ void UpdateCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int val
 
 void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
-void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType);
+void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex = -1, int TargetIndex = -1, int ValueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string());
 
