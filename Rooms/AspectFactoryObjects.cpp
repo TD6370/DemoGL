@@ -94,13 +94,16 @@ void AspectFactoryObjects::Work() {
 		CreateEditBox(info);
 		isCompleted = true;
 	}
-	if (typeObj == TypeObject::ListBox)
+	if (typeObj == TypeObject::ListBox ||
+		typeObj == TypeObject::ListTextBox ||
+		typeObj == TypeObject::ListEditBox
+		)
 	{
 		if (!isBackgroundFrame)
 			return;
 
 		Scene->ReadCommand(CreateObject);
-		CreateListBox(command.ValueS);
+		CreateListBox(command.ValueS, typeObj);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::ObjectFieldsEdit)
@@ -243,7 +246,6 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 
 	// ---- background GUI
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
-	
 
 	vector<int> listItemsIndex = vector<int>();
 	vector<CommandPack> listCommand = Scene->GetListCommand(nameListCommand);
@@ -273,39 +275,50 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	{
 		infoItem.Message = commItem.Description;
 
-		if (typeListBox == ListTextBox)
-		{
-			//-- create Item "TextBox"
+		/*if (typeListBox == ListTextBox){
 			m_startContructing = true;
 			CreateTextBox(infoItem);
 			objCreate = m_lastObjectCreated;
-
-			//--- list index items for shell
-			listItemsIndex.push_back(objCreate->Index);
-			//---  join items links
-			if (objCreateItem_Prev != nullptr) {
-				objCreateItem_Prev->SetNextItemShellObject(objCreate);
-			}
-			objCreateItem_Prev = objCreate;
-			//--- set command
-			SetCommand(objCreate, commItem);
 		}
-		if (typeListBox == ListEditBox)
-		{
-			//-- create Item "EditBox"
+		if (typeListBox == ListEditBox){
 			m_startContructing = true;
 			CreateEditBox(infoItem);
 			objCreate = m_lastObjectCreated;
-
-			//--- list index items for shell
-			listItemsIndex.push_back(objCreate->Index);
-			//---  join items links
-			if (objCreateItem_Prev != nullptr) {
-				objCreateItem_Prev->SetNextItemShellObject(objCreate);
+		}*/
+		if (typeListBox == ListTextBox)
+		{
+			bool isBorder = true;
+			if (isBorder) {
+				objName = "FrameItem_ListTextBox";
+				childModel = "FrameModel";
+				objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, GUI, vec3(1));
+				objCreate->IsFocusable = false;
 			}
-			objCreateItem_Prev = objCreate;
-			//--- set command
-			SetCommand(objCreate, commItem);
+			//-- create Item "TextBox"
+			objName = "TextBoxItem_ListTextBox";
+			childModel = "TextBoxModel";
+			color = vec3(0.117, 0.351, 0.950);
+			if (isBorder) 
+				Scene->Storage->ControlConstruct(objCreate, infoItem.Message, TextBox);
+			else
+				Scene->Storage->ControlConstruct(objBaseFrame, infoItem.Message, TextBox);
+		}
+		if (typeListBox == ListEditBox)
+		{
+			// ---- Object Edit box create	
+			objName = "EditBoxItem_ListEditBox";
+			childModel = "ButtonEditBoxModel";
+			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
+			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+			objCreateButton->IsToogleButon = true;
+			auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, EditBox);
+
+			//Command - create type Obj 
+			objCreateEditBox_Data->SceneCommand->Description= commItem.Description;
+			objCreateEditBox_Data->SceneCommand->ValueS = commItem.ValueS; 
+			objCreateEditBox_Data->SceneCommand->ValueI = commItem.ValueI;
+			//-- source object command
+			objCreateEditBox_Data->SceneCommand->Options.insert({ Scene->CommandsAttribute.SourceCommandObjIndexAttr, objBaseFrame->Index });
 		}
 		if (typeListBox == ListBox)
 		{
@@ -314,28 +327,25 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			childModel = "ButtonModel";
 			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
 			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-
 			/*if(commItem.CommandType == SelectItemValue)
 				objCreateButton->IsToogleButon = true;
 			else*/
 			objCreateButton->IsToogleButon = false;
 
-			//list index items for shell
-			listItemsIndex.push_back(objCreateButton->Index);
-
-			// - join items links
-			if (objCreateItem_Prev != nullptr) {
-				objCreateItem_Prev->SetNextItemShellObject(objCreateButton);
-			}
-			objCreateItem_Prev = objCreateButton;
-
-			SetCommand(objCreateButton, commItem);
-
 			//-- create Text item 
 			auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);
-
 			shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
+
+			SetCommand(objCreateButton, commItem);
 		}
+		//--- list index items for shell
+		listItemsIndex.push_back(objCreate->Index);
+		//---  join items links
+		if (objCreateItem_Prev != nullptr) {
+			objCreateItem_Prev->SetNextItemShellObject(objCreate);
+		}
+		objCreateItem_Prev = objCreate;
+
 		infoItem.Pos.y += infoItem.Size.y + interligne;
 	}
 

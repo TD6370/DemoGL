@@ -392,17 +392,33 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 			
 			string typeObjectAttr = Scene->CommandsAttribute.TypeObjectAttr;
 			string typeObjectText = command->ValueS;
+			string nameCommandList = "";
+
+
 			if (command->ValueI != -1)
 				typeCreate = command->ValueI;
-			if (typeCreate == TypeObject::ListBox)
+			if (typeCreate == TypeObject::ListBox ||
+				typeCreate == TypeObject::ListTextBox ||
+				typeCreate == TypeObject::ListEditBox)
 			{
 				string nameListCommands = Scene->CommandsAttribute.BaseListCommand;
-				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //--default
-				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { ListBox },
-					-1, -1, vec4(), nameListCommands);
+				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //--default : TYPES
+				if(typeCreate == TypeObject::ListTextBox ||	typeCreate == TypeObject::ListEditBox)
+					nameListCommands = Scene->CommandsAttribute.ObjectFieldsListCommand; // -- default : FIELDS
+
+				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
+					-1, 
+					-1, 
+					vec4(), 
+					nameListCommands);
 			}
 			else {
-				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate }, typeCreate, 0.0, vec4(), typeObjectText, typeObjectText);
+				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate }, 
+					typeCreate, 
+					0.0, 
+					vec4(), 
+					nameCommandList, 
+					typeObjectText);
 			}
 			SetCommand(objGUI, TypeCommand::None);
 		}

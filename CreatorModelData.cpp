@@ -1145,7 +1145,7 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			// ---- Object Edit box create	
 			vec2 offset = vec2(0.01);
 			vec3 startPos = vec3(offset.x, offset.y, 0.002);
-			startPos = vec3(.03, .03, 0.021);
+			startPos = vec3(.03, .01, 0.021);
 
 			//startPos.z = objButton->StartPos.z + 0.0005;
 			/*startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
@@ -1168,5 +1168,25 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			return editBoxObj;
 		}
 	}
+
+	if (p_typeObj == TypeObject::TextBox) {
+
+		vec2 offset = vec2(0.01);
+		vec3 startPos = vec3(offset.x, offset.y, 0.021);
+		startPos = vec3(.05, .01, 0.002);
+
+		//--- Add textbox
+		if (name.size() == 0)
+			name = "TextBox";
+		objData = AddChildObject(obj, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1), p_layer);
+		auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
+
+		AddShell("ButtonShell_" + obj->Name,
+			obj->Index,
+			objTextButton->Index);
+
+		return objTextButton;
+	}
+
 	return nullptr;
 }

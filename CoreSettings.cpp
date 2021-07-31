@@ -175,6 +175,7 @@ extern struct AttributeCommands
 	string TypesObjectListCommand = "TypesObjectListCommand";
 	string ObjectFieldsListCommand = "ObjectFieldsListCommand";
 	string TypeObjectAttr = "TypeObject";
+	string SourceCommandObjIndexAttr = "SourceCommandObjIndex";
 };
 
 
