@@ -75,6 +75,8 @@ vec4 GlowEffect(in vec4 inColor ){
 
 void main()
 {
+    int StartPressedParamShaderID = 6;
+
 	float alpha = 0.0f;
     float alphaOff = 1.0f;
     float bordB = 0.1;
@@ -138,11 +140,24 @@ void main()
     // if(paramValue == 1) //1
 	//     text1 = SDF1(text1);
     //-----------
-    if(paramValue == 0) //0     //6+
+    if(paramValue == 0) 
+    {
+        //Text Box - default
         text1 = SDF2_2(text1);
-        //text1 = SDF2(text1);
+    }
+    if(paramValue == 1) 
+    {
+        //Edit box - disable
+        text1 = SDF2_2(text1);
+    }
+    if(paramValue == StartPressedParamShaderID)
+    {
+         //Edit box - enaable
+        text1 = SDF2_2(text1);
+        text1 = SDF2(text1);
+    }
     //-----------
-    // if(paramValue == 3) //3     //6+
+    // if(paramValue == 3) //3     
     //     text1 = SDF4(text1);
     // //----------- GlowEffect
     // if(paramValue == 4) //4
@@ -155,7 +170,8 @@ void main()
     //     text1 = SDF2_2(text1);
     //---------------------
     
-    vec4 colorText = vec4(0.984,0.773,0.196,1.);
+    vec4 colorText = vec4(0.984,0.773,0.196, 1.);
+    colorText = vec4(0.996, 0.996, 0.482, 1.);
 
     float sumColor = text1.r * text1.g * text1.b;
     alpha = smoothstep(0.0, 0.5, sumColor);
@@ -163,8 +179,7 @@ void main()
     // EditBox
     if(paramValue == 1)
     {
-        //text1 = Outline(text);
-        color =  text * vec4(colorText.rgb, alpha );
+        color =  text1 * vec4(colorText.rgb, alpha );
     }
     else
     {

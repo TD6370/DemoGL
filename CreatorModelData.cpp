@@ -736,7 +736,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "FrameUI.frag";
 	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
-	nextModelPrt->MaterialData.PathTexture = "./Textures/EditBox2.bmp";
+	nextModelPrt->MaterialData.PathTexture = "./Textures/EditBox3.bmp";
 	nextModelPrt->MeshData.RadiusCollider = .1;
 	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
@@ -1068,7 +1068,6 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 
 	//-------------- Z Order Controls ---------------
 	vec3 startPos = startPosChild;
-
 	startPos.z = StartPosGUI_Z;
 	if (ownerObj->Index != SceneData->IndexBackgroundGUIObj)
 		startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
@@ -1141,16 +1140,10 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 
 	if (p_typeObj == TypeObject::EditBox) {
 		if (objButton != nullptr) {
-		
-			// ---- Object Edit box create	
-			vec2 offset = vec2(0.01);
-			vec3 startPos = vec3(offset.x, offset.y, 0.002);
-			startPos = vec3(.03, .01, 0.021);
 
-			//startPos.z = objButton->StartPos.z + 0.0005;
-			/*startPos.z = StartPosGUI_Z + StartPosSubGUI_ADD_Z;
-			if (p_layer == LayerSystem)
-				startPos.z = StartPosSystemGUI_Z + StartPosSubGUI_ADD_Z;*/
+			auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
+			vec3 own = objGUI->StartPos;
+			vec3 startPos = vec3(.03, .01, own.z + 0.01);
 
 			if (name.size() == 0)
 				name = "Button_EditBox";

@@ -47,8 +47,12 @@ void ObjectButton::Click() {
 void ObjectButton::DefaultView() {
 	if (IsToogleButon)
 	{
-		if (IsChecked)
-			ParamValue = AnimationParam->StartPressedParamShaderID;
+		if (IsChecked) {
+			if (SceneCommand->CommandType == TypeCommand::EditObjectCommand)
+				ParamValue = AnimationParam->StartResizeParamShaderID;
+			else
+				ParamValue = AnimationParam->StartPressedParamShaderID;
+		}
 	}
 }
 
