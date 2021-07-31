@@ -89,7 +89,7 @@ void main()
 
     int numSymb = numSymbol;
     
-    if(numSymb > 100){
+    if(numSymb >= 100){
         numSymb -= 100;
         isEng = true;
         //paramValue = 7; //TEST

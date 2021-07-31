@@ -102,7 +102,7 @@ void ObjectTextBox::MeshTransform() {
 	int firstStep = 0;
 	bool isFirstStep = false;
 	int indVert = 0;
-	float offsetX = 0.0477;
+	float offsetX = 0.035;
 	int vertexSize = 6;
 	int codeSymb;
 	int sizeMessage = MessageCode.size();

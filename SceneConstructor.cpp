@@ -73,13 +73,12 @@ void SceneConstructor::Init() {
 	Storage = new CreatorModelData();
 
 	TransModel = new TransformModel();
-	Contrl = new Controllers();
 
+	Contrl = new Controllers(MapAlphabet, MapAlphabetEng);
+	
 	CurrentSceneCommand = CommandPack();
 
 	CommandsAttribute = AttributeCommands();
-
-	FillAlphabet();
 
 	LoadDataModel();
 	
@@ -131,117 +130,6 @@ void SceneConstructor::ConfigRoom() {
 	factoryObjects->Init();
 	Aspects.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
 	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Aspects[Aspects.size() - 1]).get();
-}
-
-void SceneConstructor::FillAlphabet() {
-	
-	MapAlphabet = map<string, int>{
-		{"à",0},
-		{"á",1},
-		{"â",2},
-		{"ã",3},
-		{"ä",4},
-		{"å",5},
-		{"æ",6},
-		{"ç",7},
-		{"è",8},
-		{"ê",9},
-		{"ë",10},
-		{"ì",11},
-		{"í",12},
-		{"î",13},
-		{"ï",14},
-		{"ð",15},
-		{"ñ",16},
-		{"ò",17},
-		{"ó",18},
-		{"ô",19},
-		{"õ",20},
-		{"ö",21},
-		{"÷",22},
-		{"ø",23},
-		{"ø",24},
-		{"ü",25},
-		{"û",26},
-		{"ý",27},
-		{"þ",28},
-		{"ÿ",29},
-		{" ",30},
-
-		{"1",31},
-		{"2",32},
-		{"3",33},
-		{"4",34},
-		{"5",35},
-		{"6",36},
-		{"7",37},
-		{"8",38},
-		{"9",39},
-		{"0",40},
-		{"+",41},
-		{"-",42},
-		{"*",43},
-		{"/",44},
-		{"=",45},
-		{"<,",46},
-		{">",47},
-		{"?",48},
-		
-	};
-
-	MapAlphabetEng = map<string, int>{
-		{"q",0},
-		{"w",1},
-		{"e",2},
-		{"r",3},
-		{"t",4},
-		{"y",5},
-		{"u",6},
-		{"i",7},
-		{"o",8},
-		{"p",9},
-		{"a",10},
-		{"s",11},
-		{"d",12},
-		{"f",13},
-		{"g",14},
-		{"h",15},
-		{"j",16},
-		{"k",17},
-		{"l",18},
-		{"z",19},
-		{"x",20},
-		{"c",21},
-		{"v",22},
-		{"b",23},
-		{"n",24},
-		{"m",25},
-		{".",26},
-		{",",27},
-		{"!",28},
-		{":",29},
-		{" ",30},
-
-		{"1",31},
-		{"2",32},
-		{"3",33},
-		{"4",34},
-		{"5",35},
-		{"6",36},
-		{"7",37},
-		{"8",38},
-		{"9",39},
-		{"0",40},
-		{"+",41},
-		{"-",42},
-		{"*",43},
-		{"/",44},
-		{"=",45},
-		{"<,",46},
-		{">",47},
-		{"?",48},
-	};
-
 }
 
 void SceneConstructor::AddAspect(AspectBase* aspect) {
@@ -697,3 +585,4 @@ vector<CommandPack> SceneConstructor::GetListCommand(string nameList) {
 
 	return dispatcherCommands->StaticListCommand[nameList];
 }
+

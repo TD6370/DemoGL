@@ -100,6 +100,7 @@ struct ControllerInput {
 	int Action = -1;
 	int MBT = -1;
 	int ActionMouse = -1;
+	int Mode = -1;
 	GLfloat ParamCase = 0;
 };
 

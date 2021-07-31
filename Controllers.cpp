@@ -168,18 +168,24 @@ void Controllers::MouseEvents(
 void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action, int mode,
 	SceneConstructor* Scene)
 {
+//	Macros
+//#define 	GLFW_MOD_SHIFT   0x0001
+//#define 	GLFW_MOD_CONTROL   0x0002
+//#define 	GLFW_MOD_ALT   0x0004
+//#define 	GLFW_MOD_SUPER   0x0008
+//#define 	GLFW_MOD_CAPS_LOCK   0x0010
+//#define 	GLFW_MOD_NUM_LOCK   0x0020
+
+	if (m_currentLaguage == LangNone ||
+		(mode == GLFW_MOD_SHIFT && key == GLFW_KEY_LEFT_ALT))
+	{
+		SwitchLanguage();
+	}
+
 	float m_speed = Scene->m_speed;
 	float m_deltaTime = Scene->m_deltaTime;
-	//TEST***
-	/*if (Scene->IsSpeedDeltaTime) {
-		if(Scene->VersionUpdate == 1)
-			m_speed = glm::min((float)(Scene->m_speed * 1.5),Scene->DeltaTime);
-		if (Scene->VersionUpdate == 2)
-			m_speed = Scene->m_speed / Scene->DeltaTime;
-	}*/
 
-	// Когда пользователь нажимает ESC, мы устанавливаем свойство WindowShouldClose в true, 
-	// и приложение после этого закроется
+	//ESC - Exit
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 
@@ -232,11 +238,150 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 
 	Scene->Storage->Inputs->Key = key;
 	Scene->Storage->Inputs->Action = action;
+	Scene->Storage->Inputs->Mode = mode;
 }
 
 void Controllers::FillAlphabet() {
 
-	mapAlphabetKeys = map<int, string>{
+	map<string, int> m_mapAlphabetNumInputs = map<string, int>{
+		{" ",30},
+		{"1",31},
+		{"2",32},
+		{"3",33},
+		{"4",34},
+		{"5",35},
+		{"6",36},
+		{"7",37},
+		{"8",38},
+		{"9",39},
+		{"0",40},
+		{"+",41},
+		{"-",42},
+		{"*",43},
+		{"/",44},
+		{"=",45},
+		{"<,",46},
+		{">",47},
+		{"?",48}
+	};
+
+	m_mapAlphabetInputs = map<string, int>{
+		{"а",0},
+		{"б",1},
+		{"в",2},
+		{"г",3},
+		{"д",4},
+		{"е",5},
+		{"ж",6},
+		{"з",7},
+		{"и",8},
+		{"й",8},
+		{"к",9},
+		{"л",10},
+		{"м",11},
+		{"н",12},
+		{"о",13},
+		{"п",14},
+		{"р",15},
+		{"с",16},
+		{"т",17},
+		{"у",18},
+		{"ф",19},
+		{"х",20},
+		{"ц",21},
+		{"ч",22},
+		{"ш",23},
+		{"ш",24},
+		{"ь",25},
+		{"ы",26},
+		{"э",27},
+		{"ю",28},
+		{"я",29},
+	};
+
+	m_mapAlphabetInputsEng = map<string, int>{
+		{"q",0},
+		{"w",1},
+		{"e",2},
+		{"r",3},
+		{"t",4},
+		{"y",5},
+		{"u",6},
+		{"i",7},
+		{"o",8},
+		{"p",9},
+		{"a",10},
+		{"s",11},
+		{"d",12},
+		{"f",13},
+		{"g",14},
+		{"h",15},
+		{"j",16},
+		{"k",17},
+		{"l",18},
+		{"z",19},
+		{"x",20},
+		{"c",21},
+		{"v",22},
+		{"b",23},
+		{"n",24},
+		{"m",25},
+		{".",26},
+		{",",27},
+		{"!",28},
+		{":",29},
+	};
+	
+	for (auto item : m_mapAlphabetNumInputs)
+	{
+		m_mapAlphabetInputs.insert(item);
+		m_mapAlphabetInputsEng.insert(item);
+	}
+
+//#define 	GLFW_KEY_KP_DECIMAL   330
+//#define 	GLFW_KEY_KP_DIVIDE   331
+//#define 	GLFW_KEY_KP_MULTIPLY   332
+//#define 	GLFW_KEY_KP_SUBTRACT   333
+//#define 	GLFW_KEY_KP_ADD   334
+//#define GLFW_KEY_LEFT_BRACKET   91 /* [ */
+//#define GLFW_KEY_BACKSLASH   92 /* \ */
+//#define GLFW_KEY_RIGHT_BRACKET   93 /* ] */
+//#define GLFW_KEY_GRAVE_ACCENT   96 /* ` */
+
+	map<int, string> mapAlphabetNumKeys = map<int, string>{
+		{GLFW_KEY_KP_0 ,"0"},
+		{GLFW_KEY_KP_1 ,"1"},
+		{GLFW_KEY_KP_2 ,"2"},
+		{GLFW_KEY_KP_3 ,"3"},
+		{GLFW_KEY_KP_4 ,"4"},
+		{GLFW_KEY_KP_5 ,"5"},
+		{GLFW_KEY_KP_6 ,"6"},
+		{GLFW_KEY_KP_7 ,"7"},
+		{GLFW_KEY_KP_8 ,"8"},
+		{GLFW_KEY_KP_9 ,"9"},
+		{GLFW_KEY_0 ,"0"},
+		{GLFW_KEY_1 ,"1"},
+		{GLFW_KEY_2 ,"2"},
+		{GLFW_KEY_3 ,"3"},
+		{GLFW_KEY_4 ,"4"},
+		{GLFW_KEY_5 ,"5"},
+		{GLFW_KEY_6 ,"6"},
+		{GLFW_KEY_7 ,"7"},
+		{GLFW_KEY_8 ,"8"},
+		{GLFW_KEY_9 ,"9"},
+		{GLFW_KEY_KP_ADD ,"+"},
+		{GLFW_KEY_KP_SUBTRACT ,"-"},	//GLFW_KEY_MINUS
+		{GLFW_KEY_KP_MULTIPLY ,"*"},
+		{GLFW_KEY_KP_DIVIDE ,"/"},
+		{GLFW_KEY_EQUAL ,"="},
+		//{GLFW_KEY_COMMA ,"<"}, //GLFW_KEY_COMMA	","
+		//{GLFW_KEY_PERIOD ,">"},	//GLFW_KEY_PERIOD  "."
+		{GLFW_KEY_SLASH  ,"?"},	//GLFW_KEY_SLASH   "/"
+		{GLFW_KEY_SPACE ," "},
+		//{ ,""},
+	};
+
+	mapAlphabetRusKeys = new map<int, string>{
 		{GLFW_KEY_Q ,"й"},
 		{GLFW_KEY_W ,"ц"},
 		{GLFW_KEY_E ,"у"},
@@ -267,34 +412,78 @@ void Controllers::FillAlphabet() {
 		{GLFW_KEY_M ,"ь"},
 		{GLFW_KEY_COMMA ,"б"},	//GLFW_KEY_COMMA   44 /* , */	GLFW_KEY_PERIOD   46 /* . */
 		{GLFW_KEY_PERIOD ,"ю"},
-		{GLFW_KEY_SPACE ," "},
+		//{GLFW_KEY_SPACE ," "},
+	};
+		
+	mapAlphabetEngKeys = new map<int, string>{
+		{GLFW_KEY_Q ,"q"},
+		{GLFW_KEY_W ,"w"},
+		{GLFW_KEY_E ,"e"},
+		{GLFW_KEY_R ,"r"},
+		{GLFW_KEY_T ,"t"},
+		{GLFW_KEY_Y ,"y"},
+		{GLFW_KEY_U ,"u"},
+		{GLFW_KEY_I ,"i"},
+		{GLFW_KEY_O ,"o"},
+		{GLFW_KEY_P ,"p"},
+		{GLFW_KEY_A ,"a"},
+		{GLFW_KEY_S ,"s"},
+		{GLFW_KEY_D ,"d"},
+		{GLFW_KEY_F ,"f"},
+		{GLFW_KEY_G ,"g"},
+		{GLFW_KEY_H ,"h"},
+		{GLFW_KEY_J ,"j"},
+		{GLFW_KEY_K ,"k"},
+		{GLFW_KEY_L ,"l"},
+		{GLFW_KEY_Z ,"z"},
+		{GLFW_KEY_X ,"x"},
+		{GLFW_KEY_C ,"c"},
+		{GLFW_KEY_V ,"v"},
+		{GLFW_KEY_B ,"b"},
+		{GLFW_KEY_N ,"n"},
+		{GLFW_KEY_M ,"m"},
+		/*{".",26},
+		{",",27},
+		{"!",28},
+		{":",29},*/
+		{GLFW_KEY_PERIOD ,"."},  //GLFW_KEY_PERIOD   46 /* . */
+		{GLFW_KEY_COMMA ,","},	//GLFW_KEY_COMMA   44 /* , */	
+		{GLFW_KEY_SEMICOLON ,":"},	//	GLFW_KEY_SEMICOLON   59 /* ; */
+		//{GLFW_KEY_ ,"!"},
+
 		/*{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
-		{GLFW_KEY_ ,""},
 		{GLFW_KEY_ ,""},*/
 
 	};
+
+	for (auto item : mapAlphabetNumKeys)
+	{
+		mapAlphabetRusKeys->insert(item);
+		mapAlphabetEngKeys->insert(item);
+	}
+}
+
+void Controllers::SwitchLanguage() {
+
+	if (m_currentLaguage == LangRus) 
+	{
+		m_currentLaguage = LangEng;
+		mapCurrentAlphabetKeys = mapAlphabetEngKeys;
+	}
+	else 
+	{
+		m_currentLaguage = LangRus;
+		mapCurrentAlphabetKeys = mapAlphabetRusKeys;
+	}
 }
 
 string Controllers::GetSymbol(int keyIndex) {
 
 	map <int, string> ::iterator it;
-	it = mapAlphabetKeys.find(keyIndex);
-	if (it != mapAlphabetKeys.end())
+	it = mapCurrentAlphabetKeys->find(keyIndex);
+	if (it != mapCurrentAlphabetKeys->end())
 	{
-		return mapAlphabetKeys[keyIndex];
+		return (*mapCurrentAlphabetKeys)[keyIndex];
 	}
 	return "";
 }

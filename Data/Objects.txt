@@ -35,8 +35,8 @@ Name: Mon
 Model: mon
 Index: 1
 Layer: LayerNone
-Pos: -27.3216 -53.0272 7.85489
-Target: -41.2614 -53.0076 17.4386
+Pos: -35.4914 -52.9934 12.3081
+Target: -42.8691 -53.0076 13.0654
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -67,9 +67,9 @@ Name: Mon_2
 Model: mon
 Index: 2
 Layer: LayerNone
-Pos: 5.1048 -50.4883 39.3209
-Target: -6.15131 -46.4438 38.1467
-Action: Moving
+Pos: -3.23536 -52.6079 38.4509
+Target: 15.7646 -52.6079 18.4509
+Action: Look
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -99,9 +99,9 @@ Name: Mon_3
 Model: mon
 Index: 3
 Layer: LayerNone
-Pos: -49.8694 -52.8839 -9.29852
-Target: -50.1851 -51.4889 -16.8964
-Action: Look
+Pos: -49.991 -52.8464 -12.2249
+Target: -47.9217 -51.4889 -16.4176
+Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -131,9 +131,9 @@ Name: Mon_4
 Model: mon
 Index: 4
 Layer: LayerNone
-Pos: -38.1507 -52.9614 10.3866
-Target: -48.1507 -52.9614 2.38662
-Action: Look
+Pos: -45.9594 -52.9742 4.13968
+Target: -35.9594 -52.9742 11.1397
+Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -163,8 +163,8 @@ Name: Mon_5
 Model: mon
 Index: 5
 Layer: LayerNone
-Pos: 5.04354 -49.8285 27.6467
-Target: 0.344645 -52.0867 30.9359
+Pos: 0.154303 -51.9891 27.7501
+Target: -16.2505 -50.8504 18.2525
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -195,8 +195,8 @@ Name: Mon_6
 Model: mon
 Index: 6
 Layer: LayerNone
-Pos: 20.279 -52.7259 8.8911
-Target: 30.279 -52.7259 15.8911
+Pos: 26.4196 -52.791 15.4866
+Target: 11.0535 -53.0046 26.3333
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -227,8 +227,8 @@ Name: Mon_7
 Model: mon
 Index: 7
 Layer: LayerNone
-Pos: -5.70699 -52.8721 22.8132
-Target: -3.49455 -51.5218 24.6354
+Pos: -13.9706 -53.0469 32.8476
+Target: -19.707 -52.8721 39.8132
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -259,13 +259,13 @@ Name: Mon_8
 Model: mon
 Index: 8
 Layer: LayerNone
-Pos: -39.0291 -52.9848 19.4368
-Target: -20.0291 -52.9848 -0.563177
-Action: Look
+Pos: -34.2078 -52.9939 14.3618
+Target: -14.6094 -52.9848 8.06155
+Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 0 0
 Command: None
 CommandSourceIndex: 0
 CommandTargetIndex: 0
@@ -291,8 +291,8 @@ Name: Mon_9
 Model: mon
 Index: 9
 Layer: LayerNone
-Pos: -44.8614 -53.046 -37.8119
-Target: -40.617 -53.0098 -26.4936
+Pos: -40.1948 -47.6636 -25.3677
+Target: -35.5986 -48.2142 -13.1112
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -323,7 +323,7 @@ Name: Mon_10
 Model: mon
 Index: 10
 Layer: LayerNone
-Pos: 7.21111 -51.3936 41.1584
+Pos: 23.1553 -47.7926 36.0328
 Target: 29.1899 -51.1759 34.0929
 Action: Moving
 IndexObjectOwner: -1
@@ -855,7 +855,7 @@ Name: M_C_1
 Model: marker_Cross
 Index: 22
 Layer: LayerNone
-Pos: -27.3216 -53.0272 7.85489
+Pos: -35.4914 -52.9934 12.3081
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -887,7 +887,7 @@ Name: M_C_2
 Model: marker_Cross
 Index: 23
 Layer: LayerNone
-Pos: -26.9095 -55.0275 7.57163
+Pos: -34.994 -54.991 12.2571
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -919,7 +919,7 @@ Name: M_V_1
 Model: marker_Vector
 Index: 24
 Layer: LayerNone
-Pos: -25.0067 -55.0291 7.35156
+Pos: -37.7106 -54.9856 10.5298
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -951,7 +951,7 @@ Name: M_V_2
 Model: marker_Vector
 Index: 25
 Layer: LayerNone
-Pos: -28.2511 -55.0286 7.35171
+Pos: -34.5093 -54.9919 13.7284
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -983,7 +983,7 @@ Name: M_V_3
 Model: marker_Vector
 Index: 26
 Layer: LayerNone
-Pos: -28.1913 -55.0179 10.5297
+Pos: -34.4975 -54.9911 10.5372
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -1017,7 +1017,7 @@ Index: 27
 Layer: LayerNone
 Pos: 0 -54.0171 5
 Target: 0 -54.0171 5
-Action: Moving
+Action: Search
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -1079,7 +1079,7 @@ Name: BackContectGUI
 Model: ConextFrameModel
 Index: 29
 Layer: LayerBackground
-Pos: 0.0495825 -52.3857 2.45721
+Pos: -0.072863 -52.5421 2.45733
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -1115,7 +1115,7 @@ Name: TEST3
 Model: FrameModel
 Index: 30
 Layer: LayerBase
-Pos: 0.586982 -52.4373 2.45977
+Pos: 0.464041 -52.5937 2.43388
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 29
@@ -1150,7 +1150,7 @@ Name: ButtonEditOn
 Model: ButtonModel
 Index: 31
 Layer: LayerBase
-Pos: 0.0996919 -52.4356 2.46258
+Pos: -0.0224684 -52.5919 2.46148
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 29
@@ -1186,7 +1186,7 @@ Name: ButtonCreateObjGUI
 Model: ButtonModel
 Index: 32
 Layer: LayerBase
-Pos: 0.199627 -52.4357 2.45946
+Pos: 0.077171 -52.592 2.45327
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 29
@@ -1222,7 +1222,7 @@ Name: Button_TextBox
 Model: TextBoxModel
 Index: 33
 Layer: LayerBase
-Pos: -0.770351 -51.4657 2.45976
+Pos: -0.848617 -51.6331 2.47493
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 32
@@ -1249,7 +1249,7 @@ IsTransformable: 1
 IsUsable: 1
 IsChecked: 0
 Specific:
-StartPos: 0.01 0.01 0.003
+StartPos: 0.0542671 0.0207257 0.003
 SizePanel: 1.5 1
 Message: создать
 ------------------------------------------------------------------
@@ -1330,7 +1330,7 @@ Name: CursorGUI
 Model: CursorModel
 Index: 36
 Layer: LayerSystem
-Pos: -0.580739 -51.7481 2.46736
+Pos: -0.56586 -51.9066 2.47558
 Target: 0 0 0
 Action: Moving
 IndexObjectOwner: 29
@@ -1357,7 +1357,7 @@ IsTransformable: 0
 IsUsable: 0
 IsChecked: 0
 Specific:
-StartPos: 0.329459 0.322458 0.01
+StartPos: 0.464798 0.324636 0.01
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 Type: ListBox
@@ -1365,7 +1365,7 @@ Name: BaseFrame_ListBox
 Model: FrameModel
 Index: 37
 Layer: LayerBase
-Pos: 0.12387 -52.8672 2.4594
+Pos: 0.00209427 -53.0234 2.46871
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 29
@@ -1400,7 +1400,7 @@ Name: ButtonItem_ListBox
 Model: ButtonModel
 Index: 38
 Layer: LayerBase
-Pos: 0.133892 -52.8772 2.46048
+Pos: 0.0121739 -53.0334 2.46954
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1436,7 +1436,7 @@ Name: Button_TextBox_39
 Model: TextBoxModel
 Index: 39
 Layer: LayerBase
-Pos: -0.836108 -51.9072 2.4597
+Pos: -0.957918 -52.0638 2.49206
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 38
@@ -1472,7 +1472,7 @@ Name: ButtonItem_ListBox_40
 Model: ButtonModel
 Index: 40
 Layer: LayerBase
-Pos: 0.133892 -52.9522 2.46048
+Pos: 0.0122755 -53.1084 2.47156
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1508,7 +1508,7 @@ Name: Button_TextBox_41
 Model: TextBoxModel
 Index: 41
 Layer: LayerBase
-Pos: -0.836108 -51.9822 2.4597
+Pos: -0.957817 -52.1387 2.49409
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 40
@@ -1544,7 +1544,7 @@ Name: ButtonItem_ListBox_42
 Model: ButtonModel
 Index: 42
 Layer: LayerBase
-Pos: 0.133892 -53.0272 2.46048
+Pos: 0.012377 -53.1833 2.47359
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1580,7 +1580,7 @@ Name: Button_TextBox_43
 Model: TextBoxModel
 Index: 43
 Layer: LayerBase
-Pos: -0.836108 -52.0572 2.4597
+Pos: -0.957715 -52.2137 2.49611
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 42
@@ -1616,7 +1616,7 @@ Name: ButtonItem_ListBox_44
 Model: ButtonModel
 Index: 44
 Layer: LayerBase
-Pos: 0.133892 -53.1022 2.46048
+Pos: 0.0124787 -53.2583 2.47561
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1652,7 +1652,7 @@ Name: Button_TextBox_45
 Model: TextBoxModel
 Index: 45
 Layer: LayerBase
-Pos: -0.836108 -52.1322 2.4597
+Pos: -0.957613 -52.2887 2.49813
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 44
@@ -1688,7 +1688,7 @@ Name: ButtonItem_ListBox_46
 Model: ButtonModel
 Index: 46
 Layer: LayerBase
-Pos: 0.133892 -53.1772 2.46048
+Pos: 0.0125803 -53.3333 2.47763
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1724,7 +1724,7 @@ Name: Button_TextBox_47
 Model: TextBoxModel
 Index: 47
 Layer: LayerBase
-Pos: -0.836108 -52.2072 2.4597
+Pos: -0.957512 -52.3636 2.50015
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 46
@@ -1760,7 +1760,7 @@ Name: ButtonItem_ListBox_48
 Model: ButtonModel
 Index: 48
 Layer: LayerBase
-Pos: 0.133892 -53.2522 2.46048
+Pos: 0.0126818 -53.4083 2.47965
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1796,7 +1796,7 @@ Name: Button_TextBox_49
 Model: TextBoxModel
 Index: 49
 Layer: LayerBase
-Pos: -0.836108 -52.2822 2.4597
+Pos: -0.95741 -52.4386 2.50218
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 48
@@ -1832,7 +1832,7 @@ Name: ButtonItem_ListBox_50
 Model: ButtonModel
 Index: 50
 Layer: LayerBase
-Pos: 0.133892 -53.3272 2.46048
+Pos: 0.0127835 -53.4832 2.48167
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -1868,7 +1868,7 @@ Name: Button_TextBox_51
 Model: TextBoxModel
 Index: 51
 Layer: LayerBase
-Pos: -0.836108 -52.3572 2.4597
+Pos: -0.957309 -52.5136 2.5042
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 50
@@ -1904,13 +1904,13 @@ Name: ButtonItem_ListBox_52
 Model: ButtonModel
 Index: 52
 Layer: LayerBase
-Pos: 0.133892 -53.4022 2.46048
+Pos: 0.0128851 -53.5582 2.4837
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
 ShellIndex: 21
 NextItemShellIndex: 54
-Color: 1 1 1
+Color: 1 1 0
 Command: SelectItemValue
 CommandSourceIndex: 1
 CommandTargetIndex: 0
@@ -1940,7 +1940,7 @@ Name: Button_TextBox_53
 Model: TextBoxModel
 Index: 53
 Layer: LayerBase
-Pos: -0.836108 -52.4322 2.4597
+Pos: -0.957207 -52.5886 2.50622
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 52
@@ -1976,7 +1976,7 @@ Name: ButtonItem_ListBox_54
 Model: ButtonModel
 Index: 54
 Layer: LayerBase
-Pos: 0.133892 -53.4772 2.46048
+Pos: 0.0129867 -53.6332 2.48572
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2012,7 +2012,7 @@ Name: Button_TextBox_55
 Model: TextBoxModel
 Index: 55
 Layer: LayerBase
-Pos: -0.836108 -52.5072 2.4597
+Pos: -0.957105 -52.6635 2.50824
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 54
@@ -2048,7 +2048,7 @@ Name: ButtonItem_ListBox_56
 Model: ButtonModel
 Index: 56
 Layer: LayerBase
-Pos: 0.133892 -53.5522 2.46048
+Pos: 0.0130883 -53.7082 2.48774
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2084,7 +2084,7 @@ Name: Button_TextBox_57
 Model: TextBoxModel
 Index: 57
 Layer: LayerBase
-Pos: -0.836108 -52.5822 2.4597
+Pos: -0.957004 -52.7385 2.51026
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 56
@@ -2120,7 +2120,7 @@ Name: ButtonItem_ListBox_58
 Model: ButtonModel
 Index: 58
 Layer: LayerBase
-Pos: 0.133892 -53.6272 2.46048
+Pos: 0.0131899 -53.7831 2.48976
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2156,7 +2156,7 @@ Name: Button_TextBox_59
 Model: TextBoxModel
 Index: 59
 Layer: LayerBase
-Pos: -0.836108 -52.6572 2.4597
+Pos: -0.956902 -52.8135 2.51229
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 58
@@ -2192,7 +2192,7 @@ Name: ButtonItem_ListBox_60
 Model: ButtonModel
 Index: 60
 Layer: LayerBase
-Pos: 0.133892 -53.7022 2.46048
+Pos: 0.0132915 -53.8581 2.49179
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2228,7 +2228,7 @@ Name: Button_TextBox_61
 Model: TextBoxModel
 Index: 61
 Layer: LayerBase
-Pos: -0.836108 -52.7322 2.4597
+Pos: -0.956801 -52.8885 2.51431
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 60
@@ -2264,7 +2264,7 @@ Name: ButtonItem_ListBox_62
 Model: ButtonModel
 Index: 62
 Layer: LayerBase
-Pos: 0.133892 -53.7772 2.46048
+Pos: 0.0133932 -53.9331 2.49381
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2300,7 +2300,7 @@ Name: Button_TextBox_63
 Model: TextBoxModel
 Index: 63
 Layer: LayerBase
-Pos: -0.836108 -52.8072 2.4597
+Pos: -0.956699 -52.9634 2.51633
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 62
@@ -2336,7 +2336,7 @@ Name: ButtonItem_ListBox_64
 Model: ButtonModel
 Index: 64
 Layer: LayerBase
-Pos: 0.133892 -53.8522 2.46048
+Pos: 0.0134947 -54.008 2.49583
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2372,7 +2372,7 @@ Name: Button_TextBox_65
 Model: TextBoxModel
 Index: 65
 Layer: LayerBase
-Pos: -0.836108 -52.8822 2.4597
+Pos: -0.956597 -53.0384 2.51835
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 64
@@ -2408,7 +2408,7 @@ Name: ButtonItem_ListBox_66
 Model: ButtonModel
 Index: 66
 Layer: LayerBase
-Pos: 0.133892 -53.9272 2.46048
+Pos: 0.0135963 -54.083 2.49785
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2444,7 +2444,7 @@ Name: Button_TextBox_67
 Model: TextBoxModel
 Index: 67
 Layer: LayerBase
-Pos: -0.836108 -52.9572 2.4597
+Pos: -0.956496 -53.1134 2.52038
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 66
@@ -2480,7 +2480,7 @@ Name: ButtonItem_ListBox_68
 Model: ButtonModel
 Index: 68
 Layer: LayerBase
-Pos: 0.133892 -54.0022 2.46048
+Pos: 0.013698 -54.158 2.49987
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2516,7 +2516,7 @@ Name: Button_TextBox_69
 Model: TextBoxModel
 Index: 69
 Layer: LayerBase
-Pos: -0.836108 -53.0322 2.4597
+Pos: -0.956394 -53.1883 2.5224
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 68
@@ -2552,7 +2552,7 @@ Name: ButtonItem_ListBox_70
 Model: ButtonModel
 Index: 70
 Layer: LayerBase
-Pos: 0.133892 -54.0772 2.46048
+Pos: 0.0137995 -54.233 2.5019
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2588,7 +2588,7 @@ Name: Button_TextBox_71
 Model: TextBoxModel
 Index: 71
 Layer: LayerBase
-Pos: -0.836108 -53.1072 2.4597
+Pos: -0.956293 -53.2633 2.52442
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 70
@@ -2624,7 +2624,7 @@ Name: ButtonItem_ListBox_72
 Model: ButtonModel
 Index: 72
 Layer: LayerBase
-Pos: 0.133892 -54.1522 2.46048
+Pos: 0.0139011 -54.3079 2.50392
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2660,7 +2660,7 @@ Name: Button_TextBox_73
 Model: TextBoxModel
 Index: 73
 Layer: LayerBase
-Pos: -0.836108 -53.1822 2.4597
+Pos: -0.956191 -53.3383 2.52644
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 72
@@ -2696,7 +2696,7 @@ Name: ButtonItem_ListBox_74
 Model: ButtonModel
 Index: 74
 Layer: LayerBase
-Pos: 0.133892 -54.2272 2.46048
+Pos: 0.0140028 -54.3829 2.50594
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 37
@@ -2732,7 +2732,7 @@ Name: Button_TextBox_75
 Model: TextBoxModel
 Index: 75
 Layer: LayerBase
-Pos: -0.836108 -53.2572 2.4597
+Pos: -0.956089 -53.4133 2.52846
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 74
@@ -2768,7 +2768,7 @@ Name: BaseFrame_ListBox_76
 Model: FrameModel
 Index: 76
 Layer: LayerBase
-Pos: 0.790262 -52.5886 2.45993
+Pos: 0.66727 -52.7449 2.42776
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 29
@@ -2803,7 +2803,7 @@ Name: EditBoxItem_ListEditBox
 Model: ButtonEditBoxModel
 Index: 77
 Layer: LayerBase
-Pos: 0.800284 -52.5986 2.46101
+Pos: 0.67735 -52.7548 2.42859
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -2839,7 +2839,7 @@ Name: Button_EditBox
 Model: EditBoxModel
 Index: 78
 Layer: LayerBase
-Pos: -0.149716 -51.6286 2.46025
+Pos: -0.272768 -51.7852 2.45011
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 77
@@ -2875,7 +2875,7 @@ Name: EditBoxItem_ListEditBox_79
 Model: ButtonEditBoxModel
 Index: 79
 Layer: LayerBase
-Pos: 0.800284 -52.6736 2.46101
+Pos: 0.677451 -52.8298 2.43061
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -2911,7 +2911,7 @@ Name: Button_EditBox_80
 Model: EditBoxModel
 Index: 80
 Layer: LayerBase
-Pos: -0.149716 -51.7036 2.46025
+Pos: -0.272666 -51.8602 2.45213
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 79
@@ -2947,7 +2947,7 @@ Name: EditBoxItem_ListEditBox_81
 Model: ButtonEditBoxModel
 Index: 81
 Layer: LayerBase
-Pos: 0.800284 -52.7486 2.46101
+Pos: 0.677553 -52.9048 2.43263
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -2983,7 +2983,7 @@ Name: Button_EditBox_82
 Model: EditBoxModel
 Index: 82
 Layer: LayerBase
-Pos: -0.149716 -51.7786 2.46025
+Pos: -0.272565 -51.9351 2.45415
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 81
@@ -3019,7 +3019,7 @@ Name: EditBoxItem_ListEditBox_83
 Model: ButtonEditBoxModel
 Index: 83
 Layer: LayerBase
-Pos: 0.800284 -52.8236 2.46101
+Pos: 0.677654 -52.9798 2.43465
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3055,7 +3055,7 @@ Name: Button_EditBox_84
 Model: EditBoxModel
 Index: 84
 Layer: LayerBase
-Pos: -0.149716 -51.8536 2.46025
+Pos: -0.272463 -52.0101 2.45617
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 83
@@ -3091,7 +3091,7 @@ Name: EditBoxItem_ListEditBox_85
 Model: ButtonEditBoxModel
 Index: 85
 Layer: LayerBase
-Pos: 0.800284 -52.8986 2.46101
+Pos: 0.677756 -53.0547 2.43668
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3127,7 +3127,7 @@ Name: Button_EditBox_86
 Model: EditBoxModel
 Index: 86
 Layer: LayerBase
-Pos: -0.149716 -51.9286 2.46025
+Pos: -0.272361 -52.0851 2.45819
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 85
@@ -3163,7 +3163,7 @@ Name: EditBoxItem_ListEditBox_87
 Model: ButtonEditBoxModel
 Index: 87
 Layer: LayerBase
-Pos: 0.800284 -52.9736 2.46101
+Pos: 0.677858 -53.1297 2.4387
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3199,7 +3199,7 @@ Name: Button_EditBox_88
 Model: EditBoxModel
 Index: 88
 Layer: LayerBase
-Pos: -0.149716 -52.0036 2.46025
+Pos: -0.27226 -52.16 2.46022
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 87
@@ -3235,13 +3235,13 @@ Name: EditBoxItem_ListEditBox_89
 Model: ButtonEditBoxModel
 Index: 89
 Layer: LayerBase
-Pos: 0.800284 -53.0486 2.46101
+Pos: 0.677959 -53.2047 2.44072
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
 ShellIndex: 46
 NextItemShellIndex: 91
-Color: 1 1 0
+Color: 0 1 0
 Command: EditObjectCommand
 CommandSourceIndex: 89
 CommandTargetIndex: 90
@@ -3271,7 +3271,7 @@ Name: Button_EditBox_90
 Model: EditBoxModel
 Index: 90
 Layer: LayerBase
-Pos: -0.149716 -52.0786 2.46025
+Pos: -0.272158 -52.235 2.46224
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 89
@@ -3307,7 +3307,7 @@ Name: EditBoxItem_ListEditBox_91
 Model: ButtonEditBoxModel
 Index: 91
 Layer: LayerBase
-Pos: 0.800284 -53.1236 2.46101
+Pos: 0.678061 -53.2796 2.44274
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3343,7 +3343,7 @@ Name: Button_EditBox_92
 Model: EditBoxModel
 Index: 92
 Layer: LayerBase
-Pos: -0.149716 -52.1536 2.46025
+Pos: -0.272056 -52.31 2.46426
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 91
@@ -3379,7 +3379,7 @@ Name: EditBoxItem_ListEditBox_93
 Model: ButtonEditBoxModel
 Index: 93
 Layer: LayerBase
-Pos: 0.800284 -53.1986 2.46101
+Pos: 0.678162 -53.3546 2.44476
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3415,7 +3415,7 @@ Name: Button_EditBox_94
 Model: EditBoxModel
 Index: 94
 Layer: LayerBase
-Pos: -0.149716 -52.2286 2.46025
+Pos: -0.271955 -52.385 2.46628
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 93
@@ -3451,7 +3451,7 @@ Name: EditBoxItem_ListEditBox_95
 Model: ButtonEditBoxModel
 Index: 95
 Layer: LayerBase
-Pos: 0.800284 -53.2736 2.46101
+Pos: 0.678264 -53.4296 2.44679
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3487,7 +3487,7 @@ Name: Button_EditBox_96
 Model: EditBoxModel
 Index: 96
 Layer: LayerBase
-Pos: -0.149716 -52.3036 2.46025
+Pos: -0.271853 -52.4599 2.46831
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 95
@@ -3523,7 +3523,7 @@ Name: EditBoxItem_ListEditBox_97
 Model: ButtonEditBoxModel
 Index: 97
 Layer: LayerBase
-Pos: 0.800284 -53.3486 2.46101
+Pos: 0.678366 -53.5046 2.44881
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3559,7 +3559,7 @@ Name: Button_EditBox_98
 Model: EditBoxModel
 Index: 98
 Layer: LayerBase
-Pos: -0.149716 -52.3786 2.46025
+Pos: -0.271752 -52.5349 2.47033
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 97
@@ -3595,7 +3595,7 @@ Name: EditBoxItem_ListEditBox_99
 Model: ButtonEditBoxModel
 Index: 99
 Layer: LayerBase
-Pos: 0.800284 -53.4236 2.46101
+Pos: 0.678467 -53.5795 2.45083
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3631,7 +3631,7 @@ Name: Button_EditBox_100
 Model: EditBoxModel
 Index: 100
 Layer: LayerBase
-Pos: -0.149716 -52.4536 2.46025
+Pos: -0.27165 -52.6099 2.47235
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 99
@@ -3667,7 +3667,7 @@ Name: EditBoxItem_ListEditBox_101
 Model: ButtonEditBoxModel
 Index: 101
 Layer: LayerBase
-Pos: 0.800284 -53.4986 2.46101
+Pos: 0.678569 -53.6545 2.45285
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3703,7 +3703,7 @@ Name: Button_EditBox_102
 Model: EditBoxModel
 Index: 102
 Layer: LayerBase
-Pos: -0.149716 -52.5286 2.46025
+Pos: -0.271548 -52.6849 2.47437
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 101
@@ -3732,14 +3732,14 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: ддллллл
+Message: упс
 ------------------------------------------------------------------
 Type: Button
 Name: EditBoxItem_ListEditBox_103
 Model: ButtonEditBoxModel
 Index: 103
 Layer: LayerBase
-Pos: 0.800284 -53.5736 2.46101
+Pos: 0.67867 -53.7295 2.45488
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3775,7 +3775,7 @@ Name: Button_EditBox_104
 Model: EditBoxModel
 Index: 104
 Layer: LayerBase
-Pos: -0.149716 -52.6036 2.46025
+Pos: -0.271447 -52.7598 2.47639
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 103
@@ -3804,14 +3804,14 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: ддллллл
+Message: беспорядок
 ------------------------------------------------------------------
 Type: Button
 Name: EditBoxItem_ListEditBox_105
 Model: ButtonEditBoxModel
 Index: 105
 Layer: LayerBase
-Pos: 0.800284 -53.6486 2.46101
+Pos: 0.678772 -53.8045 2.4569
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3847,7 +3847,7 @@ Name: Button_EditBox_106
 Model: EditBoxModel
 Index: 106
 Layer: LayerBase
-Pos: -0.149716 -52.6786 2.46025
+Pos: -0.271345 -52.8348 2.47842
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 105
@@ -3876,14 +3876,14 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: ддллллл
+Message: порядок
 ------------------------------------------------------------------
 Type: Button
 Name: EditBoxItem_ListEditBox_107
 Model: ButtonEditBoxModel
 Index: 107
 Layer: LayerBase
-Pos: 0.800284 -53.7236 2.46101
+Pos: 0.678874 -53.8794 2.45892
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3919,7 +3919,7 @@ Name: Button_EditBox_108
 Model: EditBoxModel
 Index: 108
 Layer: LayerBase
-Pos: -0.149716 -52.7536 2.46025
+Pos: -0.271244 -52.9098 2.48044
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 107
@@ -3955,7 +3955,7 @@ Name: EditBoxItem_ListEditBox_109
 Model: ButtonEditBoxModel
 Index: 109
 Layer: LayerBase
-Pos: 0.800284 -53.7986 2.46101
+Pos: 0.678975 -53.9544 2.46094
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -3991,7 +3991,7 @@ Name: Button_EditBox_110
 Model: EditBoxModel
 Index: 110
 Layer: LayerBase
-Pos: -0.149716 -52.8286 2.46025
+Pos: -0.271142 -52.9848 2.48246
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 109
@@ -4027,7 +4027,7 @@ Name: EditBoxItem_ListEditBox_111
 Model: ButtonEditBoxModel
 Index: 111
 Layer: LayerBase
-Pos: 0.800284 -53.8736 2.46101
+Pos: 0.679077 -54.0294 2.46296
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4063,7 +4063,7 @@ Name: Button_EditBox_112
 Model: EditBoxModel
 Index: 112
 Layer: LayerBase
-Pos: -0.149716 -52.9036 2.46025
+Pos: -0.27104 -53.0597 2.48448
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 111
@@ -4099,7 +4099,7 @@ Name: EditBoxItem_ListEditBox_113
 Model: ButtonEditBoxModel
 Index: 113
 Layer: LayerBase
-Pos: 0.800284 -53.9486 2.46101
+Pos: 0.679178 -54.1043 2.46499
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4135,7 +4135,7 @@ Name: Button_EditBox_114
 Model: EditBoxModel
 Index: 114
 Layer: LayerBase
-Pos: -0.149716 -52.9786 2.46025
+Pos: -0.270939 -53.1347 2.48651
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 113
@@ -4171,7 +4171,7 @@ Name: EditBoxItem_ListEditBox_115
 Model: ButtonEditBoxModel
 Index: 115
 Layer: LayerBase
-Pos: 0.800284 -54.0236 2.46101
+Pos: 0.67928 -54.1793 2.46701
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4207,7 +4207,7 @@ Name: Button_EditBox_116
 Model: EditBoxModel
 Index: 116
 Layer: LayerBase
-Pos: -0.149716 -53.0536 2.46025
+Pos: -0.270837 -53.2097 2.48853
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 115
@@ -4243,7 +4243,7 @@ Name: EditBoxItem_ListEditBox_117
 Model: ButtonEditBoxModel
 Index: 117
 Layer: LayerBase
-Pos: 0.800284 -54.0986 2.46101
+Pos: 0.679382 -54.2543 2.46903
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4279,7 +4279,7 @@ Name: Button_EditBox_118
 Model: EditBoxModel
 Index: 118
 Layer: LayerBase
-Pos: -0.149716 -53.1286 2.46025
+Pos: -0.270736 -53.2846 2.49055
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 117
@@ -4315,7 +4315,7 @@ Name: EditBoxItem_ListEditBox_119
 Model: ButtonEditBoxModel
 Index: 119
 Layer: LayerBase
-Pos: 0.800284 -54.1736 2.46101
+Pos: 0.679483 -54.3293 2.47105
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4351,7 +4351,7 @@ Name: Button_EditBox_120
 Model: EditBoxModel
 Index: 120
 Layer: LayerBase
-Pos: -0.149716 -53.2036 2.46025
+Pos: -0.270634 -53.3596 2.49257
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 119
@@ -4387,7 +4387,7 @@ Name: EditBoxItem_ListEditBox_121
 Model: ButtonEditBoxModel
 Index: 121
 Layer: LayerBase
-Pos: 0.800284 -54.2486 2.46101
+Pos: 0.679585 -54.4042 2.47308
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4423,7 +4423,7 @@ Name: Button_EditBox_122
 Model: EditBoxModel
 Index: 122
 Layer: LayerBase
-Pos: -0.149716 -53.2786 2.46025
+Pos: -0.270532 -53.4346 2.49459
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 121
@@ -4459,7 +4459,7 @@ Name: EditBoxItem_ListEditBox_123
 Model: ButtonEditBoxModel
 Index: 123
 Layer: LayerBase
-Pos: 0.800284 -54.3236 2.46101
+Pos: 0.679687 -54.4792 2.4751
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 76
@@ -4495,7 +4495,7 @@ Name: Button_EditBox_124
 Model: EditBoxModel
 Index: 124
 Layer: LayerBase
-Pos: -0.149716 -53.3536 2.46025
+Pos: -0.270431 -53.5096 2.49662
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: 123

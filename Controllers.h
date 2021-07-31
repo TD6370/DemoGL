@@ -11,22 +11,37 @@
 //OpenGL Mathematics
 #include <glm/glm.hpp>
 //using glm::vec3;
+using std::map;
 
 struct ControllerInput;
 
 class SceneConstructor;
 
+
 glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4 p_model, GLdouble mouseX, GLdouble mouseY, int m_widthWindow, int m_heightWindow);
+
+enum Laguages { LangNone, LangRus, LangEng };
 
 class Controllers {
 private:
-		map<int, string> mapAlphabetKeys;
+
+		map<string, int>& m_mapAlphabetInputs;
+		map<string, int>& m_mapAlphabetInputsEng;
+
+		map<int, string>* mapAlphabetRusKeys;
+		map<int, string>* mapAlphabetEngKeys;
+		map<int, string>* mapCurrentAlphabetKeys = nullptr;
+		Laguages m_currentLaguage = LangNone;
 
 public:
 
-	Controllers() {
+
+
+	Controllers(map<string, int>& mapAlphabetInputs, map<string, int>& mapAlphabetInputsEng) :
+		m_mapAlphabetInputs(mapAlphabetInputs), m_mapAlphabetInputsEng(mapAlphabetInputsEng)
+	{
 		FillAlphabet();
-	}
+	};
 
 	//glm::vec3 GetPositionModelCursor(glm::mat4 p_projection, glm::mat4  p_view, glm::mat4 p_model, GLdouble mouseX, GLdouble mouseY, int m_widthWindow, int m_heightWindow);
 
@@ -51,6 +66,8 @@ public:
 		SceneConstructor* Scene);
 
 	void FillAlphabet();
+
+	void SwitchLanguage();
 
 	string GetSymbol(int keyIndex);
 };
