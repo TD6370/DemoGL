@@ -135,7 +135,7 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	shared_ptr<ObjectEditBox> objCreateEditBox;
 	shared_ptr<ObjectData> objCreate;
 	vec3 pos = vec3(1.);
-	vec2 size = vec2(0.7, 0.1);
+	vec2 size = vec2(0.7, 0.06);
 	if (info.Init) {
 		pos = info.Pos;
 		size = info.Size;
@@ -257,7 +257,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	// -- Style
 	float border = 0.01;
 	float interligne = 0.005;
-	float heightItem = 0.07;
+	float heightItem = 0.06;
 	float widthFrame = 0.6;
 	float heightFrame = (listCommand.size() * heightItem) + ((listCommand.size() -1) * interligne) + (border*2);
 	vec2 sizeFrame = vec2(widthFrame, heightFrame);

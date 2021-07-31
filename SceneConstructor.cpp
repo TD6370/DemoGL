@@ -581,6 +581,39 @@ void SceneConstructor::RefreshGUI() {
 	AddCommand(TypeCommand::CheckStateObjectCommand, true);
 }
 
+
+void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText) {
+
+	string typeObjectAttr = CommandsAttribute.TypeObjectAttr;
+	string nameCommandList = "";
+
+	if (typeCreate == TypeObject::ListBox ||
+		typeCreate == TypeObject::ListTextBox ||
+		typeCreate == TypeObject::ListEditBox)
+	{
+		string nameListCommands = CommandsAttribute.BaseListCommand;
+		nameListCommands = CommandsAttribute.TypesObjectListCommand; //--default : TYPES
+		if (typeCreate == TypeObject::ListTextBox || typeCreate == TypeObject::ListEditBox)
+			nameListCommands = CommandsAttribute.ObjectFieldsListCommand; // -- default : FIELDS
+
+		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
+			-1,
+			-1,
+			vec4(),
+			nameListCommands);
+	}
+	else {
+		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
+			typeCreate,
+			0.0,
+			vec4(),
+			nameCommandList,
+			typeObjectText);
+	}
+}
+
+//========================
+
 vector<CommandPack> SceneConstructor::GetListCommand(string nameList) {
 
 	return dispatcherCommands->StaticListCommand[nameList];

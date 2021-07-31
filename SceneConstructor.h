@@ -181,5 +181,7 @@ public:
 	void RefreshGUI();
 	
 	vector<CommandPack> GetListCommand(string nameList);
+
+	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText);
 };
 

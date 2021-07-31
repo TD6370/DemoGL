@@ -130,13 +130,13 @@ RootObjIndex: 37
 CaptionObjIndex: -1
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: EditBoxShell_EditBoxItem_ListEditBox
+Name: EditBoxShell_FrameEditBox
 Index: 22
-RootObjIndex: 77
-CaptionObjIndex: 78
+RootObjIndex: 76
+CaptionObjIndex: 77
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: EditBoxShell_EditBoxItem_ListEditBox_79
+Name: EditBoxShell_EditBoxItem_ListEditBox
 Index: 23
 RootObjIndex: 79
 CaptionObjIndex: 80
@@ -274,10 +274,136 @@ RootObjIndex: 123
 CaptionObjIndex: 124
 HeadIndexList: -1
 ------------------------------------------------------------------ 
-Name: ListBoxShell_ObjectFieldsListCommand
+Name: EditBoxShell_EditBoxItem_ListEditBox_125
 Index: 46
-RootObjIndex: 76
+RootObjIndex: 125
+CaptionObjIndex: 126
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ListBoxShell_ObjectFieldsListCommand
+Index: 47
+RootObjIndex: 78
 CaptionObjIndex: -1
 HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_128
+Index: 48
+RootObjIndex: 128
+CaptionObjIndex: 129
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_130
+Index: 49
+RootObjIndex: 130
+CaptionObjIndex: 131
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_132
+Index: 50
+RootObjIndex: 132
+CaptionObjIndex: 133
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_134
+Index: 51
+RootObjIndex: 134
+CaptionObjIndex: 135
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_136
+Index: 52
+RootObjIndex: 136
+CaptionObjIndex: 137
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_138
+Index: 53
+RootObjIndex: 138
+CaptionObjIndex: 139
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_140
+Index: 54
+RootObjIndex: 140
+CaptionObjIndex: 141
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_142
+Index: 55
+RootObjIndex: 142
+CaptionObjIndex: 143
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_144
+Index: 56
+RootObjIndex: 144
+CaptionObjIndex: 145
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_146
+Index: 57
+RootObjIndex: 146
+CaptionObjIndex: 147
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_148
+Index: 58
+RootObjIndex: 148
+CaptionObjIndex: 149
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_150
+Index: 59
+RootObjIndex: 150
+CaptionObjIndex: 151
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_152
+Index: 60
+RootObjIndex: 152
+CaptionObjIndex: 153
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_154
+Index: 61
+RootObjIndex: 154
+CaptionObjIndex: 155
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_156
+Index: 62
+RootObjIndex: 156
+CaptionObjIndex: 157
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_158
+Index: 63
+RootObjIndex: 158
+CaptionObjIndex: 159
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_160
+Index: 64
+RootObjIndex: 160
+CaptionObjIndex: 161
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_162
+Index: 65
+RootObjIndex: 162
+CaptionObjIndex: 163
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_164
+Index: 66
+RootObjIndex: 164
+CaptionObjIndex: 165
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ListBoxShell_TypesObjectListCommand
+Index: 67
+RootObjIndex: 127
+CaptionObjIndex: -1
+HeadIndexList: 128
 ------------------------------------------------------------------ 
 

@@ -149,9 +149,11 @@ void ObjectTextBox::Refresh() {
 
 void ObjectTextBox::UpdateMessage()
 {
-	if (EngineData->Inputs->Action == GLFW_PRESS
-		&& EngineData->Inputs->Key == GLFW_KEY_BACKSPACE)
-	{
+	if (EngineData->Inputs->Key == GLFW_KEY_BACKSPACE) {
+		if (Message.size() != 0)
+			Message.erase(Message.end()-1);
+	}
+	if (EngineData->Inputs->Key == GLFW_KEY_DELETE) {
 		Message.clear();
 	}
 

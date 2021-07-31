@@ -389,37 +389,13 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		//--- position selected
 		if (Scene->ReadCommand(SelectedPosForObject))
 		{
-			
-			string typeObjectAttr = Scene->CommandsAttribute.TypeObjectAttr;
 			string typeObjectText = command->ValueS;
-			string nameCommandList = "";
-
 
 			if (command->ValueI != -1)
 				typeCreate = command->ValueI;
-			if (typeCreate == TypeObject::ListBox ||
-				typeCreate == TypeObject::ListTextBox ||
-				typeCreate == TypeObject::ListEditBox)
-			{
-				string nameListCommands = Scene->CommandsAttribute.BaseListCommand;
-				nameListCommands = Scene->CommandsAttribute.TypesObjectListCommand; //--default : TYPES
-				if(typeCreate == TypeObject::ListTextBox ||	typeCreate == TypeObject::ListEditBox)
-					nameListCommands = Scene->CommandsAttribute.ObjectFieldsListCommand; // -- default : FIELDS
 
-				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
-					-1, 
-					-1, 
-					vec4(), 
-					nameListCommands);
-			}
-			else {
-				Scene->AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate }, 
-					typeCreate, 
-					0.0, 
-					vec4(), 
-					nameCommandList, 
-					typeObjectText);
-			}
+			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText);
+			
 			SetCommand(objGUI, TypeCommand::None);
 		}
 	}
@@ -478,13 +454,10 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	{
 		textButton = command->ValueS;
 	}
-		//string textButton;
 
 	//--- obj created Control position
-	//IsCreatingObject = false;	//-- after renamed
 	IndexObjectCreating = -1;
 
-	//if (objGUI->TypeObj == Button && Scene->ShellCurrent->CaptionObjIndex != -1)
 	if (Scene->IsHaveShell && Scene->ShellCurrent->CaptionObjIndex != -1)
 	{
 		//--- Start Renaming created control
@@ -502,11 +475,6 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	else {
 		IsCreatingObject = false;
 	}
-
-	//TEST ----------------- !!!!
-	/*int i = Scene->ShellCurrent->CaptionObjIndex;
-	auto obb = Scene->Storage->GetObjectPrt(i);
-	string ddd = obb->GetInfo();*/
 }
 
 //===================== Event Rename controls ===========================

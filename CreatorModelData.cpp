@@ -865,7 +865,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	caption = "ох";
 	childModel = "ButtonEditBoxModel";	///!!!!!
 	color = vec3(0.117, 0.351, 0.950);
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .1), Button, color, LayerBase);
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .06), Button, color, LayerBase);
 	//SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox", LayerBase);

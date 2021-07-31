@@ -31,15 +31,8 @@ void ObjectEditBox::ActionWork()
 
 void ObjectEditBox::AddSymbolMessage(string symbol) {
 		
-	string tempMessage = Message;
-
-	if (EngineData->Inputs->Key == GLFW_KEY_BACKSPACE) {
-		Message.clear();
-	}
-
 	if (symbol.size() != 0)
 		Message += symbol;
 
-	if(tempMessage != Message)
-		UpdateMessage();	
+	UpdateMessage();	
 }
