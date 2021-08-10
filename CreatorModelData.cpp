@@ -413,22 +413,38 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 
 	if (!isLoading)
 	{
-		objShell.RootObj = GetObjectPrt(rootIndex);
+		prt_objShell->RootObj = GetObjectPrt(rootIndex);
+		if (captionIndex != -1)
+			prt_objShell->CaptionObj = GetObjectPrt(captionIndex);
+		if (headIndex != -1)
+			prt_objShell->HeadObj = GetObjectPrt(headIndex);
+
+		/*objShell.RootObj = GetObjectPrt(rootIndex);
 		if (captionIndex != -1)
 			objShell.CaptionObj = GetObjectPrt(captionIndex);
 		if (headIndex != -1)
-			objShell.HeadObj = GetObjectPrt(headIndex);
+			objShell.HeadObj = GetObjectPrt(headIndex);*/
 	}
 
 	if(!isLoading)
 	{
-		GetObjectPrt(rootIndex)->SetShell(prt_objShell);
+		prt_objShell->RootObj->SetShell(prt_objShell);
+		
+		if (captionIndex != -1)
+			prt_objShell->CaptionObj->SetShell(prt_objShell);
+		for (auto item : items)
+		{
+			auto objItem = GetObjectPrt(item);
+			objItem->SetShell(prt_objShell);
+		}
+
+		/*GetObjectPrt(rootIndex)->SetShell(prt_objShell);
 		if (captionIndex != -1)
 			GetObjectPrt(captionIndex)->SetShell(prt_objShell);
 		for (auto item : items)
 		{
 			GetObjectPrt(item)->SetShell(prt_objShell);
-		}
+		}*/
 	}
 	ObjectsShells.push_back(prt_objShell);
 

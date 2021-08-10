@@ -458,7 +458,8 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 	//--- obj created Control position
 	IndexObjectCreating = -1;
 
-	if (Scene->IsHaveShell && Scene->ShellCurrent->CaptionObjIndex != -1)
+	if (Scene->IsHaveShell && Scene->ShellCurrent->CaptionObjIndex != -1 && 
+		Scene->ShellCurrent->CaptionObj->TypeObj != EditBox)
 	{
 		//--- Start Renaming created control
 		Scene->AddCommand(TypeCommand::RenameObject,
@@ -546,9 +547,15 @@ void RoomUseInterface::EventReadKeyInput(shared_ptr<ObjectGUI> objGUI) {
 
 			if (objGUI->TypeObj == EditBox)
 			{
+
+				//-- TEST
+				auto info = objGUI->GetInfo();
+				auto tt = objGUI->Name;
+				auto tt2 = objGUI->IsChecked;
+
 				//---- Stop edit box
 				objGUI->Click(); 
-
+		
 				//--- Stop Button edit box
 				Scene->AddCommand(StopWorking, objGUI->Index, objGUI->IndexObjectOwner); //--2.* 
 				return;
@@ -648,6 +655,132 @@ void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
 	}
 }
 
+//=================== Event Edit Object fields ====================
+
+void RoomUseInterface::EventFillFieldsEdit() {
+	
+	//return;
+
+	shared_ptr<ObjectData> obj = Scene->ObjectCurrent;
+
+	//--- Create  "ObjectFieldsEdit"
+	if (Scene->Storage->SceneData->IndexObjectFieldsEdit == -1) {
+		vec3 pos = vec3(.7, .1, Scene->Storage->StartPosGUI_Z);
+		Scene->Storage->SceneData->IndexObjectFieldsEdit = -2;
+		Scene->RunCommandCreateObject(TypeObject::ObjectFieldsEdit, "ObjectFieldsEdit", pos);
+	}
+	
+	if (Scene->Storage->SceneData->IndexObjectFieldsEdit < 0)
+		return;
+	
+	int index = obj->Index;
+	int indexEditObj = -1;
+
+	//if (IsEditControls)
+	//{
+	//	indexEditObj = IndexObjectSelected; //Scene->Storage->SceneData->IndexCursorGUI;
+	//}
+	//else {
+	//	if (obj->Index == Scene->Storage->SceneData->IndexCursorRayObj)
+	//	{
+
+	//	}
+	//	//indexEditObj = Scene->Storage->SceneData->IndexCursorRayObj;
+	//	/*void ObjectCursorRay::SelectPositionOnPolygon()
+	//	{
+	//		if (SelectedObjIndex != -1) {
+	//			m_preSelectedObjectAction = ActionObjectCurrent;
+
+	//			SceneCommand->CommandType = EditObjectCommand;
+	//			SceneCommand->SourceIndex = Index;
+	//			SceneCommand->TargetIndex = SelectedObjIndex;
+	//			SceneCommand->ValueI = (int)Transforming;
+	//			SceneCommand->Enable = true;
+	//		}
+	//	}*/
+	//}
+
+	//------ Save ray Object selected
+	if (!IsEditControls && obj->Index == Scene->Storage->SceneData->IndexCursorRayObj) {
+		IndexObjectSelected = obj->SceneCommand->TargetIndex;
+	}
+
+
+	indexEditObj = IndexObjectSelected;
+
+	if (indexEditObj == -1)
+		return;
+	
+	//---- save edit control to temp
+	if(indexEditObj == index && indexEditObj != IndexObjectSelectedEdit)
+	{
+		ObjectSelectedEdit = obj;
+		IndexObjectSelectedEdit = index;
+		return;
+	}
+
+	//-- is saved Selected object
+	if (indexEditObj == IndexObjectSelectedEdit) {
+		
+		if (obj->SceneCommand->TargetIndex == indexEditObj)
+			return;
+		
+		//---- Fill control
+		if (index == Scene->Storage->SceneData->IndexObjectFieldsEdit) {
+
+			std::shared_ptr<ObjectGUI> objItem_Button_EditBox;
+			int indItemNext = -1;
+
+			//--- List Edit box
+			shared_ptr<BaseShell> shell = Scene->ShellCurrent;
+		
+			//--- TEST
+			auto testI = obj->GetInfo();
+			auto test = obj->ShellIndex;
+			auto test2 = obj->Shell;
+			auto testR = shell->HeadObj->Name;
+			auto testT1 = shell->HeadObj->GetInfo();
+			
+			Scene->CreateObjectListFieldValue(ObjectSelectedEdit);
+
+			objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(shell->HeadObj);
+			indItemNext = objItem_Button_EditBox->Index;
+
+			// --- info Shell base
+			int indShell_ListFieldsEdit = objItem_Button_EditBox->SceneCommand->SourceIndex;
+
+			//map<string, string> listObjFieldsValue = Scene->GetObjectListFieldValue(ObjectSelectedEdit);
+			
+			while (indItemNext != -1)
+			{
+				//--- Button (objItemEditBoxControl)
+				std::shared_ptr<ObjectEditBox> objItemEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objItem_Button_EditBox->Shell->CaptionObj);
+			
+				//--- Set value
+				string fieldName = objItemEditBox->SceneCommand->Description;
+				if (fieldName.size() != 0)
+				{
+					if (fieldName[fieldName.size() - 1] == ':')
+						fieldName.erase(fieldName.end()-1);
+					//--- SET VALUE -- FROM TYPE FIELD
+					objItemEditBox->Message = Scene->GetObjectValueByFieldName(fieldName);
+					objItemEditBox->UpdateMessage();
+					//objItemEditBox->Message = listObjFieldsValue[typeFieldName];
+				}
+
+				indItemNext = objItem_Button_EditBox->NextItemShellIndex;
+				if(indItemNext != -1)
+					objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(objItem_Button_EditBox->NextItemShellObj);
+			}
+
+			//-- Save edit object in Control Edit
+			obj->SceneCommand->TargetIndex = indexEditObj;
+		}
+		//----------
+		
+	}
+}
+
 //==========================================
 //obj->ParamCase = m_startResizeParamShaderID;
 //float m_startDefaultParamShaderID = 0;
@@ -671,6 +804,8 @@ void RoomUseInterface::Work() {
 	if (Scene->IsFirstCurrentObject) {
 		IsCursorClickEvent = IsCursorClickEventConst = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 	}
+
+	EventFillFieldsEdit();
 
 	std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 	if(objGUI == nullptr)

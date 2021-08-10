@@ -339,7 +339,7 @@ string ObjectData::GetInfo() {
 	std::stringstream ss;
 	//ss << "N: " << Name << "  T: " + typeName << "  L: " << layerName;
 	//ss << "T: " + typeName << "  L: " << layerName << "  N: " << Name;
-	ss << "L: " << layerName << "  T: " + typeName << "  N: " << Name;
+	ss << "L: " << layerName << "  T: " + typeName << "  N: " << Name << " I:" << Index;
 	return ss.str();
 }
 
@@ -374,6 +374,11 @@ void ObjectData::SetNextItemShellObject(shared_ptr<ObjectData> p_nextItemShellOb
 }
 void ObjectData::SetShell(shared_ptr<BaseShell> p_shell)
 {
+	if (ShellIndex != -1)
+	{
+		SceneCommand->SourceIndex = p_shell->Index;
+		return;
+	}
 	Shell = p_shell;
 	ShellIndex = p_shell->Index;
 }

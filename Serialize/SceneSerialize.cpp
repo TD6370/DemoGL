@@ -12,6 +12,8 @@ SceneSerialize::SceneSerialize() {
 
 	m_dataObjects = std::string();
 	m_dataModels = std::string();
+	m_mapObjectFieldsNameAndValue = map<string, string>();
+	m_mapObjectFieldsNames = vector<string>();
 	m_stringSeparator = "------------------------------------------------------------------";
 	m_specificFields = "Specific:";
 
@@ -99,7 +101,14 @@ void  SceneSerialize::SaveSpecific(vector<ObjectFiledsSpecific>& specificFields)
 }
 
 // -------------------- Serialize	->	ObjectData
-void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
+void SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist, bool isGet) {
+
+	if (isGet) {
+		/*if (m_indLastObjectSerialize == obj->Index)
+			return;
+		m_indLastObjectSerialize = obj->Index;*/
+		m_dataObjects.clear();
+	}
 
 	ObjectFileds fileds;
 	std::stringstream streamObjects;
@@ -127,7 +136,6 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 	streamObjects << fileds.CommandValueF << " " << obj->SceneCommand->ValueF << "\n";
 	streamObjects << fileds.CommandValueS << " " << GetStrValue(obj->SceneCommand->ValueS) << "\n";
 	streamObjects << fileds.CommandDescription << " " << GetStrValue(obj->SceneCommand->Description) << "\n";
-	
 	//Options
 	streamObjects << fileds.Options.IsVisible << " " << obj->IsVisible << "\n";
 	streamObjects << fileds.Options.IsGravity << " " << obj->IsGravity << "\n";
@@ -143,9 +151,10 @@ void  SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist) {
 
 	streamObjects << fileds.Options.IsChecked << " " << obj->IsChecked << "\n";
 
-	//int valueInt = std::stoi(GetSpecifValue(filedsSpec//ific, 1));
-	//SceneCommand->CommandType = (TypeCommand)valueInt;
-	
+	if (isGet) {
+		AddFieldNameAndValue(streamObjects);
+		return;
+	}
 
 	if(!isSpecificExist)
 		streamObjects << m_stringSeparator << "\n";
@@ -193,171 +202,8 @@ void  SceneSerialize::Save(shared_ptr<BaseShell> shell) {
 }
 //BaseShell
 
-std::string SceneSerialize::Vec3Str(glm::vec3 vec) {
-	std::ostringstream os;
-	os << vec.x << " " << vec.y << " " << vec.z;
-	return os.str();
-}
+//--- ***
 
-std::string SceneSerialize::Vec2Str(glm::vec2 vec) {
-	std::ostringstream os;
-	os << vec.x << " " << vec.y;
-	return os.str();
-}
-
-vec3 SceneSerialize::StrToVec3(string& value) {
-	std::stringstream streamFieldValue;
-	vec3 result;
-
-	streamFieldValue.str(value);
-	streamFieldValue >> result.x;
-	streamFieldValue >> result.y;
-	streamFieldValue >> result.z;
-
-	return result;
-}
-
-vec2 SceneSerialize::StrToVec2(string& value) {
-	std::stringstream streamFieldValue;
-	vec2 result;
-
-	streamFieldValue.str(value);
-	streamFieldValue >> result.x;
-	streamFieldValue >> result.y;
-
-	return result;
-}
-
-//-------------------------------------- ActionObject
-
-void SceneSerialize::AddNextType(ActionObject typeObj, string Name) {
-	m_mapNamesTypesActions.insert(std::pair<ActionObject, string>(typeObj, Name));
-	m_mapTypesActions.insert(std::pair<string, ActionObject>(Name, typeObj));
-}
-
-string SceneSerialize::GetNameType(ActionObject typeObj) {
-
-	string name = "Error";
-	map <ActionObject, string> ::iterator it;
-	
-	auto map = m_mapNamesTypesActions;
-
-	it = map.find(typeObj);
-	if (it != map.end()) {
-		name = map[typeObj];
-	}
-	return name;
-}
-
-ActionObject SceneSerialize::GetTypeAction(string name) {
-
-	ActionObject result;
-	map <string, ActionObject> ::iterator it;
-	auto map = m_mapTypesActions;
-
-	it = map.find(name);
-	if (it != map.end()) {
-		result = map[name];
-	}
-	return result;
-}
-
-//--------------------------------------- TypeObject
-void SceneSerialize::AddNextType(TypeObject typeObj, string Name) {
-	m_mapNamesTypesObjects.insert(std::pair<TypeObject, string>(typeObj, Name));
-	m_mapTypesObjects.insert(std::pair<string, TypeObject>(Name, typeObj));
-}
-
-string SceneSerialize::GetNameType(TypeObject typeObj) {
-
-	string name = "Error";
-	map <TypeObject, string> ::iterator it;
-	auto map = m_mapNamesTypesObjects;
-
-	it = map.find(typeObj);
-	if (it != map.end()) {
-		name = map[typeObj];
-	}
-	return name;
-}
-
-TypeObject SceneSerialize::GetTypeObject(string name) {
-
-	TypeObject result;
-	map <string, TypeObject> ::iterator it;
-	auto map = m_mapTypesObjects;
-
-	it = map.find(name);
-	if (it != map.end()) {
-		result = map[name];
-	}
-	return result;
-}
-//--------	SceneCommands	-------------------------------- 
-
-void SceneSerialize::AddNextType(TypeCommand typeObj, string Name) {
-	m_mapNamesTypesCommands.insert(std::pair<TypeCommand, string>(typeObj, Name));
-	m_mapTypesCommands.insert(std::pair<string, TypeCommand>(Name, typeObj));
-}
-
-string SceneSerialize::GetNameType(TypeCommand typeObj) {
-
-	string name = "Error";
-	map <TypeCommand, string> ::iterator it;
-	auto map = m_mapNamesTypesCommands;
-
-	it = map.find(typeObj);
-	if (it != map.end()) {
-		name = map[typeObj];
-	}
-	return name;
-}
-
-TypeCommand SceneSerialize::GetTypeCommands(string name) {
-
-	TypeCommand result;
-	map <string, TypeCommand> ::iterator it;
-	auto map = m_mapTypesCommands;
-
-	it = map.find(name);
-	if (it != map.end()) {
-		result = map[name];
-	}
-	return result;
-}
-//--------------------------------------- Type Layer
-void SceneSerialize::AddNextType(TypeLayer type, string Name) {
-	m_mapNamesTypesLayers.insert(std::pair<TypeLayer, string>(type, Name));
-	m_mapTypesLayers.insert(std::pair<string, TypeLayer>(Name, type));
-}
-
-string SceneSerialize::GetNameType(TypeLayer typeObj) {
-
-	string name = "Error";
-	map <TypeLayer, string> ::iterator it;
-	auto map = m_mapNamesTypesLayers;
-
-	it = map.find(typeObj);
-	if (it != map.end()) {
-		name = map[typeObj];
-	}
-	return name;
-}
-
-TypeLayer SceneSerialize::GetTypeLayer(string name) {
-
-	TypeLayer result;
-	map <string, TypeLayer> ::iterator it;
-	auto map = m_mapTypesLayers;
-
-	it = map.find(name);
-	if (it != map.end()) {
-		result = map[name];
-	}
-	return result;
-}
-
-//----------------------------------------
 void SceneSerialize::Save() {
 
 	World WorldSetting;
@@ -403,30 +249,6 @@ void SceneSerialize::Save() {
 	}
 }
 
-string SceneSerialize::GetStrValue(string value) {
-	if (value.size() == 0)
-		value = "@?";
-	else if (value == "@?")
-		return std::string();
-	return value;
-}
-
-const char* SceneSerialize::GetStrValueToChar(string value) {
-	string result = GetStrValue(value);
-	return result.c_str();
-}
-
-//--- fix space in text
-void SceneSerialize::SetStrValue(std::ifstream& in, string& value) {
-
-	std::getline(in, value);
-	if (value[0] == char(' ')) //remove split
-		value.erase(0, 1);
-}
-
-map<TypeObject, string> SceneSerialize::GetNamesTypesObjects() {
-	return m_mapNamesTypesObjects;
-}
 
 
 void SceneSerialize::Load(bool isOnlyObjects) {
@@ -681,3 +503,253 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 	}
 	in.close();
 }
+
+//---------------- Get value
+
+void SceneSerialize::AddFieldNameAndValue(std::stringstream& stringStream) {
+
+	m_mapObjectFieldsNameAndValue.clear();
+	m_mapObjectFieldsNames.clear();
+	while (!stringStream.eof()) {
+		string strFieldName;
+		string strFieldValue;
+		stringStream >> strFieldName;
+		SetStrValue(stringStream, strFieldValue);
+		if (strFieldName.size() == 0)
+			continue;
+		strFieldName = FormatFieldName(strFieldName);
+		strFieldValue = FormatEmptyValue(strFieldValue);
+		m_mapObjectFieldsNameAndValue.insert({ strFieldName , strFieldValue });
+		//m_mapObjectFieldsNameAndValue.insert(m_mapObjectFieldsNameAndValue.begin(), { strFieldName , strFieldValue });
+		m_mapObjectFieldsNames.push_back(strFieldName);
+	}
+}
+
+
+string SceneSerialize::GetFieldValueByName(string fieldName) 
+{
+	return m_mapObjectFieldsNameAndValue[fieldName];
+}
+
+map<string, string> SceneSerialize::GetObjectListFieldValue() 
+{
+	return m_mapObjectFieldsNameAndValue;
+}
+
+vector<string> SceneSerialize::GetObjectListFields() 
+{
+	return m_mapObjectFieldsNames;
+}
+
+//----- ****
+
+string SceneSerialize::GetStrValue(string value) {
+	if (value.size() == 0)
+		value = STR_EMPTY;
+	else if (value == STR_EMPTY)
+		return std::string();
+	return value;
+}
+
+const char* SceneSerialize::GetStrValueToChar(string value) {
+	string result = GetStrValue(value);
+	return result.c_str();
+}
+
+//--- fix space in text
+void SceneSerialize::SetStrValue(std::ifstream& in, string& value) {
+
+	std::getline(in, value);
+	if (value[0] == char(' ')) //remove split
+		value.erase(0, 1);
+}
+
+void SceneSerialize::SetStrValue(std::stringstream& in, string& value) {
+
+	std::getline(in, value);
+	if (value[0] == char(' ')) //remove split
+		value.erase(0, 1);
+}
+
+map<TypeObject, string> SceneSerialize::GetNamesTypesObjects() {
+	return m_mapNamesTypesObjects;
+}
+
+std::string SceneSerialize::Vec3Str(glm::vec3 vec) {
+	std::ostringstream os;
+	os << vec.x << " " << vec.y << " " << vec.z;
+	return os.str();
+}
+
+std::string SceneSerialize::Vec2Str(glm::vec2 vec) {
+	std::ostringstream os;
+	os << vec.x << " " << vec.y;
+	return os.str();
+}
+
+vec3 SceneSerialize::StrToVec3(string& value) {
+	std::stringstream streamFieldValue;
+	vec3 result;
+
+	streamFieldValue.str(value);
+	streamFieldValue >> result.x;
+	streamFieldValue >> result.y;
+	streamFieldValue >> result.z;
+
+	return result;
+}
+
+vec2 SceneSerialize::StrToVec2(string& value) {
+	std::stringstream streamFieldValue;
+	vec2 result;
+
+	streamFieldValue.str(value);
+	streamFieldValue >> result.x;
+	streamFieldValue >> result.y;
+
+	return result;
+}
+
+//-------------------------------------- ActionObject
+
+void SceneSerialize::AddNextType(ActionObject typeObj, string Name) {
+	m_mapNamesTypesActions.insert(std::pair<ActionObject, string>(typeObj, Name));
+	m_mapTypesActions.insert(std::pair<string, ActionObject>(Name, typeObj));
+}
+
+string SceneSerialize::GetNameType(ActionObject typeObj) {
+
+	string name = "Error";
+	map <ActionObject, string> ::iterator it;
+
+	auto map = m_mapNamesTypesActions;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+ActionObject SceneSerialize::GetTypeAction(string name) {
+
+	ActionObject result;
+	map <string, ActionObject> ::iterator it;
+	auto map = m_mapTypesActions;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
+
+//--------------------------------------- TypeObject
+void SceneSerialize::AddNextType(TypeObject typeObj, string Name) {
+	m_mapNamesTypesObjects.insert(std::pair<TypeObject, string>(typeObj, Name));
+	m_mapTypesObjects.insert(std::pair<string, TypeObject>(Name, typeObj));
+}
+
+string SceneSerialize::GetNameType(TypeObject typeObj) {
+
+	string name = "Error";
+	map <TypeObject, string> ::iterator it;
+	auto map = m_mapNamesTypesObjects;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+TypeObject SceneSerialize::GetTypeObject(string name) {
+
+	TypeObject result;
+	map <string, TypeObject> ::iterator it;
+	auto map = m_mapTypesObjects;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
+//--------	SceneCommands	-------------------------------- 
+
+void SceneSerialize::AddNextType(TypeCommand typeObj, string Name) {
+	m_mapNamesTypesCommands.insert(std::pair<TypeCommand, string>(typeObj, Name));
+	m_mapTypesCommands.insert(std::pair<string, TypeCommand>(Name, typeObj));
+}
+
+string SceneSerialize::GetNameType(TypeCommand typeObj) {
+
+	string name = "Error";
+	map <TypeCommand, string> ::iterator it;
+	auto map = m_mapNamesTypesCommands;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+TypeCommand SceneSerialize::GetTypeCommands(string name) {
+
+	TypeCommand result;
+	map <string, TypeCommand> ::iterator it;
+	auto map = m_mapTypesCommands;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
+//--------------------------------------- Type Layer
+void SceneSerialize::AddNextType(TypeLayer type, string Name) {
+	m_mapNamesTypesLayers.insert(std::pair<TypeLayer, string>(type, Name));
+	m_mapTypesLayers.insert(std::pair<string, TypeLayer>(Name, type));
+}
+
+string SceneSerialize::GetNameType(TypeLayer typeObj) {
+
+	string name = "Error";
+	map <TypeLayer, string> ::iterator it;
+	auto map = m_mapNamesTypesLayers;
+
+	it = map.find(typeObj);
+	if (it != map.end()) {
+		name = map[typeObj];
+	}
+	return name;
+}
+
+TypeLayer SceneSerialize::GetTypeLayer(string name) {
+
+	TypeLayer result;
+	map <string, TypeLayer> ::iterator it;
+	auto map = m_mapTypesLayers;
+
+	it = map.find(name);
+	if (it != map.end()) {
+		result = map[name];
+	}
+	return result;
+}
+
+string FormatEmptyValue(string value) {
+	if (value == STR_EMPTY)
+		return std::string();
+	return value;
+}
+
+string FormatFieldName(string value) {
+	
+	if (value.size() != 0 && value[value.size() - 1] == ':')
+		value.erase(value.end() - 1);
+	return value;
+}
+
+//----------------------------------------

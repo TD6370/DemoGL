@@ -138,6 +138,9 @@ public:
 	mat4 TransformResult;
 	int minDist = 5;
 	int DistanceTarget = 20;
+	//GUI
+	vec3 StartPos = vec3(0);
+	vec2 SizePanel = vec2(0);
 	// Phisic collision
 	string ZonaPolygon;
 	GLfloat PolygonPointY = 0;

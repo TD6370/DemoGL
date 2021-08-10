@@ -29,6 +29,12 @@ using glm::vec2;
 //using namespace System::Diagnostics;
 
 
+void ModelData::InitNull() {
+	TypeName = FormatTypeName(typeid(this).name());
+	Render = new RenderComponent(MaterialData, MeshData);
+};
+
+
 void ModelData::Init(map<string, GLuint>& shaderPrograms) {
 
 	TypeName = FormatTypeName(typeid(this).name());

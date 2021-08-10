@@ -26,6 +26,7 @@ using glm::perspective;
 using std::string;
 using std::shared_ptr;
 
+class ObjectData;
 class ObjectGUI;
 class SceneConstructor;
 enum TypeCommand;
@@ -76,6 +77,9 @@ private:
 	int IndexObjectFocused = -1;
 	int IndexObjectSelected = -1;
 	int IndexObjectCreating = -1;
+
+	int IndexObjectSelectedEdit = -1;
+
 	float FocusedOrder = -1;
 	vec3 CursorMovePos = vec3(0);
 	vec3 SelectObjectOffsetPos = vec3(0);
@@ -83,6 +87,8 @@ private:
 
 	float StartTimer = 0;
 	float EndTimer = 0;
+
+	std::shared_ptr<ObjectData> ObjectSelectedEdit = nullptr;
 
 public:
 		
@@ -137,6 +143,11 @@ public:
 
 	void EventReadKeyInput(shared_ptr<ObjectGUI> obj);
 
+	//---------- Fill fields selected object
+	
+	//void EventFillFieldsEdit(shared_ptr<ObjectData> obj);
+	void EventFillFieldsEdit();
+	
 	
 };
 

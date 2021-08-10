@@ -44,8 +44,6 @@ public:
 	void Config();
 	void Work();
 
-	void LoadStaticCommandList();
-
 	void AddCommand(CommandPack command);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, string keyOptions = std::string(), int valueOptions = -1);
@@ -57,6 +55,11 @@ public:
 		int valueI, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string(), string descriptionbool = std::string(), bool isLong = false);
 
 	void DebugReadCommand(CommandPack* command, string name);
+
+	//----  List Object Fields Edit
+	void LoadStaticCommandList();
+
+	void CreateCommandList(shared_ptr<ObjectData> obj = nullptr);
 };
 
 
@@ -78,5 +81,9 @@ void UpdateCommandOptions(shared_ptr<ObjectData> obj, string keyOptions, int val
 
 void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
+//-------- lists commands
+
 void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex = -1, int TargetIndex = -1, int ValueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string());
+
+
 

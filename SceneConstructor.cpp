@@ -80,6 +80,8 @@ void SceneConstructor::Init() {
 
 	CommandsAttribute = AttributeCommands();
 
+	m_serializer = new SceneSerialize();
+
 	LoadDataModel();
 	
 	ConfigRoom();
@@ -300,7 +302,8 @@ bool SceneConstructor::SetObject(int indNN) {
 	//----------------------
 
 	if (ObjectCurrent->ShellIndex != -1) {
-		ShellCurrent = Storage->GetObjectShellPrt(ObjectCurrent->ShellIndex);
+		//ShellCurrent = Storage->GetObjectShellPrt(ObjectCurrent->ShellIndex);
+		ShellCurrent = ObjectCurrent->Shell; // Storage->GetObjectShellPrt(ObjectCurrent->ShellIndex);
 		IsHaveShell = true;
 	}
 	else {
@@ -582,10 +585,13 @@ void SceneConstructor::RefreshGUI() {
 }
 
 
-void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText) {
+void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos) {
 
 	string typeObjectAttr = CommandsAttribute.TypeObjectAttr;
 	string nameCommandList = "";
+	int isInitPos = -1;
+	if(pos != vec3(-1))
+		isInitPos = 1;
 
 	if (typeCreate == TypeObject::ListBox ||
 		typeCreate == TypeObject::ListTextBox ||
@@ -599,17 +605,40 @@ void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string type
 		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
 			-1,
 			-1,
-			vec4(),
+			vec4(pos.x, pos.y, pos.z, isInitPos),
 			nameListCommands);
 	}
 	else {
 		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
 			typeCreate,
 			0.0,
-			vec4(),
+			vec4(pos.x, pos.y, pos.z, isInitPos),
 			nameCommandList,
 			typeObjectText);
 	}
+}
+
+//====================== = Get Value by Object
+
+void SceneConstructor::CreateObjectListFieldValue(shared_ptr<ObjectData> obj) {
+	m_serializer->Save(obj, false, true);
+}
+ 
+string SceneConstructor::GetObjectValueByFieldName(string typeFieldName) {
+
+	string value = m_serializer->GetFieldValueByName(typeFieldName);
+	return value;
+}
+
+map<string, string> SceneConstructor::GetObjectListFieldValue(shared_ptr<ObjectData> obj) {
+
+	m_serializer->Save(obj, false, true);
+
+	return m_serializer->GetObjectListFieldValue();
+}
+
+vector<string> SceneConstructor::GetObjectListFields() {
+	return m_serializer->GetObjectListFields();
 }
 
 //========================

@@ -20,6 +20,7 @@ using std::map;
 
 #define M_PI 3.1415926535897932384626433832795
 #define EmptyID 66666
+#define STR_EMPTY "@?"
 
 struct Material {
 	string PathShaderVertex = "";
@@ -57,7 +58,9 @@ struct SceneParam {
 	int IndexBackgroundGUIObj = -1;
 	int IndexCursorGUI = -1;
 	int IndexBaseEditBox = -1;
+	int IndexObjectFieldsEdit = -1;
 	string NameSystemEditBox = "SystemRootEditBox";
+	string NameSystemObjectFieldsEdit = "SystemObjectFieldsEdit";
 	bool IsGUI = false;
 };
 
@@ -141,13 +144,13 @@ enum TypeLayer {
 struct CommandPack {
 	bool Enable;
 	TypeCommand CommandType;
-	int SourceIndex;
-	int TargetIndex;
+	int SourceIndex = -1;
+	int TargetIndex = -1;
 	string Description;
 	string ValueS;
-	int ValueI;
-	float ValueF;
-	vec4 ValueV4;
+	int ValueI = -1;
+	float ValueF = -1;
+	vec4 ValueV4 = vec4(-1);
 	map <string, int> Options = map <string, int>{};
 	bool IsLongCommand = false;
 };
@@ -175,6 +178,7 @@ extern struct AttributeCommands
 	string BaseListCommand = "BaseListCommand";
 	string TypesObjectListCommand = "TypesObjectListCommand";
 	string ObjectFieldsListCommand = "ObjectFieldsListCommand";
+	string ObjectFieldValuesListCommand = "ObjectFieldValuesListCommand";
 	string TypeObjectAttr = "TypeObject";
 	string SourceCommandObjIndexAttr = "SourceCommandObjIndex";
 };

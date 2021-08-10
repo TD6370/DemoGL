@@ -52,6 +52,9 @@ void AspectFactoryObjects::Work() {
 	
 	m_startContructing = false;
 	CreateInfo info;
+	vec4 posC = command.ValueV4;
+	if(posC.w != -1)
+		info.Pos = vec3(posC.x, posC.y, posC.z);
 
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
@@ -103,7 +106,7 @@ void AspectFactoryObjects::Work() {
 			return;
 
 		Scene->ReadCommand(CreateObject);
-		CreateListBox(command.ValueS, typeObj);
+		CreateListBox(command.ValueS, typeObj, info);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::ObjectFieldsEdit)
@@ -112,7 +115,7 @@ void AspectFactoryObjects::Work() {
 			return;
 
 		Scene->ReadCommand(CreateObject);
-		CreateObjectFieldsEdit();
+		CreateObjectFieldsEdit(info);
 		isCompleted = true;
 	}
 
@@ -225,12 +228,7 @@ void AspectFactoryObjects::CreateButton(CreateInfo info) {
 }
 
 
-void AspectFactoryObjects::CreateListEditBox(string nameListCommand) {
-	
-	CreateListBox(nameListCommand, ListEditBox);
-}
-
-void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject typeListBox) {
+void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject typeListBox, CreateInfo info) {
 	string caption;
 	string childModel;
 	string objName;
@@ -241,7 +239,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	shared_ptr<ObjectData> objBaseFrame;
 	
 	shared_ptr<ObjectData> objCreate;
-	vec2 pos = vec2(1.);
+	//vec2 pos = vec2(1.); //---- Cursor
 	float posZ = Scene->Storage->StartPosGUI_Z;
 
 	// ---- background GUI
@@ -255,13 +253,14 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	caption = "BaseFrame_ListBox";
 	childModel = "FrameModel"; 
 	// -- Style
-	float border = 0.01;
-	float interligne = 0.005;
-	float heightItem = 0.06;
-	float widthFrame = 0.6;
+	float border = 0.003;
+	float interligne = 0.003;
+	float heightItem = 0.054;
+	float widthFrame = 0.7;
 	float heightFrame = (listCommand.size() * heightItem) + ((listCommand.size() -1) * interligne) + (border*2);
 	vec2 sizeFrame = vec2(widthFrame, heightFrame);
-	vec3 posFrame = vec3(pos.x, pos.y, posZ);
+	
+	vec3 posFrame = vec3(info.Pos.x, info.Pos.y, posZ);
 
 	objBaseFrame = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, posFrame, sizeFrame, ListBox, vec3(1));
 	objBaseFrame->IsFocusable = false;
@@ -273,7 +272,10 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 
 	for (CommandPack commItem : listCommand)
 	{
-		infoItem.Message = commItem.Description;
+		if (typeListBox == ListEditBox)
+			infoItem.Message = commItem.ValueS;
+		else
+			infoItem.Message = commItem.Description;
 
 		/*if (typeListBox == ListTextBox){
 			m_startContructing = true;
@@ -362,11 +364,11 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 
 	//------------------------------
 	if (m_startContructing)
-		m_lastObjectCreated = objBackGUI;
+		m_lastObjectCreated = objBaseFrame;
 }
 
 
-void AspectFactoryObjects::CreateObjectFieldsEdit() {
+void AspectFactoryObjects::CreateObjectFieldsEdit(CreateInfo info) {
 
 	//------------------------------------
 	// Shell Object fields Edit
@@ -379,9 +381,27 @@ void AspectFactoryObjects::CreateObjectFieldsEdit() {
 	// ControlFrame->Command->Target ==> selected Object
 	//------------------------------------
 
-	CreateListBox(Scene->CommandsAttribute.ObjectFieldsListCommand);
+	m_startContructing = true;
 
-	CreateListEditBox(Scene->CommandsAttribute.ObjectFieldsListCommand);
+	//CreateInfo info;
+	//info.Pos = ""
+	float border = 0.01;
+	if (!info.Init) {
+		info.Pos.x = .5;
+		info.Pos.y = .1;
+	}
+
+	CreateListBox(Scene->CommandsAttribute.ObjectFieldsListCommand, ListTextBox, info);
+
+	info.Pos.x += m_lastObjectCreated->SizePanel.x + border;
+
+	CreateListBox(Scene->CommandsAttribute.ObjectFieldsListCommand, ListEditBox, info);
+
+	//--- save system info
+	Scene->Storage->SceneData->IndexObjectFieldsEdit = m_lastObjectCreated->Index;
+	m_lastObjectCreated->Name = Scene->Storage->SceneData->NameSystemObjectFieldsEdit;
+
+	m_startContructing = false;
 
 	//m_lastShellCreated
 }

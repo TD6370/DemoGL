@@ -17,6 +17,12 @@
 
 void RenderComponent::Clone(RenderComponent* renderModel) {
 
+	//--- for object Null
+	if (renderModel == nullptr)
+		return;
+	if (!renderModel)
+		return;
+
 	ShaderProgram = renderModel->ShaderProgram;
 	ConfUniform = renderModel->ConfUniform;
 

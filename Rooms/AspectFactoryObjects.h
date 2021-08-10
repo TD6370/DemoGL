@@ -34,17 +34,15 @@ public:
 	void Config();
 	void Work();
 
-	void CreateTextBox(CreateInfo trans);
+	void CreateTextBox(CreateInfo info);
 
-	void CreateButton(CreateInfo trans);
+	void CreateButton(CreateInfo info);
 
-	void CreateEditBox(CreateInfo trans);
+	void CreateEditBox(CreateInfo info);
 
-	void CreateListBox(string nameListCommand, TypeObject typeListBox = ListBox);
-
-	void CreateListEditBox(string nameListCommand);
+	void CreateListBox(string nameListCommand, TypeObject typeListBox = ListBox, CreateInfo info = CreateInfo());
 	
-	void CreateObjectFieldsEdit();
+	void CreateObjectFieldsEdit(CreateInfo info = CreateInfo());
 };
 
 

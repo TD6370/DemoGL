@@ -31,6 +31,7 @@ class Controllers;
 class AspectFactoryObjects;
 class AspectDispatcherCommands;
 class BaseShell;
+class SceneSerialize;
 
 using std::vector;
 using std::shared_ptr;
@@ -63,6 +64,9 @@ private:
 	string m_lastCashShader = "-2";
 
 	GLint indicesSize;
+
+	int m_indLastObjectSerialize = -1;
+	SceneSerialize* m_serializer;
 
 public:
 	shared_ptr<ObjectData> ObjectCurrent;
@@ -182,6 +186,17 @@ public:
 	
 	vector<CommandPack> GetListCommand(string nameList);
 
-	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText);
+	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos = vec3(-1));
+
+	//--- Get field value by object
+	void CreateObjectListFieldValue(shared_ptr<ObjectData> obj);
+
+	string GetObjectValueByFieldName(string typeFieldName);
+
+	map<string, string> GetObjectListFieldValue(shared_ptr<ObjectData> obj);
+
+	vector<string> GetObjectListFields();
+	//--------------------------
+
 };
 

@@ -51,6 +51,8 @@ public:
 
 	ModelData() {};
 
+	void InitNull();
+
 	void Init(map<string, GLuint>& shaderPrograms);
 
 	/*void DebugUV(vector<vec2> list_uv);

@@ -90,6 +90,9 @@ struct ObjectFiledsSpecific {
 	string Value;
 };
 
+string FormatEmptyValue(string value);
+string FormatFieldName(string value);
+
 class SceneSerialize
 {
 private:
@@ -111,6 +114,11 @@ private:
 
 	map<TypeLayer, string> m_mapNamesTypesLayers;
 	map<string, TypeLayer> m_mapTypesLayers;
+
+	map<string, string> m_mapObjectFieldsNameAndValue;
+	vector<string> m_mapObjectFieldsNames;
+
+	void AddFieldNameAndValue(std::stringstream& stringStream);
 	
 public:
 	vector<shared_ptr<ObjectFileds>> FiledsObjects;
@@ -122,7 +130,7 @@ public:
 	
 	virtual ~SceneSerialize();
 
-	void Save(shared_ptr<ObjectData> obj, bool isSpecificExist);
+	void Save(shared_ptr<ObjectData> obj, bool isSpecificExist, bool isGet = false);
 
 	void Save(shared_ptr<ModelData> model);
 
@@ -151,6 +159,7 @@ public:
 	const char* GetStrValueToChar(string value);
 
 	void SetStrValue(std::ifstream& in, string& value);
+	void SetStrValue(std::stringstream& in, string& value);
 
 	string GetNameType(TypeObject typeObj);
 	TypeObject GetTypeObject(string name);
@@ -169,5 +178,10 @@ public:
 	void AddNextType(TypeLayer typeObj, string Name);
 
 	map<TypeObject, string> GetNamesTypesObjects();
+
+	//-------------- 
+	string GetFieldValueByName(string fieldName);
+	map<string, string> GetObjectListFieldValue();
+	vector<string> GetObjectListFields();
 };
 
