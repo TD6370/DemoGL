@@ -323,6 +323,8 @@ void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
 	{
 		if (command->Options.size() != 0)
 			IsEditControls = command->Options["ButtonEditOn"];
+		if (IsEditControls)
+			IndexObjectSelected = -1;
 	}
 }
 
@@ -352,19 +354,34 @@ void RoomUseInterface::CheckStateObjects() {
 //--- Event selected info create object
 void  RoomUseInterface::EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
+	CommandPack* commButtonCreate = Scene->ObjectCurrent->SceneCommand;
+
+	//-- is Button - Start Create object
+	if (commButtonCreate->CommandType != TypeCommand::SelectPosForObject)
+		return;
+
+	//--- set position cursor for create objects (not GUI)
+	if (Scene->Storage->SceneData->IndexObjectFieldsEdit > 0)
+	{
+		int selectedType = commButtonCreate->ValueI;
+		if (selectedType != -1 && Scene->IsValidTypeObjectWorld((TypeObject)selectedType))
+			commButtonCreate->ValueV4 = vec4(CursorRayPos, 1);
+	}
+
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable || command->CommandType != SelectItemValue)
 		return;
-	if (command->SourceIndex != TypeCommand::CreateObject)
-		return;
-	if(Scene->ObjectCurrent->SceneCommand->CommandType != TypeCommand::SelectPosForObject)
+
+	if (((int)command->ValueF) != TypeCommand::CreateObject)
 		return;
 
 	Scene->ReadCommand(SelectItemValue);
 
 	//--- set to Button "Create object" -> selected type Object
-	Scene->ObjectCurrent->SceneCommand->ValueS = command->Description;
-	Scene->ObjectCurrent->SceneCommand->ValueI = command->ValueI;
+	commButtonCreate->ValueS = command->Description;
+	commButtonCreate->ValueI = command->ValueI;
+	commButtonCreate->ValueF = command->ValueF;
+	commButtonCreate->ValueV4 = vec4(-1);
 }
 
 void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
@@ -382,8 +399,18 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 		{
 			if(command->ValueI != -1)
 				typeCreate = command->ValueI;
-			//--- Set background command - select pos for Create control ---
-			SetCommand(objGUI, TypeCommand::SelectedPosForObject, typeCreate, command->ValueS);
+
+			//--- World object
+			if (command->ValueV4.w != -1)
+			{
+				//-- run create World object
+				Scene->RunCommandCreateObject((TypeObject)typeCreate, command->ValueS, command->ValueV4);
+			}
+			else 
+			{
+				//--- Set background command - select pos for Create control ---
+				SetCommand(objGUI, TypeCommand::SelectedPosForObject, typeCreate, command->ValueS);
+			}
 		}
 
 		//--- position selected
@@ -394,7 +421,7 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 			if (command->ValueI != -1)
 				typeCreate = command->ValueI;
 
-			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText);
+			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText, command->ValueV4);
 			
 			SetCommand(objGUI, TypeCommand::None);
 		}
@@ -659,7 +686,8 @@ void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
 
 void RoomUseInterface::EventFillFieldsEdit() {
 	
-	//return;
+	if (IsCreatingObject)
+		return;
 
 	shared_ptr<ObjectData> obj = Scene->ObjectCurrent;
 
@@ -672,40 +700,15 @@ void RoomUseInterface::EventFillFieldsEdit() {
 	
 	if (Scene->Storage->SceneData->IndexObjectFieldsEdit < 0)
 		return;
-	
+
 	int index = obj->Index;
 	int indexEditObj = -1;
-
-	//if (IsEditControls)
-	//{
-	//	indexEditObj = IndexObjectSelected; //Scene->Storage->SceneData->IndexCursorGUI;
-	//}
-	//else {
-	//	if (obj->Index == Scene->Storage->SceneData->IndexCursorRayObj)
-	//	{
-
-	//	}
-	//	//indexEditObj = Scene->Storage->SceneData->IndexCursorRayObj;
-	//	/*void ObjectCursorRay::SelectPositionOnPolygon()
-	//	{
-	//		if (SelectedObjIndex != -1) {
-	//			m_preSelectedObjectAction = ActionObjectCurrent;
-
-	//			SceneCommand->CommandType = EditObjectCommand;
-	//			SceneCommand->SourceIndex = Index;
-	//			SceneCommand->TargetIndex = SelectedObjIndex;
-	//			SceneCommand->ValueI = (int)Transforming;
-	//			SceneCommand->Enable = true;
-	//		}
-	//	}*/
-	//}
 
 	//------ Save ray Object selected
 	if (!IsEditControls && obj->Index == Scene->Storage->SceneData->IndexCursorRayObj) {
 		IndexObjectSelected = obj->SceneCommand->TargetIndex;
+		CursorRayPos = obj->Postranslate;
 	}
-
-
 	indexEditObj = IndexObjectSelected;
 
 	if (indexEditObj == -1)
@@ -734,13 +737,6 @@ void RoomUseInterface::EventFillFieldsEdit() {
 			//--- List Edit box
 			shared_ptr<BaseShell> shell = Scene->ShellCurrent;
 		
-			//--- TEST
-			auto testI = obj->GetInfo();
-			auto test = obj->ShellIndex;
-			auto test2 = obj->Shell;
-			auto testR = shell->HeadObj->Name;
-			auto testT1 = shell->HeadObj->GetInfo();
-			
 			Scene->CreateObjectListFieldValue(ObjectSelectedEdit);
 
 			objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(shell->HeadObj);
@@ -748,7 +744,6 @@ void RoomUseInterface::EventFillFieldsEdit() {
 
 			// --- info Shell base
 			int indShell_ListFieldsEdit = objItem_Button_EditBox->SceneCommand->SourceIndex;
-
 			//map<string, string> listObjFieldsValue = Scene->GetObjectListFieldValue(ObjectSelectedEdit);
 			
 			while (indItemNext != -1)

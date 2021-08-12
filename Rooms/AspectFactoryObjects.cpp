@@ -59,22 +59,23 @@ void AspectFactoryObjects::Work() {
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
 
+	info.Message = string();
+
 	if (typeObj == TypeObject::TextBox)
 	{
 		if (!isBackgroundFrame)
 			return;
 		Scene->ReadCommand(CreateObject);
 
-		info.Message = string();
-		info.Pos = vec3(1.);
-		info.Size = vec2(0.7, 0.1);
-
 		if (command.Description.size() != 0)
 			info.Message = command.Description;
-		if(info.Message.size() == 0 && command.ValueS.size() != 0)
+		if (info.Message.size() == 0 && command.ValueS.size() != 0)
 			info.Message = command.ValueS;
 		if (info.Message.size() != 0)
 			info.Init = true;
+
+		info.Pos = vec3(1.);
+		info.Size = vec2(0.7, 0.1);
 
 		CreateTextBox(info);
 		isCompleted = true;
@@ -120,10 +121,20 @@ void AspectFactoryObjects::Work() {
 	}
 
 	if (!isCompleted) {
-		//Create object
-	}
 
-	
+		Scene->ReadCommand(CreateObject);
+
+		if (command.Description.size() != 0)
+			info.Message = command.Description;
+		if (info.Message.size() == 0 && command.ValueS.size() != 0)
+			info.Message = command.ValueS;
+
+		//Create object
+		string objName = "Obj" + info.Message;
+		vec3 color = vec3(0.156, 0.784, 0.301);
+		shared_ptr<ObjectData> objCreate = Scene->Storage->AddObjectDefault(objName, typeObj, info.Pos, color);
+		isCompleted = true;
+	}
 
 	if (isCompleted) {
 		Scene->Storage->UpdateObjectsOrders();

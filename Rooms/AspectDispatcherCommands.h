@@ -65,13 +65,13 @@ public:
 
 
 void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, string keyOptions = std::string(), int valueOptions = -1,
-	int valueI = -1, float valueF = 0.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string());
+	int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string(), string description = std::string());
 
 void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI = -1, float valueF = 0.0, vec4 valueV4 = vec4(), string valueS = std::string(), string description = std::string());
+	int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string(), string description = std::string());
 
 void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, 
-	int valueI, string valueS, float valueF = 0.0, vec4 valueV4 = vec4(), string description = std::string());
+	int valueI, string valueS, float valueF = -1.0, vec4 valueV4 = vec4(-1), string description = std::string());
 
 void SetCommand(shared_ptr<ObjectData> obj, CommandPack command);
 
@@ -83,7 +83,7 @@ void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
 //-------- lists commands
 
-void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex = -1, int TargetIndex = -1, int ValueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(), string valueS = std::string());
+void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex = -1, int TargetIndex = -1, int ValueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string());
 
 
 

@@ -183,5 +183,17 @@ extern struct AttributeCommands
 	string SourceCommandObjIndexAttr = "SourceCommandObjIndex";
 };
 
+extern struct ModelNames
+{
+	string Hero = "homo";
+	string NPC = "mon";
+	string Bullet = "marker_Point";
+	string Block = "box";
+	string Terra = "box";
+	string MarkerPoint = "marker_Point";
+	string MarkerCross = "marker_Cross";
+	string MarkerVector = "marker_Vector";
+};
+
 
 

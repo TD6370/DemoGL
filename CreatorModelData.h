@@ -39,6 +39,8 @@ class CreatorModelData {
 
 private:
 	vector<shared_ptr<ObjectData>> SceneObjects;
+	map<int, string> m_defaultModelNames;
+	ModelNames m_namesModels;
 	//vector<ObjectData> SceneObjectsV;
 
 public:
@@ -75,6 +77,9 @@ public:
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
 	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, 
+		vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1, TypeLayer Layer = TypeLayer::LayerNone, bool isLoading = false);
+
+	shared_ptr<ObjectData> AddObjectDefault(string name, TypeObject p_typeObj,
 		vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1, TypeLayer Layer = TypeLayer::LayerNone, bool isLoading = false);
 
 	shared_ptr<ObjectData> GetObjectPrt(int index);
@@ -136,7 +141,8 @@ public:
 
 	//void ControlConstruct(shared_ptr<ObjectGUI> obj, string caption);
 	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string(), TypeLayer p_layer = LayerNone);
-		
+	
+	shared_ptr<ObjectData> CreateObjectNull();
 };
 
 

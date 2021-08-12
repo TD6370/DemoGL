@@ -61,6 +61,15 @@ CreatorModelData::CreatorModelData() {
 	ShaderPrograms = map<string, GLuint>();
 	LayerScene = new SceneLayer(this);
 	Clusters = new WorldCluster();
+	
+	m_defaultModelNames = map<int, string>();
+	m_defaultModelNames.insert({ Solid , m_namesModels.Terra });
+	m_defaultModelNames.insert({ Terra , m_namesModels.Terra });
+	m_defaultModelNames.insert({ Block , m_namesModels.Block });
+	m_defaultModelNames.insert({ NPC , m_namesModels.NPC });
+	m_defaultModelNames.insert({ Bullet , m_namesModels.Bullet });
+	m_defaultModelNames.insert({ BulletHero , m_namesModels.Bullet });
+	m_defaultModelNames.insert({ Hero , m_namesModels.Hero });
 }
 
 CreatorModelData::~CreatorModelData() {
@@ -930,7 +939,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < 1; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -1198,4 +1207,29 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 	}
 
 	return nullptr;
+}
+
+shared_ptr<ObjectData> CreatorModelData::CreateObjectNull()
+{
+	shared_ptr<ObjectData> obj;
+
+	ModelData model = ModelData();
+	shared_ptr<ModelData> modelPrt = std::make_unique<ModelData>(model);
+	modelPrt->InitNull();
+	ObjectData objNull(-1, modelPrt, TypeObject::Solid, vec3(0));
+	objNull.InitData();
+	obj = std::make_unique<ObjectData>(objNull);
+	return obj;
+}
+
+
+std::shared_ptr<ObjectData> CreatorModelData::AddObjectDefault(
+	string name, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index,
+	TypeLayer p_layer, bool isLoading) 
+{
+	string nameModel = m_defaultModelNames[p_typeObj];
+	
+	shared_ptr<ModelData> modelPtr = GetModelPrt(nameModel);
+	return AddObject(name, modelPtr, p_typeObj, p_pos, p_color, p_index,
+		p_layer, isLoading);
 }

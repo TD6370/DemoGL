@@ -57,10 +57,10 @@ void AspectDispatcherCommands::LoadStaticCommandList() {
 
 	for (auto pairTypeName : mapTypesNamesObj) {
 		commandNextType = CommandPack();
-		commandNextType.SourceIndex = TypeCommand::CreateObject;
 		commandNextType.Description = pairTypeName.second;
 		commandNextType.CommandType = TypeCommand::SelectItemValue;
 		commandNextType.ValueI = pairTypeName.first;
+		commandNextType.ValueF = TypeCommand::CreateObject;
 		listTypeObjects.push_back(commandNextType);
 	}
 
@@ -78,14 +78,7 @@ void AspectDispatcherCommands::CreateCommandList(shared_ptr<ObjectData> obj) {
 	int valueI = -1;
 
 	if (obj == nullptr)
-	{
-		ModelData model = ModelData();
-		shared_ptr<ModelData> modelPrt = std::make_unique<ModelData>(model);
-		modelPrt->InitNull();
-		ObjectData objNull(-1, modelPrt, TypeObject::Solid, vec3(0));
-		objNull.InitData();
-		obj = std::make_unique<ObjectData>(objNull);
-	}
+		obj = Scene->CreateObjectNull();
 
 	map<string, string> listObjFieldsValue = Scene->GetObjectListFieldValue(obj);
 	vector<string> listObjFields = Scene->GetObjectListFields();

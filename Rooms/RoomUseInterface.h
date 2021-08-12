@@ -82,6 +82,7 @@ private:
 
 	float FocusedOrder = -1;
 	vec3 CursorMovePos = vec3(0);
+	vec3 CursorRayPos = vec3(0);
 	vec3 SelectObjectOffsetPos = vec3(0);
 	vec2 m_startSizePanel = vec2(0);
 

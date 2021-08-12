@@ -648,3 +648,16 @@ vector<CommandPack> SceneConstructor::GetListCommand(string nameList) {
 	return dispatcherCommands->StaticListCommand[nameList];
 }
 
+//-----
+
+shared_ptr<ObjectData> SceneConstructor::CreateObjectNull()
+{
+	return Storage->CreateObjectNull();
+}
+
+bool SceneConstructor::IsValidTypeObjectWorld(TypeObject typeObj) {
+	return typeObj == TypeObject::Solid || 
+			typeObj == TypeObject::Block || 
+			typeObj == TypeObject::Tree || 
+			typeObj == TypeObject::NPC;
+}
