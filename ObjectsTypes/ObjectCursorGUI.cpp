@@ -37,7 +37,9 @@ void ObjectCursorGUI::SaveNewPosition() {
 	bool notY = false;
 	float k = 0.2;
 	
-	if (mouse.z > 0 || startPosRect.x != startPosRect.x)
+	//---- TEST -- ?? fixed frozen cursor
+	//if (mouse.z > 0 || startPosRect.x != startPosRect.x)
+	if (mouse.z > 0)
 	{
 		return;
 	}
@@ -52,13 +54,20 @@ void ObjectCursorGUI::SaveNewPosition() {
 	stepY *= k;
 
 	float limit = 0.001;
+	//---- TEST -- ?? fixed frozen cursor
 	if (stepX <limit && stepX > -limit && stepY < limit && stepY > -limit) {
-
 		return;
 	}
+	
+	vec2 sizeBack = EngineData->SceneData->SizeBackgroungGUI;
+	float offSet = (sizeBack.x - 2) / 2;
+	float limitBordMin = 0.01 - offSet;
+	float limitBordMax = 1.98 + offSet;
 
-	float limitBordMin = 0.01;
-	float limitBordMax = 1.98;
+	//---- TODO
+	float leftBackFactor = (sizeBack.x - BACKGROUND_GUI_WIDTH_F);
+	limitBordMax += leftBackFactor;
+
 	float corrBord = 0.02;
 	if (StartPos.x + stepX < limitBordMin) {
 		StartPos.x = limitBordMin + corrBord;
