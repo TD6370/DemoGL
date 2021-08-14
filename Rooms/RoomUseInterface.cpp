@@ -685,7 +685,7 @@ void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
 //=================== Event Edit Object fields ====================
 
 void RoomUseInterface::EventFillFieldsEdit() {
-	
+
 	if (IsCreatingObject)
 		return;
 
@@ -696,6 +696,9 @@ void RoomUseInterface::EventFillFieldsEdit() {
 		vec3 pos = vec3(.7, .1, Scene->Storage->StartPosGUI_Z);
 		Scene->Storage->SceneData->IndexObjectFieldsEdit = -2;
 		Scene->RunCommandCreateObject(TypeObject::ObjectFieldsEdit, "ObjectFieldsEdit", pos);
+
+		pos = vec3(.02, .3, Scene->Storage->StartPosGUI_Z);
+		Scene->RunCommandCreateObject(TypeObject::ListBox, Scene->CommandsAttribute.TypesObjectListCommand, pos);
 	}
 	
 	if (Scene->Storage->SceneData->IndexObjectFieldsEdit < 0)

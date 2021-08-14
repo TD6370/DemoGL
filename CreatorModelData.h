@@ -113,7 +113,7 @@ public:
 
 	void LoadClusters();
 
-	void Load();
+	void Load(bool isFast = false);
 
 	void ClearObjects();
 

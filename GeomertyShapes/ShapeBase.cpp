@@ -324,6 +324,7 @@ vec2 ShapeBase::GetStartPositWorld() {
 	vec2 startPos;
 	startPos.x = posWorldBL.x,
 	startPos.y = posWorldTL.y;
+
 	return startPos;
 }
 

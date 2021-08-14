@@ -402,6 +402,48 @@ std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
 	return prt_objData;
 }
 
+// --- step 2. (when loading - after create objects, join obj <- shells)
+void CreatorModelData::UpdateFamilBonds() {
+
+	shared_ptr<ObjectData> objOther;
+
+	for (auto obj : SceneObjects) {
+		//TODO: AspectFamilyBonds
+
+		if (obj->IndexObjectOwner != -1) {
+			objOther = GetObjectPrt(obj->IndexObjectOwner);
+			obj->SetOwnerObject(objOther);
+		}
+		if (obj->NextItemShellIndex != -1) {
+			objOther = GetObjectPrt(obj->NextItemShellIndex);
+			obj->SetNextItemShellObject(objOther);
+		}
+
+		if (obj->ShellIndex != -1) {
+			auto shell = ObjectsShells[obj->ShellIndex];
+			obj->SetShell(shell);
+		}
+	}
+}
+
+// --- step 3. (when loading - after create objects, join shells <- obj)
+void  CreatorModelData::LoadShellsLinks() {
+
+	for (auto shell : ObjectsShells) {
+		shell->RootObj = GetObjectPrt(shell->RootObjIndex);
+		if (shell->CaptionObjIndex != -1)
+			shell->CaptionObj = GetObjectPrt(shell->CaptionObjIndex);
+		if (shell->HeadIndexList != -1)
+			shell->HeadObj = GetObjectPrt(shell->HeadIndexList);
+	}
+	for (auto obj : SceneObjects) {
+
+		if (obj->ShellIndex != -1)
+			obj->Shell = GetObjectShellPrt(obj->ShellIndex);
+	}
+}
+
+// --- step 1. (when loading - create shells, not joins)
 shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int captionIndex, bool isLoading,
 	vector<int> items) {
 
@@ -418,42 +460,23 @@ shared_ptr<BaseShell> CreatorModelData::AddShell(string name, int rootIndex, int
 	prt_objShell->CaptionObjIndex = captionIndex;
 	prt_objShell->Index = nextIndex;
 	prt_objShell->HeadIndexList = headIndex;
-	
 
 	if (!isLoading)
 	{
 		prt_objShell->RootObj = GetObjectPrt(rootIndex);
-		if (captionIndex != -1)
+		prt_objShell->RootObj->SetShell(prt_objShell);
+		if (captionIndex != -1) {
 			prt_objShell->CaptionObj = GetObjectPrt(captionIndex);
+			prt_objShell->CaptionObj->SetShell(prt_objShell);
+		}
 		if (headIndex != -1)
 			prt_objShell->HeadObj = GetObjectPrt(headIndex);
 
-		/*objShell.RootObj = GetObjectPrt(rootIndex);
-		if (captionIndex != -1)
-			objShell.CaptionObj = GetObjectPrt(captionIndex);
-		if (headIndex != -1)
-			objShell.HeadObj = GetObjectPrt(headIndex);*/
-	}
-
-	if(!isLoading)
-	{
-		prt_objShell->RootObj->SetShell(prt_objShell);
-		
-		if (captionIndex != -1)
-			prt_objShell->CaptionObj->SetShell(prt_objShell);
 		for (auto item : items)
 		{
 			auto objItem = GetObjectPrt(item);
 			objItem->SetShell(prt_objShell);
 		}
-
-		/*GetObjectPrt(rootIndex)->SetShell(prt_objShell);
-		if (captionIndex != -1)
-			GetObjectPrt(captionIndex)->SetShell(prt_objShell);
-		for (auto item : items)
-		{
-			GetObjectPrt(item)->SetShell(prt_objShell);
-		}*/
 	}
 	ObjectsShells.push_back(prt_objShell);
 
@@ -623,26 +646,6 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 	UpdateFamilBonds();
 }
 
-void CreatorModelData::UpdateFamilBonds() {
-
-	shared_ptr<ObjectData> objOther;
-
-	for (auto obj : SceneObjects) {
-		if (obj->IndexObjectOwner != -1) {
-			objOther = GetObjectPrt(obj->IndexObjectOwner);
-			obj->SetOwnerObject(objOther);
-		}
-		if (obj->NextItemShellIndex != -1) {
-			objOther = GetObjectPrt(obj->NextItemShellIndex);
-			obj->SetNextItemShellObject(objOther);
-		}
-		if (obj->ShellIndex != -1) {
-			auto shell = ObjectsShells[obj->ShellIndex];
-			obj->SetShell(shell);
-		}
-	}
-}
-
 shared_ptr<ModelData> CreatorModelData::CreateNextModel() {
 	ModelData nextModel = ModelData();
 	Models.push_back(std::make_unique<ModelData>(nextModel));
@@ -739,6 +742,9 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->MaterialData.PathShaderVertex = "FrameUI.vert";
 	nextModelPrt->MaterialData.PathShaderFrag = "ContextUI.frag";
 	nextModelPrt->MeshData.PathModel3D = "./Models3D/Frame.obj";
+	//--- TEST
+	nextModelPrt->MeshData.PathModel3D = "./Models3D/FrameRectangle3.obj";
+
 	nextModelPrt->MaterialData.PathTexture = "./Textures/testTexture2.bmp";
 	nextModelPrt->MeshData.RadiusCollider = .1;
 	nextModelPrt->MeshData.IsSquareModel = true;
@@ -838,12 +844,10 @@ void CreatorModelData::LoadObjectsGUI() {
 	objBackGUI->IsTransformable = false;
 
 	// ---- Object frame	
-	objName = "TEST3";
+	/*objName = "TEST3";
 	caption = objBackGUI->Name + "." + objName;
 	childModel = "FrameModel";
-	//objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.4, .01, 0.02), vec2(1.1, 0.2), GUI, vec3(1));
-	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, 0.002), vec2(1.1, 0.2), GUI, vec3(1));
-	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, StartPosGUI_Z), vec2(1.1, 0.2), GUI, vec3(1));
+	AddChildObject(objBackGUI, caption, childModel, objName, vec3(.4, .01, StartPosGUI_Z), vec2(1.1, 0.2), GUI, vec3(1));*/
 	
 
 	// ---- Object Button edit obj GUI (BASE CONTROL)
@@ -867,7 +871,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	//caption = "אבגדהוזח";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
-	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, StartPosGUI_Z), vec2(0.3, 0.2), Button, vec3(1));
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, StartPosGUI_Z), vec2(0.3, 0.1), Button, vec3(1));
 	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
 	objCreateButton->IsToogleButon = false;
 	SetCommand(objCreateButton, SelectPosForObject);
@@ -916,7 +920,10 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 	for (auto shellFiled : filedsShells)
 	{
-		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), true);
+		vector<int>items = vector<int>();
+		if(shellFiled->HeadIndexList != "-1")
+			items.push_back(std::stoi(shellFiled->HeadIndexList));
+		AddShell(shellFiled->Name, stoi(shellFiled->RootObjIndex), stoi(shellFiled->CaptionObjIndex), true, items);
 	}
 
 }
@@ -1031,12 +1038,15 @@ void CreatorModelData::UpdateObjectsOrders() {
 	}
 }
 
-void CreatorModelData::Load() {
+void CreatorModelData::Load(bool isFast) {
 
-	LoadModels();
+	if(!isFast)
+		LoadModels();
+
 	LoadShells();
 	LoadObjects();
 	LoadShellsLinks();
+		
 	LoadClusters();
 }
 
@@ -1046,23 +1056,6 @@ void CreatorModelData::LoadShells() {
 	serializer->Load();
 	LoadShells(serializer->FiledsShells);
 }
-
-void  CreatorModelData::LoadShellsLinks() {
-
-	for (auto shape : ObjectsShells) {
-		shape->RootObj = GetObjectPrt(shape->RootObjIndex);
-		if (shape->CaptionObjIndex != -1)
-			shape->CaptionObj = GetObjectPrt(shape->CaptionObjIndex);
-		if (shape->HeadIndexList != -1)
-			shape->HeadObj = GetObjectPrt(shape->HeadIndexList);
-	}
-	for (auto obj : SceneObjects) {
-
-		if (obj->ShellIndex != -1)
-			obj->Shell = GetObjectShellPrt(obj->ShellIndex);
-	}
-}
-
 
 void CreatorModelData::LoadClusters() {
 

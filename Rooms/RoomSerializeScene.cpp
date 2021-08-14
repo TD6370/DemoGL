@@ -28,13 +28,17 @@ void RoomSerializeScene::Init() {
 }
 
 void RoomSerializeScene::Load() {
-	_serializer->Load();
+	
+	Scene->Storage->Load(true);
+	IsOnceComplete = true;
+	//-------
+
+	/*_serializer->Load();
 	Scene->Storage->LoadObjects(_serializer->FiledsObjects, _serializer->FiledsObjectsSpecific);
 	Scene->Storage->LoadShells(_serializer->FiledsShells);
-
 	Scene->RefreshGUI();
-
 	IsOnceComplete = true;
+	*/
 }
 
 void RoomSerializeScene::LoadObjects() {

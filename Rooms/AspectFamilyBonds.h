@@ -13,6 +13,7 @@
 
 using std::string;
 using glm::vec3;
+using glm::vec2;
 
 class SceneConstructor;
 
@@ -20,7 +21,7 @@ class AspectFamilyBonds : public AspectBase
 {
 private:
 	vec3 m_posCursor = vec3();
-	float m_lenghtLineBackground = -1;
+	vec2 m_sizeBackground = vec2(-1);
 
 public:
 	AspectFamilyBonds(string Name, SceneConstructor* sceneConstructor)

@@ -409,6 +409,9 @@ void SceneConstructor::Update()
 
 	for (int i = 0; i < countObjects + 1; i++)
 	{
+		//---- TEST DEBUG
+		assert(Storage->SceneObjectsLastIndex < 1000);
+
 		//if (IsDraw || isBase || isShowGUI)
 			ObjectUpdate(i);
 		//===========================================

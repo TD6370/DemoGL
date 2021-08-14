@@ -50,11 +50,15 @@ void AspectFactoryObjects::Work() {
 	if (!command.Enable || command.CommandType != TypeCommand::CreateObject)
 		return;
 	
+	//bool isCreateStatic = false;
 	m_startContructing = false;
 	CreateInfo info;
 	vec4 posC = command.ValueV4;
-	if(posC.w != -1)
+	if (posC.w != -1) {
+		m_startContructing = true;
 		info.Pos = vec3(posC.x, posC.y, posC.z);
+	}
+
 
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
@@ -138,6 +142,7 @@ void AspectFactoryObjects::Work() {
 
 	if (isCompleted) {
 		Scene->Storage->UpdateObjectsOrders();
+		m_startContructing = false;
 	}
 }
 
@@ -327,6 +332,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, EditBox);
 
 			//Command - create type Obj 
+			objCreateEditBox_Data->SceneCommand->CommandType = commItem.CommandType;
 			objCreateEditBox_Data->SceneCommand->Description= commItem.Description;
 			objCreateEditBox_Data->SceneCommand->ValueS = commItem.ValueS; 
 			objCreateEditBox_Data->SceneCommand->ValueI = commItem.ValueI;
@@ -398,7 +404,7 @@ void AspectFactoryObjects::CreateObjectFieldsEdit(CreateInfo info) {
 	//info.Pos = ""
 	float border = 0.01;
 	if (!info.Init) {
-		info.Pos.x = .5;
+		info.Pos.x = 1.2;
 		info.Pos.y = .1;
 	}
 

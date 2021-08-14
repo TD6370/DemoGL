@@ -15,9 +15,9 @@ ShapeSquare::~ShapeSquare() {
 
 }
 
-void ShapeSquare::SetOwnerPosition(float lenghtLineBackground, vec3 startPosParent) {
+void ShapeSquare::SetOwnerPosition(vec2 sizeBackground, vec3 startPosParent) {
 
-	m_lenghtLineBackground = lenghtLineBackground;
+	m_sizeBackground = sizeBackground;
 
 	if (!m_objGUI->IsAbsolutePosition) {
 		if (m_firstPosParent == vec3(-5000))
@@ -28,7 +28,7 @@ void ShapeSquare::SetOwnerPosition(float lenghtLineBackground, vec3 startPosPare
 	}
 
 	m_startPosParent = startPosParent;
-}
+}		
 
 
 void ShapeSquare::FormUpdate(bool isForce) {
@@ -36,37 +36,38 @@ void ShapeSquare::FormUpdate(bool isForce) {
 	if (!isForce && !obj->EngineData->SceneData->IsGUI)
 		return;
 
-	//================================================== TEST
-	/*std::stringstream ss;
-	ss << "Name: " << obj->Name << "  Model:" << obj->ModelPtr->Name << " Ind="  << obj->Index << "\n";
-	ss << "SP: " << obj->StartPos.x << " " << obj->StartPos.y << "\n\n";
-	ss << "PS: " << obj->Postranslate.x << " " << obj->Postranslate.y << " " << obj->Postranslate.z << "\n";
-	string spStart = ss.str();*/
-	//==================================================
+	//--- cash state Posititon
+	if (obj->ActionObjectCurrent == Stay)
+	{
+		float cash_owner = 0;
+		if(obj->IndexObjectOwner != -1)
+			cash_owner = obj->OwnerObj->Postranslate.x + obj->OwnerObj->Postranslate.y;
+
+		float currCash = obj->EngineData->Oper->HorizontalAngle + obj->EngineData->Oper->VerticalAngle + (obj->Postranslate.x + obj->Postranslate.y) + cash_owner;
+		if (cash_stateOperator == currCash)
+			return;
+		cash_stateOperator = currCash;
+	}
 
 	vec3 directionOut = vec3(0);
 	obj->PanelDepth = 3.8;
 	int indexBackground = obj->EngineData->SceneData->IndexBackgroundGUIObj;
+	float leftBackFactor = 1 + (m_sizeBackground.x - BACKGROUND_GUI_WIDTH_F);	//2.7
+	//leftBackFactor = 1; // --- base box
 
-	//---TEST
 	if (obj->IsAbsolutePosition)
 	{
 		vec2 offsetOfCenter = vec2(0);
-		//-----------------------------
+		
 		int indOwner = obj->IndexObjectOwner;
 		if (indOwner == -1)
 			indOwner = obj->EngineData->SceneData->IndexBackgroundGUIObj;
-		if (obj->IndexObjectOwner != -1)
+		if (indOwner != -1)
 		{
 			//---- normalize position on center backgruong control
-			float lenghtLineOwner = m_lenghtLineBackground;
-
 			float lenghtLine = obj->Shape->GetLineLenght(0);
-			float offsetOwner = lenghtLineOwner / 2;
-			float offsetAbs = lenghtLine / 2;
-			offsetOfCenter = vec2(offsetOwner - offsetAbs);
-			
-			if (obj->IndexObjectOwner != indexBackground)
+			offsetOfCenter = vec2(leftBackFactor - (lenghtLine / 2), 1 - (lenghtLine / 2));
+			if (indOwner != indexBackground)
 			{
 				//---- normalize position on parent control
 				offsetOfCenter.x -= m_startPosParent.x;
@@ -78,22 +79,6 @@ void ShapeSquare::FormUpdate(bool isForce) {
 		obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP,
 			obj->PanelDepth - obj->StartPos.z,
 			obj->EngineData->Oper, startPos);
-
-		//================================================== TEST
-		//TEST -- hystory move pos TextBox
-		/*if (Postranslate != tmp_posit && TypeObj == TextBox)
-		{
-			std::stringstream ssEnd;
-			ssEnd << "END PS: " << Postranslate.x << " " << Postranslate.y << " " << Postranslate.z << "\n";
-			string totalEnd = ssEnd.str();
-			tmp_posit = Postranslate;
-			if(hyst_posit.size()==0)
-				hyst_posit.append(spStart);
-			hyst_posit.append(totalEnd);
-			hyst_posit.append("--------------------------------");
-		}*/
-		//==================================================
-
 	}
 	else {
 		if (obj->StartPos == vec3(0)) {
@@ -105,10 +90,13 @@ void ShapeSquare::FormUpdate(bool isForce) {
 				obj->StartPos.x = m_firstPos.x - m_offsetPosParent.x;
 				obj->StartPos.y = m_firstPos.y - m_offsetPosParent.y;
 			}
-			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP, obj->PanelDepth - obj->StartPos.z, obj->EngineData->Oper, obj->StartPos);
+			float lbFactor = leftBackFactor - 1;
+			vec3 startPos = vec3(obj->StartPos.x - lbFactor, obj->StartPos.y, obj->StartPos.z);
+			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP, obj->PanelDepth - startPos.z, obj->EngineData->Oper, startPos);
+		
 		}
 	}
-
+	
 	SavePosFactor(obj->StartPos, obj->Postranslate);
 
 	Billboard();

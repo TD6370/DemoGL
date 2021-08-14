@@ -86,18 +86,23 @@ void AspectFamilyBonds::Work() {
 	if (Scene->Storage->SceneData->IsGUI && Scene->ObjectCurrent->IsGUI)
 	{
 
-		if (m_lenghtLineBackground == -1 &&
+		if (m_sizeBackground.x == -1 &&
 			Scene->ObjectCurrent->Index == Scene->Storage->SceneData->IndexBackgroundGUIObj)
 		{
-			auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(Scene->ObjectCurrent);
-			m_lenghtLineBackground = objPh->Shape->GetLineLenght(0);
+			//auto  objPh = std::dynamic_pointer_cast<ObjectPhysic>(Scene->ObjectCurrent);
+			//m_sizeBackground.x = objPh->Shape->GetLineLenght(0);
+			//m_sizeBackground.y = objPh->Shape->GetLineVertLenght(0);
+			m_sizeBackground.x = Scene->ObjectCurrent->Shape->GetLineLenght(0);
+			m_sizeBackground.y = Scene->ObjectCurrent->Shape->GetLineVertLenght(0);
+
+			Scene->Storage->SceneData->SizeBackgroungGUI = m_sizeBackground;
 		}
 
 		if (Scene->ObjectCurrent->IndexObjectOwner != -1)
 		{
 			auto  objOwnerGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent->OwnerObj);
 			auto  shapeSquare = (ShapeSquare*)Scene->ObjectCurrent->Shape;
-			shapeSquare->SetOwnerPosition(m_lenghtLineBackground, objOwnerGUI->StartPos);
+			shapeSquare->SetOwnerPosition(m_sizeBackground, objOwnerGUI->StartPos);
 		}
 	}
 }

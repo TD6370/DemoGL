@@ -26,13 +26,15 @@ private:
 	vec3 m_lastPosGUI = vec3(0);
 	vec3 m_lastPosWorld = vec3(0);
 
-	float m_lenghtLineBackground = -1;
+	vec2 m_sizeBackground = vec2(-1);
 	vec3 m_startPosParent = vec3();
 
 	// -- move to parent for not Absolute
 	vec3 m_firstPosParent = vec3(-5000);
 	vec3 m_firstPos = vec3(-5000);
 	vec3 m_offsetPosParent = vec3();
+
+	float cash_stateOperator = -1;
 
 	void SaveSizeFactor(bool isInit = false);
 
@@ -51,7 +53,7 @@ public:
 
 	void FormUpdate(bool isForce = false);
 
-	void SetOwnerPosition(float lenghtLineBackground, vec3 startPosParent);
+	void SetOwnerPosition(vec2 sizeBackground, vec3 startPosParent);
 
 	void SetSizeControl(vec3 vertOffset);
 

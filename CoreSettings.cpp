@@ -21,6 +21,7 @@ using std::map;
 #define M_PI 3.1415926535897932384626433832795
 #define EmptyID 66666
 #define STR_EMPTY "@?"
+#define BACKGROUND_GUI_WIDTH_F 2.35
 
 struct Material {
 	string PathShaderVertex = "";
@@ -62,6 +63,7 @@ struct SceneParam {
 	string NameSystemEditBox = "SystemRootEditBox";
 	string NameSystemObjectFieldsEdit = "SystemObjectFieldsEdit";
 	bool IsGUI = false;
+	vec2 SizeBackgroungGUI = vec2(-1);
 };
 
 struct Camera {

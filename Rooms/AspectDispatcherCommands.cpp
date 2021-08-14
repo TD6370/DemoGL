@@ -267,16 +267,19 @@ void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceI
 	obj->SceneCommand->ValueF = valueF;
 	obj->SceneCommand->ValueV4 = valueV4;
 	obj->SceneCommand->ValueS = valueS;
-	obj->SceneCommand->Description;
+	obj->SceneCommand->Description = description;
 
 	if(sourceIndex == -1)
 		obj->SceneCommand->SourceIndex = obj->Index;
 		
 	if (keyOptions.size() != 0) {
-		obj->SceneCommand->Description = obj->Name;
+		if (obj->SceneCommand->Description.size() == 0) //--- FIX clear command
+			obj->SceneCommand->Description = obj->Name;
 		obj->SceneCommand->Options.clear();
 		obj->SceneCommand->Options.insert(std::pair<string, int>(keyOptions, valueOptions));
-		obj->SceneCommand->ValueI = valueOptions;
+
+		if(obj->SceneCommand->ValueI == -1)
+			obj->SceneCommand->ValueI = valueOptions;
 	}
 	
 	TypeObject typeObj = obj->TypeObj;

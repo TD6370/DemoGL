@@ -39,6 +39,9 @@ WorldCluster::WorldCluster() {
 
 void WorldCluster::PlaneClusterization()
 {
+
+	Sectors->SectorsPlane.clear();
+
 	shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
 	shared_ptr<ModelData> model = object->ModelPtr;
 	vector<shared_ptr<Plane>> planes = object->Shape->Planes;

@@ -197,17 +197,40 @@ void TransformModel::GenMVP(
 
 }
 
+vec4 CorrectVerticalForwardFace(Operator* operatorG, vec4 vecPos) {
+	float vertAngle = operatorG->VerticalAngle;
+	float horAngle = operatorG->HorizontalAngle;
+
+	vec3 posOffsetCorr = vec3();
+	float stepCorr = 1.5;
+	if (vertAngle < 0)
+		posOffsetCorr.x = abs(vertAngle / stepCorr);
+	if (vertAngle > 0.5)
+		posOffsetCorr.x = abs((vertAngle - 0.5) / stepCorr);
+	if (posOffsetCorr.x != 0) {
+		vec4 corrPos = vec4(operatorG->m_right * posOffsetCorr.x, 1);
+		vecPos -= corrPos;
+	}
+	return vecPos;
+}
+
 vec3 GetVectorForwardFace(CoreMVP* ConfigMVP, GLfloat lenght, Operator* operatorG) {
 	vec4 vecPos = glm::inverse(ConfigMVP->View) * vec4(1);
-	
+
+	float vertAngle = operatorG->VerticalAngle;
+	float horAngle = operatorG->HorizontalAngle;
+
+	vecPos = CorrectVerticalForwardFace(operatorG, vecPos);
+
 	float offset = 1 / lenght;
 	vec3 directionFace = glm::vec3(
-		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
-		sin(operatorG->VerticalAngle - offset),
-		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
+		cos(vertAngle - offset) * sin(horAngle + offset),
+		sin(vertAngle - offset),
+		cos(vertAngle - offset) * cos(horAngle + offset)
 	);
 	vec3 direction = directionFace * lenght;
 	vec3 posFace = vec3(vecPos.x, vecPos.y, vecPos.z) + direction;
+
 	return posFace;
 }
 
@@ -218,23 +241,17 @@ vec3 GetVectorForwardFaceOffset(CoreMVP* ConfigMVP, GLfloat lenght, Operator* op
 	vecPos += vec4(operatorG->m_right * posOffset.x, 1);
 	vecPos -= vec4(operatorG->m_up * posOffset.y, 1);
 
-	//if(posOffset.x > 0)
-	//	vecPos += vec4(operatorG->m_right * posOffset.x, 1);
-	//else if (posOffset.x < 0)
-	//	vecPos -= vec4(operatorG->m_right * posOffset.x, 1);
+	float vertAngle = operatorG->VerticalAngle;
+	float horAngle = operatorG->HorizontalAngle;
 
-	//if (posOffset.y < 0)
-	//	vecPos += vec4(operatorG->m_up * posOffset.y, 1);
-	//else if(posOffset.y > 0)
-	//	vecPos -= vec4(operatorG->m_up * posOffset.y, 1);
-
+	vecPos = CorrectVerticalForwardFace(operatorG, vecPos);
 
 	float offset = 1 / lenght;
 
 	vec3 directionFace = glm::vec3(
-		cos(operatorG->VerticalAngle - offset) * sin(operatorG->HorizontalAngle + offset),
-		sin(operatorG->VerticalAngle - offset),
-		cos(operatorG->VerticalAngle - offset) * cos(operatorG->HorizontalAngle + offset)
+		cos(vertAngle - offset) * sin(horAngle + offset),
+		sin(vertAngle - offset),
+		cos(vertAngle - offset) * cos(horAngle + offset)
 	);
 		
 	vec3 direction = directionFace * lenght;
