@@ -33,7 +33,11 @@ public:
 public:
 	std::map<int, vec3> TopVectors;
 	std::map<int, vec3> BottomVectors;
-	std::vector<shared_ptr<Plane>> Planes;
+
+	//---- FIX.Plane
+	//std::vector<shared_ptr<Plane>> Planes;
+	std::vector<Plane> Planes;
+
 	//ObjectPhysic* m_obj;
 	ObjectData* m_obj;
 	ObjectPhysic* m_objPhysic;

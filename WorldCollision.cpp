@@ -37,6 +37,9 @@ WorldCluster::WorldCluster() {
 	Sectors = new WorldSectors();
 }
 
+
+//---- v.1 
+/*
 void WorldCluster::PlaneClusterization()
 {
 
@@ -84,10 +87,60 @@ void WorldCluster::PlaneClusterization()
 	}
 	
 }
+*/
+
+
+//---- FIX.Plane
+void WorldCluster::PlaneClusterization()
+{
+	Sectors->SectorsPlane.clear();
+	shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
+	shared_ptr<ModelData> model = object->ModelPtr;
+
+	for (Plane plane : object->Shape->Planes)
+	{
+		vec3 posWorldA = object->Shape->ToWorldPosition(plane.V0);
+		vec3 posWorldB = object->Shape->ToWorldPosition(plane.V1);
+		vec3 posWorldC = object->Shape->ToWorldPosition(plane.V2);
+
+		vec3 planeArr[3] = { posWorldA , posWorldB  , posWorldC };
+
+		for (int indVert = 0; indVert < planeArr->length(); indVert++)
+		{
+			glm::vec3 vecItem = planeArr[indVert];
+
+			int x_sector = vecItem.x / SectorSizePlane;
+			int z_sector = vecItem.z / SectorSizePlane;
+			string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+			if (Sectors->SectorsPlane.find(keyPosSectorStr) == Sectors->SectorsPlane.end())
+			{
+				vector<int> value_planeIndexs = vector<int>();
+				value_planeIndexs.push_back(plane.Index);
+				Sectors->SectorsPlane.insert(std::pair<string, vector<int>>(keyPosSectorStr, value_planeIndexs));
+			}
+			else {
+				vector<int> value_planeIndexs = Sectors->SectorsPlane[keyPosSectorStr];
+
+				//----check --  value_planeIndexs
+
+				bool isExist = std::find(value_planeIndexs.begin(), value_planeIndexs.end(), plane.Index) != value_planeIndexs.end();
+				if (isExist)
+					continue;
+				value_planeIndexs.push_back(plane.Index);
+
+				Sectors->SectorsPlane[keyPosSectorStr] = value_planeIndexs;
+			}
+		}
+	}
+
+}
 
 
 ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4& vertexOut)
 {
+	return COLLISE_DOWN;
+	/*
 	ColliseState stateResult = COLLISE_DOWN;
 	std::shared_ptr<ObjectData> polygon = Storage->CurrentPolygonObject;
 	std::shared_ptr<ObjectData> object = Storage->GetObjectPrt(indexObj);
@@ -100,7 +153,6 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 	float radius = object->ModelPtr->MeshData.RadiusCollider;
 	vec3 pos = object->Postranslate;
 	pos = vec3(pos.x, pos.y - radius, pos.z);
-	//vec3 posDown = vec3(pos.x, pos.y - radius, pos.z);
 	bool foundCollision = false;
 	float nearestDistance = 1000000;
 	vec3  nearestSphereIntersectionPoint = vec3(-50000);
@@ -120,10 +172,7 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 	object->MaterialData.Color = vec3(1, 1, 1);
 
 	object->TempVectors = vector<vec3>();
-
-	//----
 	float testMinDist = 50000;
-
 
 	for (const int indPlane : indexesPlane)
 	{
@@ -131,9 +180,6 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 		planePrt->SetInspectPoint(pos, radius);
 		planePrt->CalculatePlaneIntersectionPoint();
 		int type = planePrt->ClassifyPointType;
-
-		/*planePrt->CalculatePolygonIntersectionPoint();
-		nearestPolygonIntersectionPoint = planePrt->P_Point;*/
 
 		if (type == BEHIND)
 		{
@@ -173,13 +219,139 @@ ColliseState WorldCluster::IsCollisionPolygonP2(int indexObj, Plane* plane, vec4
 
 	if (nearestPolygonIntersectionPoint != vec3(-50000))
 		object->TempVectors.push_back(nearestPolygonIntersectionPoint);
-	//if (nearestSphereIntersectionPoint != vec3(-50000))
-	//	object->TempVectors.push_back(nearestSphereIntersectionPoint);
+
+	return stateResult;
+	*/
+
+}
+
+//---- FIX.Plane
+ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane* plane, vec4& vertexOut)
+{
+	ColliseState stateResult = COLLISE_DOWN;
+	std::shared_ptr<ObjectData> polygon = Storage->CurrentPolygonObject;
+	std::shared_ptr<ObjectData> object = Storage->GetObjectPrt(indexObj);
+
+	vector<string> checkedZona = vector<string>();
+	vector<int> indexesPlane = GetIndexPlanePolygonFromObject(indexObj, checkedZona);
+
+	float radius = object->ModelPtr->MeshData.RadiusCollider;
+	vec3 pos = object->Postranslate;
+	pos = vec3(pos.x, pos.y - radius, pos.z);
+
+	object->PlaneDownIndex = -1;
+	object->MaterialData.Color = vec3(1, 1, 1);
+	object->TempVectors = vector<vec3>();
+	object->PlaneDownPosition = vec3(0);
+
+	float libra = 2;
+	float y, y1, y2;
+	vec3 posCalc = vec3(pos.x, 0, pos.z);
+	int step = 1 / object->Speed;
+	//----
+	if (object->IsGravity)
+		stateResult = COLLISE_NORMAL;
+
+	vec3 V0_W, V1_W, V2_W, posA, posB, posC;
+	int planeDownIndex = object->PlaneDownIndex;
+	vec3 planeDownPosition = object->PlaneDownPosition;
+	vec3 newPostranslate = object->NewPostranslate;
+	bool isGravity = object->IsGravity;
+	bool isHero = object->TypeObj == Hero;
+	bool isTestVertex = object->Name == "Mon";
+
+	for (const int indPlane : indexesPlane)
+	{
+		std::tie(V0_W, V1_W, V2_W) = polygon->GetCase_V_W(indPlane);
+		posA = vec3(V0_W.x, 0, V0_W.z);
+		posB = vec3(V1_W.x, 0, V1_W.z);
+		posC = vec3(V2_W.x, 0, V2_W.z);
+
+		if (CheckPointInTriangle(posCalc, posA, posB, posC)) {
+
+			planeDownIndex = indPlane;
+
+			//-- TEST - collision
+			if (isTestVertex) {
+				object->TempVectors.push_back(V0_W);
+				object->TempVectors.push_back(V1_W);
+				object->TempVectors.push_back(V2_W);
+			}
+
+			float distA = glm::distance(posCalc, posA);
+			float distB = glm::distance(posCalc, posB);
+			float distC = glm::distance(posCalc, posC);
+
+			if (distA < distB && distA < distC)
+			{
+				float factorAB = distA / distB / libra;
+				float factorAC = distA / distC / libra;
+				float vertAB = V0_W.y - V1_W.y;
+				float vertAC = V0_W.y - V2_W.y;
+
+				y1 = V0_W.y - (vertAB * factorAB);
+				y2 = V0_W.y - (vertAC * factorAC);
+			}
+			else if (distB < distA && distB < distC)
+			{
+				float factorBA = distB / distA / libra;
+				float factorBC = distB / distC / libra;
+
+				float vertBA = V1_W.y - V0_W.y;
+				float vertBC = V1_W.y - V2_W.y;
+
+				y1 = V1_W.y - (vertBA * factorBA);
+				y2 = V1_W.y - (vertBC * factorBC);
+			}
+			else
+			{
+				float factorCA = distC / distA / libra;
+				float factorCB = distC / distB / libra;
+
+				float vertCA = V2_W.y - V0_W.y;
+				float vertCB = V2_W.y - V1_W.y;
+				y1 = V2_W.y - (vertCA * factorCA);
+				y2 = V2_W.y - (vertCB * factorCB);
+			}
+			y = (y1 + y2) / 2;
+			planeDownPosition = vec3(pos.x, y, pos.z);
+
+			int vers = 3;
+
+			if (!isGravity)
+				vers = 2;
+
+			if (isHero)
+				vers = 1;
+
+			//--- version 1
+			if (vers == 1) {
+				newPostranslate.y = planeDownPosition.y + radius;
+			}
+			//--- version 2
+			if (vers == 2) {
+				if (pos.y < planeDownPosition.y)
+					stateResult = COLLISE_UP;
+			}
+			//--- version 3
+			if (vers == 3) {
+				float speed = (newPostranslate.y - (radius * 2) - planeDownPosition.y) / step;
+				newPostranslate.y -= speed;
+			}
+			//---------------------------
+			break;
+		}
+	}
+
+	object->PlaneDownIndex = planeDownIndex;
+	object->PlaneDownPosition = planeDownPosition;
+	object->NewPostranslate = newPostranslate;
 
 	return stateResult;
 }
 
-
+/*
+//---- v.1 
 ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 & vertexOut)
 {
 	ColliseState stateResult = COLLISE_DOWN;
@@ -236,10 +408,10 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 				float vertAB = planePrt->V0_W.y - planePrt->V1_W.y;
 				float vertAC = planePrt->V0_W.y - planePrt->V2_W.y;
 				
-				/*if (distB < distC)
-					y = planePrt->V0_W.y - (vertAB * factorAB);
-				else 
-					y = planePrt->V0_W.y - (vertAC * factorAC);*/
+				//if (distB < distC)
+				//	y = planePrt->V0_W.y - (vertAB * factorAB);
+				//else 
+				//	y = planePrt->V0_W.y - (vertAC * factorAC);
 				
 				y1 = planePrt->V0_W.y - (vertAB * factorAB);
 				y2 = planePrt->V0_W.y - (vertAC * factorAC);
@@ -251,10 +423,10 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 
 				float vertBA = planePrt->V1_W.y - planePrt->V0_W.y;
 				float vertBC = planePrt->V1_W.y - planePrt->V2_W.y;
-				/*if (distA < distC)
-					y = planePrt->V1_W.y - (vertBA * factorBA);
-				else
-					y = planePrt->V1_W.y - (vertBC * factorBC);*/
+				//if (distA < distC)
+				//	y = planePrt->V1_W.y - (vertBA * factorBA);
+				//else
+				//	y = planePrt->V1_W.y - (vertBC * factorBC);
 				
 				y1 = planePrt->V1_W.y - (vertBA * factorBA);
 				y2 = planePrt->V1_W.y - (vertBC * factorBC);
@@ -266,10 +438,10 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 
 				float vertCA = planePrt->V2_W.y - planePrt->V0_W.y;
 				float vertCB = planePrt->V2_W.y - planePrt->V1_W.y;
-				/*if (distA < distB)
-					y = planePrt->V2_W.y - (vertCA * factorCA);
-				else
-					y = planePrt->V2_W.y - (vertCB * factorCB);*/
+				//if (distA < distB)
+				//	y = planePrt->V2_W.y - (vertCA * factorCA);
+				//else
+				//	y = planePrt->V2_W.y - (vertCB * factorCB);
 				y1 = planePrt->V2_W.y - (vertCA * factorCA);
 				y2 = planePrt->V2_W.y - (vertCB * factorCB);
 			}
@@ -292,9 +464,9 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 			if (vers == 2) {
 				if (pos.y < object->PlaneDownPosition.y)
 					stateResult = COLLISE_UP;
-				/*else if (pos.y > object->PlaneDownPosition.y + 0.5) {
-					stateResult = COLLISE_DOWN;
-				}*/
+				//else if (pos.y > object->PlaneDownPosition.y + 0.5) {
+				//	stateResult = COLLISE_DOWN;
+				//}
 			}
 			//--- version 3
 			if (vers == 3) {
@@ -307,6 +479,7 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 
 	}
 	return stateResult;
 }
+*/
 
 vector<int> WorldCluster::GetIndexPlanePolygonFromObject(int indexObj, vector<string>& checkedZona)
 {

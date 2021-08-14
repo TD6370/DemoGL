@@ -260,16 +260,25 @@ void ObjectData::Refresh() {
 }
 //=========================================
 
-shared_ptr<Plane> ObjectData::GetPlaneFromVertIndex(int indexVertPlane) {
+Plane& ObjectData::GetPlaneFromVertIndex(int indexVertPlane) {
 	
-	//return Planes[(int)indexVertPlane / 3];
 	return Shape->Planes[(int)indexVertPlane / 3];
 }
 
-shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
+//---- FIX.Plane
+//shared_ptr<Plane> ObjectData::GetPlanePrt(int indexPlane) {
+Plane& ObjectData::GetPlanePrt(int indexPlane) {
 
-	//return Planes[indexPlane];
 	return Shape->Planes[indexPlane];
+}
+
+//---- FIX.Plane
+std::tuple<vec3, vec3, vec3> ObjectData::GetCase_V_W(int indexPlane) {
+	return std::tuple<vec3, vec3, vec3>( 
+		Shape->Planes[indexPlane].V0_W,
+		Shape->Planes[indexPlane].V1_W,
+		Shape->Planes[indexPlane].V2_W
+	);
 }
 
 

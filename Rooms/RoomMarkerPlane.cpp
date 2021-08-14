@@ -21,7 +21,7 @@ void RoomMarkerPlane::Work() {
 
 	string name = Scene->ObjectCurrent->Name;
 
-	if (name == "Plane") {
+	/*if (name == "Plane_9999") {
 		vec3 vectorsParams[10];
 
 		Scene->ObjectCurrent->SetParamCase(55);
@@ -31,13 +31,13 @@ void RoomMarkerPlane::Work() {
 
 		if (objectObserver->PlaneDownIndex != -1)
 		{
-			shared_ptr<Plane> planeV = Scene->ObjectCurrent->GetPlanePrt(objectObserver->PlaneDownIndex);
-			vectorsParams[0] = planeV->V0;
-			vectorsParams[1] = planeV->V1;
-			vectorsParams[1] = planeV->V2;
+			Plane& planeV = Scene->ObjectCurrent->GetPlanePrt(objectObserver->PlaneDownIndex);
+			vectorsParams[0] = planeV.V0;
+			vectorsParams[1] = planeV.V1;
+			vectorsParams[1] = planeV.V2;
 			Scene->ObjectCurrent->SetVectorsParams(vectorsParams);
 		}
-	}
+	}*/
 
 
 	if (name == "M_V_1") {

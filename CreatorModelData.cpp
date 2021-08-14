@@ -1,4 +1,4 @@
-//@@@
+ï»¿//@@@
 #include "CreatorModelData.h"
 #include "WorldCollision.h"
 #include "ModelData.h"
@@ -853,7 +853,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	// ---- Object Button edit obj GUI (BASE CONTROL)
 	objName = "ButtonEditOn";
 	//caption = objBackGUI->Name + "." + objName;
-	caption = "ðåäàêò";
+	caption = "Ã°Ã¥Ã¤Ã ÃªÃ²";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
 	objCreate = 
@@ -867,8 +867,8 @@ void CreatorModelData::LoadObjectsGUI() {
 
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
-	caption = "ñîçäàòü";//  objBackGUI->Name + "." + objName;
-	//caption = "àáâãäåæç";
+	caption = "create";
+	//caption = "ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ";
 	childModel = "ButtonModel";
 	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, StartPosGUI_Z), vec2(0.3, 0.1), Button, vec3(1));
@@ -880,8 +880,8 @@ void CreatorModelData::LoadObjectsGUI() {
 	/*
 	// ---- Object text box GUI
 	objName = "TextBoxObject";
-	caption = "ïðèâåò ìèð è äîáðîå óòðî";
-	//caption = "àáâãäåæçèêëìí";
+	caption = "Ã¯Ã°Ã¨Ã¢Ã¥Ã² Ã¬Ã¨Ã° Ã¨ Ã¤Ã®Ã¡Ã°Ã®Ã¥ Ã³Ã²Ã°Ã®";
+	//caption = "Ã Ã¡Ã¢Ã£Ã¤Ã¥Ã¦Ã§Ã¨ÃªÃ«Ã¬Ã­";
 	childModel = "TextBoxModel";
 	color = vec3(0.117, 0.351, 0.950);
 	//AddChildObject(objBackGUI, caption, childModel, objName, vec3(.5, .5, 0.031), vec2(1.5, 1.), TextBox, color);
@@ -891,7 +891,7 @@ void CreatorModelData::LoadObjectsGUI() {
 	// ---- Object Edit Box	(SYSTEM CONTROL)
 	//objName = "Base_EditBox_NameObject";
 	objName = SceneData->NameSystemEditBox;
-	caption = "îõ";
+	caption = "Ã®Ãµ";
 	childModel = "ButtonEditBoxModel";	///!!!!!
 	color = vec3(0.117, 0.351, 0.950);
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .06), Button, color, LayerBase);
@@ -946,7 +946,7 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 4; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}

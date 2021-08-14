@@ -101,7 +101,10 @@ void ShapeBase::FillPlanes()
 
 		Plane plane(vertexNormA, vertexNormB, vertexNormC, trans);
 		plane.Index = indexPlane++;
-		Planes.push_back(std::make_unique<Plane>(plane));
+
+		//---- FIX.Plane
+		//Planes.push_back(std::make_unique<Plane>(plane));
+		Planes.push_back(plane);
 	}
 }
 

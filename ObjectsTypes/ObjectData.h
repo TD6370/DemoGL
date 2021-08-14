@@ -202,9 +202,14 @@ public:
 	void SetNextItemShellObject(shared_ptr<ObjectData> p_nextItemShellObj);
 	void SetShell(shared_ptr<BaseShell> p_shell);
 
-	std::shared_ptr<Plane> GetPlaneFromVertIndex(int indexVertPlane);
+	Plane& GetPlaneFromVertIndex(int indexVertPlane);
 
-	std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
+	//---- FIX.Plane
+	//std::shared_ptr<Plane> GetPlanePrt(int indexPlane);
+	Plane& GetPlanePrt(int indexPlane);
+
+	//---- FIX.Plane
+	std::tuple<vec3, vec3, vec3> GetCase_V_W(int indexPlane);
 
 	void virtual SelectedEvent();
 	void virtual UnselectedEvent();
@@ -212,8 +217,6 @@ public:
 	std::vector< glm::vec3 > virtual GetVertices();
 	std::vector< glm::vec2 > virtual GetUV();
 	std::vector< glm::vec3 > virtual GetNormals();
-
-
 	
 	void virtual ControlsEvents();
 

@@ -34,8 +34,8 @@ public:
     vec3 Point; 
 
     int ClassifyPointType;
-    vec3 R_Point;
     float Radius;
+    vec3 R_Point;
     vec3 P_Point;
     vec3 E_Point;
     float DistToPlaneIntersection;

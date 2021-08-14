@@ -1,0 +1,517 @@
+Name: ButtonShell_ButtonCreateObjGUI
+Index: 0
+RootObjIndex: 25
+CaptionObjIndex: 26
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_SystemRootEditBox
+Index: 1
+RootObjIndex: 27
+CaptionObjIndex: 28
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox
+Index: 2
+RootObjIndex: 31
+CaptionObjIndex: 32
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_33
+Index: 3
+RootObjIndex: 33
+CaptionObjIndex: 34
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_35
+Index: 4
+RootObjIndex: 35
+CaptionObjIndex: 36
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_37
+Index: 5
+RootObjIndex: 37
+CaptionObjIndex: 38
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_39
+Index: 6
+RootObjIndex: 39
+CaptionObjIndex: 40
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_41
+Index: 7
+RootObjIndex: 41
+CaptionObjIndex: 42
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_43
+Index: 8
+RootObjIndex: 43
+CaptionObjIndex: 44
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_45
+Index: 9
+RootObjIndex: 45
+CaptionObjIndex: 46
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_47
+Index: 10
+RootObjIndex: 47
+CaptionObjIndex: 48
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_49
+Index: 11
+RootObjIndex: 49
+CaptionObjIndex: 50
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_51
+Index: 12
+RootObjIndex: 51
+CaptionObjIndex: 52
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_53
+Index: 13
+RootObjIndex: 53
+CaptionObjIndex: 54
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_55
+Index: 14
+RootObjIndex: 55
+CaptionObjIndex: 56
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_57
+Index: 15
+RootObjIndex: 57
+CaptionObjIndex: 58
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_59
+Index: 16
+RootObjIndex: 59
+CaptionObjIndex: 60
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_61
+Index: 17
+RootObjIndex: 61
+CaptionObjIndex: 62
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_63
+Index: 18
+RootObjIndex: 63
+CaptionObjIndex: 64
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_65
+Index: 19
+RootObjIndex: 65
+CaptionObjIndex: 66
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_67
+Index: 20
+RootObjIndex: 67
+CaptionObjIndex: 68
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_69
+Index: 21
+RootObjIndex: 69
+CaptionObjIndex: 70
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_71
+Index: 22
+RootObjIndex: 71
+CaptionObjIndex: 72
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_73
+Index: 23
+RootObjIndex: 73
+CaptionObjIndex: 74
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_75
+Index: 24
+RootObjIndex: 75
+CaptionObjIndex: 76
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_77
+Index: 25
+RootObjIndex: 77
+CaptionObjIndex: 78
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_79
+Index: 26
+RootObjIndex: 79
+CaptionObjIndex: 80
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_81
+Index: 27
+RootObjIndex: 81
+CaptionObjIndex: 82
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_83
+Index: 28
+RootObjIndex: 83
+CaptionObjIndex: 84
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_85
+Index: 29
+RootObjIndex: 85
+CaptionObjIndex: 86
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_87
+Index: 30
+RootObjIndex: 87
+CaptionObjIndex: 88
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_89
+Index: 31
+RootObjIndex: 89
+CaptionObjIndex: 90
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_FrameItem_ListTextBox_91
+Index: 32
+RootObjIndex: 91
+CaptionObjIndex: 92
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ListBoxShell_ObjectFieldsListCommand
+Index: 33
+RootObjIndex: 30
+CaptionObjIndex: -1
+HeadIndexList: 31
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox
+Index: 34
+RootObjIndex: 94
+CaptionObjIndex: 95
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_96
+Index: 35
+RootObjIndex: 96
+CaptionObjIndex: 97
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_98
+Index: 36
+RootObjIndex: 98
+CaptionObjIndex: 99
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_100
+Index: 37
+RootObjIndex: 100
+CaptionObjIndex: 101
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_102
+Index: 38
+RootObjIndex: 102
+CaptionObjIndex: 103
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_104
+Index: 39
+RootObjIndex: 104
+CaptionObjIndex: 105
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_106
+Index: 40
+RootObjIndex: 106
+CaptionObjIndex: 107
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_108
+Index: 41
+RootObjIndex: 108
+CaptionObjIndex: 109
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_110
+Index: 42
+RootObjIndex: 110
+CaptionObjIndex: 111
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_112
+Index: 43
+RootObjIndex: 112
+CaptionObjIndex: 113
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_114
+Index: 44
+RootObjIndex: 114
+CaptionObjIndex: 115
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_116
+Index: 45
+RootObjIndex: 116
+CaptionObjIndex: 117
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_118
+Index: 46
+RootObjIndex: 118
+CaptionObjIndex: 119
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_120
+Index: 47
+RootObjIndex: 120
+CaptionObjIndex: 121
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_122
+Index: 48
+RootObjIndex: 122
+CaptionObjIndex: 123
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_124
+Index: 49
+RootObjIndex: 124
+CaptionObjIndex: 125
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_126
+Index: 50
+RootObjIndex: 126
+CaptionObjIndex: 127
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_128
+Index: 51
+RootObjIndex: 128
+CaptionObjIndex: 129
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_130
+Index: 52
+RootObjIndex: 130
+CaptionObjIndex: 131
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_132
+Index: 53
+RootObjIndex: 132
+CaptionObjIndex: 133
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_134
+Index: 54
+RootObjIndex: 134
+CaptionObjIndex: 135
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_136
+Index: 55
+RootObjIndex: 136
+CaptionObjIndex: 137
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_138
+Index: 56
+RootObjIndex: 138
+CaptionObjIndex: 139
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_140
+Index: 57
+RootObjIndex: 140
+CaptionObjIndex: 141
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_142
+Index: 58
+RootObjIndex: 142
+CaptionObjIndex: 143
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_144
+Index: 59
+RootObjIndex: 144
+CaptionObjIndex: 145
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_146
+Index: 60
+RootObjIndex: 146
+CaptionObjIndex: 147
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_148
+Index: 61
+RootObjIndex: 148
+CaptionObjIndex: 149
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_150
+Index: 62
+RootObjIndex: 150
+CaptionObjIndex: 151
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_152
+Index: 63
+RootObjIndex: 152
+CaptionObjIndex: 153
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: EditBoxShell_EditBoxItem_ListEditBox_154
+Index: 64
+RootObjIndex: 154
+CaptionObjIndex: 155
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ListBoxShell_ObjectFieldsListCommand
+Index: 65
+RootObjIndex: 93
+CaptionObjIndex: -1
+HeadIndexList: 94
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox
+Index: 66
+RootObjIndex: 157
+CaptionObjIndex: 158
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_159
+Index: 67
+RootObjIndex: 159
+CaptionObjIndex: 160
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_161
+Index: 68
+RootObjIndex: 161
+CaptionObjIndex: 162
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_163
+Index: 69
+RootObjIndex: 163
+CaptionObjIndex: 164
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_165
+Index: 70
+RootObjIndex: 165
+CaptionObjIndex: 166
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_167
+Index: 71
+RootObjIndex: 167
+CaptionObjIndex: 168
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_169
+Index: 72
+RootObjIndex: 169
+CaptionObjIndex: 170
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_171
+Index: 73
+RootObjIndex: 171
+CaptionObjIndex: 172
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_173
+Index: 74
+RootObjIndex: 173
+CaptionObjIndex: 174
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_175
+Index: 75
+RootObjIndex: 175
+CaptionObjIndex: 176
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_177
+Index: 76
+RootObjIndex: 177
+CaptionObjIndex: 178
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_179
+Index: 77
+RootObjIndex: 179
+CaptionObjIndex: 180
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_181
+Index: 78
+RootObjIndex: 181
+CaptionObjIndex: 182
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_183
+Index: 79
+RootObjIndex: 183
+CaptionObjIndex: 184
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_185
+Index: 80
+RootObjIndex: 185
+CaptionObjIndex: 186
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_187
+Index: 81
+RootObjIndex: 187
+CaptionObjIndex: 188
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_189
+Index: 82
+RootObjIndex: 189
+CaptionObjIndex: 190
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_191
+Index: 83
+RootObjIndex: 191
+CaptionObjIndex: 192
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ButtonShell_ButtonItem_ListBox_193
+Index: 84
+RootObjIndex: 193
+CaptionObjIndex: 194
+HeadIndexList: -1
+------------------------------------------------------------------ 
+Name: ListBoxShell_TypesObjectListCommand
+Index: 85
+RootObjIndex: 156
+CaptionObjIndex: -1
+HeadIndexList: 157
+------------------------------------------------------------------ 
+

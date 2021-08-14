@@ -110,19 +110,49 @@ void Controllers::MouseEvents(
 			glfwSetCursorPos(window, m_widthWindow / 2, ypos);
 			return;
 		}
-		if (ypos >= m_heightWindow - 2) {
-			Scene->Storage->Oper->MouseOffset_y += m_heightWindow / 2;
+
+		float limitVert = m_heightWindow / 1.5;
+		if (ypos >= m_heightWindow - 1) {
+			
+			//--- DOWN clip
+			/*if (Scene->Storage->Oper->MouseOffset_y > (m_heightWindow/2))
+				Scene->Storage->Oper->MouseOffset_y -= (m_heightWindow * 5);
+			else
+				Scene->Storage->Oper->MouseOffset_y += m_heightWindow / 2;
 			glfwSetCursorPos(window, xpos, m_heightWindow / 2);
 			return;
+			*/
+
+			//--- DOWN limit
+			Scene->Storage->Oper->MouseOffset_y += m_heightWindow / 2;
+			if (Scene->Storage->Oper->MouseOffset_y > (limitVert)) {
+				Scene->Storage->Oper->MouseOffset_y = (limitVert);
+				glfwSetCursorPos(window, xpos, m_heightWindow);
+			}else
+				glfwSetCursorPos(window, xpos, m_heightWindow / 2);
+
 		}
 		if (ypos <= 0) {
-			Scene->Storage->Oper->MouseOffset_y -= m_heightWindow / 2;
+
+			//--- UP clip
+			/*if (Scene->Storage->Oper->MouseOffset_y < -(m_heightWindow/2))
+				Scene->Storage->Oper->MouseOffset_y += m_heightWindow * 5;
+			else
+				Scene->Storage->Oper->MouseOffset_y -= m_heightWindow / 2;
 			glfwSetCursorPos(window, xpos, m_heightWindow / 2);
 			return;
+			*/
+
+			//--- UP limit
+			Scene->Storage->Oper->MouseOffset_y -= m_heightWindow / 2;
+			if (Scene->Storage->Oper->MouseOffset_y < -(limitVert)) {
+				Scene->Storage->Oper->MouseOffset_y = -(limitVert);
+				glfwSetCursorPos(window, xpos, 0);
+			}else
+				glfwSetCursorPos(window, xpos, m_heightWindow / 2);
 		}
 	}
 	//----------------------------
-
 
 	// Двигаем мышь в центр экрана
 	if (!Scene->Storage->Oper->m_start)
@@ -134,11 +164,10 @@ void Controllers::MouseEvents(
 	}
 
 	//вычислим необходимые углы :
-	horizontalAngle += mouseSpeed * Scene->m_deltaTime * float(m_widthWindow / 2 - xpos - Scene->Storage->Oper->MouseOffset_x);
-	verticalAngle += mouseSpeed * Scene->m_deltaTime * float(m_heightWindow / 2 - ypos - Scene->Storage->Oper->MouseOffset_y);
+	horizontalAngle = mouseSpeed * Scene->m_deltaTime * float(m_widthWindow / 2 - xpos - Scene->Storage->Oper->MouseOffset_x);
+	verticalAngle = mouseSpeed * Scene->m_deltaTime * float(m_heightWindow / 2 - ypos - Scene->Storage->Oper->MouseOffset_y);
 
 	if (!Scene->Storage->SceneData->IsGUI) {
-
 
 		Scene->Storage->Oper->VerticalAngle = verticalAngle;
 		Scene->Storage->Oper->HorizontalAngle = horizontalAngle;
