@@ -421,7 +421,7 @@ void RoomUseInterface::EventStartCreateObject() {
 			if (command->ValueV4.w != -1)
 			{
 				//-- run create World object
-				Scene->RunCommandCreateObject((TypeObject)typeCreate, command->ValueS, command->ValueV4);
+				Scene->RunCommandCreateObject((TypeObject)typeCreate, command->ValueS, command->ValueV4, false);
 			}
 			else if(IsBackgroundFrame)
 			{
@@ -438,7 +438,7 @@ void RoomUseInterface::EventStartCreateObject() {
 			if (command->ValueI != -1)
 				typeCreate = command->ValueI;
 
-			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText, command->ValueV4);
+			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText, command->ValueV4, true);
 			
 			SetCommand(Scene->ObjectCurrent, TypeCommand::None);
 		}

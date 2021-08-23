@@ -22,6 +22,12 @@ struct CreateInfo {
 class AspectFactoryObjects : public AspectBase
 {
 private:
+
+	//vector<CommandPack> collectionObjectCreate;
+	static const int POOL_SIZE = 100;
+	int m_poolNext = -1;
+	CommandPack poolObjectCreate[POOL_SIZE];
+
 	shared_ptr<BaseShell> m_lastShellCreated;
 	shared_ptr<ObjectData> m_lastObjectCreated;
 	bool m_startContructing = false;
@@ -33,6 +39,9 @@ public:
 	void Init();
 	void Config();
 	void Work();
+
+	
+	void LastWork();
 
 	void CreateTextBox(CreateInfo info);
 

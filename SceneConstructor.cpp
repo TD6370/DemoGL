@@ -432,6 +432,10 @@ void SceneConstructor::Update()
 		if (IsDraw || isBase)
 			DrawGraph();
 	}
+
+	//---- AfterBuild
+	factoryObjects->LastWork();
+
 	
 	if (Storage->Inputs->IsReading || isBase)
 	{
@@ -578,7 +582,7 @@ void SceneConstructor::RefreshGUI() {
 }
 
 
-void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos) {
+void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos, bool isGuiEdit) {
 
 	string typeObjectAttr = CommandsAttribute.TypeObjectAttr;
 	string nameCommandList = "";
@@ -595,14 +599,14 @@ void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string type
 		if (typeCreate == TypeObject::ListTextBox || typeCreate == TypeObject::ListEditBox)
 			nameListCommands = CommandsAttribute.ObjectFieldsListCommand; // -- default : FIELDS
 
-		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
+		AddCommand(TypeCommand::CreateObject, -1, isGuiEdit, { typeObjectAttr }, { typeCreate },
 			-1,
 			-1,
 			vec4(pos.x, pos.y, pos.z, isInitPos),
 			nameListCommands);
 	}
 	else {
-		AddCommand(TypeCommand::CreateObject, -1, -1, { typeObjectAttr }, { typeCreate },
+		AddCommand(TypeCommand::CreateObject, -1, isGuiEdit, { typeObjectAttr }, { typeCreate },
 			typeCreate,
 			0.0,
 			vec4(pos.x, pos.y, pos.z, isInitPos),

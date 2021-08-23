@@ -85,5 +85,5 @@ void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions);
 
 void AddCommandInList(vector<CommandPack>& listObjectFiels, string description, TypeCommand  commandType, int SargetIndex = -1, int TargetIndex = -1, int ValueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string());
 
-
+void ClearCommandPack(CommandPack& comm);
 

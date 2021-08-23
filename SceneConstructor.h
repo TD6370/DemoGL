@@ -186,7 +186,7 @@ public:
 	
 	vector<CommandPack> GetListCommand(string nameList);
 
-	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos = vec3(-1));
+	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos = vec3(-1), bool isGuiEdit = true);
 
 	//--- Get field value by object
 	void CreateObjectListFieldValue(shared_ptr<ObjectData> obj);

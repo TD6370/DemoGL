@@ -63,7 +63,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 
 	int countStack = indexInsert + conutItemsCurrType;
 	float lastZ = -1;
-	string test111 = "";
+	//string test111 = "";
 
 	if (obj->IsGUI)
 	{
@@ -77,7 +77,7 @@ void SceneLayer::SaveOrderIndex(shared_ptr<ObjectData> obj) {
 
 			if (nextObj->Layer == TypeLayer::LayerBase) {
 				lastZ = nextObj->GetZ();
-				test111 = nextObj->Name;
+				//test111 = nextObj->Name;
 			}
 
 			if (nextObj->Layer < obj->Layer)

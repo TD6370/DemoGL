@@ -14,8 +14,6 @@
 
 void ObjectPhysic::RunAction() {
 
-	auto info = GetInfo();
-
 	if (ActionObjectCurrent != Lock)
 	{
 		switch (ActionObjectCurrent)

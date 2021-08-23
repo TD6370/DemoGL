@@ -10,7 +10,8 @@ void ObjectCursorRay::InitData()
 	ObjectData::InitData();
 
 	ActionObjectCurrent = Stay;
-	Speed = 0.5f;
+	//Speed = 0.5f;
+	Speed = 0.1f;
 	IsGravity = false;
 	EngineData->SceneData->IndexCursorRayObj = Index;
 }

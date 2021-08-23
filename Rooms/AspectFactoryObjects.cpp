@@ -36,7 +36,50 @@ void AspectFactoryObjects::Init() {
 
 }
 
-void AspectFactoryObjects::Work() {
+void AspectFactoryObjects::LastWork() {
+
+	if (m_poolNext < 1)
+		return;
+
+	CommandPack command;
+	CreateInfo info;
+	vec4 posC = command.ValueV4;
+	int value;
+	TypeObject typeObj;
+	string objName;
+	vec3 color = vec3(0.156, 0.784, 0.301);
+
+	for (int i = 0; i < m_poolNext; i++) {
+		command = poolObjectCreate[i];
+
+		posC = command.ValueV4;
+		if (posC.w != -1) {
+			info.Pos = vec3(posC.x, posC.y, posC.z);
+		}
+
+		value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
+		typeObj = (TypeObject)value;
+
+		info.Message = string();
+
+		if (command.Description.size() != 0)
+			info.Message = command.Description;
+		if (info.Message.size() == 0 && command.ValueS.size() != 0)
+			info.Message = command.ValueS;
+
+		//Create object
+		objName = "Obj" + info.Message;
+		shared_ptr<ObjectData> objCreate = Scene->Storage->AddObjectDefault(objName, typeObj, info.Pos, color);
+
+		Scene->Storage->LayerScene->SaveOrderIndex(objCreate);
+
+		//Clear
+		ClearCommandPack(poolObjectCreate[i]);
+	}
+	m_poolNext = -1;
+}
+
+void  AspectFactoryObjects::Work() {
 
 	if (Scene->IsBreakUpdate())
 		return;
@@ -46,10 +89,10 @@ void AspectFactoryObjects::Work() {
 
 	//--- Create object
 	CommandPack command = Scene->CurrentSceneCommand;
-	
+
 	if (!command.Enable || command.CommandType != TypeCommand::CreateObject)
 		return;
-	
+
 	//bool isCreateStatic = false;
 	m_startContructing = false;
 	CreateInfo info;
@@ -62,13 +105,36 @@ void AspectFactoryObjects::Work() {
 
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
+	bool isGuiEdit = command.TargetIndex;
+
+	if (isGuiEdit) {
+		if (!isBackgroundFrame)
+			return;
+	}
+	else  
+	{
+		//--- World after building
+		if (m_poolNext == -1)
+			m_poolNext = 0;
+
+		assert(m_poolNext <= POOL_SIZE);
+
+		poolObjectCreate[m_poolNext] = command;
+
+		m_poolNext++;
+		if (m_poolNext > POOL_SIZE) {
+			std::cout << "ERROR POOL LIMIT !!!!! \n";
+			m_poolNext = 0;
+		}
+
+		Scene->ReadCommand(CreateObject);
+		return;
+	}
 
 	info.Message = string();
 
 	if (typeObj == TypeObject::TextBox)
 	{
-		if (!isBackgroundFrame)
-			return;
 		Scene->ReadCommand(CreateObject);
 
 		if (command.Description.size() != 0)
@@ -86,18 +152,12 @@ void AspectFactoryObjects::Work() {
 	}
 	if (typeObj == TypeObject::Button)
 	{
-		if (!isBackgroundFrame)
-			return;
-
 		Scene->ReadCommand(CreateObject);
 		CreateButton(info);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::EditBox)
 	{
-		if (!isBackgroundFrame)
-			return;
-
 		Scene->ReadCommand(CreateObject);
 		CreateEditBox(info);
 		isCompleted = true;
@@ -107,18 +167,12 @@ void AspectFactoryObjects::Work() {
 		typeObj == TypeObject::ListEditBox
 		)
 	{
-		if (!isBackgroundFrame)
-			return;
-
 		Scene->ReadCommand(CreateObject);
 		CreateListBox(command.ValueS, typeObj, info);
 		isCompleted = true;
 	}
 	if (typeObj == TypeObject::ObjectFieldsEdit)
 	{
-		if (!isBackgroundFrame)
-			return;
-
 		Scene->ReadCommand(CreateObject);
 		CreateObjectFieldsEdit(info);
 		isCompleted = true;

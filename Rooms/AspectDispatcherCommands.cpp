@@ -379,5 +379,17 @@ void UpdateCommandOptions(ObjectData* obj, string keyOptions, int valueOptions) 
 }
 
 
-
+void ClearCommandPack(CommandPack& comm) {
+	comm.Enable = false;
+	comm.CommandType = TypeCommand::None;
+	comm.SourceIndex = -1;
+	comm.TargetIndex = -1;
+	comm.Description;
+	comm.ValueS = "";
+	comm.ValueI = -1;
+	comm.ValueF = -1;
+	comm.ValueV4 = vec4(-1);
+	comm.Options.clear();
+	comm.IsLongCommand = false;
+}
 
