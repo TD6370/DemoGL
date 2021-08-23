@@ -35,13 +35,13 @@ Name: Mon
 Model: mon
 Index: 1
 Layer: LayerNone
-Pos: 36.5782 -53.0204 -39.629
-Target: 22.5782 -53.0204 -28.629
+Pos: -6.66498 -53.0228 -4.84274
+Target: 6.19801 -53.0176 -12.1434
 Action: Look
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 0 0
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -67,9 +67,9 @@ Name: Mon_2
 Model: mon
 Index: 2
 Layer: LayerNone
-Pos: 28.3841 -50.8741 21.2255
-Target: 22.1105 -52.8059 25.7564
-Action: Moving
+Pos: 12.4434 -52.9823 -2.97334
+Target: 20.4434 -52.9823 -22.9733
+Action: Look
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
@@ -99,8 +99,8 @@ Name: Mon_3
 Model: mon
 Index: 3
 Layer: LayerNone
-Pos: 12.9386 -52.1786 10.2804
-Target: 31.9386 -52.1786 3.28042
+Pos: -22.0109 -53.0324 7.11198
+Target: -14.0109 -53.0324 22.112
 Action: Look
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -131,8 +131,1480 @@ Name: Mon_4
 Model: mon
 Index: 4
 Layer: LayerNone
-Pos: 28.0345 -53.0282 -1.29815
-Target: 23.8251 -53.0267 11.3301
+Pos: -29.3396 -53.025 17.103
+Target: -24.3396 -53.025 35.103
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_5
+Model: mon
+Index: 5
+Layer: LayerNone
+Pos: 33.1278 -53.0491 1.21782
+Target: 47.0447 -53.0474 -12.6991
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_6
+Model: mon
+Index: 6
+Layer: LayerNone
+Pos: 1.74003 -53.0188 0.703645
+Target: 6.88276 -53.0257 -2.72484
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_7
+Model: mon
+Index: 7
+Layer: LayerNone
+Pos: 36.9816 -53.0278 -39.4346
+Target: 48.9816 -53.0278 -49.4346
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_8
+Model: mon
+Index: 8
+Layer: LayerNone
+Pos: 3.79149 -52.9724 -16.7469
+Target: -4.91051 -52.9895 -25.4489
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_9
+Model: mon
+Index: 9
+Layer: LayerNone
+Pos: 3.7361 -52.9833 -25.3076
+Target: 23.7361 -52.9833 -41.3076
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_10
+Model: mon
+Index: 10
+Layer: LayerNone
+Pos: -19.0905 -53.0447 -2.84218
+Target: -22.6971 -53.0437 0.788714
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_11
+Model: mon
+Index: 11
+Layer: LayerNone
+Pos: -34.7496 -52.9971 4.00296
+Target: -14.7496 -52.9971 -1.99704
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_12
+Model: mon
+Index: 12
+Layer: LayerNone
+Pos: 11.6558 -52.9821 -31.1792
+Target: -1.31855 -52.9982 -19.0157
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_13
+Model: mon
+Index: 13
+Layer: LayerNone
+Pos: 13.2784 -52.1037 17.2059
+Target: 16.845 -53.038 20.1434
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_14
+Model: mon
+Index: 14
+Layer: LayerNone
+Pos: 24.7459 -53.0256 -29.9653
+Target: 29.7459 -53.0256 -44.9653
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_15
+Model: mon
+Index: 15
+Layer: LayerNone
+Pos: 4.44039 -52.8619 -18.641
+Target: 3.38127 -52.9704 -7.22727
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_16
+Model: mon
+Index: 16
+Layer: LayerNone
+Pos: 42.6462 -53.0868 18.7441
+Target: 49.2784 -53.0549 25.3764
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_17
+Model: mon
+Index: 17
+Layer: LayerNone
+Pos: -27.3178 -53.0163 -45.1957
+Target: -47.3177 -53.0163 -30.1957
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_18
+Model: mon
+Index: 18
+Layer: LayerNone
+Pos: -33.3682 -49.0847 -32.2327
+Target: -32.9507 -46.0642 -35.2423
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_19
+Model: mon
+Index: 19
+Layer: LayerNone
+Pos: 24.2023 -53.0325 2.68362
+Target: 34.1029 -52.904 -8.498
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_20
+Model: mon
+Index: 20
+Layer: LayerNone
+Pos: -8.18099 -52.9936 -18.1657
+Target: -7.83166 -52.978 -28.2146
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_21
+Model: mon
+Index: 21
+Layer: LayerNone
+Pos: -5.73868 -53.0359 -2.04969
+Target: -10.3561 -52.9941 1.10957
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_22
+Model: mon
+Index: 22
+Layer: LayerNone
+Pos: 22.1245 -49.3187 21.8742
+Target: 25.5696 -49.0468 13.2651
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_23
+Model: mon
+Index: 23
+Layer: LayerNone
+Pos: 14.0262 -52.9897 -27.6032
+Target: 3.69464 -52.9975 -34.4909
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_24
+Model: mon
+Index: 24
+Layer: LayerNone
+Pos: -37.0086 -53.0297 -37.064
+Target: -46.5987 -53.0315 -30.4247
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_25
+Model: mon
+Index: 25
+Layer: LayerNone
+Pos: -34.1722 -52.7658 -34.0867
+Target: -23.1722 -52.7658 -45.0867
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_26
+Model: mon
+Index: 26
+Layer: LayerNone
+Pos: 25.2288 -47.5917 32.6816
+Target: 9.19814 -49.3223 42.3
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_27
+Model: mon
+Index: 27
+Layer: LayerNone
+Pos: -3.79763 -53.037 8.67383
+Target: -5.76208 -50.6744 5.80272
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_28
+Model: mon
+Index: 28
+Layer: LayerNone
+Pos: 27.1212 -53.0154 -11.479
+Target: 20.7575 -53.0509 -16.4286
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_29
+Model: mon
+Index: 29
+Layer: LayerNone
+Pos: -41.5502 -52.9666 22.0634
+Target: -46.372 -52.9886 32.3095
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_30
+Model: mon
+Index: 30
+Layer: LayerNone
+Pos: -9 -50 -20
+Target: -23.2291 0 -36.6892
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_31
+Model: mon
+Index: 31
+Layer: LayerNone
+Pos: -29.1896 -50.5548 -33.3503
+Target: -21.1896 -50.5548 -45.3503
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_32
+Model: mon
+Index: 32
+Layer: LayerNone
+Pos: 21.0958 -50.9466 20.0071
+Target: 25.1586 -50.9466 31.3426
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_33
+Model: mon
+Index: 33
+Layer: LayerNone
+Pos: -35.8721 -52.9758 -5.37751
+Target: -25.7778 -52.9705 -1.77241
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_34
+Model: mon
+Index: 34
+Layer: LayerNone
+Pos: 38.6512 -53.0706 -19.5234
+Target: 20.6512 -53.0706 -24.5234
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_35
+Model: mon
+Index: 35
+Layer: LayerNone
+Pos: -29.1951 -53.0258 5.62007
+Target: -24.1281 -53.0193 -4.46563
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_36
+Model: mon
+Index: 36
+Layer: LayerNone
+Pos: 24.9547 -53.0362 0.776423
+Target: 33.1807 -53.0605 -1.28496
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_37
+Model: mon
+Index: 37
+Layer: LayerNone
+Pos: 30.3048 -53.0462 -22.314
+Target: 14.8344 -53.0527 -17.531
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_38
+Model: mon
+Index: 38
+Layer: LayerNone
+Pos: 30.4813 -50.6672 38.8373
+Target: 28.8477 -46.9306 41.014
+Action: Search
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_39
+Model: mon
+Index: 39
+Layer: LayerNone
+Pos: -20.9507 -53.0536 30.7834
+Target: -39.4875 -53.0521 39.564
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_40
+Model: mon
+Index: 40
+Layer: LayerNone
+Pos: 42.929 -53.0818 -13.7265
+Target: 37.929 -53.0818 -1.72648
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_41
+Model: mon
+Index: 41
+Layer: LayerNone
+Pos: -43.3772 -52.979 4.65263
+Target: -28.7277 -52.9795 -10.9735
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_42
+Model: mon
+Index: 42
+Layer: LayerNone
+Pos: 9.10844 -52.9743 -9.53821
+Target: 16.1084 -52.9743 -18.5382
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_43
+Model: mon
+Index: 43
+Layer: LayerNone
+Pos: 24.0351 -53.0121 -28.0021
+Target: 28.0706 -53.0061 -31.6625
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_44
+Model: mon
+Index: 44
+Layer: LayerNone
+Pos: 28.8576 -50.6493 21.945
+Target: 19.105 -51.9963 12.7057
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_45
+Model: mon
+Index: 45
+Layer: LayerNone
+Pos: 31.1156 -53.05 -20.4603
+Target: 50.7616 -53.05 -17.6257
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_46
+Model: mon
+Index: 46
+Layer: LayerNone
+Pos: -47.534 -52.9723 -11.7261
+Target: -37.534 -52.9723 -0.726051
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_47
+Model: mon
+Index: 47
+Layer: LayerNone
+Pos: 12.7228 -46.8113 39.5807
+Target: 9.95554 -50.2961 42.3479
+Action: Moving
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_48
+Model: mon
+Index: 48
+Layer: LayerNone
+Pos: 33.832 -51.8193 37.7901
+Target: 36.3207 -53.0712 32.1214
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 1 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_49
+Model: mon
+Index: 49
+Layer: LayerNone
+Pos: -16.165 -53.0401 20.3624
+Target: 3.83503 -53.0401 12.3624
+Action: Look
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 0 0
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 0
+IsNPC: 1
+IsHexagonModel: 0
+IsSquareModel: 0
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 0
+IsUsable: 0
+IsChecked: 0
+------------------------------------------------------------------
+Type: NPC
+Name: Mon_50
+Model: mon
+Index: 50
+Layer: LayerNone
+Pos: -43.5596 -53.043 -38.3852
+Target: -38.5766 -53.0262 -45.2369
 Action: Moving
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -161,7 +1633,7 @@ IsChecked: 0
 Type: Solid
 Name: Box
 Model: box
-Index: 5
+Index: 51
 Layer: LayerNone
 Pos: 0 -35 0
 Target: 0 0 0
@@ -193,7 +1665,7 @@ IsChecked: 0
 Type: Solid
 Name: Box2
 Model: box
-Index: 6
+Index: 52
 Layer: LayerNone
 Pos: 0 -25 0
 Target: 0 0 0
@@ -225,7 +1697,7 @@ IsChecked: 0
 Type: Solid
 Name: Box3
 Model: box
-Index: 7
+Index: 53
 Layer: LayerNone
 Pos: -50 -55 70
 Target: 0 0 0
@@ -257,10 +1729,10 @@ IsChecked: 0
 Type: Block
 Name: BlockBox
 Model: box
-Index: 8
+Index: 54
 Layer: LayerNone
 Pos: -10 -54.019 -10
-Target: -8.53188 -54.9027 -16.8833
+Target: -15.3328 -54.9606 -3.96047
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -288,53 +1760,53 @@ IsChecked: 0
 Specific:
 Vertex: 1 1 -1
 Vertex: 1 -1 -1
-Vertex: 1.46812 -1 -6.88334
+Vertex: -1 -1 -1
 Vertex: 1 1 -1
-Vertex: 1.46812 -1 -6.88334
-Vertex: 1.46812 1 -6.88334
-Vertex: -1 -1 1
-Vertex: -1 1 1
-Vertex: 1.46812 1 -6.88334
-Vertex: -1 -1 1
-Vertex: 1.46812 1 -6.88334
-Vertex: 1.46812 -1 -6.88334
-Vertex: 1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 -1 1
-Vertex: 0.999999 1 1
-Vertex: -1 1 1
-Vertex: -1 -1 1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -5.33276 -1 6.03953
+Vertex: -5.33276 1 6.03953
+Vertex: -1 1 -1
+Vertex: -5.33276 -1 6.03953
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 4.88754 -1 4.94715
+Vertex: 4.88754 1 4.94715
+Vertex: -5.33276 -1 6.03953
+Vertex: 4.88754 1 4.94715
+Vertex: -5.33276 1 6.03953
+Vertex: -5.33276 -1 6.03953
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: 1 -1 1
+Vertex: 4.88754 -1 4.94715
 Vertex: 1 1 -1
-Vertex: 0.999999 1 1
-Vertex: 1 -1 1
+Vertex: 4.88754 1 4.94715
+Vertex: 4.88754 -1 4.94715
 Vertex: 1 1 -1
-Vertex: 1.46812 1 -6.88334
-Vertex: 0.999999 1 1
-Vertex: 1.46812 1 -6.88334
-Vertex: -1 1 1
-Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: 4.88754 1 4.94715
+Vertex: -1 1 -1
+Vertex: -5.33276 1 6.03953
+Vertex: 4.88754 1 4.94715
 Vertex: 1 -1 -1
-Vertex: 1 -1 1
-Vertex: -1 -1 1
+Vertex: 4.88754 -1 4.94715
+Vertex: -5.33276 -1 6.03953
 Vertex: 1 -1 -1
-Vertex: -1 -1 1
-Vertex: 1.46812 -1 -6.88334
+Vertex: -5.33276 -1 6.03953
+Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox1
 Model: box
-Index: 9
+Index: 55
 Layer: LayerNone
 Pos: -20 -54.0329 -10
-Target: -11.8996 -54.9385 -6.3688
+Target: -19.4671 -53.9313 -9.67807
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 0 1 0
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -355,10 +1827,10 @@ IsTransformable: 1
 IsUsable: 0
 IsChecked: 0
 Specific:
-Vertex: 8.10041 1 3.6312
-Vertex: 8.10041 -1 3.6312
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
 Vertex: -1 -1 -1
-Vertex: 8.10041 1 3.6312
+Vertex: 1 1 -1
 Vertex: -1 -1 -1
 Vertex: -1 1 -1
 Vertex: -1 -1 1
@@ -373,37 +1845,37 @@ Vertex: -1 -1 1
 Vertex: 0.999999 1 1
 Vertex: -1 1 1
 Vertex: -1 -1 1
-Vertex: 8.10041 -1 3.6312
-Vertex: 8.10041 1 3.6312
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
 Vertex: 1 -1 1
-Vertex: 8.10041 1 3.6312
+Vertex: 1 1 -1
 Vertex: 0.999999 1 1
 Vertex: 1 -1 1
-Vertex: 8.10041 1 3.6312
+Vertex: 1 1 -1
 Vertex: -1 1 -1
 Vertex: 0.999999 1 1
 Vertex: -1 1 -1
 Vertex: -1 1 1
 Vertex: 0.999999 1 1
-Vertex: 8.10041 -1 3.6312
+Vertex: 1 -1 -1
 Vertex: 1 -1 1
 Vertex: -1 -1 1
-Vertex: 8.10041 -1 3.6312
+Vertex: 1 -1 -1
 Vertex: -1 -1 1
 Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox2
 Model: box
-Index: 10
+Index: 56
 Layer: LayerNone
 Pos: -10 -53.9908 -20
-Target: -18.9931 -54.888 -22.6994
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -430,18 +1902,18 @@ Vertex: -1 -1 -1
 Vertex: 1 1 -1
 Vertex: -1 -1 -1
 Vertex: -1 1 -1
-Vertex: -8.99312 -1 -2.6994
-Vertex: -8.99312 1 -2.6994
+Vertex: -1 -1 1
+Vertex: -1 1 1
 Vertex: -1 1 -1
-Vertex: -8.99312 -1 -2.6994
+Vertex: -1 -1 1
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
 Vertex: 1 -1 1
 Vertex: 0.999999 1 1
-Vertex: -8.99312 -1 -2.6994
+Vertex: -1 -1 1
 Vertex: 0.999999 1 1
-Vertex: -8.99312 1 -2.6994
-Vertex: -8.99312 -1 -2.6994
+Vertex: -1 1 1
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
 Vertex: 1 -1 1
@@ -452,27 +1924,27 @@ Vertex: 1 1 -1
 Vertex: -1 1 -1
 Vertex: 0.999999 1 1
 Vertex: -1 1 -1
-Vertex: -8.99312 1 -2.6994
+Vertex: -1 1 1
 Vertex: 0.999999 1 1
 Vertex: 1 -1 -1
 Vertex: 1 -1 1
-Vertex: -8.99312 -1 -2.6994
+Vertex: -1 -1 1
 Vertex: 1 -1 -1
-Vertex: -8.99312 -1 -2.6994
+Vertex: -1 -1 1
 Vertex: -1 -1 -1
 ------------------------------------------------------------------
 Type: Block
 Name: BlockBox3
 Model: box
-Index: 11
+Index: 57
 Layer: LayerNone
 Pos: -20 -53.9883 -20
-Target: -21.4994 -54.9116 -11.9643
+Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -505,26 +1977,26 @@ Vertex: -1 1 -1
 Vertex: -1 -1 1
 Vertex: -1 1 -1
 Vertex: -1 -1 -1
-Vertex: -1.49936 -1 8.0357
-Vertex: -1.49936 1 8.0357
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
 Vertex: -1 -1 1
-Vertex: -1.49936 1 8.0357
+Vertex: 0.999999 1 1
 Vertex: -1 1 1
 Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: 1 1 -1
-Vertex: -1.49936 -1 8.0357
+Vertex: 1 -1 1
 Vertex: 1 1 -1
-Vertex: -1.49936 1 8.0357
-Vertex: -1.49936 -1 8.0357
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
 Vertex: 1 1 -1
 Vertex: -1 1 -1
-Vertex: -1.49936 1 8.0357
+Vertex: 0.999999 1 1
 Vertex: -1 1 -1
 Vertex: -1 1 1
-Vertex: -1.49936 1 8.0357
+Vertex: 0.999999 1 1
 Vertex: 1 -1 -1
-Vertex: -1.49936 -1 8.0357
+Vertex: 1 -1 1
 Vertex: -1 -1 1
 Vertex: 1 -1 -1
 Vertex: -1 -1 1
@@ -533,7 +2005,7 @@ Vertex: -1 -1 -1
 Type: Solid
 Name: M_P_1
 Model: marker_Point
-Index: 12
+Index: 58
 Layer: LayerNone
 Pos: -50 0 0
 Target: 0 0 0
@@ -565,7 +2037,7 @@ IsChecked: 0
 Type: Solid
 Name: M_P_2
 Model: marker_Point
-Index: 13
+Index: 59
 Layer: LayerNone
 Pos: -50 0 0
 Target: 0 0 0
@@ -597,7 +2069,7 @@ IsChecked: 0
 Type: Bullet
 Name: Bullet
 Model: marker_Point
-Index: 14
+Index: 60
 Layer: LayerNone
 Pos: 0 0 0
 Target: 0 0 0
@@ -629,10 +2101,10 @@ IsChecked: 0
 Type: BulletHero
 Name: BulletHero
 Model: marker_Point
-Index: 15
+Index: 61
 Layer: LayerNone
-Pos: -72.8659 -85.2422 -81.6121
-Target: -74.8678 -86.3295 -83.8462
+Pos: -2.12712 -123.058 67.7475
+Target: -1.43567 -126.292 70.5648
 Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -661,9 +2133,9 @@ IsChecked: 0
 Type: Solid
 Name: M_C_1
 Model: marker_Cross
-Index: 16
+Index: 62
 Layer: LayerNone
-Pos: 36.5782 -53.0204 -39.629
+Pos: -6.66498 -53.0228 -4.84274
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -693,9 +2165,9 @@ IsChecked: 0
 Type: Solid
 Name: M_C_2
 Model: marker_Cross
-Index: 17
+Index: 63
 Layer: LayerNone
-Pos: 36.137 -55.0205 -39.8643
+Pos: -6.66498 -55.0232 -4.84274
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -725,9 +2197,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_1
 Model: marker_Vector
-Index: 18
+Index: 64
 Layer: LayerNone
-Pos: 36.2839 -55.0207 -40.6745
+Pos: -8.88447 -55.0221 -5.46516
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -757,9 +2229,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_2
 Model: marker_Vector
-Index: 19
+Index: 65
 Layer: LayerNone
-Pos: 33.0161 -55.026 -37.4679
+Pos: -5.60835 -55.0365 -2.31527
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -789,9 +2261,9 @@ IsChecked: 0
 Type: Solid
 Name: M_V_3
 Model: marker_Vector
-Index: 20
+Index: 66
 Layer: LayerNone
-Pos: 36.3315 -55.016 -37.4325
+Pos: -5.62048 -55.0214 -5.49561
 Target: 0 0 0
 Action: Lock
 IndexObjectOwner: -1
@@ -821,10 +2293,10 @@ IsChecked: 0
 Type: Hero
 Name: Hero
 Model: homo
-Index: 21
+Index: 67
 Layer: LayerNone
-Pos: 13.7448 -43.2606 31.8252
-Target: 13.7448 -43.2606 31.8252
+Pos: -25.6691 -53.9928 -7.78009
+Target: -25.6691 -53.9928 -7.78009
 Action: Search
 IndexObjectOwner: -1
 ShellIndex: -1
@@ -853,19 +2325,19 @@ IsChecked: 0
 Type: CursorRay
 Name: CursorRay
 Model: cursorRay
-Index: 22
+Index: 68
 Layer: LayerNone
-Pos: -15.7329 -54.9348 -15.8288
-Target: -87.0284 -162.601 -158.864
+Pos: -19.4671 -53.9313 -9.67807
+Target: 144.291 -126.394 -80.2727
 Action: Stay
-IndexObjectOwner: 21
+IndexObjectOwner: 67
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 22
-CommandTargetIndex: 10
-CommandValueI: 8
+CommandSourceIndex: -1
+CommandTargetIndex: 55
+CommandValueI: 6
 CommandValueF: -1
 CommandValueS: @?
 CommandDescription: @?
@@ -885,9 +2357,9 @@ IsChecked: 0
 Type: Button
 Name: BackContectGUI
 Model: ConextFrameModel
-Index: 23
+Index: 69
 Layer: LayerBackground
-Pos: 12.2892 -42.2231 29.7798
+Pos: -19.0999 -53.1191 8.13549
 Target: 0 0 0
 Action: Stay
 IndexObjectOwner: -1
@@ -895,7 +2367,7 @@ ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0 0 0
 Command: None
-CommandSourceIndex: 23
+CommandSourceIndex: 69
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -921,17 +2393,17 @@ IsToogleButon: 0
 Type: Button
 Name: ButtonEditOn
 Model: ButtonModel
-Index: 24
+Index: 70
 Layer: LayerBase
-Pos: 12.0523 -42.2713 29.9641
+Pos: -18.8848 -53.1667 8.34504
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
+IndexObjectOwner: 69
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 1 1 1
+Color: 1 1 0
 Command: EditGUI_OnOff
-CommandSourceIndex: 24
+CommandSourceIndex: 70
 CommandTargetIndex: -1
 CommandValueI: 0
 CommandValueF: -1
@@ -957,21 +2429,21 @@ IsToogleButon: 1
 Type: Button
 Name: ButtonCreateObjGUI
 Model: ButtonModel
-Index: 25
+Index: 71
 Layer: LayerBase
-Pos: 12.1321 -42.2719 29.904
+Pos: -18.9548 -53.1674 8.27367
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
+IndexObjectOwner: 69
 ShellIndex: 0
 NextItemShellIndex: -1
 Color: 1 1 0
 Command: SelectPosForObject
-CommandSourceIndex: 25
+CommandSourceIndex: 71
 CommandTargetIndex: -1
-CommandValueI: 5
+CommandValueI: 2
 CommandValueF: 1
-CommandValueS: NPC
+CommandValueS: Block
 CommandDescription: @?
 IsVisible: 1
 IsGravity: 0
@@ -993,12 +2465,12 @@ IsToogleButon: 0
 Type: TextBox
 Name: Button_TextBox
 Model: TextBoxModel
-Index: 26
+Index: 72
 Layer: LayerBase
-Pos: 11.2408 -41.3171 30.3231
+Pos: -18.4539 -52.2209 9.13105
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 25
+IndexObjectOwner: 71
 ShellIndex: 0
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
@@ -1027,20 +2499,92 @@ SizePanel: 1.5 1
 Message: create
 ------------------------------------------------------------------
 Type: Button
+Name: ButtonSaveObjectFieldsEdit
+Model: ButtonModel
+Index: 73
+Layer: LayerBase
+Pos: -19.1716 -53.1674 8.03833
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 69
+ShellIndex: 1
+NextItemShellIndex: -1
+Color: 1 1 0
+Command: SaveObjectFieldsEdit
+CommandSourceIndex: 73
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 0
+IsFocusable: 1
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.47 0.05 0.002
+SizePanel: 0.3 0.1
+IsToogleButon: 0
+------------------------------------------------------------------
+Type: TextBox
+Name: Button_TextBox_74
+Model: TextBoxModel
+Index: 74
+Layer: LayerBase
+Pos: -18.6707 -52.2209 8.8957
+Target: 0 0 0
+Action: Stay
+IndexObjectOwner: 73
+ShellIndex: 1
+NextItemShellIndex: -1
+Color: 0.117 0.351 0.95
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 0
+IsGUI: 1
+IsTextureRepeat: 0
+IsNPC: 0
+IsHexagonModel: 0
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 1
+IsChecked: 0
+Specific:
+StartPos: 0.01 0.01 0.003
+SizePanel: 1.5 1
+Message: save
+------------------------------------------------------------------
+Type: Button
 Name: SystemRootEditBox
 Model: ButtonEditBoxModel
-Index: 27
+Index: 75
 Layer: LayerBase
 Pos: 0.1 0.3 0.005
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
-ShellIndex: 1
+IndexObjectOwner: 69
+ShellIndex: 2
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: EditObjectCommand
-CommandSourceIndex: 27
-CommandTargetIndex: 28
+CommandSourceIndex: 75
+CommandTargetIndex: 76
 CommandValueI: -1
 CommandValueF: -1
 CommandValueS: @?
@@ -1065,13 +2609,13 @@ IsToogleButon: 1
 Type: EditBox
 Name: SystemEditBox
 Model: EditBoxModel
-Index: 28
+Index: 76
 Layer: LayerBase
-Pos: 14.2823 -41.0924 28.2962
+Pos: 0.03 0.01 0.006
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 27
-ShellIndex: 1
+IndexObjectOwner: 75
+ShellIndex: 2
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1101,12 +2645,12 @@ Message: ох
 Type: CursorGUI
 Name: CursorGUI
 Model: CursorModel
-Index: 29
+Index: 77
 Layer: LayerSystem
-Pos: 11.3707 -41.3769 30.2539
+Pos: -18.844 -52.2685 8.68061
 Target: 0 0 0
 Action: Moving
-IndexObjectOwner: 23
+IndexObjectOwner: 69
 ShellIndex: -1
 NextItemShellIndex: -1
 Color: 0.2 0.5 0.1
@@ -1130,19 +2674,19 @@ IsTransformable: 0
 IsUsable: 0
 IsChecked: 0
 Specific:
-StartPos: 0.285822 0.102048 0.01
+StartPos: 0.735316 0.0904266 0.01
 SizePanel: 0.05 0.05
 ------------------------------------------------------------------
 Type: ListBox
 Name: BaseFrame_ListBox
 Model: FrameModel
-Index: 30
+Index: 78
 Layer: LayerBase
-Pos: 12.9953 -42.3211 29.3061
+Pos: -19.6582 -53.2161 7.49399
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
-ShellIndex: 33
+IndexObjectOwner: 69
+ShellIndex: 34
 NextItemShellIndex: -1
 Color: 1 1 1
 Command: None
@@ -1171,17 +2715,17 @@ SizePanel: 0.7 1.77
 Type: GUI
 Name: FrameItem_ListTextBox
 Model: FrameModel
-Index: 31
+Index: 79
 Layer: LayerBase
-Pos: 12.9987 -42.3239 29.3057
+Pos: -19.659 -53.2188 7.49061
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 2
-NextItemShellIndex: 33
+IndexObjectOwner: 78
+ShellIndex: 3
+NextItemShellIndex: 81
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1206,13 +2750,13 @@ SizePanel: 0.694 0.054
 Type: TextBox
 Name: TextBox
 Model: TextBoxModel
-Index: 32
+Index: 80
 Layer: LayerBase
-Pos: 12.1394 -41.3693 29.7009
+Pos: -19.1859 -52.2726 8.31929
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 31
-ShellIndex: 2
+IndexObjectOwner: 79
+ShellIndex: 3
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1240,19 +2784,19 @@ SizePanel: 1.5 1
 Message: Type
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_33
+Name: FrameItem_ListTextBox_81
 Model: FrameModel
-Index: 33
+Index: 81
 Layer: LayerBase
-Pos: 13.0045 -42.38 29.3139
+Pos: -19.6497 -53.2744 7.4821
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 3
-NextItemShellIndex: 35
+IndexObjectOwner: 78
+ShellIndex: 4
+NextItemShellIndex: 83
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1275,15 +2819,15 @@ StartPos: 1.203 0.16 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_34
+Name: TextBox_82
 Model: TextBoxModel
-Index: 34
+Index: 82
 Layer: LayerBase
-Pos: 12.1453 -41.4254 29.7091
+Pos: -19.1767 -52.3282 8.31079
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 33
-ShellIndex: 3
+IndexObjectOwner: 81
+ShellIndex: 4
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1311,19 +2855,19 @@ SizePanel: 1.5 1
 Message: Name
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_35
+Name: FrameItem_ListTextBox_83
 Model: FrameModel
-Index: 35
+Index: 83
 Layer: LayerBase
-Pos: 13.0104 -42.4361 29.3222
+Pos: -19.6405 -53.33 7.4736
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 4
-NextItemShellIndex: 37
+IndexObjectOwner: 78
+ShellIndex: 5
+NextItemShellIndex: 85
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1346,15 +2890,15 @@ StartPos: 1.203 0.217 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_36
+Name: TextBox_84
 Model: TextBoxModel
-Index: 36
+Index: 84
 Layer: LayerBase
-Pos: 12.1511 -41.4815 29.7174
+Pos: -19.1674 -52.3838 8.30228
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 35
-ShellIndex: 4
+IndexObjectOwner: 83
+ShellIndex: 5
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1382,19 +2926,19 @@ SizePanel: 1.5 1
 Message: Model
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_37
+Name: FrameItem_ListTextBox_85
 Model: FrameModel
-Index: 37
+Index: 85
 Layer: LayerBase
-Pos: 13.0162 -42.4922 29.3305
+Pos: -19.6313 -53.3856 7.46509
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 5
-NextItemShellIndex: 39
+IndexObjectOwner: 78
+ShellIndex: 6
+NextItemShellIndex: 87
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1417,15 +2961,15 @@ StartPos: 1.203 0.274 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_38
+Name: TextBox_86
 Model: TextBoxModel
-Index: 38
+Index: 86
 Layer: LayerBase
-Pos: 12.1569 -41.5376 29.7257
+Pos: -19.1582 -52.4394 8.29378
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 37
-ShellIndex: 5
+IndexObjectOwner: 85
+ShellIndex: 6
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1453,19 +2997,19 @@ SizePanel: 1.5 1
 Message: Index
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_39
+Name: FrameItem_ListTextBox_87
 Model: FrameModel
-Index: 39
+Index: 87
 Layer: LayerBase
-Pos: 13.022 -42.5483 29.3387
+Pos: -19.6221 -53.4412 7.45659
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 6
-NextItemShellIndex: 41
+IndexObjectOwner: 78
+ShellIndex: 7
+NextItemShellIndex: 89
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1488,15 +3032,15 @@ StartPos: 1.203 0.331 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_40
+Name: TextBox_88
 Model: TextBoxModel
-Index: 40
+Index: 88
 Layer: LayerBase
-Pos: 12.1627 -41.5937 29.734
+Pos: -19.149 -52.495 8.28527
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 39
-ShellIndex: 6
+IndexObjectOwner: 87
+ShellIndex: 7
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1524,19 +3068,19 @@ SizePanel: 1.5 1
 Message: Layer
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_41
+Name: FrameItem_ListTextBox_89
 Model: FrameModel
-Index: 41
+Index: 89
 Layer: LayerBase
-Pos: 13.0279 -42.6044 29.347
+Pos: -19.6128 -53.4968 7.44809
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 7
-NextItemShellIndex: 43
+IndexObjectOwner: 78
+ShellIndex: 8
+NextItemShellIndex: 91
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1559,15 +3103,15 @@ StartPos: 1.203 0.388 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_42
+Name: TextBox_90
 Model: TextBoxModel
-Index: 42
+Index: 90
 Layer: LayerBase
-Pos: 12.1686 -41.6498 29.7422
+Pos: -19.1397 -52.5506 8.27677
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 41
-ShellIndex: 7
+IndexObjectOwner: 89
+ShellIndex: 8
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1595,19 +3139,19 @@ SizePanel: 1.5 1
 Message: Pos
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_43
+Name: FrameItem_ListTextBox_91
 Model: FrameModel
-Index: 43
+Index: 91
 Layer: LayerBase
-Pos: 13.0337 -42.6604 29.3553
+Pos: -19.6036 -53.5524 7.43958
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 8
-NextItemShellIndex: 45
+IndexObjectOwner: 78
+ShellIndex: 9
+NextItemShellIndex: 93
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1630,15 +3174,15 @@ StartPos: 1.203 0.445 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_44
+Name: TextBox_92
 Model: TextBoxModel
-Index: 44
+Index: 92
 Layer: LayerBase
-Pos: 12.1744 -41.7059 29.7505
+Pos: -19.1305 -52.6062 8.26827
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 43
-ShellIndex: 8
+IndexObjectOwner: 91
+ShellIndex: 9
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1666,19 +3210,19 @@ SizePanel: 1.5 1
 Message: Target
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_45
+Name: FrameItem_ListTextBox_93
 Model: FrameModel
-Index: 45
+Index: 93
 Layer: LayerBase
-Pos: 13.0395 -42.7165 29.3636
+Pos: -19.5944 -53.608 7.43108
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 9
-NextItemShellIndex: 47
+IndexObjectOwner: 78
+ShellIndex: 10
+NextItemShellIndex: 95
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1701,15 +3245,15 @@ StartPos: 1.203 0.502 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_46
+Name: TextBox_94
 Model: TextBoxModel
-Index: 46
+Index: 94
 Layer: LayerBase
-Pos: 12.1802 -41.762 29.7588
+Pos: -19.1213 -52.6618 8.25976
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 45
-ShellIndex: 9
+IndexObjectOwner: 93
+ShellIndex: 10
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1737,19 +3281,19 @@ SizePanel: 1.5 1
 Message: Action
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_47
+Name: FrameItem_ListTextBox_95
 Model: FrameModel
-Index: 47
+Index: 95
 Layer: LayerBase
-Pos: 13.0454 -42.7726 29.3718
+Pos: -19.5851 -53.6636 7.42258
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 10
-NextItemShellIndex: 49
+IndexObjectOwner: 78
+ShellIndex: 11
+NextItemShellIndex: 97
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1772,15 +3316,15 @@ StartPos: 1.203 0.559 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_48
+Name: TextBox_96
 Model: TextBoxModel
-Index: 48
+Index: 96
 Layer: LayerBase
-Pos: 12.1861 -41.8181 29.767
+Pos: -19.1121 -52.7174 8.25126
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 47
-ShellIndex: 10
+IndexObjectOwner: 95
+ShellIndex: 11
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1808,19 +3352,19 @@ SizePanel: 1.5 1
 Message: IndexObjectOwner
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_49
+Name: FrameItem_ListTextBox_97
 Model: FrameModel
-Index: 49
+Index: 97
 Layer: LayerBase
-Pos: 13.0512 -42.8287 29.3801
+Pos: -19.5759 -53.7192 7.41407
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 11
-NextItemShellIndex: 51
+IndexObjectOwner: 78
+ShellIndex: 12
+NextItemShellIndex: 99
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1843,15 +3387,15 @@ StartPos: 1.203 0.616 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_50
+Name: TextBox_98
 Model: TextBoxModel
-Index: 50
+Index: 98
 Layer: LayerBase
-Pos: 12.1919 -41.8741 29.7753
+Pos: -19.1028 -52.7731 8.24275
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 49
-ShellIndex: 11
+IndexObjectOwner: 97
+ShellIndex: 12
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1879,19 +3423,19 @@ SizePanel: 1.5 1
 Message: ShellIndex
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_51
+Name: FrameItem_ListTextBox_99
 Model: FrameModel
-Index: 51
+Index: 99
 Layer: LayerBase
-Pos: 13.057 -42.8848 29.3884
+Pos: -19.5667 -53.7748 7.40557
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 12
-NextItemShellIndex: 53
+IndexObjectOwner: 78
+ShellIndex: 13
+NextItemShellIndex: 101
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1914,15 +3458,15 @@ StartPos: 1.203 0.673 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_52
+Name: TextBox_100
 Model: TextBoxModel
-Index: 52
+Index: 100
 Layer: LayerBase
-Pos: 12.1977 -41.9302 29.7836
+Pos: -19.0936 -52.8287 8.23425
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 51
-ShellIndex: 12
+IndexObjectOwner: 99
+ShellIndex: 13
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -1950,19 +3494,19 @@ SizePanel: 1.5 1
 Message: NextItemShellIndex
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_53
+Name: FrameItem_ListTextBox_101
 Model: FrameModel
-Index: 53
+Index: 101
 Layer: LayerBase
-Pos: 13.0629 -42.9409 29.3966
+Pos: -19.5574 -53.8304 7.39706
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 13
-NextItemShellIndex: 55
+IndexObjectOwner: 78
+ShellIndex: 14
+NextItemShellIndex: 103
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -1985,15 +3529,15 @@ StartPos: 1.203 0.73 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_54
+Name: TextBox_102
 Model: TextBoxModel
-Index: 54
+Index: 102
 Layer: LayerBase
-Pos: 12.2036 -41.9863 29.7919
+Pos: -19.0844 -52.8843 8.22575
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 53
-ShellIndex: 13
+IndexObjectOwner: 101
+ShellIndex: 14
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2021,19 +3565,19 @@ SizePanel: 1.5 1
 Message: Color
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_55
+Name: FrameItem_ListTextBox_103
 Model: FrameModel
-Index: 55
+Index: 103
 Layer: LayerBase
-Pos: 13.0687 -42.997 29.4049
+Pos: -19.5482 -53.886 7.38856
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 14
-NextItemShellIndex: 57
+IndexObjectOwner: 78
+ShellIndex: 15
+NextItemShellIndex: 105
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2056,15 +3600,15 @@ StartPos: 1.203 0.787 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_56
+Name: TextBox_104
 Model: TextBoxModel
-Index: 56
+Index: 104
 Layer: LayerBase
-Pos: 12.2094 -42.0424 29.8001
+Pos: -19.0751 -52.9399 8.21724
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 55
-ShellIndex: 14
+IndexObjectOwner: 103
+ShellIndex: 15
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2092,19 +3636,19 @@ SizePanel: 1.5 1
 Message: Command
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_57
+Name: FrameItem_ListTextBox_105
 Model: FrameModel
-Index: 57
+Index: 105
 Layer: LayerBase
-Pos: 13.0745 -43.0531 29.4132
+Pos: -19.539 -53.9417 7.38006
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 15
-NextItemShellIndex: 59
+IndexObjectOwner: 78
+ShellIndex: 16
+NextItemShellIndex: 107
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2127,15 +3671,15 @@ StartPos: 1.203 0.844 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_58
+Name: TextBox_106
 Model: TextBoxModel
-Index: 58
+Index: 106
 Layer: LayerBase
-Pos: 12.2152 -42.0985 29.8084
+Pos: -19.0659 -52.9955 8.20874
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 57
-ShellIndex: 15
+IndexObjectOwner: 105
+ShellIndex: 16
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2163,19 +3707,19 @@ SizePanel: 1.5 1
 Message: CommandSourceIndex
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_59
+Name: FrameItem_ListTextBox_107
 Model: FrameModel
-Index: 59
+Index: 107
 Layer: LayerBase
-Pos: 13.0804 -43.1092 29.4215
+Pos: -19.5298 -53.9972 7.37155
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 16
-NextItemShellIndex: 61
+IndexObjectOwner: 78
+ShellIndex: 17
+NextItemShellIndex: 109
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2198,15 +3742,15 @@ StartPos: 1.203 0.901 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_60
+Name: TextBox_108
 Model: TextBoxModel
-Index: 60
+Index: 108
 Layer: LayerBase
-Pos: 12.2211 -42.1546 29.8167
+Pos: -19.0567 -53.0511 8.20024
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 59
-ShellIndex: 16
+IndexObjectOwner: 107
+ShellIndex: 17
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2234,19 +3778,19 @@ SizePanel: 1.5 1
 Message: CommandTargetIndex
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_61
+Name: FrameItem_ListTextBox_109
 Model: FrameModel
-Index: 61
+Index: 109
 Layer: LayerBase
-Pos: 13.0862 -43.1653 29.4297
+Pos: -19.5205 -54.0529 7.36305
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 17
-NextItemShellIndex: 63
+IndexObjectOwner: 78
+ShellIndex: 18
+NextItemShellIndex: 111
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2269,15 +3813,15 @@ StartPos: 1.203 0.958 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_62
+Name: TextBox_110
 Model: TextBoxModel
-Index: 62
+Index: 110
 Layer: LayerBase
-Pos: 12.2269 -42.2107 29.8249
+Pos: -19.0474 -53.1067 8.19173
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 61
-ShellIndex: 17
+IndexObjectOwner: 109
+ShellIndex: 18
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2305,19 +3849,19 @@ SizePanel: 1.5 1
 Message: CommandValueI
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_63
+Name: FrameItem_ListTextBox_111
 Model: FrameModel
-Index: 63
+Index: 111
 Layer: LayerBase
-Pos: 13.092 -43.2214 29.438
+Pos: -19.5113 -54.1085 7.35455
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 18
-NextItemShellIndex: 65
+IndexObjectOwner: 78
+ShellIndex: 19
+NextItemShellIndex: 113
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2340,15 +3884,15 @@ StartPos: 1.203 1.015 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_64
+Name: TextBox_112
 Model: TextBoxModel
-Index: 64
+Index: 112
 Layer: LayerBase
-Pos: 12.2327 -42.2668 29.8332
+Pos: -19.0382 -53.1623 8.18323
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 63
-ShellIndex: 18
+IndexObjectOwner: 111
+ShellIndex: 19
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2376,19 +3920,19 @@ SizePanel: 1.5 1
 Message: CommandValueF
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_65
+Name: FrameItem_ListTextBox_113
 Model: FrameModel
-Index: 65
+Index: 113
 Layer: LayerBase
-Pos: 13.0979 -43.2775 29.4463
+Pos: -19.5021 -54.1641 7.34604
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 19
-NextItemShellIndex: 67
+IndexObjectOwner: 78
+ShellIndex: 20
+NextItemShellIndex: 115
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2411,15 +3955,15 @@ StartPos: 1.203 1.072 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_66
+Name: TextBox_114
 Model: TextBoxModel
-Index: 66
+Index: 114
 Layer: LayerBase
-Pos: 12.2386 -42.3229 29.8415
+Pos: -19.029 -53.2179 8.17472
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 65
-ShellIndex: 19
+IndexObjectOwner: 113
+ShellIndex: 20
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2447,19 +3991,19 @@ SizePanel: 1.5 1
 Message: CommandValueS
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_67
+Name: FrameItem_ListTextBox_115
 Model: FrameModel
-Index: 67
+Index: 115
 Layer: LayerBase
-Pos: 13.1037 -43.3336 29.4545
+Pos: -19.4928 -54.2197 7.33754
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 20
-NextItemShellIndex: 69
+IndexObjectOwner: 78
+ShellIndex: 21
+NextItemShellIndex: 117
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2482,15 +4026,15 @@ StartPos: 1.203 1.129 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_68
+Name: TextBox_116
 Model: TextBoxModel
-Index: 68
+Index: 116
 Layer: LayerBase
-Pos: 12.2444 -42.379 29.8498
+Pos: -19.0198 -53.2735 8.16622
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 67
-ShellIndex: 20
+IndexObjectOwner: 115
+ShellIndex: 21
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2518,19 +4062,19 @@ SizePanel: 1.5 1
 Message: CommandDescription
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_69
+Name: FrameItem_ListTextBox_117
 Model: FrameModel
-Index: 69
+Index: 117
 Layer: LayerBase
-Pos: 13.1095 -43.3897 29.4628
+Pos: -19.4836 -54.2753 7.32903
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 21
-NextItemShellIndex: 71
+IndexObjectOwner: 78
+ShellIndex: 22
+NextItemShellIndex: 119
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2553,15 +4097,15 @@ StartPos: 1.203 1.186 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_70
+Name: TextBox_118
 Model: TextBoxModel
-Index: 70
+Index: 118
 Layer: LayerBase
-Pos: 12.2502 -42.4351 29.858
+Pos: -19.0105 -53.3291 8.15772
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 69
-ShellIndex: 21
+IndexObjectOwner: 117
+ShellIndex: 22
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2589,19 +4133,19 @@ SizePanel: 1.5 1
 Message: IsVisible
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_71
+Name: FrameItem_ListTextBox_119
 Model: FrameModel
-Index: 71
+Index: 119
 Layer: LayerBase
-Pos: 13.1154 -43.4458 29.4711
+Pos: -19.4744 -54.3309 7.32053
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 22
-NextItemShellIndex: 73
+IndexObjectOwner: 78
+ShellIndex: 23
+NextItemShellIndex: 121
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2624,15 +4168,15 @@ StartPos: 1.203 1.243 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_72
+Name: TextBox_120
 Model: TextBoxModel
-Index: 72
+Index: 120
 Layer: LayerBase
-Pos: 12.2561 -42.4912 29.8663
+Pos: -19.0013 -53.3847 8.14921
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 71
-ShellIndex: 22
+IndexObjectOwner: 119
+ShellIndex: 23
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2660,19 +4204,19 @@ SizePanel: 1.5 1
 Message: IsGravity
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_73
+Name: FrameItem_ListTextBox_121
 Model: FrameModel
-Index: 73
+Index: 121
 Layer: LayerBase
-Pos: 13.1212 -43.5019 29.4793
+Pos: -19.4651 -54.3865 7.31203
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 23
-NextItemShellIndex: 75
+IndexObjectOwner: 78
+ShellIndex: 24
+NextItemShellIndex: 123
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2695,15 +4239,15 @@ StartPos: 1.203 1.3 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_74
+Name: TextBox_122
 Model: TextBoxModel
-Index: 74
+Index: 122
 Layer: LayerBase
-Pos: 12.2619 -42.5473 29.8746
+Pos: -18.9921 -53.4403 8.14071
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 73
-ShellIndex: 23
+IndexObjectOwner: 121
+ShellIndex: 24
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2731,19 +4275,19 @@ SizePanel: 1.5 1
 Message: IsGUI
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_75
+Name: FrameItem_ListTextBox_123
 Model: FrameModel
-Index: 75
+Index: 123
 Layer: LayerBase
-Pos: 13.127 -43.558 29.4876
+Pos: -19.4559 -54.4421 7.30352
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 24
-NextItemShellIndex: 77
+IndexObjectOwner: 78
+ShellIndex: 25
+NextItemShellIndex: 125
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2766,15 +4310,15 @@ StartPos: 1.203 1.357 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_76
+Name: TextBox_124
 Model: TextBoxModel
-Index: 76
+Index: 124
 Layer: LayerBase
-Pos: 12.2677 -42.6034 29.8828
+Pos: -18.9828 -53.4959 8.13221
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 75
-ShellIndex: 24
+IndexObjectOwner: 123
+ShellIndex: 25
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2802,19 +4346,19 @@ SizePanel: 1.5 1
 Message: IsTextureRepeat
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_77
+Name: FrameItem_ListTextBox_125
 Model: FrameModel
-Index: 77
+Index: 125
 Layer: LayerBase
-Pos: 13.1328 -43.6141 29.4959
+Pos: -19.4467 -54.4977 7.29502
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 25
-NextItemShellIndex: 79
+IndexObjectOwner: 78
+ShellIndex: 26
+NextItemShellIndex: 127
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2837,15 +4381,15 @@ StartPos: 1.203 1.414 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_78
+Name: TextBox_126
 Model: TextBoxModel
-Index: 78
+Index: 126
 Layer: LayerBase
-Pos: 12.2736 -42.6595 29.8911
+Pos: -18.9736 -53.5515 8.1237
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 77
-ShellIndex: 25
+IndexObjectOwner: 125
+ShellIndex: 26
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2873,19 +4417,19 @@ SizePanel: 1.5 1
 Message: IsNPC
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_79
+Name: FrameItem_ListTextBox_127
 Model: FrameModel
-Index: 79
+Index: 127
 Layer: LayerBase
-Pos: 13.1387 -43.6701 29.5042
+Pos: -19.4374 -54.5533 7.28651
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 26
-NextItemShellIndex: 81
+IndexObjectOwner: 78
+ShellIndex: 27
+NextItemShellIndex: 129
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2908,15 +4452,15 @@ StartPos: 1.203 1.471 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_80
+Name: TextBox_128
 Model: TextBoxModel
-Index: 80
+Index: 128
 Layer: LayerBase
-Pos: 12.2794 -42.7156 29.8994
+Pos: -18.9644 -53.6071 8.1152
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 79
-ShellIndex: 26
+IndexObjectOwner: 127
+ShellIndex: 27
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -2944,19 +4488,19 @@ SizePanel: 1.5 1
 Message: IsHexagonModel
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_81
+Name: FrameItem_ListTextBox_129
 Model: FrameModel
-Index: 81
+Index: 129
 Layer: LayerBase
-Pos: 13.1445 -43.7262 29.5124
+Pos: -19.4282 -54.6089 7.27801
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 27
-NextItemShellIndex: 83
+IndexObjectOwner: 78
+ShellIndex: 28
+NextItemShellIndex: 131
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -2979,15 +4523,15 @@ StartPos: 1.203 1.528 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_82
+Name: TextBox_130
 Model: TextBoxModel
-Index: 82
+Index: 130
 Layer: LayerBase
-Pos: 12.2852 -42.7717 29.9076
+Pos: -18.9551 -53.6627 8.10669
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 81
-ShellIndex: 27
+IndexObjectOwner: 129
+ShellIndex: 28
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3015,19 +4559,19 @@ SizePanel: 1.5 1
 Message: IsSquareModel
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_83
+Name: FrameItem_ListTextBox_131
 Model: FrameModel
-Index: 83
+Index: 131
 Layer: LayerBase
-Pos: 13.1503 -43.7823 29.5207
+Pos: -19.419 -54.6645 7.26951
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 28
-NextItemShellIndex: 85
+IndexObjectOwner: 78
+ShellIndex: 29
+NextItemShellIndex: 133
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -3050,15 +4594,15 @@ StartPos: 1.203 1.585 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_84
+Name: TextBox_132
 Model: TextBoxModel
-Index: 84
+Index: 132
 Layer: LayerBase
-Pos: 12.2911 -42.8277 29.9159
+Pos: -18.9459 -53.7183 8.09819
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 83
-ShellIndex: 28
+IndexObjectOwner: 131
+ShellIndex: 29
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3086,19 +4630,19 @@ SizePanel: 1.5 1
 Message: IsAbsolutePosition
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_85
+Name: FrameItem_ListTextBox_133
 Model: FrameModel
-Index: 85
+Index: 133
 Layer: LayerBase
-Pos: 13.1562 -43.8384 29.529
+Pos: -19.4098 -54.7201 7.261
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 29
-NextItemShellIndex: 87
+IndexObjectOwner: 78
+ShellIndex: 30
+NextItemShellIndex: 135
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -3121,15 +4665,15 @@ StartPos: 1.203 1.642 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_86
+Name: TextBox_134
 Model: TextBoxModel
-Index: 86
+Index: 134
 Layer: LayerBase
-Pos: 12.2969 -42.8838 29.9242
+Pos: -18.9367 -53.7739 8.08969
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 85
-ShellIndex: 29
+IndexObjectOwner: 133
+ShellIndex: 30
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3157,19 +4701,19 @@ SizePanel: 1.5 1
 Message: IsFocusable
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_87
+Name: FrameItem_ListTextBox_135
 Model: FrameModel
-Index: 87
+Index: 135
 Layer: LayerBase
-Pos: 13.162 -43.8945 29.5372
+Pos: -19.4005 -54.7757 7.2525
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 30
-NextItemShellIndex: 89
+IndexObjectOwner: 78
+ShellIndex: 31
+NextItemShellIndex: 137
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -3192,15 +4736,15 @@ StartPos: 1.203 1.699 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_88
+Name: TextBox_136
 Model: TextBoxModel
-Index: 88
+Index: 136
 Layer: LayerBase
-Pos: 12.3027 -42.9399 29.9325
+Pos: -18.9275 -53.8295 8.08118
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 87
-ShellIndex: 30
+IndexObjectOwner: 135
+ShellIndex: 31
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3228,19 +4772,19 @@ SizePanel: 1.5 1
 Message: IsTransformable
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_89
+Name: FrameItem_ListTextBox_137
 Model: FrameModel
-Index: 89
+Index: 137
 Layer: LayerBase
-Pos: 13.1678 -43.9506 29.5455
+Pos: -19.3913 -54.8313 7.244
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 31
-NextItemShellIndex: 91
+IndexObjectOwner: 78
+ShellIndex: 32
+NextItemShellIndex: 139
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -3263,15 +4807,15 @@ StartPos: 1.203 1.756 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_90
+Name: TextBox_138
 Model: TextBoxModel
-Index: 90
+Index: 138
 Layer: LayerBase
-Pos: 12.3086 -42.996 29.9407
+Pos: -18.9182 -53.8851 8.07268
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 89
-ShellIndex: 31
+IndexObjectOwner: 137
+ShellIndex: 32
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3299,19 +4843,19 @@ SizePanel: 1.5 1
 Message: IsUsable
 ------------------------------------------------------------------
 Type: GUI
-Name: FrameItem_ListTextBox_91
+Name: FrameItem_ListTextBox_139
 Model: FrameModel
-Index: 91
+Index: 139
 Layer: LayerBase
-Pos: 13.1737 -44.0067 29.5538
+Pos: -19.3821 -54.8869 7.23549
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 30
-ShellIndex: 32
+IndexObjectOwner: 78
+ShellIndex: 33
 NextItemShellIndex: -1
 Color: 1 1 1
 Command: None
-CommandSourceIndex: 33
+CommandSourceIndex: 34
 CommandTargetIndex: -1
 CommandValueI: -1
 CommandValueF: -1
@@ -3334,15 +4878,15 @@ StartPos: 1.203 1.813 0.003
 SizePanel: 0.694 0.054
 ------------------------------------------------------------------
 Type: TextBox
-Name: TextBox_92
+Name: TextBox_140
 Model: TextBoxModel
-Index: 92
+Index: 140
 Layer: LayerBase
-Pos: 12.3144 -43.0521 29.949
+Pos: -18.909 -53.9407 8.06417
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 91
-ShellIndex: 32
+IndexObjectOwner: 139
+ShellIndex: 33
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -3372,18 +4916,18 @@ Message: IsChecked
 Type: ListBox
 Name: SystemObjectFieldsEdit
 Model: FrameModel
-Index: 93
+Index: 141
 Layer: LayerBase
-Pos: 13.5755 -42.3211 28.8969
+Pos: -20.1392 -53.2161 6.97182
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
-ShellIndex: 65
+IndexObjectOwner: 69
+ShellIndex: 66
 NextItemShellIndex: -1
 Color: 1 1 1
 Command: None
 CommandSourceIndex: -1
-CommandTargetIndex: 10
+CommandTargetIndex: 245
 CommandValueI: -1
 CommandValueF: -1
 CommandValueS: @?
@@ -3407,18 +4951,18 @@ SizePanel: 0.7 1.77
 Type: Button
 Name: EditBoxItem_ListEditBox
 Model: ButtonEditBoxModel
-Index: 94
+Index: 142
 Layer: LayerBase
-Pos: 13.5789 -42.3239 28.8965
+Pos: -20.1401 -53.2188 6.96843
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 34
-NextItemShellIndex: 96
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 35
+NextItemShellIndex: 144
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 95
+CommandSourceIndex: 66
+CommandTargetIndex: 143
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
@@ -3443,13 +4987,13 @@ IsToogleButon: 1
 Type: EditBox
 Name: Button_EditBox
 Model: EditBoxModel
-Index: 95
+Index: 143
 Layer: LayerBase
-Pos: 12.7033 -41.3693 29.3032
+Pos: -19.6534 -52.2726 7.81183
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 94
-ShellIndex: 34
+IndexObjectOwner: 142
+ShellIndex: 35
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3477,24 +5021,24 @@ SizePanel: 1.5 1
 Message: Block
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_96
+Name: EditBoxItem_ListEditBox_144
 Model: ButtonEditBoxModel
-Index: 96
+Index: 144
 Layer: LayerBase
-Pos: 13.5848 -42.38 28.9048
+Pos: -20.1308 -53.2744 6.95993
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 35
-NextItemShellIndex: 98
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 36
+NextItemShellIndex: 146
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 97
+CommandSourceIndex: 66
+CommandTargetIndex: 145
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_96
+CommandDescription: EditBoxItem_ListEditBox_144
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3513,15 +5057,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_97
+Name: Button_EditBox_145
 Model: EditBoxModel
-Index: 97
+Index: 145
 Layer: LayerBase
-Pos: 12.7091 -41.4254 29.3115
+Pos: -19.6442 -52.3282 7.80332
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 96
-ShellIndex: 35
+IndexObjectOwner: 144
+ShellIndex: 36
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3546,27 +5090,27 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: BlockBox2
+Message: ObjBlock_245
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_98
+Name: EditBoxItem_ListEditBox_146
 Model: ButtonEditBoxModel
-Index: 98
+Index: 146
 Layer: LayerBase
-Pos: 13.5906 -42.4361 28.913
+Pos: -20.1216 -53.33 6.95143
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 36
-NextItemShellIndex: 100
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 37
+NextItemShellIndex: 148
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 99
+CommandSourceIndex: 66
+CommandTargetIndex: 147
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_98
+CommandDescription: EditBoxItem_ListEditBox_146
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3585,15 +5129,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_99
+Name: Button_EditBox_147
 Model: EditBoxModel
-Index: 99
+Index: 147
 Layer: LayerBase
-Pos: 12.715 -41.4815 29.3198
+Pos: -19.635 -52.3838 7.79482
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 98
-ShellIndex: 36
+IndexObjectOwner: 146
+ShellIndex: 37
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3621,24 +5165,24 @@ SizePanel: 1.5 1
 Message: box
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_100
+Name: EditBoxItem_ListEditBox_148
 Model: ButtonEditBoxModel
-Index: 100
+Index: 148
 Layer: LayerBase
-Pos: 13.5964 -42.4922 28.9213
+Pos: -20.1124 -53.3856 6.94292
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 37
-NextItemShellIndex: 102
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 38
+NextItemShellIndex: 150
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 101
+CommandSourceIndex: 66
+CommandTargetIndex: 149
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_100
+CommandDescription: EditBoxItem_ListEditBox_148
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3657,15 +5201,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_101
+Name: Button_EditBox_149
 Model: EditBoxModel
-Index: 101
+Index: 149
 Layer: LayerBase
-Pos: 12.7208 -41.5376 29.328
+Pos: -19.6257 -52.4394 7.78632
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 100
-ShellIndex: 37
+IndexObjectOwner: 148
+ShellIndex: 38
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3690,27 +5234,27 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: 10
+Message: 245
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_102
+Name: EditBoxItem_ListEditBox_150
 Model: ButtonEditBoxModel
-Index: 102
+Index: 150
 Layer: LayerBase
-Pos: 13.6023 -42.5483 28.9296
+Pos: -20.1031 -53.4412 6.93442
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 38
-NextItemShellIndex: 104
+IndexObjectOwner: 141
+ShellIndex: 39
+NextItemShellIndex: 152
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 103
+CommandSourceIndex: 66
+CommandTargetIndex: 151
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_102
+CommandDescription: EditBoxItem_ListEditBox_150
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3729,15 +5273,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_103
+Name: Button_EditBox_151
 Model: EditBoxModel
-Index: 103
+Index: 151
 Layer: LayerBase
-Pos: 12.7266 -41.5937 29.3363
+Pos: -19.6165 -52.495 7.77781
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 102
-ShellIndex: 38
+IndexObjectOwner: 150
+ShellIndex: 39
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3765,24 +5309,24 @@ SizePanel: 1.5 1
 Message: LayerNone
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_104
+Name: EditBoxItem_ListEditBox_152
 Model: ButtonEditBoxModel
-Index: 104
+Index: 152
 Layer: LayerBase
-Pos: 13.6081 -42.6044 28.9378
+Pos: -20.0939 -53.4968 6.92592
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 39
-NextItemShellIndex: 106
+IndexObjectOwner: 141
+ShellIndex: 40
+NextItemShellIndex: 154
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 105
+CommandSourceIndex: 66
+CommandTargetIndex: 153
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_104
+CommandDescription: EditBoxItem_ListEditBox_152
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3801,15 +5345,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_105
+Name: Button_EditBox_153
 Model: EditBoxModel
-Index: 105
+Index: 153
 Layer: LayerBase
-Pos: 12.7325 -41.6498 29.3446
+Pos: -19.6073 -52.5506 7.76931
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 104
-ShellIndex: 39
+IndexObjectOwner: 152
+ShellIndex: 40
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3834,27 +5378,27 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: -10 -53.9908 -20
+Message: -10.1547 -54.0567 34.1488
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_106
+Name: EditBoxItem_ListEditBox_154
 Model: ButtonEditBoxModel
-Index: 106
+Index: 154
 Layer: LayerBase
-Pos: 13.6139 -42.6604 28.9461
+Pos: -20.0847 -53.5524 6.91741
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 40
-NextItemShellIndex: 108
+IndexObjectOwner: 141
+ShellIndex: 41
+NextItemShellIndex: 156
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 107
+CommandSourceIndex: 66
+CommandTargetIndex: 155
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_106
+CommandDescription: EditBoxItem_ListEditBox_154
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3873,15 +5417,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_107
+Name: Button_EditBox_155
 Model: EditBoxModel
-Index: 107
+Index: 155
 Layer: LayerBase
-Pos: 12.7383 -41.7059 29.3528
+Pos: -19.598 -52.6062 7.76081
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 106
-ShellIndex: 40
+IndexObjectOwner: 154
+ShellIndex: 41
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3906,27 +5450,27 @@ IsChecked: 0
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: -18.9931 -54.888 -22.6994
+Message: -27.6693 -53.1781 15.8493
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_108
+Name: EditBoxItem_ListEditBox_156
 Model: ButtonEditBoxModel
-Index: 108
+Index: 156
 Layer: LayerBase
-Pos: 13.6198 -42.7165 28.9544
+Pos: -20.0754 -53.608 6.90891
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 41
-NextItemShellIndex: 110
+IndexObjectOwner: 141
+ShellIndex: 42
+NextItemShellIndex: 158
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 109
+CommandSourceIndex: 66
+CommandTargetIndex: 157
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_108
+CommandDescription: EditBoxItem_ListEditBox_156
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -3945,15 +5489,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_109
+Name: Button_EditBox_157
 Model: EditBoxModel
-Index: 109
+Index: 157
 Layer: LayerBase
-Pos: 12.7441 -41.762 29.3611
+Pos: -19.5888 -52.6618 7.7523
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 108
-ShellIndex: 41
+IndexObjectOwner: 156
+ShellIndex: 42
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -3981,24 +5525,24 @@ SizePanel: 1.5 1
 Message: Stay
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_110
+Name: EditBoxItem_ListEditBox_158
 Model: ButtonEditBoxModel
-Index: 110
+Index: 158
 Layer: LayerBase
-Pos: 13.6256 -42.7726 28.9626
+Pos: -20.0662 -53.6636 6.9004
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 42
-NextItemShellIndex: 112
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 43
+NextItemShellIndex: 160
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 111
+CommandSourceIndex: 66
+CommandTargetIndex: 159
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_110
+CommandDescription: EditBoxItem_ListEditBox_158
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4017,15 +5561,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_111
+Name: Button_EditBox_159
 Model: EditBoxModel
-Index: 111
+Index: 159
 Layer: LayerBase
-Pos: 12.75 -41.8181 29.3694
+Pos: -19.5796 -52.7174 7.7438
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 110
-ShellIndex: 42
+IndexObjectOwner: 158
+ShellIndex: 43
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4053,24 +5597,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_112
+Name: EditBoxItem_ListEditBox_160
 Model: ButtonEditBoxModel
-Index: 112
+Index: 160
 Layer: LayerBase
-Pos: 13.6314 -42.8287 28.9709
+Pos: -20.057 -53.7192 6.8919
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 43
-NextItemShellIndex: 114
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 44
+NextItemShellIndex: 162
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 113
+CommandSourceIndex: 66
+CommandTargetIndex: 161
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_112
+CommandDescription: EditBoxItem_ListEditBox_160
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4089,15 +5633,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_113
+Name: Button_EditBox_161
 Model: EditBoxModel
-Index: 113
+Index: 161
 Layer: LayerBase
-Pos: 12.7558 -41.8741 29.3777
+Pos: -19.5704 -52.773 7.73529
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 112
-ShellIndex: 43
+IndexObjectOwner: 160
+ShellIndex: 44
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4125,24 +5669,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_114
+Name: EditBoxItem_ListEditBox_162
 Model: ButtonEditBoxModel
-Index: 114
+Index: 162
 Layer: LayerBase
-Pos: 13.6373 -42.8848 28.9792
+Pos: -20.0478 -53.7748 6.8834
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 44
-NextItemShellIndex: 116
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 45
+NextItemShellIndex: 164
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 115
+CommandSourceIndex: 66
+CommandTargetIndex: 163
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_114
+CommandDescription: EditBoxItem_ListEditBox_162
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4161,15 +5705,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_115
+Name: Button_EditBox_163
 Model: EditBoxModel
-Index: 115
+Index: 163
 Layer: LayerBase
-Pos: 12.7616 -41.9302 29.3859
+Pos: -19.5611 -52.8287 7.72679
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 114
-ShellIndex: 44
+IndexObjectOwner: 162
+ShellIndex: 45
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4197,24 +5741,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_116
+Name: EditBoxItem_ListEditBox_164
 Model: ButtonEditBoxModel
-Index: 116
+Index: 164
 Layer: LayerBase
-Pos: 13.6431 -42.9409 28.9875
+Pos: -20.0385 -53.8304 6.87489
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 45
-NextItemShellIndex: 118
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 46
+NextItemShellIndex: 166
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 117
-CommandValueI: 0
+CommandSourceIndex: 66
+CommandTargetIndex: 165
+CommandValueI: 1
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_116
+CommandDescription: EditBoxItem_ListEditBox_164
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4226,24 +5770,24 @@ IsAbsolutePosition: 0
 IsFocusable: 1
 IsTransformable: 1
 IsUsable: 1
-IsChecked: 0
+IsChecked: 1
 Specific:
 StartPos: 1.913 0.73 0.003
 SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_117
+Name: Button_EditBox_165
 Model: EditBoxModel
-Index: 117
+Index: 165
 Layer: LayerBase
-Pos: 12.7675 -41.9863 29.3942
+Pos: -19.5519 -52.8843 7.71829
 Target: 0 0 0
-Action: Stay
-IndexObjectOwner: 116
-ShellIndex: 45
+Action: Woking
+IndexObjectOwner: 164
+ShellIndex: 46
 NextItemShellIndex: -1
-Color: 0.117 0.351 0.95
+Color: 0 1 0
 Command: SelectItemValue
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -4262,31 +5806,31 @@ IsAbsolutePosition: 1
 IsFocusable: 0
 IsTransformable: 1
 IsUsable: 1
-IsChecked: 0
+IsChecked: 1
 Specific:
 StartPos: 0.03 0.01 0.003
 SizePanel: 1.5 1
-Message: 0 0 0
+Message: 0 1 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_118
+Name: EditBoxItem_ListEditBox_166
 Model: ButtonEditBoxModel
-Index: 118
+Index: 166
 Layer: LayerBase
-Pos: 13.6489 -42.997 28.9957
+Pos: -20.0293 -53.886 6.86639
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 46
-NextItemShellIndex: 120
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 47
+NextItemShellIndex: 168
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 119
+CommandSourceIndex: 66
+CommandTargetIndex: 167
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_118
+CommandDescription: EditBoxItem_ListEditBox_166
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4305,15 +5849,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_119
+Name: Button_EditBox_167
 Model: EditBoxModel
-Index: 119
+Index: 167
 Layer: LayerBase
-Pos: 12.7733 -42.0424 29.4025
+Pos: -19.5427 -52.9399 7.70978
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 118
-ShellIndex: 46
+IndexObjectOwner: 166
+ShellIndex: 47
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4341,24 +5885,24 @@ SizePanel: 1.5 1
 Message: None
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_120
+Name: EditBoxItem_ListEditBox_168
 Model: ButtonEditBoxModel
-Index: 120
+Index: 168
 Layer: LayerBase
-Pos: 13.6548 -43.0531 29.004
+Pos: -20.0201 -53.9417 6.85789
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 47
-NextItemShellIndex: 122
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 48
+NextItemShellIndex: 170
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 121
+CommandSourceIndex: 66
+CommandTargetIndex: 169
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_120
+CommandDescription: EditBoxItem_ListEditBox_168
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4377,15 +5921,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_121
+Name: Button_EditBox_169
 Model: EditBoxModel
-Index: 121
+Index: 169
 Layer: LayerBase
-Pos: 12.7791 -42.0985 29.4107
+Pos: -19.5334 -52.9955 7.70128
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 120
-ShellIndex: 47
+IndexObjectOwner: 168
+ShellIndex: 48
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4413,24 +5957,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_122
+Name: EditBoxItem_ListEditBox_170
 Model: ButtonEditBoxModel
-Index: 122
+Index: 170
 Layer: LayerBase
-Pos: 13.6606 -43.1092 29.0123
+Pos: -20.0108 -53.9972 6.84938
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 48
-NextItemShellIndex: 124
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 49
+NextItemShellIndex: 172
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 123
+CommandSourceIndex: 66
+CommandTargetIndex: 171
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_122
+CommandDescription: EditBoxItem_ListEditBox_170
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4449,15 +5993,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_123
+Name: Button_EditBox_171
 Model: EditBoxModel
-Index: 123
+Index: 171
 Layer: LayerBase
-Pos: 12.785 -42.1546 29.419
+Pos: -19.5242 -53.0511 7.69277
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 122
-ShellIndex: 48
+IndexObjectOwner: 170
+ShellIndex: 49
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4485,24 +6029,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_124
+Name: EditBoxItem_ListEditBox_172
 Model: ButtonEditBoxModel
-Index: 124
+Index: 172
 Layer: LayerBase
-Pos: 13.6664 -43.1653 29.0205
+Pos: -20.0016 -54.0529 6.84088
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 49
-NextItemShellIndex: 126
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 50
+NextItemShellIndex: 174
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 125
+CommandSourceIndex: 66
+CommandTargetIndex: 173
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_124
+CommandDescription: EditBoxItem_ListEditBox_172
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4521,15 +6065,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_125
+Name: Button_EditBox_173
 Model: EditBoxModel
-Index: 125
+Index: 173
 Layer: LayerBase
-Pos: 12.7908 -42.2107 29.4273
+Pos: -19.515 -53.1067 7.68427
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 124
-ShellIndex: 49
+IndexObjectOwner: 172
+ShellIndex: 50
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4557,24 +6101,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_126
+Name: EditBoxItem_ListEditBox_174
 Model: ButtonEditBoxModel
-Index: 126
+Index: 174
 Layer: LayerBase
-Pos: 13.6723 -43.2214 29.0288
+Pos: -19.9924 -54.1085 6.83237
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 50
-NextItemShellIndex: 128
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 51
+NextItemShellIndex: 176
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 127
+CommandSourceIndex: 66
+CommandTargetIndex: 175
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_126
+CommandDescription: EditBoxItem_ListEditBox_174
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4593,15 +6137,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_127
+Name: Button_EditBox_175
 Model: EditBoxModel
-Index: 127
+Index: 175
 Layer: LayerBase
-Pos: 12.7966 -42.2668 29.4356
+Pos: -19.5057 -53.1623 7.67577
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 126
-ShellIndex: 50
+IndexObjectOwner: 174
+ShellIndex: 51
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4629,24 +6173,24 @@ SizePanel: 1.5 1
 Message: -1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_128
+Name: EditBoxItem_ListEditBox_176
 Model: ButtonEditBoxModel
-Index: 128
+Index: 176
 Layer: LayerBase
-Pos: 13.6781 -43.2775 29.0371
+Pos: -19.9831 -54.1641 6.82387
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 51
-NextItemShellIndex: 130
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 52
+NextItemShellIndex: 178
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 129
+CommandSourceIndex: 66
+CommandTargetIndex: 177
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_128
+CommandDescription: EditBoxItem_ListEditBox_176
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4665,15 +6209,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_129
+Name: Button_EditBox_177
 Model: EditBoxModel
-Index: 129
+Index: 177
 Layer: LayerBase
-Pos: 12.8025 -42.3229 29.4438
+Pos: -19.4965 -53.2179 7.66726
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 128
-ShellIndex: 51
+IndexObjectOwner: 176
+ShellIndex: 52
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4701,24 +6245,24 @@ SizePanel: 1.5 1
 Message: 
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_130
+Name: EditBoxItem_ListEditBox_178
 Model: ButtonEditBoxModel
-Index: 130
+Index: 178
 Layer: LayerBase
-Pos: 13.6839 -43.3336 29.0454
+Pos: -19.9739 -54.2197 6.81537
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 52
-NextItemShellIndex: 132
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 53
+NextItemShellIndex: 180
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 131
+CommandSourceIndex: 66
+CommandTargetIndex: 179
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_130
+CommandDescription: EditBoxItem_ListEditBox_178
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4737,15 +6281,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_131
+Name: Button_EditBox_179
 Model: EditBoxModel
-Index: 131
+Index: 179
 Layer: LayerBase
-Pos: 12.8083 -42.379 29.4521
+Pos: -19.4873 -53.2735 7.65876
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 130
-ShellIndex: 52
+IndexObjectOwner: 178
+ShellIndex: 53
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4773,24 +6317,24 @@ SizePanel: 1.5 1
 Message: 
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_132
+Name: EditBoxItem_ListEditBox_180
 Model: ButtonEditBoxModel
-Index: 132
+Index: 180
 Layer: LayerBase
-Pos: 13.6898 -43.3897 29.0536
+Pos: -19.9647 -54.2753 6.80686
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 53
-NextItemShellIndex: 134
+IndexObjectOwner: 141
+ShellIndex: 54
+NextItemShellIndex: 182
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 133
+CommandSourceIndex: 66
+CommandTargetIndex: 181
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_132
+CommandDescription: EditBoxItem_ListEditBox_180
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4809,15 +6353,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_133
+Name: Button_EditBox_181
 Model: EditBoxModel
-Index: 133
+Index: 181
 Layer: LayerBase
-Pos: 12.8141 -42.4351 29.4604
+Pos: -19.4781 -53.3291 7.65026
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 132
-ShellIndex: 53
+IndexObjectOwner: 180
+ShellIndex: 54
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4845,24 +6389,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_134
+Name: EditBoxItem_ListEditBox_182
 Model: ButtonEditBoxModel
-Index: 134
+Index: 182
 Layer: LayerBase
-Pos: 13.6956 -43.4458 29.0619
+Pos: -19.9555 -54.3309 6.79836
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 54
-NextItemShellIndex: 136
+IndexObjectOwner: 141
+ShellIndex: 55
+NextItemShellIndex: 184
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 135
+CommandSourceIndex: 66
+CommandTargetIndex: 183
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_134
+CommandDescription: EditBoxItem_ListEditBox_182
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4881,15 +6425,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_135
+Name: Button_EditBox_183
 Model: EditBoxModel
-Index: 135
+Index: 183
 Layer: LayerBase
-Pos: 12.82 -42.4912 29.4686
+Pos: -19.4688 -53.3847 7.64175
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 134
-ShellIndex: 54
+IndexObjectOwner: 182
+ShellIndex: 55
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4917,24 +6461,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_136
+Name: EditBoxItem_ListEditBox_184
 Model: ButtonEditBoxModel
-Index: 136
+Index: 184
 Layer: LayerBase
-Pos: 13.7014 -43.5019 29.0702
+Pos: -19.9462 -54.3865 6.78986
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 55
-NextItemShellIndex: 138
+IndexObjectOwner: 141
+ShellIndex: 56
+NextItemShellIndex: 186
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 137
+CommandSourceIndex: 66
+CommandTargetIndex: 185
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_136
+CommandDescription: EditBoxItem_ListEditBox_184
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -4953,15 +6497,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_137
+Name: Button_EditBox_185
 Model: EditBoxModel
-Index: 137
+Index: 185
 Layer: LayerBase
-Pos: 12.8258 -42.5473 29.4769
+Pos: -19.4596 -53.4403 7.63325
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 136
-ShellIndex: 55
+IndexObjectOwner: 184
+ShellIndex: 56
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -4989,24 +6533,24 @@ SizePanel: 1.5 1
 Message: 0
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_138
+Name: EditBoxItem_ListEditBox_186
 Model: ButtonEditBoxModel
-Index: 138
+Index: 186
 Layer: LayerBase
-Pos: 13.7073 -43.558 29.0784
+Pos: -19.937 -54.4421 6.78135
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 56
-NextItemShellIndex: 140
+IndexObjectOwner: 141
+ShellIndex: 57
+NextItemShellIndex: 188
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 139
+CommandSourceIndex: 66
+CommandTargetIndex: 187
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_138
+CommandDescription: EditBoxItem_ListEditBox_186
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5025,15 +6569,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_139
+Name: Button_EditBox_187
 Model: EditBoxModel
-Index: 139
+Index: 187
 Layer: LayerBase
-Pos: 12.8316 -42.6034 29.4852
+Pos: -19.4504 -53.4959 7.62474
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 138
-ShellIndex: 56
+IndexObjectOwner: 186
+ShellIndex: 57
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5061,24 +6605,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_140
+Name: EditBoxItem_ListEditBox_188
 Model: ButtonEditBoxModel
-Index: 140
+Index: 188
 Layer: LayerBase
-Pos: 13.7131 -43.6141 29.0867
+Pos: -19.9278 -54.4977 6.77285
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 57
-NextItemShellIndex: 142
+IndexObjectOwner: 141
+ShellIndex: 58
+NextItemShellIndex: 190
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 141
+CommandSourceIndex: 66
+CommandTargetIndex: 189
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_140
+CommandDescription: EditBoxItem_ListEditBox_188
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5097,15 +6641,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_141
+Name: Button_EditBox_189
 Model: EditBoxModel
-Index: 141
+Index: 189
 Layer: LayerBase
-Pos: 12.8375 -42.6595 29.4935
+Pos: -19.4411 -53.5515 7.61624
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 140
-ShellIndex: 57
+IndexObjectOwner: 188
+ShellIndex: 58
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5133,24 +6677,24 @@ SizePanel: 1.5 1
 Message: 0
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_142
+Name: EditBoxItem_ListEditBox_190
 Model: ButtonEditBoxModel
-Index: 142
+Index: 190
 Layer: LayerBase
-Pos: 13.7189 -43.6701 29.095
+Pos: -19.9185 -54.5533 6.76434
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 58
-NextItemShellIndex: 144
+IndexObjectOwner: 141
+ShellIndex: 59
+NextItemShellIndex: 192
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 143
+CommandSourceIndex: 66
+CommandTargetIndex: 191
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_142
+CommandDescription: EditBoxItem_ListEditBox_190
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5169,15 +6713,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_143
+Name: Button_EditBox_191
 Model: EditBoxModel
-Index: 143
+Index: 191
 Layer: LayerBase
-Pos: 12.8433 -42.7156 29.5017
+Pos: -19.4319 -53.6071 7.60774
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 142
-ShellIndex: 58
+IndexObjectOwner: 190
+ShellIndex: 59
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5205,24 +6749,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_144
+Name: EditBoxItem_ListEditBox_192
 Model: ButtonEditBoxModel
-Index: 144
+Index: 192
 Layer: LayerBase
-Pos: 13.7247 -43.7262 29.1033
+Pos: -19.9093 -54.6089 6.75584
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 59
-NextItemShellIndex: 146
+IndexObjectOwner: 141
+ShellIndex: 60
+NextItemShellIndex: 194
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 145
+CommandSourceIndex: 66
+CommandTargetIndex: 193
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_144
+CommandDescription: EditBoxItem_ListEditBox_192
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5241,15 +6785,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_145
+Name: Button_EditBox_193
 Model: EditBoxModel
-Index: 145
+Index: 193
 Layer: LayerBase
-Pos: 12.8491 -42.7717 29.51
+Pos: -19.4227 -53.6627 7.59923
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 144
-ShellIndex: 59
+IndexObjectOwner: 192
+ShellIndex: 60
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5277,24 +6821,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_146
+Name: EditBoxItem_ListEditBox_194
 Model: ButtonEditBoxModel
-Index: 146
+Index: 194
 Layer: LayerBase
-Pos: 13.7306 -43.7823 29.1115
+Pos: -19.9001 -54.6645 6.74734
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 60
-NextItemShellIndex: 148
+IndexObjectOwner: 141
+ShellIndex: 61
+NextItemShellIndex: 196
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 147
+CommandSourceIndex: 66
+CommandTargetIndex: 195
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_146
+CommandDescription: EditBoxItem_ListEditBox_194
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5313,15 +6857,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_147
+Name: Button_EditBox_195
 Model: EditBoxModel
-Index: 147
+Index: 195
 Layer: LayerBase
-Pos: 12.855 -42.8277 29.5183
+Pos: -19.4134 -53.7183 7.59073
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 146
-ShellIndex: 60
+IndexObjectOwner: 194
+ShellIndex: 61
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5349,24 +6893,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_148
+Name: EditBoxItem_ListEditBox_196
 Model: ButtonEditBoxModel
-Index: 148
+Index: 196
 Layer: LayerBase
-Pos: 13.7364 -43.8384 29.1198
+Pos: -19.8908 -54.7201 6.73883
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 61
-NextItemShellIndex: 150
+IndexObjectOwner: 141
+ShellIndex: 62
+NextItemShellIndex: 198
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 149
+CommandSourceIndex: 66
+CommandTargetIndex: 197
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_148
+CommandDescription: EditBoxItem_ListEditBox_196
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5385,15 +6929,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_149
+Name: Button_EditBox_197
 Model: EditBoxModel
-Index: 149
+Index: 197
 Layer: LayerBase
-Pos: 12.8608 -42.8838 29.5265
+Pos: -19.4042 -53.7739 7.58223
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 148
-ShellIndex: 61
+IndexObjectOwner: 196
+ShellIndex: 62
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5421,24 +6965,24 @@ SizePanel: 1.5 1
 Message: 0
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_150
+Name: EditBoxItem_ListEditBox_198
 Model: ButtonEditBoxModel
-Index: 150
+Index: 198
 Layer: LayerBase
-Pos: 13.7422 -43.8945 29.1281
+Pos: -19.8816 -54.7757 6.73033
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 62
-NextItemShellIndex: 152
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 63
+NextItemShellIndex: 200
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 151
+CommandSourceIndex: 66
+CommandTargetIndex: 199
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_150
+CommandDescription: EditBoxItem_ListEditBox_198
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5457,15 +7001,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_151
+Name: Button_EditBox_199
 Model: EditBoxModel
-Index: 151
+Index: 199
 Layer: LayerBase
-Pos: 12.8666 -42.9399 29.5348
+Pos: -19.395 -53.8295 7.57372
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 150
-ShellIndex: 62
+IndexObjectOwner: 198
+ShellIndex: 63
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5493,24 +7037,24 @@ SizePanel: 1.5 1
 Message: 1
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_152
+Name: EditBoxItem_ListEditBox_200
 Model: ButtonEditBoxModel
-Index: 152
+Index: 200
 Layer: LayerBase
-Pos: 13.7481 -43.9506 29.1363
+Pos: -19.8724 -54.8313 6.72182
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 63
-NextItemShellIndex: 154
-Color: 1 1 1
+IndexObjectOwner: 141
+ShellIndex: 64
+NextItemShellIndex: 202
+Color: 1 1 0
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 153
+CommandSourceIndex: 66
+CommandTargetIndex: 201
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_152
+CommandDescription: EditBoxItem_ListEditBox_200
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5529,15 +7073,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_153
+Name: Button_EditBox_201
 Model: EditBoxModel
-Index: 153
+Index: 201
 Layer: LayerBase
-Pos: 12.8725 -42.996 29.5431
+Pos: -19.3858 -53.8851 7.56522
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 152
-ShellIndex: 63
+IndexObjectOwner: 200
+ShellIndex: 64
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5565,24 +7109,24 @@ SizePanel: 1.5 1
 Message: 0
 ------------------------------------------------------------------
 Type: Button
-Name: EditBoxItem_ListEditBox_154
+Name: EditBoxItem_ListEditBox_202
 Model: ButtonEditBoxModel
-Index: 154
+Index: 202
 Layer: LayerBase
-Pos: 13.7539 -44.0067 29.1446
+Pos: -19.8631 -54.8869 6.71332
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 93
-ShellIndex: 64
+IndexObjectOwner: 141
+ShellIndex: 65
 NextItemShellIndex: -1
 Color: 1 1 1
 Command: EditObjectCommand
-CommandSourceIndex: 65
-CommandTargetIndex: 155
+CommandSourceIndex: 66
+CommandTargetIndex: 203
 CommandValueI: 0
 CommandValueF: -1
 CommandValueS: @?
-CommandDescription: EditBoxItem_ListEditBox_154
+CommandDescription: EditBoxItem_ListEditBox_202
 IsVisible: 1
 IsGravity: 0
 IsGUI: 1
@@ -5601,15 +7145,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 1
 ------------------------------------------------------------------
 Type: EditBox
-Name: Button_EditBox_155
+Name: Button_EditBox_203
 Model: EditBoxModel
-Index: 155
+Index: 203
 Layer: LayerBase
-Pos: 12.8783 -43.0521 29.5513
+Pos: -19.3765 -53.9407 7.55671
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 154
-ShellIndex: 64
+IndexObjectOwner: 202
+ShellIndex: 65
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: SelectItemValue
@@ -5637,15 +7181,15 @@ SizePanel: 1.5 1
 Message: 0
 ------------------------------------------------------------------
 Type: ListBox
-Name: BaseFrame_ListBox_156
+Name: BaseFrame_ListBox_204
 Model: FrameModel
-Index: 156
+Index: 204
 Layer: LayerBase
-Pos: 12.0514 -42.5179 30.0152
+Pos: -18.8262 -53.4112 8.33198
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 23
-ShellIndex: 85
+IndexObjectOwner: 69
+ShellIndex: 86
 NextItemShellIndex: -1
 Color: 1 1 1
 Command: None
@@ -5674,17 +7218,17 @@ SizePanel: 0.7 1.086
 Type: Button
 Name: ButtonItem_ListBox
 Model: ButtonModel
-Index: 157
+Index: 205
 Layer: LayerBase
-Pos: 12.0548 -42.5207 30.0147
+Pos: -18.827 -53.4139 8.3286
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 66
-NextItemShellIndex: 159
+IndexObjectOwner: 204
+ShellIndex: 67
+NextItemShellIndex: 207
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 0
 CommandValueF: 1
@@ -5708,15 +7252,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_158
+Name: Button_TextBox_206
 Model: TextBoxModel
-Index: 158
+Index: 206
 Layer: LayerBase
-Pos: 11.1629 -41.5661 30.433
+Pos: -18.3269 -52.4677 9.1867
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 157
-ShellIndex: 66
+IndexObjectOwner: 205
+ShellIndex: 67
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -5744,19 +7288,19 @@ SizePanel: 1.5 1
 Message: Polygon
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_159
+Name: ButtonItem_ListBox_207
 Model: ButtonModel
-Index: 159
+Index: 207
 Layer: LayerBase
-Pos: 12.0607 -42.5768 30.023
+Pos: -18.8178 -53.4695 8.3201
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 67
-NextItemShellIndex: 161
+IndexObjectOwner: 204
+ShellIndex: 68
+NextItemShellIndex: 209
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 1
 CommandValueF: 1
@@ -5780,15 +7324,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_160
+Name: Button_TextBox_208
 Model: TextBoxModel
-Index: 160
+Index: 208
 Layer: LayerBase
-Pos: 11.1687 -41.6222 30.4413
+Pos: -18.3176 -52.5233 9.1782
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 159
-ShellIndex: 67
+IndexObjectOwner: 207
+ShellIndex: 68
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -5816,19 +7360,19 @@ SizePanel: 1.5 1
 Message: Solid
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_161
+Name: ButtonItem_ListBox_209
 Model: ButtonModel
-Index: 161
+Index: 209
 Layer: LayerBase
-Pos: 12.0665 -42.6329 30.0313
+Pos: -18.8086 -53.5251 8.31159
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 68
-NextItemShellIndex: 163
+IndexObjectOwner: 204
+ShellIndex: 69
+NextItemShellIndex: 211
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 2
 CommandValueF: 1
@@ -5852,15 +7396,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_162
+Name: Button_TextBox_210
 Model: TextBoxModel
-Index: 162
+Index: 210
 Layer: LayerBase
-Pos: 11.1745 -41.6783 30.4495
+Pos: -18.3084 -52.5789 9.16969
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 161
-ShellIndex: 68
+IndexObjectOwner: 209
+ShellIndex: 69
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -5888,19 +7432,19 @@ SizePanel: 1.5 1
 Message: Block
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_163
+Name: ButtonItem_ListBox_211
 Model: ButtonModel
-Index: 163
+Index: 211
 Layer: LayerBase
-Pos: 12.0723 -42.689 30.0395
+Pos: -18.7994 -53.5807 8.30309
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 69
-NextItemShellIndex: 165
+IndexObjectOwner: 204
+ShellIndex: 70
+NextItemShellIndex: 213
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 3
 CommandValueF: 1
@@ -5924,15 +7468,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_164
+Name: Button_TextBox_212
 Model: TextBoxModel
-Index: 164
+Index: 212
 Layer: LayerBase
-Pos: 11.1804 -41.7344 30.4578
+Pos: -18.2992 -52.6345 9.16119
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 163
-ShellIndex: 69
+IndexObjectOwner: 211
+ShellIndex: 70
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -5960,19 +7504,19 @@ SizePanel: 1.5 1
 Message: Tree
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_165
+Name: ButtonItem_ListBox_213
 Model: ButtonModel
-Index: 165
+Index: 213
 Layer: LayerBase
-Pos: 12.0782 -42.7451 30.0478
+Pos: -18.7901 -53.6363 8.29459
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 70
-NextItemShellIndex: 167
+IndexObjectOwner: 204
+ShellIndex: 71
+NextItemShellIndex: 215
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 4
 CommandValueF: 1
@@ -5996,15 +7540,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_166
+Name: Button_TextBox_214
 Model: TextBoxModel
-Index: 166
+Index: 214
 Layer: LayerBase
-Pos: 11.1862 -41.7905 30.4661
+Pos: -18.29 -52.6901 9.15269
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 165
-ShellIndex: 70
+IndexObjectOwner: 213
+ShellIndex: 71
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6032,19 +7576,19 @@ SizePanel: 1.5 1
 Message: Terra
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_167
+Name: ButtonItem_ListBox_215
 Model: ButtonModel
-Index: 167
+Index: 215
 Layer: LayerBase
-Pos: 12.084 -42.8012 30.0561
+Pos: -18.7809 -53.6919 8.28608
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 71
-NextItemShellIndex: 169
+IndexObjectOwner: 204
+ShellIndex: 72
+NextItemShellIndex: 217
 Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 5
 CommandValueF: 1
@@ -6068,15 +7612,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_168
+Name: Button_TextBox_216
 Model: TextBoxModel
-Index: 168
+Index: 216
 Layer: LayerBase
-Pos: 11.192 -41.8466 30.4743
+Pos: -18.2807 -52.7457 9.14418
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 167
-ShellIndex: 71
+IndexObjectOwner: 215
+ShellIndex: 72
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6104,19 +7648,19 @@ SizePanel: 1.5 1
 Message: NPC
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_169
+Name: ButtonItem_ListBox_217
 Model: ButtonModel
-Index: 169
+Index: 217
 Layer: LayerBase
-Pos: 12.0898 -42.8573 30.0643
+Pos: -18.7717 -53.7475 8.27758
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 72
-NextItemShellIndex: 171
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 73
+NextItemShellIndex: 219
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 6
 CommandValueF: 1
@@ -6140,15 +7684,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_170
+Name: Button_TextBox_218
 Model: TextBoxModel
-Index: 170
+Index: 218
 Layer: LayerBase
-Pos: 11.1979 -41.9027 30.4826
+Pos: -18.2715 -52.8013 9.13568
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 169
-ShellIndex: 72
+IndexObjectOwner: 217
+ShellIndex: 73
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6176,19 +7720,19 @@ SizePanel: 1.5 1
 Message: Bullet
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_171
+Name: ButtonItem_ListBox_219
 Model: ButtonModel
-Index: 171
+Index: 219
 Layer: LayerBase
-Pos: 12.0957 -42.9134 30.0726
+Pos: -18.7624 -53.8031 8.26907
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 73
-NextItemShellIndex: 173
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 74
+NextItemShellIndex: 221
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 7
 CommandValueF: 1
@@ -6212,15 +7756,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_172
+Name: Button_TextBox_220
 Model: TextBoxModel
-Index: 172
+Index: 220
 Layer: LayerBase
-Pos: 11.2037 -41.9588 30.4909
+Pos: -18.2623 -52.8569 9.12718
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 171
-ShellIndex: 73
+IndexObjectOwner: 219
+ShellIndex: 74
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6248,19 +7792,19 @@ SizePanel: 1.5 1
 Message: Hero
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_173
+Name: ButtonItem_ListBox_221
 Model: ButtonModel
-Index: 173
+Index: 221
 Layer: LayerBase
-Pos: 12.1015 -42.9695 30.0809
+Pos: -18.7532 -53.8587 8.26057
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 74
-NextItemShellIndex: 175
+IndexObjectOwner: 204
+ShellIndex: 75
+NextItemShellIndex: 223
 Color: 1 1 1
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 8
 CommandValueF: 1
@@ -6284,15 +7828,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_174
+Name: Button_TextBox_222
 Model: TextBoxModel
-Index: 174
+Index: 222
 Layer: LayerBase
-Pos: 11.2095 -42.0149 30.4992
+Pos: -18.253 -52.9125 9.11867
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 173
-ShellIndex: 74
+IndexObjectOwner: 221
+ShellIndex: 75
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6320,19 +7864,19 @@ SizePanel: 1.5 1
 Message: BulletHero
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_175
+Name: ButtonItem_ListBox_223
 Model: ButtonModel
-Index: 175
+Index: 223
 Layer: LayerBase
-Pos: 12.1073 -43.0256 30.0892
+Pos: -18.744 -53.9143 8.25207
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 75
-NextItemShellIndex: 177
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 76
+NextItemShellIndex: 225
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 9
 CommandValueF: 1
@@ -6356,15 +7900,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_176
+Name: Button_TextBox_224
 Model: TextBoxModel
-Index: 176
+Index: 224
 Layer: LayerBase
-Pos: 11.2154 -42.071 30.5074
+Pos: -18.2438 -52.9681 9.11017
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 175
-ShellIndex: 75
+IndexObjectOwner: 223
+ShellIndex: 76
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6392,19 +7936,19 @@ SizePanel: 1.5 1
 Message: CursorRay
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_177
+Name: ButtonItem_ListBox_225
 Model: ButtonModel
-Index: 177
+Index: 225
 Layer: LayerBase
-Pos: 12.1132 -43.0816 30.0974
+Pos: -18.7347 -53.9699 8.24356
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 76
-NextItemShellIndex: 179
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 77
+NextItemShellIndex: 227
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 10
 CommandValueF: 1
@@ -6428,15 +7972,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_178
+Name: Button_TextBox_226
 Model: TextBoxModel
-Index: 178
+Index: 226
 Layer: LayerBase
-Pos: 11.2212 -42.1271 30.5157
+Pos: -18.2346 -53.0237 9.10166
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 177
-ShellIndex: 76
+IndexObjectOwner: 225
+ShellIndex: 77
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6464,19 +8008,19 @@ SizePanel: 1.5 1
 Message: GUI
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_179
+Name: ButtonItem_ListBox_227
 Model: ButtonModel
-Index: 179
+Index: 227
 Layer: LayerBase
-Pos: 12.119 -43.1377 30.1057
+Pos: -18.7255 -54.0255 8.23506
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 77
-NextItemShellIndex: 181
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 78
+NextItemShellIndex: 229
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 11
 CommandValueF: 1
@@ -6500,15 +8044,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_180
+Name: Button_TextBox_228
 Model: TextBoxModel
-Index: 180
+Index: 228
 Layer: LayerBase
-Pos: 11.227 -42.1832 30.524
+Pos: -18.2253 -53.0793 9.09316
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 179
-ShellIndex: 77
+IndexObjectOwner: 227
+ShellIndex: 78
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6536,19 +8080,19 @@ SizePanel: 1.5 1
 Message: TextBox
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_181
+Name: ButtonItem_ListBox_229
 Model: ButtonModel
-Index: 181
+Index: 229
 Layer: LayerBase
-Pos: 12.1248 -43.1938 30.114
+Pos: -18.7163 -54.0811 8.22655
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 78
-NextItemShellIndex: 183
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 79
+NextItemShellIndex: 231
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 12
 CommandValueF: 1
@@ -6572,15 +8116,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_182
+Name: Button_TextBox_230
 Model: TextBoxModel
-Index: 182
+Index: 230
 Layer: LayerBase
-Pos: 11.2329 -42.2393 30.5322
+Pos: -18.2161 -53.1349 9.08466
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 181
-ShellIndex: 78
+IndexObjectOwner: 229
+ShellIndex: 79
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6608,19 +8152,19 @@ SizePanel: 1.5 1
 Message: CursorGUI
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_183
+Name: ButtonItem_ListBox_231
 Model: ButtonModel
-Index: 183
+Index: 231
 Layer: LayerBase
-Pos: 12.1307 -43.2499 30.1222
+Pos: -18.7071 -54.1367 8.21805
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 79
-NextItemShellIndex: 185
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 80
+NextItemShellIndex: 233
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 13
 CommandValueF: 1
@@ -6644,15 +8188,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_184
+Name: Button_TextBox_232
 Model: TextBoxModel
-Index: 184
+Index: 232
 Layer: LayerBase
-Pos: 11.2387 -42.2953 30.5405
+Pos: -18.2069 -53.1905 9.07615
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 183
-ShellIndex: 79
+IndexObjectOwner: 231
+ShellIndex: 80
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6680,19 +8224,19 @@ SizePanel: 1.5 1
 Message: Button
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_185
+Name: ButtonItem_ListBox_233
 Model: ButtonModel
-Index: 185
+Index: 233
 Layer: LayerBase
-Pos: 12.1365 -43.306 30.1305
+Pos: -18.6978 -54.1923 8.20955
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 80
-NextItemShellIndex: 187
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 81
+NextItemShellIndex: 235
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 14
 CommandValueF: 1
@@ -6716,15 +8260,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_186
+Name: Button_TextBox_234
 Model: TextBoxModel
-Index: 186
+Index: 234
 Layer: LayerBase
-Pos: 11.2445 -42.3514 30.5488
+Pos: -18.1976 -53.2461 9.06765
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 185
-ShellIndex: 80
+IndexObjectOwner: 233
+ShellIndex: 81
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6752,19 +8296,19 @@ SizePanel: 1.5 1
 Message: EditBox
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_187
+Name: ButtonItem_ListBox_235
 Model: ButtonModel
-Index: 187
+Index: 235
 Layer: LayerBase
-Pos: 12.1423 -43.3621 30.1388
+Pos: -18.6886 -54.2479 8.20104
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 81
-NextItemShellIndex: 189
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 82
+NextItemShellIndex: 237
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 15
 CommandValueF: 1
@@ -6788,15 +8332,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_188
+Name: Button_TextBox_236
 Model: TextBoxModel
-Index: 188
+Index: 236
 Layer: LayerBase
-Pos: 11.2503 -42.4075 30.5571
+Pos: -18.1884 -53.3018 9.05914
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 187
-ShellIndex: 81
+IndexObjectOwner: 235
+ShellIndex: 82
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6824,19 +8368,19 @@ SizePanel: 1.5 1
 Message: ListBox
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_189
+Name: ButtonItem_ListBox_237
 Model: ButtonModel
-Index: 189
+Index: 237
 Layer: LayerBase
-Pos: 12.1482 -43.4182 30.1471
+Pos: -18.6794 -54.3035 8.19254
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 82
-NextItemShellIndex: 191
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 83
+NextItemShellIndex: 239
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 16
 CommandValueF: 1
@@ -6860,15 +8404,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_190
+Name: Button_TextBox_238
 Model: TextBoxModel
-Index: 190
+Index: 238
 Layer: LayerBase
-Pos: 11.2562 -42.4636 30.5653
+Pos: -18.1792 -53.3573 9.05064
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 189
-ShellIndex: 82
+IndexObjectOwner: 237
+ShellIndex: 83
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6896,19 +8440,19 @@ SizePanel: 1.5 1
 Message: ListEditBox
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_191
+Name: ButtonItem_ListBox_239
 Model: ButtonModel
-Index: 191
+Index: 239
 Layer: LayerBase
-Pos: 12.154 -43.4743 30.1553
+Pos: -18.6701 -54.3591 8.18404
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 83
-NextItemShellIndex: 193
-Color: 1 1 1
+IndexObjectOwner: 204
+ShellIndex: 84
+NextItemShellIndex: 241
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 17
 CommandValueF: 1
@@ -6932,15 +8476,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_192
+Name: Button_TextBox_240
 Model: TextBoxModel
-Index: 192
+Index: 240
 Layer: LayerBase
-Pos: 11.262 -42.5197 30.5736
+Pos: -18.17 -53.413 9.04214
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 191
-ShellIndex: 83
+IndexObjectOwner: 239
+ShellIndex: 84
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -6968,19 +8512,19 @@ SizePanel: 1.5 1
 Message: ListTextBox
 ------------------------------------------------------------------
 Type: Button
-Name: ButtonItem_ListBox_193
+Name: ButtonItem_ListBox_241
 Model: ButtonModel
-Index: 193
+Index: 241
 Layer: LayerBase
-Pos: 12.1598 -43.5304 30.1636
+Pos: -18.6609 -54.4147 8.17553
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 156
-ShellIndex: 84
+IndexObjectOwner: 204
+ShellIndex: 85
 NextItemShellIndex: -1
-Color: 1 1 1
+Color: 1 1 0
 Command: SelectItemValue
-CommandSourceIndex: 85
+CommandSourceIndex: 86
 CommandTargetIndex: -1
 CommandValueI: 18
 CommandValueF: 1
@@ -7004,15 +8548,15 @@ SizePanel: 0.694 0.054
 IsToogleButon: 0
 ------------------------------------------------------------------
 Type: TextBox
-Name: Button_TextBox_194
+Name: Button_TextBox_242
 Model: TextBoxModel
-Index: 194
+Index: 242
 Layer: LayerBase
-Pos: 11.2678 -42.5758 30.5819
+Pos: -18.1607 -53.4686 9.03363
 Target: 0 0 0
 Action: Stay
-IndexObjectOwner: 193
-ShellIndex: 84
+IndexObjectOwner: 241
+ShellIndex: 85
 NextItemShellIndex: -1
 Color: 0.117 0.351 0.95
 Command: None
@@ -7039,18 +8583,18 @@ StartPos: 0.01 0.01 0.003
 SizePanel: 1.5 1
 Message: ObjectFieldsEdit
 ------------------------------------------------------------------
-Type: NPC
-Name: ObjNPC
-Model: mon
-Index: 195
+Type: Block
+Name: ObjBlock
+Model: box
+Index: 243
 Layer: LayerNone
-Pos: 35.2927 -53.037 -5.19353
-Target: 29.427 -53.0446 -19.1245
-Action: Moving
+Pos: 3.51572 -54.0002 7.55629
+Target: 10.2724 -52.5631 12.825
+Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 0 0 1
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -7061,28 +8605,65 @@ CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
 IsAbsolutePosition: 1
 IsFocusable: 0
-IsTransformable: 0
+IsTransformable: 1
 IsUsable: 0
 IsChecked: 0
+Specific:
+Vertex: 6.82164 1 -5.91976
+Vertex: 6.82164 -1 -5.91976
+Vertex: -1 -1 -1
+Vertex: 6.82164 1 -5.91976
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 8.40266 -1 5.59298
+Vertex: 8.40266 1 5.59298
+Vertex: -1 -1 1
+Vertex: 8.40266 1 5.59298
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 6.82164 -1 -5.91976
+Vertex: 6.82164 1 -5.91976
+Vertex: 8.40266 -1 5.59298
+Vertex: 6.82164 1 -5.91976
+Vertex: 8.40266 1 5.59298
+Vertex: 8.40266 -1 5.59298
+Vertex: 6.82164 1 -5.91976
+Vertex: -1 1 -1
+Vertex: 8.40266 1 5.59298
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 8.40266 1 5.59298
+Vertex: 6.82164 -1 -5.91976
+Vertex: 8.40266 -1 5.59298
+Vertex: -1 -1 1
+Vertex: 6.82164 -1 -5.91976
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
 ------------------------------------------------------------------
-Type: NPC
-Name: ObjNPC_196
-Model: mon
-Index: 196
+Type: Block
+Name: ObjBlock_244
+Model: box
+Index: 244
 Layer: LayerNone
-Pos: 21.1717 -53.0117 -24.0437
-Target: 27.4119 -53.006 -13.2652
-Action: Moving
+Pos: 26.9738 -54.0359 -1.22178
+Target: 0 0 0
+Action: Stay
 IndexObjectOwner: -1
 ShellIndex: -1
 NextItemShellIndex: -1
-Color: 0 0 0
+Color: 1 1 1
 Command: None
 CommandSourceIndex: -1
 CommandTargetIndex: -1
@@ -7093,14 +8674,120 @@ CommandDescription: @?
 IsVisible: 1
 IsGravity: 1
 IsGUI: 0
-IsTextureRepeat: 0
-IsNPC: 1
-IsHexagonModel: 0
-IsSquareModel: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
 IsAbsolutePosition: 1
 IsFocusable: 0
-IsTransformable: 0
+IsTransformable: 1
 IsUsable: 0
 IsChecked: 0
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -1 -1 -1
+Vertex: 1 1 -1
+Vertex: -1 -1 -1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 1
+Vertex: -1 1 -1
+Vertex: -1 -1 -1
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -1 1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -1 1 -1
+Vertex: 0.999999 1 1
+Vertex: -1 1 -1
+Vertex: -1 1 1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -1 -1 1
+Vertex: 1 -1 -1
+Vertex: -1 -1 1
+Vertex: -1 -1 -1
+------------------------------------------------------------------
+Type: Block
+Name: ObjBlock_245
+Model: box
+Index: 245
+Layer: LayerNone
+Pos: -10.1547 -54.0567 34.1488
+Target: -27.6693 -53.1781 15.8493
+Action: Stay
+IndexObjectOwner: -1
+ShellIndex: -1
+NextItemShellIndex: -1
+Color: 0 1 1
+Command: None
+CommandSourceIndex: -1
+CommandTargetIndex: -1
+CommandValueI: -1
+CommandValueF: -1
+CommandValueS: @?
+CommandDescription: @?
+IsVisible: 1
+IsGravity: 1
+IsGUI: 0
+IsTextureRepeat: 1
+IsNPC: 0
+IsHexagonModel: 1
+IsSquareModel: 1
+IsAbsolutePosition: 1
+IsFocusable: 0
+IsTransformable: 1
+IsUsable: 0
+IsChecked: 0
+Specific:
+Vertex: 1 1 -1
+Vertex: 1 -1 -1
+Vertex: -22.2803 -1 -22.5059
+Vertex: 1 1 -1
+Vertex: -22.2803 -1 -22.5059
+Vertex: -22.2803 1 -22.5059
+Vertex: -26.799 -1 7.35995
+Vertex: -26.799 1 7.35995
+Vertex: -22.2803 1 -22.5059
+Vertex: -26.799 -1 7.35995
+Vertex: -22.2803 1 -22.5059
+Vertex: -22.2803 -1 -22.5059
+Vertex: 1 -1 1
+Vertex: 0.999999 1 1
+Vertex: -26.799 -1 7.35995
+Vertex: 0.999999 1 1
+Vertex: -26.799 1 7.35995
+Vertex: -26.799 -1 7.35995
+Vertex: 1 -1 -1
+Vertex: 1 1 -1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: 0.999999 1 1
+Vertex: 1 -1 1
+Vertex: 1 1 -1
+Vertex: -22.2803 1 -22.5059
+Vertex: 0.999999 1 1
+Vertex: -22.2803 1 -22.5059
+Vertex: -26.799 1 7.35995
+Vertex: 0.999999 1 1
+Vertex: 1 -1 -1
+Vertex: 1 -1 1
+Vertex: -26.799 -1 7.35995
+Vertex: 1 -1 -1
+Vertex: -26.799 -1 7.35995
+Vertex: -22.2803 -1 -22.5059
 ------------------------------------------------------------------
 

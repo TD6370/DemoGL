@@ -123,8 +123,8 @@ public:
 	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
 
 	//------- CreateObject
-	void EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objGUI); // Event selected info create object
-	void EventStartCreateObject(shared_ptr<ObjectGUI> objGUI);
+	void EventSelectedInfoCreateObject(); // Event selected info create object
+	void EventStartCreateObject();
 	void EventEndCreateObject(shared_ptr<ObjectGUI> objGUI);
 
 	//------- Rename Object
@@ -148,6 +148,10 @@ public:
 	
 	//void EventFillFieldsEdit(shared_ptr<ObjectData> obj);
 	void EventFillFieldsEdit();
+
+	bool EventSaveFieldsEdit();
+
+	void SavePosCursorWorld();
 	
 	
 };

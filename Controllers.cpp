@@ -54,6 +54,8 @@ void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstructor* Scene)
 		Scene->Storage->Inputs->ActionMouse = state;
 		//Scene->Debug("MouseEvents Set MBT");
 	}
+
+	Scene->Storage->Inputs->IsReading = false;
 }
 
 void Controllers::MouseEvents(
@@ -268,6 +270,7 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	Scene->Storage->Inputs->Key = key;
 	Scene->Storage->Inputs->Action = action;
 	Scene->Storage->Inputs->Mode = mode;
+	Scene->Storage->Inputs->IsReading = false;
 }
 
 void Controllers::FillAlphabet() {

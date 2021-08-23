@@ -119,7 +119,7 @@ void ObjectCursorRay::Push() {
 
 	if (EngineData->Inputs->MBT == KeyPush) {
 		
-		EngineData->Inputs->MBT = -1;
+		//EngineData->Inputs->MBT = -1;
 		vec3 posCursorObject = GetVectorForwardFace(EngineData->ConfigMVP, StartLenght, EngineData->Oper);
 		//vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
 		vec3 posTarget = GetVectorForward(EngineData->ConfigMVP, EndLenght, EngineData->Oper);

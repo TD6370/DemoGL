@@ -290,7 +290,6 @@ bool SceneConstructor::SetObject(int indNN) {
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	
-
 	//TEST -----------------
 	/*glDisable(GL_BLEND);
 	if (ObjectCurrent->TypeObj == TypeObject::CursorGUI ||
@@ -362,9 +361,12 @@ void SceneConstructor::ObjectUpdate(int i) {
 	//Hard mode
 	if (isPause) //Lite mode
 		return;
-
+	
 	if (isDraw || isBase) 
 	{
+		//-- start reading inputs
+		Storage->Inputs->IsReading = true;
+
 		PreparationDataFromShader();
 		
 		if(!isPause)
@@ -400,7 +402,6 @@ void SceneConstructor::Update()
 			DrawGraph();
 		if (!IsDraw || isBase)
 			WorkingAspects();
-			//WorkingRooms();
 		return;
 	}
 
@@ -412,14 +413,11 @@ void SceneConstructor::Update()
 		//---- TEST DEBUG
 		assert(Storage->SceneObjectsLastIndex < 1000);
 
-		//if (IsDraw || isBase || isShowGUI)
-			ObjectUpdate(i);
+		ObjectUpdate(i);
 		//===========================================
 
-		//if (!IsDraw || isBase)
-			if (!IsDraw || isBase || (IsDraw && !isShowGUI))
+		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
 			WorkingAspects();
-			//WorkingRooms();
 
 		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
 			continue;
@@ -435,14 +433,9 @@ void SceneConstructor::Update()
 			DrawGraph();
 	}
 	
-	
-	bool checkClearInputs;
-	if (isShowGUI)
-		checkClearInputs = !IsDraw;
-	else
-		checkClearInputs = IsDraw;
-
-	if (checkClearInputs || isBase) {
+	if (Storage->Inputs->IsReading || isBase)
+	{
+		Storage->Inputs->IsReading = false;
 		Storage->Inputs->MBT = -1;
 		Storage->Inputs->Key = -1;
 		Storage->Inputs->Action = -1;
@@ -542,17 +535,14 @@ void SceneConstructor::FactoryObjectsWork() {
 
 bool SceneConstructor::ReadCommand(TypeCommand commandType)
 {
+	if(!CurrentSceneCommand.Enable || CurrentSceneCommand.CommandType != commandType)
+		return false;
+
 	CommandPack* command = &CurrentSceneCommand;
-	if (command->Enable && command->CommandType == commandType) {
-
-		dispatcherCommands->DebugReadCommand(command, "ReadCommand");
-
-		command->Enable = false;
-		command->CommandType = None;
-		return true;
-	}
-
-	return false;
+	dispatcherCommands->DebugReadCommand(command, "ReadCommand");
+	command->Enable = false;
+	command->CommandType = None;
+	return true;
 }
 
 bool SceneConstructor::IsCurrentObjectBackgroundFrameGUI() {
@@ -627,6 +617,16 @@ void SceneConstructor::CreateObjectListFieldValue(shared_ptr<ObjectData> obj) {
 	m_serializer->Save(obj, false, true);
 }
  
+void SceneConstructor::SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, string steamFields) {
+		
+	ObjectFileds objFields;
+	vector<ObjectFiledsSpecific> objectDataSpecific;
+	std::stringstream ifstramFields(steamFields);
+
+	m_serializer->CreateStructFileds(ifstramFields, objFields);
+	Storage->SaveAndInitObject(&objFields, objectDataSpecific, obj);
+}
+
 string SceneConstructor::GetObjectValueByFieldName(string typeFieldName) {
 
 	string value = m_serializer->GetFieldValueByName(typeFieldName);

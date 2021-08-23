@@ -107,6 +107,9 @@ struct ControllerInput {
 	int ActionMouse = -1;
 	int Mode = -1;
 	GLfloat ParamCase = 0;
+	bool IsReading = false;
+
+	int Default_KeyUse = 69; // GLFW_KEY_E;
 };
 
 struct Lighting {
@@ -131,7 +134,7 @@ enum TypeObject { Polygon, Solid, Block, Tree, Terra, NPC, Bullet, Hero, BulletH
 enum ColliseState  { COLLISE_UP, COLLISE_DOWN, COLLISE_NORMAL, UNKNOWN};
 
 enum TypeCommand { None, CreateObject, ObjectCreated, DeleteObject, SelectPosForObject, SelectedPosForObject, EditGUI_OnOff, EditObjectCommand,
-	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading, SelectItemValue
+	CheckStateObjectCommand, StopWorking, KeyInputCommand, RenameObject, ObjectReading, SelectItemValue, SaveObjectFieldsEdit
 };
 
 enum TypeLayer {
@@ -153,6 +156,7 @@ struct CommandPack {
 	int ValueI = -1;
 	float ValueF = -1;
 	vec4 ValueV4 = vec4(-1);
+	// -- TODO: delete Options 
 	map <string, int> Options = map <string, int>{};
 	bool IsLongCommand = false;
 };

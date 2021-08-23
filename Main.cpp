@@ -169,10 +169,10 @@ int main()
 	LoopGame loopGame;
 
 	Scene->DeltaTime = 3.;
-	Scene->VersionUpdate == 1;
+	Scene->VersionUpdate = 1;
 	Scene->IsSpeedDeltaTime = true;
 	float lastParamCase = Scene->Storage->Inputs->ParamCase;
-	bool isDebugFPS = true;
+	bool isDebugFPS = false;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -227,6 +227,17 @@ int main()
 			loopGame.Lag += loopGame.DeltaTime;
 			loopGame.LastTime = loopGame.NowTime;
 			Scene->DeltaTime = loopGame.DeltaTime;
+
+			//--- DEBUG freeze
+			if (loopGame.Lag > 50) {
+				loopGame.Lag = 0;
+				std::cout << "GAME LOOP FREEZE LAG: " << loopGame.Lag << "\n";
+			}
+			if (loopGame.DeltaTime > 50) {
+				loopGame.DeltaTime = 0;
+				std::cout << "GAME LOOP FREEZE DeltaTime: " << loopGame.DeltaTime << "\n";
+			}
+			//---------------
 
 			// ******
 			//update input events

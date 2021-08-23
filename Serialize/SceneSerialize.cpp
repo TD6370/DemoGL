@@ -65,6 +65,7 @@ SceneSerialize::SceneSerialize() {
 	AddNextType(TypeCommand::RenameObject, "RenameObject");
 	AddNextType(TypeCommand::ObjectReading, "ObjectReading");
 	AddNextType(TypeCommand::SelectItemValue, "SelectItemValue");
+	AddNextType(TypeCommand::SaveObjectFieldsEdit, "SaveObjectFieldsEdit");
 	
 	AddNextType(TypeLayer::LayerBackground, "LayerBackground");
 	AddNextType(TypeLayer::LayerBack, "LayerBack");
@@ -249,13 +250,105 @@ void SceneSerialize::Save() {
 	}
 }
 
+void SceneSerialize::CreateStructFileds(std::stringstream& in, ObjectFileds& filedsObj) {
 
+	string lineStr;
+
+	if (in >> lineStr && lineStr == filedsObj.Type) {
+		in >> filedsObj.Type;
+	}
+	else {
+		if (lineStr.size() == 0) {
+			return;
+		}
+	}
+	if (in >> lineStr && lineStr == filedsObj.Name)
+		in >> filedsObj.Name;
+	if (in >> lineStr && lineStr == filedsObj.Model)
+		in >> filedsObj.Model;
+	if (in >> lineStr && lineStr == filedsObj.Index)
+		in >> filedsObj.Index;
+	if (in >> lineStr && lineStr == filedsObj.Layer)
+		in >> filedsObj.Layer;
+
+	if (in >> lineStr && lineStr == filedsObj.Postranslate) {
+		in >> filedsObj.PostranslateValue.x;
+		in >> filedsObj.PostranslateValue.y;
+		in >> filedsObj.PostranslateValue.z;
+	}
+
+	if (in >> lineStr && lineStr == filedsObj.Target) {
+		in >> filedsObj.TargetValue.x;
+		in >> filedsObj.TargetValue.y;
+		in >> filedsObj.TargetValue.z;
+	}
+
+	if (in >> lineStr && lineStr == filedsObj.ActionObjectCurrent)
+		in >> filedsObj.ActionObjectCurrent;
+
+	if (in >> lineStr && lineStr == filedsObj.IndexObjectOwner)
+		in >> filedsObj.IndexObjectOwner;
+	if (in >> lineStr && lineStr == filedsObj.ShellIndex)
+		in >> filedsObj.ShellIndex;
+	if (in >> lineStr && lineStr == filedsObj.NextItemShellIndex)
+		in >> filedsObj.NextItemShellIndex;
+
+	if (in >> lineStr && lineStr == filedsObj.Color) {
+		in >> filedsObj.ColorValue.x;
+		in >> filedsObj.ColorValue.y;
+		in >> filedsObj.ColorValue.z;
+	}
+
+	if (in >> lineStr && lineStr == filedsObj.Command)
+		in >> filedsObj.Command;
+
+	if (in >> lineStr && lineStr == filedsObj.CommandSourceIndex)
+		in >> filedsObj.CommandSourceIndex;
+	if (in >> lineStr && lineStr == filedsObj.CommandTargetIndex)
+		in >> filedsObj.CommandTargetIndex;
+	if (in >> lineStr && lineStr == filedsObj.CommandValueI)
+		in >> filedsObj.CommandValueI;
+	if (in >> lineStr && lineStr == filedsObj.CommandValueF)
+		in >> filedsObj.CommandValueF;
+	if (in >> lineStr && lineStr == filedsObj.CommandValueS)
+		SetStrValue(in, filedsObj.CommandValueS);
+	//in >> filedsObj.CommandValueS;
+
+	if (in >> lineStr && lineStr == filedsObj.CommandDescription)
+		SetStrValue(in, filedsObj.CommandDescription);
+	if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
+		in >> filedsObj.Options.IsVisible;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsGravity)
+		in >> filedsObj.Options.IsGravity;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsGUI)
+		in >> filedsObj.Options.IsGUI;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsTextureRepeat)
+		in >> filedsObj.Options.IsTextureRepeat;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsNPC)
+		in >> filedsObj.Options.IsNPC;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsHexagonModel)
+		in >> filedsObj.Options.IsHexagonModel;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsSquareModel)
+		in >> filedsObj.Options.IsSquareModel;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsAbsolutePosition)
+		in >> filedsObj.Options.IsAbsolutePosition;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsFocusable)
+		in >> filedsObj.Options.IsFocusable;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsTransformable)
+		in >> filedsObj.Options.IsTransformable;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsUsable)
+		in >> filedsObj.Options.IsUsable;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsChecked)
+		in >> filedsObj.Options.IsChecked;
+}
 
 void SceneSerialize::Load(bool isOnlyObjects) {
 
 	World WorldSetting;
 	string filePath;
+
 	std::ifstream in;
+
 	//ObjectFileds* filedsObj = new ObjectFileds;
 	string stringSeparator;
 	string specificFields;
@@ -287,7 +380,10 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 		ObjectFileds filedsObjResult;
 		ObjectFiledsSpecific fieldsSpecific = ObjectFiledsSpecific();
 
-		while (!in.eof()) {
+		std::stringstream inStr;
+		inStr << in.rdbuf();
+
+		while (!inStr.eof()) {
 
 			if (!isSpecificFields)
 			{
@@ -298,99 +394,11 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 					specificFiels.clear();
 					isNext = false;
 				}
-				if (in >> lineStr && lineStr == filedsObj.Type) {
-					in >> filedsObj.Type;
-				}
-				else {
-					if (lineStr.size() == 0) {
-						break;
-					}
-				}
-				if (in >> lineStr && lineStr == filedsObj.Name)
-					in >> filedsObj.Name;
-				if (in >> lineStr && lineStr == filedsObj.Model)
-					in >> filedsObj.Model;
-				if (in >> lineStr && lineStr == filedsObj.Index)
-					in >> filedsObj.Index;
-				if (in >> lineStr && lineStr == filedsObj.Layer)
-					in >> filedsObj.Layer;
 
-				if (in >> lineStr && lineStr == filedsObj.Postranslate) {
-					in >> filedsObj.PostranslateValue.x;
-					in >> filedsObj.PostranslateValue.y;
-					in >> filedsObj.PostranslateValue.z;
-				}
-
-				if (in >> lineStr && lineStr == filedsObj.Target) {
-					in >> filedsObj.TargetValue.x;
-					in >> filedsObj.TargetValue.y;
-					in >> filedsObj.TargetValue.z;
-				}
-
-				if (in >> lineStr && lineStr == filedsObj.ActionObjectCurrent)
-					in >> filedsObj.ActionObjectCurrent;
-
-				if (in >> lineStr && lineStr == filedsObj.IndexObjectOwner)
-					in >> filedsObj.IndexObjectOwner;
-				if (in >> lineStr && lineStr == filedsObj.ShellIndex)
-					in >> filedsObj.ShellIndex;
-				if (in >> lineStr && lineStr == filedsObj.NextItemShellIndex)
-					in >> filedsObj.NextItemShellIndex;
-
-				if (in >> lineStr && lineStr == filedsObj.Color) {
-					in >> filedsObj.ColorValue.x;
-					in >> filedsObj.ColorValue.y;
-					in >> filedsObj.ColorValue.z;
-				}
-
-				if (in >> lineStr && lineStr == filedsObj.Command)
-					in >> filedsObj.Command;
-
-				if (in >> lineStr && lineStr == filedsObj.CommandSourceIndex)
-					in >> filedsObj.CommandSourceIndex;
-				if (in >> lineStr && lineStr == filedsObj.CommandTargetIndex)
-					in >> filedsObj.CommandTargetIndex;
-				if (in >> lineStr && lineStr == filedsObj.CommandValueI)
-					in >> filedsObj.CommandValueI;
-				if (in >> lineStr && lineStr == filedsObj.CommandValueF)
-					in >> filedsObj.CommandValueF;
-				if (in >> lineStr && lineStr == filedsObj.CommandValueS)
-					SetStrValue(in, filedsObj.CommandValueS);
-					//in >> filedsObj.CommandValueS;
-
-				if (in >> lineStr && lineStr == filedsObj.CommandDescription)
-					SetStrValue(in, filedsObj.CommandDescription);
-				if (in >> lineStr && lineStr == filedsObj.Options.IsVisible)
-					in >> filedsObj.Options.IsVisible;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsGravity)
-					in >> filedsObj.Options.IsGravity;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsGUI)
-					in >> filedsObj.Options.IsGUI;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsTextureRepeat)
-					in >> filedsObj.Options.IsTextureRepeat;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsNPC)
-					in >> filedsObj.Options.IsNPC;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsHexagonModel)
-					in >> filedsObj.Options.IsHexagonModel;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsSquareModel)
-					in >> filedsObj.Options.IsSquareModel;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsAbsolutePosition)
-					in >> filedsObj.Options.IsAbsolutePosition;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsFocusable)
-					in >> filedsObj.Options.IsFocusable;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsTransformable)
-					in >> filedsObj.Options.IsTransformable;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsUsable)
-					in >> filedsObj.Options.IsUsable;
-				if (in >> lineStr && lineStr == filedsObj.Options.IsChecked)
-					in >> filedsObj.Options.IsChecked;
-
-		/*		if (in >> lineStr && lineStr == filedsObj.Options.)
-					in >> filedsObj.Options.;*/
-							
+				CreateStructFileds(inStr, filedsObj);
 			}
 
-			if (in >> lineStr && lineStr == m_stringSeparator) {
+			if (inStr >> lineStr && lineStr == m_stringSeparator) {
 
 				filedsObjResult = filedsObj;
 				filedsObj = ObjectFileds();
@@ -404,15 +412,14 @@ void SceneSerialize::Load(bool isOnlyObjects) {
 			else if (isSpecificFields) 
 			{
 				fieldsSpecific.FieldName = lineStr;
-				std::getline(in, fieldsSpecific.Value);
+				std::getline(inStr, fieldsSpecific.Value);
 				if (fieldsSpecific.Value[0] == char(' ')) //remove split
 					fieldsSpecific.Value.erase(0, 1);
 				specificFiels.push_back(fieldsSpecific);
 			}
 		}
 	}
-
-	
+		
 	in.close();
 
 	if (isOnlyObjects)

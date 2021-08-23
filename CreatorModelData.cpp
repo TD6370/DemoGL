@@ -51,6 +51,8 @@
 
 using std::shared_ptr;
 
+static SceneSerialize m_serializer;
+
 CreatorModelData::CreatorModelData() {
 	
 	Cam = new Camera();
@@ -61,6 +63,8 @@ CreatorModelData::CreatorModelData() {
 	ShaderPrograms = map<string, GLuint>();
 	LayerScene = new SceneLayer(this);
 	Clusters = new WorldCluster();
+
+	m_serializer = SceneSerialize();
 	
 	m_defaultModelNames = map<int, string>();
 	m_defaultModelNames.insert({ Solid , m_namesModels.Terra });
@@ -563,7 +567,79 @@ void CreatorModelData::SaveObject(ObjectData* objData)
 }
 
 
-//#SaveFieldSpecific
+void CreatorModelData::SaveAndInitObject(ObjectFileds* objFields, vector<ObjectFiledsSpecific> objectDataSpecific, shared_ptr<ObjectData> newObj) {
+
+	bool isNewObject = newObj == nullptr;
+
+	vector<ObjectFiledsSpecific> specificFields;
+	TypeObject typeObj = m_serializer.GetTypeObject(objFields->Type);
+	TypeLayer layer = m_serializer.GetTypeLayer(objFields->Layer);
+
+	int indexObj = std::stoi(objFields->Index);
+
+	if (isNewObject) {
+		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
+		newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue, vec3(0), indexObj, layer, true);
+	}
+
+	if (newObj == nullptr)
+		return;
+
+	newObj->Target = objFields->TargetValue;
+	newObj->Layer = layer;
+
+	ActionObject typeAction = m_serializer.GetTypeAction(objFields->ActionObjectCurrent);
+	newObj->ActionObjectCurrent = typeAction;
+
+	newObj->IndexObjectOwner = stoi(objFields->IndexObjectOwner);
+	newObj->ShellIndex = stoi(objFields->ShellIndex);
+	newObj->NextItemShellIndex = stoi(objFields->NextItemShellIndex);
+
+	newObj->MaterialData.Color = objFields->ColorValue;
+
+	TypeCommand typeCommand = m_serializer.GetTypeCommands(objFields->Command);
+	int sourceIndex = stoi(objFields->CommandSourceIndex);
+	int targetIndex = stoi(objFields->CommandTargetIndex);
+	int valueI = stoi(objFields->CommandValueI);
+	float valueF = stof(objFields->CommandValueF);
+	vec4 valueV4 = vec4();
+	string valueS = m_serializer.GetStrValue(objFields->CommandValueS);
+	string description = m_serializer.GetStrValue(objFields->CommandDescription);
+
+	if (typeCommand != TypeCommand::None) {
+		//SetCommand(newObj, typeCommand);
+		SetCommand(newObj, typeCommand,
+			sourceIndex, targetIndex,
+			description, valueI,
+			valueI, valueF, valueV4, valueS,
+			description);
+	}
+
+	OptionsObject opt = objFields->Options;
+	newObj->IsVisible = StrToBool(opt.IsVisible);
+	newObj->IsGravity = StrToBool(opt.IsGravity);
+	newObj->IsGUI = StrToBool(opt.IsGUI);
+	newObj->IsTextureRepeat = StrToBool(opt.IsTextureRepeat);
+	newObj->IsNPC = StrToBool(opt.IsNPC);
+	newObj->IsHexagonModel = StrToBool(opt.IsHexagonModel);
+	newObj->IsSquareModel = StrToBool(opt.IsSquareModel);
+	newObj->IsAbsolutePosition = StrToBool(opt.IsAbsolutePosition);
+	newObj->IsFocusable = StrToBool(opt.IsFocusable);
+	newObj->IsTransformable = StrToBool(opt.IsTransformable);
+	newObj->IsUsable = StrToBool(opt.IsUsable);
+	newObj->IsChecked = StrToBool(opt.IsChecked);
+
+	//#SaveFieldSpecific
+	if (isNewObject) {
+		specificFields = objectDataSpecific;
+		newObj->SetSpecificFiels(specificFields);
+	}
+
+	//--- After init
+	if(isNewObject)
+		newObj->UpdateState();
+}
+
 void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData, vector<vector<ObjectFiledsSpecific>> objectsDataSpecific) {
 
 	if (objectsData.size() == 0)
@@ -577,67 +653,8 @@ void CreatorModelData::LoadObjects(vector<shared_ptr<ObjectFileds>> objectsData,
 
 	for (auto objFields : objectsData) {
 
-		shared_ptr<ModelData> model = GetModelPrt(objFields->Model);
-		TypeObject typeObj = serializer->GetTypeObject(objFields->Type);
-		TypeLayer layer = serializer->GetTypeLayer(objFields->Layer);
-
-		int indexObj = std::stoi(objFields->Index);
-
-		auto newObj = AddObject(objFields->Name, model, typeObj, objFields->PostranslateValue,vec3(0), indexObj, layer, true);
-	
-		if (newObj == NULL)
-			continue;
-
-		newObj->Target = objFields->TargetValue;
-		newObj->Layer = layer;
-
-		ActionObject typeAction = serializer->GetTypeAction(objFields->ActionObjectCurrent);
-		newObj->ActionObjectCurrent = typeAction;
-
-		newObj->IndexObjectOwner = stoi(objFields->IndexObjectOwner);
-		newObj->ShellIndex = stoi(objFields->ShellIndex);
-		newObj->NextItemShellIndex = stoi(objFields->NextItemShellIndex);
-
-		newObj->MaterialData.Color = objFields->ColorValue;
-
-		TypeCommand typeCommand = serializer->GetTypeCommands(objFields->Command);
-		int sourceIndex = stoi(objFields->CommandSourceIndex);
-		int targetIndex = stoi(objFields->CommandTargetIndex);
-		int valueI = stoi(objFields->CommandValueI);
-		float valueF = stof(objFields->CommandValueF);
-		vec4 valueV4 = vec4();
-		string valueS = serializer->GetStrValue(objFields->CommandValueS);
-		string description = serializer->GetStrValue(objFields->CommandDescription);
-		
-		if (typeCommand != TypeCommand::None) {
-			//SetCommand(newObj, typeCommand);
-			SetCommand(newObj, typeCommand, 
-				sourceIndex, targetIndex, 
-				description, valueI,  
-				valueI, valueF, valueV4, valueS, 
-				description);
-		}
-
-		OptionsObject opt = objFields->Options;
-		newObj->IsVisible = StrToBool(opt.IsVisible);
-		newObj->IsGravity = StrToBool(opt.IsGravity);
-		newObj->IsGUI = StrToBool(opt.IsGUI);
-		newObj->IsTextureRepeat = StrToBool(opt.IsTextureRepeat);
-		newObj->IsNPC = StrToBool(opt.IsNPC);
-		newObj->IsHexagonModel = StrToBool(opt.IsHexagonModel);
-		newObj->IsSquareModel = StrToBool(opt.IsSquareModel);
-		newObj->IsAbsolutePosition = StrToBool(opt.IsAbsolutePosition);
-		newObj->IsFocusable = StrToBool(opt.IsFocusable);
-		newObj->IsTransformable = StrToBool(opt.IsTransformable);
-		newObj->IsUsable = StrToBool(opt.IsUsable);
-		newObj->IsChecked = StrToBool(opt.IsChecked);
-
-		//#SaveFieldSpecific
 		specificFields = objectsDataSpecific[i];
-		newObj->SetSpecificFiels(specificFields);
-
-		//--- After init
-		newObj->UpdateState();
+		SaveAndInitObject(objFields.get(), specificFields);
 		i++;
 	}
 
@@ -876,6 +893,15 @@ void CreatorModelData::LoadObjectsGUI() {
 	objCreateButton->IsToogleButon = false;
 	SetCommand(objCreateButton, SelectPosForObject);
 	ControlConstruct(objCreateButton, caption, Button);
+
+	// ---- Object Button Save object fields (Edit)
+	objName = "ButtonSaveObjectFieldsEdit";
+	caption = "save";
+	childModel = "ButtonModel";
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.47, .05, StartPosGUI_Z), vec2(0.3, 0.1), Button, vec3(1));
+	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
+	SetCommand(objCreateButton, SaveObjectFieldsEdit);
+	ControlConstruct(objCreateButton, caption, Button);
 	
 	/*
 	// ---- Object text box GUI
@@ -930,6 +956,9 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 void CreatorModelData::LoadObjects() {
 
+	bool isTestFreeze = false;
+	//bool isTestFreeze = true;
+
 	SceneSerialize* serializer = new SceneSerialize();
 	serializer->Load();
 	LoadObjects(serializer->FiledsObjects, serializer->FiledsObjectsSpecific);
@@ -946,7 +975,11 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-    for (int i = 0; i < 4; i++)
+	int maxNPC = 50;
+	if (isTestFreeze)
+		maxNPC = 50; // 200;
+
+    for (int i = 0; i < maxNPC; i++)
 	{
 		AddObject("Mon", modelMon, NPC);
 	}
@@ -965,16 +998,18 @@ void CreatorModelData::LoadObjects() {
 		AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
 
 		//TEST gen Box
-		/*for (int i = 0; i < 200; i++)
-		{
-			int step = 10;
-			int z = floor(i / step) * step;
-			int x = (i * step) - (z * step);
+		if (isTestFreeze) {
+			for (int i = 0; i < 200; i++)
+			{
+				int step = 10;
+				int z = floor(i / step) * step;
+				int x = (i * step) - (z * step);
 
-			if(glm::mod((float)i, (float)step)<0.00001)
-				AddObject("BoxN", modelBox, Solid, vec3(30 - x, -45, 50 + z));
-			AddObject("BoxN", modelBox, Block, vec3(0 - x, -5, 50 + z));
-		}*/
+				if (glm::mod((float)i, (float)step) < 0.00001)
+					AddObject("BoxN", modelBox, Solid, vec3(30 - x, -45, 50 + z));
+				AddObject("BoxN", modelBox, Block, vec3(0 - x, -5, 50 + z));
+			}
+		}
 
 		AddObject("BlockBox", modelBox, Block, vec3(-10, -50, -10));
 		AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));

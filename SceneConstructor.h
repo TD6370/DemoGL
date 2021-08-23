@@ -191,6 +191,8 @@ public:
 	//--- Get field value by object
 	void CreateObjectListFieldValue(shared_ptr<ObjectData> obj);
 
+	void SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, string steamFields);
+
 	string GetObjectValueByFieldName(string typeFieldName);
 
 	map<string, string> GetObjectListFieldValue(shared_ptr<ObjectData> obj);

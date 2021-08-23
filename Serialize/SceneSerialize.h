@@ -141,10 +141,11 @@ public:
 	//-------------
 	void Save();
 
+	void CreateStructFileds(std::stringstream& in, ObjectFileds& filedsObj);
+	
+
 	void Load(bool isOnlyObjects = false);
 	//-------------
-
-	//string GetValue(string nameField, TypeValue value);
 
 	string Vec3Str(vec3 vec);
 

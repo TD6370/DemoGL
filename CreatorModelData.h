@@ -33,15 +33,14 @@ struct ObjectFileds;
 struct ModelFileds; //#Error 3
 struct ShellFileds;
 struct ObjectFiledsSpecific;
-//enum TypeObject;
 
 class CreatorModelData {
 
 private:
+
 	vector<shared_ptr<ObjectData>> SceneObjects;
 	map<int, string> m_defaultModelNames;
 	ModelNames m_namesModels;
-	//vector<ObjectData> SceneObjectsV;
 
 public:
 	std::shared_ptr<ObjectData> CurrentPolygonObject;
@@ -106,6 +105,8 @@ public:
 	void LoadModels(vector<shared_ptr<ModelFileds>> filedsModels);
 
 	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects, vector<vector<ObjectFiledsSpecific>> objectsDataOthers);
+
+	void SaveAndInitObject(ObjectFileds* objectData, vector<ObjectFiledsSpecific> objectDataSpecific, shared_ptr<ObjectData> newObj = nullptr);
 
 	void LoadShells(vector<shared_ptr<ShellFileds>> filedsShells);
 

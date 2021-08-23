@@ -218,6 +218,7 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 
 	if (IsBackgroundFrame && Scene->ObjectCurrent->SceneCommand->CommandType == TypeCommand::None)
 		return;
+
 	if (Scene->ObjectCurrent->ActionObjectCurrent == Moving || 
 		Scene->ObjectCurrent->ActionObjectCurrent == Transforming)
 		return;
@@ -352,14 +353,28 @@ void RoomUseInterface::CheckStateObjects() {
 //===================== Event Create Object ===========================
 
 //--- Event selected info create object
-void  RoomUseInterface::EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objGUI) {
+void  RoomUseInterface::EventSelectedInfoCreateObject() {
+
+	//---- Save pos cursor ray for World create
+	if (Scene->Storage->SceneData->IsGUI == false)
+		SavePosCursorWorld();
 
 	CommandPack* commButtonCreate = Scene->ObjectCurrent->SceneCommand;
 
 	//-- is Button - Start Create object
 	if (commButtonCreate->CommandType != TypeCommand::SelectPosForObject)
 		return;
+		
+	//---- KEY COMMAND CREATE  (FOR WORLD)
+	bool isPressUse = Scene->Storage->Inputs->Key == Scene->Storage->Inputs->Default_KeyUse && Scene->Storage->Inputs->Action == GLFW_PRESS;
+	if (isPressUse) {
 
+		//-- run command in Button create object
+		if(!Scene->ObjectCurrent->SceneCommand->Enable)
+			Scene->ObjectCurrent->SceneCommand->Enable = true;
+	}
+	//------------------------
+	
 	//--- set position cursor for create objects (not GUI)
 	if (Scene->Storage->SceneData->IndexObjectFieldsEdit > 0)
 	{
@@ -384,17 +399,19 @@ void  RoomUseInterface::EventSelectedInfoCreateObject(shared_ptr<ObjectGUI> objG
 	commButtonCreate->ValueV4 = vec4(-1);
 }
 
-void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
-	int typeCreate = (int)TypeObject::Button; //--default
-	typeCreate = (int)TypeObject::ListBox;
+void RoomUseInterface::EventStartCreateObject() {
 
-	CommandPack* command = &Scene->CurrentSceneCommand;
-	if (!command->Enable)
+	if (!Scene->CurrentSceneCommand.Enable)
 		return;
 
-	if (IsBackgroundFrame)
+	CommandPack* command = &Scene->CurrentSceneCommand;
+	
+	if (IsBackgroundFrame || Scene->Storage->SceneData->IsGUI == false)
 	{
+		int typeCreate = (int)TypeObject::Button; //--default
+		typeCreate = (int)TypeObject::ListBox;
+
 		if (Scene->ReadCommand(SelectPosForObject))
 		{
 			if(command->ValueI != -1)
@@ -406,15 +423,15 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 				//-- run create World object
 				Scene->RunCommandCreateObject((TypeObject)typeCreate, command->ValueS, command->ValueV4);
 			}
-			else 
+			else if(IsBackgroundFrame)
 			{
 				//--- Set background command - select pos for Create control ---
-				SetCommand(objGUI, TypeCommand::SelectedPosForObject, typeCreate, command->ValueS);
+				SetCommand(Scene->ObjectCurrent, TypeCommand::SelectedPosForObject, typeCreate, command->ValueS);
 			}
 		}
 
 		//--- position selected
-		if (Scene->ReadCommand(SelectedPosForObject))
+		if (IsBackgroundFrame && Scene->ReadCommand(SelectedPosForObject))
 		{
 			string typeObjectText = command->ValueS;
 
@@ -423,11 +440,11 @@ void RoomUseInterface::EventStartCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
 			Scene->RunCommandCreateObject((TypeObject)typeCreate, typeObjectText, command->ValueV4);
 			
-			SetCommand(objGUI, TypeCommand::None);
+			SetCommand(Scene->ObjectCurrent, TypeCommand::None);
 		}
 	}
 	
-	if (command->TargetIndex == objGUI->Index) {
+	if (command->TargetIndex == Scene->ObjectCurrent->Index) {
 		
 		//--- position selected and Object created
 		if (Scene->ReadCommand(ObjectCreated))
@@ -708,10 +725,9 @@ void RoomUseInterface::EventFillFieldsEdit() {
 	int indexEditObj = -1;
 
 	//------ Save ray Object selected
-	if (!IsEditControls && obj->Index == Scene->Storage->SceneData->IndexCursorRayObj) {
-		IndexObjectSelected = obj->SceneCommand->TargetIndex;
-		CursorRayPos = obj->Postranslate;
-	}
+	if(!IsEditControls)
+		SavePosCursorWorld();
+
 	indexEditObj = IndexObjectSelected;
 
 	if (indexEditObj == -1)
@@ -725,14 +741,20 @@ void RoomUseInterface::EventFillFieldsEdit() {
 		return;
 	}
 
-	//-- is saved Selected object
+	//-- is cashed Selected object
 	if (indexEditObj == IndexObjectSelectedEdit) {
 		
-		if (obj->SceneCommand->TargetIndex == indexEditObj)
-			return;
-		
+				
 		//---- Fill control
 		if (index == Scene->Storage->SceneData->IndexObjectFieldsEdit) {
+
+			bool isFillFields = obj->SceneCommand->TargetIndex != indexEditObj;
+			if(!isFillFields){				//==================== Save fields object
+				if(!EventSaveFieldsEdit())
+					return;
+			}
+
+			string resultFieldsAndValues = string();
 
 			std::shared_ptr<ObjectGUI> objItem_Button_EditBox;
 			int indItemNext = -1;
@@ -740,7 +762,8 @@ void RoomUseInterface::EventFillFieldsEdit() {
 			//--- List Edit box
 			shared_ptr<BaseShell> shell = Scene->ShellCurrent;
 		
-			Scene->CreateObjectListFieldValue(ObjectSelectedEdit);
+			if(isFillFields)
+				Scene->CreateObjectListFieldValue(ObjectSelectedEdit);
 
 			objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(shell->HeadObj);
 			indItemNext = objItem_Button_EditBox->Index;
@@ -758,12 +781,22 @@ void RoomUseInterface::EventFillFieldsEdit() {
 				string fieldName = objItemEditBox->SceneCommand->Description;
 				if (fieldName.size() != 0)
 				{
-					if (fieldName[fieldName.size() - 1] == ':')
-						fieldName.erase(fieldName.end()-1);
-					//--- SET VALUE -- FROM TYPE FIELD
-					objItemEditBox->Message = Scene->GetObjectValueByFieldName(fieldName);
-					objItemEditBox->UpdateMessage();
-					//objItemEditBox->Message = listObjFieldsValue[typeFieldName];
+					if (isFillFields) {
+						/*if (fieldName[fieldName.size() - 1] == ':')
+							fieldName.erase(fieldName.end() - 1);*/
+
+						//--- SET VALUE -- FROM TYPE FIELD
+						objItemEditBox->Message = Scene->GetObjectValueByFieldName(fieldName);
+						objItemEditBox->UpdateMessage();
+						//objItemEditBox->Message = listObjFieldsValue[typeFieldName];
+					}
+					else {
+						//=== SAVE FIELDS - TO OBJECT
+						fieldName += ": ";
+						resultFieldsAndValues.append(fieldName);
+						resultFieldsAndValues.append(objItemEditBox->Message);
+						resultFieldsAndValues.append("\n");
+					}
 				}
 
 				indItemNext = objItem_Button_EditBox->NextItemShellIndex;
@@ -771,11 +804,36 @@ void RoomUseInterface::EventFillFieldsEdit() {
 					objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(objItem_Button_EditBox->NextItemShellObj);
 			}
 
-			//-- Save edit object in Control Edit
-			obj->SceneCommand->TargetIndex = indexEditObj;
+			if (isFillFields) {
+				//-- Save edit object in Control Edit
+				obj->SceneCommand->TargetIndex = indexEditObj;
+			}
+			else {
+				//-- Save list to Object
+				Scene->SaveObjectFieldValueFromList(ObjectSelectedEdit, resultFieldsAndValues);
+			}
 		}
 		//----------
 		
+	}
+}
+
+//=================== Event Save Object fields  [SaveObjectFieldsEdit] ====================
+
+bool RoomUseInterface::EventSaveFieldsEdit() {
+
+	if (Scene->ReadCommand(SaveObjectFieldsEdit))
+	{
+		return true;
+	}
+	return false;
+}
+
+void RoomUseInterface::SavePosCursorWorld() {
+
+	if (Scene->ObjectCurrent->Index == Scene->Storage->SceneData->IndexCursorRayObj) {
+		IndexObjectSelected = Scene->ObjectCurrent->SceneCommand->TargetIndex;
+		CursorRayPos = Scene->ObjectCurrent->Postranslate;
 	}
 }
 
@@ -790,11 +848,19 @@ void RoomUseInterface::EventFillFieldsEdit() {
 //====================================
 
 void RoomUseInterface::Work() {
-	
-	if (Scene->Storage->SceneData->IsGUI == false)
-		return;
 
 	if (Scene->IsBreakUpdate())
+		return;
+
+	//IsBackgroundFrame = Scene->ObjectCurrent->IndexObjectOwner == -1;
+	IsBackgroundFrame = Scene->ObjectCurrent->Index == Scene->Storage->SceneData->IndexBackgroundGUIObj;
+
+	//--- select info object
+	EventSelectedInfoCreateObject();
+	//--- Create new control
+	EventStartCreateObject();
+
+	if (Scene->Storage->SceneData->IsGUI == false)
 		return;
 
 	IsFocused = false;
@@ -811,12 +877,10 @@ void RoomUseInterface::Work() {
 
 	ModeEditControls(objGUI);
 
-	EventSelectedInfoCreateObject(objGUI);
+	//--- EventSelectedInfoCreateObject(objGUI);
 
 	CheckStateObjects();
-
-	IsBackgroundFrame = Scene->ObjectCurrent->IndexObjectOwner == -1;
-
+	
 	//--- Focused
 	CalculateMousePosWorld();
 
@@ -833,8 +897,8 @@ void RoomUseInterface::Work() {
 		//--- Moving to Cusror position
 		EventMovingControl(objGUI);
 
-		//--- Create new control
-		EventStartCreateObject(objGUI);
+		////--- Create new control
+		//EventStartCreateObject();
 		
 		//--- Resize control to Cusror position
 		EventResizeControl(objGUI);
