@@ -286,7 +286,9 @@ bool SceneConstructor::SetObject(int indNN) {
 	IsLastCurrentObject = countObjects == indNN;
 	CurrentIndexOrder = indNN;
 	bool isShowGUI = Storage->SceneData->IsGUI;
+	
 	int indObj = Storage->GetIndexObjBySortInd(indNN);
+	
 	ObjectCurrent = Storage->GetObjectPrt(indObj);
 	ModelCurrent = ObjectCurrent->ModelPtr;
 	
@@ -346,7 +348,7 @@ void SceneConstructor::ObjectUpdate(int i) {
 	bool isVisible = SetObject(i);
 	if (!isVisible)
 		return;
-	
+		
 	bool isUpdate = (isDraw || isBase || isShowGUI);
 	if (!isUpdate)
 		return;
@@ -364,13 +366,11 @@ void SceneConstructor::ObjectUpdate(int i) {
 	
 	if (isDraw || isBase) 
 	{
-		//-- start reading inputs
-		Storage->Inputs->IsReading = true;
-
 		PreparationDataFromShader();
 		
+		//---------------------------------
 		if(!isPause)
-			ObjectCurrent->Action();
+			ObjectCurrent->Action(); // --- Only calculate transform geometry
 
 		SetDataToShader();
 	}
@@ -383,7 +383,6 @@ void SceneConstructor::Update()
 	bool isBase = VersionUpdate == 0;
 	
 	if (!IsDraw || isBase)
-		//ResetRooms();
 		ResetAspects();
 
 	if(IsDraw || isBase)
@@ -391,7 +390,7 @@ void SceneConstructor::Update()
 
 	SetMouseEvents();
 
-	SetInputTextEvents();
+	//SetInputTextEvents();
 
 	if (IsDraw || isBase)
 		GenMVP();
@@ -408,16 +407,20 @@ void SceneConstructor::Update()
 	if (!IsDraw || isBase)
 		FactoryObjectsWork();
 
+	
+	Storage->Inputs->IsReading = true;
+	SetInputTextEvents();
+
 	for (int i = 0; i < countObjects + 1; i++)
 	{
 		//---- TEST DEBUG
 		assert(Storage->SceneObjectsLastIndex < 1000);
 
-		ObjectUpdate(i);
+		ObjectUpdate(i); //--- Calculate geometry
 		//===========================================
 
 		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
-			WorkingAspects();
+			WorkingAspects(); //--- Calculate logic
 
 		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
 			continue;
@@ -440,6 +443,7 @@ void SceneConstructor::Update()
 	if (Storage->Inputs->IsReading || isBase)
 	{
 		Storage->Inputs->IsReading = false;
+		Storage->Inputs->Mode = -1;
 		Storage->Inputs->MBT = -1;
 		Storage->Inputs->Key = -1;
 		Storage->Inputs->Action = -1;

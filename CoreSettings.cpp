@@ -201,5 +201,14 @@ extern struct ModelNames
 	string MarkerVector = "marker_Vector";
 };
 
-
+struct PaletteColors {
+	vec3 color_red = vec3(1, 0, 0);
+	vec3 color_blue = vec3(0, 0, 1);
+	vec3 color_green = vec3(0, 1, 0);
+	vec3 color_violet = vec3(1, 0, 1);
+	vec3 color_yelow = vec3(1, 1, 0);
+	vec3 color_none = vec3(0);
+	vec3 color_default = vec3(1);
+	vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
+};
 

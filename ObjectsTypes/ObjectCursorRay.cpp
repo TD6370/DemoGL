@@ -38,9 +38,6 @@ void ObjectCursorRay::RunAction() {
 		}
 	}
 	RunTransform();
-	
-	//ObjectPhysic::RunAction();
-	Push();
 }
 
 bool ObjectCursorRay::CheckIsLock() {
@@ -66,13 +63,6 @@ bool ObjectCursorRay::CheckIsLock() {
 
 void ObjectCursorRay::LockResult() {
 	ActionObjectCurrent = Stay;
-
-	/*ActionObjectCurrent = Stay;
-	NewPostranslate.y = PlaneDownPosition.y + ModelPtr->MeshData.RadiusCollider;
-
-	SelectPositionOnPolygon();
-	SelectedObjIndex = -1;
-	ClearSelected();*/
 }
 
 void ObjectCursorRay::LockPolygonResult() {
@@ -86,7 +76,6 @@ void ObjectCursorRay::LockPolygonResult() {
 void ObjectCursorRay::CusrsorAction() {
 
 	SelectPositionOnPolygon();
-	//SelectedObjIndex = -1;
 	ClearPrevousSelected();
 }
 
@@ -113,14 +102,13 @@ void ObjectCursorRay::TargetCompleted()
 	ActionObjectCurrent = Stay;
 }
 
-void ObjectCursorRay::Push() {
-
+void ObjectCursorRay::Click()
+{
 	if (EngineData->SceneData->IsGUI)
 		return;
 
 	if (EngineData->Inputs->MBT == KeyPush) {
 		
-		//EngineData->Inputs->MBT = -1;
 		vec3 posCursorObject = GetVectorForwardFace(EngineData->ConfigMVP, StartLenght, EngineData->Oper);
 		//vec3 posCursorObject = GetVectorForward(Storage->MVP, StartLenght, Storage->Operator);
 		vec3 posTarget = GetVectorForward(EngineData->ConfigMVP, EndLenght, EngineData->Oper);

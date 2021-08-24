@@ -25,7 +25,7 @@ void RoomUseInterface::Init() {
 	
 	AnimationParams = new AnimationParamGUI();
 	//color_selected = color_yelow;
-	color_selected = color_yelow;
+	color_selected = m_palette.color_yelow;
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
@@ -155,7 +155,7 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 
 	//Scene->Debug("Start resize");
 	obj->ActionObjectCurrent = ActionObject::Transforming;
-	obj->MaterialData.Color = color_resize;
+	obj->MaterialData.Color = m_palette.color_resize;
 	IndexObjectSelected = obj->Index;
 	m_startSizePanel = obj->SizePanel;
 	IsCursorClickEvent = false;//!!!
@@ -866,7 +866,8 @@ void RoomUseInterface::Work() {
 	IsFocused = false;
 
 	if (Scene->IsFirstCurrentObject) {
-		IsCursorClickEvent = IsCursorClickEventConst = Scene->Storage->Inputs->MBT == m_KeyPush && Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
+		IsCursorClickEvent = Scene->Storage->Inputs->MBT == m_KeyPush && 
+							Scene->Storage->Inputs->ActionMouse == GLFW_PRESS;
 	}
 
 	EventFillFieldsEdit();

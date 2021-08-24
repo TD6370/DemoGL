@@ -42,20 +42,17 @@ void Controllers::MouseButtonEvents(GLFWwindow* window, SceneConstructor* Scene)
 	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
 	if (state == GLFW_PRESS)
 	{
-		//isCeneter = true;
-		//p_operator->m_start = false;
 		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
 		Scene->Storage->Inputs->ActionMouse = state;
+		Scene->Storage->Inputs->IsReading = false;
 	}
 	state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
 	if (state == GLFW_PRESS)
 	{
 		Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
 		Scene->Storage->Inputs->ActionMouse = state;
-		//Scene->Debug("MouseEvents Set MBT");
+		Scene->Storage->Inputs->IsReading = false;
 	}
-
-	Scene->Storage->Inputs->IsReading = false;
 }
 
 void Controllers::MouseEvents(
@@ -83,22 +80,6 @@ void Controllers::MouseEvents(
 	
 
 	bool isCeneter = false;
-	//int state = -1;
-	//state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-	//if (state == GLFW_PRESS)
-	//{
-	//	//isCeneter = true;
-	//	//p_operator->m_start = false;
-	//	Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_2;
-	//	Scene->Storage->Inputs->ActionMouse = state;
-	//}
-	//state = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-	//if (state == GLFW_PRESS)
-	//{
-	//	Scene->Storage->Inputs->MBT = GLFW_MOUSE_BUTTON_1;
-	//	Scene->Storage->Inputs->ActionMouse = state;
-	//	Scene->Debug("MouseEvents Set MBT");
-	//}
 
 	//----------------------------
 	if (!Scene->Storage->SceneData->IsGUI) {
@@ -228,22 +209,18 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 	if (!Scene->Storage->SceneData->IsGUI) {
 		// Двигаемся вперед
 		if ((key == GLFW_KEY_UP || key == GLFW_KEY_W) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			//if (key == GLFW_KEY_UP && action == GLFW_PRESS) {
 			Scene->Storage->Oper->m_position += Scene->Storage->Oper->m_direction * m_deltaTime * m_speed;
 		}
 		// Двигаемся назад
 		if ((key == GLFW_KEY_DOWN || key == GLFW_KEY_S) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			//if (key == GLFW_KEY_DOWN && action == GLFW_PRESS) {
 			Scene->Storage->Oper->m_position -= Scene->Storage->Oper->m_direction * m_deltaTime * m_speed;
 		}
 		// Шаг вправо
 		if ((key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			//if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS) {
 			Scene->Storage->Oper->m_position += Scene->Storage->Oper->m_right * m_deltaTime * m_speed;
 		}
 		// Шаг влево
 		if ((key == GLFW_KEY_LEFT || key == GLFW_KEY_A) && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			//if (key == GLFW_KEY_LEFT && action == GLFW_PRESS) {
 			Scene->Storage->Oper->m_position -= Scene->Storage->Oper->m_right * m_deltaTime * m_speed;
 		}
 	}
@@ -258,7 +235,6 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 		Scene->Storage->Inputs->ParamCase = 3;
 	if ((key == GLFW_KEY_4) && action == GLFW_PRESS)
 		Scene->Storage->Inputs->ParamCase = 4;
-		//*paramCase = 4;
 
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
 

@@ -50,7 +50,7 @@ public:
 
 	void TargetCompleted();
 
-	void Push();
+	void Click();
 
 	void ObjectSelected(int index);
 

@@ -40,6 +40,16 @@ void AspectFamilyBonds::Work() {
 
 	CommandPack* command = &Scene->CurrentSceneCommand;
 
+
+	
+	if (Scene->ObjectCurrent->TypeObj == TypeObject::CursorRay ||
+			Scene->ObjectCurrent->TypeObj == TypeObject::BulletHero) {
+
+		if (Scene->Storage->Inputs->MBT != -1) {
+			Scene->ObjectCurrent->Click();
+		}
+	}
+
 	if (!Scene->Storage->SceneData->IsGUI && command->Enable && command->CommandType == EditObjectCommand)
 	{
 		if (Scene->ObjectCurrent->Index == command->TargetIndex)

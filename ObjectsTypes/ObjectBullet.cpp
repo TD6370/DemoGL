@@ -31,8 +31,6 @@ void ObjectBullet::RunAction() {
 		}
 	}
 	RunTransform();
-
-	Push();
 }
 
 bool ObjectBullet::CheckIsLock() {
@@ -44,8 +42,8 @@ void ObjectBullet::TargetCompleted()
 	ActionObjectCurrent = Stay;
 }
 
-void ObjectBullet::Push() {
-
+void ObjectBullet::Click()
+{
 	if (EngineData->SceneData->IsGUI)
 		return;
 

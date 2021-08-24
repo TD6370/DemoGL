@@ -2,7 +2,7 @@
 
 #include "AspectBase.h"
 #include "../GeometryLib.h"
-//#include "..\CoreSettings.h"
+#include "..\CoreSettings.h"
 
 #include <sstream>
 
@@ -35,15 +35,17 @@ struct AnimationParamGUI;
 class RoomUseInterface : public AspectBase
 {
 private:
-	vec3 color_red = vec3(1, 0, 0);
-	vec3 color_blue = vec3(0, 0, 1);
-	vec3 color_green = vec3(0, 1, 0);
-	vec3 color_violet = vec3(1, 0, 1);
-	vec3 color_yelow = vec3(1, 1, 0);
-	vec3 color_none = vec3(0);
-	vec3 color_default = vec3(1);
+	//vec3 color_red = vec3(1, 0, 0);
+	//vec3 color_blue = vec3(0, 0, 1);
+	//vec3 color_green = vec3(0, 1, 0);
+	//vec3 color_violet = vec3(1, 0, 1);
+	//vec3 color_yelow = vec3(1, 1, 0);
+	//vec3 color_none = vec3(0);
+	//vec3 color_default = vec3(1);
 	vec3 color_selected = vec3(0, 0, 0);
-	vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
+	//vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
+	PaletteColors m_palette = PaletteColors();
+
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
 	const int m_endEditKey = GLFW_KEY_ENTER;
@@ -67,7 +69,6 @@ private:
 
 	bool IsFocused = false;
 	bool IsCursorClickEvent = false;
-	bool IsCursorClickEventConst = false;
 	bool IsCheckBorder = false;
 	bool IsEditControls = false;
 	bool IsBackgroundFrame = false;

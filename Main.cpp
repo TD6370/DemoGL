@@ -172,8 +172,8 @@ int main()
 	Scene->VersionUpdate = 1;
 	Scene->IsSpeedDeltaTime = true;
 	float lastParamCase = Scene->Storage->Inputs->ParamCase;
-	//bool isDebugFPS = false;
-	bool isDebugFPS = true;
+	bool isDebugFPS = false;
+	//bool isDebugFPS = true;
 
 	while (!glfwWindowShouldClose(window))
 	{

@@ -28,7 +28,6 @@ class ObjectData;
 class WorldCluster;
 class BaseShell;
 class SceneLayer;
-struct ControllerInput;
 struct ObjectFileds;
 struct ModelFileds; //#Error 3
 struct ShellFileds;

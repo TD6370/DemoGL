@@ -39,5 +39,5 @@ public:
 
 	void TargetCompleted();
 
-	void Push();
+	void Click();
 };
