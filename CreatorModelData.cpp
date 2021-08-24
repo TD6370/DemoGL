@@ -975,9 +975,9 @@ void CreatorModelData::LoadObjects() {
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
-	int maxNPC = 5;
+	int maxNPC = 50;
 	if (isTestFreeze)
-		maxNPC = 50; // 200;
+		maxNPC = 200; // 200;
 
     for (int i = 0; i < maxNPC; i++)
 	{

@@ -69,7 +69,11 @@ bool ObjectPhysic::CheckIsPolygon() {
 	Plane* plane = NULL;
 	vec4 vertex = vec4(-5000);
 
-	CollisionPolygonState = Clusters->IsCollisionPolygon(Index, plane, vertex);
+	//--- TEST - SPEED - COLLISION
+	if (EngineData->Inputs->ParamCase == 5)
+		CollisionPolygonState = Clusters->IsCollisionPolygon(Index, plane, vertex);
+	else
+		CollisionPolygonState = Clusters->IsCollisionPolygon(this, plane, vertex);
 
 	if (IsGravity) {
 		switch (CollisionPolygonState)
@@ -136,7 +140,11 @@ void ObjectPhysic::LockPolygonResult() {
 
 bool ObjectPhysic::IsCollisionObject(int index, int& indexObjHit, bool isNewPosition)
 {
-	return Clusters->IsCollisionObject(index, indexObjHit, isNewPosition);
+	//--- TEST - SPEED - COLLISION
+	if (EngineData->Inputs->ParamCase == 5)
+		return Clusters->IsCollisionObject(index, indexObjHit, isNewPosition);
+	else
+		return Clusters->IsCollisionObject(this, indexObjHit, isNewPosition);
 }
 
 void ObjectPhysic::SelectedEvent() {
@@ -149,7 +157,11 @@ void ObjectPhysic::UnselectedEvent() {
 
 void ObjectPhysic::SaveToCluster()
 {
-	Clusters->SaveClusterObject(Index);
+	//--- TEST - SPEED - COLLISION
+	if (EngineData->Inputs->ParamCase == 5)
+		Clusters->SaveClusterObject(Index);
+	else
+		Clusters->SaveClusterObject(this);
 }
 
 bool ObjectPhysic::GetVisible() {

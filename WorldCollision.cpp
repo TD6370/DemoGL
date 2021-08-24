@@ -350,6 +350,140 @@ ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane* plane, vec4& 
 	return stateResult;
 }
 
+ColliseState WorldCluster::IsCollisionPolygon(ObjectData* object, Plane* plane, vec4& vertexOut)
+{
+	int indexObj = object->Index;
+	ColliseState stateResult = COLLISE_DOWN;
+	std::shared_ptr<ObjectData> polygon = Storage->CurrentPolygonObject;
+	//std::shared_ptr<ObjectData> object = Storage->GetObjectPrt(indexObj);
+
+	vector<string> checkedZona = vector<string>();
+	vector<int> indexesPlane;
+
+	//--- TEST - SPEED - COLLISION 
+	if (object->EngineData->Inputs->ParamCase == 5) 
+		indexesPlane = GetIndexPlanePolygonFromObject(indexObj, checkedZona);
+	else
+		indexesPlane = GetIndexPlanePolygonFromObject(object, checkedZona);
+
+	//vector<int> indexesPlane = GetIndexPlanePolygonFromObject(object, checkedZona);
+
+	float radius = object->ModelPtr->MeshData.RadiusCollider;
+	vec3 pos = object->Postranslate;
+	pos = vec3(pos.x, pos.y - radius, pos.z);
+
+	object->PlaneDownIndex = -1;
+	object->MaterialData.Color = vec3(1, 1, 1);
+	object->TempVectors = vector<vec3>();
+	object->PlaneDownPosition = vec3(0);
+
+	float libra = 2;
+	float y, y1, y2;
+	vec3 posCalc = vec3(pos.x, 0, pos.z);
+	int step = 1 / object->Speed;
+	//----
+	if (object->IsGravity)
+		stateResult = COLLISE_NORMAL;
+
+	vec3 V0_W, V1_W, V2_W, posA, posB, posC;
+	int planeDownIndex = object->PlaneDownIndex;
+	vec3 planeDownPosition = object->PlaneDownPosition;
+	vec3 newPostranslate = object->NewPostranslate;
+	bool isGravity = object->IsGravity;
+	bool isHero = object->TypeObj == Hero;
+	bool isTestVertex = object->Name == "Mon";
+
+	for (const int indPlane : indexesPlane)
+	{
+		std::tie(V0_W, V1_W, V2_W) = polygon->GetCase_V_W(indPlane);
+		posA = vec3(V0_W.x, 0, V0_W.z);
+		posB = vec3(V1_W.x, 0, V1_W.z);
+		posC = vec3(V2_W.x, 0, V2_W.z);
+
+		if (CheckPointInTriangle(posCalc, posA, posB, posC)) {
+
+			planeDownIndex = indPlane;
+
+			//-- TEST - collision
+			if (isTestVertex) {
+				object->TempVectors.push_back(V0_W);
+				object->TempVectors.push_back(V1_W);
+				object->TempVectors.push_back(V2_W);
+			}
+
+			float distA = glm::distance(posCalc, posA);
+			float distB = glm::distance(posCalc, posB);
+			float distC = glm::distance(posCalc, posC);
+
+			if (distA < distB && distA < distC)
+			{
+				float factorAB = distA / distB / libra;
+				float factorAC = distA / distC / libra;
+				float vertAB = V0_W.y - V1_W.y;
+				float vertAC = V0_W.y - V2_W.y;
+
+				y1 = V0_W.y - (vertAB * factorAB);
+				y2 = V0_W.y - (vertAC * factorAC);
+			}
+			else if (distB < distA && distB < distC)
+			{
+				float factorBA = distB / distA / libra;
+				float factorBC = distB / distC / libra;
+
+				float vertBA = V1_W.y - V0_W.y;
+				float vertBC = V1_W.y - V2_W.y;
+
+				y1 = V1_W.y - (vertBA * factorBA);
+				y2 = V1_W.y - (vertBC * factorBC);
+			}
+			else
+			{
+				float factorCA = distC / distA / libra;
+				float factorCB = distC / distB / libra;
+
+				float vertCA = V2_W.y - V0_W.y;
+				float vertCB = V2_W.y - V1_W.y;
+				y1 = V2_W.y - (vertCA * factorCA);
+				y2 = V2_W.y - (vertCB * factorCB);
+			}
+			y = (y1 + y2) / 2;
+			planeDownPosition = vec3(pos.x, y, pos.z);
+
+			int vers = 3;
+
+			if (!isGravity)
+				vers = 2;
+
+			if (isHero)
+				vers = 1;
+
+			//--- version 1
+			if (vers == 1) {
+				newPostranslate.y = planeDownPosition.y + radius;
+			}
+			//--- version 2
+			if (vers == 2) {
+				if (pos.y < planeDownPosition.y)
+					stateResult = COLLISE_UP;
+			}
+			//--- version 3
+			if (vers == 3) {
+				float speed = (newPostranslate.y - (radius * 2) - planeDownPosition.y) / step;
+				newPostranslate.y -= speed;
+			}
+			//---------------------------
+			break;
+		}
+	}
+
+	object->PlaneDownIndex = planeDownIndex;
+	object->PlaneDownPosition = planeDownPosition;
+	object->NewPostranslate = newPostranslate;
+
+	return stateResult;
+}
+
+
 /*
 //---- v.1 
 ColliseState WorldCluster::IsCollisionPolygon(int indexObj, Plane * plane, vec4 & vertexOut)
@@ -512,8 +646,8 @@ vector<int> WorldCluster::GetIndexPlanePolygonFromObject(int indexObj, vector<st
 			pos.x += radius;
 			pos.z += radius;
 		}
-		int x_sector = pos.x / SectorSizePlane; 
-		int z_sector = pos.z / SectorSizePlane; 
+		int x_sector = pos.x / SectorSizePlane;
+		int z_sector = pos.z / SectorSizePlane;
 		string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
 
 		bool isExist = std::find(checkedZona.begin(), checkedZona.end(), keyPosSectorStr) != checkedZona.end();
@@ -530,6 +664,71 @@ vector<int> WorldCluster::GetIndexPlanePolygonFromObject(int indexObj, vector<st
 				if (isExist)
 					continue;
 				//resultPlaneIndexes.insert(std::end(resultPlaneIndexes), std::begin(indexesPlane), std::end(indexesPlane));
+				resultPlaneIndexes.push_back(indPlane);
+			}
+		}
+	}
+	return resultPlaneIndexes;
+}
+
+
+vector<int> WorldCluster::GetIndexPlanePolygonFromObject(ObjectData* object, vector<string>& checkedZona)
+{
+	int indexObj = object->Index;
+	//std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
+	vector<int> resultPlaneIndexes = vector<int>();
+
+	vec3 pos;
+	vec3 posStart = object->Postranslate;
+
+	int x_sector;
+	int z_sector;
+	string keyPosSectorStr;
+	bool isExist;
+	vector<int> indexesPlane;
+
+	//clear old  position in zona
+	for (int i = 0; i <= 4; i++)
+	{
+		pos = posStart;
+		if (i == 0)
+		{
+			pos.x -= radius;
+			pos.z -= radius;
+		}
+		if (i == 1)
+		{
+			pos.x -= radius;
+			pos.z += radius;
+		}
+		if (i == 2)
+		{
+			pos.x += radius;
+			pos.z -= radius;
+		}
+		if (i == 3)
+		{
+			pos.x += radius;
+			pos.z += radius;
+		}
+		x_sector = pos.x / SectorSizePlane; 
+		z_sector = pos.z / SectorSizePlane; 
+		keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+		isExist = std::find(checkedZona.begin(), checkedZona.end(), keyPosSectorStr) != checkedZona.end();
+		if (isExist)
+			continue;
+		checkedZona.push_back(keyPosSectorStr);
+
+		if (Sectors->SectorsPlane.find(keyPosSectorStr) != Sectors->SectorsPlane.end())
+		{
+			indexesPlane = Sectors->SectorsPlane[keyPosSectorStr];
+			//--------------
+			for (const int indPlane : indexesPlane) {
+				isExist = std::find(resultPlaneIndexes.begin(), resultPlaneIndexes.end(), indPlane) != resultPlaneIndexes.end();
+				if (isExist)
+					continue;
 				resultPlaneIndexes.push_back(indPlane);
 			}
 		}
@@ -590,6 +789,82 @@ vector<int> WorldCluster::GetVertexPolygonFromObject(int indexObj, vector<string
 		}
 	}
 	return resultVertex;
+}
+
+//ObjectData* object
+vector<int> WorldCluster::GetSectorObjects(ObjectData* object, bool isNewPosition, TypeObject typeObj)
+{
+	int indexObj = object->Index;
+	int indObjOwner = object->IndexObjectOwner;
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
+	vector<string> checkedZona = vector<string>();
+	vector<int> resultIndexObjects = vector<int>();
+
+	std::map <std::string, std::vector<int>> sectorsObjects;
+	switch (typeObj)
+	{
+	case TypeObject::Polygon:
+		sectorsObjects = Sectors->SectorsPlane;
+		break;
+	case TypeObject::Block:
+		sectorsObjects = Sectors->SectorsBlocks;
+		break;
+	case TypeObject::NPC:
+		sectorsObjects = Sectors->SectorsObjects;
+		break;
+	default:
+		sectorsObjects = Sectors->SectorsObjects;
+		break;
+	}
+
+	glm::vec3 pos;
+	for (int i = 0; i <= 5; i++)
+	{
+		if (isNewPosition)
+			pos = object->NewPostranslate;
+		else
+			pos = object->Postranslate;
+		if (i == 0)
+		{
+			pos.x -= radius;
+			pos.z -= radius;
+		}
+		if (i == 1)
+		{
+			pos.x -= radius;
+			pos.z += radius;
+		}
+		if (i == 2)
+		{
+			pos.x += radius;
+			pos.z -= radius;
+		}
+		if (i == 3)
+		{
+			pos.x += radius;
+			pos.z += radius;
+		}
+
+		int x_sector = pos.x / SectorSize;
+		int z_sector = pos.z / SectorSize;
+		string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+		bool isExist = std::find(checkedZona.begin(), checkedZona.end(), keyPosSectorStr) != checkedZona.end();
+		if (isExist)
+			continue;
+		checkedZona.push_back(keyPosSectorStr);
+
+		if (sectorsObjects.find(keyPosSectorStr) != sectorsObjects.end())
+		{
+			vector<int> indObjsInSecor = sectorsObjects[keyPosSectorStr];
+			for (const auto& nextIndObj : indObjsInSecor) {
+				if (nextIndObj == indexObj || nextIndObj == indObjOwner)
+					continue;
+				resultIndexObjects.push_back(nextIndObj);
+			}
+		}
+	}
+	return resultIndexObjects;
 }
 
 vector<int> WorldCluster::GetSectorObjects(int indexObj, bool isNewPosition, TypeObject typeObj)
@@ -679,6 +954,86 @@ void WorldCluster::SaveClusterObject(int indexObj)
 	}
 }
 
+void WorldCluster::SaveClusterObject(ObjectData* object)
+{
+	//if (object->TypeObj == Block) {
+	if (object->IsHexagonModel) {
+		SaveClusterBlockObject(object);
+	}
+	else {
+		SaveClusterDynamicColiderObject(object);
+	}
+}
+
+void WorldCluster::SaveClusterBlockObject(ObjectData* object) {
+
+	if (object->TypeObj != Block) {
+		return;
+	}
+
+	int indexObj = object->Index;
+
+	//ObjectBlock* objP = dynamic_cast<ObjectBlock*>(od);
+	//shared_ptr <ObjectBlock> objectBlock = std::dynamic_pointer_cast<ObjectBlock>(object);
+	map<int, vec3> blockVectors = object->Shape->BottomVectors;
+	vec3 leftTop = blockVectors[0];
+	vec3 rightBottom = blockVectors[0];
+	vec3 vertexNext;
+	vec3 blockPos = object->Postranslate;
+
+	//clear old  position in zona
+	for (std::map<string, vector<int>>::iterator it = Sectors->SectorsBlocks.begin(); it != Sectors->SectorsBlocks.end(); ++it)
+	{
+		string keyPosSectorStr = it->first;
+		vector<int> value_objectIndexs = Sectors->SectorsBlocks[keyPosSectorStr];
+		for (int ind = value_objectIndexs.size() - 1; ind >= 0; ind--)
+		{
+			if (value_objectIndexs[ind] == indexObj) {
+				value_objectIndexs.erase(value_objectIndexs.begin() + ind);
+				Sectors->SectorsBlocks[keyPosSectorStr] = value_objectIndexs;
+			}
+		}
+	}
+	/*for (const auto& nextIndObj : indObjsInSecor){} */
+
+	//save new position in zona
+	for (std::map<int, vec3>::iterator it = blockVectors.begin(); it != blockVectors.end(); ++it)
+	{
+		vertexNext = it->second;
+		if (vertexNext.x < leftTop.x)
+			leftTop.x = vertexNext.x;
+		if (vertexNext.z < leftTop.z)
+			leftTop.z = vertexNext.z;
+		if (vertexNext.x > rightBottom.x)
+			rightBottom.x = vertexNext.x;
+		if (vertexNext.z > rightBottom.z)
+			rightBottom.z = vertexNext.z;
+	}
+
+	int minX = (leftTop.x + blockPos.x) / SectorSize;
+	int maxX = (rightBottom.x + blockPos.x) / SectorSize;
+	int minZ = (leftTop.z + blockPos.z) / SectorSize;
+	int maxZ = (rightBottom.z + blockPos.z) / SectorSize;
+
+	for (int x_sector = minX; x_sector <= maxX; x_sector++) {
+		for (int z_sector = minZ; z_sector <= maxZ; z_sector++) {
+			string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+			if (Sectors->SectorsBlocks.find(keyPosSectorStr) == Sectors->SectorsBlocks.end())
+			{
+				vector<int> value_objectIndexs = vector<int>();
+				value_objectIndexs.push_back(indexObj);
+				Sectors->SectorsBlocks.insert(std::pair<string, vector<int>>(keyPosSectorStr, value_objectIndexs));
+			}
+			else {
+				vector<int> value_objectIndexs = Sectors->SectorsBlocks[keyPosSectorStr];
+				value_objectIndexs.push_back(indexObj);
+				Sectors->SectorsBlocks[keyPosSectorStr] = value_objectIndexs;
+			}
+		}
+	}
+}
+
 void WorldCluster::SaveClusterBlockObject(int indexObj) {
 
 	shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
@@ -744,6 +1099,115 @@ void WorldCluster::SaveClusterBlockObject(int indexObj) {
 				value_objectIndexs.push_back(indexObj);
 				Sectors->SectorsBlocks[keyPosSectorStr] = value_objectIndexs;
 			}
+		}
+	}
+}
+
+void WorldCluster::SaveClusterDynamicColiderObject(ObjectData* object) {
+
+	int indexObj = object->Index;
+	//std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
+	int radius = object->ModelPtr->MeshData.RadiusCollider;
+	vector<string> checkedZona = vector<string>();
+	glm::vec3 pos;
+	//clear old  position in zona
+	for (int i = 0; i <= 5; i++)
+	{
+		pos = object->Postranslate;
+		if (i == 0)
+		{
+			pos.x -= radius;
+			pos.z -= radius;
+		}
+		if (i == 1)
+		{
+			pos.x -= radius;
+			pos.z += radius;
+		}
+		if (i == 2)
+		{
+			pos.x += radius;
+			pos.z -= radius;
+		}
+		if (i == 3)
+		{
+			pos.x += radius;
+			pos.z += radius;
+		}
+		if (i == 4)
+		{
+		}
+
+		int x_sector = pos.x / SectorSize;
+		int z_sector = pos.z / SectorSize;
+		string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+		bool isExist = std::find(checkedZona.begin(), checkedZona.end(), keyPosSectorStr) != checkedZona.end();
+		if (isExist)
+			continue;
+		checkedZona.push_back(keyPosSectorStr);
+
+		if (Sectors->SectorsObjects.find(keyPosSectorStr) != Sectors->SectorsObjects.end())
+		{
+			vector<int> value_objectIndexs = Sectors->SectorsObjects[keyPosSectorStr];
+			for (int ind = value_objectIndexs.size() - 1; ind >= 0; ind--)
+			{
+				if (value_objectIndexs[ind] == indexObj)
+					value_objectIndexs.erase(value_objectIndexs.begin() + ind);
+			}
+			Sectors->SectorsObjects[keyPosSectorStr] = value_objectIndexs;
+		}
+	}
+
+	checkedZona.clear();
+
+	//save new position in zona
+	for (int i = 0; i < 5; i++)
+	{
+		pos = object->NewPostranslate;
+		if (i == 0)
+		{
+			pos.x -= radius;
+			pos.z -= radius;
+		}
+		if (i == 1)
+		{
+			pos.x -= radius;
+			pos.z += radius;
+		}
+		if (i == 2)
+		{
+			pos.x += radius;
+			pos.z -= radius;
+		}
+		if (i == 3)
+		{
+			pos.x += radius;
+			pos.z += radius;
+		}
+		if (i == 4)
+		{
+		}
+
+		int x_sector = pos.x / SectorSize;
+		int z_sector = pos.z / SectorSize;
+		string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
+
+		bool isExist = std::find(checkedZona.begin(), checkedZona.end(), keyPosSectorStr) != checkedZona.end();
+		if (isExist)
+			continue;
+		checkedZona.push_back(keyPosSectorStr);
+
+		if (Sectors->SectorsObjects.find(keyPosSectorStr) == Sectors->SectorsObjects.end())
+		{
+			vector<int> value_objectIndexs = vector<int>();
+			value_objectIndexs.push_back(indexObj);
+			Sectors->SectorsObjects.insert(std::pair<string, vector<int>>(keyPosSectorStr, value_objectIndexs));
+		}
+		else {
+			vector<int> value_objectIndexs = Sectors->SectorsObjects[keyPosSectorStr];
+			value_objectIndexs.push_back(indexObj);
+			Sectors->SectorsObjects[keyPosSectorStr] = value_objectIndexs;
 		}
 	}
 }
@@ -882,6 +1346,37 @@ bool WorldCluster::IsCollisionLineCircle(float x1, float y1, float x2, float y2,
 	return (a + b + c < 0);
 }
 
+//ObjectData* obj
+bool WorldCluster::IsCollisionObjectToBlock(ObjectData* objectMe, ObjectData* objBlock, bool isNewPosition)
+{
+	float x1, y1, x2, y2, xC, yC, r;
+	bool isCollision = false;
+
+	if (isNewPosition) {
+		xC = objectMe->NewPostranslate.x;
+		yC = objectMe->NewPostranslate.z;
+	}
+	else {
+		xC = objectMe->Postranslate.x;
+		yC = objectMe->Postranslate.z;
+	}
+	r = objectMe->ModelPtr->MeshData.RadiusCollider;
+
+	for (int indLine = 0; indLine < 4; indLine++) {
+		vec4 line = objBlock->Shape->GetLine(indLine);
+		x1 = line.x;
+		y1 = line.y;
+		x2 = line.z;
+		y2 = line.w;
+
+		if (IsCollisionLineCircle(x1, y1, x2, y2, xC, yC, r)) {
+			isCollision = true;
+			break;
+		}
+	}
+	return isCollision;
+}
+
 bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isNewPosition)
 {
 	std::shared_ptr <ObjectData> objectMe = Storage->GetObjectPrt(indObjMe);
@@ -915,6 +1410,34 @@ bool WorldCluster::IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isN
 	return isCollision;
 }
 
+bool WorldCluster::IsCollisionCircle(ObjectData* objectMe, ObjectData* objOther, bool isNewPosition)
+{
+	double x1, x2, y1, y2, r1, r2;
+	
+	if (isNewPosition) {
+		x1 = objectMe->NewPostranslate.x;
+		y1 = objectMe->NewPostranslate.z;
+	}
+	else {
+		x1 = objectMe->Postranslate.x;
+		y1 = objectMe->Postranslate.z;
+	}
+	r1 = objectMe->ModelPtr->MeshData.RadiusCollider;
+
+	x2 = objOther->Postranslate.x;
+	y2 = objOther->Postranslate.z;
+	r2 = objOther->ModelPtr->MeshData.RadiusCollider;
+
+	double r = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+	if (r == 0 && r1 == r2)
+		return true;
+
+	if (r1 + r2 >= r && r1 + r >= r2 && r2 + r >= r1)
+		return true;
+	else
+		return false;
+}
+
 bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPosition)
 {
 	double x1, x2, y1, y2, r1, r2;
@@ -945,6 +1468,17 @@ bool WorldCluster::IsCollisionCircle(int indObjMe, int indObj2, bool isNewPositi
 	else
 		return false;
 }
+//ObjectData* objectMe
+bool WorldCluster::IsCollisionObject(ObjectData* objectMe, int& indexObjHit, bool isNewPosition)
+{
+	indexObjHit = -1;
+	bool result = false;
+	result = IsCollisionDynamicObject(objectMe, indexObjHit, isNewPosition);
+	if (!result)
+		result = IsCollisionBlocks(objectMe, indexObjHit, isNewPosition);
+
+	return result;
+}
 
 
 bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
@@ -958,6 +1492,24 @@ bool WorldCluster::IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNe
 	return result;
 }
 
+//ObjectData* objectMe
+bool WorldCluster::IsCollisionDynamicObject(ObjectData* objectMe, int& indexObjHit, bool isNewPosition)
+{
+	vector<int> indObjsInSecor = GetSectorObjects(objectMe, isNewPosition, NPC);
+	std::shared_ptr <ObjectData> objNext;
+	for (const auto& nextIndObj : indObjsInSecor)
+	{
+		if (nextIndObj == objectMe->Index)
+			continue;
+		objNext = Storage->GetObjectPrt(nextIndObj);
+		if (IsCollisionCircle(objectMe, objNext.get(), isNewPosition)) {
+			indexObjHit = nextIndObj;
+			return true;
+		}
+	}
+	return false;
+}
+
 bool WorldCluster::IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bool isNewPosition)
 {
 	vector<int> indObjsInSecor = GetSectorObjects(indexObjMe, isNewPosition, NPC);
@@ -968,6 +1520,26 @@ bool WorldCluster::IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bo
 			continue;
 		objNext = Storage->GetObjectPrt(nextIndObj);
 		if (IsCollisionCircle(indexObjMe, objNext->Index, isNewPosition)) {
+			indexObjHit = nextIndObj;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool WorldCluster::IsCollisionBlocks(ObjectData* objectMe, int& indexObjHit, bool isNewPosition)
+{
+	if (objectMe->TypeObj == Block)
+		return false;
+
+	vector<int> indObjsInSecor = GetSectorObjects(objectMe, isNewPosition, Block);
+	std::shared_ptr <ObjectData> objNext;
+	for (const auto& nextIndObj : indObjsInSecor)
+	{
+		if (nextIndObj == objectMe->Index)
+			continue;
+		objNext = Storage->GetObjectPrt(nextIndObj);
+		if (IsCollisionObjectToBlock(objectMe, objNext.get(), isNewPosition)) {
 			indexObjHit = nextIndObj;
 			return true;
 		}

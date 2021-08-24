@@ -9,7 +9,7 @@ void ObjectBullet::InitData()
 	ObjectData::InitData();
 
 	ActionObjectCurrent = Stay;
-	Speed = 0.4f;
+	Speed = 2;// 0.4f;
 }
 
 void ObjectBullet::RunAction() {
