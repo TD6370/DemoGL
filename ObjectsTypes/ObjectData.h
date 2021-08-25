@@ -268,6 +268,7 @@ public:
 
 	string GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, int index);
 
+	void SizeControlUpdate();
 };
 
 #endif

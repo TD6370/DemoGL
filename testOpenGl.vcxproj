@@ -182,6 +182,7 @@
     <ClCompile Include="Rooms\AspectDispatcherCommands.cpp" />
     <ClCompile Include="Rooms\AspectFactoryObjects.cpp" />
     <ClCompile Include="Rooms\AspectFamilyBonds.cpp" />
+    <ClCompile Include="Rooms\Inretface\AspectTransformControlsGUI.cpp" />
     <ClCompile Include="Rooms\RoomMarkerPlane.cpp" />
     <ClCompile Include="Rooms\RoomSerializeScene.cpp" />
     <ClCompile Include="Rooms\RoomUseInterface.cpp" />
@@ -231,6 +232,7 @@
     <ClInclude Include="Rooms\AspectDispatcherCommands.h" />
     <ClInclude Include="Rooms\AspectFactoryObjects.h" />
     <ClInclude Include="Rooms\AspectFamilyBonds.h" />
+    <ClInclude Include="Rooms\Inretface\AspectTransformControlsGUI.h" />
     <ClInclude Include="Rooms\RoomMarkerPlane.h" />
     <ClInclude Include="Rooms\RoomSerializeScene.h" />
     <ClInclude Include="Rooms\RoomUseInterface.h" />

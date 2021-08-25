@@ -69,8 +69,6 @@ public:
 
 	void ActionMoving();
 
-	void DefaultView();
-
 	float GetTopLayer();
 
 	float GetZ();
@@ -83,7 +81,5 @@ public:
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
-
-	void virtual SizeControlUpdate();
 
 };

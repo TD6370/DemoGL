@@ -35,15 +35,7 @@ struct AnimationParamGUI;
 class RoomUseInterface : public AspectBase
 {
 private:
-	//vec3 color_red = vec3(1, 0, 0);
-	//vec3 color_blue = vec3(0, 0, 1);
-	//vec3 color_green = vec3(0, 1, 0);
-	//vec3 color_violet = vec3(1, 0, 1);
-	//vec3 color_yelow = vec3(1, 1, 0);
-	//vec3 color_none = vec3(0);
-	//vec3 color_default = vec3(1);
 	vec3 color_selected = vec3(0, 0, 0);
-	//vec3 color_resize = vec3(0.022, 0.099, 0.950); // 15 %, 62 %, 92 %
 	PaletteColors m_palette = PaletteColors();
 
 	vec2 m_tempMousePos = vec2(0);
@@ -53,12 +45,6 @@ private:
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
 
-	/*float m_startDefaultParamShaderID = 0;
-	float m_startFocusParamShaderID = 1;
-	float m_startMoveParamShaderID = 2;
-	float m_startResizeParamShaderID = 3;
-	float m_startCheckBorderParamShaderID = 4;
-	float m_startClickParamShaderID = 5;*/
 	AnimationParamGUI* AnimationParams;
 
 	float m_CurrentStartedEventID = -1;
@@ -99,60 +85,64 @@ public:
 
 	~RoomUseInterface();
 
-	void CalculateMousePosWorld();
-
 	void Init();
 	void Config();
 	void Work();
 
+	//============= Event Transform Controls ==============
 	//-------- Move control
-	void EventStartMovingControl(shared_ptr<ObjectGUI> objGUI);
-	void EventMovingControl(shared_ptr<ObjectGUI> objGUI);
-	bool EventEndMovingControl(shared_ptr<ObjectGUI> objGUI);
+	void EventStartMovingControl();
+	void EventMovingControl();
+	bool EventEndMovingControl();
 
 	//-------- Resize control
-	void EventStartResizeControl(shared_ptr<ObjectGUI> objGUI);
-	void EventResizeControl(shared_ptr<ObjectGUI> objGUI);
-	bool EventEndResizeControl(shared_ptr<ObjectGUI> objGUI);
+	void EventStartResizeControl();
+	void EventResizeControl();
+	bool EventEndResizeControl();
 
 	//-------- Focus control
-	//bool IsFocusedControl(shared_ptr<ObjectGUI> objGUI);
-	void CheckFocusBoxAndBorderControl(shared_ptr<ObjectGUI> objGUI);
-	void EventFocusControl(shared_ptr<ObjectGUI> objGUI);
+	void CheckFocusBoxAndBorderControl();
+	void EventFocusControl();
 
-	//-------- Click control
-	void EventStartClickControl(shared_ptr<ObjectGUI> objGUI);
+	//============= Event Create Controls ==============
 
 	//------- CreateObject
 	void EventSelectedInfoCreateObject(); // Event selected info create object
 	void EventStartCreateObject();
-	void EventEndCreateObject(shared_ptr<ObjectGUI> objGUI);
-
-	//------- Rename Object
-	void EventStartRenameObject(shared_ptr<ObjectGUI> objGUI);
-
-	void SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value);
-
-	void ModeEditControls(shared_ptr<ObjectGUI> objGUI);
-
-	void SetTimeAnimate(shared_ptr<ObjectGUI> obj, float time);
-
-	//bool ReadCommand(TypeCommand commandType);
-			
-	void CheckStateObjects();
-
-	void EventEditTextControl(shared_ptr<ObjectGUI> obj);
-
-	void EventReadKeyInput(shared_ptr<ObjectGUI> obj);
+	void EventEndCreateObject();
 
 	//---------- Fill fields selected object
-	
-	//void EventFillFieldsEdit(shared_ptr<ObjectData> obj);
 	void EventFillFieldsEdit();
-
 	bool EventSaveFieldsEdit();
+	void SaveEditObjectWoldInfo();
 
-	void SavePosCursorWorld();
+	//============== Event Use Controls ========================================
+
+	//--- Use = Edit on/off
+	void ModeEditControls();
+
+	//--- Use = Click control
+	void EventStartClickControl();
+
+	//--- Edit = Name control
+	void EventStartRenameObject();
+
+	//--- Use = Edit box controls
+	void EventEditTextControl();
+		
+	//--- Use = Message - EditBox & TextBox
+	void EventReadKeyInput();
+
+	//=================================================
+	
+	void CalculateMousePosWorld();
+
+	//--- call refresh visible
+	void CheckStateObjects();
+
+	// -- save event status animation
+	void SetCurrentEventParam(shared_ptr<ObjectData> obj, int value);
+	void SetTimeAnimate(shared_ptr<ObjectData> obj, float time);
 	
 	
 };

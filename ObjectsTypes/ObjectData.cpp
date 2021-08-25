@@ -337,6 +337,9 @@ bool ObjectData::GetVisible() {
 void ObjectData::DefaultView()
 {
 	MaterialData.Color = StartColor;
+
+	//--- TEST
+	ParamValue = 0;
 }
 
 string ObjectData::GetInfo() {
@@ -408,4 +411,9 @@ void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 //Get Last By Specific Field Value
 string ObjectData::GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, int index) {
 	return filedsSpecific[filedsSpecific.size() - index].Value;
+}
+
+void ObjectData::SizeControlUpdate()
+{
+	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 }

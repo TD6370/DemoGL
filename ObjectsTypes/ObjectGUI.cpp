@@ -68,12 +68,6 @@ bool ObjectGUI::GetVisible() {
 	return EngineData->SceneData->IsGUI && IsVisible;
 }
 
-
-void ObjectGUI::SizeControlUpdate()
-{
-	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
-}
-
 //----------------------------------------------------------------
 
 vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
@@ -113,14 +107,6 @@ void ObjectGUI::ActionWork() {
 	ActionObjectCurrent = Stay; //Off
 }
 
-
-void ObjectGUI::DefaultView() {
-
-	ObjectData::DefaultView();
-
-	ParamValue = 0;
-
-}
 
 float ObjectGUI::GetTopLayer() {
 	

@@ -24,19 +24,17 @@ void RoomUseInterface::Config() {
 void RoomUseInterface::Init() {
 	
 	AnimationParams = new AnimationParamGUI();
-	//color_selected = color_yelow;
 	color_selected = m_palette.color_yelow;
 	auto winHeight = Scene->m_heightWindow;
 	auto winHWidth = Scene->m_widthWindow;
 	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
 	//IsEditControls = true;
 	IsEditControls = false;
-
-
 }
 
-void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value)
+void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectData> obj, int value)
 {
+
 	if (EndTimer > 0) {
 		auto currTimer = glfwGetTime();
 		if (currTimer < EndTimer)
@@ -53,7 +51,7 @@ void RoomUseInterface::SetCurrentEventParam(shared_ptr<ObjectGUI> obj, int value
 	m_CurrentStartedEventID = value;
 }
 
-void RoomUseInterface::SetTimeAnimate(shared_ptr<ObjectGUI> obj, float timeAnim)
+void RoomUseInterface::SetTimeAnimate(shared_ptr<ObjectData> obj, float timeAnim)
 {
 	obj->SetStartTimer();
 	StartTimer = glfwGetTime();
@@ -61,7 +59,9 @@ void RoomUseInterface::SetTimeAnimate(shared_ptr<ObjectGUI> obj, float timeAnim)
 }
 
 //==================================== START MOVE
-void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) {
+void  RoomUseInterface::EventStartMovingControl() {
+
+	auto obj = Scene->ObjectCurrent;
 	if (!IsEditControls)
 		return;
 	if (!obj->IsTransformable)
@@ -89,9 +89,10 @@ void  RoomUseInterface::EventStartMovingControl(std::shared_ptr<ObjectGUI> obj) 
 #pragma region MOVE
 
 //----------------------- MOVE
-void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
+void  RoomUseInterface::EventMovingControl() {
 
-	//---- TEST
+	auto obj = Scene->ObjectCurrent;
+	
 	if (IndexObjectSelected != obj->Index)
 		return;
 	if(!obj->IsTransformable)
@@ -106,8 +107,10 @@ void  RoomUseInterface::EventMovingControl(std::shared_ptr<ObjectGUI> obj) {
 }
 
 //----------------------- END MOVE
-bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
+bool RoomUseInterface::EventEndMovingControl() {
 	
+	auto obj = Scene->ObjectCurrent;
+
 	if (!IsCursorClickEvent)
 		return false;
 
@@ -125,15 +128,15 @@ bool RoomUseInterface::EventEndMovingControl(std::shared_ptr<ObjectGUI> obj) {
 	//TODO:
 	IsCursorClickEvent = false; //---- VVVV
 	SetCurrentEventParam(obj, AnimationParams->StartDefaultParamShaderID);
-	//EventEndCreateObject(obj);
-
 	return true;
 }
 
 #pragma endregion
 
 //==================================== START RESIZE
-void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
+void RoomUseInterface::EventStartResizeControl() {
+	
+	auto obj = Scene->ObjectCurrent;
 	if (!IsEditControls)
 		return;
 	if (!obj->IsTransformable)
@@ -163,7 +166,9 @@ void RoomUseInterface::EventStartResizeControl(shared_ptr<ObjectGUI> obj) {
 }
 
 //----------------------- RESIZE
-void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
+void  RoomUseInterface::EventResizeControl() {
+	auto  obj = Scene->ObjectCurrent;
+
 	if (!IsEditControls)
 		return;
 	if (IndexObjectSelected != obj->Index)
@@ -191,7 +196,9 @@ void  RoomUseInterface::EventResizeControl(shared_ptr<ObjectGUI> obj) {
 }
 
 //----------------------- END RESIZE
-bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
+bool RoomUseInterface::EventEndResizeControl() {
+	auto obj = Scene->ObjectCurrent;
+
 	if (!IsEditControls)
 		return false;
 	if(!obj->IsFocusable)
@@ -214,13 +221,15 @@ bool RoomUseInterface::EventEndResizeControl(shared_ptr<ObjectGUI> obj) {
 }
 
 //----------------------- FOCUS
-void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> obj) {
+void RoomUseInterface::CheckFocusBoxAndBorderControl() {
 
-	if (IsBackgroundFrame && Scene->ObjectCurrent->SceneCommand->CommandType == TypeCommand::None)
+	auto obj = Scene->ObjectCurrent;
+
+	if (IsBackgroundFrame && obj->SceneCommand->CommandType == TypeCommand::None)
 		return;
 
-	if (Scene->ObjectCurrent->ActionObjectCurrent == Moving || 
-		Scene->ObjectCurrent->ActionObjectCurrent == Transforming)
+	if (obj->ActionObjectCurrent == Moving ||
+		obj->ActionObjectCurrent == Transforming)
 		return;
 
 	bool isCheckOrder = true;
@@ -253,10 +262,12 @@ void RoomUseInterface::CheckFocusBoxAndBorderControl(std::shared_ptr<ObjectGUI> 
 	}
 }
 
-void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
+void RoomUseInterface::EventFocusControl() {
+
+	auto obj = Scene->ObjectCurrent;
+
 	if (obj->ActionObjectCurrent != Stay)
 		return;
-
 
 	bool isOrderParam = IsCompareF(m_CurrentStartedEventID, AnimationParams->StartResizeParamShaderID);
 	bool isUpdateView = obj->IsFocusable || IsEditControls;
@@ -287,7 +298,10 @@ void RoomUseInterface::EventFocusControl(std::shared_ptr<ObjectGUI> obj) {
 }
 
 //==================================== START CLICK 
-void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
+void  RoomUseInterface::EventStartClickControl() {
+
+	auto obj = Scene->ObjectCurrent;
+
 	if (IsEditControls && obj->IsTransformable)
 		return;
 	if (!obj->IsFocusable)
@@ -303,7 +317,6 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 	if (IsCreatingObject)
 		return;
 
-	//Scene->Debug("Start click");
 	obj->Click();
 	SetCurrentEventParam(obj, AnimationParams->StartClickParamShaderID);
 
@@ -313,9 +326,8 @@ void  RoomUseInterface::EventStartClickControl(std::shared_ptr<ObjectGUI> obj) {
 }
 //===================== Event On/Off Edit mode controls ===========================
 
-void RoomUseInterface::ModeEditControls(shared_ptr<ObjectGUI> objGUI)
+void RoomUseInterface::ModeEditControls()
 {
-
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
 		return;
@@ -357,7 +369,7 @@ void  RoomUseInterface::EventSelectedInfoCreateObject() {
 
 	//---- Save pos cursor ray for World create
 	if (Scene->Storage->SceneData->IsGUI == false)
-		SavePosCursorWorld();
+		SaveEditObjectWoldInfo();
 
 	CommandPack* commButtonCreate = Scene->ObjectCurrent->SceneCommand;
 
@@ -457,7 +469,9 @@ void RoomUseInterface::EventStartCreateObject() {
 	}
 }
 
-void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
+void RoomUseInterface::EventEndCreateObject() {
+
+	auto objGUI = Scene->ObjectCurrent;
 
 	if (!IsCreatingObject)
 		return;
@@ -524,7 +538,9 @@ void RoomUseInterface::EventEndCreateObject(shared_ptr<ObjectGUI> objGUI) {
 
 //===================== Event Rename controls ===========================
 
-void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
+void RoomUseInterface::EventStartRenameObject() {
+
+	auto objGUI = Scene->ObjectCurrent;
 
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	//--- obj base Edit box
@@ -579,7 +595,9 @@ void RoomUseInterface::EventStartRenameObject(shared_ptr<ObjectGUI> objGUI) {
 	}
 }
 
-void RoomUseInterface::EventReadKeyInput(shared_ptr<ObjectGUI> objGUI) {
+void RoomUseInterface::EventReadKeyInput() {
+
+	auto objGUI = Scene->ObjectCurrent;
 
 	bool isPressEscape = Scene->Storage->Inputs->Key == GLFW_KEY_ESCAPE && Scene->Storage->Inputs->Action == GLFW_PRESS;
 	bool isPressStop = Scene->Storage->Inputs->Key == m_endEditKey && Scene->Storage->Inputs->Action == GLFW_PRESS;
@@ -591,12 +609,6 @@ void RoomUseInterface::EventReadKeyInput(shared_ptr<ObjectGUI> objGUI) {
 
 			if (objGUI->TypeObj == EditBox)
 			{
-
-				//-- TEST
-				auto info = objGUI->GetInfo();
-				auto tt = objGUI->Name;
-				auto tt2 = objGUI->IsChecked;
-
 				//---- Stop edit box
 				objGUI->Click(); 
 		
@@ -627,7 +639,6 @@ void RoomUseInterface::EventReadKeyInput(shared_ptr<ObjectGUI> objGUI) {
 		return;
 
 	//--- Event inputs in text box
-	//int keyIndex = Scene->Storage->Inputs->Key;
 	auto objEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objGUI);
 
 	if (objEditBox != nullptr) {
@@ -643,8 +654,9 @@ void RoomUseInterface::EventReadKeyInput(shared_ptr<ObjectGUI> objGUI) {
 
 //===================== Event Work Edit box controls ===========================
 
-void RoomUseInterface::EventEditTextControl(shared_ptr<ObjectGUI> objGUI) {
+void RoomUseInterface::EventEditTextControl() {
 
+	auto objGUI = Scene->ObjectCurrent;
 	//----------- Start edit
 	CommandPack* command = &Scene->CurrentSceneCommand;
 	if (!command->Enable)
@@ -726,7 +738,7 @@ void RoomUseInterface::EventFillFieldsEdit() {
 
 	//------ Save ray Object selected
 	if(!IsEditControls)
-		SavePosCursorWorld();
+		SaveEditObjectWoldInfo();
 
 	indexEditObj = IndexObjectSelected;
 
@@ -829,7 +841,7 @@ bool RoomUseInterface::EventSaveFieldsEdit() {
 	return false;
 }
 
-void RoomUseInterface::SavePosCursorWorld() {
+void RoomUseInterface::SaveEditObjectWoldInfo() {
 
 	if (Scene->ObjectCurrent->Index == Scene->Storage->SceneData->IndexCursorRayObj) {
 		IndexObjectSelected = Scene->ObjectCurrent->SceneCommand->TargetIndex;
@@ -876,7 +888,7 @@ void RoomUseInterface::Work() {
 	if(objGUI == nullptr)
 		return;
 
-	ModeEditControls(objGUI);
+	ModeEditControls();
 
 	//--- EventSelectedInfoCreateObject(objGUI);
 
@@ -889,46 +901,41 @@ void RoomUseInterface::Work() {
 		CursorMovePos = objGUI->StartPos;
 	}
 
-	EventEndCreateObject(objGUI);
+	EventEndCreateObject();
 
-	EventStartRenameObject(objGUI);
+	EventStartRenameObject();
 	
 	if (objGUI->IsUsable)
 	{
 		//--- Moving to Cusror position
-		EventMovingControl(objGUI);
+		EventMovingControl();
 
-		////--- Create new control
-		//EventStartCreateObject();
-		
 		//--- Resize control to Cusror position
-		EventResizeControl(objGUI);
+		EventResizeControl();
 
 		//--- Focus box & focus Border
-		CheckFocusBoxAndBorderControl(objGUI);
+		CheckFocusBoxAndBorderControl();
 
 		//----Start event Click Control
-		EventStartClickControl(objGUI);
+		EventStartClickControl();
 
 		//-- End event resize control
-		//bool isEndRsizeControl = 
-		EventEndResizeControl(objGUI);
+		EventEndResizeControl();
 		//-- Start event resize colntrol
-		EventStartResizeControl(objGUI);
+		EventStartResizeControl();
 
 		//-- End event on control
-		//bool isEndMovingControl = 
-		EventEndMovingControl(objGUI);
+		EventEndMovingControl();
 		//----Start event Moving Control
-		EventStartMovingControl(objGUI);
+		EventStartMovingControl();
 
-		EventEditTextControl(objGUI);
+		EventEditTextControl();
 	}
 
-	EventReadKeyInput(objGUI);
+	EventReadKeyInput();
 
 	//===== Event Focus Control
-	EventFocusControl(objGUI);
+	EventFocusControl();
 
 	//------------- Total orders
 	if (Scene->IsLastCurrentObject) {
