@@ -4,6 +4,11 @@
 #include "../GeometryLib.h"
 #include "..\CoreSettings.h"
 
+
+#include "./Inretface/AspectTransformControlsGUI.h"
+#include "./Inretface/AspectCreateControlsGUI.h"
+#include "./Inretface/AspectUseControlsGUI.h"
+
 #include <sstream>
 
 //#define GLEW_STATIC
@@ -32,6 +37,16 @@ class SceneConstructor;
 enum TypeCommand;
 struct AnimationParamGUI;
 
+struct StateGUI {
+	bool IsFocused = false;
+	bool IsCursorClickEvent = false;
+	bool IsCheckBorder = false;
+	bool IsEditControls = false;
+	bool IsBackgroundFrame = false;
+	bool IsUpdatingStateObjects = true;
+	bool IsCreatingObject = false;
+};
+
 class RoomUseInterface : public AspectBase
 {
 private:
@@ -40,48 +55,42 @@ private:
 
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
-	const int m_endEditKey = GLFW_KEY_ENTER;
 
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
-
-	AnimationParamGUI* AnimationParams;
-
+		
 	float m_CurrentStartedEventID = -1;
 		
 	bool m_isDebug = false;
 	mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
-
-	bool IsFocused = false;
-	bool IsCursorClickEvent = false;
-	bool IsCheckBorder = false;
-	bool IsEditControls = false;
-	bool IsBackgroundFrame = false;
-	bool IsUpdatingStateObjects = true;
-	bool IsCreatingObject = false ;
 	
-	int IndexObjectFocused = -1;
-	int IndexObjectSelected = -1;
-	int IndexObjectCreating = -1;
-
-	int IndexObjectSelectedEdit = -1;
-
 	float FocusedOrder = -1;
-	vec3 CursorMovePos = vec3(0);
-	vec3 CursorRayPos = vec3(0);
-	vec3 SelectObjectOffsetPos = vec3(0);
-	vec2 m_startSizePanel = vec2(0);
-
 	float StartTimer = 0;
 	float EndTimer = 0;
 
-	std::shared_ptr<ObjectData> ObjectSelectedEdit = nullptr;
+	//=========
+	AspectTransformControlsGUI AspectTransformControls;
+	AspectCreateControlsGUI AspectCreateControls;
+	AspectUseControlsGUI AspectUseControls;
 
 public:
-		
+
+	AnimationParamGUI* AnimationParams;
+	StateGUI State = StateGUI();
+
+	int IndexObjectFocused = -1;
+	int IndexObjectSelected = -1;
+	int IndexObjectCreating = -1;
+	int IndexObjectSelectedEdit = -1;
+			
 	RoomUseInterface(string Name, SceneConstructor* sceneConstructor)
-		: AspectBase(Name, sceneConstructor) {};
+		: AspectBase(Name, sceneConstructor)
+		, AspectTransformControls("EventsTransformControls", sceneConstructor),
+		AspectCreateControls("EventsCreateControls", sceneConstructor),
+		AspectUseControls("EventsUseControls", sceneConstructor)
+	{
+	};
 
 	~RoomUseInterface();
 
@@ -89,53 +98,12 @@ public:
 	void Config();
 	void Work();
 
-	//============= Event Transform Controls ==============
-	//-------- Move control
-	void EventStartMovingControl();
-	void EventMovingControl();
-	bool EventEndMovingControl();
+	//=================================================
+	void CalculateMousePosWorld();
 
-	//-------- Resize control
-	void EventStartResizeControl();
-	void EventResizeControl();
-	bool EventEndResizeControl();
-
-	//-------- Focus control
+	//--- Event Focus control
 	void CheckFocusBoxAndBorderControl();
 	void EventFocusControl();
-
-	//============= Event Create Controls ==============
-
-	//------- CreateObject
-	void EventSelectedInfoCreateObject(); // Event selected info create object
-	void EventStartCreateObject();
-	void EventEndCreateObject();
-
-	//---------- Fill fields selected object
-	void EventFillFieldsEdit();
-	bool EventSaveFieldsEdit();
-	void SaveEditObjectWoldInfo();
-
-	//============== Event Use Controls ========================================
-
-	//--- Use = Edit on/off
-	void ModeEditControls();
-
-	//--- Use = Click control
-	void EventStartClickControl();
-
-	//--- Edit = Name control
-	void EventStartRenameObject();
-
-	//--- Use = Edit box controls
-	void EventEditTextControl();
-		
-	//--- Use = Message - EditBox & TextBox
-	void EventReadKeyInput();
-
-	//=================================================
-	
-	void CalculateMousePosWorld();
 
 	//--- call refresh visible
 	void CheckStateObjects();
@@ -143,7 +111,5 @@ public:
 	// -- save event status animation
 	void SetCurrentEventParam(shared_ptr<ObjectData> obj, int value);
 	void SetTimeAnimate(shared_ptr<ObjectData> obj, float time);
-	
-	
 };
 

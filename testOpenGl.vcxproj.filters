@@ -207,6 +207,12 @@
     <ClCompile Include="Rooms\Inretface\AspectTransformControlsGUI.cpp">
       <Filter>Rooms\Interface</Filter>
     </ClCompile>
+    <ClCompile Include="Rooms\Inretface\AspectCreateControlsGUI.cpp">
+      <Filter>Rooms\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms\Inretface\AspectUseControlsGUI.cpp">
+      <Filter>Rooms\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_coreCpp_4_3.hpp">
@@ -351,6 +357,12 @@
       <Filter>Rooms</Filter>
     </ClInclude>
     <ClInclude Include="Rooms\Inretface\AspectTransformControlsGUI.h">
+      <Filter>Rooms\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\Inretface\AspectCreateControlsGUI.h">
+      <Filter>Rooms\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms\Inretface\AspectUseControlsGUI.h">
       <Filter>Rooms\Interface</Filter>
     </ClInclude>
   </ItemGroup>

@@ -119,19 +119,19 @@ void SceneConstructor::ConfigRoom() {
 	Aspects.push_back(make_unique<AspectFamilyBonds>(*aspectFamilyBonds));
 
 	RoomUseInterface* aspectInterface = new RoomUseInterface("Interface", this);
-	aspectInterface->Init();
 	Aspects.push_back(make_unique<RoomUseInterface>(*aspectInterface));
+	Aspects.back()->Init();
 		
 	dispatcherCommands = new AspectDispatcherCommands("DispatcherCommands", this);
 	dispatcherCommands->Init();
 	Aspects.push_back(make_unique<AspectDispatcherCommands>(*dispatcherCommands));
-	dispatcherCommands = dynamic_pointer_cast<AspectDispatcherCommands>(Aspects[Aspects.size()-1]).get();
+	dispatcherCommands = dynamic_pointer_cast<AspectDispatcherCommands>(Aspects.back()).get();
 	
 		
 	factoryObjects = new AspectFactoryObjects("FactoryObjects", this);
 	factoryObjects->Init();
 	Aspects.push_back(make_unique<AspectFactoryObjects>(*factoryObjects));
-	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Aspects[Aspects.size() - 1]).get();
+	factoryObjects = dynamic_pointer_cast<AspectFactoryObjects>(Aspects.back()).get();
 }
 
 void SceneConstructor::AddAspect(AspectBase* aspect) {

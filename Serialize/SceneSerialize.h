@@ -96,7 +96,6 @@ string FormatFieldName(string value);
 class SceneSerialize
 {
 private:
-
 	string m_dataObjects;
 	string m_dataModels;
 	string m_dataShells;
