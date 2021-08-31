@@ -6,8 +6,6 @@
 //#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\ObjectsTypes\ObjectButton.h"
-#include "..\ObjectsTypes\ObjectEditBox.h"
-#include "..\ObjectsTypes\ObjectTextBox.h"
 #include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"

@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Components\RenderComponent.cpp" />
+    <ClCompile Include="Components\TextBoxComponent.cpp" />
     <ClCompile Include="ConfigBuffers.cpp" />
     <ClCompile Include="ConfigUniformArg.cpp">
       <FileType>CppCode</FileType>
@@ -170,14 +171,12 @@
     <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectData.cpp" />
-    <ClCompile Include="ObjectsTypes\ObjectEditBox.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectGUI.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectHero.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectListBox.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectNPC.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPhysic.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectPolygon.cpp" />
-    <ClCompile Include="ObjectsTypes\ObjectTextBox.cpp" />
     <ClCompile Include="OperationString.cpp" />
     <ClCompile Include="Rooms\AspectDispatcherCommands.cpp" />
     <ClCompile Include="Rooms\AspectFactoryObjects.cpp" />
@@ -199,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\RenderComponent.h" />
+    <ClInclude Include="Components\TextBoxComponent.h" />
     <ClInclude Include="ConfigBuffers.h" />
     <ClInclude Include="ConfigUniformArg.h" />
     <ClInclude Include="Controllers.h" />
@@ -221,14 +221,12 @@
     <ClInclude Include="ObjectsTypes\ObjectCursorRay.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />
     <ClInclude Include="ObjectsTypes\ObjectData.h" />
-    <ClInclude Include="ObjectsTypes\ObjectEditBox.h" />
     <ClInclude Include="ObjectsTypes\ObjectGUI.h" />
     <ClInclude Include="ObjectsTypes\ObjectHero.h" />
     <ClInclude Include="ObjectsTypes\ObjectListBox.h" />
     <ClInclude Include="ObjectsTypes\ObjectNPC.h" />
     <ClInclude Include="ObjectsTypes\ObjectPhysic.h" />
     <ClInclude Include="ObjectsTypes\ObjectPolygon.h" />
-    <ClInclude Include="ObjectsTypes\ObjectTextBox.h" />
     <ClInclude Include="OperationString.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rooms\AspectDispatcherCommands.h" />

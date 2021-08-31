@@ -16,7 +16,9 @@
 
 #include "../../CreatorModelData.h"
 #include "../../ShellObjects/BaseShell.h"
-#include "../../ObjectsTypes\ObjectEditBox.h"
+//#include "../../ObjectsTypes\ObjectEditBox.h"
+
+#include "../../Components/TextBoxComponent.h"
 
 void AspectUseControlsGUI::Config() {
 
@@ -113,7 +115,7 @@ void AspectUseControlsGUI::EventStartRenameObject() {
 		objGUI->Click();
 	}
 
-	auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objGUI);
+	
 
 	if (command->TargetIndex == objGUI->Index)
 	{
@@ -128,14 +130,13 @@ void AspectUseControlsGUI::EventStartRenameObject() {
 
 	if (objGUI->ActionObjectCurrent == ActionObject::Woking)
 	{
-
-		if (objTextBox != nullptr && objTextBox->TypeObj == TextBox)
+		if (objGUI->IsTextBoxComponent && objGUI->TypeObj == TextBox)
 		{
 			if (Scene->ReadCommand(KeyInputCommand))
 			{
 				// Import Message from EditBox
-				objTextBox->Message = command->ValueS;
-				objTextBox->UpdateMessage();
+				objGUI->TextBox->Message = command->ValueS;
+				objGUI->TextBox->UpdateMessage();
 			}
 		}
 	}
@@ -186,18 +187,15 @@ void AspectUseControlsGUI::EventReadKeyInput() {
 	if (!isPressKey)
 		return;
 
-	//--- Event inputs in text box
-	auto objEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objGUI);
-
-	if (objEditBox != nullptr) {
-		objEditBox->AddSymbolMessage(Scene->SymbolInput);
+	if (objGUI->TypeObj == TypeObject::EditBox && objGUI->IsTextBoxComponent) {
+		//--- Event inputs in text box
+		objGUI->TextBox->AddSymbolMessage(Scene->SymbolInput);
+		//-- Translate Message EditBox -> TextBox 
+		Scene->AddCommand(TypeCommand::KeyInputCommand,
+			objGUI->Index,
+			-1, -1, -1, vec4(),
+			objGUI->TextBox->Message);
 	}
-
-	//-- Translate Message EditBox -> TextBox 
-	Scene->AddCommand(TypeCommand::KeyInputCommand,
-		objGUI->Index,
-		-1, -1, -1, vec4(),
-		objEditBox->Message);
 }
 
 
@@ -220,11 +218,10 @@ void AspectUseControlsGUI::EventEditTextControl() {
 	{
 		if (isChecked)
 		{
-			auto objEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objGUI);
-			if (objGUI->TypeObj == EditBox && command->ValueS.size() != 0) {
-				objEditBox->Message = command->ValueS;
-				objEditBox->UpdateMessage();
-			}
+			if (objGUI->IsTextBoxComponent && objGUI->TypeObj == EditBox && command->ValueS.size() != 0) {
+				objGUI->TextBox->Message = command->ValueS;
+				objGUI->TextBox->UpdateMessage();
+			} 
 
 			//Start edit box
 			m_base->IndexObjectSelected = objGUI->Index;

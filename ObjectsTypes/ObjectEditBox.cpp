@@ -3,6 +3,7 @@
 #include "../CoreSettings.h"
 #include "../CreatorModelData.h"
 
+#include "../Components/TextBoxComponent.h"
 
 ObjectEditBox::~ObjectEditBox() {
 
@@ -34,5 +35,12 @@ void ObjectEditBox::AddSymbolMessage(string symbol) {
 	if (symbol.size() != 0)
 		Message += symbol;
 
-	UpdateMessage();	
+	
+	if (IsTextBoxComponent) //#TBX
+	{
+		TextBox->UpdateMessage();
+	}
+	else {
+		UpdateMessage();  //#TBX--	 
+	}
 }

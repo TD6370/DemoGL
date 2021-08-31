@@ -177,12 +177,6 @@
     <ClCompile Include="ObjectsTypes\ObjectButton.cpp">
       <Filter>Objects\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectTextBox.cpp">
-      <Filter>Objects\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectEditBox.cpp">
-      <Filter>Objects\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="ShellObjects\BaseShell.cpp">
       <Filter>ShellObjects</Filter>
     </ClCompile>
@@ -212,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="Rooms\Inretface\AspectUseControlsGUI.cpp">
       <Filter>Rooms\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TextBoxComponent.cpp">
+      <Filter>Engine\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,12 +326,6 @@
     <ClInclude Include="ObjectsTypes\ObjectButton.h">
       <Filter>Objects\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectTextBox.h">
-      <Filter>Objects\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectEditBox.h">
-      <Filter>Objects\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="ShellObjects\BaseShell.h">
       <Filter>ShellObjects</Filter>
     </ClInclude>
@@ -364,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="Rooms\Inretface\AspectUseControlsGUI.h">
       <Filter>Rooms\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TextBoxComponent.h">
+      <Filter>Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -36,6 +36,7 @@ class WorldCluster;
 struct ObjectFiledsSpecific;
 class BaseShell;
 class RenderComponent;
+class TextBoxComponent;
 
 class ShapeBase;
 class ShapeHexagon;
@@ -91,6 +92,7 @@ public:
 	bool IsNPC = false;
 	bool IsHexagonModel = false;
 	bool IsSquareModel = false;
+	bool IsTextBoxComponent = false;
 
 	bool IsVisible = true;
 	bool IsFocusable = false;
@@ -100,6 +102,7 @@ public:
 	bool IsAbsolutePosition = true;
 	bool IsTextureRepeat = false;
 	bool IsGravity = false;
+	
 	
 	//-------- Links
 	shared_ptr<ModelData> ModelPtr; 	//TODO: ????
@@ -121,6 +124,10 @@ public:
 					
 	//---- Render component
 	RenderComponent* Render;
+
+	//---- Text box component
+
+	TextBoxComponent* TextBox;
 
 	//-- Render ??
 	float TextureRepeat = 1;

@@ -33,6 +33,7 @@ struct OptionsObject {
 	string IsTransformable = "IsTransformable:";
 	string IsUsable = "IsUsable:";
 	string IsChecked = "IsChecked:";
+	string IsTextBoxComponent = "IsTextBoxComponent:";
 	bool Value;
 };
 

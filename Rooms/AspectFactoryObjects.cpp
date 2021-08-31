@@ -3,28 +3,11 @@
 #include "../SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
 
-//#include "RoomMarkerPlane.h"
-//#include "..\GeometryLib.h"
-//#include "..\SceneConstructor.h"
-//#include "..\ObjectsTypes\ObjectData.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 
-//#include "ObjectsTypes/ObjectData.h"
-//#include "ObjectsTypes/ObjectPhysic.h"
-//#include "ObjectsTypes/ObjectDynamic.h"
-//#include "ObjectsTypes/ObjectPolygon.h"
-//#include "ObjectsTypes/ObjectHero.h"
-//#include "ObjectsTypes/ObjectNPC.h"
-//#include "ObjectsTypes/ObjectBullet.h"
-//#include "ObjectsTypes/ObjectCursorRay.h"
-//#include "ObjectsTypes/ObjectBlock.h"
 #include "../ObjectsTypes/ObjectGUI.h"
-//#include "ObjectsTypes/ObjectTextBox.h"
-//#include "ObjectsTypes/ObjectCursorGUI.h"
 #include "../ObjectsTypes/ObjectButton.h"
-#include "../ObjectsTypes/ObjectEditBox.h"
-//#include "GeomertyShapes//ShapeBase.h" //###
 #include "../SceneLayer.h"
 
 
@@ -101,7 +84,6 @@ void  AspectFactoryObjects::Work() {
 		m_startContructing = true;
 		info.Pos = vec3(posC.x, posC.y, posC.z);
 	}
-
 
 	int value = command.Options[Scene->CommandsAttribute.TypeObjectAttr];
 	TypeObject typeObj = (TypeObject)value;
@@ -205,7 +187,7 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	string childModel;
 	string objName;
 	shared_ptr<ObjectButton> objCreateButton;
-	shared_ptr<ObjectEditBox> objCreateEditBox;
+	//shared_ptr<ObjectEditBox> objCreateEditBox;
 	shared_ptr<ObjectData> objCreate;
 	vec3 pos = vec3(1.);
 	vec2 size = vec2(0.7, 0.06);
@@ -226,7 +208,7 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	objCreateButton->IsToogleButon = true;
 
 		// ---- Object Edit box create	
-		auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
+		Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
 
 	if(!m_startContructing)
 		Scene->AddCommand(ObjectCreated, -1, objCreateButton->Index);
@@ -406,9 +388,8 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			objCreateButton->IsToogleButon = false;
 
 			//-- create Text item 
-			auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);
-			shared_ptr<ObjectTextBox> objCreateTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objCreateTextBox_Data);
-
+			Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);
+			
 			SetCommand(objCreateButton, commItem);
 		}
 		//--- list index items for shell

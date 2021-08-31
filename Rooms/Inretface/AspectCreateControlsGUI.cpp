@@ -16,7 +16,9 @@
 
 #include "../../CreatorModelData.h"
 #include "../../ShellObjects/BaseShell.h"
-#include "../../ObjectsTypes\ObjectEditBox.h"
+//#include "../../ObjectsTypes\ObjectEditBox.h"
+
+#include "../../Components/TextBoxComponent.h"
 
 void AspectCreateControlsGUI::Config() {
 
@@ -158,13 +160,13 @@ void AspectCreateControlsGUI::EventEndCreateObject() {
 		if (Scene->ShellCurrent->RootObjIndex == m_base->IndexObjectCreating &&
 			Scene->ShellCurrent->CaptionObjIndex == objGUI->Index)
 		{
-			auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(objGUI);
-			if (objTextBox != nullptr && objTextBox->TypeObj == TextBox)
+
+			if (objGUI->IsTextBoxComponent && objGUI->TypeObj == TextBox)
 			{
 				Scene->AddCommand(TypeCommand::ObjectReading,
 					objGUI->Index,
 					m_base->IndexObjectCreating, -1, -1, vec4(-1),
-					objTextBox->Message,
+					objGUI->TextBox->Message,
 					"",
 					true);
 			}
@@ -287,26 +289,26 @@ void AspectCreateControlsGUI::EventFillFieldsEdit() {
 			while (indItemNext != -1)
 			{
 				//--- Button (objItemEditBoxControl)
-				std::shared_ptr<ObjectEditBox> objItemEditBox = std::dynamic_pointer_cast<ObjectEditBox>(objItem_Button_EditBox->Shell->CaptionObj);
+				auto objItemEditBox = objItem_Button_EditBox->Shell->CaptionObj;
 
 				//--- Set value
 				string fieldName = objItemEditBox->SceneCommand->Description;
 				if (fieldName.size() != 0)
 				{
 					if (isFillFields) {
-						/*if (fieldName[fieldName.size() - 1] == ':')
-							fieldName.erase(fieldName.end() - 1);*/
 
+						if (objItemEditBox->IsTextBoxComponent)
+						{
 							//--- SET VALUE -- FROM TYPE FIELD
-						objItemEditBox->Message = Scene->GetObjectValueByFieldName(fieldName);
-						objItemEditBox->UpdateMessage();
-						//objItemEditBox->Message = listObjFieldsValue[typeFieldName];
+							objItemEditBox->TextBox->Message = Scene->GetObjectValueByFieldName(fieldName);
+							objItemEditBox->TextBox->UpdateMessage();
+						}
 					}
 					else {
 						//=== SAVE FIELDS - TO OBJECT
 						fieldName += ": ";
 						resultFieldsAndValues.append(fieldName);
-						resultFieldsAndValues.append(objItemEditBox->Message);
+						resultFieldsAndValues.append(objItemEditBox->TextBox->Message);
 						resultFieldsAndValues.append("\n");
 					}
 				}

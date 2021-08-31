@@ -12,10 +12,10 @@
 #include "ObjectsTypes/ObjectCursorRay.h"
 #include "ObjectsTypes/ObjectBlock.h"
 #include "ObjectsTypes/ObjectGUI.h"
-#include "ObjectsTypes/ObjectTextBox.h"
+//#include "ObjectsTypes/ObjectTextBox.h"
 #include "ObjectsTypes/ObjectCursorGUI.h"
 #include "ObjectsTypes/ObjectButton.h"
-#include "ObjectsTypes/ObjectEditBox.h"
+//#include "ObjectsTypes/ObjectEditBox.h"
 #include "ObjectsTypes/ObjectListBox.h"
 #include "GeomertyShapes/ShapeBase.h"
 #include "GeomertyShapes/ShapeSquare.h"
@@ -25,6 +25,8 @@
 
 #include "Serialize/SceneSerialize.h"
 #include "Rooms/RoomSerializeScene.h"
+
+#include "Components/TextBoxComponent.h"
 
 #include "LoadBmp.h"
 #include "ConfigBuffers.h"
@@ -249,17 +251,17 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 			break;
 		}
 		case TextBox: {
-			ObjectTextBox obj = ObjectTextBox(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectTextBox>(obj));
-			//SceneObjectsV.push_back(obj); //TEST^^
+			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsTextBoxComponent = true;
 			break;
 		}
 		case EditBox: {
-			ObjectEditBox obj = ObjectEditBox(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectEditBox>(obj));
-			//SceneObjectsV.push_back(obj); //TEST^^
+			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsTextBoxComponent = true;
 			break;
 		}
 		case Button: {
@@ -628,6 +630,7 @@ void CreatorModelData::SaveAndInitObject(ObjectFileds* objFields, vector<ObjectF
 	newObj->IsTransformable = StrToBool(opt.IsTransformable);
 	newObj->IsUsable = StrToBool(opt.IsUsable);
 	newObj->IsChecked = StrToBool(opt.IsChecked);
+	newObj->IsTextBoxComponent = StrToBool(opt.IsTextBoxComponent);
 
 	//#SaveFieldSpecific
 	if (isNewObject) {
@@ -1150,12 +1153,11 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 
 	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
 
-	auto objTextBox = std::dynamic_pointer_cast<ObjectTextBox>(obj);
-	if (objTextBox != nullptr) {
-		objTextBox->Message = caption;
-		objTextBox->CreateMessage();
+	if (obj->IsTextBoxComponent) 
+	{
+		obj->TextBox->Message = caption;
+		obj->TextBox->CreateMessage();
 	}
-
 	return objGUI;
 }
 
@@ -1179,14 +1181,14 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 				if (name.size() == 0)
 					name = "Button_TextBox";
 				objData = AddChildObject(objButton, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1), p_layer);
-				auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
-
-				AddShell("ButtonShell_" + objButton->Name,
-					objButton->Index,
-					objTextButton->Index);
-
-				//LayerScene->SaveOrderIndex(objTextButton);
-				return objTextButton;
+				
+				if (objData->IsTextBoxComponent)
+				{
+					AddShell("ButtonShell_" + objButton->Name,
+						objButton->Index,
+						objData->Index);
+					return objData;
+				}
 			}
 		}
 	}
@@ -1201,17 +1203,17 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 			if (name.size() == 0)
 				name = "Button_EditBox";
 			auto objCreate = AddChildObject(objButton, caption, "EditBoxModel", name, startPos, vec2(1.5, 1.), EditBox, vec3(-1), p_layer);
-			auto editBoxObj = std::dynamic_pointer_cast<ObjectEditBox>(objCreate);
 
-			SetCommand(objButton, TypeCommand::EditObjectCommand, objButton->Index, editBoxObj->Index, -1);
+			if (objCreate->IsTextBoxComponent)
+			{
+				SetCommand(objButton, TypeCommand::EditObjectCommand, objButton->Index, objCreate->Index, -1);
 
-			AddShell("EditBoxShell_" + objButton->Name,
-				objButton->Index, 
-				editBoxObj->Index);
+				AddShell("EditBoxShell_" + objButton->Name,
+					objButton->Index,
+					objCreate->Index);
 
-			//LayerScene->SaveOrderIndex(editBoxObj);
-
-			return editBoxObj;
+				return objCreate;
+			}
 		}
 	}
 
@@ -1225,13 +1227,14 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 		if (name.size() == 0)
 			name = "TextBox";
 		objData = AddChildObject(obj, caption, "TextBoxModel", name, startPos, vec2(1.5, 1.), TextBox, vec3(-1), p_layer);
-		auto objTextButton = std::dynamic_pointer_cast<ObjectTextBox>(objData);
-
-		AddShell("ButtonShell_" + obj->Name,
-			obj->Index,
-			objTextButton->Index);
-
-		return objTextButton;
+		
+		if (objData->IsTextBoxComponent)
+		{
+			AddShell("ButtonShell_" + obj->Name,
+				obj->Index,
+				objData->Index);
+			return objData;
+		}
 	}
 
 	return nullptr;

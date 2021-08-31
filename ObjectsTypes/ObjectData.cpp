@@ -14,6 +14,8 @@
 #include "../GeomertyShapes/ShapeHexagon.h"
 #include "../GeomertyShapes/ShapeSquare.h"
 #include "../Components/RenderComponent.h"
+#include "../Components/TextBoxComponent.h"
+
 
 #include "../ShellObjects/BaseShell.h"
 
@@ -54,6 +56,8 @@ ObjectData::ObjectData(int p_index,
 	StartColor = MaterialData.Color;
 	Layer = TypeLayer::LayerNone;
 	EngineData = new DataEngine();
+	
+
 }
 
 ObjectData::~ObjectData()
@@ -75,6 +79,12 @@ void ObjectData::InitRender() {
 void ObjectData::InitData()
 {
 	InitRender();
+
+	if (IsTextBoxComponent)
+	{
+		TextBox = new TextBoxComponent();
+		TextBox->Init(this);
+	}
 
 	switch (TypeObj)
 	{
@@ -149,15 +159,33 @@ void ObjectData::RunTransform()
 
 void ObjectData::CheckedRefresh() { }
 
-void ObjectData::Click() { }
+void ObjectData::Click() {
 
-void ObjectData::ActionWork() { }
+	if (IsTextBoxComponent)
+	{
+		TextBox->Click();
+	}
+}
+
+void ObjectData::ActionWork() {
+
+	if (IsTextBoxComponent)
+	{
+		TextBox->ActionWork();
+	}
+}
 
 void ObjectData::CheckStartPosition() {}
 
 //================================== To shader mem
 
 string ObjectData::GetCashStateUpdateDataToShader() {
+
+	if (IsTextBoxComponent)
+	{
+		return TextBox->GetCashStateUpdateDataToShader();
+	}
+
 	string cash(1, Index);
 	return cash;
 }
@@ -256,6 +284,11 @@ void ObjectData::Refresh() {
 			IsVisible = OwnerObj->IsVisible;
 	}
 
+	if (IsTextBoxComponent)
+	{
+		TextBox->Refresh();
+	}
+
 	//CheckedRefresh();
 }
 //=========================================
@@ -299,6 +332,11 @@ std::vector<glm::vec3> ObjectData::GetNormals() {
 }
 
 void ObjectData::MeshTransform() {
+
+	if (IsTextBoxComponent)
+	{
+		TextBox->MeshTransform();
+	}
 }
 
 void ObjectData::SelectedEvent() {
@@ -340,6 +378,11 @@ void ObjectData::DefaultView()
 
 	//--- TEST
 	ParamValue = 0;
+
+	if (IsTextBoxComponent && TypeObj == TypeObject::EditBox)
+	{
+		TextBox->DefaultView();
+	}
 }
 
 string ObjectData::GetInfo() {
@@ -369,6 +412,10 @@ void ObjectData::SetZ(float z)
 
 int ObjectData::GetRightBorderVertexIndex() {
 
+	if (IsTextBoxComponent)
+	{
+		return TextBox->GetRightBorderVertexIndex();
+	}
 	return -1;
 }
 
@@ -399,13 +446,21 @@ void ObjectData::SetShell(shared_ptr<BaseShell> p_shell)
 
 vector<ObjectFiledsSpecific> ObjectData::GetSpecificFiels() {
 
+	if (IsTextBoxComponent)
+	{
+		return TextBox->GetSpecificFiels();
+	}
+
 	vector<ObjectFiledsSpecific> result;
 	return result;
 }
 
 void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 
-
+	if (IsTextBoxComponent)
+	{
+		return TextBox->SetSpecificFiels(filedsSpecific);
+	}
 }
 
 //Get Last By Specific Field Value

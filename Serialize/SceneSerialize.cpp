@@ -149,8 +149,9 @@ void SceneSerialize::Save(shared_ptr<ObjectData> obj, bool isSpecificExist, bool
 	streamObjects << fileds.Options.IsFocusable << " " << obj->IsFocusable << "\n";
 	streamObjects << fileds.Options.IsTransformable << " " << obj->IsTransformable << "\n";
 	streamObjects << fileds.Options.IsUsable << " " << obj->IsUsable << "\n";
-
 	streamObjects << fileds.Options.IsChecked << " " << obj->IsChecked << "\n";
+
+	streamObjects << fileds.Options.IsTextBoxComponent << " " << obj->IsTextBoxComponent << "\n";
 
 	if (isGet) {
 		AddFieldNameAndValue(streamObjects);
@@ -340,6 +341,8 @@ void SceneSerialize::CreateStructFileds(std::stringstream& in, ObjectFileds& fil
 		in >> filedsObj.Options.IsUsable;
 	if (in >> lineStr && lineStr == filedsObj.Options.IsChecked)
 		in >> filedsObj.Options.IsChecked;
+	if (in >> lineStr && lineStr == filedsObj.Options.IsTextBoxComponent)
+		in >> filedsObj.Options.IsTextBoxComponent;
 }
 
 void SceneSerialize::Load(bool isOnlyObjects) {

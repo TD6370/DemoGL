@@ -1,6 +1,5 @@
 #include "ObjectGUI.h"
 #include "ObjectPhysic.h"
-#include "ObjectTextBox.h"
 #include "ObjectButton.h"
 
 #include "..\CreatorModelData.h"
@@ -12,6 +11,8 @@
 #include "../GeomertyShapes/ShapeSquare.h"
 #include "../ShellObjects/BaseShell.h"
 #include "../Components/RenderComponent.h"
+
+#include "../Components/TextBoxComponent.h"
 
 void ObjectGUI::InitData() {
 
@@ -38,7 +39,12 @@ void ObjectGUI::RunAction() {
 		switch (ActionObjectCurrent)
 		{
 			case Woking:
-				ActionWork();
+				if (IsTextBoxComponent)
+				{
+					TextBox->ActionWork();
+				}
+				else
+					ActionWork();
 				break;
 			case Moving:
 				ActionMoving();
@@ -79,6 +85,12 @@ vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
 		{"SizePanel:", serializer->Vec2Str(SizePanel)}
 	};
 
+	if (IsTextBoxComponent)
+	{
+		vector<ObjectFiledsSpecific> resultTextBox = TextBox->GetSpecificFiels();
+		result.insert(result.end(), resultTextBox.begin(), resultTextBox.end());
+	}
+
 	return result;
 }
 
@@ -91,6 +103,11 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 
 	StartPos = serializer->StrToVec3(filedsSpecific[0].Value);
 	SizePanel = serializer->StrToVec2(filedsSpecific[1].Value);
+
+	if (IsTextBoxComponent)
+	{
+		TextBox->SetSpecificFiels(filedsSpecific);
+	}
 	
 	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 }
@@ -98,10 +115,22 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 //----------------------------------------------------------------
 
 void ObjectGUI::Click() {
+
+	if (IsTextBoxComponent)
+	{
+		TextBox->Click();
+		return;
+	}
 	ActionObjectCurrent = Woking;
 }
 
 void ObjectGUI::ActionWork() {
+
+	if (IsTextBoxComponent)
+	{
+		TextBox->ActionWork();
+		return;
+	}
 
 	MaterialData.Color = m_color_work;
 	ActionObjectCurrent = Stay; //Off
