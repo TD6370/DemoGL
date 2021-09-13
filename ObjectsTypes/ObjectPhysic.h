@@ -55,7 +55,7 @@ public:
 	bool IsCollisionObject(int index, int& indexObjHit, bool isNewPosition);
 
 	void virtual ActionMoving(); 
-	void virtual ActionTransforming();
+	//void virtual ActionTransforming();
 	void virtual CalculateNextPosition();
 	void virtual SaveNewPosition();
 

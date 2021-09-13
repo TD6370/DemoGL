@@ -10,6 +10,8 @@
 #include "../ObjectsTypes/ObjectButton.h"
 #include "../SceneLayer.h"
 
+#include "../Components/ButtonComponent.h"
+#include "../Components/GUIComponent.h"
 
 void AspectFactoryObjects::Config() {
 
@@ -186,8 +188,8 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	string caption = "?";
 	string childModel;
 	string objName;
-	shared_ptr<ObjectButton> objCreateButton;
-	//shared_ptr<ObjectEditBox> objCreateEditBox;
+	
+	shared_ptr<ObjectGUI> objCreateButton;
 	shared_ptr<ObjectData> objCreate;
 	vec3 pos = vec3(1.);
 	vec2 size = vec2(0.7, 0.06);
@@ -204,8 +206,9 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 	
 	objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
-	objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-	objCreateButton->IsToogleButon = true;
+	
+	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+	objCreateButton->ComponentButton->IsToogleButon = true;
 
 		// ---- Object Edit box create	
 		Scene->Storage->ControlConstruct(objCreateButton, caption, EditBox);
@@ -249,7 +252,8 @@ void AspectFactoryObjects::CreateButton(CreateInfo info) {
 	string childModel;
 	string objName;
 	vec3 color = vec3(0.3);
-	shared_ptr<ObjectButton> objCreateButton;
+	shared_ptr<ObjectGUI> objCreateButton;
+
 	shared_ptr<ObjectData> objCreate;
 	vec3 pos = vec3(1.);
 	vec2 size = vec2(0.7, 0.1);
@@ -266,8 +270,9 @@ void AspectFactoryObjects::CreateButton(CreateInfo info) {
 	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
 	
 		objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
-		objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-		objCreateButton->IsToogleButon = false;
+		
+		objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+		objCreateButton->ComponentButton->IsToogleButon = false;
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
 	
 		auto objCreateTextBox_Data = Scene->Storage->ControlConstruct(objCreateButton, caption, Button);
@@ -285,8 +290,8 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	string childModel;
 	string objName;
 	vec3 color = vec3(0.3);
-	shared_ptr<ObjectButton> objCreateButton;
-	//shared_ptr<ObjectButton> objCreateButton_Prev = nullptr;
+
+	shared_ptr<ObjectGUI> objCreateButton;
 	shared_ptr<ObjectData> objCreateItem_Prev = nullptr;
 	shared_ptr<ObjectData> objBaseFrame;
 	
@@ -363,8 +368,9 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			objName = "EditBoxItem_ListEditBox";
 			childModel = "ButtonEditBoxModel";
 			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
-			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-			objCreateButton->IsToogleButon = true;
+			objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+			objCreateButton->ComponentButton->IsToogleButon = true;
+
 			auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, EditBox);
 
 			//Command - create type Obj 
@@ -381,11 +387,8 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			objName = "ButtonItem_ListBox";
 			childModel = "ButtonModel";
 			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
-			objCreateButton = std::dynamic_pointer_cast<ObjectButton>(objCreate);
-			/*if(commItem.CommandType == SelectItemValue)
-				objCreateButton->IsToogleButon = true;
-			else*/
-			objCreateButton->IsToogleButon = false;
+			objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+			objCreateButton->ComponentButton->IsToogleButon = false;
 
 			//-- create Text item 
 			Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);

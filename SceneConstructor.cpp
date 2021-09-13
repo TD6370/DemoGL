@@ -195,18 +195,18 @@ void SceneConstructor::SetDataToShader() {
 		return;
 
 
-	if (ObjectCurrent->IsGUI != m_isEnableGUI ||
-		ObjectCurrent->IsGUI != Storage->SceneData->IsGUI) 
-	{
-		m_isEnableGUI = ObjectCurrent->IsGUI;
-		m_isUpdateShaderProgramm = true;
-	}
+	//if (ObjectCurrent->IsGUI != m_isEnableGUI ||
+	//	ObjectCurrent->IsGUI != Storage->SceneData->IsGUI) 
+	//{
+	//	m_isEnableGUI = ObjectCurrent->IsGUI;
+	//	m_isUpdateShaderProgramm = true;
+	//}
 
-	if (m_isUpdateShaderProgramm) {
+	/*if (m_isUpdateShaderProgramm) {
 		m_isUpdateTexture = true;
 		m_isUpdateMesh = true;
 		m_isUpdateUV = true;
-	}
+	}*/
 
 	ConfigUniform* uniform = ModelCurrent->Render->ConfUniform;
 
@@ -230,10 +230,12 @@ void SceneConstructor::SetDataToShader() {
 	//MODEL param
 	uniform->SetModel(Storage->ConfigMVP->Model);
 
-	bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
+	//bool isTransformMesh = IsHexagonModel || IsSquareModel || ObjectCurrent->IsTransformable;
+	bool isTransformMesh = ObjectCurrent->IsNeedUodateMeshToShader();
 
 	//if (!isSkipDynamic && (m_isUpdateMesh || isTransformMesh))  //Lite mode
 	bool liteMode = !isSkipDynamic && (m_isUpdateMesh || IsSquareModel);
+
 	if (liteMode)  //Lite mode
 	{
 		if (isTransformMesh || isTransformMesh != m_isLastTransformMesh) {

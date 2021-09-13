@@ -1,6 +1,6 @@
 #include "ObjectGUI.h"
 #include "ObjectPhysic.h"
-#include "ObjectButton.h"
+//#include "ObjectButton.h"
 
 #include "..\CreatorModelData.h"
 #include "..\Serialize\SceneSerialize.h"
@@ -13,6 +13,7 @@
 #include "../Components/RenderComponent.h"
 
 #include "../Components/TextBoxComponent.h"
+#include "../Components/ButtonComponent.h"
 
 void ObjectGUI::InitData() {
 
@@ -39,19 +40,24 @@ void ObjectGUI::RunAction() {
 		switch (ActionObjectCurrent)
 		{
 			case Woking:
-				if (IsTextBoxComponent)
+				/*if (IsButtonComponent)
+				{
+					ActionWork();
+					ComponentButton->ActionWork();
+				}
+				else if (IsTextBoxComponent)
 				{
 					TextBox->ActionWork();
 				}
-				else
+				else*/
 					ActionWork();
 				break;
 			case Moving:
 				ActionMoving();
 				break;
-			case Transforming:
+			/*case Transforming:
 				ActionTransforming();
-				break;
+				break;*/
 			default:
 				break;
 		}
@@ -90,6 +96,11 @@ vector<ObjectFiledsSpecific> ObjectGUI::GetSpecificFiels() {
 		vector<ObjectFiledsSpecific> resultTextBox = TextBox->GetSpecificFiels();
 		result.insert(result.end(), resultTextBox.begin(), resultTextBox.end());
 	}
+	if (IsButtonComponent)
+	{
+		vector<ObjectFiledsSpecific> resultTextBox = ComponentButton->GetSpecificFiels();
+		result.insert(result.end(), resultTextBox.begin(), resultTextBox.end());
+	}
 
 	return result;
 }
@@ -108,6 +119,10 @@ void ObjectGUI::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	{
 		TextBox->SetSpecificFiels(filedsSpecific);
 	}
+	if (IsButtonComponent)
+	{
+		ComponentButton->SetSpecificFiels(filedsSpecific);
+	}
 	
 	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
 }
@@ -118,9 +133,19 @@ void ObjectGUI::Click() {
 
 	if (IsTextBoxComponent)
 	{
-		TextBox->Click();
+		IsChecked = !IsChecked;
+		if (IsChecked)
+			ActionObjectCurrent = Woking;
+		else
+			ActionObjectCurrent = Stay;
 		return;
 	}
+	if (IsButtonComponent) {
+		if (ComponentButton->IsToogleButon) {
+			IsChecked = !IsChecked;
+		}
+	}
+
 	ActionObjectCurrent = Woking;
 }
 
@@ -134,6 +159,11 @@ void ObjectGUI::ActionWork() {
 
 	MaterialData.Color = m_color_work;
 	ActionObjectCurrent = Stay; //Off
+
+	if (IsButtonComponent)
+	{
+		ComponentButton->ActionWork();
+	}
 }
 
 

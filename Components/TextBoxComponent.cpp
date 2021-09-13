@@ -47,13 +47,13 @@ void TextBoxComponent::Init(ObjectData* obj) {
 	}
 }
 
-void TextBoxComponent::Click() {
-	m_obj->IsChecked = !m_obj->IsChecked;
-	if (m_obj->IsChecked)
-		m_obj->ActionObjectCurrent = Woking;
-	else
-		m_obj->ActionObjectCurrent = Stay;
-}
+//void TextBoxComponent::Click() {
+//	m_obj->IsChecked = !m_obj->IsChecked;
+//	if (m_obj->IsChecked)
+//		m_obj->ActionObjectCurrent = Woking;
+//	else
+//		m_obj->ActionObjectCurrent = Stay;
+//}
 
 void TextBoxComponent::ActionWork() {
 

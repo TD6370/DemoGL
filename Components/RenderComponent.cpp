@@ -225,17 +225,22 @@ void RenderComponent::SetDataToShader(ObjectData& obj) {
 
 	if (obj.IsGUI)
 	{
-		float width = obj.GetShapeSquare()->WidthFactor;
-		float height = obj.GetShapeSquare()->HeightFactor;
-		vec3 posMove = obj.GetShapeSquare()->PosMoveFactor;
-		vec3 posMoveSize = obj.GetShapeSquare()->PosMoveSizeFactor;
-		if (width < 0)
-			return;
+		if (obj.ActionObjectCurrent == ActionObject::Transforming ||
+			obj.ActionObjectCurrent == ActionObject::Moving ||
+			obj.ActionObjectCurrent == ActionObject::Woking) {
 
-		SetWidth(width);
-		SetHeight(height);
-		SetPosMove(posMove);
-		SetPosMoveSize(posMoveSize);
+			float width = obj.GetShapeSquare()->WidthFactor;
+			float height = obj.GetShapeSquare()->HeightFactor;
+			vec3 posMove = obj.GetShapeSquare()->PosMoveFactor;
+			vec3 posMoveSize = obj.GetShapeSquare()->PosMoveSizeFactor;
+			if (width < 0)
+				return;
+
+			SetWidth(width);
+			SetHeight(height);
+			SetPosMove(posMove);
+			SetPosMoveSize(posMoveSize);
+		}
 	}
 }
 

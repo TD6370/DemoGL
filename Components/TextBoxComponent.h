@@ -41,7 +41,7 @@ public:
 
 	void Init(ObjectData* obj);
 
-	void Click();
+	//void Click();
 
 	void ActionWork();
 

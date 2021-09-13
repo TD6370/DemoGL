@@ -180,10 +180,10 @@ void ObjectPhysic::ActionMoving()
 
 }
 
-void ObjectPhysic::ActionTransforming()
-{
-
-}
+//void ObjectPhysic::ActionTransforming()
+//{
+//
+//}
 
 void ObjectPhysic::CalculateNextPosition() {
 

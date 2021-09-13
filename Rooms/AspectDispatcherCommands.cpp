@@ -5,10 +5,13 @@
 //#include "..\GeometryLib.h"
 //#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
-#include "..\ObjectsTypes\ObjectButton.h"
+//#include "..\ObjectsTypes\ObjectButton.h"
 #include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
+
+#include "../Components/ButtonComponent.h"
+#include "../Components/GUIComponent.h"
 
 AspectDispatcherCommands::~AspectDispatcherCommands(){}
 
@@ -282,9 +285,10 @@ void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceI
 	
 	TypeObject typeObj = obj->TypeObj;
 	if (typeObj == TypeObject::Button) {
-		auto objButton = std::dynamic_pointer_cast<ObjectButton>(obj);
+
+		auto objButton = std::dynamic_pointer_cast<ObjectGUI>(obj);
 		if (objButton != nullptr) {
-			if(objButton->IsToogleButon)
+			if (objButton->ComponentButton->IsToogleButon)
 			{
 				//-- command tooble button
 				objButton->SceneCommand->Options.clear();

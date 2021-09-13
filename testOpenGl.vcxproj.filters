@@ -174,9 +174,6 @@
     <ClCompile Include="Rooms\AspectDispatcherCommands.cpp">
       <Filter>Rooms</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectButton.cpp">
-      <Filter>Objects\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="ShellObjects\BaseShell.cpp">
       <Filter>ShellObjects</Filter>
     </ClCompile>
@@ -208,6 +205,12 @@
       <Filter>Rooms\Interface</Filter>
     </ClCompile>
     <ClCompile Include="Components\TextBoxComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ButtonComponent.cpp">
+      <Filter>Engine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\GUIComponent.cpp">
       <Filter>Engine\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -323,9 +326,6 @@
     <ClInclude Include="Rooms\AspectDispatcherCommands.h">
       <Filter>Rooms</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectButton.h">
-      <Filter>Objects\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="ShellObjects\BaseShell.h">
       <Filter>ShellObjects</Filter>
     </ClInclude>
@@ -357,6 +357,12 @@
       <Filter>Rooms\Interface</Filter>
     </ClInclude>
     <ClInclude Include="Components\TextBoxComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ButtonComponent.h">
+      <Filter>Engine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\GUIComponent.h">
       <Filter>Engine\Components</Filter>
     </ClInclude>
   </ItemGroup>

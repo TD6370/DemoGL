@@ -55,12 +55,11 @@ void ObjectButton::DefaultView() {
 		}
 	}
 }
-
-void ObjectButton::Refresh()
-{
-	
-}
-
+//
+//void ObjectButton::Refresh()
+//{
+//	
+//}
 
 void ObjectButton::ActionWork() {
 

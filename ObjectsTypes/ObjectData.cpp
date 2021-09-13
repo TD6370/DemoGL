@@ -15,7 +15,8 @@
 #include "../GeomertyShapes/ShapeSquare.h"
 #include "../Components/RenderComponent.h"
 #include "../Components/TextBoxComponent.h"
-
+#include "../Components/ButtonComponent.h"
+#include "../Components/GUIComponent.h"
 
 #include "../ShellObjects/BaseShell.h"
 
@@ -85,6 +86,19 @@ void ObjectData::InitData()
 		TextBox = new TextBoxComponent();
 		TextBox->Init(this);
 	}
+	if (IsButtonComponent) {
+		ComponentButton = new ButtonComponent();
+		ComponentButton->Init(this);
+	}
+	if (IsGUIComponent) {
+		ComponentGUI = new GUIComponent();
+		ComponentGUI->Init(this);
+	}
+
+	if (Name.size() != 0 && Name == EngineData->SceneData->NameSystemEditBox)
+	{
+		EngineData->SceneData->IndexBaseEditBox = Index;
+	}
 
 	switch (TypeObj)
 	{
@@ -102,7 +116,17 @@ void ObjectData::InitData()
 
 void ObjectData::Action()
 {
-	RunAction();
+	if (IsGUIComponent) {
+		ComponentGUI->RunAction();
+	}
+	else
+	{
+		RunAction();
+	}
+	if (IsButtonComponent) {
+		//ObjectGUI::RunAction();
+		ComponentButton->DefaultView();;
+	}
 }
 
 void ObjectData::RunAction() {
@@ -163,7 +187,24 @@ void ObjectData::Click() {
 
 	if (IsTextBoxComponent)
 	{
-		TextBox->Click();
+		//TextBox->Click();
+		IsChecked = !IsChecked;
+		if (IsChecked)
+			ActionObjectCurrent = Woking;
+		else
+			ActionObjectCurrent = Stay;
+		return;
+	}
+
+	if (IsGUIComponent)
+	{
+		ActionObjectCurrent = Woking;  /// -- TextBox
+	}
+	if (IsButtonComponent) {
+		//ObjectGUI::Click();
+		if (ComponentButton->IsToogleButon) {
+			IsChecked = !IsChecked;
+		}
 	}
 }
 
@@ -172,6 +213,14 @@ void ObjectData::ActionWork() {
 	if (IsTextBoxComponent)
 	{
 		TextBox->ActionWork();
+	}
+	if (IsButtonComponent)
+	{
+		ComponentButton->ActionWork();
+	}
+	if (IsGUIComponent) 
+	{
+		ComponentGUI->ActionWork();
 	}
 }
 
@@ -186,7 +235,7 @@ string ObjectData::GetCashStateUpdateDataToShader() {
 		return TextBox->GetCashStateUpdateDataToShader();
 	}
 
-	string cash(1, Index);
+	const string cash(1, Index);
 	return cash;
 }
 
@@ -450,6 +499,12 @@ vector<ObjectFiledsSpecific> ObjectData::GetSpecificFiels() {
 	{
 		return TextBox->GetSpecificFiels();
 	}
+	if (IsButtonComponent)
+	{		
+		if (TypeObj == TypeObject::Button) {
+			return ComponentButton->GetSpecificFiels();
+		}
+	}
 
 	vector<ObjectFiledsSpecific> result;
 	return result;
@@ -461,6 +516,10 @@ void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	{
 		return TextBox->SetSpecificFiels(filedsSpecific);
 	}
+	if (IsButtonComponent)
+	{
+		return ComponentButton->SetSpecificFiels(filedsSpecific);
+	}
 }
 
 //Get Last By Specific Field Value
@@ -471,4 +530,9 @@ string ObjectData::GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, i
 void ObjectData::SizeControlUpdate()
 {
 	GetShapeSquare()->SetSizeControl(vec3(SizePanel.x, SizePanel.y, 1));
+}
+
+bool ObjectData::IsNeedUodateMeshToShader() {
+
+	return IsHexagonModel || IsSquareModel || ModelPtr->MeshData.IsSquareModel || IsTransformable;
 }

@@ -6,7 +6,7 @@
 #include "..\ObjectsTypes\ObjectData.h"
 #include "..\ObjectsTypes\ObjectGUI.h"
 //#include "..\ObjectsTypes\ObjectEditBox.h"
-#include "..\ObjectsTypes\ObjectButton.h"
+//#include "..\ObjectsTypes\ObjectButton.h"
 
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"

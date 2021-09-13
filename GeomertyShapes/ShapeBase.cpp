@@ -304,7 +304,8 @@ void ShapeBase::GetPositRect(vec2& startPos, vec2& endPos, float& zOrder) {
 
 vec2 ShapeBase::GetStartPositWorld() {
 
-	ObjectPhysic* obj = m_objPhysic;
+	//ObjectPhysic* obj = m_objPhysic;
+	auto obj = m_obj;
 
 	glm::mat4 MVP = obj->EngineData->ConfigMVP->MVP;
 	glm::mat4 transform = obj->TransformResult;

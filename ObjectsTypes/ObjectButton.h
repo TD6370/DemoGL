@@ -36,22 +36,6 @@ public:
 			p_model,
 			p_typeObj,
 			p_pos) {
-
-		/*IsAbsolutePosition = false;
-		IsFocusable = true;
-		IsTransformable = true;
-		IsUsable = true;
-		IsSquareModel = true;*/
-		//ActionObjectCurrent = ActionObject::Stay;
-		//ActionObjectCurrent = ActionObject::Moving;
-
-		/*IsGUI = true;
-		IsFocusable = true;
-		IsTransformable = true;
-		IsUsable = true;
-		IsAbsolutePosition = false;
-		IsSquareModel = true;
-		ActionObjectCurrent = ActionObject::Stay;*/
 	};
 
 	~ObjectButton();
@@ -62,18 +46,9 @@ public:
 
 	void RunAction();
 
-	//void UpdateState();
-
 	void DefaultView();
 
 	void Click();
-
-	void Refresh();
-
-	
-
-	
-	//ParamCaseDefault = -1;
 	//-------------
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();

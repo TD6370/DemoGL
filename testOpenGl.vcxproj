@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Components\ButtonComponent.cpp" />
+    <ClCompile Include="Components\GUIComponent.cpp" />
     <ClCompile Include="Components\RenderComponent.cpp" />
     <ClCompile Include="Components\TextBoxComponent.cpp" />
     <ClCompile Include="ConfigBuffers.cpp" />
@@ -166,7 +168,6 @@
     <ClCompile Include="ModelData.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectBlock.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectBullet.cpp" />
-    <ClCompile Include="ObjectsTypes\ObjectButton.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectCursorGUI.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectCursorRay.cpp" />
     <ClCompile Include="ObjectsTypes\ObjectDynamic.cpp" />
@@ -197,6 +198,8 @@
     <ClCompile Include="WorldCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Components\ButtonComponent.h" />
+    <ClInclude Include="Components\GUIComponent.h" />
     <ClInclude Include="Components\RenderComponent.h" />
     <ClInclude Include="Components\TextBoxComponent.h" />
     <ClInclude Include="ConfigBuffers.h" />
@@ -216,7 +219,6 @@
     <ClInclude Include="ModelData.h" />
     <ClInclude Include="ObjectsTypes\ObjectBlock.h" />
     <ClInclude Include="ObjectsTypes\ObjectBullet.h" />
-    <ClInclude Include="ObjectsTypes\ObjectButton.h" />
     <ClInclude Include="ObjectsTypes\ObjectCursorGUI.h" />
     <ClInclude Include="ObjectsTypes\ObjectCursorRay.h" />
     <ClInclude Include="ObjectsTypes\ObjectDynamic.h" />

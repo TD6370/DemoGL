@@ -37,6 +37,8 @@ struct ObjectFiledsSpecific;
 class BaseShell;
 class RenderComponent;
 class TextBoxComponent;
+class ButtonComponent;
+class GUIComponent;
 
 class ShapeBase;
 class ShapeHexagon;
@@ -73,6 +75,9 @@ public:
 	ColliseState CollisionPolygonState; //????
 	GLfloat Speed = 0.5f;
 	GLfloat ParamCase = -1; //???
+
+	AnimationParamGUI* AnimationParam; //TODO: in static param
+
 	//--- Command:
 	CommandPack* SceneCommand;
 	
@@ -93,6 +98,10 @@ public:
 	bool IsHexagonModel = false;
 	bool IsSquareModel = false;
 	bool IsTextBoxComponent = false;
+	//B#
+	bool IsButtonComponent = false;
+	bool IsGUIComponent = false;
+	bool IsPhisicComponent = false;
 
 	bool IsVisible = true;
 	bool IsFocusable = false;
@@ -128,6 +137,10 @@ public:
 	//---- Text box component
 
 	TextBoxComponent* TextBox;
+
+	ButtonComponent* ComponentButton;
+
+	GUIComponent* ComponentGUI;
 
 	//-- Render ??
 	float TextureRepeat = 1;
@@ -276,6 +289,9 @@ public:
 	string GetSpecifValue(vector<ObjectFiledsSpecific> filedsSpecific, int index);
 
 	void SizeControlUpdate();
+
+	bool IsNeedUodateMeshToShader();
+
 };
 
 #endif
