@@ -4,15 +4,14 @@
 #include "..\CoreSettings.h"
 #include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
-#include "..\ObjectsTypes\ObjectGUI.h"
-//#include "..\ObjectsTypes\ObjectEditBox.h"
-//#include "..\ObjectsTypes\ObjectButton.h"
 
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 #include "../GeomertyShapes//ShapeBase.h"
 #include "AspectDispatcherCommands.h"
 #include "../ShellObjects/BaseShell.h"
+
+#include "../Components/GUIComponent.h"
 
 RoomUseInterface::~RoomUseInterface() {
 }
@@ -24,9 +23,12 @@ void RoomUseInterface::Init() {
 	
 	AnimationParams = new AnimationParamGUI();
 	color_selected = m_palette.color_yelow;
-	auto winHeight = Scene->m_heightWindow;
-	auto winHWidth = Scene->m_widthWindow;
-	m_projectionPerspective = glm::perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
+		
+	m_MouseStateGUI.winHeight = Scene->m_heightWindow;
+	m_MouseStateGUI.winHWidth = Scene->m_widthWindow;
+	m_MouseStateGUI.viewportVec = vec4(0.0f, 0.0f, m_MouseStateGUI.winHWidth, m_MouseStateGUI.winHeight);
+	m_MouseStateGUI.projectionPerspective = perspective(45.0f, (float)(m_MouseStateGUI.winHeight) / (float)(m_MouseStateGUI.winHeight), 0.1f, 1000.0f);
+
 	State.IsEditControls = false;
 
 	AspectTransformControls.Init(this);
@@ -240,7 +242,55 @@ void RoomUseInterface::Work() {
 	}*/
 }
 
+void RoomUseInterface::CalculateMousePosWorld() {
 
+	m_MouseStateGUI.mouseX = Scene->Storage->Oper->m_MouseX;
+	m_MouseStateGUI.mouseY = Scene->Storage->Oper->m_MouseY;
+	/*if (m_tempMousePos != vec2(m_MouseStateGUI.mouseX, m_MouseStateGUI.mouseY))
+	{
+		m_tempMousePos = vec2(m_MouseStateGUI.mouseX, m_MouseStateGUI.mouseY);*/
+
+		//================================= Mouse pos calculate
+		//float depthMouse = 0.978;	//  (for zOrder == 3.79)	
+		//float depthMouse = 0.9845;//  (for zOrder == 4.79)
+		//float depthMouse = 0.988;	//  (for zOrder == 5.79)
+
+		glReadPixels(m_MouseStateGUI.mouseX, m_MouseStateGUI.winHeight - m_MouseStateGUI.mouseY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &m_MouseStateGUI.depthPixel);
+		m_MouseStateGUI.depthMouse = (m_MouseStateGUI.magicNumberOne * m_MouseStateGUI.depthPixel) + m_MouseStateGUI.magicNumberTwo;
+		m_MouseStateGUI.screenPos = vec3(m_MouseStateGUI.mouseX, m_MouseStateGUI.winHeight - m_MouseStateGUI.mouseY, m_MouseStateGUI.depthMouse);
+		m_tempMousePosWorld = unProject(m_MouseStateGUI.screenPos, Scene->Storage->ConfigMVP->Model, m_MouseStateGUI.projectionPerspective, m_MouseStateGUI.viewportVec);
+		Scene->Storage->Oper->PositionCursorWorld = m_tempMousePosWorld;
+
+		if (m_isDebug) {
+			float depthGUI = Scene->ObjectCurrent->ComponentGUI->PanelDepth;
+
+			vec2 startPosRect = vec2(0);
+			vec2 endPosRect = vec2(0);
+			float zOrder;
+		
+
+			Scene->ObjectCurrent->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
+			std::stringstream ss;
+			ss << "---------------------------------\n"
+				<< "Mouse depth: " << m_MouseStateGUI.depthMouse << " \n"
+				<< "Mouse: " << m_tempMousePosWorld.x << " ; " << m_tempMousePosWorld.y << " ; " << m_tempMousePosWorld.z << " \n\n"
+				<< "Calc Depth: " << m_MouseStateGUI.depthPixel << " \n\n"
+				<< "gui depth: " << depthGUI << " \n"
+				<< "gui start: " << startPosRect.x << " ; " << startPosRect.y << " \n"
+				<< "gui end: " << endPosRect.x << " ; " << endPosRect.y << " \n"
+				<< "gui zOrder: " << zOrder << " \n"
+				<< std::endl;
+			string strTemp = ss.str();
+
+			if (m_stringDebug != strTemp) {
+				m_stringDebug = strTemp;
+				std::cout << m_stringDebug;
+			}
+		}
+	//}
+}
+
+/*
 void RoomUseInterface::CalculateMousePosWorld() {
 
 	auto mouseX = Scene->Storage->Oper->m_MouseX;
@@ -248,7 +298,8 @@ void RoomUseInterface::CalculateMousePosWorld() {
 	if (m_tempMousePos != vec2(mouseX, mouseY))
 	{
 		m_tempMousePos = vec2(mouseX, mouseY);
-		std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+		auto objGUI = Scene->ObjectCurrent;
+		
 		auto mouseX = Scene->Storage->Oper->m_MouseX;
 		auto mouseY = Scene->Storage->Oper->m_MouseY;
 		auto winHeight = Scene->m_heightWindow;
@@ -256,9 +307,9 @@ void RoomUseInterface::CalculateMousePosWorld() {
 		auto model = Scene->Storage->ConfigMVP->Model;
 
 		//================================= Mouse pos calculate
-		//float depthMouse = 0.978;	//  (for ObjectGUI.zOrder == 3.79)	
-		//float depthMouse = 0.9845;//  (for ObjectGUI.zOrder == 4.79)
-		//float depthMouse = 0.988;	//  (for ObjectGUI.zOrder == 5.79)
+		//float depthMouse = 0.978;	//  (for zOrder == 3.79)	
+		//float depthMouse = 0.9845;//  (for zOrder == 4.79)
+		//float depthMouse = 0.988;	//  (for zOrder == 5.79)
 
 		float depthPixel;
 		glReadPixels(mouseX, winHeight - mouseY, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depthPixel);
@@ -275,12 +326,13 @@ void RoomUseInterface::CalculateMousePosWorld() {
 		//auto mouseY = Scene->Storage->Oper->m_MouseY;
 
 		if (m_isDebug) {
+			float depthGUI = objGUI->ComponentGUI->PanelDepth;
 
-			float depthGUI = objGUI->PanelDepth;
 			vec2 startPosRect = vec2(0);
 			vec2 endPosRect = vec2(0);
 			float zOrder;
-			std::shared_ptr<ObjectGUI> objGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+			auto objGUI = Scene->ObjectCurrent;
+
 			objGUI->Shape->GetPositRect(startPosRect, endPosRect, zOrder);
 			std::stringstream ss;
 			ss << "---------------------------------\n"
@@ -301,4 +353,5 @@ void RoomUseInterface::CalculateMousePosWorld() {
 		}
 	}
 }
+*/
 

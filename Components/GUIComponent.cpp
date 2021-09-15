@@ -1,8 +1,6 @@
 #include "GUIComponent.h"
 
-#include "../ObjectsTypes/ObjectGUI.h"
 #include "../ObjectsTypes/ObjectPhysic.h"
-//#include "../ObjectsTypes/ObjectButton.h"
 
 #include "..\CreatorModelData.h"
 #include "..\Serialize\SceneSerialize.h"
@@ -20,23 +18,37 @@ void GUIComponent::Init(ObjectData* obj) {
 
 	m_obj = obj;
 
+	//------------------------
+	m_obj->IsGUI = true;
+	m_obj->IsFocusable = true;
+	m_obj->IsTransformable = true;
+	m_obj->IsUsable = true;
+	m_obj->IsAbsolutePosition = false;
+	m_obj->IsSquareModel = true;
+	m_obj->ActionObjectCurrent = ActionObject::Stay;
+	m_obj->Layer = TypeLayer::LayerBase;
 
+	//------------------------
 	m_obj->AnimationParam = new AnimationParamGUI();
-	
-	//------------- ??? 
-	m_obj->Shape = new ShapeSquare();
-	m_obj->Shape->UpdateShapeInfo(m_obj);
-
-	//------------- ??? 
-	//m_obj->IsPhisicComponent = true;
-	//ObjectPhysic::InitData();
-
 	m_obj->Size = vec3(0);
+	m_obj->ActionObjectCurrent = Stay;
+	//------------------------
 
-	if (m_obj->EngineData->SceneData->IndexBackgroundGUIObj == -1)//First create gui
+	//-- System Background GUI
+	if (m_obj->Name == m_obj->EngineData->SceneData->NameSystemBackgroundGUI)
 		m_obj->EngineData->SceneData->IndexBackgroundGUIObj = m_obj->Index;
 
-	m_obj->ActionObjectCurrent = Stay;
+	//-- System Cursor GUI
+	if (m_obj->TypeObj == TypeObject::CursorGUI) {
+		m_obj->ActionObjectCurrent = Moving;
+		m_obj->IsAbsolutePosition = true;
+	}
+
+	//-- System Edit Box GUI
+	if (m_obj->Name == m_obj->EngineData->SceneData->NameSystemEditBox)
+	{
+		m_obj->EngineData->SceneData->IndexBaseEditBox = m_obj->Index;
+	}
 }
 
 
@@ -49,12 +61,7 @@ void GUIComponent::RunAction() {
 		switch (m_obj->ActionObjectCurrent)
 		{
 		case Woking:
-			if (m_obj->IsTextBoxComponent)
-			{
-				m_obj->TextBox->ActionWork();
-			}
-			else
-				m_obj->ActionWork();
+			m_obj->ActionWork();
 			break;
 		case Moving:
 			ActionMoving();
@@ -82,6 +89,11 @@ void GUIComponent::ActionMoving()
 {
 	if (m_obj->ActionObjectCurrent != Moving)
 		return;
+
+	if (m_obj->TypeObj == TypeObject::CursorGUI) {
+		SaveNewPosition();
+		return;
+	}
 
 	m_obj->MaterialData.Color = m_color_transforming;
 }
@@ -133,13 +145,6 @@ vector<ObjectFiledsSpecific> GUIComponent::GetSpecificFiels() {
 		{"StartPos:", serializer->Vec3Str(m_obj->StartPos)} ,
 		{"SizePanel:", serializer->Vec2Str(m_obj->SizePanel)}
 	};
-
-	if (m_obj->IsTextBoxComponent)
-	{
-		vector<ObjectFiledsSpecific> resultTextBox = m_obj->TextBox->GetSpecificFiels();
-		result.insert(result.end(), resultTextBox.begin(), resultTextBox.end());
-	}
-
 	return result;
 }
 
@@ -153,13 +158,73 @@ void GUIComponent::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific)
 	m_obj->StartPos = serializer->StrToVec3(filedsSpecific[0].Value);
 	m_obj->SizePanel = serializer->StrToVec2(filedsSpecific[1].Value);
 
-	if (m_obj->IsTextBoxComponent)
-	{
-		m_obj->TextBox->SetSpecificFiels(filedsSpecific);
-	}
-
 	m_obj->GetShapeSquare()->SetSizeControl(vec3(m_obj->SizePanel.x, m_obj->SizePanel.y, 1));
 }
 
 //----------------------------------------------------------------
 
+
+void GUIComponent::SaveNewPosition() {
+
+	//--- Set position Cursor
+	vec3 mouse = m_obj->EngineData->Oper->PositionCursorWorld;
+	vec2 startPosRect = m_obj->Shape->GetStartPositWorld();
+
+	bool notX = false;
+	bool notY = false;
+	float k = 0.2;
+
+	//---- TEST -- ?? fixed frozen cursor
+	//if (mouse.z > 0 || startPosRect.x != startPosRect.x)
+	if (mouse.z > 0)
+	{
+		return;
+	}
+
+	//=========================================
+	float stepFactorX = mouse.x / startPosRect.x;
+	float stepFactorY = mouse.y / startPosRect.y;
+
+	float stepX = mouse.x - startPosRect.x;
+	float stepY = startPosRect.y - mouse.y;
+	stepX *= k;
+	stepY *= k;
+
+	float limit = 0.001;
+	//---- TEST -- ?? fixed frozen cursor
+	if (stepX <limit && stepX > -limit && stepY < limit && stepY > -limit) {
+		return;
+	}
+
+	vec2 sizeBack = m_obj->EngineData->SceneData->SizeBackgroungGUI;
+	float offSet = (sizeBack.x - 2) / 2;
+	float limitBordMin = 0.01 - offSet;
+	float limitBordMax = 1.98 + offSet;
+
+	//---- TODO
+	float leftBackFactor = (sizeBack.x - BACKGROUND_GUI_WIDTH_F);
+	limitBordMax += leftBackFactor;
+
+	float corrBord = 0.02;
+	if (m_obj->StartPos.x + stepX < limitBordMin) {
+		m_obj->StartPos.x = limitBordMin + corrBord;
+		notX = true;
+	}
+	if (m_obj->StartPos.x + stepX > limitBordMax) {
+		m_obj->StartPos.x = limitBordMax - corrBord;
+		notX = true;
+	}
+	if (m_obj->StartPos.y + stepY < limitBordMin) {
+		m_obj->StartPos.y = limitBordMin + corrBord;
+		notY = true;
+	}
+	if (m_obj->StartPos.y + stepY > limitBordMax) {
+		m_obj->StartPos.y = limitBordMax - corrBord;
+		notY = true;
+	}
+
+	if (!notX)
+		m_obj->StartPos.x += stepX;
+	if (!notY)
+		m_obj->StartPos.y += stepY;
+}

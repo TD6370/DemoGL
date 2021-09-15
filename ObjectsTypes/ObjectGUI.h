@@ -33,10 +33,7 @@ protected :
 
 public:
 	
-	//vec3 StartPos = vec3(0);
-	//vec2 SizePanel = vec2(0);
 	float PanelDepth;
-	//AnimationParamGUI* AnimationParam; //TODO: in static param
 
 	ObjectGUI(
 		int p_index,
@@ -82,4 +79,7 @@ public:
 
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
 
+	//--------- Cursor GUI
+
+	void SaveNewPosition() override;
 };

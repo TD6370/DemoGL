@@ -81,7 +81,7 @@ void ObjectData::InitData()
 {
 	InitRender();
 
-	if (IsTextBoxComponent)
+	/*if (IsTextBoxComponent)
 	{
 		TextBox = new TextBoxComponent();
 		TextBox->Init(this);
@@ -93,7 +93,7 @@ void ObjectData::InitData()
 	if (IsGUIComponent) {
 		ComponentGUI = new GUIComponent();
 		ComponentGUI->Init(this);
-	}
+	}*/
 
 	if (Name.size() != 0 && Name == EngineData->SceneData->NameSystemEditBox)
 	{
@@ -112,6 +112,25 @@ void ObjectData::InitData()
 			ActionObjectCurrent = Lock;
 			break;
 	}
+
+	if (IsGUIComponent) {
+		ComponentGUI = new GUIComponent();
+		ComponentGUI->Init(this);
+	}
+	if (IsTextBoxComponent)
+	{
+		TextBox = new TextBoxComponent();
+		TextBox->Init(this);
+	}
+	if (IsButtonComponent) {
+		ComponentButton = new ButtonComponent();
+		ComponentButton->Init(this);
+	}
+	
+	if (TypeObj == TypeObject::ListBox && Name == EngineData->SceneData->NameSystemObjectFieldsEdit)
+	{
+		EngineData->SceneData->IndexObjectFieldsEdit = Index;
+	}
 }
 
 void ObjectData::Action()
@@ -124,7 +143,6 @@ void ObjectData::Action()
 		RunAction();
 	}
 	if (IsButtonComponent) {
-		//ObjectGUI::RunAction();
 		ComponentButton->DefaultView();;
 	}
 }
@@ -185,6 +203,11 @@ void ObjectData::CheckedRefresh() { }
 
 void ObjectData::Click() {
 
+	if (IsGUIComponent)
+	{
+		ActionObjectCurrent = Woking;  /// -- TextBox
+	}
+
 	if (IsTextBoxComponent)
 	{
 		//TextBox->Click();
@@ -196,31 +219,35 @@ void ObjectData::Click() {
 		return;
 	}
 
-	if (IsGUIComponent)
+	/*if (IsGUIComponent)
 	{
 		ActionObjectCurrent = Woking;  /// -- TextBox
-	}
+	}*/
 	if (IsButtonComponent) {
-		//ObjectGUI::Click();
+		//IsGUIComponent->Click();
 		if (ComponentButton->IsToogleButon) {
 			IsChecked = !IsChecked;
 		}
 	}
+
+
 }
 
 void ObjectData::ActionWork() {
-
+	
+	
 	if (IsTextBoxComponent)
 	{
 		TextBox->ActionWork();
+		return;
+	}
+	if (IsGUIComponent)
+	{
+		ComponentGUI->ActionWork();
 	}
 	if (IsButtonComponent)
 	{
 		ComponentButton->ActionWork();
-	}
-	if (IsGUIComponent) 
-	{
-		ComponentGUI->ActionWork();
 	}
 }
 
@@ -418,6 +445,10 @@ void ObjectData::ControlsEvents() {
 }
 
 bool ObjectData::GetVisible() {
+
+	if (IsGUIComponent) {
+		return ComponentGUI->GetVisible();
+	}
 	return IsVisible;
 }
 
@@ -452,11 +483,17 @@ float ObjectData::GetTopLayer() {
 }
 
 float ObjectData::GetZ() {
+	if (IsGUIComponent) {
+		ComponentGUI->GetZ();
+	}
+
 	return Postranslate.z;
 }
 void ObjectData::SetZ(float z)
 {
-
+	if (IsGUIComponent) {
+		ComponentGUI->SetZ(z);
+	}
 }
 
 int ObjectData::GetRightBorderVertexIndex() {
@@ -505,6 +542,10 @@ vector<ObjectFiledsSpecific> ObjectData::GetSpecificFiels() {
 			return ComponentButton->GetSpecificFiels();
 		}
 	}
+	if (IsGUIComponent)
+	{
+		return ComponentGUI->GetSpecificFiels();
+	}
 
 	vector<ObjectFiledsSpecific> result;
 	return result;
@@ -519,6 +560,10 @@ void ObjectData::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific) {
 	if (IsButtonComponent)
 	{
 		return ComponentButton->SetSpecificFiels(filedsSpecific);
+	}
+	if (IsGUIComponent)
+	{
+		return ComponentGUI->SetSpecificFiels(filedsSpecific);
 	}
 }
 

@@ -17,6 +17,7 @@
 
 void ObjectGUI::InitData() {
 
+	
 	AnimationParam = new AnimationParamGUI();
 	Shape = new ShapeSquare();
 	Shape->UpdateShapeInfo(this);
@@ -29,6 +30,15 @@ void ObjectGUI::InitData() {
 		EngineData->SceneData->IndexBackgroundGUIObj = Index;
 
 	ActionObjectCurrent = Stay;
+
+	if (TypeObj == TypeObject::CursorGUI) {
+		IsAbsolutePosition = true;
+		IsFocusable = false;
+		IsTransformable = false;
+		IsUsable = false;
+
+		ActionObjectCurrent = ActionObject::Moving;
+	}
 }
 
 void ObjectGUI::RunAction() {
@@ -70,6 +80,11 @@ void ObjectGUI::ActionMoving()
 {
 	if (ActionObjectCurrent != Moving)
 		return;
+
+	if (TypeObj == TypeObject::CursorGUI) {
+		SaveNewPosition();
+		return;
+	}
 
 	MaterialData.Color = m_color_transforming;
 }
@@ -201,4 +216,72 @@ string ObjectGUI::GetInfo() {
 	//ss << info << "\nZ: " << StartPos.z << "  T: " << StartPos.y;
 	ss << info << "\n							Z: " << StartPos.z << "  T: " << GetTopLayer();
 	return ss.str();
+}
+
+
+//=============== Cursor GUI
+
+void ObjectGUI::SaveNewPosition() {
+
+	//--- Set position Cursor
+	vec3 mouse = EngineData->Oper->PositionCursorWorld;
+	vec2 startPosRect = Shape->GetStartPositWorld();
+
+	bool notX = false;
+	bool notY = false;
+	float k = 0.2;
+
+	//---- TEST -- ?? fixed frozen cursor
+	//if (mouse.z > 0 || startPosRect.x != startPosRect.x)
+	if (mouse.z > 0)
+	{
+		return;
+	}
+
+	//=========================================
+	float stepFactorX = mouse.x / startPosRect.x;
+	float stepFactorY = mouse.y / startPosRect.y;
+
+	float stepX = mouse.x - startPosRect.x;
+	float stepY = startPosRect.y - mouse.y;
+	stepX *= k;
+	stepY *= k;
+
+	float limit = 0.001;
+	//---- TEST -- ?? fixed frozen cursor
+	if (stepX <limit && stepX > -limit && stepY < limit && stepY > -limit) {
+		return;
+	}
+
+	vec2 sizeBack = EngineData->SceneData->SizeBackgroungGUI;
+	float offSet = (sizeBack.x - 2) / 2;
+	float limitBordMin = 0.01 - offSet;
+	float limitBordMax = 1.98 + offSet;
+
+	//---- TODO
+	float leftBackFactor = (sizeBack.x - BACKGROUND_GUI_WIDTH_F);
+	limitBordMax += leftBackFactor;
+
+	float corrBord = 0.02;
+	if (StartPos.x + stepX < limitBordMin) {
+		StartPos.x = limitBordMin + corrBord;
+		notX = true;
+	}
+	if (StartPos.x + stepX > limitBordMax) {
+		StartPos.x = limitBordMax - corrBord;
+		notX = true;
+	}
+	if (StartPos.y + stepY < limitBordMin) {
+		StartPos.y = limitBordMin + corrBord;
+		notY = true;
+	}
+	if (StartPos.y + stepY > limitBordMax) {
+		StartPos.y = limitBordMax - corrBord;
+		notY = true;
+	}
+
+	if (!notX)
+		StartPos.x += stepX;
+	if (!notY)
+		StartPos.y += stepY;
 }

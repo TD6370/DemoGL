@@ -11,12 +11,7 @@
 #include "ObjectsTypes/ObjectBullet.h"
 #include "ObjectsTypes/ObjectCursorRay.h"
 #include "ObjectsTypes/ObjectBlock.h"
-#include "ObjectsTypes/ObjectGUI.h"
-//#include "ObjectsTypes/ObjectTextBox.h"
-#include "ObjectsTypes/ObjectCursorGUI.h"
-//#include "ObjectsTypes/ObjectButton.h"
-//#include "ObjectsTypes/ObjectEditBox.h"
-#include "ObjectsTypes/ObjectListBox.h"
+
 #include "GeomertyShapes/ShapeBase.h"
 #include "GeomertyShapes/ShapeSquare.h"
 #include "Rooms/AspectDispatcherCommands.h"
@@ -220,10 +215,7 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 		return NULL;
 
 	SceneObjectsLastIndex = SceneObjects.size();
-	//TEST^^
-	//SceneObjectsLastIndex = SceneObjectsV.size();
 
-	//if (p_index == -1)
 		p_index = SceneObjectsLastIndex;
 
 	bool isGenName = name.length() == 0;
@@ -246,44 +238,48 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 	switch (p_typeObj)
 	{
 		case GUI: {
-			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
-			//SceneObjectsV.push_back(obj); //TEST^^
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			break;
 		}
 		case TextBox: {
-			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			object->IsTextBoxComponent = true;
 			break;
 		}
 		case EditBox: {
-			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			object->IsTextBoxComponent = true;
 			break;
 		}
 		case Button: {
-			ObjectGUI obj = ObjectGUI(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectGUI>(obj));
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			object->IsButtonComponent = true;
 			break;
 		}
 		case ListBox: {
-			ObjectListBox obj = ObjectListBox(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectListBox>(obj));
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			break;
 		}
 		case CursorGUI: {
-			ObjectCursorGUI obj = ObjectCursorGUI(p_index, modelPtr, p_typeObj, p_pos);
-			SceneObjects.push_back(std::make_unique<ObjectCursorGUI>(obj));
-			//SceneObjectsV.push_back(obj); //TEST^^
+			ObjectPhysic obj = ObjectPhysic(p_index, modelPtr, p_typeObj, p_pos);
+			SceneObjects.push_back(std::make_unique<ObjectPhysic>(obj));
 			object = GetObjectPrt(obj.Index);
+			object->IsGUIComponent = true;
 			break;
 		}
 		case Polygon: {
@@ -850,68 +846,59 @@ void CreatorModelData::LoadObjectsGUI() {
 	string childModel = "conextGUI_2";
 	string objName;
 	vec3 color = vec3(0.3);
-	shared_ptr<ObjectGUI> objCreateButton;// 
 	shared_ptr<ObjectData> objCreate;
 
 	// ---- Object Context frame GUI	(SYSTEM CONTROL)
-	shared_ptr<ModelData> modelGUI = GetModelPrt("ConextFrameModel");
-	shared_ptr<ObjectData> objBackGUI_Data =
-		AddObject("BackContectGUI", modelGUI, Button, vec3(0, -50, 0), vec3(1), -1, LayerBackground);
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(objBackGUI_Data);
+	shared_ptr<ModelData> modelGUI = GetModelPrt(m_namesModels.BackgroundGUI);
+	
+	shared_ptr<ObjectData> objBackGUI =
+		AddObject(SceneData->NameSystemBackgroundGUI, modelGUI, Button, vec3(0, -50, 0), vec3(1), -1, LayerBackground);
+	
 	objBackGUI->ComponentButton->IsToogleButon = false;
 	
 	SetCommand(objBackGUI, TypeCommand::None);
 	objBackGUI->IsSelected = false;
 	objBackGUI->IsTransformable = false;
-
 	
 	// ---- Object Button edit obj GUI (BASE CONTROL)
 	objName = "ButtonEditOn";
-	caption = "ðåäàêò";
+	caption = "Edit";
 	childModel = "ButtonModel";
-	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.05, .05, 0.03), vec2(0.1, 0.1), Button, vec3(1));
-	objCreate =
-		AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, StartPosGUI_Z), vec2(0.1, 0.1), Button, vec3(1), LayerBase);
-	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-	objCreateButton->ComponentButton->IsToogleButon = true;
-	objCreateButton->IsTransformable = false;
-	SetCommand(objCreateButton, EditGUI_OnOff);
-	ControlConstruct(objCreateButton, caption, Button);
 
+	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.05, .05, StartPosGUI_Z), vec2(0.1, 0.1), Button, vec3(1), LayerBase);
+	objCreate->ComponentButton->IsToogleButon = true;
+	objCreate->IsTransformable = false;
+	SetCommand(objCreate, EditGUI_OnOff);
+	ControlConstruct(objCreate, caption, Button);
 
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
 	caption = "create";
-	//caption = "создать";
 	childModel = "ButtonModel";
-	//objCreate = objBackGUI->ConfigInterface(caption, childModel, objName, vec3(.15, .05, 0.02), vec2(0.3, 0.2), Button, vec3(1));
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.15, .05, StartPosGUI_Z), vec2(0.3, 0.1), Button, vec3(1));
-	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-	objCreateButton->ComponentButton->IsToogleButon = false;
-	SetCommand(objCreateButton, SelectPosForObject);
-	ControlConstruct(objCreateButton, caption, Button);
+	objCreate = std::dynamic_pointer_cast<ObjectData>(objCreate);
+	objCreate->ComponentButton->IsToogleButon = false;
+	SetCommand(objCreate, SelectPosForObject);
+	ControlConstruct(objCreate, caption, Button);
 
 	// ---- Object Button Save object fields (Edit)
 	objName = "ButtonSaveObjectFieldsEdit";
 	caption = "save";
 	childModel = "ButtonModel";
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.47, .05, StartPosGUI_Z), vec2(0.3, 0.1), Button, vec3(1));
-	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-	SetCommand(objCreateButton, SaveObjectFieldsEdit);
-	ControlConstruct(objCreateButton, caption, Button);
+	SetCommand(objCreate, SaveObjectFieldsEdit);
+	ControlConstruct(objCreate, caption, Button);
 
 	objName = SceneData->NameSystemEditBox;
 	caption = "îõ";
 	childModel = "ButtonEditBoxModel";	///!!!!!
 	color = vec3(0.117, 0.351, 0.950);
 	objCreate = AddChildObject(objBackGUI, caption, childModel, objName, vec3(.1, .3, StartPosSystemGUI_Z), vec2(.7, .06), Button, color, LayerBase);
-	//SceneData->IndexBaseEditBox = objCreate->Index; //(SYSTEM CONTROL)
-	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-	ControlConstruct(objCreateButton, caption, EditBox, "SystemEditBox", LayerBase);
-	objCreateButton->ComponentButton->IsToogleButon = true;
-	objCreateButton->IsFocusable = false;
-	objCreateButton->IsTransformable = false;
-	objCreateButton->IsVisible = false;
+	ControlConstruct(objCreate, caption, EditBox, "SystemEditBox", LayerBase);
+	objCreate->ComponentButton->IsToogleButon = true;
+	objCreate->IsFocusable = false;
+	objCreate->IsTransformable = false;
+	objCreate->IsVisible = false;
 
 	// ---- Object Cursor GUI (Last is alpha background fix)
 	objName = "CursorGUI";
@@ -1085,22 +1072,12 @@ void CreatorModelData::LoadClusters() {
 
 shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> ownerObjData, string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color, TypeLayer p_layer)
 {
-	shared_ptr<ObjectGUI> ownerObj = std::dynamic_pointer_cast<ObjectGUI>(ownerObjData);
+	auto ownerObj = ownerObjData;
 
 	if (color == vec3(0))
 		color = vec3(1);
 
 	std::shared_ptr<ModelData> model = GetModelPrt(nameModel);
-	//auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
-	//auto  modelTextBox = std::dynamic_pointer_cast<ModelTextBox>(model);
-	/*if (modelTextBox != nullptr) {
-		model = modelTextBox;
-	}
-	auto modelFrame = std::dynamic_pointer_cast<ModelFrame>(model);
-	if (modelFrame != nullptr) {
-		model = modelFrame;
-	}*/
-
 
 	//-------------- Z Order Controls ---------------
 	vec3 startPos = startPosChild;
@@ -1117,26 +1094,27 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	if (p_layer == LayerSystem) {
 		startPos.z = .01;
 	}
-	//-------------------------------------------------
-	
-	//shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, ownerObj->StartPos, color, -1, p_layer);
-	shared_ptr<ObjectData> obj = AddObject(nameObject, model, p_typeObj, startPos, color, -1, p_layer);
 
-	auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
+	shared_ptr<ObjectData> objGUI = AddObject(nameObject, model, p_typeObj, startPos, color, -1, p_layer);
+	
 	objGUI->SetOwnerObject(ownerObj);
-	//objGUI->StartPos = startPosChild;
 	objGUI->StartPos = startPos;
 	objGUI->SizePanel = size;
 	objGUI->MaterialData.Color = color;
 	objGUI->UpdateState();
-	//objGUI->IsTextureRepeat = true;
-
 	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
 
-	if (obj->IsTextBoxComponent) 
+	objGUI->SetOwnerObject(ownerObj);
+	objGUI->StartPos = startPos;
+	objGUI->SizePanel = size;
+	objGUI->MaterialData.Color = color;
+	objGUI->UpdateState();
+	objGUI->GetShapeSquare()->SetSizeControl(vec3(size.x, size.y, 1));
+
+	if (objGUI->IsTextBoxComponent)
 	{
-		obj->TextBox->Message = caption;
-		obj->TextBox->CreateMessage();
+		objGUI->TextBox->Message = caption;
+		objGUI->TextBox->CreateMessage();
 	}
 	return objGUI;
 }
@@ -1144,15 +1122,12 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string name, TypeLayer p_layer)
 {
 	shared_ptr<ObjectData> objData;
-	auto objButton = std::dynamic_pointer_cast<ObjectGUI>(obj);
+	auto objButton = obj;
 
 	if (p_typeObj == TypeObject::Button) {
 		if (objButton != nullptr) {
-			
-			//##NB
-			//if (!objButton->IsToogleButon) {
+
 			if (!objButton->ComponentButton->IsToogleButon) {
-				
 
 				//--- Add textbox
 				vec2 offset = vec2(0.01);
@@ -1182,9 +1157,7 @@ shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData
 	if (p_typeObj == TypeObject::EditBox) {
 		if (objButton != nullptr) {
 
-			auto objGUI = std::dynamic_pointer_cast<ObjectGUI>(obj);
-			vec3 own = objGUI->StartPos;
-			vec3 startPos = vec3(.03, .01, own.z + 0.01);
+			vec3 startPos = vec3(.03, .01, obj->StartPos.z + 0.01);
 
 			if (name.size() == 0)
 				name = "Button_EditBox";

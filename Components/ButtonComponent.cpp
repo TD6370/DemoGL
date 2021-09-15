@@ -12,15 +12,6 @@
 void ButtonComponent::Init(ObjectData* obj) {
 
 	m_obj = obj;
-
-	/*m_obj->IsSquareModel = true;
-	m_obj->IsAbsolutePosition = true;
-	m_obj->IsFocusable = false;*/
-
-	if (m_obj->Name == m_obj->EngineData->SceneData->NameSystemEditBox)
-	{
-		m_obj->EngineData->SceneData->IndexBaseEditBox = m_obj->Index;
-	}
 }
 
 void ButtonComponent::ActionWork() {
@@ -54,10 +45,6 @@ void ButtonComponent::DefaultView() {
 
 vector<ObjectFiledsSpecific> ButtonComponent::GetSpecificFiels() {
 
-	/*vector<ObjectFiledsSpecific> result = ObjectGUI::GetSpecificFiels();
-	result.push_back({ "IsToogleButon:", BoolToStr(IsToogleButon) });
-	return result;*/
-
 	vector<ObjectFiledsSpecific> result = m_obj->ComponentGUI->GetSpecificFiels();
 	result.push_back({ "IsToogleButon:", BoolToStr(IsToogleButon) });
 	return result;
@@ -67,15 +54,11 @@ void ButtonComponent::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecif
 
 	if (m_obj->IndexObjectOwner == -1) //Back GUI
 		return;
-
-	string valueStr;
-	//ObjectGUI::SetSpecificFiels(filedsSpecific);
+	
 	m_obj->ComponentGUI->SetSpecificFiels(filedsSpecific);
 	
+	string valueStr;
 	valueStr = m_obj->GetSpecifValue(filedsSpecific, 1);
 	IsToogleButon = StrToBool(valueStr);
-
-	if (m_obj->IndexObjectOwner == -1) //Back GUI
-		return;
 }
 

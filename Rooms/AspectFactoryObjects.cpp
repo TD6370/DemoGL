@@ -6,8 +6,6 @@
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 
-#include "../ObjectsTypes/ObjectGUI.h"
-#include "../ObjectsTypes/ObjectButton.h"
 #include "../SceneLayer.h"
 
 #include "../Components/ButtonComponent.h"
@@ -188,9 +186,8 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	string caption = "?";
 	string childModel;
 	string objName;
-	
-	shared_ptr<ObjectGUI> objCreateButton;
-	shared_ptr<ObjectData> objCreate;
+
+	shared_ptr<ObjectData> objCreateButton;
 	vec3 pos = vec3(1.);
 	vec2 size = vec2(0.7, 0.06);
 	if (info.Init) {
@@ -203,11 +200,9 @@ void AspectFactoryObjects::CreateEditBox(CreateInfo info) {
 	// ---- Object Button create obj GUI
 	objName = "FrameEditBox";
 	childModel = "ButtonEditBoxModel";
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	shared_ptr<ObjectData> objBackGUI = Scene->ObjectCurrent;
 	
-	objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
-	
-	objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+	objCreateButton = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
 	objCreateButton->ComponentButton->IsToogleButon = true;
 
 		// ---- Object Edit box create	
@@ -236,7 +231,8 @@ void AspectFactoryObjects::CreateTextBox(CreateInfo info) {
 	}
 	pos.z = Scene->Storage->StartPosGUI_Z;
 
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	shared_ptr<ObjectData> objBackGUI = Scene->ObjectCurrent;
+
 	shared_ptr<ObjectData> objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, TextBox, color);
 
 	if (!m_startContructing)
@@ -252,9 +248,8 @@ void AspectFactoryObjects::CreateButton(CreateInfo info) {
 	string childModel;
 	string objName;
 	vec3 color = vec3(0.3);
-	shared_ptr<ObjectGUI> objCreateButton;
+	shared_ptr<ObjectData> objCreateButton;
 
-	shared_ptr<ObjectData> objCreate;
 	vec3 pos = vec3(1.);
 	vec2 size = vec2(0.7, 0.1);
 	if (info.Init) {
@@ -267,11 +262,10 @@ void AspectFactoryObjects::CreateButton(CreateInfo info) {
 	// ---- Object Button create obj GUI
 	objName = "ButtonCreateObjGUI";
 	childModel = "ButtonModel";
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	shared_ptr<ObjectData> objBackGUI = Scene->ObjectCurrent;
 	
-		objCreate = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
-		
-		objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
+	objCreateButton = Scene->Storage->AddChildObject(objBackGUI, caption, childModel, objName, pos, size, Button, vec3(1));
+
 		objCreateButton->ComponentButton->IsToogleButon = false;
 		objCreateButton->SceneCommand->CommandType = TypeCommand::None;
 	
@@ -291,7 +285,6 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	string objName;
 	vec3 color = vec3(0.3);
 
-	shared_ptr<ObjectGUI> objCreateButton;
 	shared_ptr<ObjectData> objCreateItem_Prev = nullptr;
 	shared_ptr<ObjectData> objBaseFrame;
 	
@@ -300,7 +293,7 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 	float posZ = Scene->Storage->StartPosGUI_Z;
 
 	// ---- background GUI
-	shared_ptr<ObjectGUI> objBackGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent);
+	shared_ptr<ObjectData> objBackGUI = Scene->ObjectCurrent;
 
 	vector<int> listItemsIndex = vector<int>();
 	vector<CommandPack> listCommand = Scene->GetListCommand(nameListCommand);
@@ -367,11 +360,12 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			// ---- Object Edit box create	
 			objName = "EditBoxItem_ListEditBox";
 			childModel = "ButtonEditBoxModel";
-			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
-			objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-			objCreateButton->ComponentButton->IsToogleButon = true;
 
-			auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, EditBox);
+			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
+
+			objCreate->ComponentButton->IsToogleButon = true;
+
+			auto objCreateEditBox_Data = Scene->Storage->ControlConstruct(objCreate, infoItem.Message, EditBox);
 
 			//Command - create type Obj 
 			objCreateEditBox_Data->SceneCommand->CommandType = commItem.CommandType;
@@ -386,14 +380,15 @@ void AspectFactoryObjects::CreateListBox(string nameListCommand, TypeObject type
 			//-- create Item "BUTTON"
 			objName = "ButtonItem_ListBox";
 			childModel = "ButtonModel";
+			
 			objCreate = Scene->Storage->AddChildObject(objBaseFrame, infoItem.Message, childModel, objName, infoItem.Pos, infoItem.Size, Button, vec3(1));
-			objCreateButton = std::dynamic_pointer_cast<ObjectGUI>(objCreate);
-			objCreateButton->ComponentButton->IsToogleButon = false;
+
+			objCreate->ComponentButton->IsToogleButon = false;
 
 			//-- create Text item 
-			Scene->Storage->ControlConstruct(objCreateButton, infoItem.Message, Button);
+			Scene->Storage->ControlConstruct(objCreate, infoItem.Message, Button);
 			
-			SetCommand(objCreateButton, commItem);
+			SetCommand(objCreate, commItem);
 		}
 		//--- list index items for shell
 		listItemsIndex.push_back(objCreate->Index);

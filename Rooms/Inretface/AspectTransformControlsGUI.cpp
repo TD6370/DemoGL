@@ -4,54 +4,14 @@
 
 #include "../AspectBase.h"
 #include "../RoomUseInterface.h"
-//#include "../../GeometryLib.h"
 #include "../../CoreSettings.h"
 #include "../../SceneConstructor.h"
 
 //------------------------------
 #include "../../ObjectsTypes\ObjectData.h"
-#include "../../ObjectsTypes\ObjectGUI.h"
-//#include "../../ObjectsTypes\ObjectEditBox.h"
-//#include "../../ObjectsTypes\ObjectButton.h"
 
-//#include "../../CreatorModelData.h"
-//#include "../../ModelData.h"
 #include "../../GeomertyShapes//ShapeBase.h"
 #include "../AspectDispatcherCommands.h"
-//#include "../../ShellObjects/BaseShell.h"
-
-
-
-//--------------------------
-
-//#include <sstream>
-//
-////#define GLEW_STATIC
-//#include <GL/glew.h>
-//
-//// GLFW
-//#include <GLFW/glfw3.h>
-//
-////OpenGL Mathematics
-//#include <glm/glm.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-//#include <glm/gtc/random.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-
-//using glm::vec4;
-//using glm::vec3;
-//using glm::vec2;
-//using glm::mat4;
-//using glm::perspective;
-//using std::string;
-//using std::shared_ptr;
-
-//class ObjectData;
-//class ObjectGUI;
-//class SceneConstructor;
-//enum TypeCommand;
-//struct AnimationParamGUI;
-
 
 void AspectTransformControlsGUI::Config() {
 

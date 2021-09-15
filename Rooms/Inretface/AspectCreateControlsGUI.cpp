@@ -9,7 +9,6 @@
 
 //------------------------------
 #include "../../ObjectsTypes\ObjectData.h"
-#include "../../ObjectsTypes\ObjectGUI.h"
 
 #include "../../GeomertyShapes//ShapeBase.h"
 #include "../AspectDispatcherCommands.h"
@@ -270,7 +269,7 @@ void AspectCreateControlsGUI::EventFillFieldsEdit() {
 
 			string resultFieldsAndValues = string();
 
-			std::shared_ptr<ObjectGUI> objItem_Button_EditBox;
+			std::shared_ptr<ObjectData> objItem_Button_EditBox;
 			int indItemNext = -1;
 
 			//--- List Edit box
@@ -279,7 +278,7 @@ void AspectCreateControlsGUI::EventFillFieldsEdit() {
 			if (isFillFields)
 				Scene->CreateObjectListFieldValue(ObjectSelectedEdit);
 
-			objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(shell->HeadObj);
+			objItem_Button_EditBox = shell->HeadObj;
 			indItemNext = objItem_Button_EditBox->Index;
 
 			// --- info Shell base
@@ -315,7 +314,7 @@ void AspectCreateControlsGUI::EventFillFieldsEdit() {
 
 				indItemNext = objItem_Button_EditBox->NextItemShellIndex;
 				if (indItemNext != -1)
-					objItem_Button_EditBox = std::dynamic_pointer_cast<ObjectGUI>(objItem_Button_EditBox->NextItemShellObj);
+					objItem_Button_EditBox = objItem_Button_EditBox->NextItemShellObj;
 			}
 
 			if (isFillFields) {

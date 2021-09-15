@@ -21,7 +21,6 @@
 #include "Serialize/SceneSerialize.h"
 #include "ConfigUniformArg.h"
 
-#include "./ObjectsTypes/ObjectGUI.h"
 #include "ShellObjects/BaseShell.h"
 #include "./Components/RenderComponent.h"
 

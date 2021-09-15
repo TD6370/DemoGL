@@ -8,8 +8,8 @@
 #include "../CreatorModelData.h"
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
 #include "../Components/RenderComponent.h"
+#include "../Components/GUIComponent.h"
 
 ShapeSquare::~ShapeSquare() {
 
@@ -19,11 +19,11 @@ void ShapeSquare::SetOwnerPosition(vec2 sizeBackground, vec3 startPosParent) {
 
 	m_sizeBackground = sizeBackground;
 
-	if (!m_objGUI->IsAbsolutePosition) {
+	if (!m_obj->IsAbsolutePosition) {
 		if (m_firstPosParent == vec3(-5000))
 			m_firstPosParent = startPosParent;
 		if (m_firstPos == vec3(-5000))
-			m_firstPos = m_objGUI->StartPos;
+			m_firstPos = m_obj->StartPos;
 		m_offsetPosParent = m_firstPosParent - startPosParent;
 	}
 
@@ -32,40 +32,40 @@ void ShapeSquare::SetOwnerPosition(vec2 sizeBackground, vec3 startPosParent) {
 
 
 void ShapeSquare::FormUpdate(bool isForce) {
-	ObjectGUI* obj = m_objGUI;
-	if (!isForce && !obj->EngineData->SceneData->IsGUI)
+	
+	if (!isForce && !m_obj->EngineData->SceneData->IsGUI)
 		return;
 
 	//--- cash state Posititon
-	if (obj->ActionObjectCurrent == Stay)
+	if (m_obj->ActionObjectCurrent == Stay)
 	{
 		float cash_owner = 0;
-		if(obj->IndexObjectOwner != -1)
-			cash_owner = obj->OwnerObj->Postranslate.x + obj->OwnerObj->Postranslate.y;
+		if(m_obj->IndexObjectOwner != -1)
+			cash_owner = m_obj->OwnerObj->Postranslate.x + m_obj->OwnerObj->Postranslate.y;
 
-		float currCash = obj->EngineData->Oper->HorizontalAngle + obj->EngineData->Oper->VerticalAngle + (obj->Postranslate.x + obj->Postranslate.y) + cash_owner;
+		float currCash = m_obj->EngineData->Oper->HorizontalAngle + m_obj->EngineData->Oper->VerticalAngle + (m_obj->Postranslate.x + m_obj->Postranslate.y) + cash_owner;
 		if (cash_stateOperator == currCash)
 			return;
 		cash_stateOperator = currCash;
 	}
 
 	vec3 directionOut = vec3(0);
-	obj->PanelDepth = 3.8;
-	int indexBackground = obj->EngineData->SceneData->IndexBackgroundGUIObj;
+	m_obj->ComponentGUI->PanelDepth = 3.8;
+	int indexBackground = m_obj->EngineData->SceneData->IndexBackgroundGUIObj;
 	float leftBackFactor = 1 + (m_sizeBackground.x - BACKGROUND_GUI_WIDTH_F);	//2.7
 	//leftBackFactor = 1; // --- base box
 
-	if (obj->IsAbsolutePosition)
+	if (m_obj->IsAbsolutePosition)
 	{
 		vec2 offsetOfCenter = vec2(0);
 		
-		int indOwner = obj->IndexObjectOwner;
+		int indOwner = m_obj->IndexObjectOwner;
 		if (indOwner == -1)
-			indOwner = obj->EngineData->SceneData->IndexBackgroundGUIObj;
+			indOwner = m_obj->EngineData->SceneData->IndexBackgroundGUIObj;
 		if (indOwner != -1)
 		{
 			//---- normalize position on center backgruong control
-			float lenghtLine = obj->Shape->GetLineLenght(0);
+			float lenghtLine = m_obj->Shape->GetLineLenght(0);
 			offsetOfCenter = vec2(leftBackFactor - (lenghtLine / 2), 1 - (lenghtLine / 2));
 			if (indOwner != indexBackground)
 			{
@@ -75,42 +75,42 @@ void ShapeSquare::FormUpdate(bool isForce) {
 			}
 		}
 
-		vec3 startPos = vec3(obj->StartPos.x - offsetOfCenter.x, obj->StartPos.y - offsetOfCenter.y, obj->StartPos.z); //when SetSizeControl - is disabled
-		obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP,
-			obj->PanelDepth - obj->StartPos.z,
-			obj->EngineData->Oper, startPos);
+		vec3 startPos = vec3(m_obj->StartPos.x - offsetOfCenter.x, m_obj->StartPos.y - offsetOfCenter.y, m_obj->StartPos.z); //when SetSizeControl - is disabled
+		m_obj->Postranslate = m_obj->NewPostranslate = GetVectorForwardFaceOffset(m_obj->EngineData->ConfigMVP,
+			m_obj->ComponentGUI->PanelDepth - m_obj->StartPos.z,
+			m_obj->EngineData->Oper, startPos);
 	}
 	else {
-		if (obj->StartPos == vec3(0)) {
-			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFace(obj->EngineData->ConfigMVP, obj->PanelDepth, obj->EngineData->Oper);
+		if (m_obj->StartPos == vec3(0)) {
+			m_obj->Postranslate = m_obj->NewPostranslate = GetVectorForwardFace(m_obj->EngineData->ConfigMVP, m_obj->ComponentGUI->PanelDepth, m_obj->EngineData->Oper);
 		}
 		else {
-			if (obj->IndexObjectOwner != -1 && obj->IndexObjectOwner != indexBackground && m_firstPos != vec3(-5000))
+			if (m_obj->IndexObjectOwner != -1 && m_obj->IndexObjectOwner != indexBackground && m_firstPos != vec3(-5000))
 			{
-				obj->StartPos.x = m_firstPos.x - m_offsetPosParent.x;
-				obj->StartPos.y = m_firstPos.y - m_offsetPosParent.y;
+				m_obj->StartPos.x = m_firstPos.x - m_offsetPosParent.x;
+				m_obj->StartPos.y = m_firstPos.y - m_offsetPosParent.y;
 			}
 			float lbFactor = leftBackFactor - 1;
-			vec3 startPos = vec3(obj->StartPos.x - lbFactor, obj->StartPos.y, obj->StartPos.z);
-			obj->Postranslate = obj->NewPostranslate = GetVectorForwardFaceOffset(obj->EngineData->ConfigMVP, obj->PanelDepth - startPos.z, obj->EngineData->Oper, startPos);
+			vec3 startPos = vec3(m_obj->StartPos.x - lbFactor, m_obj->StartPos.y, m_obj->StartPos.z);
+			m_obj->Postranslate = m_obj->NewPostranslate = GetVectorForwardFaceOffset(m_obj->EngineData->ConfigMVP, m_obj->ComponentGUI->PanelDepth - startPos.z, m_obj->EngineData->Oper, startPos);
 		
 		}
 	}
 	
-	SavePosFactor(obj->StartPos, obj->Postranslate);
+	SavePosFactor(m_obj->StartPos, m_obj->Postranslate);
 
 	Billboard();
 }
 
 void ShapeSquare::SetSizeControl(vec3 vertOffset) {
-	ObjectGUI* obj = m_objGUI;
-	if (obj->IsAbsolutePosition)
+
+	if (m_obj->IsAbsolutePosition)
 		return;
 
 	SaveSizeFactor(true);
 
 	//-- set transform
-	if (obj->MeshData.Vertices.size() != 0) {
+	if (m_obj->MeshData.Vertices.size() != 0) {
 
 		if (start_vertBottomLeft == vec3(0)) {
 			start_vertBottomLeft = GetBottom(1);
@@ -129,7 +129,7 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 		vec3 vertBottomRight = vec3(start_vertBottomRight.x, (start_vertBottomRight.y + offsetY), start_vertBottomRight.z + offsetX);
 		SetBottom(0, vertBottomRight);
 
-		obj->Render->ResetMem_Vertex();
+		m_obj->Render->ResetMem_Vertex();
 	}
 
 	SaveSizeFactor();
@@ -189,13 +189,13 @@ void ShapeSquare::SavePosFactor(vec3 posGUI, vec3 posWorld) {
 }
 
 void ShapeSquare::ResizeTextureUV() {
-	ObjectGUI* obj = m_objGUI;
-	if (obj->IsTextureRepeat) {
-		std::vector< glm::vec2 > repeat_UV = obj->ModelPtr->MeshData.UV;
+	
+	if (m_obj->IsTextureRepeat) {
+		std::vector< glm::vec2 > repeat_UV = m_obj->ModelPtr->MeshData.UV;
 		for (auto& uv : repeat_UV) {
-			uv.y *= obj->TextureRepeat;
+			uv.y *= m_obj->TextureRepeat;
 		}
-		obj->MeshData.UV = repeat_UV;
-		obj->Render->ResetMem_UV();
+		m_obj->MeshData.UV = repeat_UV;
+		m_obj->Render->ResetMem_UV();
 	}
 }

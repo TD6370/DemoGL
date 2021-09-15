@@ -156,9 +156,6 @@
     <ClCompile Include="OperationString.cpp">
       <Filter>Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectCursorGUI.cpp">
-      <Filter>Objects\GUI</Filter>
-    </ClCompile>
     <ClCompile Include="GeomertyShapes\ShapeBase.cpp">
       <Filter>GeomertyShapes</Filter>
     </ClCompile>
@@ -182,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Rooms\AspectFamilyBonds.cpp">
       <Filter>Rooms</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectsTypes\ObjectListBox.cpp">
-      <Filter>Objects\GUI</Filter>
     </ClCompile>
     <ClCompile Include="SceneConstructor.cpp">
       <Filter>Engine</Filter>
@@ -308,9 +302,6 @@
     <ClInclude Include="OperationString.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectCursorGUI.h">
-      <Filter>Objects\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="GeomertyShapes\ShapeBase.h">
       <Filter>GeomertyShapes</Filter>
     </ClInclude>
@@ -334,9 +325,6 @@
     </ClInclude>
     <ClInclude Include="Rooms\AspectFamilyBonds.h">
       <Filter>Rooms</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectsTypes\ObjectListBox.h">
-      <Filter>Objects\GUI</Filter>
     </ClInclude>
     <ClInclude Include="SceneConstructor.h">
       <Filter>Engine</Filter>

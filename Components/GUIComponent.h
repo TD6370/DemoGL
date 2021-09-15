@@ -9,7 +9,6 @@
 #include <fstream>
 
 class ObjectData;
-//class ObjectGUI;
 struct ObjectFiledsSpecific;
 
 
@@ -41,8 +40,6 @@ public:
 
 	bool GetVisible();
 
-	//void Click();
-
 	void ActionWork();
 
 	void ActionMoving();
@@ -57,5 +54,7 @@ public:
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
+
+	void SaveNewPosition(); //Cursor GUI
 };
 

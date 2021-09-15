@@ -136,10 +136,8 @@ public:
 
 	void UpdateFamilBonds();
 
-	//shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectGUI> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0));
 	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0), TypeLayer p_layer = LayerNone);
 
-	//void ControlConstruct(shared_ptr<ObjectGUI> obj, string caption);
 	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string(), TypeLayer p_layer = LayerNone);
 	
 	shared_ptr<ObjectData> CreateObjectNull();

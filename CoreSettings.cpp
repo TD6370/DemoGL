@@ -60,6 +60,8 @@ struct SceneParam {
 	int IndexCursorGUI = -1;
 	int IndexBaseEditBox = -1;
 	int IndexObjectFieldsEdit = -1;
+
+	string NameSystemBackgroundGUI = "SystemBackgroundGUI";
 	string NameSystemEditBox = "SystemRootEditBox";
 	string NameSystemObjectFieldsEdit = "SystemObjectFieldsEdit";
 	bool IsGUI = false;
@@ -189,6 +191,7 @@ extern struct AttributeCommands
 	string SourceCommandObjIndexAttr = "SourceCommandObjIndex";
 };
 
+// -- default Model Names
 extern struct ModelNames
 {
 	string Hero = "homo";
@@ -199,6 +202,7 @@ extern struct ModelNames
 	string MarkerPoint = "marker_Point";
 	string MarkerCross = "marker_Cross";
 	string MarkerVector = "marker_Vector";
+	string BackgroundGUI = "ConextFrameModel";
 };
 
 struct PaletteColors {

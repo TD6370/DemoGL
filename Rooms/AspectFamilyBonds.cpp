@@ -6,7 +6,6 @@
 #include "../SceneConstructor.h"
 #include "../ObjectsTypes/ObjectData.h"
 #include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"
 #include "../ObjectsTypes/ObjectCursorRay.h"
 
 #include "../CreatorModelData.h"
@@ -110,7 +109,7 @@ void AspectFamilyBonds::Work() {
 
 		if (Scene->ObjectCurrent->IndexObjectOwner != -1)
 		{
-			auto  objOwnerGUI = std::dynamic_pointer_cast<ObjectGUI>(Scene->ObjectCurrent->OwnerObj);
+			auto  objOwnerGUI = Scene->ObjectCurrent->OwnerObj;
 			auto  shapeSquare = (ShapeSquare*)Scene->ObjectCurrent->Shape;
 			shapeSquare->SetOwnerPosition(m_sizeBackground, objOwnerGUI->StartPos);
 		}

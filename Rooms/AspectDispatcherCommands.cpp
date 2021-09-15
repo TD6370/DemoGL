@@ -5,8 +5,6 @@
 //#include "..\GeometryLib.h"
 //#include "..\SceneConstructor.h"
 #include "..\ObjectsTypes\ObjectData.h"
-//#include "..\ObjectsTypes\ObjectButton.h"
-#include "..\ObjectsTypes\ObjectGUI.h"
 #include "..\CreatorModelData.h"
 #include "..\ModelData.h"
 
@@ -286,15 +284,14 @@ void SetCommand(shared_ptr<ObjectData> obj, TypeCommand commandType, int sourceI
 	TypeObject typeObj = obj->TypeObj;
 	if (typeObj == TypeObject::Button) {
 
-		auto objButton = std::dynamic_pointer_cast<ObjectGUI>(obj);
-		if (objButton != nullptr) {
-			if (objButton->ComponentButton->IsToogleButon)
+		if (obj != nullptr) {
+			if (obj->ComponentButton->IsToogleButon)
 			{
 				//-- command tooble button
-				objButton->SceneCommand->Options.clear();
-				objButton->SceneCommand->Options.insert(std::pair<string, int>(objButton->Name, (int)objButton->IsChecked));
-				objButton->SceneCommand->Description = objButton->Name;
-				objButton->SceneCommand->ValueI = (int)objButton->IsChecked;
+				obj->SceneCommand->Options.clear();
+				obj->SceneCommand->Options.insert(std::pair<string, int>(obj->Name, (int)obj->IsChecked));
+				obj->SceneCommand->Description = obj->Name;
+				obj->SceneCommand->ValueI = (int)obj->IsChecked;
 			}
 		}
 	}

@@ -32,7 +32,6 @@ using std::string;
 using std::shared_ptr;
 
 class ObjectData;
-class ObjectGUI;
 class SceneConstructor;
 enum TypeCommand;
 struct AnimationParamGUI;
@@ -47,11 +46,28 @@ struct StateGUI {
 	bool IsCreatingObject = false;
 };
 
+struct MouseStateGUI {
+	GLdouble mouseX;
+	GLdouble mouseY;
+	int winHeight;
+	int winHWidth;
+
+	float depthPixel;
+	float magicNumberOne = 0.5722;
+	float magicNumberTwo = 0.4282;
+	float depthMouse;;
+
+	vec4 viewportVec;
+	mat4 projectionPerspective; // = perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
+	vec3 screenPos = vec3(mouseX, winHeight - mouseY, depthMouse);
+};
+
 class RoomUseInterface : public AspectBase
 {
 private:
 	vec3 color_selected = vec3(0, 0, 0);
 	PaletteColors m_palette = PaletteColors();
+	MouseStateGUI m_MouseStateGUI = MouseStateGUI();
 
 	vec2 m_tempMousePos = vec2(0);
 	vec3 m_tempMousePosWorld = vec3(0);
@@ -62,7 +78,7 @@ private:
 	float m_CurrentStartedEventID = -1;
 		
 	bool m_isDebug = false;
-	mat4 m_projectionPerspective;
+	//mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
 	
 	float FocusedOrder = -1;

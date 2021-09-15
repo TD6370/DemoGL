@@ -2,7 +2,6 @@
 #include "ObjectsTypes/ObjectData.h"
 #include "CreatorModelData.h"
 #include "Serialize/SceneSerialize.h"
-#include "ObjectsTypes\ObjectGUI.h"
 
 void SceneLayer::FillSortTypesObjects() {
 

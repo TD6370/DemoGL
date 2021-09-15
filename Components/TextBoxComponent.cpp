@@ -3,8 +3,6 @@
 #include "TextBoxComponent.h"
 
 #include "../ObjectsTypes/ObjectData.h"
-#include "../ObjectsTypes/ObjectGUI.h"
-
 //----------------------
 
 #include "../CoreSettings.h"
@@ -16,6 +14,7 @@
 #include "../CreatorModelData.h"
 #include "../SceneConstructor.h"
 #include "../Components/RenderComponent.h"
+#include "../Components/GUIComponent.h";
 
 #include <sstream>
 #include <vector>
@@ -46,14 +45,6 @@ void TextBoxComponent::Init(ObjectData* obj) {
 		m_obj->ParamValue = 1;
 	}
 }
-
-//void TextBoxComponent::Click() {
-//	m_obj->IsChecked = !m_obj->IsChecked;
-//	if (m_obj->IsChecked)
-//		m_obj->ActionObjectCurrent = Woking;
-//	else
-//		m_obj->ActionObjectCurrent = Stay;
-//}
 
 void TextBoxComponent::ActionWork() {
 
@@ -215,9 +206,9 @@ int TextBoxComponent::GetRightBorderVertexIndex() {
 
 vector<ObjectFiledsSpecific> TextBoxComponent::GetSpecificFiels() {
 
-	vector<ObjectFiledsSpecific> result{
-	{ "Message:", Message } 
-	};
+	vector<ObjectFiledsSpecific> result = m_obj->ComponentGUI->GetSpecificFiels();
+
+	result.push_back({ "Message:", Message });
 
 	return result;
 }
@@ -226,6 +217,8 @@ void TextBoxComponent::SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpeci
 
 	if (m_obj->IndexObjectOwner == -1) //Back GUI
 		return;
+
+	m_obj->ComponentGUI->SetSpecificFiels(filedsSpecific);
 
 	m_obj->Render->ResetMem_Vertex();
 	m_obj->Render->ResetMem_UV();

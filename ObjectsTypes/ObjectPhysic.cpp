@@ -7,6 +7,7 @@
 #include "../CreatorModelData.h"
 
 #include "../Components/RenderComponent.h"
+#include "../Components/GUIComponent.h"
 //#include "..\GeometryLib.h"
 //------------------------
 
@@ -34,6 +35,10 @@ void ObjectPhysic::RunAction() {
 
 void ObjectPhysic::InitData() {
 
+	if (IsGUIComponent) {
+		Shape = new ShapeSquare();
+	}
+	
 	Shape->UpdateShapeInfo(this);
 
 	ObjectData::InitData();
@@ -177,7 +182,10 @@ std::vector< glm::vec3 > ObjectPhysic::GetVertices() {
 
 void ObjectPhysic::ActionMoving()
 {
-
+	//-----????
+	/*if (IsGUIComponent) {
+		return ComponentGUI->ActionMoving();
+	}*/
 }
 
 //void ObjectPhysic::ActionTransforming()

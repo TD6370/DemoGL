@@ -9,14 +9,12 @@
 
 //------------------------------
 #include "../../ObjectsTypes\ObjectData.h"
-#include "../../ObjectsTypes\ObjectGUI.h"
 
 #include "../../GeomertyShapes//ShapeBase.h"
 #include "../AspectDispatcherCommands.h"
 
 #include "../../CreatorModelData.h"
 #include "../../ShellObjects/BaseShell.h"
-//#include "../../ObjectsTypes\ObjectEditBox.h"
 
 #include "../../Components/TextBoxComponent.h"
 

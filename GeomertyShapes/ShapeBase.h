@@ -22,10 +22,8 @@ using std::map;
 //using std::vector;
 
 class Plane;
-//class ModelData;
 class ObjectData;
 class ObjectPhysic;
-class ObjectGUI;
 
 class ShapeBase
 {
@@ -38,10 +36,8 @@ public:
 	//std::vector<shared_ptr<Plane>> Planes;
 	std::vector<Plane> Planes;
 
-	//ObjectPhysic* m_obj;
 	ObjectData* m_obj;
 	ObjectPhysic* m_objPhysic;
-	ObjectGUI* m_objGUI;
 	bool IsContainObject = true;
 
 	ShapeBase();
@@ -50,7 +46,6 @@ public:
 
 	void UpdateShapeInfo(ObjectPhysic* m_obj);
 	void UpdateShapeInfo(ObjectData* m_obj);
-	void UpdateShapeInfo(ObjectGUI* m_obj);
 
 	//--------------------------------------
 

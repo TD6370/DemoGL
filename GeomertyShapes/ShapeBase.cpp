@@ -8,7 +8,6 @@
 #include "../CreatorModelData.h"
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
 #include "../Components/RenderComponent.h"
 
 ShapeBase::ShapeBase() {
@@ -19,7 +18,6 @@ ShapeBase::~ShapeBase() {
 
 }
 
-//void ShapeBase::UpdateShapeInfo(ObjectData* obj)
 void ShapeBase::UpdateShapeInfo(ObjectPhysic* obj)
 {
 	m_obj = obj;
@@ -30,13 +28,6 @@ void ShapeBase::UpdateShapeInfo(ObjectData* obj)
 {
 	m_obj = obj;
 }
-
-void ShapeBase::UpdateShapeInfo(ObjectGUI* obj)
-{
-	m_obj = obj;
-	m_objGUI = obj;
-}
-
 
 vec3 ShapeBase::GetVertexWorldPosition(int indVertex)
 {

@@ -17,7 +17,6 @@ using std::vector;
 using std::shared_ptr;
 
 class ObjectData;
-class ObjectGUI;
 struct ObjectFiledsSpecific;
 
 class TextBoxComponent

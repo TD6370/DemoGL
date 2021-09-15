@@ -9,7 +9,6 @@
 #include "../CreatorModelData.h"
 #include "../WorldCollision.h" //--<< #include "CreatorModelData.h"  
 #include "../ObjectsTypes/ObjectPhysic.h"
-#include "../ObjectsTypes/ObjectGUI.h"	//##$$5.
 #include "../Components/RenderComponent.h"
 
 ShapeHexagon::~ShapeHexagon() {

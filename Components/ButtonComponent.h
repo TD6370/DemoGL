@@ -9,7 +9,6 @@
 #include <fstream>
 
 class ObjectData;
-//class ObjectGUI;
 struct ObjectFiledsSpecific;
 
 class ButtonComponent
@@ -24,27 +23,11 @@ public:
 
 	ButtonComponent() : m_obj(nullptr) {}
 
-	//void InitData();
-
 	void Init(ObjectData* obj);
 
 	void ActionWork();
 
 	void DefaultView();
-
-	/*
-
-		
-
-		void RunAction();
-
-		void DefaultView();
-
-		void Click();
-
-		void Refresh();*/
-
-	//-------------
 
 	vector<ObjectFiledsSpecific> GetSpecificFiels();
 	void SetSpecificFiels(vector<ObjectFiledsSpecific> filedsSpecific);
