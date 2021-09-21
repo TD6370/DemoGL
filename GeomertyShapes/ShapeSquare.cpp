@@ -36,6 +36,17 @@ void ShapeSquare::FormUpdate(bool isForce) {
 	if (!isForce && !m_obj->EngineData->SceneData->IsGUI)
 		return;
 
+	//------------------
+	if (m_obj->IndexObjectOwner != -1 && !IsNeedCalculateForm) {
+		if (m_obj->OwnerObj->GetShapeSquare()->IsNeedCalculateForm) {
+			IsNeedCalculateForm = true;
+		}
+	}
+	//----------------
+
+	if (!IsNeedCalculateForm)
+		return;
+	
 	//--- cash state Posititon
 	if (m_obj->ActionObjectCurrent == Stay)
 	{
@@ -100,6 +111,8 @@ void ShapeSquare::FormUpdate(bool isForce) {
 	SavePosFactor(m_obj->StartPos, m_obj->Postranslate);
 
 	Billboard();
+
+	IsNeedCalculateForm = false;
 }
 
 void ShapeSquare::SetSizeControl(vec3 vertOffset) {
@@ -133,6 +146,8 @@ void ShapeSquare::SetSizeControl(vec3 vertOffset) {
 	}
 
 	SaveSizeFactor();
+
+	IsNeedCalculateForm = true;
 }
 
 void ShapeSquare::SaveSizeFactor(bool isInit) {

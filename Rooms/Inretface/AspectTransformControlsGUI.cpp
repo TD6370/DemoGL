@@ -10,15 +10,14 @@
 //------------------------------
 #include "../../ObjectsTypes\ObjectData.h"
 
-#include "../../GeomertyShapes//ShapeBase.h"
-#include "../AspectDispatcherCommands.h"
+#include "../../GeomertyShapes/ShapeBase.h"
+//#include "../AspectDispatcherCommands.h"
+#include "../../GeomertyShapes/ShapeSquare.h"
 
 void AspectTransformControlsGUI::Config() {
 
-	auto obj = Scene->ObjectCurrent;
-
-	if (obj->TypeObj == TypeObject::CursorGUI) {
-		CursorMovePos = obj->StartPos;
+	if (Scene->ObjectCurrent->TypeObj == TypeObject::CursorGUI) {
+		CursorMovePos = Scene->ObjectCurrent->StartPos;
 	}
 }
 
@@ -32,8 +31,6 @@ void AspectTransformControlsGUI::Init(RoomUseInterface* base) {
 }
 
 void AspectTransformControlsGUI::Work() {
-
-	auto obj = Scene->ObjectCurrent;
 
 	//--- Moving to Cusror position
 	EventMovingControl();
@@ -105,6 +102,8 @@ void  AspectTransformControlsGUI::EventMovingControl() {
 	vec3 newPos = CursorMovePos - SelectObjectOffsetPos;
 	obj->StartPos = vec3(newPos.x, newPos.y, obj->StartPos.z);
 
+	//-- update Form
+	obj->Reset();
 }
 
 //----------------------- END MOVE
@@ -129,6 +128,9 @@ bool AspectTransformControlsGUI::EventEndMovingControl() {
 	//TODO:
 	m_base->State.IsCursorClickEvent = false; //---- VVVV
 	m_base->SetCurrentEventParam(obj, m_base->AnimationParams->StartDefaultParamShaderID);
+
+	Scene->RefreshGUI();
+
 	return true;
 }
 
@@ -218,5 +220,8 @@ bool AspectTransformControlsGUI::EventEndResizeControl() {
 
 	m_base->State.IsCursorClickEvent = false;
 	m_base->SetCurrentEventParam(obj, m_base->AnimationParams->StartDefaultParamShaderID);
+
+	Scene->RefreshGUI();
+
 	return true;
 }

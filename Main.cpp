@@ -173,7 +173,10 @@ int main()
 	Scene->IsSpeedDeltaTime = true;
 	float lastParamCase = Scene->Storage->Inputs->ParamCase;
 	bool isDebugFPS = false;
-	//bool isDebugFPS = true;
+	//bool 
+	isDebugFPS = true;
+
+	bool isNeedUpdate = false;
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -220,7 +223,57 @@ int main()
 			continue;
 		}
 		//==========================
-		if (Scene->VersionUpdate == 1)
+		if (Scene->VersionUpdate == 1) //==== NEW
+		{
+			// - Measure time
+			loopGame.NowTime = glfwGetTime();
+			loopGame.DeltaTime = (loopGame.NowTime - loopGame.LastTime) / loopGame.LimitFPS;
+			loopGame.Lag += loopGame.DeltaTime;
+			loopGame.LastTime = loopGame.NowTime;
+			Scene->DeltaTime = loopGame.DeltaTime;
+
+			// ******
+			//update input events
+			//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
+			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
+			//glfwWaitEventsTimeout(1); /1
+
+			//--- DEBUG freeze
+			if (loopGame.Lag > 10) {
+				loopGame.Lag = 0;
+				std::cout << "GAME LOOP FREEZE LAG: " << loopGame.Lag << "\n";
+			}
+			if (loopGame.DeltaTime > 10) {
+				loopGame.DeltaTime = 0;
+				std::cout << "GAME LOOP FREEZE DeltaTime: " << loopGame.DeltaTime << "\n";
+			}
+
+			isNeedUpdate = false;
+
+			while (loopGame.Lag >= 1.0) {
+				
+				if (!isNeedUpdate) {
+					isNeedUpdate - true;
+					Scene->IsDeltaUpdateLogic = true;
+					Scene->Update();
+				}
+
+				loopGame.Updates++;
+				loopGame.Lag--;
+			}
+
+			// - Render at maximum possible frames
+			Scene->IsDeltaUpdateLogic = false;
+			Scene->Update();
+
+			if (isDebugFPS)
+				DebugLoopGame(loopGame);
+
+			glfwSwapBuffers(window);
+			continue;
+		}
+		 
+		if (Scene->VersionUpdate == 11) //==== Origin
 		{
 			  // - Measure time
 			loopGame.NowTime = glfwGetTime();
@@ -234,7 +287,7 @@ int main()
 				loopGame.Lag = 0;
 				std::cout << "GAME LOOP FREEZE LAG: " << loopGame.Lag << "\n";
 			}
-			if (loopGame.DeltaTime > 50) {
+			if (loopGame.DeltaTime > 10) {
 				loopGame.DeltaTime = 0;
 				std::cout << "GAME LOOP FREEZE DeltaTime: " << loopGame.DeltaTime << "\n";
 			}

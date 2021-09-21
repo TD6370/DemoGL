@@ -60,7 +60,7 @@ private:
 	GLfloat m_nextWayTime = 0;
 	GLfloat m_stepMove = 0;
 	std::string m_keyPosSectorStr;
-	
+
 protected:
 	GLfloat m_speedRotate = 0.1f;
 	GLfloat m_angleModel = 0.0;
@@ -201,6 +201,8 @@ public:
 	void virtual UpdateState(); //after fill options
 
 	void virtual Refresh(); //in actions
+
+	void Reset(); //in actions
 
 	void CheckedRefresh();
 

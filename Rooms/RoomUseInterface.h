@@ -47,19 +47,26 @@ struct StateGUI {
 };
 
 struct MouseStateGUI {
-	GLdouble mouseX;
-	GLdouble mouseY;
-	int winHeight;
-	int winHWidth;
+	vec2 MousePos = vec2(0);
+	vec3 MousePosWorld = vec3(0);
 
-	float depthPixel;
-	float magicNumberOne = 0.5722;
-	float magicNumberTwo = 0.4282;
-	float depthMouse;;
+	int WinHeight;
+	int WinHWidth;
 
-	vec4 viewportVec;
-	mat4 projectionPerspective; // = perspective(45.0f, (float)(winHeight) / (float)(winHeight), 0.1f, 1000.0f);
-	vec3 screenPos = vec3(mouseX, winHeight - mouseY, depthMouse);
+	float DepthPixel;
+	float MagicNumberOne = 0.5722;
+	float MagicNumberTwo = 0.4282;
+	float DepthMouse;
+	
+	mat4 Model;
+	vec4 ViewportVec;
+	mat4 ProjectionPerspective;
+	vec3 ScreenPos = vec3(0);
+
+	bool IsDebug = false;
+
+	int TestUpdateIndex = -1;
+	int TestUpdateLimit = 60;
 };
 
 class RoomUseInterface : public AspectBase
@@ -67,17 +74,15 @@ class RoomUseInterface : public AspectBase
 private:
 	vec3 color_selected = vec3(0, 0, 0);
 	PaletteColors m_palette = PaletteColors();
-	MouseStateGUI m_MouseStateGUI = MouseStateGUI();
-
-	vec2 m_tempMousePos = vec2(0);
-	vec3 m_tempMousePosWorld = vec3(0);
+	MouseStateGUI MouseState = MouseStateGUI();
 
 	float m_sizeBorder = 0.2;
 	string m_stringDebug = "";
+	bool m_isHided = true;
 		
 	float m_CurrentStartedEventID = -1;
 		
-	bool m_isDebug = false;
+	
 	//mat4 m_projectionPerspective;
 	int m_KeyPush = GLFW_MOUSE_BUTTON_1;
 	

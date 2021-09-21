@@ -193,20 +193,6 @@ void SceneConstructor::SetDataToShader() {
 	if (isSkipGUI) //Hard mode
 		return;
 
-
-	//if (ObjectCurrent->IsGUI != m_isEnableGUI ||
-	//	ObjectCurrent->IsGUI != Storage->SceneData->IsGUI) 
-	//{
-	//	m_isEnableGUI = ObjectCurrent->IsGUI;
-	//	m_isUpdateShaderProgramm = true;
-	//}
-
-	/*if (m_isUpdateShaderProgramm) {
-		m_isUpdateTexture = true;
-		m_isUpdateMesh = true;
-		m_isUpdateUV = true;
-	}*/
-
 	ConfigUniform* uniform = ModelCurrent->Render->ConfUniform;
 
 	//-------------------- Set Uniforms
@@ -349,7 +335,7 @@ void SceneConstructor::ObjectUpdate(int i) {
 	bool isVisible = SetObject(i);
 	if (!isVisible)
 		return;
-		
+
 	bool isUpdate = (isDraw || isBase || isShowGUI);
 	if (!isUpdate)
 		return;
@@ -364,6 +350,7 @@ void SceneConstructor::ObjectUpdate(int i) {
 	//Hard mode
 	if (isPause) //Lite mode
 		return;
+
 	
 	if (isDraw || isBase) 
 	{
@@ -382,9 +369,6 @@ void SceneConstructor::Update()
 	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool IsDraw = !IsDeltaUpdateLogic;
 	bool isBase = VersionUpdate == 0;
-	
-	if (!IsDraw || isBase)
-		ResetAspects();
 
 	if(IsDraw || isBase)
 		ClearScene();
@@ -415,12 +399,14 @@ void SceneConstructor::Update()
 	for (int i = 0; i < countObjects + 1; i++)
 	{
 		//---- TEST DEBUG
-		assert(Storage->SceneObjectsLastIndex < 1000);
+		assert(Storage->SceneObjectsLastIndex < 1500);
+		
 
 		ObjectUpdate(i); //--- Calculate geometry
 		//===========================================
 
-		if (!IsDraw || isBase || (IsDraw && !isShowGUI))
+		//if (!IsDraw || isBase || (IsDraw && !isShowGUI))
+		if (!IsDraw)
 			WorkingAspects(); //--- Calculate logic
 
 		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
@@ -441,7 +427,8 @@ void SceneConstructor::Update()
 	factoryObjects->LastWork();
 
 	
-	if (Storage->Inputs->IsReading || isBase)
+	//if (Storage->Inputs->IsReading || isBase)
+	if (!IsDraw && (Storage->Inputs->IsReading || isBase))
 	{
 		Storage->Inputs->IsReading = false;
 		Storage->Inputs->Mode = -1;
@@ -555,6 +542,8 @@ bool SceneConstructor::ReadCommand(TypeCommand commandType)
 }
 
 bool SceneConstructor::IsCurrentObjectBackgroundFrameGUI() {
+	if (ObjectCurrent == nullptr)
+		return false;
 	return ObjectCurrent->Index == Storage->SceneData->IndexBackgroundGUIObj;
 }
 

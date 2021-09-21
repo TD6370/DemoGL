@@ -41,6 +41,5 @@ void ModelData::Init(map<string, GLuint>& shaderPrograms) {
 
 	Render = new RenderComponent(MaterialData, MeshData);
 	Render->Init(shaderPrograms);
-
 }
 

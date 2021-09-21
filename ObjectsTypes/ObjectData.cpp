@@ -147,6 +147,8 @@ void ObjectData::Action()
 	}
 }
 
+
+
 void ObjectData::RunAction() {
 
 	if (ActionObjectCurrent != Lock)
@@ -350,7 +352,7 @@ void ObjectData::UpdateState() {
 }
 
 void ObjectData::Refresh() {
-	
+
 	if (IndexObjectOwner != -1)
 	{
 		if (IndexObjectOwner == EngineData->SceneData->IndexBackgroundGUIObj)
@@ -364,9 +366,17 @@ void ObjectData::Refresh() {
 	{
 		TextBox->Refresh();
 	}
-
+	
 	//CheckedRefresh();
 }
+
+void ObjectData::Reset() {
+	if (IsGUI) {
+		GetShapeSquare()->IsNeedCalculateForm = true;
+	}
+}
+
+
 //=========================================
 
 Plane& ObjectData::GetPlaneFromVertIndex(int indexVertPlane) {

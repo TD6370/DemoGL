@@ -1,6 +1,6 @@
 ﻿//@@@
 #include "CreatorModelData.h"
-#include "WorldCollision.h"
+
 #include "ModelData.h"
 #include "ObjectsTypes/ObjectData.h"
 #include "ObjectsTypes/ObjectPhysic.h"
@@ -927,7 +927,8 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 void CreatorModelData::LoadObjects() {
 
 	bool isTestFreeze = false;
-	//bool isTestFreeze = true;
+	//bool 	
+	isTestFreeze = true;
 
 	SceneSerialize* serializer = new SceneSerialize();
 	serializer->Load();
@@ -936,18 +937,19 @@ void CreatorModelData::LoadObjects() {
 	if (SceneObjectsSize() > 0)
 		return;
 
-	float offsetCentrePlane = 500;
-	float radiusPlane = 70;
+	float radiusPlane = m_WorldSetting.PlaneRadius;
+	vec3 startPlane = m_WorldSetting.StartPlaneOffset;
+
+	//vec3 startPlane = vec3(-20, -55, 70);
 
 	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
-	AddObject("Plane", modelPolygon, Polygon, vec3(-20.f, -55, radiusPlane));
-	//CurrentPolygonObject = GetObjectPrt("Plane");
+		AddObject("Plane", modelPolygon, Polygon, startPlane);
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
 	int maxNPC = 50;
 	if (isTestFreeze)
-		maxNPC = 200; // 200;
+		maxNPC = 300; // 200;
 
     for (int i = 0; i < maxNPC; i++)
 	{
@@ -963,10 +965,11 @@ void CreatorModelData::LoadObjects() {
 	// ------- Wall
 
 		std::shared_ptr<ModelData> modelBox = GetModelPrt("box");
+		
 		AddObject("Box", modelBox, Solid, vec3(0, -35, 0));
 		AddObject("Box2", modelBox, Solid, vec3(0, -25, 0));
 		AddObject("Box3", modelBox, Solid, vec3(-50, -55, 70));
-
+		
 		//TEST gen Box
 		if (isTestFreeze) {
 			for (int i = 0; i < 200; i++)
@@ -985,6 +988,9 @@ void CreatorModelData::LoadObjects() {
 		AddObject("BlockBox1", modelBox, Block, vec3(-20, -50, -10));
 		AddObject("BlockBox2", modelBox, Block, vec3(-10, -50, -20));
 		AddObject("BlockBox3", modelBox, Block, vec3(-20, -50, -20));
+
+		AddObject("BlockBox5", modelBox, Block, vec3(0, -50, 0), color_green);
+		AddObject("Box5", modelBox, Solid, vec3(0, -45, 0), color_violet);
 
 	std::shared_ptr<ModelData> modelM_P = GetModelPrt("marker_Point");
 	AddObject("M_P_1", modelM_P, Solid, vec3(-50, 0, 0));
@@ -1015,16 +1021,33 @@ void CreatorModelData::LoadObjects() {
 
 	LoadObjectsGUI();
 
-	/* for (int x = 0; x < 5; x++)
-	{
-		for (int z = 0; z < 5; z++)
+	bool IsTerraGen = false;
+	IsTerraGen = true;
+	if (IsTerraGen) {
+		bool isOnce = false; // true;
+		float offsetCentrePlaneX = 0; //(startPlane.x * 3);// 350;
+		float offsetCentrePlaneZ = 0; // (startPlane.z * 3);// 350;
+		int maxPlane = 4;
+		for (int x = 0; x < maxPlane; x++)
 		{
-			int o_x = -offsetCentrePlane + (radiusPlane * x);
-			int o_z = -offsetCentrePlane + (radiusPlane * z);
-			std::shared_ptr<ModelData> model1 = GetModelPrt("plane");
-			AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
+			for (int z = 0; z < maxPlane; z++)
+			{
+				if (z == 0 && x == 0)
+					continue;
+
+				int o_x = startPlane.x + (radiusPlane * x) - offsetCentrePlaneX;
+				int o_z = startPlane.z + (radiusPlane * z) - offsetCentrePlaneZ;
+
+				std::shared_ptr<ModelData> model1 = GetModelPrt("plane");
+				AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
+
+				if (isOnce)
+					break;
+			}
+			if (isOnce)
+				break;
 		}
-	}*/
+	}
 
 	UpdateObjectsOrders();
 }
@@ -1064,7 +1087,7 @@ void CreatorModelData::LoadShells() {
 
 void CreatorModelData::LoadClusters() {
 
-	Clusters->Sectors = new WorldSectors();
+	Clusters->Init();
 	Clusters->Storage = this;
 	Clusters->PlaneClusterization();
 }

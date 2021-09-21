@@ -37,6 +37,7 @@ class CreatorModelData {
 
 private:
 
+	World m_WorldSetting;
 	vector<shared_ptr<ObjectData>> SceneObjects;
 	map<int, string> m_defaultModelNames;
 	ModelNames m_namesModels;

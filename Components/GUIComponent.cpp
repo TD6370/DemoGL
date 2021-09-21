@@ -227,4 +227,6 @@ void GUIComponent::SaveNewPosition() {
 		m_obj->StartPos.x += stepX;
 	if (!notY)
 		m_obj->StartPos.y += stepY;
+
+	m_obj->Reset();
 }

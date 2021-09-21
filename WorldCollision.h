@@ -20,6 +20,7 @@ class ShapeBase;
 class CreatorModelData;
 class ObjectData;
 
+using std::shared_ptr;
 using std::string;
 using std::vector;
 using std::map;
@@ -27,59 +28,64 @@ using glm::vec4;
 
 class WorldCluster
 {
+private:
+		World m_WorldSetting;
+		WorldSectors* default_Sectors;
+		map<string, int> ClasterPlanes;
+
 public:
 	//TODO: static !!!!
 	int SectorSizePlane = 5; // 5;// 10;// 100;
 
 	int SectorSize = 10;// 100;
 	CreatorModelData* Storage;
-	WorldSectors* Sectors;
+	//WorldSectors* Sectors;
+	map<string, WorldSectors*> Sectors;
 
 	WorldCluster();
-	
+
+	void Init();
+		
 	void PlaneClusterization();
 
-	void SaveClusterObject(int indexObj);
 	void SaveClusterObject(ObjectData* obj);
 
-	void SaveClusterDynamicColiderObject(int indexObj);
 	void SaveClusterDynamicColiderObject(ObjectData* object);
 
-	void SaveClusterBlockObject(int indexObj);
 	void SaveClusterBlockObject(ObjectData* object);
 
-	vector<int> GetSectorObjects(int indexObj, bool isNewPosition, TypeObject typeObj);
 	vector<int> GetSectorObjects(ObjectData* object, bool isNewPosition, TypeObject typeObj);
 
 	vector<int> GetVertexPolygonFromObject(int indexObj, vector<string>& checkedZona);
-	
-	vector<int> GetIndexPlanePolygonFromObject(int indexObj, vector<string>& checkedZona);
+
 	vector<int> GetIndexPlanePolygonFromObject(ObjectData* obj, vector<string>& checkedZona);
 
-	bool IsCollisionCircle(int indObjMe, int indObj2, bool isNewPosition = false);
 	bool IsCollisionCircle(ObjectData* objectMe, ObjectData* objOther, bool isNewPosition);
 
 	bool IsCollisionLineCircle(float x1, float y1, float x2, float y2,
 		float xC, float yC, float R);
 
-	bool IsCollisionObject(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
 	bool IsCollisionObject(ObjectData* objectMe, int& indexObjHit, bool isNewPosition = false);
 
-	bool IsCollisionDynamicObject(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
 	bool IsCollisionDynamicObject(ObjectData* objectMe, int& indexObjHit, bool isNewPosition = false);
 
-	bool IsCollisionBlocks(int indexObjMe, int& indexObjHit, bool isNewPosition = false);
 	bool IsCollisionBlocks(ObjectData* objectMe, int& indexObjHit, bool isNewPosition = false);
 
-	bool IsCollisionObjectToBlock(int indObjMe, int indBlock, bool isNewPosition);
 	bool IsCollisionObjectToBlock(ObjectData* obj, ObjectData* objBlock, bool isNewPosition);
-	
-	//std::vector<glm::vec3> GetPosVertextPolygon(int ind, int x_sector, int z_sector);
 
-	ColliseState IsCollisionPolygon(int indexObj, Plane* plane, vec4& vertex);
 	ColliseState IsCollisionPolygon(ObjectData* obj, Plane* plane, vec4& vertex);
 
 	ColliseState IsCollisionPolygonP2(int indexObj, Plane* plane, vec4& vertex);
+
+	string GetKeyPlaneSector(vec3 pos, bool isOffset = false);
+
+	void SectorsPlaneClear();
+
+	WorldSectors* GetSectors(string key);
+
+	void InitPlaneSectors(string key, int index);
+	
+	shared_ptr<ObjectData> GetSectorPolygon(string key);
 };
 
 #endif

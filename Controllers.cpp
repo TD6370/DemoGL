@@ -235,6 +235,17 @@ void Controllers::KeyInput(GLFWwindow* window, int key, int scancode, int action
 		Scene->Storage->Inputs->ParamCase = 3;
 	if ((key == GLFW_KEY_4) && action == GLFW_PRESS)
 		Scene->Storage->Inputs->ParamCase = 4;
+	if ((key == GLFW_KEY_5) && action == GLFW_PRESS)
+		Scene->Storage->Inputs->ParamCase = 5;
+	if ((key == GLFW_KEY_6) && action == GLFW_PRESS)
+		Scene->Storage->Inputs->ParamCase = 6;
+	if ((key == GLFW_KEY_7) && action == GLFW_PRESS)
+		Scene->Storage->Inputs->ParamCase = 7;
+	if ((key == GLFW_KEY_8) && action == GLFW_PRESS)
+		Scene->Storage->Inputs->ParamCase = 8;
+	if ((key == GLFW_KEY_9) && action == GLFW_PRESS)
+		Scene->Storage->Inputs->ParamCase = 9;
+
 
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
 

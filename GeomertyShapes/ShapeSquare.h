@@ -46,6 +46,8 @@ public:
 	float HeightFactor = -1;
 	vec3 PosMoveFactor = vec3();
 	vec3 PosMoveSizeFactor = vec3();
+
+	bool IsNeedCalculateForm = false;
 	
 	ShapeSquare() :ShapeBase() {};
 

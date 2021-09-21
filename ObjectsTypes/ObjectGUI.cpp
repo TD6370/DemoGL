@@ -284,4 +284,6 @@ void ObjectGUI::SaveNewPosition() {
 		StartPos.x += stepX;
 	if (!notY)
 		StartPos.y += stepY;
+
+	Refresh();
 }

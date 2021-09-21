@@ -46,11 +46,13 @@ struct Mesh {
 };
 
 struct World {
-	GLfloat Radius = 50; // 10;
+	float Radius =  500; // 50;// // 10;
+	float PlaneRadius = 102;
+	float PlaneRadius50 = 50;
+	vec3 StartPlaneOffset = vec3(-20, -55 , 70);
 	string PathObjects = "./Data/Objects.txt";
 	string PathModels = "./Data/Models.txt";
 	string PathShells = "./Data/Shells.txt";
-
 };
 
 struct SceneParam {
@@ -164,7 +166,8 @@ struct CommandPack {
 };
 
 struct WorldSectors{
-	string NameTerraPlane;
+	bool IsEmpty = false;
+	//string NameTerraPlane;
 	map <string, vector<int>> SectorsPlane;
 	map <string, vector<int>> SectorsObjects;
 	map <string, vector<int>> SectorsBlocks;

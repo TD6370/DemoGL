@@ -30,7 +30,7 @@ private:
 
 	vec3 SelectObjectOffsetPos = vec3(0);
 	vec3 CursorMovePos = vec3(0);
-	
+
 public:
 
 	AspectTransformControlsGUI(string Name, SceneConstructor* sceneConstructor)
