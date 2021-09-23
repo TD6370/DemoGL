@@ -55,7 +55,15 @@ void WorldCluster::SectorsPlaneClear()
 	}
 }
 
-WorldSectors* WorldCluster::GetSectors(string key) {
+
+WorldSectors* WorldCluster::GetSectors(vec3 pos, int index) {
+
+	string  key = GetKeyPlaneSector(pos, index != -1);
+	InitPlaneSectors(key, index);
+	return Sectors[key];
+}
+
+WorldSectors* WorldCluster::GetSectors(string& key) {
 	
 	if (Sectors.find(key) == Sectors.end()) {
 		return default_Sectors;
@@ -63,7 +71,16 @@ WorldSectors* WorldCluster::GetSectors(string key) {
 	return Sectors[key];
 }
 
-void WorldCluster::InitPlaneSectors(string key, int index) {
+WorldSectors* WorldCluster::GetSectors(vec3 pos) {
+
+	string key = GetKeyPlaneSector(pos);
+	if (Sectors.find(key) == Sectors.end()) {
+		return default_Sectors;
+	}
+	return Sectors[key];
+}
+
+void WorldCluster::InitPlaneSectors(string& key, int index) {
 	
 	if (Sectors.find(key) != Sectors.end()) {
 		return;
@@ -73,7 +90,7 @@ void WorldCluster::InitPlaneSectors(string key, int index) {
 	ClasterPlanes.insert({ key , index });
 }
 
-shared_ptr<ObjectData> WorldCluster::GetSectorPolygon(string key) {
+shared_ptr<ObjectData> WorldCluster::GetSectorPolygon(string& key) {
 
 	if (ClasterPlanes.find(key) == ClasterPlanes.end()) {
 		return nullptr;
@@ -82,100 +99,62 @@ shared_ptr<ObjectData> WorldCluster::GetSectorPolygon(string key) {
 	return Storage->GetObjectPrt(ClasterPlanes[key]);
 }
 
-//---- v.1 
-/*
-void WorldCluster::PlaneClusterization()
-{
+shared_ptr<ObjectData> WorldCluster::GetSectorPolygon(vec3 pos) {
 
-	Sectors->SectorsPlane.clear();
-
-	shared_ptr<ObjectData> object = Storage->CurrentPolygonObject;
-	shared_ptr<ModelData> model = object->ModelPtr;
-	vector<shared_ptr<Plane>> planes = object->Shape->Planes;
-
-	for (shared_ptr<Plane> plane : planes)
-	{
-		vec3 posWorldA = object->Shape->ToWorldPosition(plane->V0);
-		vec3 posWorldB = object->Shape->ToWorldPosition(plane->V1);
-		vec3 posWorldC = object->Shape->ToWorldPosition(plane->V2);
-
-		vec3 planeArr[3] = { posWorldA , posWorldB  , posWorldC };
-
-		for (int indVert = 0; indVert < planeArr->length(); indVert++)
-		{
-			glm::vec3 vecItem = planeArr[indVert];
-
-			int x_sector = vecItem.x / SectorSizePlane;
-			int z_sector = vecItem.z / SectorSizePlane;
-			string keyPosSectorStr = std::to_string(x_sector) + "_" + std::to_string(z_sector);
-
-			if (Sectors->SectorsPlane.find(keyPosSectorStr) == Sectors->SectorsPlane.end())
-			{
-				vector<int> value_planeIndexs = vector<int>();
-				value_planeIndexs.push_back(plane->Index);
-				Sectors->SectorsPlane.insert(std::pair<string, vector<int>>(keyPosSectorStr, value_planeIndexs));
-			}
-			else {
-				vector<int> value_planeIndexs = Sectors->SectorsPlane[keyPosSectorStr];
-
-				//----check --  value_planeIndexs
-
-				bool isExist = std::find(value_planeIndexs.begin(), value_planeIndexs.end(), plane->Index) != value_planeIndexs.end();
-				if (isExist)
-					continue;
-				value_planeIndexs.push_back(plane->Index);
-
-				Sectors->SectorsPlane[keyPosSectorStr] = value_planeIndexs;
-			}
-		}
+	string key = GetKeyPlaneSector(pos);
+	if (ClasterPlanes.find(key) == ClasterPlanes.end()) {
+		return nullptr;
 	}
-	
+	return Storage->GetObjectPrt(ClasterPlanes[key]);
 }
-*/
 
 string WorldCluster::GetKeyPlaneSector(vec3 pos, bool isOffset)
 {
+	float x = pos.x;
+	float z = pos.z;
+
 	if (isOffset) {
-		pos = vec3(pos.x - m_WorldSetting.StartPlaneOffset.x, 0, pos.z - m_WorldSetting.StartPlaneOffset.z);
-		pos.x /= m_WorldSetting.PlaneRadius;
-		pos.z /= m_WorldSetting.PlaneRadius;
+		x -= m_WorldSetting.StartPlaneOffset.x;
+		x /= m_WorldSetting.PlaneRadius;
+		z -= m_WorldSetting.StartPlaneOffset.z;
+		z /= m_WorldSetting.PlaneRadius;
 	}
-	else {
-		if (int(pos.x) < m_WorldSetting.PlaneRadius50)
+	else
+	{
+		if (glm::abs(x) < m_WorldSetting.PlaneRadius50)
 		{
-			pos.x /= m_WorldSetting.PlaneRadius50;
+			x /= m_WorldSetting.PlaneRadius50;
 		}
 		else
 		{
-			if (pos.x > 0)
-				pos.x += m_WorldSetting.PlaneRadius50;
-			else
-				pos.x -= m_WorldSetting.PlaneRadius50;
-
-			pos.x /= m_WorldSetting.PlaneRadius;
+			x += (m_WorldSetting.PlaneRadius50 * (x < 0 ? -1 : 1));
+			x /= m_WorldSetting.PlaneRadius;
 		}
-		if (int(pos.z) < m_WorldSetting.PlaneRadius50)
+		if (glm::abs(z) < m_WorldSetting.PlaneRadius50)
 		{
-			pos.z /= m_WorldSetting.PlaneRadius50;
+			z /= m_WorldSetting.PlaneRadius50;
 		}
 		else
 		{
-			if (pos.z > 0)
-				pos.z += m_WorldSetting.PlaneRadius50;
-			else
-				pos.z -= m_WorldSetting.PlaneRadius50;
-
-			pos.z /= m_WorldSetting.PlaneRadius;
+			z += (m_WorldSetting.PlaneRadius50 * (z < 0 ? -1 : 1));
+			z /= m_WorldSetting.PlaneRadius;
 		}
 	}
-	return std::to_string(int(pos.x)) + "_" + std::to_string(int(pos.z));
+	return std::to_string(int(x)) + "_" + std::to_string(int(z));
 }
+
+//std::pair<int, int> rowCol = std::make_pair(currentRow, currentCol);
+
+//--- TODO:
+/*int test = std::hash<int>()(int(pos.x)) ^ std::hash<int>()(int(pos.z));
+*/
+
 
 void WorldCluster::PlaneClusterization()
 {
 	SectorsPlaneClear();
 	
-	string keyP;
+	//string keyP;
 	ClasterPlanes = map<string, int>();
 
 	shared_ptr<ObjectData> object;
@@ -187,10 +166,8 @@ void WorldCluster::PlaneClusterization()
 		if (object->TypeObj != TypeObject::Polygon)
 			continue;
 
-		keyP = GetKeyPlaneSector(object->Postranslate, true);
-		InitPlaneSectors(keyP, object->Index);
+		WorldSectors* Sectors = GetSectors(object->Postranslate, object->Index);
 
-		WorldSectors* Sectors = GetSectors(keyP);
 		if (Sectors->IsEmpty) {
 			return;
 		}
@@ -356,13 +333,11 @@ ColliseState WorldCluster::IsCollisionPolygon(ObjectData* object, Plane* plane, 
 	bool isHero = object->TypeObj == Hero;
 	bool isTestVertex = object->Name == "Mon";
 
+	shared_ptr<ObjectData> polygon = GetSectorPolygon(object->Postranslate);
 
-	string keyP = GetKeyPlaneSector(object->Postranslate);
-	//----------- POLYGON
-	shared_ptr<ObjectData> polygon = GetSectorPolygon(keyP);
 	if (polygon == nullptr)
 	{
-		return stateResult;
+		return UNKNOWN;
 	}
 
 	for (const int indPlane : indexesPlane)
@@ -472,8 +447,8 @@ vector<int> WorldCluster::GetIndexPlanePolygonFromObject(ObjectData* object, vec
 	bool isExist;
 	vector<int> indexesPlane;
 
-	string keyP = GetKeyPlaneSector(posStart);
-	WorldSectors* Sectors = GetSectors(keyP);
+	WorldSectors* Sectors = GetSectors(posStart);
+	
 	if (Sectors->IsEmpty) {
 		return resultPlaneIndexes;
 	}
@@ -532,10 +507,8 @@ vector<int> WorldCluster::GetVertexPolygonFromObject(int indexObj, vector<string
 	std::shared_ptr <ObjectData> object = Storage->GetObjectPrt(indexObj);
 	int radius = object->ModelPtr->MeshData.RadiusCollider;
 	vector<int> resultVertex = vector<int>();
-	//vector<string> checkedZona = vector<string>();
 
-	string keyP = GetKeyPlaneSector(object->Postranslate);
-	WorldSectors* Sectors = GetSectors(keyP);
+	WorldSectors* Sectors = GetSectors(object->Postranslate);
 
 	if (Sectors->IsEmpty) {
 		return resultVertex;
@@ -596,8 +569,8 @@ vector<int> WorldCluster::GetSectorObjects(ObjectData* object, bool isNewPositio
 	vector<string> checkedZona = vector<string>();
 	vector<int> resultIndexObjects = vector<int>();
 
-	string keyP = GetKeyPlaneSector(object->Postranslate);
-	WorldSectors* Sectors = GetSectors(keyP);
+	WorldSectors* Sectors = GetSectors(object->Postranslate);
+
 	if (Sectors->IsEmpty) {
 		return resultIndexObjects;
 	}
@@ -689,8 +662,8 @@ void WorldCluster::SaveClusterBlockObject(ObjectData* object) {
 
 	int indexObj = object->Index;
 
-	string keyP = GetKeyPlaneSector(object->Postranslate);
-	WorldSectors* Sectors = GetSectors(keyP);
+	WorldSectors* Sectors = GetSectors(object->Postranslate);
+
 	if (Sectors->IsEmpty) {
 		return;
 	}
@@ -761,8 +734,8 @@ void WorldCluster::SaveClusterDynamicColiderObject(ObjectData* object) {
 	vector<string> checkedZona = vector<string>();
 	glm::vec3 pos;
 
-	string keyP = GetKeyPlaneSector(object->Postranslate);
-	WorldSectors* Sectors = GetSectors(keyP);
+	WorldSectors* Sectors = GetSectors(object->Postranslate);
+
 	if (Sectors->IsEmpty) {
 		return;
 	}

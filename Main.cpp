@@ -110,8 +110,9 @@ int main()
 	//¬ыключение возможности изменени€ размера окна
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	//bool isFullscreen = true;
 	bool isFullscreen = false;
+	//	isFullscreen = true;
+
 	GLFWmonitor* monitor = isFullscreen ? glfwGetPrimaryMonitor() : nullptr;
 	GLFWwindow* window = glfwCreateWindow(Scene->m_widthWindow, Scene->m_heightWindow, "LearnOpenGL", monitor, nullptr);
 	
@@ -175,17 +176,17 @@ int main()
 	bool isDebugFPS = false;
 	//bool 
 	isDebugFPS = true;
-
-	bool isNeedUpdate = false;
+	bool isNeedUpdateUI = false;
 
 	while (!glfwWindowShouldClose(window))
 	{
-		if (isDebugFPS)
+		/*if (isDebugFPS)
 		{
 			glfwPollEvents();
 			SwitchLoopGameVersion(loopGame, lastParamCase);
-		}
+		}*/
 
+		/*
 		//==========================
 		if (Scene->VersionUpdate == 2)
 		{
@@ -222,9 +223,10 @@ int main()
 			glfwSwapBuffers(window);
 			continue;
 		}
+		*/
 		//==========================
-		if (Scene->VersionUpdate == 1) //==== NEW
-		{
+		//if (Scene->VersionUpdate == 1) //==== NEW
+		//{
 			// - Measure time
 			loopGame.NowTime = glfwGetTime();
 			loopGame.DeltaTime = (loopGame.NowTime - loopGame.LastTime) / loopGame.LimitFPS;
@@ -232,13 +234,6 @@ int main()
 			loopGame.LastTime = loopGame.NowTime;
 			Scene->DeltaTime = loopGame.DeltaTime;
 
-			// ******
-			//update input events
-			//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
-			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
-			//glfwWaitEventsTimeout(1); /1
-
-			//--- DEBUG freeze
 			if (loopGame.Lag > 10) {
 				loopGame.Lag = 0;
 				std::cout << "GAME LOOP FREEZE LAG: " << loopGame.Lag << "\n";
@@ -248,12 +243,15 @@ int main()
 				std::cout << "GAME LOOP FREEZE DeltaTime: " << loopGame.DeltaTime << "\n";
 			}
 
-			isNeedUpdate = false;
-
+			isNeedUpdateUI = true;
+			
 			while (loopGame.Lag >= 1.0) {
 				
-				if (!isNeedUpdate) {
-					isNeedUpdate - true;
+				if (isNeedUpdateUI) {
+					
+					glfwPollEvents();
+
+					isNeedUpdateUI = false;
 					Scene->IsDeltaUpdateLogic = true;
 					Scene->Update();
 				}
@@ -271,71 +269,7 @@ int main()
 
 			glfwSwapBuffers(window);
 			continue;
-		}
-		 
-		if (Scene->VersionUpdate == 11) //==== Origin
-		{
-			  // - Measure time
-			loopGame.NowTime = glfwGetTime();
-			loopGame.DeltaTime = (loopGame.NowTime - loopGame.LastTime) / loopGame.LimitFPS;
-			loopGame.Lag += loopGame.DeltaTime;
-			loopGame.LastTime = loopGame.NowTime;
-			Scene->DeltaTime = loopGame.DeltaTime;
-
-			//--- DEBUG freeze
-			if (loopGame.Lag > 50) {
-				loopGame.Lag = 0;
-				std::cout << "GAME LOOP FREEZE LAG: " << loopGame.Lag << "\n";
-			}
-			if (loopGame.DeltaTime > 10) {
-				loopGame.DeltaTime = 0;
-				std::cout << "GAME LOOP FREEZE DeltaTime: " << loopGame.DeltaTime << "\n";
-			}
-			//---------------
-
-			// ******
-			//update input events
-			//glfwPollEvents();	//-- (hard) (Ёто лучший выбор при непрерывном рендеринге, как и в большинстве игр.)
-			//glfwWaitEvents();	//-- (low) ≈сли вам нужно только обновить содержимое окна при получении нового ввода, лучше выбрать 
-			//glfwWaitEventsTimeout(1); /1
-
-			while (loopGame.Lag >= 1.0) {
-
-				glfwPollEvents();
-
-				Scene->IsDeltaUpdateLogic = true;
-				Scene->Update();
-
-				loopGame.Updates++;
-				loopGame.Lag--;
-			}
-
-			// - Render at maximum possible frames
-			Scene->IsDeltaUpdateLogic = false;
-			Scene->Update();
-			
-			if (isDebugFPS)
-				DebugLoopGame(loopGame);
-
-			glfwSwapBuffers(window);
-			continue;
-		}
-		//==========================
-		if (Scene->VersionUpdate == 0)
-		{
-			//update input events
-			glfwPollEvents();
-
-			Scene->Update();
-
-			if (isDebugFPS) {
-				loopGame.Updates++;
-				DebugLoopGame(loopGame);
-			}
-
-			glfwSwapBuffers(window);
-		}
-		//==========================
+		//}
 	}
 
 	glfwTerminate();

@@ -32,6 +32,7 @@ class AspectFactoryObjects;
 class AspectDispatcherCommands;
 class BaseShell;
 class SceneSerialize;
+class RoomSerializeScene;
 
 using std::vector;
 using std::shared_ptr;
@@ -42,6 +43,7 @@ using glm::vec3;
 class SceneConstructor
 {
 private:
+
 	int prevIndexModel = -1;
 	string prevModelTexture;
 	const char* prevModel3D;
@@ -112,6 +114,8 @@ public:
 	vector<shared_ptr<AspectBase>> Aspects;
 
 	AspectFactoryObjects* factoryObjects;
+
+	RoomSerializeScene* aspectSerializator;
 
 	AspectDispatcherCommands* dispatcherCommands;
 

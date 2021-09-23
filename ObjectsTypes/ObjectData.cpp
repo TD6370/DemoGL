@@ -231,8 +231,6 @@ void ObjectData::Click() {
 			IsChecked = !IsChecked;
 		}
 	}
-
-
 }
 
 void ObjectData::ActionWork() {
@@ -466,7 +464,6 @@ void ObjectData::DefaultView()
 {
 	MaterialData.Color = StartColor;
 
-	//--- TEST
 	ParamValue = 0;
 
 	if (IsTextBoxComponent && TypeObj == TypeObject::EditBox)

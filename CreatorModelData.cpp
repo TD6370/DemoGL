@@ -927,7 +927,7 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 void CreatorModelData::LoadObjects() {
 
 	bool isTestFreeze = false;
-	//bool 	
+	//bool 		
 	isTestFreeze = true;
 
 	SceneSerialize* serializer = new SceneSerialize();
@@ -949,7 +949,7 @@ void CreatorModelData::LoadObjects() {
 
 	int maxNPC = 50;
 	if (isTestFreeze)
-		maxNPC = 300; // 200;
+		maxNPC = 200;//-forFULL_SCREEN  300; // 200;
 
     for (int i = 0; i < maxNPC; i++)
 	{
@@ -1018,7 +1018,6 @@ void CreatorModelData::LoadObjects() {
 	auto obj = AddObject("CursorRay", model, CursorRay, vec3(-50, -55, 70));
 	obj->SetOwnerObject(objHero);
 
-
 	LoadObjectsGUI();
 
 	bool IsTerraGen = false;
@@ -1027,7 +1026,7 @@ void CreatorModelData::LoadObjects() {
 		bool isOnce = false; // true;
 		float offsetCentrePlaneX = 0; //(startPlane.x * 3);// 350;
 		float offsetCentrePlaneZ = 0; // (startPlane.z * 3);// 350;
-		int maxPlane = 4;
+		int maxPlane = 5;
 		for (int x = 0; x < maxPlane; x++)
 		{
 			for (int z = 0; z < maxPlane; z++)

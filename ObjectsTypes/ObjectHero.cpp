@@ -26,10 +26,9 @@ void ObjectHero::SaveHeroOperator(bool onlyVertical) {
 		EngineData->Oper->m_position.y = newPosOperatorY + heroHeight;
 	}
 	else {
-		vec3 stepsV = vec3(steps);
 		vec3 opPos = EngineData->Oper->m_position;
 		opPos.y -= heroHeight;
-		vec3 speed = (NewPostranslate - opPos) / stepsV;
+		vec3 speed = (NewPostranslate - opPos) / steps;
 		vec3 newPosOperator = opPos + speed;
 
 		//Storage->Operator->m_position = vec3(NewPostranslate.x, NewPostranslate.y + heroHeight, NewPostranslate.z);

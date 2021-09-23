@@ -17,7 +17,6 @@
 // GLFW
 #include <GLFW/glfw3.h>
 
-
 void RoomSerializeScene::Config() {
 
 }
@@ -59,59 +58,52 @@ bool RoomSerializeScene::IsValidSave(shared_ptr<ObjectData> object)
 
 void RoomSerializeScene::Save() {
 
-	if (Scene->IsBreakUpdate())
-		return;
-
-	if (Scene->IsLastCurrentObject) {
-
-		int indO = 0;
-		while (indO <= Scene->Storage->SceneObjectsLastIndex)
-		{
-			auto obj = Scene->Storage->GetObjectPrt(indO++);
-			if (IsValidSave(obj)) {
+	int indO = 0;
+	while (indO <= Scene->Storage->SceneObjectsLastIndex)
+	{
+		auto obj = Scene->Storage->GetObjectPrt(indO++);
+		if (IsValidSave(obj)) {
 				
-				vector<ObjectFiledsSpecific> specificFiels = obj->GetSpecificFiels();
-				bool isSpecificExist = specificFiels.size() != 0;
+			vector<ObjectFiledsSpecific> specificFiels = obj->GetSpecificFiels();
+			bool isSpecificExist = specificFiels.size() != 0;
 
-				_serializer->Save(obj, isSpecificExist);
+			_serializer->Save(obj, isSpecificExist);
 				
-				_serializer->SaveSpecific(specificFiels);
-			}
+			_serializer->SaveSpecific(specificFiels);
 		}
-
-		for (auto model : Scene->Storage->Models)
-		{
-			_serializer->Save(model);
-		}
-
-		for (auto shell : Scene->Storage->ObjectsShells)
-		{
-			_serializer->Save(shell);
-		}
-
-		_serializer->Save();
-
 	}
+
+	for (auto model : Scene->Storage->Models)
+	{
+		_serializer->Save(model);
+	}
+
+	for (auto shell : Scene->Storage->ObjectsShells)
+	{
+		_serializer->Save(shell);
+	}
+
+	_serializer->Save();
+
+	IsOnceComplete = false;
+
 }
 
-void RoomSerializeScene::Work() {
+void RoomSerializeScene::Work() {};
+
+void RoomSerializeScene::LastWork() {
 
 	//------ Serialization
-
 	if (Scene->Storage->Inputs->Key == m_saveKey &&
 		Scene->Storage->Inputs->Action == GLFW_PRESS) {
 		Save();
 	}
 
 	//------ Deserialization
-
 	if (Scene->Storage->Inputs->Key == m_loadKey &&
 		Scene->Storage->Inputs->Action == GLFW_PRESS) {
 
-		if (!IsOnceComplete)
-		{
+		//if (!IsOnceComplete)
 			Load();
-		}
 	}
-
 }

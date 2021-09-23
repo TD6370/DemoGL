@@ -66,7 +66,7 @@ struct MouseStateGUI {
 	bool IsDebug = false;
 
 	int TestUpdateIndex = -1;
-	int TestUpdateLimit = 60;
+	int TestUpdateLimit = 10; // 60;
 };
 
 class RoomUseInterface : public AspectBase

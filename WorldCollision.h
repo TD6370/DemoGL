@@ -81,11 +81,17 @@ public:
 
 	void SectorsPlaneClear();
 
-	WorldSectors* GetSectors(string key);
+	WorldSectors* GetSectors(string& key);
 
-	void InitPlaneSectors(string key, int index);
+	WorldSectors* GetSectors(vec3 pos, int index);
+
+	WorldSectors* GetSectors(vec3 pos);
+
+	void InitPlaneSectors(string& key, int index);
 	
-	shared_ptr<ObjectData> GetSectorPolygon(string key);
+	shared_ptr<ObjectData> GetSectorPolygon(string& key);
+
+	shared_ptr<ObjectData> GetSectorPolygon(vec3 pos);
 };
 
 #endif

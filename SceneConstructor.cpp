@@ -107,12 +107,12 @@ void SceneConstructor::ConfigRoom() {
 	RoomMarkerPlane* aspectMarkers = new RoomMarkerPlane("Markers", this);
 	aspectMarkers->Init();
 	Aspects.push_back(make_unique<RoomMarkerPlane>(*aspectMarkers));
-		
-	RoomSerializeScene* aspectSerializator = new RoomSerializeScene("Serialize", this);
+
+	aspectSerializator = new RoomSerializeScene("Serialize", this);
 	aspectSerializator->Init();
 	Aspects.push_back(make_unique<RoomSerializeScene>(*aspectSerializator));
-
-		
+	aspectSerializator = dynamic_pointer_cast<RoomSerializeScene>(Aspects.back()).get();
+				
 	AspectFamilyBonds* aspectFamilyBonds = new AspectFamilyBonds("FamilyBonds", this);
 	aspectFamilyBonds->Init();
 	Aspects.push_back(make_unique<AspectFamilyBonds>(*aspectFamilyBonds));
@@ -336,22 +336,23 @@ void SceneConstructor::ObjectUpdate(int i) {
 	if (!isVisible)
 		return;
 
-	bool isUpdate = (isDraw || isBase || isShowGUI);
-	if (!isUpdate)
-		return;
-
 	//-------------- Start next ObjectCurrent ---------------------
-				
-	if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
+	if (isShowGUI && !ObjectCurrent->IsGUI) //Lite mode
 		isPause = true;
-	if (!isShowGUI && ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
+	if (!isShowGUI && ObjectCurrent->IsGUI) //Lite mode
 		isPause = true;
+
+	//--- Render HERO
+	if (Storage->SceneData->IndexHeroObj == ObjectCurrent->Index)
+	{
+		if (!isDraw && !isPause)
+			ObjectCurrent->Action(); // --- Only calculate transform geometry
+	}
 
 	//Hard mode
 	if (isPause) //Lite mode
 		return;
-
-	
+		
 	if (isDraw || isBase) 
 	{
 		PreparationDataFromShader();
@@ -366,33 +367,28 @@ void SceneConstructor::ObjectUpdate(int i) {
 
 void SceneConstructor::Update()
 {
-	bool isShowGUI = Storage->SceneData->IsGUI;
 	bool IsDraw = !IsDeltaUpdateLogic;
-	bool isBase = VersionUpdate == 0;
-
-	if(IsDraw || isBase)
+		
+	if(IsDraw)
 		ClearScene();
 
 	SetMouseEvents();
 
-	//SetInputTextEvents();
-
-	if (IsDraw || isBase)
+	if (IsDraw)
 		GenMVP();
 
 	countObjects = Storage->SceneObjectsLastIndex;
 	if (IsBreakUpdate()) {
-		if (IsDraw || isBase)
+		if (IsDraw)
 			DrawGraph();
-		if (!IsDraw || isBase)
+		else
 			WorkingAspects();
 		return;
 	}
 
-	if (!IsDraw || isBase)
+	if (!IsDraw)
 		FactoryObjectsWork();
-
-	
+		
 	Storage->Inputs->IsReading = true;
 	SetInputTextEvents();
 
@@ -401,17 +397,11 @@ void SceneConstructor::Update()
 		//---- TEST DEBUG
 		assert(Storage->SceneObjectsLastIndex < 1500);
 		
-
 		ObjectUpdate(i); //--- Calculate geometry
-		//===========================================
 
-		//if (!IsDraw || isBase || (IsDraw && !isShowGUI))
 		if (!IsDraw)
 			WorkingAspects(); //--- Calculate logic
-
-		if (isShowGUI && !ObjectCurrent->IsGUI && countObjects > 50) //Lite mode
-			continue;
-
+		
 		if (IsBreakUpdate())
 			break;
 
@@ -419,16 +409,17 @@ void SceneConstructor::Update()
 		if (!isVisible)
 			continue;
 
-		if (IsDraw || isBase)
+		if (IsDraw)
 			DrawGraph();
 	}
 
-	//---- AfterBuild
+	//---- After Build
 	factoryObjects->LastWork();
 
-	
-	//if (Storage->Inputs->IsReading || isBase)
-	if (!IsDraw && (Storage->Inputs->IsReading || isBase))
+	//---- After Save & Load game
+	aspectSerializator->LastWork();
+		
+	if (!IsDraw && Storage->Inputs->IsReading)
 	{
 		Storage->Inputs->IsReading = false;
 		Storage->Inputs->Mode = -1;

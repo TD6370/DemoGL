@@ -46,9 +46,9 @@ struct Mesh {
 };
 
 struct World {
-	float Radius =  500; // 50;// // 10;
+	float Radius =  700; // 50;// // 10;
 	float PlaneRadius = 102;
-	float PlaneRadius50 = 50;
+	float PlaneRadius50 = PlaneRadius / 2;
 	vec3 StartPlaneOffset = vec3(-20, -55 , 70);
 	string PathObjects = "./Data/Objects.txt";
 	string PathModels = "./Data/Models.txt";

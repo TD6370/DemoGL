@@ -29,6 +29,8 @@ public:
 	RoomSerializeScene(string Name, SceneConstructor* sceneConstructor)
 		: AspectBase(Name, sceneConstructor) {};
 
+	void LastWork();
+
 	void Init();
 	void Config();
 	void Work();
