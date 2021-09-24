@@ -111,7 +111,7 @@ int main()
 	//glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	bool isFullscreen = false;
-	//	isFullscreen = true;
+	//			isFullscreen = true;
 
 	GLFWmonitor* monitor = isFullscreen ? glfwGetPrimaryMonitor() : nullptr;
 	GLFWwindow* window = glfwCreateWindow(Scene->m_widthWindow, Scene->m_heightWindow, "LearnOpenGL", monitor, nullptr);

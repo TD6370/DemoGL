@@ -45,7 +45,8 @@ public:
 
     Plane();
 
-    Plane(vec3 p_a, vec3 p_b, vec3 p_c, glm::mat4& trans, int vers = 0);
+    //Plane(vec3 p_a, vec3 p_b, vec3 p_c, glm::mat4& trans, int vers = 0);
+    Plane(vec3 p_a, vec3 p_b, vec3 p_c, glm::mat4& trans, int index);
 
     Plane(const vec3& _p, const vec3& _n);
 

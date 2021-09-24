@@ -27,33 +27,31 @@ using glm::dot;
             _v2.x * _v1.y - _v2.y * _v1.x);
     }
 
-    Plane::Plane(vec3 p_a, vec3 p_b, vec3 p_c, glm::mat4& trans, int vers) 
+    Plane::Plane(vec3 p_a, vec3 p_b, vec3 p_c, glm::mat4& trans, int index)
     {
-        vers = 1;
-        if (vers == 1)
-        {
-            V0 = p_a;
-            V1 = p_b;
-            V2 = p_c;
-            V0_W = vec3(trans * vec4(p_a, 1));
-            V1_W = vec3(trans * vec4(p_b, 1));
-            V2_W = vec3(trans * vec4(p_c, 1));
+        Index = index;
+      
+        V0 = p_a;
+        V1 = p_b;
+        V2 = p_c;
+        V0_W = vec3(trans * vec4(p_a, 1));
+        V1_W = vec3(trans * vec4(p_b, 1));
+        V2_W = vec3(trans * vec4(p_c, 1));
 
-            Point = V0_W;
+        Point = V0_W;
 
-            vec3 edge1(V0_W - V1_W);
-            vec3 edge2(V2_W - V1_W);
-            Normal = andOp(edge1, edge2);
-            vec3 Normal_1 = cross(edge1, edge2);
-            Normal = glm::normalize(Normal);
-            a = Normal.x;
-            b = Normal.y;
-            c = Normal.z;
-            D = -(V0_W.x * a + V0_W.y * b + V0_W.z * c);
-            //----------------
-        }
-        else 
-        {
+        vec3 edge1(V0_W - V1_W);
+        vec3 edge2(V2_W - V1_W);
+        //Normal = andOp(edge1, edge2);
+        //vec3 Normal_1 = cross(edge1, edge2);
+        Normal = cross(edge1, edge2);
+        Normal = normalize(Normal);
+        a = Normal.x;
+        b = Normal.y;
+        c = Normal.z;
+        D = -(V0_W.x * a + V0_W.y * b + V0_W.z * c);
+        //---------------- Version 2
+        /*
             V0 = p_a;
             V1 = p_b;
             V2 = p_c;
@@ -63,7 +61,7 @@ using glm::dot;
             // расстояние от начала координат до плоскости: 
             //D = -Normal*Point (от нормали и точки плоскости)
             D = glm::dot(Normal, Point); //P is a point in the plane, like a, b or c
-        }
+        */
     }
 
     Plane::~Plane() {

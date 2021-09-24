@@ -190,6 +190,8 @@ void ObjectData::GenStartPosition() {
 
 void ObjectData::RunTransform()
 {
+	//TODO: cash trans ???
+
 	glm::mat4 trans = Transform(1, EngineData->Inputs->ParamCase, false,
 		glm::mat4(1.0f),
 		Postranslate,

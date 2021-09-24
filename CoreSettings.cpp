@@ -46,7 +46,7 @@ struct Mesh {
 };
 
 struct World {
-	float Radius =  700; // 50;// // 10;
+	float Radius =  300; // 50;// // 10;
 	float PlaneRadius = 102;
 	float PlaneRadius50 = PlaneRadius / 2;
 	vec3 StartPlaneOffset = vec3(-20, -55 , 70);
@@ -82,7 +82,8 @@ struct Camera {
 
 struct Operator {
 
-	GLfloat Far = 300.f;// 1000.f;;
+	//GLfloat Far = 300.f;// 1000.f;;
+	GLfloat Far = 1000.f;;
 	glm::vec3 m_direction;
 	float VerticalAngle = 0;
 	float HorizontalAngle = 0;
@@ -206,6 +207,7 @@ extern struct ModelNames
 	string MarkerCross = "marker_Cross";
 	string MarkerVector = "marker_Vector";
 	string BackgroundGUI = "ConextFrameModel";
+	string Plane = "plane";
 };
 
 struct PaletteColors {

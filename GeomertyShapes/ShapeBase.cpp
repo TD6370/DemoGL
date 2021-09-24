@@ -84,18 +84,18 @@ void ShapeBase::FillPlanes()
 		obj->TranslateAngle,
 		obj->Size);
 
-	while (indVert < obj->GetVertices().size())
+	int count = obj->GetVertices().size();
+	vec3 vertexNormA;
+	vec3 vertexNormB;
+	vec3 vertexNormC;
+
+	while (indVert < count)
 	{
-		vec3 vertexNormA = obj->GetVertices()[indVert++];
-		vec3 vertexNormB = obj->GetVertices()[indVert++];
-		vec3 vertexNormC = obj->GetVertices()[indVert++];
+		vertexNormA = obj->GetVertices()[indVert++];
+		vertexNormB = obj->GetVertices()[indVert++];
+		vertexNormC = obj->GetVertices()[indVert++];
 
-		Plane plane(vertexNormA, vertexNormB, vertexNormC, trans);
-		plane.Index = indexPlane++;
-
-		//---- FIX.Plane
-		//Planes.push_back(std::make_unique<Plane>(plane));
-		Planes.push_back(plane);
+		Planes.push_back(Plane(vertexNormA, vertexNormB, vertexNormC, trans, indexPlane++));
 	}
 }
 

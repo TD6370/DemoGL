@@ -137,34 +137,18 @@ void CreatorModelData::LoadModels(vector<shared_ptr<ModelFileds>> filedsModels)
 
 	ClearModels();
 
+	std::shared_ptr<ModelData> nextModelPrt;
+	string typeModel;
 	int i = 0;
 
 	for (auto fieldsModel : filedsModels) {
 
-		std::shared_ptr<ModelData> nextModelPrt;
+		typeModel = fieldsModel->TypeName;
 
-		string typeModel = fieldsModel->TypeName;
-		if (typeModel == "ModelFrame") {
-			auto modelFrame = ModelData(); // ModelFrame();
-			Models.push_back(std::make_unique<ModelData>(modelFrame));
-			nextModelPrt = GetModelPrt(Models.size() - 1);
-		}
-		if (typeModel == "ModelTextBox") {
-			auto modelTextBox = ModelData(); // ModelTextBox();
-			Models.push_back(std::make_unique<ModelData>(modelTextBox));
-			nextModelPrt = GetModelPrt(Models.size() - 1);
-		}
-		if (typeModel == "ModelEditBox") {
-			auto modelEditBox = ModelData();// ModelEditBox();
-			Models.push_back(std::make_unique<ModelData>(modelEditBox));
-			nextModelPrt = GetModelPrt(Models.size() - 1);
-		}
-		
-		if(nextModelPrt == nullptr){
-			ModelData nextModel = ModelData();
-			Models.push_back(std::make_unique<ModelData>(nextModel));
-			nextModelPrt = GetModelPrt(Models.size() - 1);
-		}
+		//-------------------
+		Models.push_back(std::make_unique<ModelData>(ModelData()));
+		nextModelPrt = GetModelPrt(Models.size() - 1);
+		//------------------
 
 		nextModelPrt->MaterialData.PathShaderVertex = fieldsModel->PathShaderVertex.c_str();
 		nextModelPrt->MaterialData.PathShaderFrag = fieldsModel->PathShaderFrag.c_str();
@@ -688,7 +672,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->MeshData.PathModel3D = "./Models3D/monkey.obj";
 	nextModelPrt->MeshData.RadiusCollider = 1;
 	nextModelPrt->Init(ShaderPrograms);
-	AddModel(nextModelPrt, "mon");
+	AddModel(nextModelPrt, m_namesModels.NPC);
 
 	nextModelPrt = CreateNextModel();
 	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
@@ -697,7 +681,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->MeshData.PathModel3D = "./Models3D/polygonPlane.obj";
 	nextModelPrt->MeshData.RadiusCollider = 0.2;
 	nextModelPrt->Init(ShaderPrograms);
-	AddModel(nextModelPrt, "plane");
+	AddModel(nextModelPrt, m_namesModels.Plane);
 
 	nextModelPrt = CreateNextModel();
 	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
@@ -708,7 +692,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->IsDebug = true;
 	nextModelPrt->MeshData.IsSquareModel = true;
 	nextModelPrt->Init(ShaderPrograms);
-	AddModel(nextModelPrt, "box");
+	AddModel(nextModelPrt, m_namesModels.Block);
 
 	nextModelPrt = CreateNextModel();
 	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
@@ -744,7 +728,7 @@ void CreatorModelData::LoadModels() {
 	nextModelPrt->MaterialData.PathTexture = "./Textures/future.bmp";
 	nextModelPrt->MeshData.RadiusCollider = 1;
 	nextModelPrt->Init(ShaderPrograms);
-	AddModel(nextModelPrt, "homo");
+	AddModel(nextModelPrt, m_namesModels.Hero);
 
 	nextModelPrt = CreateNextModel();
 	nextModelPrt->MaterialData.PathShaderVertex = "basic.vert";
@@ -924,6 +908,47 @@ void CreatorModelData::LoadShells(vector<shared_ptr<ShellFileds>> filedsShells) 
 
 }
 
+void CreatorModelData::LoadPlanes() {
+
+	//vec3 startPlane = vec3(-20, -55, 70);
+	float radiusPlane = m_WorldSetting.PlaneRadius;
+	vec3 startPlane = m_WorldSetting.StartPlaneOffset;
+
+	shared_ptr<ModelData> modelPolygon = GetModelPrt(m_namesModels.Plane);
+
+	bool isOnce = false; // true;
+	int sizePlane = 6;
+	int o_Down = -55;
+	int offeset = (sizePlane / 2) - 1;
+	float offsetCentrePlaneX = (radiusPlane * offeset);
+	float offsetCentrePlaneZ = (radiusPlane * offeset);
+	int o_x;
+	int o_z;
+	int x;
+	int z;
+
+	bool IsTerraGen = false;
+	IsTerraGen = true;
+
+	if (IsTerraGen) {
+		for (x = 0; x < sizePlane; x++)
+		{
+			for (z = 0; z < sizePlane; z++)
+			{
+				o_x = startPlane.x + (radiusPlane * x) - offsetCentrePlaneX;
+				o_z = startPlane.z + (radiusPlane * z) - offsetCentrePlaneZ;
+				
+				AddObject("Plane", modelPolygon, Polygon, vec3(o_x, o_Down, o_z));
+
+				if (isOnce)
+					break;
+			}
+			if (isOnce)
+				break;
+		}
+	}
+}
+
 void CreatorModelData::LoadObjects() {
 
 	bool isTestFreeze = false;
@@ -937,19 +962,13 @@ void CreatorModelData::LoadObjects() {
 	if (SceneObjectsSize() > 0)
 		return;
 
-	float radiusPlane = m_WorldSetting.PlaneRadius;
-	vec3 startPlane = m_WorldSetting.StartPlaneOffset;
-
-	//vec3 startPlane = vec3(-20, -55, 70);
-
-	std::shared_ptr<ModelData> modelPolygon = GetModelPrt("plane");
-		AddObject("Plane", modelPolygon, Polygon, startPlane);
+	LoadPlanes();
 
 	std::shared_ptr<ModelData> modelMon = GetModelPrt("mon");
 
 	int maxNPC = 50;
 	if (isTestFreeze)
-		maxNPC = 200;//-forFULL_SCREEN  300; // 200;
+		maxNPC = 100; // 200;//-forFULL_SCREEN  300; // 200;
 
     for (int i = 0; i < maxNPC; i++)
 	{
@@ -1019,35 +1038,7 @@ void CreatorModelData::LoadObjects() {
 	obj->SetOwnerObject(objHero);
 
 	LoadObjectsGUI();
-
-	bool IsTerraGen = false;
-	IsTerraGen = true;
-	if (IsTerraGen) {
-		bool isOnce = false; // true;
-		float offsetCentrePlaneX = 0; //(startPlane.x * 3);// 350;
-		float offsetCentrePlaneZ = 0; // (startPlane.z * 3);// 350;
-		int maxPlane = 5;
-		for (int x = 0; x < maxPlane; x++)
-		{
-			for (int z = 0; z < maxPlane; z++)
-			{
-				if (z == 0 && x == 0)
-					continue;
-
-				int o_x = startPlane.x + (radiusPlane * x) - offsetCentrePlaneX;
-				int o_z = startPlane.z + (radiusPlane * z) - offsetCentrePlaneZ;
-
-				std::shared_ptr<ModelData> model1 = GetModelPrt("plane");
-				AddObject("Plane", model1, Polygon, vec3(o_x, -55, o_z));
-
-				if (isOnce)
-					break;
-			}
-			if (isOnce)
-				break;
-		}
-	}
-
+	
 	UpdateObjectsOrders();
 }
 

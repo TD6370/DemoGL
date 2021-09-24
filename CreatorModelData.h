@@ -102,6 +102,8 @@ public:
 
 	void LoadObjects();
 
+	void LoadPlanes();
+
 	void LoadModels(vector<shared_ptr<ModelFileds>> filedsModels);
 
 	void LoadObjects(vector<shared_ptr<ObjectFileds>> filedsObjects, vector<vector<ObjectFiledsSpecific>> objectsDataOthers);
