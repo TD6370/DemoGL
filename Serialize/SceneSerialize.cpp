@@ -553,17 +553,16 @@ vector<string> SceneSerialize::GetObjectListFields()
 
 //----- ****
 
-string SceneSerialize::GetStrValue(string value) {
+string SceneSerialize::GetStrValue(const string& value) {
 	if (value.size() == 0)
-		value = STR_EMPTY;
+		return STR_EMPTY;
 	else if (value == STR_EMPTY)
 		return std::string();
 	return value;
 }
 
-const char* SceneSerialize::GetStrValueToChar(string value) {
-	string result = GetStrValue(value);
-	return result.c_str();
+const char* SceneSerialize::GetStrValueToChar(const string& value) {
+	return  GetStrValue(value).c_str();
 }
 
 //--- fix space in text

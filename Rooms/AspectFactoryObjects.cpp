@@ -54,7 +54,8 @@ void AspectFactoryObjects::LastWork() {
 		objName = "Obj" + info.Message;
 		shared_ptr<ObjectData> objCreate = Scene->Storage->AddObjectDefault(objName, typeObj, info.Pos, color);
 
-		Scene->Storage->LayerScene->SaveOrderIndex(objCreate);
+		if (objCreate != nullptr)
+			Scene->Storage->LayerScene->SaveOrderIndex(objCreate);
 
 		//Clear
 		ClearCommandPack(poolObjectCreate[i]);

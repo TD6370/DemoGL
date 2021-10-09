@@ -104,7 +104,7 @@ void SceneConstructor::ConfigRoom() {
 	//*** join point
 	AddAspect(aspect);
 
-	RoomMarkerPlane* aspectMarkers = new RoomMarkerPlane("Markers", this);
+	RoomMarkerPlane* aspectMarkers = new RoomMarkerPlane("Markers", this); //TODO: GIZMO
 	aspectMarkers->Init();
 	Aspects.push_back(make_unique<RoomMarkerPlane>(*aspectMarkers));
 
@@ -405,8 +405,8 @@ void SceneConstructor::Update()
 		if (IsBreakUpdate())
 			break;
 
-		bool isVisible = ObjectCurrent->GetVisible();
-		if (!isVisible)
+		m_isVisibleCurrent = ObjectCurrent->GetVisible();
+		if (!m_isVisibleCurrent)
 			continue;
 
 		if (IsDraw)
@@ -431,7 +431,7 @@ void SceneConstructor::Update()
 }
 
 
-void SceneConstructor::Debug(string msg) {
+void SceneConstructor::Debug(const string& msg) {
 	if (DebugMessage != msg)
 	{
 		DebugMessage = msg;
@@ -455,11 +455,10 @@ void SceneConstructor::SetMouseEvents() {
 }
 
 void SceneConstructor::SetInputTextEvents() {
-	SymbolInput = "";
-	int keyIndex = Storage->Inputs->Key;
-	if (keyIndex == -1)
+	if (Storage->Inputs->Key == -1)
 		return;
-	SymbolInput = Contrl->GetSymbol(keyIndex);
+	SymbolInput = "";
+	SymbolInput = Contrl->GetSymbol(Storage->Inputs->Key);
 }
 
 void SceneConstructor::SetMouseButtonEvents() {
@@ -491,19 +490,16 @@ void SceneConstructor::DrawGraph()
 	//Mode fill 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-	bool isIndex = ModelCurrent->Render->IsIndex;
-
 	
-	GLint trianglesCount = ModelCurrent->MeshData.TrianglesCount;
+	m_trianglesCount = ModelCurrent->MeshData.TrianglesCount;
 	if(ObjectCurrent->MeshData.TrianglesCount > 0)
-		trianglesCount = ObjectCurrent->MeshData.TrianglesCount;
+		m_trianglesCount = ObjectCurrent->MeshData.TrianglesCount;
 
-	if (isIndex) {
+	if (ModelCurrent->Render->IsIndex) {
 		glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
 	}
 	else
-		glDrawArrays(GL_TRIANGLES, 0, trianglesCount * 3);
+		glDrawArrays(GL_TRIANGLES, 0, m_trianglesCount * 3);
 	//glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -544,13 +540,13 @@ void SceneConstructor::AddCommand(CommandPack command) {
 
 
 void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, vector<string> keyOptions, vector<int> valueOptions,
-	int valueI, float valueF, vec4 valueV4, string valueS, string description, bool isLong)
+	int valueI, float valueF, vec4 valueV4, const string& valueS, const string& description, bool isLong)
 {
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, keyOptions, valueOptions, valueI, valueF, valueV4, valueS, description, isLong);
 }
 
 void SceneConstructor::AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex,
-	int valueI, float valueF, vec4 valueV4, string valueS, string description, bool isLong) {
+	int valueI, float valueF, vec4 valueV4, const string& valueS, const string& description, bool isLong) {
 
 	dispatcherCommands->AddCommand(commandType, sourceIndex, targetIndex, valueI, valueF, valueV4, valueS, description, isLong);
 
@@ -567,7 +563,7 @@ void SceneConstructor::RefreshGUI() {
 }
 
 
-void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos, bool isGuiEdit) {
+void SceneConstructor::RunCommandCreateObject(TypeObject typeCreate, const string& typeObjectText, vec3 pos, bool isGuiEdit) {
 
 	string typeObjectAttr = CommandsAttribute.TypeObjectAttr;
 	string nameCommandList = "";
@@ -606,7 +602,7 @@ void SceneConstructor::CreateObjectListFieldValue(shared_ptr<ObjectData> obj) {
 	m_serializer->Save(obj, false, true);
 }
  
-void SceneConstructor::SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, string steamFields) {
+void SceneConstructor::SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, const string& steamFields) {
 		
 	ObjectFileds objFields;
 	vector<ObjectFiledsSpecific> objectDataSpecific;
@@ -616,16 +612,14 @@ void SceneConstructor::SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, 
 	Storage->SaveAndInitObject(&objFields, objectDataSpecific, obj);
 }
 
-string SceneConstructor::GetObjectValueByFieldName(string typeFieldName) {
+string SceneConstructor::GetObjectValueByFieldName(const string& typeFieldName) {
 
-	string value = m_serializer->GetFieldValueByName(typeFieldName);
-	return value;
+	return m_serializer->GetFieldValueByName(typeFieldName);
 }
 
 map<string, string> SceneConstructor::GetObjectListFieldValue(shared_ptr<ObjectData> obj) {
 
 	m_serializer->Save(obj, false, true);
-
 	return m_serializer->GetObjectListFieldValue();
 }
 
@@ -635,7 +629,7 @@ vector<string> SceneConstructor::GetObjectListFields() {
 
 //========================
 
-vector<CommandPack> SceneConstructor::GetListCommand(string nameList) {
+vector<CommandPack> SceneConstructor::GetListCommand(const string& nameList) {
 
 	return dispatcherCommands->StaticListCommand[nameList];
 }

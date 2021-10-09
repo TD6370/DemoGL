@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CoreSettings.h"
 #include "SceneConstructor.h"
 
@@ -24,14 +24,23 @@ enum Laguages { LangNone, LangRus, LangEng };
 
 class Controllers {
 private:
+	// горизонтальный угол : по -Z
+	float m_horizontalAngle = 3.14f;
+	// вертикальный угол : 0, смотрим на горизонт
+	float m_verticalAngle = 0.0f;
+	float m_mouseSpeed = 0.005f;
+	// получаем координаты курсора
+	GLdouble m_xpos, m_ypos;
+	bool m_isCeneter = false;
+	int m_stateMBE = -1;
 
-		map<string, int>& m_mapAlphabetInputs;
-		map<string, int>& m_mapAlphabetInputsEng;
+	map<string, int>& m_mapAlphabetInputs;
+	map<string, int>& m_mapAlphabetInputsEng;
 
-		map<int, string>* mapAlphabetRusKeys;
-		map<int, string>* mapAlphabetEngKeys;
-		map<int, string>* mapCurrentAlphabetKeys = nullptr;
-		Laguages m_currentLaguage = LangNone;
+	map<int, string>* mapAlphabetRusKeys;
+	map<int, string>* mapAlphabetEngKeys;
+	map<int, string>* mapCurrentAlphabetKeys = nullptr;
+	Laguages m_currentLaguage = LangNone;
 
 public:
 

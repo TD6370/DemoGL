@@ -44,6 +44,7 @@ class SceneConstructor
 {
 private:
 
+	bool m_isVisibleCurrent;
 	int prevIndexModel = -1;
 	string prevModelTexture;
 	const char* prevModel3D;
@@ -52,6 +53,7 @@ private:
 	bool test_isFerst = true;
 	vec3 SavePos;
 	int countObjects = 0;
+	GLint m_trianglesCount;
 
 	bool isTextureRepeat = false;
 	bool m_isUpdateShaderProgramm = false;
@@ -166,7 +168,7 @@ public:
 
 	void DrawGraph();
 
-	void Debug(string msg);
+	void Debug(const string& msg);
 
 	void FactoryObjectsWork();
 
@@ -181,23 +183,30 @@ public:
 	void AddCommand(TypeCommand commandType, bool isLong = false);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex = -1, int targetIndex = -1, vector<string> keyOptions = vector<string>(), vector<int> valueOptions = vector<int>(),
-		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string(), string description = std::string(), bool isLong = false);
+		int valueI = -1, float valueF = -1.0, vec4 valueV4 = vec4(-1), 
+		const string& valueS = std::string(),
+		const string& description = std::string(),
+		bool isLong = false);
 
 	void AddCommand(TypeCommand commandType, int sourceIndex, int targetIndex, 
-		int valueI, float valueF = -1.0, vec4 valueV4 = vec4(-1), string valueS = std::string(), string description = std::string(), bool isLong = false);
+		int valueI, float valueF = -1.0, vec4 valueV4 = vec4(-1), 
+		const string& valueS = std::string(),
+		const string& description = std::string(), bool isLong = false);
 
 	void RefreshGUI();
 	
-	vector<CommandPack> GetListCommand(string nameList);
+	vector<CommandPack> GetListCommand(const string& nameList);
 
-	void RunCommandCreateObject(TypeObject typeCreate, string typeObjectText, vec3 pos = vec3(-1), bool isGuiEdit = true);
+	void RunCommandCreateObject(TypeObject typeCreate, 
+		const string& typeObjectText, vec3 pos = vec3(-1), bool isGuiEdit = true);
 
 	//--- Get field value by object
 	void CreateObjectListFieldValue(shared_ptr<ObjectData> obj);
 
-	void SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, string steamFields);
+	void SaveObjectFieldValueFromList(shared_ptr<ObjectData> obj, 
+		const string& steamFields);
 
-	string GetObjectValueByFieldName(string typeFieldName);
+	string GetObjectValueByFieldName(const string& typeFieldName);
 
 	map<string, string> GetObjectListFieldValue(shared_ptr<ObjectData> obj);
 

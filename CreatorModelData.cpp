@@ -100,7 +100,7 @@ void CreatorModelData::ClearObjects() {
 	LayerScene->Clear();
 }
 
-void CreatorModelData::AddModel(shared_ptr<ModelData> newModel, std::string name) {
+void CreatorModelData::AddModel(shared_ptr<ModelData> newModel, string name) {
 
 	int index = Models.size();
 	index--;
@@ -175,7 +175,7 @@ std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(int index)
 	return prt_model;
 }
 
-std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(string key)
+std::shared_ptr<ModelData> CreatorModelData::GetModelPrt(const string& key)
 {
 	int index = MapModels[key];
 	std::shared_ptr<ModelData> prt_model = Models[index];
@@ -192,7 +192,8 @@ bool CreatorModelData::IsExistObject(TypeObject typeObj)
 }
 
 std::shared_ptr<ObjectData> CreatorModelData::AddObject(
-	string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index, 
+	const string& p_name,
+	std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index, 
 	TypeLayer p_layer, bool isLoading) {
 
 	if (IsExistObject(p_typeObj))
@@ -202,22 +203,7 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 
 		p_index = SceneObjectsLastIndex;
 
-	bool isGenName = name.length() == 0;
-	if (!isGenName) {
-		map <string, int> ::iterator it;
-		it = MapSceneObjects.find(name);
-		if (it != MapSceneObjects.end()) {
-			//isGenName = true;
-			name += "_" + std::to_string(p_index);
-		}
-	}
-
-	if (isGenName) {
-		string fileModel = GetFile(modelPtr->MeshData.PathModel3D);
-		//string fileTexture = GetFile(modelPtr->PathTexture);
-		name += fileModel + "_" + std::to_string(p_index);
-	}
-
+	
 	std::shared_ptr<ObjectData> object;
 	switch (p_typeObj)
 	{
@@ -343,13 +329,28 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObject(
 		object->EngineData->SceneData = SceneData;
 
 		object->MaterialData.Color = p_color;
-		object->Name = name;
+		object->Name = p_name;
+
+		bool isGenName = p_name.length() == 0;
+		if (isGenName) {
+			string fileModel = GetFile(modelPtr->MeshData.PathModel3D);
+			object->Name = p_name + fileModel + "_" + std::to_string(p_index);
+		}
+		else 
+		{
+			map <string, int> ::iterator it;
+			it = MapSceneObjects.find(p_name);
+			if (it != MapSceneObjects.end()) {
+				object->Name = p_name + "_" + std::to_string(p_index);
+			}
+		}
+
 		if(p_layer != LayerNone)
 			object->Layer = p_layer;
 		object->InitData();
 	}
 
-	MapSceneObjects.insert(std::pair<string, int>(name, p_index));
+	MapSceneObjects.insert(std::pair<string, int>(object->Name, p_index));
 
 	//--------------------------------- Save Order Index 
 	/*if(isLoading)
@@ -372,22 +373,12 @@ int  CreatorModelData::SceneObjectsSize() {
 std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(int index)
 {
 	assert(index < SceneObjects.size());
-
-	std::shared_ptr<ObjectData> prt_objData = SceneObjects[index];
-	//TEST^^
-	//std::shared_ptr<ObjectData> prt_objData(&SceneObjectsV[index]);
-
-	return prt_objData;
+	return SceneObjects[index];
 }
 
-std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(string key)
+std::shared_ptr<ObjectData> CreatorModelData::GetObjectPrt(const string& key)
 {
-	int index = MapSceneObjects[key];
-	std::shared_ptr<ObjectData> prt_objData = SceneObjects[index];
-	//TEST^^
-	//std::shared_ptr<ObjectData> prt_objData(&SceneObjectsV[index]);
-
-	return prt_objData;
+	return SceneObjects[MapSceneObjects[key]];
 }
 
 // --- step 2. (when loading - after create objects, join obj <- shells)
@@ -511,7 +502,7 @@ shared_ptr<BaseShell> CreatorModelData::GetObjectShellPrt(int index)
 	return prt_objShell;
 }
 
-bool CreatorModelData::IsExistObjectByName(string key)
+bool CreatorModelData::IsExistObjectByName(const string& key)
 {
 	map <string, int> ::iterator it;
 	it = MapSceneObjects.find(key);
@@ -968,7 +959,7 @@ void CreatorModelData::LoadObjects() {
 
 	int maxNPC = 50;
 	if (isTestFreeze)
-		maxNPC = 100; // 200;//-forFULL_SCREEN  300; // 200;
+		maxNPC = 150; // 200;//-forFULL_SCREEN  300; // 200;
 
     for (int i = 0; i < maxNPC; i++)
 	{
@@ -1083,7 +1074,10 @@ void CreatorModelData::LoadClusters() {
 }
 
 
-shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> ownerObjData, string caption, string nameModel, string nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color, TypeLayer p_layer)
+shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> ownerObjData, 
+	const string& caption,
+	const string& nameModel,
+	const string& nameObject, vec3 startPosChild, vec2 size, TypeObject p_typeObj, vec3 color, TypeLayer p_layer)
 {
 	auto ownerObj = ownerObjData;
 
@@ -1132,7 +1126,9 @@ shared_ptr<ObjectData> CreatorModelData::AddChildObject(shared_ptr<ObjectData> o
 	return objGUI;
 }
 
-shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string name, TypeLayer p_layer)
+shared_ptr<ObjectData>  CreatorModelData::ControlConstruct(shared_ptr<ObjectData> obj, 
+	string caption, TypeObject p_typeObj,
+	string name, TypeLayer p_layer)
 {
 	shared_ptr<ObjectData> objData;
 	auto objButton = obj;
@@ -1230,6 +1226,9 @@ std::shared_ptr<ObjectData> CreatorModelData::AddObjectDefault(
 	string name, TypeObject p_typeObj, vec3 p_pos, vec3 p_color, int p_index,
 	TypeLayer p_layer, bool isLoading) 
 {
+	if (m_defaultModelNames.find(p_typeObj) == m_defaultModelNames.end())
+		return nullptr;
+
 	string nameModel = m_defaultModelNames[p_typeObj];
 	
 	shared_ptr<ModelData> modelPtr = GetModelPrt(nameModel);

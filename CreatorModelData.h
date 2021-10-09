@@ -75,17 +75,17 @@ public:
 
 	void AddModel(shared_ptr<ModelData> newModel, string name);
 
-	shared_ptr<ObjectData> AddObject(string name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj, 
+	shared_ptr<ObjectData> AddObject(const string& name, std::shared_ptr<ModelData> modelPtr, TypeObject p_typeObj,
 		vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1, TypeLayer Layer = TypeLayer::LayerNone, bool isLoading = false);
 
 	shared_ptr<ObjectData> AddObjectDefault(string name, TypeObject p_typeObj,
 		vec3 p_pos = vec3(0), vec3 p_color = vec3(0), int p_index = -1, TypeLayer Layer = TypeLayer::LayerNone, bool isLoading = false);
 
 	shared_ptr<ObjectData> GetObjectPrt(int index);
-	shared_ptr<ObjectData> GetObjectPrt(string key);
+	shared_ptr<ObjectData> GetObjectPrt(const string& key);
 
 	shared_ptr<ModelData> GetModelPrt(int index);
-	shared_ptr<ModelData> GetModelPrt(string key);
+	shared_ptr<ModelData> GetModelPrt(const string& key);
 
 	shared_ptr<BaseShell> AddShell(string name, int rootIndex, int captionIndex = -1, bool isLoading = false, vector<int> items = vector<int>());
 
@@ -125,7 +125,7 @@ public:
 	void LoadShells();
 	void LoadShellsLinks();
 
-	bool IsExistObjectByName(string key);
+	bool IsExistObjectByName(const string& key);
 
 	bool IsExistObjectByType(TypeObject type);
 
@@ -139,9 +139,15 @@ public:
 
 	void UpdateFamilBonds();
 
-	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, string caption, string nameModel, string nameObject, vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0), TypeLayer p_layer = LayerNone);
+	shared_ptr<ObjectData> AddChildObject(shared_ptr<ObjectData> ownerObj, 
+		const string& caption,
+		const string& nameModel,
+		const string& nameObject,
+		vec3 position, vec2 size, TypeObject p_typeObj = TypeObject::GUI, vec3 color = vec3(0), TypeLayer p_layer = LayerNone);
 
-	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, string caption, TypeObject p_typeObj, string nameObj = std::string(), TypeLayer p_layer = LayerNone);
+	shared_ptr<ObjectData> ControlConstruct(shared_ptr<ObjectData> obj, 
+		string caption, TypeObject p_typeObj,
+		string nameObj = std::string(), TypeLayer p_layer = LayerNone);
 	
 	shared_ptr<ObjectData> CreateObjectNull();
 };

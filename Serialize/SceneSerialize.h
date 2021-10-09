@@ -155,9 +155,9 @@ public:
 
 	vec2 StrToVec2(string& value);
 
-	string GetStrValue(string value);
+	string GetStrValue(const string& value);
 
-	const char* GetStrValueToChar(string value);
+	const char* GetStrValueToChar(const string& value);
 
 	void SetStrValue(std::ifstream& in, string& value);
 	void SetStrValue(std::stringstream& in, string& value);
